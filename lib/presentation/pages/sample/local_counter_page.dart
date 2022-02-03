@@ -37,6 +37,10 @@ class LocalCounterPage extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
+            'ローカル',
+            style: context.bodyStyle,
+          ),
+          Text(
             counter.value.toString(),
             style: context.titleStyle,
           ),

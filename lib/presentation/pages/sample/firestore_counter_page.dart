@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,12 +50,14 @@ class FirestoreCounterPage extends HookConsumerWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          isLoading.value
-              ? const CupertinoActivityIndicator()
-              : Text(
-                  (counter.value?.count ?? 0).toString(),
-                  style: context.titleStyle,
-                ),
+          Text(
+            'Firestore',
+            style: context.bodyStyle,
+          ),
+          Text(
+            (counter.value?.count ?? 0).toString(),
+            style: context.titleStyle,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             child: Row(
