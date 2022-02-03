@@ -78,8 +78,9 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       try {
                         final newCounter = () {
                           final now = DateTime.now();
-                          final value = counter.value ??
-                              Counter(createdAt: now, updatedAt: now);
+                          final value =
+                              counter.value?.copyWith(updatedAt: now) ??
+                                  Counter(createdAt: now, updatedAt: now);
                           final count = value.count ?? 0;
                           return value.copyWith(count: max(count - 1, 0));
                         }();
@@ -112,8 +113,9 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       try {
                         final newCounter = () {
                           final now = DateTime.now();
-                          final value = counter.value ??
-                              Counter(createdAt: now, updatedAt: now);
+                          final value =
+                              counter.value?.copyWith(updatedAt: now) ??
+                                  Counter(createdAt: now, updatedAt: now);
                           final count = value.count ?? 0;
                           return value.copyWith(count: count + 1);
                         }();
