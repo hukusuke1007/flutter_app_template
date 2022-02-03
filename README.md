@@ -41,7 +41,7 @@ git clone https://github.com/hukusuke1007/flutter_app_template.git
 rm -rf .git
 ```
 
-3. 以下の箇所を変更後のプロジェクト名へ変更。com.example.app から変更したいプロジェクト名にする
+3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更してください。
    https://github.com/hukusuke1007/flutter_app_template/pull/1/files
 
 4. 新しい Firebase プロジェクトを作成して Firebase の 設定ファイル を変更する。Firebase については[こちら](https://firebase.flutter.dev/docs/overview)を確認してください。新しい Firebase プロジェクトを作成後、.json と.plist ファイルを以下のものと入れ替える。
