@@ -13,3 +13,6 @@
    https://github.com/hukusuke1007/flutter_app_template/pull/1/files
 
 2. Firebase の plist を変更
+
+3. pub getをしてライブラリを取り込む。
+    pubspec.lock内のプラグインのバージョンを見てpubspec.yamlのプラグインのバージョンを指定する（利用するバージョンを固定にするため）

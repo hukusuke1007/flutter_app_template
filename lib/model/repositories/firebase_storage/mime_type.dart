@@ -5,6 +5,6 @@ extension MimeTypeExtensio on MimeType {
     if (this == MimeType.applicationOctetStream) {
       return 'application/octet-stream';
     }
-    return null;
+    throw AssertionError();
   }
 }
