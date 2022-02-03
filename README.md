@@ -1,11 +1,22 @@
 # flutter_app_template
 
+## 概要
+
+### 実装済み
 - [x] iOS13、Android7 以上
 - [x] DDD ライクな設計
 - [x] 状態管理は flutter_hooks、riverpod を利用
-- [x] Firebase を利用
-- [x] iPad 未対応
+- [x] Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
+- [x] タブ構成のサンプル画面実装
+- [x] iOS カメラ、画像のパーミッション許可のplist設定
 - [x] その他アプリに必要なライブラリを設定済み
+- [x] デバイス向きは縦固定
+
+### やっていないこと
+- Android/iOS のFlavor設定
+- Android/iOS ローカル通知とプッシュ通知の設定
+- Androidのkeystoreの設定（debug, release）
+- iPad 対応
 
 ## プロジェクト名の変更方法
 
