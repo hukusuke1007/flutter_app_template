@@ -7,25 +7,11 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsIconGen {
-  const $AssetsIconGen();
-
-  /// File path: assets/icon/adaptive_icon_foreground.png
-  AssetGenImage get adaptiveIconForeground =>
-      const AssetGenImage('assets/icon/adaptive_icon_foreground.png');
-
-  /// File path: assets/icon/icon_android.png
-  AssetGenImage get iconAndroid =>
-      const AssetGenImage('assets/icon/icon_android.png');
-
-  /// File path: assets/icon/icon_ios.png
-  AssetGenImage get iconIos => const AssetGenImage('assets/icon/icon_ios.png');
-}
-
 class Assets {
   Assets._();
 
-  static const $AssetsIconGen icon = $AssetsIconGen();
+  static const AssetGenImage flutterLogo =
+      AssetGenImage('assets/flutter_logo.png');
 }
 
 class AssetGenImage extends AssetImage {

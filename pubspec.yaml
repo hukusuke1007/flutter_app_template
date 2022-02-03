@@ -140,16 +140,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/images/
-    - assets/icon/
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path_android: "assets/icon/icon_android.png"
-  image_path_ios: "assets/icon/icon_ios.png"
-  adaptive_icon_foreground: "assets/icon/adaptive_icon_foreground.png"
-  adaptive_icon_background: "#F4A281"
 
   # fonts:
   #   - family: Schyler
@@ -162,3 +152,12 @@ flutter_icons:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+#flutter_icons:
+#  android: true
+#  ios: true
+#  image_path_android: "assets/icon/icon_android.png"
+#  image_path_ios: "assets/icon/icon_ios.png"
+#  adaptive_icon_foreground: "assets/icon/adaptive_icon_foreground.png"
+#  adaptive_icon_background: "#F4A281"
+
