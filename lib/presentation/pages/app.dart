@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const locale = Locale('ja', 'JP');
     return MaterialApp(
-      title: 'アプリ名', // TODO(shohei): アプリ名を設定
+      title: 'テンプレアプリ', // TODO(shohei): アプリ名を設定
       theme: getAppTheme(),
       darkTheme: getAppThemeDark(),
       locale: locale,
