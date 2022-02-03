@@ -4,6 +4,21 @@
 
 Flutter + Firebase アプリの雛形
 
+### 環境
+
+```
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel stable, 2.10.0, on macOS 12.1 21C52 darwin-x64, locale ja-JP)
+[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 13.2.1)
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2021.1)
+[✓] IntelliJ IDEA Community Edition (version 2018.3.3)
+[✓] VS Code (version 1.63.2)
+[✓] Connected device (2 available)
+[✓] HTTP Host Availability
+```
+
 ### 実装済み
 
 - iOS13、Android7 以上
