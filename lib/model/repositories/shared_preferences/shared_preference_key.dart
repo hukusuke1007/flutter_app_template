@@ -1,9 +1,10 @@
 enum SharedPreferencesKey {
+  /// アプリレビュー
   isReviewedAppStore,
   showingReviewAt,
 
-  /// サンプルカウンター
-  sampleCounter,
+  /// サンプル
+  sampleLocalCounter,
 }
 
 extension SharedPreferencesKeyExtension on SharedPreferencesKey {

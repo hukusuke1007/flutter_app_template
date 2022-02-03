@@ -23,12 +23,10 @@ class _$CounterTearOff {
   const _$CounterTearOff();
 
   _Counter call(
-      {String? counterId,
-      int? count,
+      {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
       @DateTimeTimestampConverter() DateTime? updatedAt}) {
     return _Counter(
-      counterId: counterId,
       count: count,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -45,7 +43,6 @@ const $Counter = _$CounterTearOff();
 
 /// @nodoc
 mixin _$Counter {
-  String? get counterId => throw _privateConstructorUsedError;
   int? get count => throw _privateConstructorUsedError;
   @DateTimeTimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -62,8 +59,7 @@ abstract class $CounterCopyWith<$Res> {
   factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
       _$CounterCopyWithImpl<$Res>;
   $Res call(
-      {String? counterId,
-      int? count,
+      {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
       @DateTimeTimestampConverter() DateTime? updatedAt});
 }
@@ -78,16 +74,11 @@ class _$CounterCopyWithImpl<$Res> implements $CounterCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? counterId = freezed,
     Object? count = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      counterId: counterId == freezed
-          ? _value.counterId
-          : counterId // ignore: cast_nullable_to_non_nullable
-              as String?,
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -110,8 +101,7 @@ abstract class _$CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
       __$CounterCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? counterId,
-      int? count,
+      {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
       @DateTimeTimestampConverter() DateTime? updatedAt});
 }
@@ -127,16 +117,11 @@ class __$CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? counterId = freezed,
     Object? count = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_Counter(
-      counterId: counterId == freezed
-          ? _value.counterId
-          : counterId // ignore: cast_nullable_to_non_nullable
-              as String?,
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -157,8 +142,7 @@ class __$CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Counter extends _Counter {
   _$_Counter(
-      {this.counterId,
-      this.count,
+      {this.count,
       @DateTimeTimestampConverter() this.createdAt,
       @DateTimeTimestampConverter() this.updatedAt})
       : super._();
@@ -166,8 +150,6 @@ class _$_Counter extends _Counter {
   factory _$_Counter.fromJson(Map<String, dynamic> json) =>
       _$$_CounterFromJson(json);
 
-  @override
-  final String? counterId;
   @override
   final int? count;
   @override
@@ -179,7 +161,7 @@ class _$_Counter extends _Counter {
 
   @override
   String toString() {
-    return 'Counter(counterId: $counterId, count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Counter(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -187,7 +169,6 @@ class _$_Counter extends _Counter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Counter &&
-            const DeepCollectionEquality().equals(other.counterId, counterId) &&
             const DeepCollectionEquality().equals(other.count, count) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
@@ -196,7 +177,6 @@ class _$_Counter extends _Counter {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(counterId),
       const DeepCollectionEquality().hash(count),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt));
@@ -214,16 +194,13 @@ class _$_Counter extends _Counter {
 
 abstract class _Counter extends Counter {
   factory _Counter(
-      {String? counterId,
-      int? count,
+      {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
       @DateTimeTimestampConverter() DateTime? updatedAt}) = _$_Counter;
   _Counter._() : super._();
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$_Counter.fromJson;
 
-  @override
-  String? get counterId;
   @override
   int? get count;
   @override

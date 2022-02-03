@@ -23,7 +23,8 @@
 1. 以下の箇所を変更後のプロジェクト名へ変更。com.example.app から変更したいプロジェクト名にする
    https://github.com/hukusuke1007/flutter_app_template/pull/1/files
 
-2. Firebase の plist を変更
+2. Firebase の plist を変更し、利用するFirebaseコンソールから匿名認証をONにしてください
 
 3. pub getをしてライブラリを取り込む。
     pubspec.lock内のプラグインのバージョンを見てpubspec.yamlのプラグインのバージョンを指定する（利用するバージョンを固定にするため）
+

@@ -10,7 +10,6 @@ part 'counter.g.dart';
 @freezed
 class Counter with _$Counter {
   factory Counter({
-    String? counterId,
     int? count,
     @DateTimeTimestampConverter() DateTime? createdAt,
     @DateTimeTimestampConverter() DateTime? updatedAt,
