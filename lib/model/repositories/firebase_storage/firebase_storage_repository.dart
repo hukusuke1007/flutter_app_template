@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'mime_type.dart';
+
 final firebaseStorageRepositoryProvider = Provider<FirebaseStorageRepository>(
     (ref) => FirebaseStorageRepository(FirebaseStorage.instance));
 
@@ -22,7 +24,7 @@ class FirebaseStorageRepository {
     Uint8List data, {
     required String path,
     String? cacheControl,
-    String? mimeType,
+    MimeType? mimeType,
     Map<String, String> metadata = const <String, String>{},
   }) async {
     final ref = _storage.ref(path);
@@ -30,7 +32,7 @@ class FirebaseStorageRepository {
       data,
       SettableMetadata(
         cacheControl: cacheControl,
-        contentType: mimeType,
+        contentType: mimeType?.value,
         customMetadata: metadata,
       ),
     );
@@ -46,7 +48,7 @@ class FirebaseStorageRepository {
     File data, {
     required String path,
     String? cacheControl,
-    String? mimeType,
+    MimeType? mimeType,
     Map<String, String> metadata = const <String, String>{},
     PublishSubject<TaskSnapshot>? uploader,
   }) async {
@@ -55,7 +57,7 @@ class FirebaseStorageRepository {
       data,
       SettableMetadata(
         cacheControl: cacheControl,
-        contentType: mimeType,
+        contentType: mimeType?.value,
         customMetadata: metadata,
       ),
     );

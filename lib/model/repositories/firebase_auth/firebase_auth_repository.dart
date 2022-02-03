@@ -1,5 +1,6 @@
 import 'dart:async';
 
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,12 +10,6 @@ import 'login_type.dart';
 final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>((_) {
   return FirebaseAuthRepository(FirebaseAuth.instance);
 });
-
-class ProviderCredential {
-  ProviderCredential(this.credential, this.userId);
-  final OAuthCredential credential;
-  final String userId;
-}
 
 class FirebaseAuthRepository {
   FirebaseAuthRepository(this._auth);
@@ -32,9 +27,7 @@ class FirebaseAuthRepository {
   bool get isEmailVerification => _auth.currentUser?.emailVerified ?? false;
 
   Future<String?> get idToken async {
-    return _auth.currentUser != null
-        ? _auth.currentUser!.getIdToken(true)
-        : null;
+    return _auth.currentUser?.getIdToken(true);
   }
 
   LoginType? get loginType {

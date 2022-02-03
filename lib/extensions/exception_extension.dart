@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_app_template/exceptions/app_exception.dart';
+
+import '../model/exceptions/app_exception.dart';
 
 extension ExceptionExtension on Exception {
   String get errorMessage {
