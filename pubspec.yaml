@@ -141,6 +141,7 @@ flutter:
   assets:
     - assets/
 
+  # カスタムフォントを利用する場合はここを設定する
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -153,6 +154,7 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
 
+# flutter_launcher_iconsを利用してアイコンのリサイズする場合はここを設定する
 #flutter_icons:
 #  android: true
 #  ios: true
