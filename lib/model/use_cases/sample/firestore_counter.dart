@@ -1,3 +1,4 @@
+import 'package:flutter_app_template/exceptions/app_exception.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entities/sample/counter.dart';
@@ -11,10 +12,10 @@ class FetchFirestoreCounter {
   FetchFirestoreCounter(this._read);
   final Reader _read;
 
-  Future<Counter?> call(int count) async {
+  Future<Counter?> call() async {
     final userId = _read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
-      return null;
+      throw AppException(title: 'ログインしてください');
     }
     final doc = await _read(documentRepositoryProvider).fetch<Counter>(
       Counter.docPath(userId),
@@ -33,7 +34,7 @@ class SaveFirestoreCounter {
   Future<void> call(Counter counter) async {
     final userId = _read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
-      return;
+      throw AppException(title: 'ログインしてください');
     }
     await _read(documentRepositoryProvider).save(
       Counter.docPath(userId),
