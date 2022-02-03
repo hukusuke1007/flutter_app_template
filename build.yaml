@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          include:
+            - lib/presentation/pages/*.dart
+            - lib/presentation/pages/**/*.dart
+            - lib/model/entities/*.dart
+            - lib/model/entities/**/*.dart
+            - lib/model/use_cases/*.dart
+            - lib/model/use_cases/**/*.dart

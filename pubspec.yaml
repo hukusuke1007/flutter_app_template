@@ -1,78 +1,156 @@
 name: flutter_app_template
 description: A new Flutter project.
-
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  # Logger
+  simple_logger:
+
+  # LocalDatabase
+  shared_preferences:
+
+  # Riverpod
+  flutter_hooks:
+  hooks_riverpod:
+  freezed_annotation:
+
+  # Dialog
+  adaptive_dialog:
+
+  # Album and camera
+  image_picker:
+
+  # Access local storage
+  path_provider:
+
+  # Date
+  intl:
+
+  # Reactive
+  rxdart:
+
+  # Cache image
+  extended_image:
+
+  # Data share
+  share:
+
+  # WebView
+  flutter_inappwebview:
+
+  # Launcher
+  url_launcher:
+  map_launcher:
+
+  # Setting
+  app_settings:
+
+  # Review
+  launch_review:
+  app_review:
+
+  # Text
+  auto_size_text:
+
+  # Carousel
+  carousel_slider:
+
+  # Switch
+  toggle_switch:
+
+  # Transition
+  page_transition:
+
+  # Image
+  image_cropper:
+  flutter_image_compress:
+
+  # Picker
+  numberpicker:
+
+  # PullToRefresh
+  pull_to_refresh:
+
+  # Scroll
+  extended_nested_scroll_view:
+
+  # Permission
+  permission_handler:
+
+  # Firebase
+#  firebase_core:
+#  firebase_analytics:
+#  cloud_firestore:
+#  firebase_auth:
+#  firebase_storage:
+#  cloud_functions:
+#  firebase_messaging:
+#  firebase_crashlytics:
+
+  # LocalNotification
+  flutter_local_notifications:
+  flutter_native_timezone:
+
+  # Widget
+  flutter_fadein:
+  flutter_cupertino_datetime_picker:
+  flutter_app_badger:
+  badges:
+
+  # Other
+  uuid:
+  package_info:
+  synchronized:
+  nonce:
+  crypto:
+  hashids2:
+  encrypt:
+  flutter_svg:
+  recase:
+  device_info:
+  flutter_linkify:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  # Static analysis
+  pedantic_mono:
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  # Serializer
+  json_serializable:
 
-# The following section is specific to Flutter.
+  # Code generator
+  build_runner:
+  freezed:
+  flutter_gen_runner:
+
+  # Other
+  flutter_launcher_icons:
+
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icon/
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+flutter_icons:
+  android: true
+  ios: true
+  image_path_android: "assets/icon/icon_android.png"
+  image_path_ios: "assets/icon/icon_ios.png"
+  adaptive_icon_foreground: "assets/icon/adaptive_icon_foreground.png"
+  adaptive_icon_background: "#F4A281"
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -84,6 +162,3 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
