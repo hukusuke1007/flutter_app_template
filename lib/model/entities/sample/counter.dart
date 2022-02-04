@@ -25,5 +25,5 @@ class Counter with _$Counter {
 
   static String docPath(String id) => '$collectionPath/$id';
   static DocumentReference<SnapType> docRef(String id) =>
-      Document.docRef(docPath(id));
+      Document.docRefWithDocPath(docPath(id));
 }

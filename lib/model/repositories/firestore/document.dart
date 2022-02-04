@@ -19,17 +19,24 @@ class Document<T extends Object> {
   String get collectionName => ref.parent.id;
   String get path => ref.path;
 
+  /// CollectionReference
   static CollectionReference<SnapType> colRef(String path) =>
       FirebaseFirestore.instance.collection(path);
 
   static Query<SnapType> colGroupQuery(String path) =>
       FirebaseFirestore.instance.collectionGroup(path);
 
-  static DocumentReference<SnapType> docRef(String docPath) =>
-      FirebaseFirestore.instance.doc(docPath);
-  static String get docId =>
-      FirebaseFirestore.instance.collection('collection').doc().id;
+  /// DocumentReference
+  static DocumentReference<SnapType> docRef(String collectionPath) =>
+      FirebaseFirestore.instance.collection(collectionPath).doc();
 
+  static DocumentReference<SnapType> docRefWithDocPath(String docPath) =>
+      FirebaseFirestore.instance.doc(docPath);
+
+  static String docId(String collectionPath) =>
+      FirebaseFirestore.instance.collection(collectionPath).doc().id;
+
+  /// Entity copy
   Document<T> copyWith(T newEntity) => Document(
         ref: ref,
         exists: exists,
