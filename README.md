@@ -30,7 +30,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 - その他アプリに必要なライブラリを設定済み
 - デバイス向きは縦固定
 - 起動時に匿名認証でログイン
-- ダークモード（Flutter側のみ）
+- ダークモード
 
 ### やっていないこと
 
@@ -38,7 +38,6 @@ Doctor summary (to see all details, run flutter doctor -v):
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - iPad 対応
-- ダークモード（ネイティブ側）
 
 ## 設計指針
 
