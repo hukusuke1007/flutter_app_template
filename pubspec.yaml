@@ -107,6 +107,7 @@ dependencies:
   flutter_cupertino_datetime_picker:
   flutter_app_badger:
   badges:
+  flutter_slidable:
 
   # Other
   uuid:
