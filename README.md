@@ -6,18 +6,7 @@ Flutter + Firebase アプリの雛形
 
 ### 環境
 
-```
-Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 2.10.0, on macOS 12.1 21C52 darwin-x64, locale ja-JP)
-[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
-[✓] Xcode - develop for iOS and macOS (Xcode 13.2.1)
-[✓] Chrome - develop for the web
-[✓] Android Studio (version 2021.1)
-[✓] IntelliJ IDEA Community Edition (version 2018.3.3)
-[✓] VS Code (version 1.63.2)
-[✓] Connected device (2 available)
-[✓] HTTP Host Availability
-```
+Flutter Stable 2.10.0
 
 ### 実装済み
 
@@ -25,12 +14,12 @@ Doctor summary (to see all details, run flutter doctor -v):
 - DDD ライクな設計
 - 状態管理は flutter_hooks、riverpod を利用
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
-- タブ構成のサンプル画面実装
+- ボトムナビゲーション構成のサンプル画面
 - iOS カメラ、画像のパーミッション許可の plist 設定
-- その他アプリに必要なライブラリを設定済み
-- デバイス向きは縦固定
 - 起動時に匿名認証でログイン
 - ダークモード
+- デバイス向きは縦固定
+- その他アプリに必要なライブラリを設定済み
 
 ### やっていないこと
 
@@ -38,6 +27,8 @@ Doctor summary (to see all details, run flutter doctor -v):
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - iPad 対応
+- ユニットテスト
+- UIテスト
 
 ## 設計指針
 
