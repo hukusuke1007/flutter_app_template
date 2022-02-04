@@ -141,7 +141,7 @@ class __$CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Counter extends _Counter {
-  _$_Counter(
+  const _$_Counter(
       {this.count,
       @DateTimeTimestampConverter() this.createdAt,
       @DateTimeTimestampConverter() this.updatedAt})
@@ -193,11 +193,11 @@ class _$_Counter extends _Counter {
 }
 
 abstract class _Counter extends Counter {
-  factory _Counter(
+  const factory _Counter(
       {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
       @DateTimeTimestampConverter() DateTime? updatedAt}) = _$_Counter;
-  _Counter._() : super._();
+  const _Counter._() : super._();
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$_Counter.fromJson;
 

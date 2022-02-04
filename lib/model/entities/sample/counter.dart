@@ -9,12 +9,12 @@ part 'counter.g.dart';
 
 @freezed
 class Counter with _$Counter {
-  factory Counter({
+  const factory Counter({
     int? count,
     @DateTimeTimestampConverter() DateTime? createdAt,
     @DateTimeTimestampConverter() DateTime? updatedAt,
   }) = _Counter;
-  Counter._();
+  const Counter._();
 
   factory Counter.fromJson(Map<String, dynamic> json) =>
       _$CounterFromJson(json);
