@@ -72,8 +72,8 @@ ios/Runner/GoogleService-Info.plist
 
 4. pub get をしてライブラリを取り込む。pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する（利用するバージョンを固定にするため）
 
-5. ビルドして動作確認する
+5. プロジェクトのディレクトリ名とpubspec.yamlのnameを変更したいプロジェクト名へ変更する
 
-6. プロジェクトのディレクトリ名とpubspec.yamlのnameを変更する
+6. ビルドして動作確認する
 
 7. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
