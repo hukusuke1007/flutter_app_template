@@ -30,6 +30,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 - その他アプリに必要なライブラリを設定済み
 - デバイス向きは縦固定
 - 起動時に匿名認証でログイン
+- ダークモード（Flutter側のみ）
 
 ### やっていないこと
 
@@ -37,6 +38,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - iPad 対応
+- ダークモード（ネイティブ側）
 
 ## 設計指針
 
@@ -72,4 +74,6 @@ ios/Runner/GoogleService-Info.plist
 
 5. ビルドして動作確認する
 
-6. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+6. プロジェクトのディレクトリ名とpubspec.yamlのnameを変更する
+
+7. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。

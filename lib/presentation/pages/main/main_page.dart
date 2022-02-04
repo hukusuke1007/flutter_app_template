@@ -6,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../../extensions/context_extension.dart';
 import '../sample/firestore_counter_page.dart';
 import '../sample/local_counter_page.dart';
+import '../sample/memo_page.dart';
 import '../sample/setting_page.dart';
 import 'tab_navigator.dart';
 
@@ -28,12 +29,14 @@ class MainPage extends HookConsumerWidget {
     final widgets = useState<List<Widget>>([
       const LocalCounterPage(),
       const FirestoreCounterPage(),
+      const MemoPage(),
       const SettingPage(),
     ]);
     final navigatorKeys = useState({
       0: GlobalKey<NavigatorState>(),
       1: GlobalKey<NavigatorState>(),
       2: GlobalKey<NavigatorState>(),
+      3: GlobalKey<NavigatorState>(),
     });
     final selectedIndex = useState(0);
 
@@ -74,8 +77,13 @@ class MainPage extends HookConsumerWidget {
               tooltip: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.event_note),
               label: 'タブ3',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'タブ4',
               tooltip: '',
             ),
           ],

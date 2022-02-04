@@ -18,7 +18,7 @@ class MemoController extends StateNotifier<List<Memo>> {
   ) : super([]) {
     final userId = _firebaseAuthRepository.loggedInUserId;
     if (userId == null) {
-      throw AppException(title: 'ログインしてください');
+      return;
     }
     _collectionPagingRepository = _read(memoPagingProvider(
       CollectionParam<Memo>(
@@ -47,7 +47,12 @@ class MemoController extends StateNotifier<List<Memo>> {
     if (repository == null) {
       return;
     }
-    final data = await repository.fetch();
+    final data = await repository.fetch(
+      fromCache: (cache) {
+        /// キャッシュから即時反映する
+        state = cache.map((e) => e.entity).whereType<Memo>().toList();
+      },
+    );
     state = data.map((e) => e.entity).whereType<Memo>().toList();
   }
 

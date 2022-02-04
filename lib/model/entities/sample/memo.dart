@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../extensions/date_extension.dart';
 import '../../../model/repositories/firestore/document.dart';
 import '../../converters/date_time_timestamp_converter.dart';
 import '../../repositories/firestore/collection_paging_repository.dart';
@@ -54,4 +55,12 @@ class Memo with _$Memo {
         'text': text,
         'updatedAt': FieldValue.serverTimestamp(),
       };
+
+  String get dateLabel {
+    final date = createdAt;
+    if (date == null) {
+      return '-';
+    }
+    return date.format(format: 'yyyy.M.d HH:mm');
+  }
 }
