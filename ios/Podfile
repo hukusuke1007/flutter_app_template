@@ -85,7 +85,6 @@ post_install do |installer|
           ## dart: PermissionGroup.criticalAlerts
           # 'PERMISSION_CRITICAL_ALERTS=1'
         ]
-        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64 i386"
     end
   end
 end
