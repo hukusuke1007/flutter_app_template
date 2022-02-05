@@ -23,7 +23,7 @@ dependencies:
   flutter_hooks:
   hooks_riverpod:
   freezed_annotation:
-  json_annotation: ^4.4.0
+  json_annotation:
 
   # Dialog
   adaptive_dialog:
