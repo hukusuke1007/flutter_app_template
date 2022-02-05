@@ -52,6 +52,8 @@ android {
 
     signingConfigs {
         release {
+            // TODO: release.keystoreとkey.propertiesを作成する。
+            //  作成したrelease.keystoreのパスワード情報はkey.propertiesで管理する
             def keystorePropertiesFile = rootProject.file('key.properties')
             if (keystorePropertiesFile.exists()) {
                 def keystoreProperties = new Properties()
@@ -63,7 +65,8 @@ android {
             }
         }
         debug {
-            // TODO: 生成したdebug.keystoreの情報に変更する
+            // TODO: debug.keystore作成する。作成したdebug.keystoreの情報に変更する
+            // debug.keystoreのパスワードは以下のように設定する
             def storeFile = rootProject.file('../debug.keystore')
             if (storeFile.exists()) {
                 keyAlias "androiddebugkey"

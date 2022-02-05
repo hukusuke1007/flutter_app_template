@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,12 +12,13 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const locale = Locale('ja', 'JP');
     return MaterialApp(
       title: 'テンプレアプリ', // TODO(shohei): アプリ名を設定
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: getAppTheme(),
       darkTheme: getAppThemeDark(),
-      locale: locale,
       navigatorKey: ref.watch(navigatorKeyProvider),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -25,7 +27,7 @@ class App extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        locale,
+        Locale('ja', 'JP'),
       ],
       home: const StartUpPage(),
     );

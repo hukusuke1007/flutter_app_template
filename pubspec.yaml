@@ -102,6 +102,9 @@ dependencies:
   flutter_local_notifications: ^10.0.0-dev.5
   flutter_native_timezone:
 
+  # Preview
+  device_preview:
+
   # Widget
   flutter_fadein:
   flutter_cupertino_datetime_picker:

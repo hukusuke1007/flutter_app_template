@@ -61,8 +61,9 @@ class EditMemoDialog extends HookConsumerWidget {
                   key: textKey.value,
                   initialValue: data?.text,
                   style: const TextStyle(fontSize: 15),
-                  validator: (value) =>
-                      (value!.trim().isEmpty) ? '正しい値を入力してください' : null,
+                  validator: (value) => (value == null || value.trim().isEmpty)
+                      ? '正しい値を入力してください'
+                      : null,
                   decoration: const InputDecoration(
                     labelText: 'テキスト入力',
                     hintText: '',
