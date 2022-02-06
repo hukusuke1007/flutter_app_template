@@ -69,8 +69,16 @@ git clone https://github.com/hukusuke1007/flutter_app_template.git
 rm -rf .git
 ```
 
-3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更してください。
+3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更する。
    https://github.com/hukusuke1007/flutter_app_template/pull/1/files
+   また、以下の情報も新しいプロジェクトの情報に変更する。
+
+   - アプリ名を変更する
+     - iOS: info.plist => [CFBundleDisplayName](https://github.com/hukusuke1007/flutter_app_template/blob/main/ios/Runner/Info.plist#L16)
+     - Android: strings.xml => [app_name](https://github.com/hukusuke1007/flutter_app_template/blob/main/android/app/src/main/res/values/strings.xml#L3)
+   - プロジェクト名を変更する
+     - ディレクトリ名
+     - [pubspec.yaml の name](https://github.com/hukusuke1007/flutter_app_template/blob/main/pubspec.yaml#L1)
 
 4. 新しい Firebase プロジェクトを作成して Firebase の 設定ファイル を変更する。Firebase については[こちら](https://firebase.flutter.dev/docs/overview)を確認してください。新しい Firebase プロジェクトを作成後、.json と.plist ファイルを以下のものと入れ替える。
 
@@ -83,8 +91,6 @@ ios/Runner/GoogleService-Info.plist
 
 4. pub get をしてライブラリを取り込む。pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する（利用するバージョンを固定にするため）
 
-5. プロジェクトのディレクトリ名と pubspec.yaml の name を変更したいプロジェクト名へ変更する
+5. ビルドして動作確認する
 
-6. ビルドして動作確認する
-
-7. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+6. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
