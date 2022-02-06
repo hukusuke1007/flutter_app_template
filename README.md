@@ -56,19 +56,19 @@ Flutter Stable 2.10.0
 ### ディレクトリ構造
 
 - [lib/](./lib)
-  - extensions/
-  - gen/
-  - model/
-    - converters/
-    - entities/
-    - exceptions/
-    - repositories/
-    - use_cases/
-  - presentation/
-    - pages/
-    - res/
-    - widgets/
-  - main.dart
+  - [extensions/](./lib/extensions)
+  - [gen/](./lib/gen)
+  - [model/](./lib/model)
+    - [converters/](./lib/model/converters)
+    - [entities/](./lib/model/entities)
+    - [exceptions/](./lib/model/exceptions)
+    - [repositories/](./lib/model/repositories)
+    - [use_cases/](./lib/model/use_cases)
+  - [presentation/](./lib/presentation)
+    - [pages/](./lib/presentation/pages)
+    - [res/](./lib/presentation/res)
+    - [widgets/](./lib/presentation/widgets)
+  - [main.dart](./lib/main.dart)
 
 ## 新規プロジェクトへの移行方法
 
