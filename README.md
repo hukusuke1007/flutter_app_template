@@ -10,30 +10,48 @@ Flutter Stable 2.10.0
 
 ### 実装済み
 
-- iOS13、Android7 以上
-- DDD ライクな設計
+- iOS13、Android7 以上で動作
+- DDD ライクな設計で構築
 - 状態管理は flutter_hooks、riverpod を利用
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - ボトムナビゲーション構成のサンプル画面
 - iOS カメラ、画像のパーミッション許可の plist 設定
 - 起動時に匿名認証でログイン
-- ダークモード
+- ダークモード対応
 - デバイス向きは縦固定
 - その他アプリに必要なライブラリを設定済み
-- device_preview導入
+- device_preview 導入
 
 ### やっていないこと
 
 - Android/iOS の Flavor 設定
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
+- ローカライズ対応
 - iPad 対応
 - ユニットテスト
-- UIテスト
+- UI テスト
 
 ## 設計指針
 
 [こちらの資料](https://docs.google.com/presentation/d/19XERQBG-aWWD7R5NEJCyS8VXSeUL9KTENOe0ChYz_1M)にまとめました。
+
+### ディレクトリ構造
+
+- lib/
+  - extensions/
+  - gen/
+  - model/
+    - converters/
+    - entities/
+    - exceptions/
+    - repositories/
+    - use_cases/
+  - presentation/
+    - pages/
+    - res/
+    - widgets/
+  - main.dart
 
 ## 新規プロジェクトへの移行方法
 
@@ -63,7 +81,7 @@ ios/Runner/GoogleService-Info.plist
 
 4. pub get をしてライブラリを取り込む。pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する（利用するバージョンを固定にするため）
 
-5. プロジェクトのディレクトリ名とpubspec.yamlのnameを変更したいプロジェクト名へ変更する
+5. プロジェクトのディレクトリ名と pubspec.yaml の name を変更したいプロジェクト名へ変更する
 
 6. ビルドして動作確認する
 
