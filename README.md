@@ -55,7 +55,7 @@ Flutter Stable 2.10.0
 
 ### ディレクトリ構造
 
-- lib/
+- [lib/](./lib)
   - extensions/
   - gen/
   - model/
@@ -74,15 +74,15 @@ Flutter Stable 2.10.0
 
 1. git clone で取り込む
 
-```
-git clone https://github.com/hukusuke1007/flutter_app_template.git
-```
+   ```
+   git clone https://github.com/hukusuke1007/flutter_app_template.git
+   ```
 
 2. 取り込んだら .git を削除する
 
-```
-rm -rf .git
-```
+   ```
+   rm -rf .git
+   ```
 
 3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更する
 
