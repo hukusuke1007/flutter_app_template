@@ -92,7 +92,7 @@ Flutter Stable 2.10.0
 
    - アプリ名を変更する
 
-     - iOS: info.plist => [CFBundleDisplayName](./ios/Runner/Info.plist#L16)
+     - iOS: info.plist => [CFBundleDisplayName](./ios/Runner/Info.plist#L16), [CFBundleName](./ios/Runner/Info.plist#L23)
      - Android: strings.xml => [app_name](./android/app/src/main/res/values/strings.xml#L3)
 
    - プロジェクト名を変更する
