@@ -1,18 +1,33 @@
 # flutter_app_template
 
-## 概要
-
 Flutter + Firebase アプリの雛形
+
+| カテゴリ      | 説明                          |
+| ------------- | ----------------------------- |
+| 状態管理と DI | flutter_hooks, hooks_riverpod |
+| データモデル  | freezed                       |
+| クラウド DB   | cloud_firestore               |
+| ローカル DB   | shared_preferences            |
 
 ### 環境
 
 Flutter Stable 2.10.0
 
+### 画面構成
+
+- タブ 1
+  - SharedPreferences を用いた カウンター
+- タブ 2
+  - Firestore を用いた カウンター
+- タブ 3
+  - Firestore を用いた Memo データ一覧と CRUD
+- タブ 4
+  - アプリバージョンを表示
+
 ### 実装済み
 
 - iOS13、Android7 以上で動作
 - DDD ライクな設計で構築
-- 状態管理は flutter_hooks、riverpod を利用
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - ボトムナビゲーション構成のサンプル画面
 - iOS カメラ、画像のパーミッション許可の plist 設定
@@ -80,17 +95,21 @@ rm -rf .git
      - ディレクトリ名
      - [pubspec.yaml の name](https://github.com/hukusuke1007/flutter_app_template/blob/main/pubspec.yaml#L1)
 
-4. 新しい Firebase プロジェクトを作成して Firebase の 設定ファイル を変更する。Firebase については[こちら](https://firebase.flutter.dev/docs/overview)を確認してください。新しい Firebase プロジェクトを作成後、.json と.plist ファイルを以下のものと入れ替える。
+4. 新しい Firebase プロジェクトを構築して Firebase の 設定ファイル を変更する。Firebase の構築方法は[こちら](https://firebase.flutter.dev/docs/overview)。
+   構築した Firebase の設定ファイル（.json と.plist）を以下のものと入れ替える。
 
-```
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-```
+   ```
+   android/app/google-services.json
+   ios/Runner/GoogleService-Info.plist
+   ```
 
-3. 利用する Firebase コンソールから匿名認証を ON にする
+5. 利用する Firebase の コンソールから匿名認証を ON にする
 
-4. pub get をしてライブラリを取り込む。pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する（利用するバージョンを固定にするため）
+6. flutter のライブラリを取り込む。
+   pub get を実行する。利用するバージョンを固定にするため、pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する。
 
-5. ビルドして動作確認する
+7. ビルドして動作確認する
 
-6. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+8. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+
+9. あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
