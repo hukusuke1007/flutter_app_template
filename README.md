@@ -95,8 +95,8 @@ rm -rf .git
      - ディレクトリ名
      - [pubspec.yaml の name](https://github.com/hukusuke1007/flutter_app_template/blob/main/pubspec.yaml#L1)
 
-4. 新しい Firebase プロジェクトを構築して Firebase の 設定ファイル を変更する。Firebase の構築方法は[こちら](https://firebase.flutter.dev/docs/overview)。
-   構築した Firebase の設定ファイル（.json と.plist）を以下のものと入れ替える。
+4. 新しい Firebase プロジェクトを構築する。Firebase の構築方法は[こちら](https://firebase.flutter.dev/docs/overview)
+   構築した Firebase の設定ファイル（.json と.plist）を以下の場所へ設置する。
 
    ```
    android/app/google-services.json
