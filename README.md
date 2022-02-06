@@ -31,6 +31,7 @@ Flutter Stable 2.10.0
 - iPad 対応
 - ユニットテスト
 - UI テスト
+- dartdoc
 
 ## 設計指針
 
