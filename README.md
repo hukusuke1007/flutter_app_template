@@ -84,9 +84,11 @@ git clone https://github.com/hukusuke1007/flutter_app_template.git
 rm -rf .git
 ```
 
-3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更する。
-   https://github.com/hukusuke1007/flutter_app_template/pull/1/files
-   また、以下の情報も新しいプロジェクトの情報に変更する。
+3. `com.example.app` から変更したいプロジェクト名にする。以下の PR を参考に変更する
+
+   - https://github.com/hukusuke1007/flutter_app_template/pull/1/files
+
+   また、以下も新しいプロジェクトの情報へ変更する
 
    - アプリ名を変更する
      - iOS: info.plist => [CFBundleDisplayName](https://github.com/hukusuke1007/flutter_app_template/blob/main/ios/Runner/Info.plist#L16)
@@ -95,8 +97,11 @@ rm -rf .git
      - ディレクトリ名
      - [pubspec.yaml の name](https://github.com/hukusuke1007/flutter_app_template/blob/main/pubspec.yaml#L1)
 
-4. 新しい Firebase プロジェクトを構築する。Firebase の構築方法は[こちら](https://firebase.flutter.dev/docs/overview)
-   構築した Firebase の設定ファイル（.json と.plist）を以下の場所へ設置する。
+4. 新しい Firebase プロジェクトを構築する
+
+   - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
+
+   構築した Firebase の設定ファイル（.json と.plist）を以下の場所へ設置する
 
    ```
    android/app/google-services.json
@@ -105,8 +110,7 @@ rm -rf .git
 
 5. 利用する Firebase の コンソールから匿名認証を ON にする
 
-6. flutter のライブラリを取り込む。
-   pub get を実行する。利用するバージョンを固定にするため、pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する。
+6. flutter のライブラリを取り込む。 pub get を実行する。利用するバージョンを固定にするため、pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する。
 
 7. ビルドして動作確認する
 
