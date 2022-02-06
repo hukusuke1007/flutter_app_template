@@ -35,7 +35,7 @@ class MemoPage extends HookConsumerWidget {
         }
       });
       return null;
-    }, []);
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(

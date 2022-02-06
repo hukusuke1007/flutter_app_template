@@ -20,7 +20,7 @@ class LocalCounterPage extends HookConsumerWidget {
         counter.value = await ref.read(fetchLocalCounter).call();
       });
       return null;
-    }, []);
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(

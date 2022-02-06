@@ -34,7 +34,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
         isLoading.value = false;
       });
       return null;
-    }, []);
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(

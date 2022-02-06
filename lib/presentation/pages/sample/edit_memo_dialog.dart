@@ -36,11 +36,11 @@ class EditMemoDialog extends HookConsumerWidget {
     final textKey = useState(GlobalKey<FormFieldState<String>>());
 
     useEffect(() {
-      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
         textKey.value.currentState?.didChange(data?.text);
       });
       return null;
-    }, []);
+    }, const []);
 
     return GestureDetector(
       onTap: context.hideKeyboard,

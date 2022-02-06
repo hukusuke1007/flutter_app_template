@@ -34,8 +34,8 @@ class StartUpPage extends HookConsumerWidget {
         }
         unawaited(MainPage.show(context));
       });
-      return;
-    }, []);
+      return null;
+    }, const []);
     return const Scaffold(
       body: Center(
         child: CupertinoActivityIndicator(),
