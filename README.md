@@ -91,11 +91,13 @@ Flutter Stable 2.10.0
    また、以下も新しいプロジェクトの情報へ変更する
 
    - アプリ名を変更する
-     - iOS: info.plist => [CFBundleDisplayName](https://github.com/hukusuke1007/flutter_app_template/blob/main/ios/Runner/Info.plist#L16)
-     - Android: strings.xml => [app_name](https://github.com/hukusuke1007/flutter_app_template/blob/main/android/app/src/main/res/values/strings.xml#L3)
+
+     - iOS: info.plist => [CFBundleDisplayName](./ios/Runner/Info.plist#L16)
+     - Android: strings.xml => [app_name](./android/app/src/main/res/values/strings.xml#L3)
+
    - プロジェクト名を変更する
      - ディレクトリ名
-     - [pubspec.yaml の name](https://github.com/hukusuke1007/flutter_app_template/blob/main/pubspec.yaml#L1)
+     - [pubspec.yaml の name](./pubspec.yaml#L1)
 
 4. 新しい Firebase プロジェクトを構築する
 
