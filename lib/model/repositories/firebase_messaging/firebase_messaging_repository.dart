@@ -2,9 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_app_template/model/repositories/firebase_messaging/topics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
+
+import '../../../model/repositories/firebase_messaging/topics.dart';
 
 final firebaseMessagingRepositoryProvider =
     Provider<FirebaseMessagingRepository>(

@@ -1,6 +1,6 @@
-import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../repositories/firebase_auth/login_type.dart';
 

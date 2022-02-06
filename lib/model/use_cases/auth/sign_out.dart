@@ -1,4 +1,3 @@
-import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/provider.dart';

@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/utils/constants.dart';
-import 'package:flutter_app_template/utils/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:launch_review/launch_review.dart';
 
+import '../../../utils/constants.dart';
+import '../../../utils/logger.dart';
 import '../../model/repositories/shared_preferences/shared_preference_key.dart';
 import '../../model/repositories/shared_preferences/shared_preference_repository.dart';
 import '../../utils/constants.dart';

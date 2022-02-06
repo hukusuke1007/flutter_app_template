@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/utils/provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,6 +7,7 @@ import '../../../extensions/exception_extension.dart';
 import '../../../model/entities/sample/memo.dart';
 import '../../../model/use_cases/sample/memo_controller.dart';
 import '../../../utils/logger.dart';
+import '../../../utils/provider.dart';
 import '../../res/colors.dart';
 import '../../widgets/show_indicator.dart';
 
