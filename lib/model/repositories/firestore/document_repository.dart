@@ -97,15 +97,14 @@ class DocumentRepository {
     try {
       final cache = await doc.get(const GetOptions(source: Source.cache));
       if (cache.exists) {
-        // logger.info('fetch from cache');
         return Document(
           ref: cache.reference,
           exists: cache.exists,
           entity: cache.exists ? decode(cache.data()!) : null,
         );
       }
-    } on Exception catch (e) {
-      // logger.info(e);
+    } on Exception catch (_) {
+      // ignore exception
     }
     return Document(
       ref: doc,
@@ -125,8 +124,8 @@ class DocumentRepository {
     try {
       final cache = await doc.get(const GetOptions(source: Source.cache));
       return cache.exists;
-    } on Exception catch (e) {
-      // logger.info(e);
+    } on Exception catch (_) {
+      // ignore exception
     }
     final snap = await doc.get(const GetOptions(source: Source.serverAndCache));
     return snap.exists;

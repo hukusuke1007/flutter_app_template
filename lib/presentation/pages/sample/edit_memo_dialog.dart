@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/utils/provider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -98,18 +99,23 @@ class EditMemoDialog extends HookConsumerWidget {
                       try {
                         showIndicator(context);
                         context.hideKeyboard();
+                        final gContext =
+                            ref.read(navigatorKeyProvider).currentContext!;
                         if (data != null) {
                           /// 更新
                           await ref
                               .read(memoControllerProvider.notifier)
                               .update(data!.copyWith(text: text));
+                          gContext.showSnackBar('更新しました');
                         } else {
                           /// 新規作成
                           await ref
                               .read(memoControllerProvider.notifier)
                               .create(text);
+                          gContext.showSnackBar('作成しました');
                         }
                         dismissIndicator(context);
+
                         Navigator.pop(context);
                       } on Exception catch (e) {
                         logger.shout(e);

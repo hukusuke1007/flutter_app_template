@@ -53,7 +53,7 @@ Flutter Stable 2.10.0
 
 [こちらの資料](https://docs.google.com/presentation/d/19XERQBG-aWWD7R5NEJCyS8VXSeUL9KTENOe0ChYz_1M)にまとめました。
 
-### ディレクトリ構造
+### ディレクトリ構成
 
 - [lib/](./lib)
   - [extensions/](./lib/extensions)
