@@ -112,7 +112,8 @@ Flutter Stable 2.10.0
 
 5. 利用する Firebase の コンソールから匿名認証を ON にする
 
-6. flutter のライブラリを取り込む。 pub get を実行する。利用するバージョンを固定にするため、pubspec.lock 内のプラグインのバージョンを見て pubspec.yaml のプラグインのバージョンを指定する。
+6. flutter のライブラリを取り込む。 pub get を実行する。
+   利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
 7. ビルドして動作確認する
 
