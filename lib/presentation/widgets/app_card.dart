@@ -19,7 +19,7 @@ class AppCard extends StatelessWidget {
     return Material(
       elevation: elevation,
       borderRadius: borderRadius,
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: borderRadius,
           color: color,

@@ -89,9 +89,7 @@ class _PagingListener<T extends Object> {
     required this.decode,
     this.collectionReference,
   }) {
-    _fetchController
-        .switchMap<int>((event) => Stream.value(event))
-        .listen(_fetch);
+    _fetchController.switchMap<int>(Stream.value).listen(_fetch);
   }
 
   final Query<Map<String, dynamic>> query;

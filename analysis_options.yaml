@@ -10,3 +10,6 @@ analyzer:
     - lib/**/*.freezed.dart
     - lib/**/*.chopper.dart
     - lib/l10n/*.dart
+linter:
+  rules:
+    sort_pub_dependencies: false

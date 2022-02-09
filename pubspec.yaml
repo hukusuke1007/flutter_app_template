@@ -124,6 +124,8 @@ dependencies:
   recase:
   device_info:
   flutter_linkify:
+  timezone:
+  collection:
 
 dev_dependencies:
   flutter_test:
