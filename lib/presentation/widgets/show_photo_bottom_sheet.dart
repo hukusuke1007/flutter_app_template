@@ -27,6 +27,7 @@ Future<File?> showPhotoAndCropBottomSheet(BuildContext context) async {
     final cropFile = await cropAvatar(file.path);
     return cropFile;
   }
+  return null;
 }
 
 enum PhotoType {

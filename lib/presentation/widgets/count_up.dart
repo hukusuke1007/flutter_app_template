@@ -79,7 +79,7 @@ class _State extends State<CountUp> with TickerProviderStateMixin {
     _latestEnd = widget.end;
     _controller.forward();
 
-    return _CountupAnimatedText(
+    return _CountUpAnimatedText(
       key: UniqueKey(),
       animation: _animation,
       precision: widget.precision,
@@ -99,8 +99,8 @@ class _State extends State<CountUp> with TickerProviderStateMixin {
   }
 }
 
-class _CountupAnimatedText extends AnimatedWidget {
-  _CountupAnimatedText({
+class _CountUpAnimatedText extends AnimatedWidget {
+  _CountUpAnimatedText({
     Key? key,
     required this.animation,
     required this.precision,
@@ -138,6 +138,7 @@ class _CountupAnimatedText extends AnimatedWidget {
   @override
   Widget build(BuildContext context) => Text(
         separator != null
+            // ignore:lines_longer_than_80_chars
             ? '$prefix${animation.value.toStringAsFixed(precision).replaceAllMapped(reg, (Match match) => '${match[1]}$separator')}$suffix'
             : '$prefix${animation.value.toStringAsFixed(precision)}$suffix',
         style: style,
