@@ -13,7 +13,7 @@ Flutter + Firebase アプリの雛形
 
 ### 環境
 
-Flutter Stable 2.10.0
+Flutter Stable 2.10.1
 
 ### 画面構成
 
@@ -135,9 +135,11 @@ Android Studio から実行する場合は以下のように Run Configurations 
     - パッケージ名を変更する
 
       - iOS:
+
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
-        Debug, Profile, Release の全てを変更する。但し、`$(APP_ID_SUFFIX)`はそのままにしてください。
+        Debug, Profile, Release の全てを変更する。`$(APP_ID_SUFFIX)`はそのままにしてください。
         ![dev](./doc/images/product_bundle_identifier.png)
+
       - Android:
 
         - android/app/build.gradle
@@ -161,10 +163,17 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
     - アプリ名を変更する
 
-      - iOS: `$(APP_NAME_PREFIX)`はそのままでそれ以外を変更する
+      - iOS:
+
+        `$(APP_NAME_PREFIX)`はそのままでそれ以外を変更する
+
         - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
         - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
-      - Android: `android/app/build.gradle`
+
+      - Android:
+
+        `android/app/build.gradle`
+
         - [resValue](./android/app/build.gradle#L80)
 
     - プロジェクト名を変更する
