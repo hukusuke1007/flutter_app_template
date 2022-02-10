@@ -50,6 +50,7 @@ Flutter Stable 2.10.0
 - ユニットテスト
 - UI テスト
 - dartdoc
+- fastlane
 
 ## 設計指針
 
@@ -196,3 +197,20 @@ Android Studio から実行する場合は以下のように Run Configurations 
 8.  問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
 
 9.  あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
+
+## リリースビルドに関して
+
+- Android
+
+  ```sh
+  flutter build appbundle --release --dart-define=FLAVOR=prod
+  ```
+
+- iOS
+  `ExportOptions.plist` を用意してください。
+
+  [ExportOptions.plist サンプル](./ExportOptions.plist) （teamID は `Apple Developer -> Membership`から確認できます）
+
+  ```sh
+  flutter build ipa --export-options-plist=ExportOptions.plist --release --dart-define=FLAVOR=prod
+  ```
