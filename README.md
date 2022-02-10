@@ -99,73 +99,85 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
 ## 新規プロジェクトへの移行方法
 
-1. git clone で取り込む
+1.  git clone で取り込む
 
-   ```
-   git clone https://github.com/hukusuke1007/flutter_app_template.git
-   ```
+    ```
+    git clone https://github.com/hukusuke1007/flutter_app_template.git
+    ```
 
-2. 取り込んだら .git を削除する
+2.  取り込んだら .git を削除する
 
-   ```
-   rm -rf .git
-   ```
+    ```
+    rm -rf .git
+    ```
 
-3. WIP `com.example.app` を変更したいパッケージ名 にする。以下の PR を参考に変更する
+3.  `com.example.app` を変更したいパッケージ名 にする
 
-   - https://github.com/hukusuke1007/flutter_app_template/pull/1/files
+    - パッケージ名を変更する
 
-   また、以下も新しいプロジェクトの情報へ変更する
+      - iOS:
+        `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
+        Debug, Profile, Release の全てを変更する。但し、`$(APP_ID_SUFFIX)`はそのままにしてください。
+        ![dev](./doc/images/product_bundle_identifier.png)
+      - Android:
 
-   - パッケージ名を変更する
+        - android/app/build.gradle
+          - [applicationId](./android/app/build.gradle#L70)
+        - AndroidManifest.xml - package
 
-     - iOS: TODO
-     - Android: TODO
+          - [main](./android/app/src/main/AndroidManifest.xml#L2)
+          - [debug](./android/app/src/debug/AndroidManifest.xml#L2)
+          - [profile](./android/app/src/profile/AndroidManifest.xml#L2)
 
-   - アプリ名を変更する
+        - MainActivity.kt
+          - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.k#L1)
+        - kotlin 配下のディレクトリ名 例えば `com.example.app` から `com.never.jp` に変更する場合は以下の通りにする。
+          `android/app/src/main/kotlin/com/example/app` -> `android/app/src/main/kotlin/com/never/jp`
 
-     - iOS: info.plist
-       - [CFBundleDisplayName](./ios/Runner/Info.plist#L16)
-       - [CFBundleName](./ios/Runner/Info.plist#L23)
-     - Android: android/app/build.gradle
-       - [resValue](./android/app/build.gradle#L80)
+    - アプリ名を変更する
 
-   - プロジェクト名を変更する
-     - ディレクトリ名
-     - [pubspec.yaml の name](./pubspec.yaml#L1)
+      - iOS: `$(APP_NAME_PREFIX)`はそのままでそれ以外を変更する
+        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
+        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
+      - Android: `android/app/build.gradle`
+        - [resValue](./android/app/build.gradle#L80)
 
-4. 新しい Firebase プロジェクトを構築する。
-   開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
+    - プロジェクト名を変更する
+      - ディレクトリ名
+      - [pubspec.yaml の name](./pubspec.yaml#L1)
 
-   - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
+4.  新しい Firebase プロジェクトを構築する。
+    開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
 
-   構築した Firebase の設定ファイルを以下の場所へ設置する
+    - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
 
-   - Android
+    構築した Firebase の設定ファイルを以下の場所へ設置する
 
-     ```
-     # 開発環境
-     android/app/src/dev/google-services.json
-     # 本番環境
-     android/app/src/prod/google-services.json
-     ```
+    - Android
 
-   - iOS
+      ```
+      # 開発環境
+      android/app/src/dev/google-services.json
+      # 本番環境
+      android/app/src/prod/google-services.json
+      ```
 
-     ```
-     # 開発環境
-     ios/dev/GoogleService-Info.plist
-     # 本番環境
-     ios/prod/GoogleService-Info.plist
-     ```
+    - iOS
 
-5. Firebase コンソールから匿名認証を ON にする（開発、本番共に）
+      ```
+      # 開発環境
+      ios/dev/GoogleService-Info.plist
+      # 本番環境
+      ios/prod/GoogleService-Info.plist
+      ```
 
-6. flutter のライブラリを取り込む。 pub get を実行する。
-   利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
+5.  Firebase コンソールから匿名認証を 開発、本番共に ON にする
 
-7. [実行コマンド](#実行コマンド)を用いて動作確認する。
+6.  flutter のライブラリを取り込む。 pub get を実行する。
+    利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
-8. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+7.  [実行コマンド](#実行コマンド)を用いて動作確認する。
 
-9. あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
+8.  問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+
+9.  あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
