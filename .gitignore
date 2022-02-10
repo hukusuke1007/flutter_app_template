@@ -45,6 +45,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+ios/Flutter/DartDefines.xcconfig
+
 # Firebase
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
+android/**/google-services.json
+ios/**/GoogleService-Info.plist
