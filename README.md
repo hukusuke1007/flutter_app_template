@@ -132,7 +132,9 @@ Android Studio から実行する場合は以下のように Run Configurations 
         - MainActivity.kt
           - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
         - kotlin 配下のディレクトリ名を変更する
+
           （例）`com.example.app` から `com.never.jp` へ変更した場合
+
           ```
             変更前: android/app/src/main/kotlin/com/example/app
             変更後: android/app/src/main/kotlin/com/never/jp
@@ -149,6 +151,7 @@ Android Studio から実行する場合は以下のように Run Configurations 
     - プロジェクト名を変更する
 
       - `flutter_app_template` のディレクトリ名を変更する
+
         （例）`flutter_app_template`　から `never_app` へ変更
 
         ```
