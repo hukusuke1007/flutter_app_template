@@ -31,19 +31,19 @@ class SharedPreferencesRepository {
   }
 
   Future<T?> fetch<T>(SharedPreferencesKey key) async {
-    if (T.toString() == 'int') {
+    if (T == int) {
       return _prefs.getInt(key.value) as T?;
     }
-    if (T.toString() == 'double') {
+    if (T == double) {
       return _prefs.getDouble(key.value) as T?;
     }
-    if (T.toString() == 'bool') {
+    if (T == bool) {
       return _prefs.getBool(key.value) as T?;
     }
-    if (T.toString() == 'String') {
+    if (T == String) {
       return _prefs.getString(key.value) as T?;
     }
-    if (T.toString() == 'List<String>') {
+    if (T == List<String>) {
       return _prefs.getStringList(key.value) as T?;
     }
     return null;
