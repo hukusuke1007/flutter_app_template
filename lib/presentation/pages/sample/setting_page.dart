@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/model/use_cases/package_info/fetch_package_name.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/package_info/fetch_app_name.dart';
 import '../../../model/use_cases/package_info/fetch_app_version.dart';
+import '../../../model/use_cases/package_info/fetch_package_name.dart';
 
 class SettingPage extends HookConsumerWidget {
   const SettingPage({Key? key}) : super(key: key);

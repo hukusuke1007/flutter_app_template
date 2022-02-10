@@ -14,6 +14,7 @@ import '../utils/logger.dart';
 import 'model/repositories/package_info/package_info_repository.dart';
 import 'model/repositories/shared_preferences/shared_preference_repository.dart';
 import 'presentation/pages/app.dart';
+import 'utils/flavor.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,15 @@ Future<void> main() async {
   late final SharedPreferences sharedPreferences;
   Logger.configure();
   await Future.wait([
+    /// Firebase
     Firebase.initializeApp(),
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]),
+
+    /// 縦固定
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]),
+
     Future(() async {
       packageInfo = await PackageInfo.fromPlatform();
     }),
@@ -36,6 +43,8 @@ Future<void> main() async {
       tz.setLocalLocation(tz.getLocation(currentTimeZone));
     }),
   ]);
+
+  logger.info(Flavor.environment);
 
   runApp(ProviderScope(
     overrides: [

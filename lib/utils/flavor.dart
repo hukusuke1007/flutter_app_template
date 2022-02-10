@@ -1,4 +1,4 @@
-enum FlavorType { dev, prd }
+enum FlavorType { dev, prod }
 
 class Flavor {
   Flavor._();
@@ -7,9 +7,9 @@ class Flavor {
     const flavor = String.fromEnvironment('FLAVOR');
     if (flavor == 'dev') {
       return FlavorType.dev;
-    } else if (flavor == 'prd') {
-      return FlavorType.prd;
+    } else if (flavor == 'prod') {
+      return FlavorType.prod;
     }
-    throw Exception('Not support flavor');
+    throw AssertionError('No support flavor');
   }
 }
