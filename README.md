@@ -130,9 +130,12 @@ Android Studio から実行する場合は以下のように Run Configurations 
           - [profile](./android/app/src/profile/AndroidManifest.xml#L2)
 
         - MainActivity.kt
-          - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.k#L1)
+          - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
         - kotlin 配下のディレクトリ名 例えば `com.example.app` から `com.never.jp` に変更する場合は以下の通りにする。
-          `android/app/src/main/kotlin/com/example/app` -> `android/app/src/main/kotlin/com/never/jp`
+          ```
+            変更前: android/app/src/main/kotlin/com/example/app
+            変更後: android/app/src/main/kotlin/com/never/jp
+          ```
 
     - アプリ名を変更する
 
