@@ -131,7 +131,8 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
         - MainActivity.kt
           - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
-        - kotlin 配下のディレクトリ名 例えば `com.example.app` から `com.never.jp` に変更する場合は以下の通りにする。
+        - kotlin 配下のディレクトリ名を変更する
+          （例）`com.example.app` から `com.never.jp` へ変更した場合
           ```
             変更前: android/app/src/main/kotlin/com/example/app
             変更後: android/app/src/main/kotlin/com/never/jp
@@ -146,7 +147,15 @@ Android Studio から実行する場合は以下のように Run Configurations 
         - [resValue](./android/app/build.gradle#L80)
 
     - プロジェクト名を変更する
-      - ディレクトリ名
+
+      - `flutter_app_template` のディレクトリ名を変更する
+        （例）`flutter_app_template`　から `never_app` へ変更
+
+        ```
+          変更前: flutter_app_template/
+          変更後: never_app/
+        ```
+
       - [pubspec.yaml の name](./pubspec.yaml#L1)
 
 4.  新しい Firebase プロジェクトを構築する。
