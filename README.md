@@ -37,10 +37,10 @@ Flutter Stable 2.10.0
 - 静的解析導入
 - その他アプリに必要なライブラリを設定済み
 - device_preview 導入
+- Android/iOS の Flavor 設定
 
 ### やっていないこと
 
-- Android/iOS の Flavor 設定
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応

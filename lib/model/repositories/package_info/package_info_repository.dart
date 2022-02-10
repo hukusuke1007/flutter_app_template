@@ -8,7 +8,7 @@ class PackageInfoRepository {
   PackageInfoRepository(this._packageInfo);
 
   final PackageInfo _packageInfo;
-
+  String get appName => _packageInfo.appName;
   String get appVersion => _packageInfo.version;
   String get packageName => _packageInfo.packageName;
 }
