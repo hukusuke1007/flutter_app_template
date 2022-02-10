@@ -186,7 +186,7 @@ Android Studio から実行する場合は以下のように Run Configurations 
       ios/prod/GoogleService-Info.plist
       ```
 
-5.  Firebase コンソールから匿名認証を 開発、本番共に ON にする
+5.  Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
 6.  flutter のライブラリを取り込む。 pub get を実行する。
     利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
