@@ -84,13 +84,17 @@ Flutter Stable 2.10.1
 
 #### 実行コマンド
 
-```sh
-# 開発
-flutter run --debug --dart-define=FLAVOR=dev
+- 開発
 
-# 本番
-flutter run --debug --dart-define=FLAVOR=prod
-```
+  ```sh
+  flutter run --debug --dart-define=FLAVOR=dev
+  ```
+
+- 本番
+
+  ```sh
+  flutter run --debug --dart-define=FLAVOR=prod
+  ```
 
 Android Studio から実行する場合は以下のように Run Configurations を設定する。
 
