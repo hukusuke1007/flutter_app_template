@@ -77,15 +77,16 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       isLoading.value = true;
                       try {
                         final newCounter = () {
-                          final now = DateTime.now();
-                          final value =
-                              counter.value?.copyWith(updatedAt: now) ??
-                                  Counter(createdAt: now, updatedAt: now);
+                          final value = counter.value ?? const Counter();
                           final count = value.count ?? 0;
                           return value.copyWith(count: max(count - 1, 0));
                         }();
                         await ref.read(saveFirestoreCounter).call(newCounter);
-                        counter.value = newCounter;
+                        final now = DateTime.now();
+                        counter.value = newCounter.copyWith(
+                          createdAt: counter.value?.createdAt ?? now,
+                          updatedAt: now,
+                        );
                       } on Exception catch (e) {
                         logger.shout(e);
                         context.showSnackBar(

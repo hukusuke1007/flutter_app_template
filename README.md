@@ -13,7 +13,7 @@ Flutter + Firebase アプリの雛形
 
 ### 環境
 
-Flutter Stable 2.10.1
+Flutter Stable 2.10.2
 
 ### 画面構成
 
@@ -23,8 +23,14 @@ Flutter Stable 2.10.1
   - Firestore を用いた カウンター
 - タブ 3
   - Firestore を用いた Memo データ一覧と CRUD
+    - データの追加、更新、削除
+    - データ一覧の Pull-to-refresh
+    - データ一覧の Infinite Scroll Pagination
 - タブ 4
-  - アプリバージョンを表示
+  - 設定画面
+    - アプリ名、パッケージ名、バージョンを表示
+    - 株式会社 Never の URL を WebView で表示
+    - ログアウト
 
 ### 実装済み
 

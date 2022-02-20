@@ -5,6 +5,7 @@ final navigatorKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
 
 enum AuthState {
   noSignIn,
+  signInWithAnonymously,
   signIn,
 }
 

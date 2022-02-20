@@ -26,4 +26,10 @@ class Counter with _$Counter {
   static String docPath(String id) => '$collectionPath/$id';
   static DocumentReference<SnapType> docRef(String id) =>
       Document.docRefWithDocPath(docPath(id));
+
+  Map<String, dynamic> get toDoc => <String, dynamic>{
+        ...toJson(),
+        'createdAt': createdAt ?? FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
 }

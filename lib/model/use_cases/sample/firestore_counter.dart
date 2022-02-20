@@ -38,7 +38,7 @@ class SaveFirestoreCounter {
     }
     await _read(documentRepositoryProvider).save(
       Counter.docPath(userId),
-      data: counter.toJson(),
+      data: counter.toDoc,
     );
   }
 }
