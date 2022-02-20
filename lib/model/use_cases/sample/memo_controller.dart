@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../model/exceptions/app_exception.dart';
+import '../../../utils/provider.dart';
 import '../../entities/sample/memo.dart';
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../repositories/firestore/collection_paging_repository.dart';
@@ -9,6 +10,7 @@ import '../../repositories/firestore/document_repository.dart';
 
 final memoControllerProvider =
     StateNotifierProvider<MemoController, List<Memo>>((ref) {
+  ref.watch(authStateProvider);
   return MemoController(ref.read);
 });
 
