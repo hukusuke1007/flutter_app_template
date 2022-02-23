@@ -8,7 +8,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
 import '../../../model/use_cases/sample/memo_controller.dart';
-import '../../../presentation/widgets/show_indicator.dart';
 import '../../../utils/logger.dart';
 import '../../widgets/smart_refresher_custom.dart';
 import 'edit_memo_dialog.dart';
@@ -19,13 +18,12 @@ class MemoPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final refreshController = useState(RefreshController());
-
-    final memos = ref.watch(memoControllerProvider);
+    final items = ref.watch(memoProvider);
 
     useEffect(() {
       Future(() async {
         try {
-          await ref.read(memoControllerProvider.notifier).fetch();
+          await ref.read(memoProvider.notifier).fetch();
         } on Exception catch (e) {
           logger.shout(e);
           context.showSnackBar(
@@ -38,6 +36,7 @@ class MemoPage extends HookConsumerWidget {
     }, const []);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'メモ',
@@ -57,7 +56,7 @@ class MemoPage extends HookConsumerWidget {
         physics: const BouncingScrollPhysics(),
         onRefresh: () async {
           try {
-            await ref.read(memoControllerProvider.notifier).fetch();
+            await ref.read(memoProvider.notifier).fetch();
           } on Exception catch (e) {
             logger.shout(e);
             context.showSnackBar(
@@ -69,7 +68,7 @@ class MemoPage extends HookConsumerWidget {
         },
         onLoading: () async {
           try {
-            await ref.read(memoControllerProvider.notifier).fetchMore();
+            await ref.read(memoProvider.notifier).fetchMore();
           } on Exception catch (e) {
             logger.shout(e);
             context.showSnackBar(
@@ -81,7 +80,7 @@ class MemoPage extends HookConsumerWidget {
         },
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
-            final data = memos[index];
+            final data = items[index];
             return Slidable(
               endActionPane: ActionPane(
                 motion: const ScrollMotion(),
@@ -98,13 +97,10 @@ class MemoPage extends HookConsumerWidget {
                         return;
                       }
                       try {
-                        await ref
-                            .read(memoControllerProvider.notifier)
-                            .remove(docId);
+                        await ref.read(memoProvider.notifier).remove(docId);
                         context.showSnackBar('削除しました');
                       } on Exception catch (e) {
                         logger.shout(e);
-                        dismissIndicator(context);
                         context.showSnackBar(
                           e.errorMessage,
                           backgroundColor: Colors.grey,
@@ -136,7 +132,7 @@ class MemoPage extends HookConsumerWidget {
           separatorBuilder: (BuildContext context, int index) {
             return const Divider(height: 1);
           },
-          itemCount: memos.length,
+          itemCount: items.length,
         ),
       ),
       floatingActionButton: FloatingActionButton(

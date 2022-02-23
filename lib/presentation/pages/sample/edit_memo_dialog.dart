@@ -104,14 +104,12 @@ class EditMemoDialog extends HookConsumerWidget {
                         if (data != null) {
                           /// 更新
                           await ref
-                              .read(memoControllerProvider.notifier)
+                              .read(memoProvider.notifier)
                               .update(data!.copyWith(text: text));
                           gContext.showSnackBar('更新しました');
                         } else {
                           /// 新規作成
-                          await ref
-                              .read(memoControllerProvider.notifier)
-                              .create(text);
+                          await ref.read(memoProvider.notifier).create(text);
                           gContext.showSnackBar('作成しました');
                         }
                         dismissIndicator(context);

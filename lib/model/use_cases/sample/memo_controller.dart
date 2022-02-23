@@ -8,8 +8,7 @@ import '../../repositories/firestore/collection_paging_repository.dart';
 import '../../repositories/firestore/document.dart';
 import '../../repositories/firestore/document_repository.dart';
 
-final memoControllerProvider =
-    StateNotifierProvider<MemoController, List<Memo>>((ref) {
+final memoProvider = StateNotifierProvider<MemoController, List<Memo>>((ref) {
   ref.watch(authStateProvider);
   return MemoController(ref.read);
 });
