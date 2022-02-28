@@ -1,17 +1,19 @@
-import 'dart:math';
-
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'image_viewer_header.dart';
+import 'save_image_to_media_folder.dart';
+
 class ImageViewer extends StatefulHookWidget {
-  const ImageViewer({
+  ImageViewer({
     required this.urls,
     required this.files,
     required this.assetNames,
     Key? key,
-  }) : super(key: key);
+  })  : assert(urls.isNotEmpty || files.isNotEmpty || assetNames.isNotEmpty),
+        super(key: key);
 
   static Future<void> show(
     BuildContext context, {
@@ -42,10 +44,12 @@ class ImageViewer extends StatefulHookWidget {
 }
 
 class _State extends State<ImageViewer> {
-  Offset beginningDragPosition = Offset.zero;
-  Offset currentDragPosition = Offset.zero;
-  int photoViewAnimationDurationMilliSec = 0;
-  double barsOpacity = 1;
+  int _selectedIndex = 0;
+
+  bool get isUrl =>
+      widget.urls.isNotEmpty &&
+      widget.files.isEmpty &&
+      widget.assetNames.isEmpty;
 
   bool get isFile =>
       widget.urls.isEmpty &&
@@ -62,30 +66,6 @@ class _State extends State<ImageViewer> {
       : widget.assetNames.isNotEmpty
           ? widget.assetNames.length
           : widget.urls.length;
-
-  double get photoViewScale {
-    return max(1.0 - currentDragPosition.distance * 0.001, 0.8);
-  }
-
-  double get photoViewOpacity {
-    return max(1.0 - currentDragPosition.distance * 0.005, 0.1);
-  }
-
-  Matrix4 get photoViewTransform {
-    final translationTransform = Matrix4.translationValues(
-      currentDragPosition.dx,
-      currentDragPosition.dy,
-      0,
-    );
-
-    final scaleTransform = Matrix4.diagonal3Values(
-      photoViewScale,
-      photoViewScale,
-      1,
-    );
-
-    return translationTransform.multiplied(scaleTransform);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,90 +139,47 @@ class _State extends State<ImageViewer> {
               },
               itemCount: count,
               onPageChanged: (int index) {
-                // nothing
+                _selectedIndex = index;
               },
               controller: ExtendedPageController(initialPage: 0),
               scrollDirection: Axis.horizontal,
             ),
           ),
-          _buildTopBar(context),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: 1,
+            child: ImageViewerHeader(
+              onMenuSelected: _selectedIndex == 0
+                  ? (value) async {
+                      if (value == 0) {
+                        final imageBytes = await Future(() async {
+                          if (isUrl) {
+                            return ExtendedNetworkImageProvider(
+                              widget.urls[_selectedIndex],
+                              cache: true,
+                            ).getNetworkImageData();
+                          } else if (isAsset) {
+                            return ExtendedAssetImageProvider(
+                                    widget.assetNames[_selectedIndex])
+                                .rawImageData;
+                          } else if (isFile) {
+                            return ExtendedFileImageProvider(
+                                    widget.files[_selectedIndex])
+                                .rawImageData;
+                          }
+                          return null;
+                        });
+                        if (imageBytes == null) {
+                          return;
+                        }
+                        await saveImageToMediaFolder(context, imageBytes);
+                      }
+                    }
+                  : null,
+            ),
+          ),
         ],
       ),
     );
-  }
-
-  Widget _buildTopBar(BuildContext context) {
-    final statusBarHeight = MediaQuery.of(context).padding.top;
-    const topBarHeight = 100.0;
-    return AnimatedOpacity(
-      duration: const Duration(milliseconds: 200),
-      opacity: barsOpacity,
-      child: Container(
-        color: Colors.black.withOpacity(0.4),
-        height: topBarHeight,
-        child: Column(
-          children: [
-            Container(height: statusBarHeight),
-            SizedBox(
-              height: topBarHeight - statusBarHeight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.close,
-                        color: Colors.white.withOpacity(0.8),
-                        size: 26,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void onTapPhotoView() {
-    setState(() {
-      barsOpacity = (barsOpacity <= 0.0) ? 1.0 : 0.0;
-    });
-  }
-
-  void onVerticalDragStart(DragStartDetails details) {
-    setState(() {
-      barsOpacity = 0.0;
-      photoViewAnimationDurationMilliSec = 0;
-    });
-    beginningDragPosition = details.globalPosition;
-  }
-
-  void onVerticalDragUpdate(DragUpdateDetails details) {
-    setState(() {
-      barsOpacity = (currentDragPosition.distance < 20.0) ? 1.0 : 0.0;
-      currentDragPosition = Offset(
-        details.globalPosition.dx - beginningDragPosition.dx,
-        details.globalPosition.dy - beginningDragPosition.dy,
-      );
-    });
-  }
-
-  void onVerticalDragEnd(DragEndDetails details) {
-    if (currentDragPosition.distance < 100.0) {
-      setState(() {
-        photoViewAnimationDurationMilliSec = 200;
-        currentDragPosition = Offset.zero;
-        barsOpacity = 1.0;
-      });
-    } else {
-      Navigator.of(context).pop();
-    }
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/model/use_cases/sample/my_profile/save_my_profile_image.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +10,7 @@ import '../../../extensions/date_extension.dart';
 import '../../../model/use_cases/image_compress.dart';
 import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../model/use_cases/sample/my_profile/save_my_profile.dart';
+import '../../../model/use_cases/sample/my_profile/save_my_profile_image.dart';
 import '../../../utils/logger.dart';
 import '../../../utils/provider.dart';
 import '../../../utils/vibration.dart';
@@ -22,6 +23,7 @@ import '../../widgets/sheets/show_date_picker_sheet.dart';
 import '../../widgets/sheets/show_photo_and_crop_bottom_sheet.dart';
 import '../../widgets/show_indicator.dart';
 import '../../widgets/thumbnail.dart';
+import '../image_viewer/image_viewer.dart';
 
 Future<void> showEditProfileDialog({
   required BuildContext context,
@@ -62,7 +64,10 @@ class _Dialog extends HookConsumerWidget {
               size: 96,
               url: profile?.image?.url,
               onTap: () {
-                ///
+                final url = profile?.image?.url;
+                if (url != null) {
+                  ImageViewer.show(context, urls: [url]);
+                }
               },
             ),
             Positioned(
@@ -92,11 +97,10 @@ class _Dialog extends HookConsumerWidget {
                     await ref
                         .read(saveMyProfileImageProvider)
                         .call(compressImage);
-                    globalContext.showSnackBar('画像を保存しました');
                   } on Exception catch (e) {
                     logger.shout(e);
-                    globalContext.showSnackBar('画像を保存できませんでした',
-                        backgroundColor: Colors.redAccent);
+                    await showOkAlertDialog(
+                        context: context, title: '画像を保存できませんでした');
                   } finally {
                     dismissIndicator(globalContext);
                   }
@@ -199,8 +203,7 @@ class _Dialog extends HookConsumerWidget {
                 Navigator.of(context).pop();
               } on Exception catch (e) {
                 logger.shout(e);
-                globalContext.showSnackBar('保存できませんでした',
-                    backgroundColor: Colors.redAccent);
+                await showOkAlertDialog(context: context, title: '保存できませんでした');
               } finally {
                 dismissIndicator(globalContext);
               }

@@ -12,11 +12,12 @@ import '../../../model/use_cases/package_info/fetch_app_name.dart';
 import '../../../model/use_cases/package_info/fetch_app_version.dart';
 import '../../../model/use_cases/package_info/fetch_package_name.dart';
 import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
-import '../../../presentation/pages/sample/show_edit_profile_dialog.dart';
-import '../../../presentation/widgets/material_tap_gesture.dart';
+import '../../widgets/material_tap_gesture.dart';
 import '../../widgets/thumbnail.dart';
+import '../image_viewer/image_viewer.dart';
 import '../start_up_page.dart';
 import '../web_view_page.dart';
+import 'show_edit_profile_dialog.dart';
 
 class SettingPage extends HookConsumerWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -49,6 +50,12 @@ class SettingPage extends HookConsumerWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: ProfileTile(
                   profile.value,
+                  onTapImage: () {
+                    final url = profile.value?.image?.url;
+                    if (url != null) {
+                      ImageViewer.show(context, urls: [url]);
+                    }
+                  },
                   onTapTile: () {
                     showEditProfileDialog(context: context);
                   },
@@ -165,11 +172,13 @@ class SettingPage extends HookConsumerWidget {
 class ProfileTile extends StatelessWidget {
   const ProfileTile(
     this.developer, {
+    this.onTapImage,
     this.onTapTile,
     Key? key,
   }) : super(key: key);
 
   final Developer? developer;
+  final VoidCallback? onTapImage;
   final VoidCallback? onTapTile;
 
   @override
@@ -190,6 +199,7 @@ class ProfileTile extends StatelessWidget {
                 CircleThumbnail(
                   size: 48,
                   url: developer?.image?.url,
+                  onTap: onTapImage,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16)
