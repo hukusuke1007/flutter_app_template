@@ -42,6 +42,7 @@ Future<void> showDatePickerSheet(
                 initialDateTime: date,
                 maximumYear: DateTime.now().year,
                 onDateTimeChanged: onDateTimeChanged,
+                minimumYear: 1900,
                 mode: CupertinoDatePickerMode.date,
               ),
             ),

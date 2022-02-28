@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/model/use_cases/sample/my_profile/save_my_profile_image.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/date_extension.dart';
+import '../../../model/use_cases/image_compress.dart';
 import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../model/use_cases/sample/my_profile/save_my_profile.dart';
 import '../../../utils/logger.dart';
@@ -18,6 +19,7 @@ import '../../widgets/color_circle.dart';
 import '../../widgets/dialogs/show_content_dialog.dart';
 import '../../widgets/material_tap_gesture.dart';
 import '../../widgets/sheets/show_date_picker_sheet.dart';
+import '../../widgets/sheets/show_photo_and_crop_bottom_sheet.dart';
 import '../../widgets/show_indicator.dart';
 import '../../widgets/thumbnail.dart';
 
@@ -42,7 +44,6 @@ class _Dialog extends HookConsumerWidget {
     final birthdateFormKey = useState<GlobalKey<FormFieldState<String>>>(
         GlobalKey<FormFieldState<String>>());
     final birthdateState = useState<DateTime?>(null);
-    final file = useState<File?>(null);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -60,7 +61,6 @@ class _Dialog extends HookConsumerWidget {
             CircleThumbnail(
               size: 96,
               url: profile?.image?.url,
-              file: file.value,
               onTap: () {
                 ///
               },
@@ -70,14 +70,36 @@ class _Dialog extends HookConsumerWidget {
               bottom: 0,
               child: ColorCircleIcon(
                 onTap: () async {
-                  // final result = await showPhotoAndCropBottomSheet(
-                  //   context,
-                  //   title: 'アイコン画像を変更',
-                  // );
-                  // if (result != null) {
-                  //   /// 圧縮して設定
-                  //   file.value = await ref.read(imageCompressProvider)(result);
-                  // }
+                  final selectedImage = await showPhotoAndCropBottomSheet(
+                    context,
+                    title: 'プロフィール画像',
+                  );
+                  if (selectedImage == null) {
+                    return;
+                  }
+                  final globalContext =
+                      ref.read(navigatorKeyProvider).currentContext!;
+
+                  /// 圧縮して設定
+                  final compressImage =
+                      await ref.read(imageCompressProvider)(selectedImage);
+                  if (compressImage == null) {
+                    return;
+                  }
+
+                  try {
+                    showIndicator(globalContext);
+                    await ref
+                        .read(saveMyProfileImageProvider)
+                        .call(compressImage);
+                    globalContext.showSnackBar('画像を保存しました');
+                  } on Exception catch (e) {
+                    logger.shout(e);
+                    globalContext.showSnackBar('画像を保存できませんでした',
+                        backgroundColor: Colors.redAccent);
+                  } finally {
+                    dismissIndicator(globalContext);
+                  }
                 },
                 child: const Icon(
                   Icons.camera_alt,
@@ -95,7 +117,7 @@ class _Dialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 4),
               child: Text('名前', style: context.bodyStyle),
             ),
             TextFormField(
@@ -118,14 +140,14 @@ class _Dialog extends HookConsumerWidget {
             ),
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 4),
               child: Text('誕生日', style: context.bodyStyle),
             ),
             MaterialTapGesture(
               onTap: () async {
-                final birthdate = birthdateState.value ?? DateTime.now();
-                FocusScope.of(context).requestFocus(FocusNode());
+                context.hideKeyboard();
                 unawaited(Vibration.select());
+                final birthdate = birthdateState.value ?? DateTime.now();
                 await showDatePickerSheet(
                   context,
                   date: birthdate,

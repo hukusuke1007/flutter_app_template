@@ -14,7 +14,8 @@ class SignInWithAnonymously {
   Future<User?> call() async {
     final userCredential =
         await _read(firebaseAuthRepositoryProvider).signInWithAnonymously();
-    _read(authStateProvider.state).state = AuthState.signInWithAnonymously;
+    _read(authStateProvider.state)
+        .update((state) => AuthState.signInWithAnonymously);
     return userCredential.user;
   }
 }

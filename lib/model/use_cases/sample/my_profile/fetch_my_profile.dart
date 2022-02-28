@@ -6,7 +6,10 @@ import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 
 final fetchMyProfileProvider = StreamProvider<Developer?>((ref) {
-  ref.watch(authStateProvider);
+  final authState = ref.watch(authStateProvider);
+  if (authState == AuthState.noSignIn) {
+    return Stream.value(null);
+  }
   final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
   if (userId == null) {
     return Stream.value(null);
