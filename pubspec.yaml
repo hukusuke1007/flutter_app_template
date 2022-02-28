@@ -28,9 +28,6 @@ dependencies:
   # Dialog
   adaptive_dialog:
 
-  # Album and camera
-  image_picker:
-
   # Access local storage
   path_provider:
 
@@ -39,9 +36,6 @@ dependencies:
 
   # Reactive
   rxdart:
-
-  # Cache image
-  extended_image:
 
   # Data share
   share:
@@ -73,8 +67,11 @@ dependencies:
   page_transition:
 
   # Image
+  image_picker:
+  image_gallery_saver:
   image_cropper:
   flutter_image_compress:
+  extended_image:
 
   # Picker
   numberpicker:

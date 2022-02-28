@@ -131,7 +131,7 @@ class _Dialog extends HookConsumerWidget {
                 counterText: '',
               ),
               key: nameFormKey.value,
-              initialValue: nameFormKey.value.currentState?.value ?? '',
+              initialValue: profile?.name,
               validator: (value) => (value == null || value.trim().isEmpty)
                   ? '名前を入力してください'
                   : null,
@@ -170,6 +170,7 @@ class _Dialog extends HookConsumerWidget {
                   ),
                   key: birthdateFormKey.value,
                   maxLines: 1,
+                  initialValue: profile?.birthdateLabel,
                 ),
               ),
             ),
