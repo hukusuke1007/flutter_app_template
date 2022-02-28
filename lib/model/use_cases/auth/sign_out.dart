@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../utils/provider.dart';
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final signOut = Provider((ref) => SignOut(ref.read));
+final signOutProvider = Provider((ref) => SignOut(ref.read));
 
 class SignOut {
   SignOut(this._read);

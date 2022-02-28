@@ -28,9 +28,9 @@ class StartUpPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
       Future(() async {
-        final isLoggedIn = ref.read(fetchLoggedInWithAnonymously)();
+        final isLoggedIn = ref.read(fetchLoggedInWithAnonymouslyProvider)();
         if (!isLoggedIn) {
-          await ref.read(signInWithAnonymously)();
+          await ref.read(signInWithAnonymouslyProvider)();
         }
         unawaited(MainPage.show(context));
       });

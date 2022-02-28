@@ -17,9 +17,9 @@ class SettingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appName = ref.watch(fetchAppName);
-    final appVersion = ref.watch(fetchAppVersion);
-    final packageName = ref.watch(fetchPackageName);
+    final appName = ref.watch(fetchAppNameProvider);
+    final appVersion = ref.watch(fetchAppVersionProvider);
+    final packageName = ref.watch(fetchPackageNameProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -131,7 +131,7 @@ class SettingPage extends HookConsumerWidget {
                         message: 'ログアウトしますか？',
                       );
                       if (result == OkCancelResult.ok) {
-                        await ref.read(signOut)();
+                        await ref.read(signOutProvider)();
                         unawaited(StartUpPage.show(context));
                       }
                     },

@@ -4,7 +4,8 @@ import '../../../model/repositories/firebase_auth/firebase_auth_repository.dart'
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../repositories/firebase_auth/login_type.dart';
 
-final fetchLoggedInWithAnonymously = Provider<FetchLoggedInWithAnonymously>(
+final fetchLoggedInWithAnonymouslyProvider =
+    Provider<FetchLoggedInWithAnonymously>(
   (ref) => FetchLoggedInWithAnonymously(ref.read),
 );
 

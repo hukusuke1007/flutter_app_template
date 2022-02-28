@@ -3,7 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../repositories/shared_preferences/shared_preference_key.dart';
 import '../../repositories/shared_preferences/shared_preference_repository.dart';
 
-final fetchLocalCounter = Provider((ref) => FetchLocalCounter(ref.read));
+final fetchLocalCounterProvider =
+    Provider((ref) => FetchLocalCounter(ref.read));
 
 class FetchLocalCounter {
   FetchLocalCounter(this._read);

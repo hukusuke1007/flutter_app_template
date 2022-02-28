@@ -17,7 +17,7 @@ class LocalCounterPage extends HookConsumerWidget {
 
     useEffect(() {
       Future(() async {
-        counter.value = await ref.read(fetchLocalCounter).call();
+        counter.value = await ref.read(fetchLocalCounterProvider).call();
       });
       return null;
     }, const []);

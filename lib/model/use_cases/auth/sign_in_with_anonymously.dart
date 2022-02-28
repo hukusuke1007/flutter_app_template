@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../utils/provider.dart';
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final signInWithAnonymously =
+final signInWithAnonymouslyProvider =
     Provider((ref) => SignInWithAnonymously(ref.read));
 
 class SignInWithAnonymously {
