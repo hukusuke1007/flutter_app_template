@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-import '../../extensions/context_extension.dart';
-import '../res/colors.dart';
+import '../../../extensions/context_extension.dart';
+import '../../res/colors.dart';
 
 Future<void> showDecimalPickerDialog(
   BuildContext context,

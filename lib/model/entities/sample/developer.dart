@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../extensions/date_extension.dart';
 import '../../../model/entities/common/storage_file.dart';
 import '../../../model/repositories/firestore/document.dart';
 import '../../converters/date_time_timestamp_converter.dart';
@@ -36,6 +37,10 @@ class Developer with _$Developer {
     String filename,
   ) =>
       '${docPath(id)}/image/$filename';
+
+  String get birthdateLabel {
+    return birthdate?.format(format: 'yyyy/M/d') ?? '-';
+  }
 
   Map<String, dynamic> get toDocWithNotImage {
     final data = <String, dynamic>{

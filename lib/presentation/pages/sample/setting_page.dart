@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
+import '../../../extensions/date_extension.dart';
+import '../../../model/entities/sample/developer.dart';
 import '../../../model/use_cases/auth/sign_out.dart';
 import '../../../model/use_cases/package_info/fetch_app_name.dart';
 import '../../../model/use_cases/package_info/fetch_app_version.dart';
 import '../../../model/use_cases/package_info/fetch_package_name.dart';
+import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
+import '../../../presentation/pages/sample/show_edit_profile_dialog.dart';
+import '../../../presentation/widgets/material_tap_gesture.dart';
+import '../../widgets/thumbnail.dart';
 import '../start_up_page.dart';
 import '../web_view_page.dart';
 
@@ -20,6 +26,7 @@ class SettingPage extends HookConsumerWidget {
     final appName = ref.watch(fetchAppNameProvider);
     final appVersion = ref.watch(fetchAppVersionProvider);
     final packageName = ref.watch(fetchPackageNameProvider);
+    final profile = ref.watch(fetchMyProfileProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,6 +45,15 @@ class SettingPage extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: ProfileTile(
+                  profile.value,
+                  onTapTile: () {
+                    showEditProfileDialog(context: context);
+                  },
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 16, left: 8),
                 child: Text(
@@ -139,6 +155,65 @@ class SettingPage extends HookConsumerWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileTile extends StatelessWidget {
+  const ProfileTile(
+    this.developer, {
+    this.onTapTile,
+    Key? key,
+  }) : super(key: key);
+
+  final Developer? developer;
+  final VoidCallback? onTapTile;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(16);
+    return SizedBox(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
+        ),
+        child: MaterialTapGesture(
+          onTap: onTapTile,
+          borderRadius: borderRadius,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                CircleThumbnail(
+                  size: 48,
+                  url: developer?.image?.url,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(right: 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '名前: ${developer?.name ?? '-'}',
+                        style: context.bodyStyle,
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        // ignore: lines_longer_than_80_chars
+                        '誕生日: ${developer?.birthdate?.format(format: 'yyyy/M/d') ?? '-'}',
+                        style: context.bodyStyle,
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

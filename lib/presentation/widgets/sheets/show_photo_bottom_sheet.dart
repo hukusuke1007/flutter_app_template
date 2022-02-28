@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../utils/vibration.dart';
-import 'wrapped_image_cropper.dart';
+import '../../../utils/vibration.dart';
+import '../wrapped_image_cropper.dart';
 
 Future<File?> showPhotoAndCropBottomSheet(BuildContext context) async {
   unawaited(Vibration.select());

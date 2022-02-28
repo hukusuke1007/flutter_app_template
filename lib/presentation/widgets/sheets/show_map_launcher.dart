@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_launcher/map_launcher.dart';
 
-import '../../extensions/context_extension.dart';
-import '../../utils/vibration.dart';
+import '../../../extensions/context_extension.dart';
+import '../../../utils/vibration.dart';
 
 enum AppMapType {
   apple,
