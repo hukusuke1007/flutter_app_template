@@ -27,7 +27,7 @@ Future<PhotoType?> showPhotoBottomSheet(
         icon: Icons.camera_alt,
       ),
       SheetAction<int>(
-        label: 'アルバムから選択する',
+        label: '写真から選択する',
         key: 1,
         icon: Icons.photo,
       ),
@@ -59,8 +59,8 @@ Future<PhotoType?> showPhotoBottomSheet(
     if (!status.isGranted) {
       final result = await showOkAlertDialog(
         context: context,
-        title: 'アルバムのパーミッション',
-        message: 'アプリの設定画面よりアルバムを許可してください。',
+        title: '写真のパーミッション',
+        message: 'アプリの設定画面より写真のアクセスを許可してください。',
         okLabel: '設定画面を開く',
       );
       if (result == OkCancelResult.ok) {

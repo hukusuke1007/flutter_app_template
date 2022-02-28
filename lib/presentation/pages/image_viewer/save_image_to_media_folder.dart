@@ -23,7 +23,7 @@ Future<void> saveImageToMediaFolder(
     final result = await showOkAlertDialog(
       context: context,
       title: '写真のパーミッション',
-      message: 'アプリの設定画面より写真アクセスを許可してください。',
+      message: 'アプリの設定画面より写真のアクセスを許可してください。',
       okLabel: '設定画面を開く',
     );
     if (result == OkCancelResult.ok) {
