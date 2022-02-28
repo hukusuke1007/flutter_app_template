@@ -237,6 +237,7 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
 ## 参考文献
 
+- [Dart/Flutter の静的解析強化のススメ](https://medium.com/flutter-jp/analysis-b8dbb19d3978)
 - [Flutter/Dart における immutable の実践的な扱い方](https://medium.com/flutter-jp/immutable-d23bae5c29f8)
 - [Riverpod の Provider 命名手引き](https://medium.com/flutter-jp/riverpod-naming-5031504fc692)
 - [mono0926/wdb106-flutter](https://github.com/mono0926/wdb106-flutter)
