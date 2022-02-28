@@ -52,6 +52,7 @@ class Developer with _$Developer {
   }
 
   Map<String, dynamic> get toImageOnly => <String, dynamic>{
+        'developerId': developerId,
         'image': image?.toJson(),
         'createdAt': createdAt ?? FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),

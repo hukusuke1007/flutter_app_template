@@ -180,6 +180,7 @@ class _Dialog extends HookConsumerWidget {
           padding: const EdgeInsets.only(top: 40),
           child: RoundedButton(
             onPressed: () async {
+              context.hideKeyboard();
               if (!nameFormKey.value.currentState!.validate()) {
                 return;
               }
