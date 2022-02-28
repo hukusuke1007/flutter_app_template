@@ -29,7 +29,10 @@ class FetchFirestoreCounter {
 
 /// 取得（スナップショットリスナー使用）
 final fetchFirestoreCounterStreamProvider = StreamProvider<Counter?>((ref) {
-  ref.watch(authStateProvider);
+  final authState = ref.watch(authStateProvider);
+  if (authState == AuthState.noSignIn) {
+    return Stream.value(null);
+  }
   final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
   if (userId == null) {
     return Stream.value(null);

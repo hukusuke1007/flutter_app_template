@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../extensions/context_extension.dart';
-import '../res/colors.dart';
+import '../../../extensions/context_extension.dart';
+import '../../res/colors.dart';
 
 Future<int?> showCupertinoPickerDialog(
   BuildContext context,

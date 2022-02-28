@@ -9,6 +9,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../../model/use_cases/auth/fetch_logged_in_with_anonymously.dart';
 import '../../../model/use_cases/auth/sign_in_with_anonymously.dart';
 import '../../../presentation/pages/main/main_page.dart';
+import '../../utils/provider.dart';
 
 class StartUpPage extends HookConsumerWidget {
   const StartUpPage({Key? key}) : super(key: key);
@@ -29,7 +30,11 @@ class StartUpPage extends HookConsumerWidget {
     useEffect(() {
       Future(() async {
         final isLoggedIn = ref.read(fetchLoggedInWithAnonymouslyProvider)();
-        if (!isLoggedIn) {
+        if (isLoggedIn) {
+          ref
+              .read(authStateProvider.state)
+              .update((state) => AuthState.signInWithAnonymously);
+        } else {
           await ref.read(signInWithAnonymouslyProvider)();
         }
         unawaited(MainPage.show(context));

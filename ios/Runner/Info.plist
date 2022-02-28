@@ -11,7 +11,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>写真はアプリ内で利用します。</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>ja_JP</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(APP_NAME_PREFIX)テンプレアプリ</string>
 	<key>CFBundleExecutable</key>

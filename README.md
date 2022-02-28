@@ -28,6 +28,7 @@ Flutter Stable 2.10.2
     - データ一覧の Infinite Scroll Pagination
 - タブ 4
   - 設定画面
+    - プロフィール 「名前」「誕生日」「画像」の表示と保存
     - アプリ名、パッケージ名、バージョンを表示
     - 株式会社 Never の URL を WebView で表示
     - ログアウト
@@ -38,7 +39,8 @@ Flutter Stable 2.10.2
 - DDD ライクな設計で構築
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - ボトムナビゲーション構成のサンプル画面
-- iOS カメラ、画像のパーミッション許可の plist 設定
+- 画像選択・保存
+- カメラ、画像のパーミッション設定
 - 起動時に匿名認証でログイン
 - ダークモード対応
 - デバイス向きは縦固定
