@@ -6,11 +6,12 @@ import 'package:page_transition/page_transition.dart';
 import 'image_viewer_header.dart';
 import 'save_image_to_media_folder.dart';
 
-class ImageViewer extends StatefulHookWidget {
+class ImageViewer extends HookWidget {
   ImageViewer({
     required this.urls,
     required this.files,
     required this.assetNames,
+    required this.initialPage,
     Key? key,
   })  : assert(urls.isNotEmpty || files.isNotEmpty || assetNames.isNotEmpty),
         super(key: key);
@@ -20,6 +21,7 @@ class ImageViewer extends StatefulHookWidget {
     List<String>? urls,
     List<File>? files,
     List<String>? assetNames,
+    int initialPage = 0,
     bool rootNavigator = true,
   }) {
     return Navigator.of(context, rootNavigator: rootNavigator).push(
@@ -29,6 +31,7 @@ class ImageViewer extends StatefulHookWidget {
           urls: urls ?? [],
           files: files ?? [],
           assetNames: assetNames ?? [],
+          initialPage: initialPage,
         ),
         duration: const Duration(milliseconds: 200),
       ),
@@ -38,37 +41,25 @@ class ImageViewer extends StatefulHookWidget {
   final List<String> urls;
   final List<File> files;
   final List<String> assetNames;
+  final int initialPage;
 
-  @override
-  _State createState() => _State();
-}
+  bool get isUrl => urls.isNotEmpty && files.isEmpty && assetNames.isEmpty;
 
-class _State extends State<ImageViewer> {
-  int _selectedIndex = 0;
+  bool get isFile => urls.isEmpty && files.isNotEmpty && assetNames.isEmpty;
 
-  bool get isUrl =>
-      widget.urls.isNotEmpty &&
-      widget.files.isEmpty &&
-      widget.assetNames.isEmpty;
+  bool get isAsset => urls.isEmpty && files.isEmpty && assetNames.isNotEmpty;
 
-  bool get isFile =>
-      widget.urls.isEmpty &&
-      widget.files.isNotEmpty &&
-      widget.assetNames.isEmpty;
-
-  bool get isAsset =>
-      widget.urls.isEmpty &&
-      widget.files.isEmpty &&
-      widget.assetNames.isNotEmpty;
-
-  int get count => widget.files.isNotEmpty
-      ? widget.files.length
-      : widget.assetNames.isNotEmpty
-          ? widget.assetNames.length
-          : widget.urls.length;
+  int get count => files.isNotEmpty
+      ? files.length
+      : assetNames.isNotEmpty
+          ? assetNames.length
+          : urls.length;
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = useState(initialPage);
+    final controller =
+        useState(ExtendedPageController(initialPage: initialPage));
     return Scaffold(
       body: Stack(
         children: [
@@ -86,7 +77,7 @@ class _State extends State<ImageViewer> {
                 Widget getExtendedImage() {
                   if (isFile) {
                     return ExtendedImage.file(
-                      widget.files[index],
+                      files[index],
                       fit: BoxFit.contain,
                       mode: ExtendedImageMode.gesture,
                       initGestureConfigHandler: (state) {
@@ -100,7 +91,7 @@ class _State extends State<ImageViewer> {
                   }
                   if (isAsset) {
                     return ExtendedImage.asset(
-                      widget.assetNames[index],
+                      assetNames[index],
                       fit: BoxFit.contain,
                       mode: ExtendedImageMode.gesture,
                       initGestureConfigHandler: (state) {
@@ -113,7 +104,7 @@ class _State extends State<ImageViewer> {
                     );
                   }
                   return ExtendedImage.network(
-                    widget.urls[index],
+                    urls[index],
                     fit: BoxFit.contain,
                     mode: ExtendedImageMode.gesture,
                     cacheMaxAge: const Duration(days: 90),
@@ -139,44 +130,38 @@ class _State extends State<ImageViewer> {
               },
               itemCount: count,
               onPageChanged: (int index) {
-                _selectedIndex = index;
+                selectedIndex.value = index;
               },
-              controller: ExtendedPageController(initialPage: 0),
+              controller: controller.value,
               scrollDirection: Axis.horizontal,
             ),
           ),
           AnimatedOpacity(
             duration: const Duration(milliseconds: 200),
             opacity: 1,
-            child: ImageViewerHeader(
-              onMenuSelected: _selectedIndex == 0
-                  ? (value) async {
-                      if (value == 0) {
-                        final imageBytes = await Future(() async {
-                          if (isUrl) {
-                            return ExtendedNetworkImageProvider(
-                              widget.urls[_selectedIndex],
-                              cache: true,
-                            ).getNetworkImageData();
-                          } else if (isAsset) {
-                            return ExtendedAssetImageProvider(
-                                    widget.assetNames[_selectedIndex])
-                                .rawImageData;
-                          } else if (isFile) {
-                            return ExtendedFileImageProvider(
-                                    widget.files[_selectedIndex])
-                                .rawImageData;
-                          }
-                          return null;
-                        });
-                        if (imageBytes == null) {
-                          return;
-                        }
-                        await saveImageToMediaFolder(context, imageBytes);
-                      }
-                    }
-                  : null,
-            ),
+            child: ImageViewerHeader(onMenuSelected: (value) async {
+              if (value == 0) {
+                final index = selectedIndex.value;
+                final imageBytes = await Future(() async {
+                  if (isUrl) {
+                    return ExtendedNetworkImageProvider(
+                      urls[index],
+                      cache: true,
+                    ).getNetworkImageData();
+                  } else if (isAsset) {
+                    return ExtendedAssetImageProvider(assetNames[index])
+                        .rawImageData;
+                  } else if (isFile) {
+                    return ExtendedFileImageProvider(files[index]).rawImageData;
+                  }
+                  return null;
+                });
+                if (imageBytes == null) {
+                  return;
+                }
+                await saveImageToMediaFolder(context, imageBytes);
+              }
+            }),
           ),
         ],
       ),
