@@ -136,10 +136,8 @@ class ImageViewer extends HookWidget {
               scrollDirection: Axis.horizontal,
             ),
           ),
-          AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: 1,
-            child: ImageViewerHeader(onMenuSelected: (value) async {
+          ImageViewerHeader(
+            onMenuSelected: (value) async {
               if (value == 0) {
                 final index = selectedIndex.value;
                 final imageBytes = await Future(() async {
@@ -161,7 +159,7 @@ class ImageViewer extends HookWidget {
                 }
                 await saveImageToMediaFolder(context, imageBytes);
               }
-            }),
+            },
           ),
         ],
       ),
