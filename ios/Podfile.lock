@@ -46,7 +46,7 @@ PODS:
     - Firebase/Auth (= 8.11.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.12.0):
+  - firebase_core (1.13.1):
     - Firebase/CoreOnly (= 8.11.0)
     - Flutter
   - firebase_crashlytics (2.5.0):
@@ -372,7 +372,7 @@ SPEC CHECKSUMS:
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   firebase_analytics: b267e923ba3cdc892bdcadc01efab50f3b8b7441
   firebase_auth: ccdb84a0d52a2d7897898ae8121689da6e13d71f
-  firebase_core: 443bccfd6aa6b42f07be365b500773dc69db2d87
+  firebase_core: 08f6a85f62060111de5e98d6a214810d11365de9
   firebase_crashlytics: 824c5100677bbc8dbc4cc2b264dab21c0ffa3279
   firebase_messaging: 8dc3a6f069774a0bf4dac04dd79fdaffcb62e145
   firebase_storage: e1ac35b46a4ead41de4d8d6dd44728c476fb87b3
@@ -416,6 +416,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
 
-PODFILE CHECKSUM: 093c2f176a860c61ad62df84653a4b42540e8cef
+PODFILE CHECKSUM: c8ae0c89a8aa6f6e2682e10803bf05b45210c4dc
 
 COCOAPODS: 1.11.2
