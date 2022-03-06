@@ -10,7 +10,7 @@ import '../../../extensions/exception_extension.dart';
 import '../../../model/use_cases/sample/memo_controller.dart';
 import '../../../utils/logger.dart';
 import '../../widgets/smart_refresher_custom.dart';
-import 'edit_memo_dialog.dart';
+import 'show_edit_memo_dialog.dart';
 
 class MemoPage extends HookConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
