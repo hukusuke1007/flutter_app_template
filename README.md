@@ -48,14 +48,14 @@ Flutter Stable 2.10.3
 - その他アプリに必要なライブラリを設定済み
 - device_preview 導入
 - Android/iOS の Flavor 設定
-- iOS日本語デフォルト
+- iOS 日本語デフォルト
 
 ### やっていないこと
 
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
-- iPad 対応（Sizer導入）
+- iPad 対応（Sizer 導入）
 - ユニットテスト
 - UI テスト
 - dartdoc
