@@ -1,29 +1,35 @@
+import 'dart:math';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../repositories/shared_preferences/shared_preference_key.dart';
 import '../../repositories/shared_preferences/shared_preference_repository.dart';
 
-final fetchLocalCounterProvider =
-    Provider((ref) => FetchLocalCounter(ref.read));
+final localCounterProvider =
+    StateNotifierProvider<LocalCounter, int>((ref) => LocalCounter(ref.read));
 
-class FetchLocalCounter {
-  FetchLocalCounter(this._read);
+class LocalCounter extends StateNotifier<int> {
+  LocalCounter(this._read) : super(0);
+
+  static SharedPreferencesKey get localCounterKey =>
+      SharedPreferencesKey.sampleLocalCounter;
+
   final Reader _read;
 
-  Future<int> call() async {
+  Future<void> fetch() async {
     final db = _read(sharedPreferencesRepositoryProvider);
-    return (await db.fetch<int>(SharedPreferencesKey.sampleLocalCounter)) ?? 0;
+    state = (await db.fetch<int>(localCounterKey)) ?? 0;
   }
-}
 
-final saveLocalCounter = Provider((ref) => SaveLocalCounter(ref.read));
-
-class SaveLocalCounter {
-  SaveLocalCounter(this._read);
-  final Reader _read;
-
-  Future<void> call(int value) async {
+  Future<void> increment() async {
+    state += 1;
     await _read(sharedPreferencesRepositoryProvider)
-        .save<int>(SharedPreferencesKey.sampleLocalCounter, value);
+        .save<int>(localCounterKey, state);
+  }
+
+  Future<void> decrement() async {
+    state = max(state - 1, 0);
+    await _read(sharedPreferencesRepositoryProvider)
+        .save<int>(localCounterKey, state);
   }
 }

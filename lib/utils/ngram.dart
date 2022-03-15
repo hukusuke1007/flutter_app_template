@@ -1,11 +1,11 @@
 class Ngram {
   Ngram._();
 
-  static List<String> parse(
+  static Set<String> parse(
     String data, {
     int n = 2,
   }) {
-    final result = <String>[];
+    final result = <String>{};
     for (var i = 0; i < data.length; i++) {
       if (n > data.length - i) {
         break;

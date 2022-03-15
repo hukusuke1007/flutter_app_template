@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,11 +11,11 @@ class LocalCounterPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = useState(0);
+    final counter = ref.watch(localCounterProvider);
 
     useEffect(() {
       Future(() async {
-        counter.value = await ref.read(fetchLocalCounterProvider).call();
+        await ref.read(localCounterProvider.notifier).fetch();
       });
       return null;
     }, const []);
@@ -41,7 +39,7 @@ class LocalCounterPage extends HookConsumerWidget {
             style: context.bodyStyle,
           ),
           Text(
-            counter.value.toString(),
+            counter.toString(),
             style: context.titleStyle,
           ),
           Padding(
@@ -57,9 +55,8 @@ class LocalCounterPage extends HookConsumerWidget {
                       color: Colors.white,
                     ),
                     onPressed: () async {
-                      final value = max(counter.value - 1, 0);
-                      await ref.read(saveLocalCounter).call(value);
-                      counter.value = value;
+                      await ref.read(localCounterProvider.notifier).decrement();
+                      // counter.value = value;
                     },
                   ),
                 ),
@@ -72,9 +69,7 @@ class LocalCounterPage extends HookConsumerWidget {
                       color: Colors.white,
                     ),
                     onPressed: () async {
-                      final value = counter.value + 1;
-                      await ref.read(saveLocalCounter).call(value);
-                      counter.value = value;
+                      await ref.read(localCounterProvider.notifier).increment();
                     },
                   ),
                 ),

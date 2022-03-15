@@ -1,4 +1,7 @@
-enum FlavorType { dev, prod }
+enum FlavorType {
+  dev,
+  prod,
+}
 
 class Flavor {
   Flavor._();

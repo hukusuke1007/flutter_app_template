@@ -85,13 +85,15 @@ class _Dialog extends HookConsumerWidget {
                   final globalContext =
                       ref.read(navigatorKeyProvider).currentContext!;
 
+                  logger.info(selectedImage.readAsBytesSync().length);
+
                   /// 圧縮して設定
                   final compressImage =
                       await ref.read(imageCompressProvider)(selectedImage);
                   if (compressImage == null) {
                     return;
                   }
-
+                  logger.info(compressImage.lengthInBytes);
                   try {
                     showIndicator(globalContext);
                     await ref
