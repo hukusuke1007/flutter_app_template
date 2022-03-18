@@ -13,11 +13,12 @@ import '../../widgets/smart_refresher_custom.dart';
 import 'show_edit_memo_dialog.dart';
 
 class MemoPage extends HookConsumerWidget {
-  const MemoPage({Key? key}) : super(key: key);
+  MemoPage({Key? key}) : super(key: key);
+
+  final _refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final refreshController = useState(RefreshController());
     final items = ref.watch(memoProvider);
 
     useEffect(() {
@@ -52,7 +53,7 @@ class MemoPage extends HookConsumerWidget {
         footer: const SmartRefreshFooter(),
         enablePullDown: true,
         enablePullUp: true,
-        controller: refreshController.value,
+        controller: _refreshController,
         physics: const BouncingScrollPhysics(),
         onRefresh: () async {
           try {
@@ -64,7 +65,7 @@ class MemoPage extends HookConsumerWidget {
               backgroundColor: Colors.grey,
             );
           }
-          refreshController.value.refreshCompleted();
+          _refreshController.refreshCompleted();
         },
         onLoading: () async {
           try {
@@ -76,7 +77,7 @@ class MemoPage extends HookConsumerWidget {
               backgroundColor: Colors.grey,
             );
           }
-          refreshController.value.loadComplete();
+          _refreshController.loadComplete();
         },
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {

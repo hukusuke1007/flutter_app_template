@@ -30,27 +30,25 @@ Future<void> showEditProfileDialog({
 }) async {
   return showContentDialog(
     context: context,
-    contentWidget: const _Dialog(),
+    contentWidget: _Dialog(),
   );
 }
 
 class _Dialog extends HookConsumerWidget {
-  const _Dialog({Key? key}) : super(key: key);
+  _Dialog({Key? key}) : super(key: key);
+
+  final _nameFormKey = GlobalKey<FormFieldState<String>>();
+  final _birthdateFormKey = GlobalKey<FormFieldState<String>>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(fetchMyProfileProvider).value;
-
-    final nameFormKey = useState<GlobalKey<FormFieldState<String>>>(
-        GlobalKey<FormFieldState<String>>());
-    final birthdateFormKey = useState<GlobalKey<FormFieldState<String>>>(
-        GlobalKey<FormFieldState<String>>());
     final birthdateState = useState<DateTime?>(null);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        nameFormKey.value.currentState?.didChange(profile?.name);
-        birthdateFormKey.value.currentState?.didChange(profile?.birthdateLabel);
+        _nameFormKey.currentState?.didChange(profile?.name);
+        _birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
         birthdateState.value = profile?.birthdate;
       });
       return null;
@@ -136,7 +134,7 @@ class _Dialog extends HookConsumerWidget {
                 isDense: true,
                 counterText: '',
               ),
-              key: nameFormKey.value,
+              key: _nameFormKey,
               initialValue: profile?.name,
               validator: (value) => (value == null || value.trim().isEmpty)
                   ? '名前を入力してください'
@@ -159,7 +157,7 @@ class _Dialog extends HookConsumerWidget {
                   date: birthdate,
                   onDateTimeChanged: (DateTime value) {
                     birthdateState.value = value;
-                    birthdateFormKey.value.currentState
+                    _birthdateFormKey.currentState
                         ?.didChange(value.format(format: 'yyyy/M/d'));
                   },
                 );
@@ -174,7 +172,7 @@ class _Dialog extends HookConsumerWidget {
                     border: OutlineInputBorder(),
                     isDense: true,
                   ),
-                  key: birthdateFormKey.value,
+                  key: _birthdateFormKey,
                   maxLines: 1,
                   initialValue: profile?.birthdateLabel,
                 ),
@@ -188,10 +186,10 @@ class _Dialog extends HookConsumerWidget {
           child: RoundedButton(
             onPressed: () async {
               context.hideKeyboard();
-              if (!nameFormKey.value.currentState!.validate()) {
+              if (!_nameFormKey.currentState!.validate()) {
                 return;
               }
-              final name = nameFormKey.value.currentState?.value?.trim() ?? '';
+              final name = _nameFormKey.currentState?.value?.trim() ?? '';
               final birthdate = birthdateState.value;
               final globalContext =
                   ref.read(navigatorKeyProvider).currentContext!;

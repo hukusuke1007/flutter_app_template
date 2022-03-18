@@ -22,110 +22,106 @@ Future<void> showEditMemoDialog(
     );
 
 class _Dialog extends HookConsumerWidget {
-  const _Dialog(
+  _Dialog(
     this.data, {
     Key? key,
   }) : super(key: key);
 
   final Memo? data;
+  final _textKey = GlobalKey<FormFieldState<String>>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textKey = useState(GlobalKey<FormFieldState<String>>());
-
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        textKey.value.currentState?.didChange(data?.text);
+        _textKey.currentState?.didChange(data?.text);
       });
       return null;
     }, const []);
 
-    return SizedBox(
-      width: context.deviceWidth * 0.8,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-            child: TextFormField(
-              key: textKey.value,
-              initialValue: data?.text,
-              style: context.bodyStyle,
-              validator: (value) => (value == null || value.trim().isEmpty)
-                  ? '正しい値を入力してください'
-                  : null,
-              decoration: const InputDecoration(
-                labelText: 'テキスト入力',
-                hintText: '',
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 8,
-                ),
-                border: OutlineInputBorder(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          child: TextFormField(
+            key: _textKey,
+            initialValue: data?.text,
+            style: context.bodyStyle,
+            validator: (value) => (value == null || value.trim().isEmpty)
+                ? '正しい値を入力してください'
+                : null,
+            decoration: const InputDecoration(
+              labelText: 'テキスト入力',
+              hintText: '',
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 8,
               ),
-              textInputAction: TextInputAction.newline,
-              minLines: 1,
-              maxLines: 3,
-              maxLength: 1024,
+              border: OutlineInputBorder(),
             ),
+            textInputAction: TextInputAction.newline,
+            minLines: 1,
+            maxLines: 3,
+            maxLength: 1024,
           ),
-          const SizedBox(height: 16),
-          Center(
-            child: SizedBox(
-              height: 40,
-              width: 100,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: kPrimaryColor,
-                  shape: const StadiumBorder(),
-                ),
-                onPressed: () async {
-                  if (textKey.value.currentState?.validate() != true) {
-                    return;
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: SizedBox(
+            height: 40,
+            width: 100,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: kPrimaryColor,
+                shape: const StadiumBorder(),
+              ),
+              onPressed: () async {
+                if (_textKey.currentState?.validate() != true) {
+                  return;
+                }
+                final text = _textKey.currentState?.value?.trim() ?? '';
+                try {
+                  showIndicator(context);
+                  context.hideKeyboard();
+                  final gContext =
+                      ref.read(navigatorKeyProvider).currentContext!;
+                  if (data != null) {
+                    /// 更新
+                    await ref
+                        .read(memoProvider.notifier)
+                        .update(data!.copyWith(text: text));
+                    gContext.showSnackBar('更新しました');
+                  } else {
+                    /// 新規作成
+                    await ref.read(memoProvider.notifier).create(text);
+                    gContext.showSnackBar('作成しました');
                   }
-                  final text = textKey.value.currentState?.value?.trim() ?? '';
-                  try {
-                    showIndicator(context);
-                    context.hideKeyboard();
-                    final gContext =
-                        ref.read(navigatorKeyProvider).currentContext!;
-                    if (data != null) {
-                      /// 更新
-                      await ref
-                          .read(memoProvider.notifier)
-                          .update(data!.copyWith(text: text));
-                      gContext.showSnackBar('更新しました');
-                    } else {
-                      /// 新規作成
-                      await ref.read(memoProvider.notifier).create(text);
-                      gContext.showSnackBar('作成しました');
-                    }
-                    dismissIndicator(context);
+                  dismissIndicator(context);
 
-                    Navigator.pop(context);
-                  } on Exception catch (e) {
-                    logger.shout(e);
-                    dismissIndicator(context);
-                    context.showSnackBar(
-                      e.errorMessage,
-                      backgroundColor: Colors.grey,
-                    );
-                  }
-                },
-                child: Text(
-                  '投稿する',
-                  style: context.bodyStyle.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                ),
+                  Navigator.pop(context);
+                } on Exception catch (e) {
+                  logger.shout(e);
+                  dismissIndicator(context);
+                  context.showSnackBar(
+                    e.errorMessage,
+                    backgroundColor: Colors.grey,
+                  );
+                }
+              },
+              child: Text(
+                '投稿する',
+                style: context.bodyStyle
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                maxLines: 1,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

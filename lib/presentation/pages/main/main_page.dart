@@ -29,7 +29,7 @@ class MainPage extends HookConsumerWidget {
     final widgets = useState<List<Widget>>([
       const LocalCounterPage(),
       const FirestoreCounterPage(),
-      const MemoPage(),
+      MemoPage(),
       const SettingPage(),
     ]);
     final navigatorKeys = useState({
