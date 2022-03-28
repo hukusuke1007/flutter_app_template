@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
@@ -8,6 +7,8 @@ import '../../../model/entities/sample/memo.dart';
 import '../../../model/use_cases/sample/memo_controller.dart';
 import '../../../utils/logger.dart';
 import '../../../utils/provider.dart';
+import '../../custom_hooks/use_effect_once.dart';
+import '../../custom_hooks/use_form_field_state_key.dart';
 import '../../res/colors.dart';
 import '../../widgets/dialogs/show_content_dialog.dart';
 import '../../widgets/show_indicator.dart';
@@ -22,22 +23,25 @@ Future<void> showEditMemoDialog(
     );
 
 class _Dialog extends HookConsumerWidget {
-  _Dialog(
+  const _Dialog(
     this.data, {
     Key? key,
   }) : super(key: key);
 
   final Memo? data;
-  final _textKey = GlobalKey<FormFieldState<String>>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    useEffect(() {
+    /// カスタムフック
+    final textKey = useFormFieldStateKey();
+
+    /// カスタムフック
+    useEffectOnce(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        _textKey.currentState?.didChange(data?.text);
+        textKey.currentState?.didChange(data?.text);
       });
       return null;
-    }, const []);
+    });
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -48,7 +52,7 @@ class _Dialog extends HookConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           child: TextFormField(
-            key: _textKey,
+            key: textKey,
             initialValue: data?.text,
             style: context.bodyStyle,
             validator: (value) => (value == null || value.trim().isEmpty)
@@ -80,10 +84,10 @@ class _Dialog extends HookConsumerWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () async {
-                if (_textKey.currentState?.validate() != true) {
+                if (textKey.currentState?.validate() != true) {
                   return;
                 }
-                final text = _textKey.currentState?.value?.trim() ?? '';
+                final text = textKey.currentState?.value?.trim() ?? '';
                 try {
                   showIndicator(context);
                   context.hideKeyboard();

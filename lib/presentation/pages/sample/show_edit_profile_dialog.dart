@@ -14,6 +14,8 @@ import '../../../model/use_cases/sample/my_profile/save_my_profile_image.dart';
 import '../../../utils/logger.dart';
 import '../../../utils/provider.dart';
 import '../../../utils/vibration.dart';
+import '../../custom_hooks/use_effect_once.dart';
+import '../../custom_hooks/use_form_field_state_key.dart';
 import '../../res/colors.dart';
 import '../../widgets/button.dart';
 import '../../widgets/color_circle.dart';
@@ -30,29 +32,31 @@ Future<void> showEditProfileDialog({
 }) async {
   return showContentDialog(
     context: context,
-    contentWidget: _Dialog(),
+    contentWidget: const _Dialog(),
   );
 }
 
 class _Dialog extends HookConsumerWidget {
-  _Dialog({Key? key}) : super(key: key);
-
-  final _nameFormKey = GlobalKey<FormFieldState<String>>();
-  final _birthdateFormKey = GlobalKey<FormFieldState<String>>();
+  const _Dialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(fetchMyProfileProvider).value;
     final birthdateState = useState<DateTime?>(null);
 
-    useEffect(() {
+    /// カスタムフック
+    final nameFormKey = useFormFieldStateKey();
+    final birthdateFormKey = useFormFieldStateKey();
+
+    /// カスタムフック
+    useEffectOnce(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        _nameFormKey.currentState?.didChange(profile?.name);
-        _birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
+        nameFormKey.currentState?.didChange(profile?.name);
+        birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
         birthdateState.value = profile?.birthdate;
       });
       return null;
-    }, const []);
+    });
 
     return Column(
       children: [
@@ -134,7 +138,7 @@ class _Dialog extends HookConsumerWidget {
                 isDense: true,
                 counterText: '',
               ),
-              key: _nameFormKey,
+              key: nameFormKey,
               initialValue: profile?.name,
               validator: (value) => (value == null || value.trim().isEmpty)
                   ? '名前を入力してください'
@@ -157,7 +161,7 @@ class _Dialog extends HookConsumerWidget {
                   date: birthdate,
                   onDateTimeChanged: (DateTime value) {
                     birthdateState.value = value;
-                    _birthdateFormKey.currentState
+                    birthdateFormKey.currentState
                         ?.didChange(value.format(format: 'yyyy/M/d'));
                   },
                 );
@@ -172,7 +176,7 @@ class _Dialog extends HookConsumerWidget {
                     border: OutlineInputBorder(),
                     isDense: true,
                   ),
-                  key: _birthdateFormKey,
+                  key: birthdateFormKey,
                   maxLines: 1,
                   initialValue: profile?.birthdateLabel,
                 ),
@@ -186,10 +190,10 @@ class _Dialog extends HookConsumerWidget {
           child: RoundedButton(
             onPressed: () async {
               context.hideKeyboard();
-              if (!_nameFormKey.currentState!.validate()) {
+              if (!nameFormKey.currentState!.validate()) {
                 return;
               }
-              final name = _nameFormKey.currentState?.value?.trim() ?? '';
+              final name = nameFormKey.currentState?.value?.trim() ?? '';
               final birthdate = birthdateState.value;
               final globalContext =
                   ref.read(navigatorKeyProvider).currentContext!;
