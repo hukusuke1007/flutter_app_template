@@ -13,7 +13,7 @@ Flutter + Firebase アプリの雛形
 
 ### 環境
 
-Flutter Stable 2.10.3
+Flutter Stable 2.10.4
 
 ### 画面構成
 
