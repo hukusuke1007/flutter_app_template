@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RoundedButton extends ConsumerWidget {
+class RoundedButton extends StatelessWidget {
   const RoundedButton({
     this.height,
     this.width,
@@ -25,7 +24,7 @@ class RoundedButton extends ConsumerWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       width: width,
