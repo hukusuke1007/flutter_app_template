@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/sample/local_counter.dart';
-import '../../../presentation/widgets/button.dart';
+import '../../../presentation/widgets/rounded_button.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({Key? key}) : super(key: key);

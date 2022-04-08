@@ -17,10 +17,10 @@ import '../../../utils/vibration.dart';
 import '../../custom_hooks/use_effect_once.dart';
 import '../../custom_hooks/use_form_field_state_key.dart';
 import '../../res/colors.dart';
-import '../../widgets/button.dart';
 import '../../widgets/color_circle.dart';
 import '../../widgets/dialogs/show_content_dialog.dart';
-import '../../widgets/material_tap_gesture.dart';
+import '../../widgets/ripple_tap_gesture.dart';
+import '../../widgets/rounded_button.dart';
 import '../../widgets/sheets/show_date_picker_sheet.dart';
 import '../../widgets/sheets/show_photo_and_crop_bottom_sheet.dart';
 import '../../widgets/show_indicator.dart';
@@ -151,7 +151,7 @@ class _Dialog extends HookConsumerWidget {
               padding: const EdgeInsets.only(bottom: 4),
               child: Text('誕生日', style: context.bodyStyle),
             ),
-            MaterialTapGesture(
+            RippleTapGesture(
               onTap: () async {
                 context.hideKeyboard();
                 unawaited(Vibration.select());
@@ -212,7 +212,7 @@ class _Dialog extends HookConsumerWidget {
                 dismissIndicator(globalContext);
               }
             },
-            bgColor: kPrimaryColor,
+            color: kPrimaryColor,
             width: 120,
             child: const Text(
               '保存する',

@@ -4,10 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RoundedButton extends ConsumerWidget {
   const RoundedButton({
+    this.height,
+    this.width,
     required this.child,
-    this.bgColor,
-    this.height = 40,
-    this.width = 140,
+    this.color,
     this.elevation = 0,
     this.side = BorderSide.none,
     this.isLoading = false,
@@ -15,10 +15,10 @@ class RoundedButton extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
+  final double? height;
+  final double? width;
   final Widget child;
-  final Color? bgColor;
-  final double height;
-  final double width;
+  final Color? color;
   final double elevation;
   final BorderSide side;
   final bool isLoading;
@@ -31,11 +31,8 @@ class RoundedButton extends ConsumerWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: bgColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(height / 2),
-            side: side,
-          ),
+          primary: color,
+          shape: const StadiumBorder().copyWith(side: side),
           onPrimary: Colors.grey,
           elevation: elevation,
         ),

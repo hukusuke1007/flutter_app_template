@@ -12,7 +12,7 @@ import '../../../model/use_cases/package_info/fetch_app_name.dart';
 import '../../../model/use_cases/package_info/fetch_app_version.dart';
 import '../../../model/use_cases/package_info/fetch_package_name.dart';
 import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
-import '../../widgets/material_tap_gesture.dart';
+import '../../widgets/ripple_tap_gesture.dart';
 import '../../widgets/thumbnail.dart';
 import '../image_viewer/image_viewer.dart';
 import '../start_up_page.dart';
@@ -189,7 +189,7 @@ class ProfileTile extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius,
         ),
-        child: MaterialTapGesture(
+        child: RippleTapGesture(
           onTap: onTapTile,
           borderRadius: borderRadius,
           child: Padding(

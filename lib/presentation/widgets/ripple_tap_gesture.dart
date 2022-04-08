@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
-class MaterialTapGesture extends StatelessWidget {
-  const MaterialTapGesture({
+class RippleTapGesture extends StatelessWidget {
+  const RippleTapGesture({
     Key? key,
+    this.type = MaterialType.transparency,
+    this.color = Colors.white,
     this.borderRadius,
     this.onTap,
     this.onLongPress,
     this.child,
   }) : super(key: key);
 
+  final MaterialType type;
+  final Color color;
   final BorderRadius? borderRadius;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -17,9 +21,9 @@ class MaterialTapGesture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      type: MaterialType.transparency,
+      type: type,
       borderRadius: borderRadius,
-      color: Colors.white,
+      color: color,
       child: InkWell(
         borderRadius: borderRadius,
         onTap: onTap,
