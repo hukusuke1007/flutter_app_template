@@ -12,7 +12,7 @@ extension ContextExtension on BuildContext {
   TextStyle get titleStyle => Theme.of(this).textTheme.headline5!;
   TextStyle get subtitleStyle => Theme.of(this).textTheme.subtitle1!;
   TextStyle get bodyStyle => Theme.of(this).textTheme.bodyText2!;
-  TextStyle get smallStyle => Theme.of(this).textTheme.caption!.copyWith();
+  TextStyle get smallStyle => Theme.of(this).textTheme.caption!;
   TextStyle get verySmallStyle =>
       Theme.of(this).textTheme.caption!.copyWith(fontSize: 10);
   Color? get commentBgColor =>
@@ -29,7 +29,12 @@ extension ContextExtension on BuildContext {
       isDark ? ThemeData.dark().cardColor : ThemeData.light().cardColor;
 
   void hideKeyboard() => FocusScope.of(this).unfocus();
-  void showSnackBar(String text, {Color backgroundColor = kPrimaryColor}) {
+  void showSnackBar(
+    String text, {
+    Color backgroundColor = kPrimaryColor,
+    Duration duration = const Duration(seconds: 2),
+    VoidCallback? onTap,
+  }) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         backgroundColor: backgroundColor,
@@ -37,9 +42,16 @@ extension ContextExtension on BuildContext {
           text,
           style: bodyStyle.copyWith(color: Colors.white),
         ),
-        duration: const Duration(seconds: 2),
+        duration: duration,
         action: SnackBarAction(
-            label: '閉じる', textColor: Colors.white, onPressed: () {}),
+          label: '閉じる',
+          textColor: Colors.white,
+          onPressed: () {
+            if (onTap != null) {
+              onTap();
+            }
+          },
+        ),
       ),
     );
   }

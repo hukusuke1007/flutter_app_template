@@ -61,6 +61,6 @@ class Memo with _$Memo {
     if (date == null) {
       return '-';
     }
-    return date.format(format: 'yyyy.M.d HH:mm');
+    return date.format(pattern: 'yyyy.M.d HH:mm');
   }
 }

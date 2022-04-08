@@ -10,7 +10,7 @@ class RoundedButton extends StatelessWidget {
     this.elevation = 0,
     this.side = BorderSide.none,
     this.isLoading = false,
-    this.onPressed,
+    this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class RoundedButton extends StatelessWidget {
   final double elevation;
   final BorderSide side;
   final bool isLoading;
-  final VoidCallback? onPressed;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class RoundedButton extends StatelessWidget {
           onPrimary: Colors.grey,
           elevation: elevation,
         ),
-        onPressed: onPressed,
+        onPressed: onTap,
         child: isLoading ? const CupertinoActivityIndicator() : child,
       ),
     );

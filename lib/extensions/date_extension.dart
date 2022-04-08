@@ -7,12 +7,10 @@ extension DateExtension on DateTime {
   }
 
   String format({
-    String format = 'yyyy/MM/dd HH:mm:ss',
+    String pattern = 'yyyy/MM/dd HH:mm:ss',
     String locale = 'ja_JP',
-  }) {
-    final formatter = DateFormat(format, locale);
-    return formatter.format(this);
-  }
+  }) =>
+      DateFormat(pattern, locale).format(this);
 
   DateTime toJst() {
     return toUtc().add(const Duration(hours: 9));
@@ -29,11 +27,11 @@ extension DateExtension on DateTime {
     final difference = now.difference(self);
     final sec = difference.inSeconds;
     if (sec < 0) {
-      return format(format: 'yyyy.M.d');
+      return format(pattern: 'yyyy.M.d');
     }
 
     if (sec >= 60 * 60 * 24 * 30) {
-      return format(format: 'yyyy.M.d');
+      return format(pattern: 'yyyy.M.d');
     } else if (sec >= 60 * 60 * 24) {
       return '${difference.inDays.toString()}日前';
     } else if (sec >= 60 * 60) {

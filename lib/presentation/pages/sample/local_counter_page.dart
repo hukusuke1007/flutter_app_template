@@ -54,7 +54,7 @@ class LocalCounterPage extends HookConsumerWidget {
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
+                    onTap: () async {
                       await ref.read(localCounterProvider.notifier).decrement();
                       // counter.value = value;
                     },
@@ -68,7 +68,7 @@ class LocalCounterPage extends HookConsumerWidget {
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
+                    onTap: () async {
                       await ref.read(localCounterProvider.notifier).increment();
                     },
                   ),

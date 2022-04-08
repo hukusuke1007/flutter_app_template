@@ -215,7 +215,7 @@ class ProfileTile extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         // ignore: lines_longer_than_80_chars
-                        '誕生日: ${developer?.birthdate?.format(format: 'yyyy/M/d') ?? '-'}',
+                        '誕生日: ${developer?.birthdate?.format(pattern: 'yyyy/M/d') ?? '-'}',
                         style: context.bodyStyle,
                         maxLines: 1,
                       ),

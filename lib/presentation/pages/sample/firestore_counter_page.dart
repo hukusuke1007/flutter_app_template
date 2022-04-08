@@ -102,7 +102,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
+                    onTap: () async {
                       if (isLoading.value) {
                         return;
                       }
@@ -140,7 +140,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
+                    onTap: () async {
                       if (isLoading.value) {
                         return;
                       }

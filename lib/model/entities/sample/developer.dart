@@ -39,7 +39,7 @@ class Developer with _$Developer {
       '${docPath(id)}/image/$filename';
 
   String get birthdateLabel {
-    return birthdate?.format(format: 'yyyy/M/d') ?? '-';
+    return birthdate?.format(pattern: 'yyyy/M/d') ?? '-';
   }
 
   Map<String, dynamic> get toDocWithNotImage {

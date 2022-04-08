@@ -162,7 +162,7 @@ class _Dialog extends HookConsumerWidget {
                   onDateTimeChanged: (DateTime value) {
                     birthdateState.value = value;
                     birthdateFormKey.currentState
-                        ?.didChange(value.format(format: 'yyyy/M/d'));
+                        ?.didChange(value.format(pattern: 'yyyy/M/d'));
                   },
                 );
               },
@@ -188,7 +188,7 @@ class _Dialog extends HookConsumerWidget {
         Padding(
           padding: const EdgeInsets.only(top: 40),
           child: RoundedButton(
-            onPressed: () async {
+            onTap: () async {
               context.hideKeyboard();
               if (!nameFormKey.currentState!.validate()) {
                 return;
