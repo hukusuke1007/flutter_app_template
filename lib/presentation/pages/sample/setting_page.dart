@@ -50,10 +50,15 @@ class SettingPage extends HookConsumerWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: ProfileTile(
                   profile.value,
+                  heroTag: 'profile',
                   onTapImage: () {
                     final url = profile.value?.image?.url;
                     if (url != null) {
-                      ImageViewer.show(context, urls: [url]);
+                      ImageViewer.show(
+                        context,
+                        urls: [url],
+                        heroTag: 'profile',
+                      );
                     }
                   },
                   onTapTile: () {
@@ -172,12 +177,14 @@ class SettingPage extends HookConsumerWidget {
 class ProfileTile extends StatelessWidget {
   const ProfileTile(
     this.developer, {
+    required this.heroTag,
     this.onTapImage,
     this.onTapTile,
     Key? key,
   }) : super(key: key);
 
   final Developer? developer;
+  final String heroTag;
   final VoidCallback? onTapImage;
   final VoidCallback? onTapTile;
 
@@ -196,10 +203,13 @@ class ProfileTile extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                CircleThumbnail(
-                  size: 48,
-                  url: developer?.image?.url,
-                  onTap: onTapImage,
+                Hero(
+                  tag: heroTag,
+                  child: CircleThumbnail(
+                    size: 48,
+                    url: developer?.image?.url,
+                    onTap: onTapImage,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16)
