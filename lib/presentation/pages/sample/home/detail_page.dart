@@ -33,64 +33,67 @@ class _Body extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 300,
-          child: Stack(
-            children: [
-              Image.asset(
-                Assets.neko.assetName,
-                fit: BoxFit.fitHeight,
-                height: 300,
-              ),
-              SafeArea(
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 8,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
+    return ColoredBox(
+      color: context.scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 300,
+            child: Stack(
+              children: [
+                Image.asset(
+                  Assets.neko.assetName,
+                  fit: BoxFit.fitHeight,
+                  height: 300,
+                ),
+                SafeArea(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 8,
                       ),
-                      onPressed: () => Navigator.of(context).pop(),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Text(
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-            'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n',
-            style: context.bodyStyle,
-            textAlign: TextAlign.start,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Text(
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+              'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n',
+              style: context.bodyStyle,
+              textAlign: TextAlign.start,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -2,13 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../extensions/context_extension.dart';
+
 class DraggableScrollablePage extends StatefulWidget {
   const DraggableScrollablePage({
     required this.heroTag,
     required this.child,
     this.dismissThresholdRate = 0.72,
     this.scaleDownOffset = 60.0,
-    this.color = Colors.white,
+    this.color,
     this.onDragVertical,
     this.scrollController,
     Key? key,
@@ -18,7 +20,7 @@ class DraggableScrollablePage extends StatefulWidget {
   final Widget child;
   final double dismissThresholdRate;
   final double scaleDownOffset;
-  final Color color;
+  final Color? color;
   final ScrollController? scrollController;
   final void Function(double margin, bool isScaleDown)? onDragVertical;
 
@@ -67,7 +69,10 @@ class _State extends State<DraggableScrollablePage> {
         setState(() {
           _isScaleDown = margin != 0;
           _top = margin;
-          _bottom = margin;
+
+          /// BouncingScrollPhysicsの影響でひっぱった時にtopが大きくなるためbottomを余分に加算する
+          _bottom = margin * 4;
+
           _right = margin;
           _left = margin;
         });
@@ -76,7 +81,7 @@ class _State extends State<DraggableScrollablePage> {
           widget.onDragVertical!(margin, _isScaleDown);
         }
 
-        final deviceWidth = MediaQuery.of(context).size.width;
+        final deviceWidth = context.deviceWidth;
         final bodyWidth = deviceWidth - margin * 2;
         final widthRate = bodyWidth / deviceWidth;
         // print('deviceWidth $deviceWidth, margin: $margin, rate: $widthRate');
@@ -100,7 +105,9 @@ class _State extends State<DraggableScrollablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.color.withOpacity(_opacity),
+      backgroundColor: widget.color != null
+          ? widget.color!.withOpacity(_opacity)
+          : context.scaffoldBackgroundColor.withOpacity(_opacity),
       body: Stack(
         children: [
           Positioned(
@@ -110,9 +117,9 @@ class _State extends State<DraggableScrollablePage> {
             left: _left,
             child: Hero(
               tag: widget.heroTag,
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Scrollbar(
+              child: Material(
+                color: Colors.transparent,
+                child: Scrollbar(
                   thickness: _isScaleDown ? 0 : 3,
                   controller: _scrollController,
                   child: SingleChildScrollView(
