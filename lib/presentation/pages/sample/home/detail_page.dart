@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
@@ -41,6 +43,8 @@ class DetailPage extends HookConsumerWidget {
     final rightState = useState<double>(0);
     final leftState = useState<double>(0);
     final isLockState = useState<bool>(false);
+    final opacityState = useState<double>(1);
+    const threshold = 80.0;
 
     useEffectOnce(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -49,9 +53,13 @@ class DetailPage extends HookConsumerWidget {
         }
         scrollController.addListener(() {
           final pixels = scrollController.position.pixels;
+          final velocity = scrollController.position.activity?.velocity ?? 0;
           print(pixels);
           final margin = () {
             const offset = 50.0;
+            if (velocity != 0.0) {
+              return 0.0;
+            }
             if (pixels >= 0) {
               return 0.0;
             } else if (0.0 > pixels && pixels > -offset) {
@@ -61,20 +69,26 @@ class DetailPage extends HookConsumerWidget {
           }();
 
           print(margin);
+
           topState.value = margin;
           bottomState.value = margin;
           rightState.value = margin;
           leftState.value = margin;
-          if (margin >= 80 && !isLockState.value) {
-            isLockState.value = true;
-            Navigator.pop(context);
+          if (!isLockState.value) {
+            opacityState.value = max((threshold - margin) / threshold, 0.0);
+
+            if (margin >= threshold) {
+              isLockState.value = true;
+              opacityState.value = 0.0;
+              Navigator.pop(context);
+            }
           }
         });
       });
     });
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white.withOpacity(opacityState.value),
       body: Stack(
         children: [
           Positioned(
@@ -112,71 +126,68 @@ class _Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Scrollbar(
+      backgroundColor: Colors.transparent,
+      body: SingleChildScrollView(
         controller: scrollController,
-        child: SingleChildScrollView(
-          controller: scrollController,
-          physics: physics,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 300,
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      Assets.neko.assetName,
-                      fit: BoxFit.fitHeight,
-                      height: 300,
-                    ),
-                    SafeArea(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 8,
+        physics: physics,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 300,
+              child: Stack(
+                children: [
+                  Image.asset(
+                    Assets.neko.assetName,
+                    fit: BoxFit.fitHeight,
+                    height: 300,
+                  ),
+                  SafeArea(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 8,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
                           ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.close,
-                              color: Colors.white,
-                            ),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
+                          onPressed: () => Navigator.of(context).pop(),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: Text(
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
-                  'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n',
-                  style: context.bodyStyle,
-                  textAlign: TextAlign.start,
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: Text(
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n'
+                'にゃーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー\n',
+                style: context.bodyStyle,
+                textAlign: TextAlign.start,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
