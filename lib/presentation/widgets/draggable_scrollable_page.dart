@@ -51,6 +51,7 @@ class _State extends State<DraggableScrollablePage> {
       }
       _scrollController.addListener(() {
         final pixels = _scrollController.position.pixels;
+        // TODO(shohei): 警告が気になる
         final velocity = _scrollController.position.activity?.velocity ?? 0;
         // print(pixels);
         final margin = () {
@@ -63,10 +64,6 @@ class _State extends State<DraggableScrollablePage> {
           return -pixels - _scaleDownOffset;
         }();
 
-        final deviceWidth = MediaQuery.of(context).size.width;
-        final bodyWidth = deviceWidth - margin * 2;
-        final widthRate = bodyWidth / deviceWidth;
-        // print('deviceWidth $deviceWidth, margin: $margin, rate: $widthRate');
         setState(() {
           _isScaleDown = margin != 0;
           _top = margin;
@@ -78,6 +75,11 @@ class _State extends State<DraggableScrollablePage> {
         if (widget.onDragVertical != null) {
           widget.onDragVertical!(margin, _isScaleDown);
         }
+
+        final deviceWidth = MediaQuery.of(context).size.width;
+        final bodyWidth = deviceWidth - margin * 2;
+        final widthRate = bodyWidth / deviceWidth;
+        // print('deviceWidth $deviceWidth, margin: $margin, rate: $widthRate');
 
         if (!_isLock) {
           setState(() {
