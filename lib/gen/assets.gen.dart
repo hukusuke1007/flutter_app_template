@@ -12,6 +12,7 @@ class Assets {
 
   static const AssetGenImage flutterLogo =
       AssetGenImage('assets/flutter_logo.png');
+  static const AssetGenImage neko = AssetGenImage('assets/neko.jpg');
 }
 
 class AssetGenImage extends AssetImage {
