@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/presentation/pages/sample/home/home_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
@@ -27,6 +28,7 @@ class MainPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final widgets = useState<List<Widget>>([
+      const HomePage(),
       const LocalCounterPage(),
       const FirestoreCounterPage(),
       const MemoPage(),
@@ -37,6 +39,7 @@ class MainPage extends HookConsumerWidget {
       1: GlobalKey<NavigatorState>(),
       2: GlobalKey<NavigatorState>(),
       3: GlobalKey<NavigatorState>(),
+      4: GlobalKey<NavigatorState>(),
     });
     final selectedIndex = useState(0);
 
@@ -72,18 +75,23 @@ class MainPage extends HookConsumerWidget {
               tooltip: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.edit),
+              icon: Icon(Icons.star),
               label: 'タブ2',
               tooltip: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.event_note),
+              icon: Icon(Icons.edit),
               label: 'タブ3',
               tooltip: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.event_note),
               label: 'タブ4',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'タブ5',
               tooltip: '',
             ),
           ],

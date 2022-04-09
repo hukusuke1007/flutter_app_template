@@ -108,6 +108,7 @@ dependencies:
   flutter_app_badger:
   badges:
   flutter_slidable:
+  dismissible_page:
 
   # Other
   uuid:
