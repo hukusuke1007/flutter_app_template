@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../widgets/draggable_scrollable_page.dart';
-import '../../../widgets/transparent_route.dart';
+import '../../../widgets/routes/transparent_route.dart';
 
 class DetailPage {
   DetailPage._();
