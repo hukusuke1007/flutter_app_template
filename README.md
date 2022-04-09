@@ -18,15 +18,17 @@ Flutter Stable 2.10.4
 ### 画面構成
 
 - タブ 1
-  - SharedPreferences を用いた カウンター
+  - Hero アニメーションによるモーダル表示
 - タブ 2
-  - Firestore を用いた カウンター
+  - SharedPreferences を用いた カウンター
 - タブ 3
+  - Firestore を用いた カウンター
+- タブ 4
   - Firestore を用いた Memo データ一覧と CRUD
     - データの追加、更新、削除
     - データ一覧の Pull-to-refresh
     - データ一覧の Infinite Scroll Pagination
-- タブ 4
+- タブ 5
   - 設定画面
     - プロフィール 「名前」「誕生日」「画像」の表示と保存
     - アプリ名、パッケージ名、バージョンを表示
