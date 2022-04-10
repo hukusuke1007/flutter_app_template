@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class DraggableScrollablePage extends StatefulWidget {
     required this.child,
     this.dismissThresholdRate = 0.72,
     this.scaleDownOffset = 60.0,
+    this.enableBlur = true,
+    this.blurSigma = 7,
     this.color,
     this.onDragVertical,
     this.scrollController,
@@ -20,6 +23,8 @@ class DraggableScrollablePage extends StatefulWidget {
   final Widget child;
   final double dismissThresholdRate;
   final double scaleDownOffset;
+  final bool enableBlur;
+  final double blurSigma;
   final Color? color;
   final ScrollController? scrollController;
   final void Function(double margin, bool isScaleDown)? onDragVertical;
@@ -88,13 +93,10 @@ class _State extends State<DraggableScrollablePage> {
 
         if (!_isLock) {
           setState(() {
-            _opacity = widthRate == 1.0 ? widthRate : max(widthRate - 0.8, 0);
+            _opacity = widthRate == 1.0 ? widthRate : max(widthRate - 0.5, 0.2);
           });
           if (widthRate <= _dismissThresholdRate) {
             _isLock = true;
-            setState(() {
-              _opacity = 0.0;
-            });
             Navigator.pop(context);
           }
         }
@@ -110,6 +112,16 @@ class _State extends State<DraggableScrollablePage> {
           : context.scaffoldBackgroundColor.withOpacity(_opacity),
       body: Stack(
         children: [
+          if (widget.enableBlur)
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: widget.blurSigma,
+                  sigmaY: widget.blurSigma,
+                ),
+                child: const SizedBox.shrink(),
+              ),
+            ),
           Positioned(
             top: _top,
             bottom: _bottom,

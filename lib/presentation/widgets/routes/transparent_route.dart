@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const _transitionDuration = Duration(milliseconds: 300);
-
 class TransparentRoute<T> extends PageRoute<T>
     with CupertinoRouteTransitionMixin<T> {
   TransparentRoute({
@@ -19,9 +17,9 @@ class TransparentRoute<T> extends PageRoute<T>
   static Future<T?> show<T>(
     BuildContext context,
     Widget page, {
-    Color backgroundColor = Colors.black38,
-    Duration transitionDuration = _transitionDuration,
-    Duration reverseTransitionDuration = _transitionDuration,
+    Color backgroundColor = Colors.transparent,
+    Duration transitionDuration = const Duration(milliseconds: 350),
+    Duration reverseTransitionDuration = const Duration(milliseconds: 350),
     bool rootNavigator = true,
   }) async {
     return Navigator.of(context, rootNavigator: rootNavigator).push<T>(
