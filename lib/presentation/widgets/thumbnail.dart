@@ -189,7 +189,9 @@ class CircleThumbnail extends StatelessWidget {
           loadStateChanged: (ExtendedImageState state) {
             switch (state.extendedImageLoadState) {
               case LoadState.loading:
-                return const CupertinoActivityIndicator();
+                return const Center(
+                  child: CupertinoActivityIndicator(),
+                );
               case LoadState.completed:
                 return Image(
                   image: state.imageProvider,
