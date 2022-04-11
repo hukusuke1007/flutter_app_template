@@ -124,6 +124,7 @@ dependencies:
   flutter_linkify:
   timezone:
   collection:
+  go_router:
 
 dev_dependencies:
   flutter_test:

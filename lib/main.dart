@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,6 +23,8 @@ import 'utils/flavor.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  /// go_router
+  GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
   late final PackageInfo packageInfo;
   late final SharedPreferences sharedPreferences;
   late final Directory tempDirectory;
