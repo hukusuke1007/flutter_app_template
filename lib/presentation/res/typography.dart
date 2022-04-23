@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 
+// TODO(shohei): もういらんかも？
 const kLocale = Locale('ja', 'JP');
 
 const String kFontFamilyAndroid = 'Robot';
