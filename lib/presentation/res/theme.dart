@@ -1,37 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../../../gen/colors.gen.dart';
 import 'typography.dart';
 
 /// https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties#migration-guide
-ThemeData getAppTheme({
-  Color? appBarColor,
-  Color? selectedItemColor,
-  Color? floatingActionButtonColor,
-}) {
+ThemeData getAppTheme() {
   final base = ThemeData(
     brightness: Brightness.light,
     fontFamily: kFontFamily,
     typography: kTypography,
-    primaryColor: kPrimaryColor,
+    primaryColor: ColorName.primary,
   );
   return base.copyWith(
     buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: kPrimaryColor,
+      buttonColor: ColorName.primary,
       textTheme: ButtonTextTheme.normal,
     ),
     appBarTheme: base.appBarTheme.copyWith(
-      backgroundColor: appBarColor,
       iconTheme: base.iconTheme.copyWith(color: Colors.grey),
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
-      backgroundColor: floatingActionButtonColor ?? kPrimaryColor,
+      backgroundColor: ColorName.primary,
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
       backgroundColor: Colors.white,
-      selectedItemColor: selectedItemColor ?? kPrimaryColor,
+      selectedItemColor: ColorName.primary,
       unselectedItemColor: Colors.black.withOpacity(0.4),
     ),
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
@@ -47,30 +42,25 @@ ThemeData getAppTheme({
   );
 }
 
-ThemeData getAppThemeDark({
-  Color? appBarColor,
-  Color? selectedItemColor,
-  Color? floatingActionButtonColor,
-}) {
+ThemeData getAppThemeDark() {
   final base = ThemeData.from(colorScheme: const ColorScheme.dark());
   return base.copyWith(
     typography: kTypography,
-    primaryColor: kPrimaryColor,
-    colorScheme: base.colorScheme.copyWith(secondary: kPrimaryColor),
+    primaryColor: ColorName.primary,
+    colorScheme: base.colorScheme.copyWith(secondary: ColorName.primary),
     buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: kPrimaryColor,
+      buttonColor: ColorName.primary,
       textTheme: ButtonTextTheme.normal,
     ),
     appBarTheme: base.appBarTheme.copyWith(
-      backgroundColor: appBarColor,
       iconTheme: base.iconTheme.copyWith(color: Colors.grey),
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
-      backgroundColor: floatingActionButtonColor ?? kPrimaryColor,
+      backgroundColor: ColorName.primary,
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
-      selectedItemColor: selectedItemColor ?? kPrimaryColor,
+      selectedItemColor: ColorName.primary,
     ),
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.dark,

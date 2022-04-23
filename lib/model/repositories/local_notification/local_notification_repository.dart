@@ -16,7 +16,9 @@ class LocalNotificationRepository {
     bool requestAlertPermission = true,
     bool requestSoundPermission = true,
     bool requestBadgePermission = true,
-    SelectNotificationCallback? onSelectNotification,
+    DidReceiveNotificationResponseCallback? onDidReceiveNotificationResponse,
+    DidReceiveBackgroundNotificationResponseCallback?
+        onDidReceiveBackgroundNotificationResponse,
   }) async {
     const initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');
@@ -26,10 +28,23 @@ class LocalNotificationRepository {
       requestSoundPermission: requestBadgePermission,
     );
     final initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
 
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
+    await _flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse:
+          onDidReceiveBackgroundNotificationResponse,
+    );
+  }
+
+  Future<void> createChannel(AndroidNotificationChannel channel) async {
+    await _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
   }
 
   Future<bool> requestPermission({
@@ -55,15 +70,18 @@ class LocalNotificationRepository {
     required String androidChannelId,
     required String androidChannelName,
     required String androidChannelDescription,
+    Importance importance = Importance.max,
+    Priority priority = Priority.high,
+    String ticker = 'ticker',
     String? payload,
   }) async {
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
       androidChannelId,
       androidChannelName,
       channelDescription: androidChannelDescription,
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
+      importance: importance,
+      priority: priority,
+      ticker: ticker,
     );
     const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
 
@@ -72,8 +90,13 @@ class LocalNotificationRepository {
       iOS: iOSPlatformChannelSpecifics,
     );
 
-    await _flutterLocalNotificationsPlugin
-        .show(id, title, body, platformChannelSpecifics, payload: payload);
+    await _flutterLocalNotificationsPlugin.show(
+      id,
+      title,
+      body,
+      platformChannelSpecifics,
+      payload: payload,
+    );
   }
 
   Future<void> requestZonedSchedule({
@@ -85,16 +108,20 @@ class LocalNotificationRepository {
     required String androidChannelId,
     required String androidChannelName,
     required String androidChannelDescription,
+    Importance importance = Importance.max,
+    Priority priority = Priority.high,
+    String ticker = 'ticker',
     String? payload,
+    bool androidAllowWhileIdle = true, // 低電力アイドルモードでも通知する設定
   }) async {
     /// https://pub.dev/packages/flutter_local_notifications#scheduling-a-notification
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
       androidChannelId,
       androidChannelName,
       channelDescription: androidChannelDescription,
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
+      importance: importance,
+      priority: priority,
+      ticker: ticker,
     );
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
@@ -105,7 +132,7 @@ class LocalNotificationRepository {
       NotificationDetails(android: androidPlatformChannelSpecifics),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: true, // 低電力アイドルモードでも通知する設定
+      androidAllowWhileIdle: androidAllowWhileIdle,
       payload: payload,
       matchDateTimeComponents: dateTimeComponents,
     );
@@ -119,15 +146,19 @@ class LocalNotificationRepository {
     required String androidChannelId,
     required String androidChannelName,
     required String androidChannelDescription,
+    Importance importance = Importance.max,
+    Priority priority = Priority.high,
+    String ticker = 'ticker',
     String? payload,
+    bool androidAllowWhileIdle = true, // 低電力アイドルモードでも通知する設定
   }) async {
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
       androidChannelId,
       androidChannelName,
       channelDescription: androidChannelDescription,
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
+      importance: importance,
+      priority: priority,
+      ticker: ticker,
     );
 
     await _flutterLocalNotificationsPlugin.periodicallyShow(
@@ -137,7 +168,7 @@ class LocalNotificationRepository {
       interval,
       NotificationDetails(android: androidPlatformChannelSpecifics),
       payload: payload,
-      androidAllowWhileIdle: true, // 低電力アイドルモードでも通知する設定
+      androidAllowWhileIdle: androidAllowWhileIdle,
     );
   }
 

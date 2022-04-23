@@ -16,9 +16,9 @@ class LocalCounter extends StateNotifier<int> {
 
   final Reader _read;
 
-  Future<void> fetch() async {
+  void fetch() {
     final db = _read(sharedPreferencesRepositoryProvider);
-    state = (await db.fetch<int>(localCounterKey)) ?? 0;
+    state = (db.fetch<int>(localCounterKey)) ?? 0;
   }
 
   Future<void> increment() async {

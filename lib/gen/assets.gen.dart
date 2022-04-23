@@ -7,12 +7,17 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/neko.jpg
+  AssetGenImage get neko => const AssetGenImage('assets/images/neko.jpg');
+}
+
 class Assets {
   Assets._();
 
-  static const AssetGenImage flutterLogo =
-      AssetGenImage('assets/flutter_logo.png');
-  static const AssetGenImage neko = AssetGenImage('assets/neko.jpg');
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage extends AssetImage {

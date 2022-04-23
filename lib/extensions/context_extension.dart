@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../presentation/res/colors.dart';
+import '../gen/colors.gen.dart';
 
 extension ContextExtension on BuildContext {
   bool get isDark => MediaQuery.of(this).platformBrightness == Brightness.dark;
-  bool get isSafeArea => MediaQuery.of(this).viewPadding.bottom >= 34.0;
   double get deviceWidth => MediaQuery.of(this).size.width;
   double get deviceHeight => MediaQuery.of(this).size.height;
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
@@ -15,25 +14,19 @@ extension ContextExtension on BuildContext {
   TextStyle get smallStyle => Theme.of(this).textTheme.caption!;
   TextStyle get verySmallStyle =>
       Theme.of(this).textTheme.caption!.copyWith(fontSize: 10);
-  Color? get commentBgColor =>
-      isDark ? ThemeData.dark().backgroundColor : Colors.grey[300];
   bool get isIphoneMiniSize =>
       deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
   double get appBarHeight => MediaQuery.of(this).padding.top + kToolbarHeight;
 
-  Color get scaffoldBackgroundColor => isDark
-      ? const ColorScheme.dark().background
-      : ThemeData.light().scaffoldBackgroundColor;
-
-  Color get cardColor =>
-      isDark ? ThemeData.dark().cardColor : ThemeData.light().cardColor;
+  Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
   void hideKeyboard() => FocusScope.of(this).unfocus();
   void showSnackBar(
     String text, {
-    Color backgroundColor = kPrimaryColor,
-    Duration duration = const Duration(seconds: 2),
+    Color backgroundColor = ColorName.primary,
+    Duration duration = const Duration(milliseconds: 1500),
     VoidCallback? onTap,
+    String closeLabel = '閉じる',
   }) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
@@ -44,7 +37,7 @@ extension ContextExtension on BuildContext {
         ),
         duration: duration,
         action: SnackBarAction(
-          label: '閉じる',
+          label: closeLabel,
           textColor: Colors.white,
           onPressed: () {
             if (onTap != null) {

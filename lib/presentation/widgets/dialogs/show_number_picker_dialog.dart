@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../../res/colors.dart';
+import '../../../gen/colors.gen.dart';
 
 Future<void> showDecimalPickerDialog(
   BuildContext context,
@@ -72,7 +72,7 @@ class _DecimalPickerState extends State<DecimalPicker> {
                   },
                   child: Text(
                     widget.doneText,
-                    style: context.bodyStyle.copyWith(color: kPrimaryColor),
+                    style: context.bodyStyle.copyWith(color: ColorName.primary),
                   ),
                 ),
               ),
