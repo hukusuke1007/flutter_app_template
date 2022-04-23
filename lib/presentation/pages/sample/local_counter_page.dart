@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/sample/local_counter.dart';
 import '../../../presentation/widgets/rounded_button.dart';
+import '../../custom_hooks/use_effect_once.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({Key? key}) : super(key: key);
