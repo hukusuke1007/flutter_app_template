@@ -20,12 +20,12 @@ Future<void> showAppStoreReview(
   Reader read,
 ) async {
   final reviewApp = read(reviewAppProvider);
-  final reviewed = await reviewApp.fetchReviewed();
+  final reviewed = reviewApp.fetchReviewed();
   if (reviewed) {
     logger.info('No showing review. already reviewed');
     return;
   }
-  final showingDateAt = await reviewApp.fetchShowingReviewAt();
+  final showingDateAt = reviewApp.fetchShowingReviewAt();
   final now = DateTime.now();
   if (showingDateAt != null && showingDateAt.isAfter(now)) {
     logger.info('No showing review. showingDateAt: $showingDateAt');
@@ -62,8 +62,8 @@ class ReviewApp {
   SharedPreferencesRepository get sharedPreferencesRepository =>
       _read(sharedPreferencesRepositoryProvider);
 
-  Future<bool> fetchReviewed() async {
-    final result = await sharedPreferencesRepository
+  bool fetchReviewed() {
+    final result = sharedPreferencesRepository
         .fetch<bool>(SharedPreferencesKey.isReviewedAppStore);
     return result ?? false;
   }
@@ -73,8 +73,8 @@ class ReviewApp {
         SharedPreferencesKey.isReviewedAppStore, true);
   }
 
-  Future<DateTime?> fetchShowingReviewAt() async {
-    final result = await sharedPreferencesRepository
+  DateTime? fetchShowingReviewAt() {
+    final result = sharedPreferencesRepository
         .fetch<int>(SharedPreferencesKey.showingReviewAt);
     if (result == null) {
       return null;
