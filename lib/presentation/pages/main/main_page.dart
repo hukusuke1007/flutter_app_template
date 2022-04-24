@@ -48,7 +48,7 @@ class MainPage extends HookConsumerWidget {
       if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
         return !await keyTab.currentState!.maybePop();
       }
-      return Future.value(true);
+      return true;
     }
 
     return WillPopScope(
