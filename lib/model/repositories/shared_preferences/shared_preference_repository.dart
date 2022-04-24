@@ -46,7 +46,7 @@ class SharedPreferencesRepository {
     if (T == List<String>) {
       return _prefs.getStringList(key.value) as T?;
     }
-    return null;
+    throw UnsupportedError('Not support \'$T\'');
   }
 
   Future<bool> remove(SharedPreferencesKey key) => _prefs.remove(key.value);
