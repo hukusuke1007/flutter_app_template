@@ -42,7 +42,7 @@ class _Body extends HookConsumerWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  Assets.neko.assetName,
+                  Assets.images.neko.assetName,
                   fit: BoxFit.fitHeight,
                   height: 300,
                 ),

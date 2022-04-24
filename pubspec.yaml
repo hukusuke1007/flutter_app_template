@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
 
 dependencies:
   flutter:
@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.14.0
+  firebase_core: ^1.15.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,7 +96,7 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.5
+  flutter_local_notifications: ^10.0.0-dev.12
   flutter_native_timezone:
 
   # Preview
@@ -143,10 +143,16 @@ dev_dependencies:
   # Other
   flutter_launcher_icons:
 
+flutter_gen:
+  output: lib/gen/
+  colors:
+    inputs:
+      - assets/color/colors.xml
+
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
 
   # カスタムフォントを利用する場合はここを設定する
   # fonts:

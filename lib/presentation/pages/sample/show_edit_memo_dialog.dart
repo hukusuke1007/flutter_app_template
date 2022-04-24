@@ -3,13 +3,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
+import '../../../gen/colors.gen.dart';
 import '../../../model/entities/sample/memo.dart';
 import '../../../model/use_cases/sample/memo_controller.dart';
 import '../../../utils/logger.dart';
 import '../../../utils/provider.dart';
 import '../../custom_hooks/use_effect_once.dart';
 import '../../custom_hooks/use_form_field_state_key.dart';
-import '../../res/colors.dart';
 import '../../widgets/dialogs/show_content_dialog.dart';
 import '../../widgets/show_indicator.dart';
 
@@ -80,7 +80,7 @@ class _Dialog extends HookConsumerWidget {
             width: 100,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: kPrimaryColor,
+                primary: ColorName.primary,
                 shape: const StadiumBorder(),
               ),
               onPressed: () async {

@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/date_extension.dart';
+import '../../../gen/colors.gen.dart';
 import '../../../model/use_cases/image_compress.dart';
 import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../model/use_cases/sample/my_profile/save_my_profile.dart';
@@ -16,7 +17,6 @@ import '../../../utils/provider.dart';
 import '../../../utils/vibration.dart';
 import '../../custom_hooks/use_effect_once.dart';
 import '../../custom_hooks/use_form_field_state_key.dart';
-import '../../res/colors.dart';
 import '../../widgets/color_circle.dart';
 import '../../widgets/dialogs/show_content_dialog.dart';
 import '../../widgets/ripple_tap_gesture.dart';
@@ -212,7 +212,7 @@ class _Dialog extends HookConsumerWidget {
                 dismissIndicator(globalContext);
               }
             },
-            color: kPrimaryColor,
+            color: ColorName.primary,
             width: 120,
             child: const Text(
               '保存する',

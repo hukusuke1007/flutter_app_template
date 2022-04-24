@@ -30,7 +30,7 @@ class SharedPreferencesRepository {
     return false;
   }
 
-  Future<T?> fetch<T>(SharedPreferencesKey key) async {
+  T? fetch<T>(SharedPreferencesKey key) {
     if (T == int) {
       return _prefs.getInt(key.value) as T?;
     }

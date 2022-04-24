@@ -19,6 +19,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
     final counter = useState<Counter?>(null);
     final isLoading = useState<bool>(false);
     final counterFromStream = ref.watch(fetchFirestoreCounterStreamProvider);
+
     useEffect(() {
       Future(() async {
         isLoading.value = true;

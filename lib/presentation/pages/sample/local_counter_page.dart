@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/sample/local_counter.dart';
 import '../../../presentation/widgets/rounded_button.dart';
+import '../../custom_hooks/use_effect_once.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({Key? key}) : super(key: key);
@@ -13,12 +13,12 @@ class LocalCounterPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final counter = ref.watch(localCounterProvider);
 
-    useEffect(() {
-      Future(() async {
-        await ref.read(localCounterProvider.notifier).fetch();
+    useEffectOnce(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        ref.read(localCounterProvider.notifier).fetch();
       });
       return null;
-    }, const []);
+    });
 
     return Scaffold(
       appBar: AppBar(
