@@ -1,39 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../widgets/draggable_scrollable_page.dart';
 import '../../../widgets/routes/transparent_route.dart';
 
-class DetailPage {
-  DetailPage._();
-  static void show(
-    BuildContext context, {
-    required String heroTag,
-  }) {
-    TransparentRoute.show<void>(
-      context,
-      DraggableScrollablePage(
-        heroTag: heroTag,
-        itemBuilder: (scrollController) =>
-            _Body(scrollController: scrollController),
-      ),
-      rootNavigator: true,
-    );
-  }
-}
-
-class _Body extends HookConsumerWidget {
-  const _Body({
-    required this.scrollController,
+class DetailPage extends StatelessWidget {
+  const DetailPage({
     Key? key,
   }) : super(key: key);
 
-  final ScrollController scrollController;
+  static Future<void> show(
+    BuildContext context, {
+    required String heroTag,
+  }) =>
+      TransparentRoute.show<void>(
+        context,
+        DraggableScrollablePage(
+          heroTag: heroTag,
+          pageBuilder: (_) => const DetailPage(),
+        ),
+        rootNavigator: true,
+      );
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(

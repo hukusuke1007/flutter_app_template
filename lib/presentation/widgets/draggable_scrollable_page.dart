@@ -8,7 +8,7 @@ import '../../extensions/context_extension.dart';
 class DraggableScrollablePage extends StatefulWidget {
   const DraggableScrollablePage({
     required this.heroTag,
-    required this.itemBuilder,
+    required this.pageBuilder,
     this.dismissThresholdRate = 0.72,
     this.scaleDownOffset = 60.0,
     this.enableBlur = true,
@@ -19,7 +19,7 @@ class DraggableScrollablePage extends StatefulWidget {
   }) : super(key: key);
 
   final String heroTag;
-  final Widget Function(ScrollController scrollController) itemBuilder;
+  final Widget Function(ScrollController scrollController) pageBuilder;
   final double dismissThresholdRate;
   final double scaleDownOffset;
   final bool enableBlur;
@@ -134,7 +134,7 @@ class _State extends State<DraggableScrollablePage> {
                   child: SingleChildScrollView(
                     controller: _scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: widget.itemBuilder(_scrollController),
+                    child: widget.pageBuilder(_scrollController),
                   ),
                 ),
               ),
