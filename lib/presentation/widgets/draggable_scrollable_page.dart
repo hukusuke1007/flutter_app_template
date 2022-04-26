@@ -8,25 +8,23 @@ import '../../extensions/context_extension.dart';
 class DraggableScrollablePage extends StatefulWidget {
   const DraggableScrollablePage({
     required this.heroTag,
-    required this.child,
+    required this.itemBuilder,
     this.dismissThresholdRate = 0.72,
     this.scaleDownOffset = 60.0,
     this.enableBlur = true,
     this.blurSigma = 7,
     this.color,
     this.onDragVertical,
-    this.scrollController,
     Key? key,
   }) : super(key: key);
 
   final String heroTag;
-  final Widget child;
+  final Widget Function(ScrollController scrollController) itemBuilder;
   final double dismissThresholdRate;
   final double scaleDownOffset;
   final bool enableBlur;
   final double blurSigma;
   final Color? color;
-  final ScrollController? scrollController;
   final void Function(double margin, bool isScaleDown)? onDragVertical;
 
   @override
@@ -34,8 +32,7 @@ class DraggableScrollablePage extends StatefulWidget {
 }
 
 class _State extends State<DraggableScrollablePage> {
-  late final ScrollController _scrollController =
-      widget.scrollController ?? ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   double _top = 0;
   double _bottom = 0;
@@ -135,9 +132,9 @@ class _State extends State<DraggableScrollablePage> {
                   thickness: _isScaleDown ? 0 : 3,
                   controller: _scrollController,
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
                     controller: _scrollController,
-                    child: widget.child,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: widget.itemBuilder(_scrollController),
                   ),
                 ),
               ),

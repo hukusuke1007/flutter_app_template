@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class LeadingBackButton extends StatelessWidget {
   const LeadingBackButton({
-    this.color,
+    this.color = Colors.white,
     Key? key,
   }) : super(key: key);
 
-  final Color? color;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(
         Icons.arrow_back_ios,
-        color: color ?? Colors.white,
+        color: color,
       ),
       onPressed: () => Navigator.of(context).pop(),
     );
@@ -22,18 +22,18 @@ class LeadingBackButton extends StatelessWidget {
 
 class LeadingModalBackButton extends StatelessWidget {
   const LeadingModalBackButton({
-    this.color,
+    this.color = Colors.white,
     Key? key,
   }) : super(key: key);
 
-  final Color? color;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(
         Icons.close,
-        color: color ?? Colors.white,
+        color: color,
       ),
       onPressed: () => Navigator.of(context).pop(),
     );
