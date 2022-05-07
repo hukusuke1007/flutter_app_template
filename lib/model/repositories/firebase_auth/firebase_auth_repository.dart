@@ -3,6 +3,7 @@ import 'dart:async';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app_template/utils/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'login_type.dart';
@@ -18,13 +19,15 @@ class FirebaseAuthRepository {
 
   Stream<User?> get onAuthStateChanged => _auth.authStateChanges();
 
+  Stream<User?> get onUserChanged => _auth.userChanges();
+
   User? get authUser => _auth.currentUser;
 
   String? get loggedInUserId => _auth.currentUser?.uid;
 
   bool get isAnonymously => _auth.currentUser?.isAnonymous ?? false;
 
-  bool get isEmailVerification => _auth.currentUser?.emailVerified ?? false;
+  bool get isEmailVerified => _auth.currentUser?.emailVerified ?? false;
 
   Future<String?> get idToken async {
     return _auth.currentUser?.getIdToken(true);
@@ -40,6 +43,23 @@ class FirebaseAuthRepository {
   Future<UserCredential> signInWithAuthCredential(
           AuthCredential authCredential) =>
       _auth.signInWithCredential(authCredential);
+
+  Future<UserCredential> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) =>
+      _auth.createUserWithEmailAndPassword(email: email, password: password);
+
+  Future<UserCredential> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) =>
+      _auth.signInWithEmailAndPassword(email: email, password: password);
+
+  Future<void> sendEmailVerification(User user) => user.sendEmailVerification();
+
+  Future<void> sendPasswordResetEmail(String email) =>
+      _auth.sendPasswordResetEmail(email: email);
 
   Future<UserCredential> signInWithLink(AuthCredential authCredential) async {
     final user = _auth.currentUser;
@@ -57,14 +77,19 @@ class FirebaseAuthRepository {
     if (user.isAnonymous) {
       return LoginType.anonymously;
     }
-    if (user.providerData
-            .firstWhereOrNull((element) => element.providerId == 'apple.com') !=
+    if (user.providerData.firstWhereOrNull(
+          (element) => element.providerId == kEmailProviderId,
+        ) !=
+        null) {
+      return LoginType.email;
+    }
+    if (user.providerData.firstWhereOrNull(
+            (element) => element.providerId == kAppleProviderId) !=
         null) {
       return LoginType.apple;
     }
-
     if (user.providerData.firstWhereOrNull(
-            (element) => element.providerId == 'google.com') !=
+            (element) => element.providerId == kGoogleProviderId) !=
         null) {
       return LoginType.google;
     }
