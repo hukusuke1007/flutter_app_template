@@ -23,6 +23,6 @@ class SendEmailVerification {
     await repository.sendEmailVerification(user);
     controller.update((state) => AuthState.noSignIn);
 
-    logger.info('確認メールを送信しました。');
+    logger.info('確認メールを送信しました');
   }
 }

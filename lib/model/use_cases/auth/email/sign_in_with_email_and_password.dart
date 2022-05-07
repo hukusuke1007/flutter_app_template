@@ -27,7 +27,7 @@ class SignInWithEmailAndPassword {
         controller.update((state) => AuthState.noSignIn);
       }
 
-      logger.info('Emailサインインに成功しました。');
+      logger.info('Emailサインインに成功しました');
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
