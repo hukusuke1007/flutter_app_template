@@ -188,6 +188,7 @@ class _Dialog extends HookConsumerWidget {
         Padding(
           padding: const EdgeInsets.only(top: 40),
           child: RoundedButton(
+            elevation: 2,
             onTap: () async {
               context.hideKeyboard();
               if (!nameFormKey.currentState!.validate()) {
@@ -213,12 +214,14 @@ class _Dialog extends HookConsumerWidget {
               }
             },
             color: ColorName.primary,
-            width: 120,
-            child: const Text(
-              '保存する',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Text(
+                '保存する',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),

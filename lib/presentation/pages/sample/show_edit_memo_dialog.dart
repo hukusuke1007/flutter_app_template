@@ -75,47 +75,45 @@ class _Dialog extends HookConsumerWidget {
         ),
         const SizedBox(height: 16),
         Center(
-          child: SizedBox(
-            height: 40,
-            width: 100,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: ColorName.primary,
-                shape: const StadiumBorder(),
-              ),
-              onPressed: () async {
-                if (textKey.currentState?.validate() != true) {
-                  return;
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: ColorName.primary,
+              shape: const StadiumBorder(),
+            ),
+            onPressed: () async {
+              if (textKey.currentState?.validate() != true) {
+                return;
+              }
+              final text = textKey.currentState?.value?.trim() ?? '';
+              try {
+                showIndicator(context);
+                context.hideKeyboard();
+                final gContext = ref.read(navigatorKeyProvider).currentContext!;
+                if (data != null) {
+                  /// 更新
+                  await ref
+                      .read(memoProvider.notifier)
+                      .update(data!.copyWith(text: text));
+                  gContext.showSnackBar('更新しました');
+                } else {
+                  /// 新規作成
+                  await ref.read(memoProvider.notifier).create(text);
+                  gContext.showSnackBar('作成しました');
                 }
-                final text = textKey.currentState?.value?.trim() ?? '';
-                try {
-                  showIndicator(context);
-                  context.hideKeyboard();
-                  final gContext =
-                      ref.read(navigatorKeyProvider).currentContext!;
-                  if (data != null) {
-                    /// 更新
-                    await ref
-                        .read(memoProvider.notifier)
-                        .update(data!.copyWith(text: text));
-                    gContext.showSnackBar('更新しました');
-                  } else {
-                    /// 新規作成
-                    await ref.read(memoProvider.notifier).create(text);
-                    gContext.showSnackBar('作成しました');
-                  }
-                  dismissIndicator(context);
+                dismissIndicator(context);
 
-                  Navigator.pop(context);
-                } on Exception catch (e) {
-                  logger.shout(e);
-                  dismissIndicator(context);
-                  context.showSnackBar(
-                    e.errorMessage,
-                    backgroundColor: Colors.grey,
-                  );
-                }
-              },
+                Navigator.pop(context);
+              } on Exception catch (e) {
+                logger.shout(e);
+                dismissIndicator(context);
+                context.showSnackBar(
+                  e.errorMessage,
+                  backgroundColor: Colors.grey,
+                );
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
                 '投稿する',
                 style: context.bodyStyle

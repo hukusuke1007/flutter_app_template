@@ -163,48 +163,38 @@ class WebViewPage extends HookConsumerWidget {
                   },
                 ),
               ),
-              SizedBox(
-                width: context.deviceWidth,
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: 24,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          webViewController.value?.goBack();
-                        },
-                      ),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 24,
+                      color: Colors.grey,
                     ),
-                    Expanded(
-                      flex: 7,
-                      child: Text(
-                        urlState.value,
-                        style: context.smallStyle,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.visible,
-                        maxLines: 1,
-                      ),
+                    onPressed: () {
+                      webViewController.value?.goBack();
+                    },
+                  ),
+                  Expanded(
+                    child: Text(
+                      urlState.value,
+                      style: context.smallStyle,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
+                      maxLines: 1,
                     ),
-                    Flexible(
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_forward,
-                          size: 24,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          webViewController.value?.goForward();
-                        },
-                      ),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      size: 24,
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
+                    onPressed: () {
+                      webViewController.value?.goForward();
+                    },
+                  ),
+                ],
               ),
             ],
           ),

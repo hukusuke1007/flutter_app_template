@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../../extensions/context_extension.dart';
 
-Future<void> showDatePickerSheet(
+Future<bool?> showDatePickerSheet(
   BuildContext context, {
   required DateTime date,
   required void Function(DateTime) onDateTimeChanged,
 }) async {
-  return showCupertinoModalPopup(
+  return showCupertinoModalPopup<bool?>(
     context: context,
     builder: (BuildContext context) {
       return SizedBox(
@@ -22,21 +22,28 @@ Future<void> showDatePickerSheet(
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(false);
                     },
-                    child: const Text('キャンセル'),
+                    child: Text(
+                      'キャンセル',
+                      style: context.bodyStyle,
+                      maxLines: 1,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(true);
                     },
-                    child: const Text('完了'),
+                    child: Text(
+                      '完了',
+                      style: context.bodyStyle,
+                      maxLines: 1,
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 250,
+            Flexible(
               child: CupertinoDatePicker(
                 backgroundColor: context.isDark ? Colors.black : Colors.white,
                 initialDateTime: date,
