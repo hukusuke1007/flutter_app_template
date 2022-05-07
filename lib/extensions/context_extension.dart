@@ -20,7 +20,14 @@ extension ContextExtension on BuildContext {
 
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
-  void hideKeyboard() => FocusScope.of(this).unfocus();
+  void hideKeyboard() {
+    // https://github.com/flutter/flutter/issues/54277#issuecomment-640998757
+    final currentScope = FocusScope.of(this);
+    if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
+  }
+
   void showSnackBar(
     String text, {
     Color backgroundColor = ColorName.primary,
