@@ -17,11 +17,11 @@ class CreateUserWithEmailAndPassword {
   Future<void> call(String email, String password) async {
     try {
       final repository = _read(firebaseAuthRepositoryProvider);
-      final controller = _read(authStateProvider.state);
+      final authState = _read(authStateProvider.state);
 
       await repository.createUserWithEmailAndPassword(email, password);
       // NOTE: メールアドレスの確認を完了させるまではsignInに変更しない
-      controller.update((state) => AuthState.noSignIn);
+      authState.update((state) => AuthState.noSignIn);
 
       logger.info('Emailサインアップに成功しました');
     } on FirebaseAuthException catch (e) {

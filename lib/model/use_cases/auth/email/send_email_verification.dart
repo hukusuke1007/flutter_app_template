@@ -15,7 +15,7 @@ class SendEmailVerification {
 
   Future<void> call() async {
     final repository = _read(firebaseAuthRepositoryProvider);
-    final controller = _read(authStateProvider.state);
+    final authState = _read(authStateProvider.state);
 
     final user = repository.authUser;
     if (user == null) {
@@ -24,7 +24,7 @@ class SendEmailVerification {
 
     try {
       await repository.sendEmailVerification(user);
-      controller.update((state) => AuthState.noSignIn);
+      authState.update((state) => AuthState.noSignIn);
 
       logger.info('確認メールを送信しました');
     } on FirebaseException catch (e) {
