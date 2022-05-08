@@ -6,7 +6,7 @@ import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final sendEmailVerificationProvider =
-    Provider.autoDispose((ref) => SendEmailVerification(ref.read));
+    Provider((ref) => SendEmailVerification(ref.read));
 
 class SendEmailVerification {
   SendEmailVerification(this._read);

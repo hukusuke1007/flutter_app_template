@@ -4,9 +4,8 @@ import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_a
 import 'package:flutter_app_template/utils/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final sendPasswordResetEmailProvider = Provider.autoDispose(
-  (ref) => SendPasswordResetEmail(ref.read),
-);
+final sendPasswordResetEmailProvider =
+    Provider((ref) => SendPasswordResetEmail(ref.read));
 
 class SendPasswordResetEmail {
   SendPasswordResetEmail(this._read);

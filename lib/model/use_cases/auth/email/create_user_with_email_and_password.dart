@@ -6,7 +6,7 @@ import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final createUserWithEmailAndPasswordProvider =
-    Provider.autoDispose((ref) => CreateUserWithEmailAndPassword(ref.read));
+    Provider((ref) => CreateUserWithEmailAndPassword(ref.read));
 
 class CreateUserWithEmailAndPassword {
   CreateUserWithEmailAndPassword(this._read);

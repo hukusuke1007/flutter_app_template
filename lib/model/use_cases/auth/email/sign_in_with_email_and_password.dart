@@ -6,7 +6,7 @@ import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final signInWithEmailAndPasswordProvider =
-    Provider.autoDispose((ref) => SignInWithEmailAndPassword(ref.read));
+    Provider((ref) => SignInWithEmailAndPassword(ref.read));
 
 class SignInWithEmailAndPassword {
   SignInWithEmailAndPassword(this._read);
