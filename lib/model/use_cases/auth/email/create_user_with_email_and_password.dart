@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app_template/model/exceptions/app_exception.dart';
 import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
-import 'package:flutter_app_template/model/use_cases/auth/auth_state.dart';
 import 'package:flutter_app_template/utils/logger.dart';
+import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final createUserWithEmailAndPasswordProvider =
@@ -16,7 +16,7 @@ class CreateUserWithEmailAndPassword {
   Future<void> call(String email, String password) async {
     try {
       final repository = _read(firebaseAuthRepositoryProvider);
-      final controller = _read(authProvider.state);
+      final controller = _read(authStateProvider.state);
 
       await repository.createUserWithEmailAndPassword(email, password);
       // NOTE: メールアドレスの確認を完了させるまではsignInに変更しない

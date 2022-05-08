@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_app_template/model/use_cases/auth/auth_state.dart';
+import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../repositories/firebase_auth/firebase_auth_repository.dart';
@@ -13,7 +13,7 @@ class UserDelete {
   Future<void> call(User user) async {
     /// Firestoreのサインアウト・認証情報削除前にStreamProvider経由のlistenを解除するため
     /// authStateProviderのstateを変更する cloud_firestore/permission-denied対策
-    _read(authProvider.state).update((state) => AuthState.noSignIn);
+    _read(authStateProvider.state).update((state) => AuthState.noSignIn);
     await _read(firebaseAuthRepositoryProvider).userDelete(user);
   }
 }

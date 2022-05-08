@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app_template/model/exceptions/app_exception.dart';
 import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
-import 'package:flutter_app_template/model/use_cases/auth/auth_state.dart';
 import 'package:flutter_app_template/utils/logger.dart';
+import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final sendEmailVerificationProvider =
@@ -14,7 +14,7 @@ class SendEmailVerification {
 
   Future<void> call() async {
     final repository = _read(firebaseAuthRepositoryProvider);
-    final controller = _read(authProvider.state);
+    final controller = _read(authStateProvider.state);
 
     final user = repository.authUser;
     if (user == null) {
