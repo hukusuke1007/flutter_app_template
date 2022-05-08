@@ -47,6 +47,9 @@ class SignInWithEmailAndPassword {
         /// メールアドレスに対応するユーザーが存在しない
         case 'user-not-found':
           throw AppException(title: 'メールアドレスもしくはパスワードが正しくありません');
+
+        default:
+          throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }

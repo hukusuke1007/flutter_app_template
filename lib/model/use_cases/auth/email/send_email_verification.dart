@@ -33,6 +33,9 @@ class SendEmailVerification {
       switch (e.code) {
         case 'missing-email':
           throw AppException(title: 'メールアドレスでログインしてください');
+
+        default:
+          throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }

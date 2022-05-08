@@ -45,6 +45,9 @@ class CreateUserWithEmailAndPassword {
         /// パスワードが十分に強力でない
         case 'weak-password':
           throw AppException(title: '安全性が低いパスワードです');
+
+        default:
+          throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }

@@ -45,6 +45,9 @@ class SendPasswordResetEmail {
         /// メールアドレスに対応するユーザーが存在しない
         case 'auth/user-not-found':
           throw AppException(title: '接続エラーが発生しました');
+
+        default:
+          throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }
