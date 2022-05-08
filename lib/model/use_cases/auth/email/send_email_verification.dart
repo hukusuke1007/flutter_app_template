@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app_template/model/exceptions/app_exception.dart';
-import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
-import 'package:flutter_app_template/utils/logger.dart';
-import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../utils/logger.dart';
+import '../../../../utils/provider.dart';
+import '../../../exceptions/app_exception.dart';
+import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final sendEmailVerificationProvider =
     Provider((ref) => SendEmailVerification(ref.read));

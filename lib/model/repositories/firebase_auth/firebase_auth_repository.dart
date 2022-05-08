@@ -3,9 +3,9 @@ import 'dart:async';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_app_template/utils/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../utils/constants.dart';
 import 'login_type.dart';
 
 final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>((_) {
