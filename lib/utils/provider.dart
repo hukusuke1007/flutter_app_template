@@ -21,13 +21,15 @@ final authStateProvider = StateProvider<AuthState>((ref) {
   final loginType = repository.loginType;
   final user = repository.authUser;
 
-  if (user == null) {
-    return AuthState.noSignIn;
-  } else if (user.isAnonymous) {
-    return AuthState.signInWithAnonymously;
-  } else if (loginType == LoginType.email && !user.emailVerified) {
-    // アプリ起動直後にメールアドレスの確認を行なっていない
-    return AuthState.noSignIn;
+  switch (loginType) {
+    case null:
+      return AuthState.noSignIn;
+    case LoginType.email:
+      return user!.emailVerified ? AuthState.signIn : AuthState.noSignIn;
+    case LoginType.anonymously:
+      return AuthState.signInWithAnonymously;
+    case LoginType.apple:
+    case LoginType.google:
+      return AuthState.signIn;
   }
-  return AuthState.signIn;
 });
