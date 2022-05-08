@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../exceptions/app_exception.dart';
@@ -31,9 +32,8 @@ class SendEmailVerification {
       logger.shout(e);
 
       switch (e.code) {
-        case 'missing-email':
+        case kMissingEmail:
           throw AppException(title: 'メールアドレスでログインしてください');
-
         default:
           throw AppException(title: '不明なエラーです ${e.message}');
       }

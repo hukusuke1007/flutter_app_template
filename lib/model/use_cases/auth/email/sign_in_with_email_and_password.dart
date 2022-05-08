@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../exceptions/app_exception.dart';
@@ -33,21 +34,11 @@ class SignInWithEmailAndPassword {
       logger.shout(e);
 
       switch (e.code) {
-
-        /// メールアドレスが有効でない
-        case 'invalid-email':
-
-        /// メールアドレスのパスワードが間違っている場合、
-        /// または、メールアドレスに対応するユーザーがパスワードを設定していない場合
-        case 'wrong-password':
-
-        /// メールアドレスに対応するユーザーが無効
-        case 'user-disabled':
-
-        /// メールアドレスに対応するユーザーが存在しない
-        case 'user-not-found':
+        case kInvalidEmail:
+        case kWrongPassword:
+        case kUserDisabled:
+        case kUserNotFound:
           throw AppException(title: 'メールアドレスもしくはパスワードが正しくありません');
-
         default:
           throw AppException(title: '不明なエラーです ${e.message}');
       }
