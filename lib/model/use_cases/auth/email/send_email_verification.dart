@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app_template/model/exceptions/app_exception.dart';
 import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
 import 'package:flutter_app_template/model/use_cases/auth/auth_state.dart';
@@ -20,9 +21,18 @@ class SendEmailVerification {
       throw AppException(title: 'ログインしてください');
     }
 
-    await repository.sendEmailVerification(user);
-    controller.update((state) => AuthState.noSignIn);
+    try {
+      await repository.sendEmailVerification(user);
+      controller.update((state) => AuthState.noSignIn);
 
-    logger.info('確認メールを送信しました');
+      logger.info('確認メールを送信しました');
+    } on FirebaseException catch (e) {
+      logger.shout(e);
+
+      switch (e.code) {
+        case 'missing-email':
+          throw AppException(title: 'メールアドレスでログインしてください');
+      }
+    }
   }
 }

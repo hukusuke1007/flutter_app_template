@@ -16,6 +16,8 @@ class SendPasswordResetEmail {
     try {
       final repository = _read(firebaseAuthRepositoryProvider);
       await repository.sendPasswordResetEmail(email);
+
+      logger.info('パスワード再設定メールを送信しました');
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
