@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../exceptions/app_exception.dart';
+import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final signInWithEmailAndPasswordProvider =
@@ -34,10 +34,10 @@ class SignInWithEmailAndPassword {
       logger.shout(e);
 
       switch (e.code) {
-        case kInvalidEmail:
-        case kWrongPassword:
-        case kUserDisabled:
-        case kUserNotFound:
+        case AuthErrorCode.invalidEmail:
+        case AuthErrorCode.wrongPassword:
+        case AuthErrorCode.userDisabled:
+        case AuthErrorCode.userNotFound:
           throw AppException(title: 'メールアドレスもしくはパスワードが正しくありません');
         default:
           throw AppException(title: '不明なエラーです ${e.message}');

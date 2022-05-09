@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../utils/constants.dart';
+import 'auth_provider_id.dart';
 import 'login_type.dart';
 
 final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>((_) {
@@ -78,18 +78,18 @@ class FirebaseAuthRepository {
       return LoginType.anonymously;
     }
     if (user.providerData.firstWhereOrNull(
-          (element) => element.providerId == kEmailProviderId,
+          (element) => element.providerId == AuthProviderId.email,
         ) !=
         null) {
       return LoginType.email;
     }
     if (user.providerData.firstWhereOrNull(
-            (element) => element.providerId == kAppleProviderId) !=
+            (element) => element.providerId == AuthProviderId.apple) !=
         null) {
       return LoginType.apple;
     }
     if (user.providerData.firstWhereOrNull(
-            (element) => element.providerId == kGoogleProviderId) !=
+            (element) => element.providerId == AuthProviderId.google) !=
         null) {
       return LoginType.google;
     }

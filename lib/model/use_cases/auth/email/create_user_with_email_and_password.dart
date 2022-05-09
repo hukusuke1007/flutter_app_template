@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../exceptions/app_exception.dart';
+import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final createUserWithEmailAndPasswordProvider =
@@ -29,13 +29,13 @@ class CreateUserWithEmailAndPassword {
       logger.shout(e);
 
       switch (e.code) {
-        case kEmailAlreadyInUse:
+        case AuthErrorCode.emailAlreadyInUse:
           throw AppException(title: 'このアカウントは既に存在します');
-        case kInvalidEmail:
+        case AuthErrorCode.invalidEmail:
           throw AppException(title: 'メールアドレスが正しくありません');
-        case kOperationNotAllowed:
+        case AuthErrorCode.operationNotAllowed:
           throw AppException(title: '接続エラーが発生しました');
-        case kWeakPassword:
+        case AuthErrorCode.weakPassword:
           throw AppException(title: '安全性が低いパスワードです');
         default:
           throw AppException(title: '不明なエラーです ${e.message}');

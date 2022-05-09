@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../exceptions/app_exception.dart';
+import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final sendEmailVerificationProvider =
@@ -32,7 +32,7 @@ class SendEmailVerification {
       logger.shout(e);
 
       switch (e.code) {
-        case kMissingEmail:
+        case AuthErrorCode.missingEmail:
           throw AppException(title: 'メールアドレスでログインしてください');
         default:
           throw AppException(title: '不明なエラーです ${e.message}');
