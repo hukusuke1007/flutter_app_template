@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/presentation/pages/sample/home/home_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../sample/firestore_counter_page.dart';
+import '../sample/home/home_page.dart';
 import '../sample/local_counter_page.dart';
 import '../sample/memo_page.dart';
 import '../sample/setting_page.dart';
