@@ -133,7 +133,10 @@ class _State extends State<DraggableScrollablePage> {
                   controller: _scrollController,
                   child: SingleChildScrollView(
                     controller: _scrollController,
-                    physics: const AlwaysScrollableScrollPhysics(),
+                    physics:
+                        Theme.of(context).platform == TargetPlatform.android
+                            ? const BouncingScrollPhysics()
+                            : const AlwaysScrollableScrollPhysics(),
                     child: widget.pageBuilder(_scrollController),
                   ),
                 ),

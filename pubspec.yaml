@@ -48,7 +48,7 @@ dependencies:
   map_launcher:
 
   # Setting
-  app_settings:
+  app_settings: ^4.1.6
 
   # Review
   launch_review:
