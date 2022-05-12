@@ -11,8 +11,8 @@ class RoundedButton extends StatelessWidget {
     this.side = BorderSide.none,
     this.isLoading = false,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double? height;
   final double? width;

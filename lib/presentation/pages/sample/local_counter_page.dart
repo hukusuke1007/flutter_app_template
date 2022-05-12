@@ -7,7 +7,7 @@ import '../../../presentation/widgets/rounded_button.dart';
 import '../../custom_hooks/use_effect_once.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
-  const LocalCounterPage({Key? key}) : super(key: key);
+  const LocalCounterPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

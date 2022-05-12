@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'dart:math';
 import 'dart:ui';
 
@@ -15,8 +17,8 @@ class DraggableScrollablePage extends StatefulWidget {
     this.blurSigma = 7,
     this.color,
     this.onDragVertical,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String heroTag;
   final Widget Function(ScrollController scrollController) pageBuilder;
@@ -55,7 +57,7 @@ class _State extends State<DraggableScrollablePage> {
       }
       _scrollController.addListener(() {
         final pixels = _scrollController.position.pixels;
-        // TODO(shohei): 警告が気になる
+        // ignore: invalid_use_of_protected_member
         final velocity = _scrollController.position.activity?.velocity ?? 0;
         // print(pixels);
         final margin = () {

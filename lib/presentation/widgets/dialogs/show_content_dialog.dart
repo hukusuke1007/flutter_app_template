@@ -26,7 +26,6 @@ Future<T?> showContentDialog<T>({
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   contentWidget,
                   TextButton(

@@ -1014,7 +1014,7 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.16.0"
+    version: "1.19.0+1"
   permission_handler:
     dependency: "direct main"
     description:

@@ -44,11 +44,13 @@ class DocumentRepository {
         final cache = await _firestore
             .doc(documentPath)
             .get(const GetOptions(source: Source.cache));
-        fromCache(Document(
-          ref: cache.reference,
-          exists: cache.exists,
-          entity: cache.exists == true ? decode(cache.data()!) : null,
-        ));
+        fromCache(
+          Document(
+            ref: cache.reference,
+            exists: cache.exists,
+            entity: cache.exists == true ? decode(cache.data()!) : null,
+          ),
+        );
       } on Exception catch (_) {
         // ignore exception
         fromCache(null);
@@ -81,7 +83,10 @@ class DocumentRepository {
     } on Exception catch (_) {
       // ignore exception
     }
-    final snap = await doc.get(const GetOptions(source: Source.serverAndCache));
+    final snap = await doc.get(
+      // ignore: avoid_redundant_argument_values
+      const GetOptions(source: Source.serverAndCache),
+    );
     return Document(
       ref: snap.reference,
       exists: snap.exists,
@@ -115,6 +120,7 @@ class DocumentRepository {
 
   Future<bool> exists(String documentPath) async {
     final doc = _firestore.doc(documentPath);
+    // ignore: avoid_redundant_argument_values
     final snap = await doc.get(const GetOptions(source: Source.serverAndCache));
     return snap.exists;
   }
@@ -127,6 +133,7 @@ class DocumentRepository {
     } on Exception catch (_) {
       // ignore exception
     }
+    // ignore: avoid_redundant_argument_values
     final snap = await doc.get(const GetOptions(source: Source.serverAndCache));
     return snap.exists;
   }

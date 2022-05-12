@@ -6,8 +6,8 @@ class WrappedNotificationListener extends StatefulWidget {
     required this.child,
     this.isBounce = true,
     this.onLoadMore,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final bool isBounce;
@@ -36,7 +36,7 @@ class _State extends State<WrappedNotificationListener> {
           if (offset > maxScrollExtent && !_isLoadMore) {
             _isLoadMore = true;
             if (widget.onLoadMore != null) {
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 widget.onLoadMore!();
               });
             }
@@ -51,7 +51,7 @@ class _State extends State<WrappedNotificationListener> {
           _isLoadMore = true;
           if (widget.onLoadMore != null) {
             //widget.onLoadMore!();
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               widget.onLoadMore!();
             });
           }

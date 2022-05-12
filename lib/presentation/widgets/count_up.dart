@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 class CountUp extends StatefulWidget {
   const CountUp({
-    Key? key,
+    super.key,
     required this.begin,
     required this.end,
     this.precision = 0,
@@ -20,7 +20,7 @@ class CountUp extends StatefulWidget {
     this.separator,
     this.prefix = '',
     this.suffix = '',
-  }) : super(key: key);
+  });
 
   final double begin;
   final double end;
@@ -101,7 +101,7 @@ class _State extends State<CountUp> with TickerProviderStateMixin {
 
 class _CountUpAnimatedText extends AnimatedWidget {
   _CountUpAnimatedText({
-    Key? key,
+    super.key,
     required this.animation,
     required this.precision,
     this.style,
@@ -116,7 +116,7 @@ class _CountUpAnimatedText extends AnimatedWidget {
     this.separator,
     this.prefix,
     this.suffix,
-  }) : super(key: key, listenable: animation);
+  }) : super(listenable: animation);
 
   final RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
 

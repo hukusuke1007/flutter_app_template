@@ -20,7 +20,7 @@ import '../web_view_page.dart';
 import 'show_edit_profile_dialog.dart';
 
 class SettingPage extends HookConsumerWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -144,8 +144,10 @@ class SettingPage extends HookConsumerWidget {
                     children: [
                       ListTile(
                         onTap: () {
-                          WebViewPage.show(context,
-                              url: 'https://neverjp.com/');
+                          WebViewPage.show(
+                            context,
+                            url: 'https://neverjp.com/',
+                          );
                         },
                         title: Text(
                           '株式会社Never',
@@ -199,8 +201,8 @@ class ProfileTile extends StatelessWidget {
     required this.heroTag,
     this.onTapImage,
     this.onTapTile,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Developer? developer;
   final String heroTag;

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,7 +13,7 @@ import '../../../presentation/widgets/rounded_button.dart';
 import '../../../utils/logger.dart';
 
 class FirestoreCounterPage extends HookConsumerWidget {
-  const FirestoreCounterPage({Key? key}) : super(key: key);
+  const FirestoreCounterPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +21,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
     final isLoading = useState<bool>(false);
     final counterFromStream = ref.watch(fetchFirestoreCounterStreamProvider);
 
-    useEffect(() {
+    useEffectOnce(() {
       Future(() async {
         isLoading.value = true;
         try {
@@ -35,7 +36,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
         isLoading.value = false;
       });
       return null;
-    }, const []);
+    });
 
     return Scaffold(
       appBar: AppBar(

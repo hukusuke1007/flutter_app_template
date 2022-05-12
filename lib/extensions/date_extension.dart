@@ -17,7 +17,7 @@ extension DateExtension on DateTime {
   }
 
   DateTime toYearMonthDay() {
-    final date = DateTime(year, month, day, 0, 0, 0);
+    final date = DateTime(year, month, day);
     return date.add(date.timeZoneOffset).toUtc();
   }
 
@@ -86,13 +86,13 @@ extension DateExtension on DateTime {
       add(Duration(days: DateTime.daysPerWeek - weekday)).startOfDay;
 
   /// 月始まり
-  DateTime get startOfMonth => DateTime(year, month, 1).startOfDay;
+  DateTime get startOfMonth => DateTime(year, month).startOfDay;
 
   /// 月終わり
   DateTime get endOfMonth => DateTime(year, month + 1, 0).startOfDay;
 
   /// 次の月
-  DateTime get nextMonth => DateTime(year, month + 1, 1);
+  DateTime get nextMonth => DateTime(year, month + 1);
 
   /// 前の日
   DateTime get beforeDay => DateTime(year, month, day - 1).startOfDay;

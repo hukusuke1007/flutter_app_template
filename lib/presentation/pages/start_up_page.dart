@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -12,7 +12,7 @@ import '../../../presentation/pages/main/main_page.dart';
 import '../../utils/provider.dart';
 
 class StartUpPage extends HookConsumerWidget {
-  const StartUpPage({Key? key}) : super(key: key);
+  const StartUpPage({super.key});
 
   static Future<void> show(BuildContext context) async {
     await Navigator.of(context, rootNavigator: true)
@@ -27,7 +27,7 @@ class StartUpPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    useEffect(() {
+    useEffectOnce(() {
       Future(() async {
         final isLoggedIn = ref.read(fetchLoggedInWithAnonymouslyProvider)();
         if (isLoggedIn) {
@@ -40,7 +40,7 @@ class StartUpPage extends HookConsumerWidget {
         unawaited(MainPage.show(context));
       });
       return null;
-    }, const []);
+    });
     return const Scaffold(
       body: Center(
         child: CupertinoActivityIndicator(),

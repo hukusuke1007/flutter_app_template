@@ -130,7 +130,7 @@ dev_dependencies:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono:
+  pedantic_mono: ^1.19.0+1
 
   # Serializer
   json_serializable:

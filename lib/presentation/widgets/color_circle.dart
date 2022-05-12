@@ -5,8 +5,8 @@ class ColorCircle extends StatelessWidget {
     required this.size,
     required this.color,
     this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double size;
   final Color color;
@@ -39,8 +39,8 @@ class ColorCircleIcon extends StatelessWidget {
     this.size = 24,
     this.color,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final double size;

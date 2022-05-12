@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class RippleTapGesture extends StatelessWidget {
   const RippleTapGesture({
-    Key? key,
+    super.key,
     this.type = MaterialType.transparency,
     this.color = Colors.white,
     this.borderRadius,
     this.onTap,
     this.onLongPress,
     this.child,
-  }) : super(key: key);
+  });
 
   final MaterialType type;
   final Color color;

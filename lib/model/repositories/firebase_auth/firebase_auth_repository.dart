@@ -41,7 +41,8 @@ class FirebaseAuthRepository {
   Future<UserCredential> signInWithAnonymously() => _auth.signInAnonymously();
 
   Future<UserCredential> signInWithAuthCredential(
-          AuthCredential authCredential) =>
+    AuthCredential authCredential,
+  ) =>
       _auth.signInWithCredential(authCredential);
 
   Future<UserCredential> createUserWithEmailAndPassword(
@@ -78,18 +79,20 @@ class FirebaseAuthRepository {
       return LoginType.anonymously;
     }
     if (user.providerData.firstWhereOrNull(
-          (element) => element.providerId == AuthProviderId.email,
+          (element) => element.providerId == AuthProviderId.email.value,
         ) !=
         null) {
       return LoginType.email;
     }
     if (user.providerData.firstWhereOrNull(
-            (element) => element.providerId == AuthProviderId.apple) !=
+          (element) => element.providerId == AuthProviderId.apple.value,
+        ) !=
         null) {
       return LoginType.apple;
     }
     if (user.providerData.firstWhereOrNull(
-            (element) => element.providerId == AuthProviderId.google) !=
+          (element) => element.providerId == AuthProviderId.google.value,
+        ) !=
         null) {
       return LoginType.google;
     }

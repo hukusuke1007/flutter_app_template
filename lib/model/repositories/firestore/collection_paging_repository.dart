@@ -6,7 +6,10 @@ import 'document.dart';
 final collectionPagingRepositoryProvider = Provider.family
     .autoDispose<CollectionPagingRepository, CollectionParam>((ref, query) {
   return CollectionPagingRepository(
-      query: query.query, limit: query.limit, decode: query.decode);
+    query: query.query,
+    limit: query.limit,
+    decode: query.decode,
+  );
 });
 
 class CollectionParam<T extends Object> {
@@ -41,11 +44,13 @@ class CollectionPagingRepository<T extends Object> {
         final cacheDocuments = await _fetch(source: Source.cache);
         fromCache(
           cacheDocuments
-              .map((e) => Document(
-                    ref: e.reference,
-                    exists: e.exists,
-                    entity: e.exists ? decode(e.data()!) : null,
-                  ))
+              .map(
+                (e) => Document(
+                  ref: e.reference,
+                  exists: e.exists,
+                  entity: e.exists ? decode(e.data()!) : null,
+                ),
+              )
               .toList(),
         );
       } on Exception catch (_) {
@@ -54,11 +59,13 @@ class CollectionPagingRepository<T extends Object> {
     }
     final documents = await _fetch(source: source);
     return documents
-        .map((e) => Document(
-              ref: e.reference,
-              exists: e.exists,
-              entity: e.exists ? decode(e.data()!) : null,
-            ))
+        .map(
+          (e) => Document(
+            ref: e.reference,
+            exists: e.exists,
+            entity: e.exists ? decode(e.data()!) : null,
+          ),
+        )
         .toList();
   }
 
@@ -68,11 +75,13 @@ class CollectionPagingRepository<T extends Object> {
     final documents =
         await _fetch(source: source, startAfterDocument: _startAfterDocument);
     return documents
-        .map((e) => Document(
-              ref: e.reference,
-              exists: e.exists,
-              entity: e.exists ? decode(e.data()!) : null,
-            ))
+        .map(
+          (e) => Document(
+            ref: e.reference,
+            exists: e.exists,
+            entity: e.exists ? decode(e.data()!) : null,
+          ),
+        )
         .toList();
   }
 

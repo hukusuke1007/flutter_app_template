@@ -35,8 +35,8 @@ class DecimalPicker extends StatefulWidget {
     required this.minValue,
     required this.maxValue,
     required this.onChange,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double height;
   final double initialValue;

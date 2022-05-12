@@ -6,10 +6,10 @@ class TabNavigatorRoutes {
 
 class TabNavigator extends StatelessWidget {
   const TabNavigator({
-    Key? key,
+    super.key,
     required this.navigatorKey,
     required this.page,
-  }) : super(key: key);
+  });
 
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget page;

@@ -4,7 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'document.dart';
 
 final collectionRepositoryProvider = Provider<CollectionRepository>(
-    (ref) => CollectionRepository(FirebaseFirestore.instance));
+  (ref) => CollectionRepository(FirebaseFirestore.instance),
+);
 
 class CollectionRepository {
   CollectionRepository(this._firestore);

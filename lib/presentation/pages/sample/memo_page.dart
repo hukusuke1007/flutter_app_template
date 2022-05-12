@@ -15,7 +15,7 @@ import '../../widgets/smart_refresher_custom.dart';
 import 'show_edit_memo_dialog.dart';
 
 class MemoPage extends HookConsumerWidget {
-  const MemoPage({Key? key}) : super(key: key);
+  const MemoPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -58,6 +58,7 @@ class MemoPage extends HookConsumerWidget {
         child: SmartRefresher(
           header: const SmartRefreshHeader(),
           footer: const SmartRefreshFooter(),
+          // ignore: avoid_redundant_argument_values
           enablePullDown: true,
           enablePullUp: true,
           controller: refreshController,
@@ -101,7 +102,9 @@ class MemoPage extends HookConsumerWidget {
                           return;
                         }
                         final result = await showOkCancelAlertDialog(
-                            context: context, title: '削除しますか？');
+                          context: context,
+                          title: '削除しますか？',
+                        );
                         if (result == OkCancelResult.cancel) {
                           return;
                         }

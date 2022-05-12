@@ -22,17 +22,16 @@ class SendPasswordResetEmail {
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
-      switch (e.code) {
-        case AuthErrorCode.authInvalidEmail:
-        case AuthErrorCode.authMissingAndroidPkgName:
-        case AuthErrorCode.authMissingContinueUri:
-        case AuthErrorCode.authMissingIosBundleId:
-        case AuthErrorCode.authInvalidContinueUri:
-        case AuthErrorCode.authUnauthorizedContinueUri:
-        case AuthErrorCode.authUserNotFound:
-          throw AppException(title: '接続エラーが発生しました');
-        default:
-          throw AppException(title: '不明なエラーです ${e.message}');
+      if (e.code == AuthErrorCode.authInvalidEmail.value ||
+          e.code == AuthErrorCode.authMissingAndroidPkgName.value ||
+          e.code == AuthErrorCode.authMissingContinueUri.value ||
+          e.code == AuthErrorCode.authMissingIosBundleId.value ||
+          e.code == AuthErrorCode.authInvalidContinueUri.value ||
+          e.code == AuthErrorCode.authUnauthorizedContinueUri.value ||
+          e.code == AuthErrorCode.authUserNotFound.value) {
+        throw AppException(title: '接続エラーが発生しました');
+      } else {
+        throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }
