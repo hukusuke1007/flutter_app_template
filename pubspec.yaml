@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -48,7 +48,7 @@ dependencies:
   map_launcher:
 
   # Setting
-  app_settings:
+  app_settings: ^4.1.6
 
   # Review
   launch_review:
@@ -71,7 +71,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image:
+  extended_image: ^7.0.0-dev.1
 
   # Picker
   numberpicker:

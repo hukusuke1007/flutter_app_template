@@ -37,7 +37,6 @@ ThemeData getAppTheme() {
             ),
       ),
     ),
-    scaffoldBackgroundColor: Colors.white,
     textTheme: textTheme(base.textTheme),
   );
 }
@@ -47,7 +46,9 @@ ThemeData getAppThemeDark() {
   return base.copyWith(
     typography: kTypography,
     primaryColor: ColorName.primary,
-    colorScheme: base.colorScheme.copyWith(secondary: ColorName.primary),
+    colorScheme: base.colorScheme.copyWith(
+      primary: ColorName.primary,
+    ),
     buttonTheme: base.buttonTheme.copyWith(
       buttonColor: ColorName.primary,
       textTheme: ButtonTextTheme.normal,

@@ -37,7 +37,7 @@ class _Dialog extends HookConsumerWidget {
 
     /// カスタムフック
     useEffectOnce(() {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         textKey.currentState?.didChange(data?.text);
       });
       return null;
