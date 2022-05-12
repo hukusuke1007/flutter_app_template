@@ -2,17 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../gen/colors.gen.dart';
-import 'typography.dart';
 
 /// https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties#migration-guide
 ThemeData getAppTheme() {
   final base = ThemeData(
+    useMaterial3: false,
     brightness: Brightness.light,
-    fontFamily: kFontFamily,
-    typography: kTypography,
-    primaryColor: ColorName.primary,
   );
   return base.copyWith(
+    primaryColor: ColorName.primary,
     buttonTheme: base.buttonTheme.copyWith(
       buttonColor: ColorName.primary,
       textTheme: ButtonTextTheme.normal,
@@ -32,19 +30,20 @@ ThemeData getAppTheme() {
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.light,
       textTheme: CupertinoTextThemeData(
-        dateTimePickerTextStyle: textTheme(base.textTheme).bodyText2!.copyWith(
-              fontSize: 15,
-            ),
+        dateTimePickerTextStyle: base.textTheme.bodyText2!.copyWith(
+          fontSize: 15,
+        ),
       ),
     ),
-    textTheme: textTheme(base.textTheme),
   );
 }
 
 ThemeData getAppThemeDark() {
-  final base = ThemeData.from(colorScheme: const ColorScheme.dark());
+  final base = ThemeData.from(
+    useMaterial3: false,
+    colorScheme: const ColorScheme.dark(),
+  );
   return base.copyWith(
-    typography: kTypography,
     primaryColor: ColorName.primary,
     colorScheme: base.colorScheme.copyWith(
       primary: ColorName.primary,
@@ -66,11 +65,10 @@ ThemeData getAppThemeDark() {
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.dark,
       textTheme: CupertinoTextThemeData(
-        dateTimePickerTextStyle: textTheme(base.textTheme).bodyText2!.copyWith(
-              fontSize: 15,
-            ),
+        dateTimePickerTextStyle: base.textTheme.bodyText2!.copyWith(
+          fontSize: 15,
+        ),
       ),
     ),
-    textTheme: textTheme(base.textTheme),
   );
 }

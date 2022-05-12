@@ -4,30 +4,28 @@ import 'package:flutter/material.dart';
 // TODO(shohei): もういらんかも？
 const kLocale = Locale('ja', 'JP');
 
-const String kFontFamilyAndroid = 'Robot';
-const String kFontFamilyCupertino = 'Hiragino Sans';
-
 final bool _android = defaultTargetPlatform == TargetPlatform.android;
 
-final String kFontFamily = _android ? kFontFamilyAndroid : kFontFamilyCupertino;
+// const String kFontFamilyAndroid = 'Robot';
+// const String kFontFamilyCupertino = 'Hiragino Sans';
+// final String kFontFamily = _android ? kFontFamilyAndroid : kFontFamilyCupertino;
 
 final TextTheme _whiteTextTheme =
     _android ? Typography.whiteMountainView : Typography.whiteCupertino;
 final TextTheme _blackTextTheme =
     _android ? Typography.blackMountainView : Typography.blackCupertino;
 
-final Typography kTypography = Typography.material2018(
+final Typography kTypography = Typography.material2021(
   platform: defaultTargetPlatform,
   white: textTheme(_whiteTextTheme),
   black: textTheme(_blackTextTheme),
-  englishLike: textTheme(Typography.englishLike2014),
-  dense: textTheme(Typography.dense2014),
-  tall: textTheme(Typography.tall2014),
+  englishLike: textTheme(Typography.englishLike2021),
+  dense: textTheme(Typography.dense2021),
+  tall: textTheme(Typography.tall2021),
 );
 
 TextStyle? _textStyle(TextStyle? base) {
   return base?.copyWith(
-    fontFamily: kFontFamily,
     locale: kLocale,
     textBaseline: TextBaseline.ideographic,
   );

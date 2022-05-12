@@ -35,7 +35,6 @@ class WrappedAutoSizeText extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,
-        fontFamily: kFontFamily,
         locale: const Locale('ja', 'JP'),
       ),
       overflow: overflow,
