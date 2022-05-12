@@ -14,7 +14,7 @@ class LocalCounterPage extends HookConsumerWidget {
     final counter = ref.watch(localCounterProvider);
 
     useEffectOnce(() {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(localCounterProvider.notifier).fetch();
       });
       return null;

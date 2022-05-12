@@ -50,7 +50,7 @@ class _Dialog extends HookConsumerWidget {
 
     /// カスタムフック
     useEffectOnce(() {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         nameFormKey.currentState?.didChange(profile?.name);
         birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
         birthdateState.value = profile?.birthdate;
