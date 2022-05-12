@@ -48,7 +48,6 @@ Future<void> showAppStoreReview(
       await LaunchReview.launch(
         androidAppId: androidId,
         iOSAppId: appleId,
-        writeReview: true,
       );
     }
   }
@@ -70,7 +69,9 @@ class ReviewApp {
 
   Future<void> reviewed() async {
     await sharedPreferencesRepository.save(
-        SharedPreferencesKey.isReviewedAppStore, true);
+      SharedPreferencesKey.isReviewedAppStore,
+      true,
+    );
   }
 
   DateTime? fetchShowingReviewAt() {
@@ -84,6 +85,8 @@ class ReviewApp {
 
   Future<void> saveShowingReviewAt(DateTime dateTime) async {
     await sharedPreferencesRepository.save(
-        SharedPreferencesKey.showingReviewAt, dateTime.millisecondsSinceEpoch);
+      SharedPreferencesKey.showingReviewAt,
+      dateTime.millisecondsSinceEpoch,
+    );
   }
 }

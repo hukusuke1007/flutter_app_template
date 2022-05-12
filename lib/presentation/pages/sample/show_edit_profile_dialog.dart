@@ -37,7 +37,7 @@ Future<void> showEditProfileDialog({
 }
 
 class _Dialog extends HookConsumerWidget {
-  const _Dialog({Key? key}) : super(key: key);
+  const _Dialog();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -104,7 +104,9 @@ class _Dialog extends HookConsumerWidget {
                   } on Exception catch (e) {
                     logger.shout(e);
                     await showOkAlertDialog(
-                        context: context, title: '画像を保存できませんでした');
+                      context: context,
+                      title: '画像を保存できませんでした',
+                    );
                   } finally {
                     dismissIndicator(globalContext);
                   }
@@ -143,7 +145,6 @@ class _Dialog extends HookConsumerWidget {
               validator: (value) => (value == null || value.trim().isEmpty)
                   ? '名前を入力してください'
                   : null,
-              maxLines: 1,
               maxLength: 32,
             ),
             const SizedBox(height: 24),
@@ -177,7 +178,6 @@ class _Dialog extends HookConsumerWidget {
                     isDense: true,
                   ),
                   key: birthdateFormKey,
-                  maxLines: 1,
                   initialValue: profile?.birthdateLabel,
                 ),
               ),

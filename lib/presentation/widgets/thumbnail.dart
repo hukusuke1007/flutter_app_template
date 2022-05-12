@@ -18,8 +18,8 @@ class Thumbnail extends StatelessWidget {
     this.child,
     this.cacheMaxAge,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String? url;
   final File? file;
@@ -95,6 +95,7 @@ class Thumbnail extends StatelessWidget {
           width: width,
           height: height,
           fit: BoxFit.cover,
+          // ignore: avoid_redundant_argument_values
           cache: true,
           cacheMaxAge: cacheMaxAge ?? const Duration(days: 90),
           loadStateChanged: (ExtendedImageState state) {
@@ -139,8 +140,8 @@ class CircleThumbnail extends StatelessWidget {
     this.loadingWidget,
     this.cacheMaxAge,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final double size;
 
   final String? url;
@@ -186,6 +187,7 @@ class CircleThumbnail extends StatelessWidget {
           width: size,
           height: size,
           fit: BoxFit.cover,
+          // ignore: avoid_redundant_argument_values
           cache: true,
           cacheMaxAge: cacheMaxAge ?? const Duration(days: 90),
           loadStateChanged: (ExtendedImageState state) {

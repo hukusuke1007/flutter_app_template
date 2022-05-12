@@ -7,8 +7,6 @@ class UuidGenerator {
     final hashIds = HashIds(
       salt: const Uuid().v4(),
       minHashLength: length,
-      alphabet:
-          'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
     );
     final id = hashIds.encode([1, 2, 3]);
     return id;

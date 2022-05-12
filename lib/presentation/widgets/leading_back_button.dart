@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class LeadingBackButton extends StatelessWidget {
   const LeadingBackButton({
     this.color = Colors.white,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Color color;
 
@@ -23,8 +23,8 @@ class LeadingBackButton extends StatelessWidget {
 class LeadingModalBackButton extends StatelessWidget {
   const LeadingModalBackButton({
     this.color = Colors.white,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Color color;
 

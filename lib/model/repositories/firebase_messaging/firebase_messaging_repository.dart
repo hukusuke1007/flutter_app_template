@@ -9,7 +9,8 @@ import '../../../model/repositories/firebase_messaging/topics.dart';
 
 final firebaseMessagingRepositoryProvider =
     Provider<FirebaseMessagingRepository>(
-        (ref) => FirebaseMessagingRepository(FirebaseMessaging.instance));
+  (ref) => FirebaseMessagingRepository(FirebaseMessaging.instance),
+);
 
 class FirebaseMessagingRepository {
   FirebaseMessagingRepository(this._firebaseMessaging);

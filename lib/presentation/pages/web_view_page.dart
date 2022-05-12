@@ -13,9 +13,9 @@ import '../../utils/logger.dart';
 
 class WebViewPage extends HookConsumerWidget {
   const WebViewPage({
-    Key? key,
+    super.key,
     required this.url,
-  }) : super(key: key);
+  });
 
   static String get screenName => 'WebViewPage';
 
@@ -41,19 +41,21 @@ class WebViewPage extends HookConsumerWidget {
     final progress = useState<double>(0);
     final webViewController = useState<InAppWebViewController?>(null);
 
-    final pullToRefreshController = useState(PullToRefreshController(
-      options: PullToRefreshOptions(color: Colors.blue),
-      onRefresh: () async {
-        if (Platform.isAndroid) {
-          await webViewController.value?.reload();
-        } else if (Platform.isIOS) {
-          await webViewController.value?.loadUrl(
-            urlRequest:
-                URLRequest(url: await webViewController.value?.getUrl()),
-          );
-        }
-      },
-    ));
+    final pullToRefreshController = useState(
+      PullToRefreshController(
+        options: PullToRefreshOptions(color: Colors.blue),
+        onRefresh: () async {
+          if (Platform.isAndroid) {
+            await webViewController.value?.reload();
+          } else if (Platform.isIOS) {
+            await webViewController.value?.loadUrl(
+              urlRequest:
+                  URLRequest(url: await webViewController.value?.getUrl()),
+            );
+          }
+        },
+      ),
+    );
 
     final mounted = useIsMounted();
 

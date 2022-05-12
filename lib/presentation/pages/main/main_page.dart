@@ -12,7 +12,7 @@ import '../sample/setting_page.dart';
 import 'tab_navigator.dart';
 
 class MainPage extends HookConsumerWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   static Future<void> show(BuildContext context) async {
     await Navigator.of(context, rootNavigator: true)

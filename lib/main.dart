@@ -54,17 +54,20 @@ Future<void> main() async {
 
   logger.info(Flavor.environment);
 
-  runApp(ProviderScope(
-    overrides: [
-      sharedPreferencesRepositoryProvider
-          .overrideWithValue(SharedPreferencesRepository(sharedPreferences)),
-      packageInfoRepositoryProvider
-          .overrideWithValue(PackageInfoRepository(packageInfo)),
-      imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory))
-    ],
-    child: DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const App(),
+  runApp(
+    ProviderScope(
+      overrides: [
+        sharedPreferencesRepositoryProvider
+            .overrideWithValue(SharedPreferencesRepository(sharedPreferences)),
+        packageInfoRepositoryProvider
+            .overrideWithValue(PackageInfoRepository(packageInfo)),
+        imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory))
+      ],
+      child: DevicePreview(
+        // ignore: avoid_redundant_argument_values
+        enabled: !kReleaseMode,
+        builder: (context) => const App(),
+      ),
     ),
-  ));
+  );
 }

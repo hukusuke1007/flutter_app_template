@@ -15,9 +15,8 @@ class ImageViewer extends HookWidget {
     required this.assetNames,
     required this.initialPage,
     this.heroTag,
-    Key? key,
-  })  : assert(urls.isNotEmpty || files.isNotEmpty || assetNames.isNotEmpty),
-        super(key: key);
+    super.key,
+  }) : assert(urls.isNotEmpty || files.isNotEmpty || assetNames.isNotEmpty);
 
   static Future<void> show(
     BuildContext context, {
@@ -65,7 +64,9 @@ class ImageViewer extends HookWidget {
 
     Widget extendedImageSlidePage() {
       return ExtendedImageSlidePage(
+        // ignore: avoid_redundant_argument_values
         slideAxis: SlideAxis.both,
+        // ignore: avoid_redundant_argument_values
         slideType: SlideType.onlyImage,
         onSlidingPage: print,
         slidePageBackgroundHandler: (Offset offset, Size size) {
@@ -84,8 +85,6 @@ class ImageViewer extends HookWidget {
                   initGestureConfigHandler: (state) {
                     return GestureConfig(
                       inPageView: true,
-                      initialScale: 1,
-                      cacheGesture: false,
                     );
                   },
                 );
@@ -98,8 +97,6 @@ class ImageViewer extends HookWidget {
                   initGestureConfigHandler: (state) {
                     return GestureConfig(
                       inPageView: true,
-                      initialScale: 1,
-                      cacheGesture: false,
                     );
                   },
                 );
@@ -112,8 +109,6 @@ class ImageViewer extends HookWidget {
                 initGestureConfigHandler: (state) {
                   return GestureConfig(
                     inPageView: true,
-                    initialScale: 1,
-                    cacheGesture: false,
                   );
                 },
               );
@@ -126,6 +121,7 @@ class ImageViewer extends HookWidget {
             selectedIndex.value = index;
           },
           controller: controller.value,
+          // ignore: avoid_redundant_argument_values
           scrollDirection: Axis.horizontal,
         ),
       );
@@ -136,6 +132,7 @@ class ImageViewer extends HookWidget {
         Navigator.of(context).pop();
       },
       direction: DismissiblePageDismissDirection.down,
+      // ignore: avoid_redundant_argument_values
       isFullScreen: true,
       child: Scaffold(
         body: Stack(

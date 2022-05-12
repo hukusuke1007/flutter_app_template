@@ -14,8 +14,8 @@ class WrappedAutoSizeText extends StatelessWidget {
     this.overflow,
     this.textAlign,
     this.maxFontSize = double.infinity,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final double? fontSize;

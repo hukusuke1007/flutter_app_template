@@ -21,15 +21,17 @@ class MemoController extends StateNotifier<List<Memo>> {
     if (userId == null) {
       return;
     }
-    _collectionPagingRepository = _read(memoPagingProvider(
-      CollectionParam<Memo>(
-        query: Document.colRef(
-          Memo.collectionPath(userId),
-        ).orderBy('createdAt', descending: true),
-        limit: 20,
-        decode: Memo.fromJson,
+    _collectionPagingRepository = _read(
+      memoPagingProvider(
+        CollectionParam<Memo>(
+          query: Document.colRef(
+            Memo.collectionPath(userId),
+          ).orderBy('createdAt', descending: true),
+          limit: 20,
+          decode: Memo.fromJson,
+        ),
       ),
-    ));
+    );
   }
 
   final Reader _read;

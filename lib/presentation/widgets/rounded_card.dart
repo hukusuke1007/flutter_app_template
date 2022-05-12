@@ -5,8 +5,8 @@ class RoundedCard extends StatelessWidget {
     required this.child,
     this.color,
     this.elevation = 0,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final Color? color;

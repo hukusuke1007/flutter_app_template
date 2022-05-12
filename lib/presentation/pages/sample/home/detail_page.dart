@@ -7,8 +7,8 @@ import '../../../widgets/routes/transparent_route.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   static Future<void> show(
     BuildContext context, {

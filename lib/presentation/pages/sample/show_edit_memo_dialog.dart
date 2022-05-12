@@ -24,9 +24,8 @@ Future<void> showEditMemoDialog(
 
 class _Dialog extends HookConsumerWidget {
   const _Dialog(
-    this.data, {
-    Key? key,
-  }) : super(key: key);
+    this.data,
+  );
 
   final Memo? data;
 
@@ -44,13 +43,12 @@ class _Dialog extends HookConsumerWidget {
     });
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const SizedBox(height: 8),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: TextFormField(
             key: textKey,
             initialValue: data?.text,

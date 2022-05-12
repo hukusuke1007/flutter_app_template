@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ImageViewerHeader extends HookConsumerWidget {
   const ImageViewerHeader({
     this.onMenuSelected,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final void Function(int)? onMenuSelected;
 

@@ -33,14 +33,13 @@ class SignInWithEmailAndPassword {
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
-      switch (e.code) {
-        case AuthErrorCode.invalidEmail:
-        case AuthErrorCode.wrongPassword:
-        case AuthErrorCode.userDisabled:
-        case AuthErrorCode.userNotFound:
-          throw AppException(title: 'メールアドレスもしくはパスワードが正しくありません');
-        default:
-          throw AppException(title: '不明なエラーです ${e.message}');
+      if (e.code == AuthErrorCode.invalidEmail.value ||
+          e.code == AuthErrorCode.wrongPassword.value ||
+          e.code == AuthErrorCode.userDisabled.value ||
+          e.code == AuthErrorCode.userNotFound.value) {
+        throw AppException(title: 'メールアドレスもしくはパスワードが正しくありません');
+      } else {
+        throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }

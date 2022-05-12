@@ -31,11 +31,10 @@ class SendEmailVerification {
     } on FirebaseException catch (e) {
       logger.shout(e);
 
-      switch (e.code) {
-        case AuthErrorCode.missingEmail:
-          throw AppException(title: 'メールアドレスでログインしてください');
-        default:
-          throw AppException(title: '不明なエラーです ${e.message}');
+      if (e.code == AuthErrorCode.missingEmail.value) {
+        throw AppException(title: 'メールアドレスでログインしてください');
+      } else {
+        throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }

@@ -34,7 +34,8 @@ class ImageCompress {
   }) async {
     // .jpgを末尾に付与にしないとエラーを吐くため
     final directory = Directory(
-        '${_tempDirectory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      '${_tempDirectory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg',
+    );
     final tempFile = File(directory.path);
     return FlutterImageCompress.compressAndGetFile(
       path,
@@ -42,6 +43,7 @@ class ImageCompress {
       quality: quality,
       minWidth: minWidth,
       minHeight: minHeight,
+      // ignore: avoid_redundant_argument_values
       format: CompressFormat.jpeg,
     );
   }

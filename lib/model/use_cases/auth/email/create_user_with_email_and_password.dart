@@ -28,17 +28,16 @@ class CreateUserWithEmailAndPassword {
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
-      switch (e.code) {
-        case AuthErrorCode.emailAlreadyInUse:
-          throw AppException(title: 'このアカウントは既に存在します');
-        case AuthErrorCode.invalidEmail:
-          throw AppException(title: 'メールアドレスが正しくありません');
-        case AuthErrorCode.operationNotAllowed:
-          throw AppException(title: '接続エラーが発生しました');
-        case AuthErrorCode.weakPassword:
-          throw AppException(title: '安全性が低いパスワードです');
-        default:
-          throw AppException(title: '不明なエラーです ${e.message}');
+      if (e.code == AuthErrorCode.emailAlreadyInUse.value) {
+        throw AppException(title: 'このアカウントは既に存在します');
+      } else if (e.code == AuthErrorCode.invalidEmail.value) {
+        throw AppException(title: 'メールアドレスが正しくありません');
+      } else if (e.code == AuthErrorCode.operationNotAllowed.value) {
+        throw AppException(title: '接続エラーが発生しました');
+      } else if (e.code == AuthErrorCode.weakPassword.value) {
+        throw AppException(title: '安全性が低いパスワードです');
+      } else {
+        throw AppException(title: '不明なエラーです ${e.message}');
       }
     }
   }
