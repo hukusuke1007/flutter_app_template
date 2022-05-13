@@ -7,7 +7,7 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "34.0.0"
+    version: "38.0.0"
   adaptive_dialog:
     dependency: "direct main"
     description:
@@ -21,7 +21,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.4.1"
   animations:
     dependency: transitive
     description:
@@ -112,7 +112,7 @@ packages:
       name: build_daemon
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.1.0"
   build_resolvers:
     dependency: transitive
     description:
@@ -126,7 +126,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.7"
+    version: "2.1.10"
   build_runner_core:
     dependency: transitive
     description:
@@ -176,13 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  cli_util:
-    dependency: transitive
-    description:
-      name: cli_util
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -302,13 +295,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.3"
-  device_frame:
-    dependency: transitive
-    description:
-      name: device_frame
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   device_info:
     dependency: "direct main"
     description:
@@ -323,13 +309,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  device_preview:
-    dependency: "direct main"
-    description:
-      name: device_preview
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   dismissible_page:
     dependency: "direct main"
     description:
@@ -364,7 +343,7 @@ packages:
       name: extended_nested_scroll_view
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0-dev.1"
   fake_async:
     dependency: transitive
     description:
@@ -434,21 +413,21 @@ packages:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0"
+    version: "1.16.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.5"
+    version: "4.3.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.2"
+    version: "1.6.3"
   firebase_crashlytics:
     dependency: "direct main"
     description:
@@ -558,7 +537,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.2"
+    version: "0.18.4"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -600,7 +579,7 @@ packages:
       name: flutter_local_notifications
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.0.0-dev.12"
+    version: "10.0.0-dev.13"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -640,7 +619,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -671,14 +650,14 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "2.0.3+1"
   freezed_annotation:
     dependency: "direct main"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "2.0.3"
   frontend_server_client:
     dependency: transitive
     description:
@@ -713,7 +692,7 @@ packages:
       name: hooks_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   http:
     dependency: transitive
     description:
@@ -889,13 +868,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   nonce:
     dependency: "direct main"
     description:
@@ -1071,13 +1043,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.2"
   pub_semver:
     dependency: transitive
     description:
@@ -1120,13 +1085,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.3"
-  share:
+  share_plus:
     dependency: "direct main"
     description:
-      name: share
+      name: share_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "4.0.4"
+  share_plus_linux:
+    dependency: transitive
+    description:
+      name: share_plus_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  share_plus_macos:
+    dependency: transitive
+    description:
+      name: share_plus_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
+  share_plus_web:
+    dependency: transitive
+    description:
+      name: share_plus_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  share_plus_windows:
+    dependency: transitive
+    description:
+      name: share_plus_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1435,4 +1435,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.17.0 <3.0.0"
-  flutter: ">=2.10.0"
+  flutter: ">=3.0.0"

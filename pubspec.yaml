@@ -20,9 +20,9 @@ dependencies:
   shared_preferences:
 
   # Riverpod
-  flutter_hooks:
-  hooks_riverpod:
-  freezed_annotation:
+  flutter_hooks: ^0.18.4
+  hooks_riverpod: ^1.0.4
+  freezed_annotation: ^2.0.3
   json_annotation:
 
   # Dialog
@@ -38,7 +38,7 @@ dependencies:
   rxdart:
 
   # Data share
-  share:
+  share_plus:
 
   # WebView
   flutter_inappwebview:
@@ -80,13 +80,13 @@ dependencies:
   pull_to_refresh:
 
   # Scroll
-  extended_nested_scroll_view:
+  extended_nested_scroll_view: ^6.0.0-dev.1
 
   # Permission
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.15.0
+  firebase_core: ^1.16.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,11 +96,12 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.12
+  flutter_local_notifications: ^10.0.0-dev.13
   flutter_native_timezone:
 
   # Preview
-  device_preview:
+  # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
+#  device_preview: ^1.0.0
 
   # Widget
   flutter_fadein:
@@ -136,8 +137,8 @@ dev_dependencies:
   json_serializable:
 
   # Code generator
-  build_runner:
-  freezed:
+  build_runner: ^2.1.10
+  freezed: ^2.0.3+1
   flutter_gen_runner:
 
   # Other

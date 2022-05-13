@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
@@ -63,11 +61,7 @@ Future<void> main() async {
             .overrideWithValue(PackageInfoRepository(packageInfo)),
         imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory))
       ],
-      child: DevicePreview(
-        // ignore: avoid_redundant_argument_values
-        enabled: !kReleaseMode,
-        builder: (context) => const App(),
-      ),
+      child: const App(),
     ),
   );
 }

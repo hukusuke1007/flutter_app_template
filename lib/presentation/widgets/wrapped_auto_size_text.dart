@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../res/typography.dart';
-
 class WrappedAutoSizeText extends StatelessWidget {
   const WrappedAutoSizeText(
     this.text, {

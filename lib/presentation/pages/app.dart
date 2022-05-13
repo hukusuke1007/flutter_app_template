@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,8 +14,6 @@ class App extends ConsumerWidget {
     return MaterialApp(
       title: 'テンプレアプリ', // TODO(shohei): アプリ名を設定
       useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       theme: getAppTheme(),
       darkTheme: getAppThemeDark(),
       navigatorKey: ref.watch(navigatorKeyProvider),
