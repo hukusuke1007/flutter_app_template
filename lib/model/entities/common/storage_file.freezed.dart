@@ -12,36 +12,11 @@ part of 'storage_file.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 StorageFile _$StorageFileFromJson(Map<String, dynamic> json) {
   return _StorageFile.fromJson(json);
 }
-
-/// @nodoc
-class _$StorageFileTearOff {
-  const _$StorageFileTearOff();
-
-  _StorageFile call(
-      {required String url,
-      required String path,
-      String? mimeType,
-      Map<String, String>? metadata}) {
-    return _StorageFile(
-      url: url,
-      path: path,
-      mimeType: mimeType,
-      metadata: metadata,
-    );
-  }
-
-  StorageFile fromJson(Map<String, Object?> json) {
-    return StorageFile.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $StorageFile = _$StorageFileTearOff();
 
 /// @nodoc
 mixin _$StorageFile {
@@ -105,11 +80,11 @@ class _$StorageFileCopyWithImpl<$Res> implements $StorageFileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$StorageFileCopyWith<$Res>
+abstract class _$$_StorageFileCopyWith<$Res>
     implements $StorageFileCopyWith<$Res> {
-  factory _$StorageFileCopyWith(
-          _StorageFile value, $Res Function(_StorageFile) then) =
-      __$StorageFileCopyWithImpl<$Res>;
+  factory _$$_StorageFileCopyWith(
+          _$_StorageFile value, $Res Function(_$_StorageFile) then) =
+      __$$_StorageFileCopyWithImpl<$Res>;
   @override
   $Res call(
       {String url,
@@ -119,14 +94,14 @@ abstract class _$StorageFileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
-    implements _$StorageFileCopyWith<$Res> {
-  __$StorageFileCopyWithImpl(
-      _StorageFile _value, $Res Function(_StorageFile) _then)
-      : super(_value, (v) => _then(v as _StorageFile));
+class __$$_StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
+    implements _$$_StorageFileCopyWith<$Res> {
+  __$$_StorageFileCopyWithImpl(
+      _$_StorageFile _value, $Res Function(_$_StorageFile) _then)
+      : super(_value, (v) => _then(v as _$_StorageFile));
 
   @override
-  _StorageFile get _value => super._value as _StorageFile;
+  _$_StorageFile get _value => super._value as _$_StorageFile;
 
   @override
   $Res call({
@@ -135,7 +110,7 @@ class __$StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
     Object? mimeType = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(_StorageFile(
+    return _then(_$_StorageFile(
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -149,7 +124,7 @@ class __$StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
           : mimeType // ignore: cast_nullable_to_non_nullable
               as String?,
       metadata: metadata == freezed
-          ? _value.metadata
+          ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, String>?,
     ));
@@ -160,8 +135,12 @@ class __$StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_StorageFile extends _StorageFile {
   _$_StorageFile(
-      {required this.url, required this.path, this.mimeType, this.metadata})
-      : super._();
+      {required this.url,
+      required this.path,
+      this.mimeType,
+      final Map<String, String>? metadata})
+      : _metadata = metadata,
+        super._();
 
   factory _$_StorageFile.fromJson(Map<String, dynamic> json) =>
       _$$_StorageFileFromJson(json);
@@ -172,8 +151,14 @@ class _$_StorageFile extends _StorageFile {
   final String path;
   @override
   final String? mimeType;
+  final Map<String, String>? _metadata;
   @override
-  final Map<String, String>? metadata;
+  Map<String, String>? get metadata {
+    final value = _metadata;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
@@ -184,25 +169,26 @@ class _$_StorageFile extends _StorageFile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _StorageFile &&
+            other is _$_StorageFile &&
             const DeepCollectionEquality().equals(other.url, url) &&
             const DeepCollectionEquality().equals(other.path, path) &&
             const DeepCollectionEquality().equals(other.mimeType, mimeType) &&
-            const DeepCollectionEquality().equals(other.metadata, metadata));
+            const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(url),
       const DeepCollectionEquality().hash(path),
       const DeepCollectionEquality().hash(mimeType),
-      const DeepCollectionEquality().hash(metadata));
+      const DeepCollectionEquality().hash(_metadata));
 
   @JsonKey(ignore: true)
   @override
-  _$StorageFileCopyWith<_StorageFile> get copyWith =>
-      __$StorageFileCopyWithImpl<_StorageFile>(this, _$identity);
+  _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
+      __$$_StorageFileCopyWithImpl<_$_StorageFile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -212,25 +198,25 @@ class _$_StorageFile extends _StorageFile {
 
 abstract class _StorageFile extends StorageFile {
   factory _StorageFile(
-      {required String url,
-      required String path,
-      String? mimeType,
-      Map<String, String>? metadata}) = _$_StorageFile;
+      {required final String url,
+      required final String path,
+      final String? mimeType,
+      final Map<String, String>? metadata}) = _$_StorageFile;
   _StorageFile._() : super._();
 
   factory _StorageFile.fromJson(Map<String, dynamic> json) =
       _$_StorageFile.fromJson;
 
   @override
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
-  String get path;
+  String get path => throw _privateConstructorUsedError;
   @override
-  String? get mimeType;
+  String? get mimeType => throw _privateConstructorUsedError;
   @override
-  Map<String, String>? get metadata;
+  Map<String, String>? get metadata => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StorageFileCopyWith<_StorageFile> get copyWith =>
+  _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
       throw _privateConstructorUsedError;
 }

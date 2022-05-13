@@ -22,7 +22,7 @@ dependencies:
   # Riverpod
   flutter_hooks: ^0.18.4
   hooks_riverpod: ^1.0.4
-  freezed_annotation:
+  freezed_annotation: ^2.0.3
   json_annotation:
 
   # Dialog
@@ -100,7 +100,8 @@ dependencies:
   flutter_native_timezone:
 
   # Preview
-  device_preview: ^1.0.0
+  # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
+#  device_preview: ^1.0.0
 
   # Widget
   flutter_fadein:
@@ -125,10 +126,6 @@ dependencies:
   timezone:
   collection:
 
-#dependency_overrides:
-#  freezed: ^2.0.3+1
-#  freezed_annotation: ^2.0.3
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -140,8 +137,8 @@ dev_dependencies:
   json_serializable:
 
   # Code generator
-  build_runner:
-  freezed:
+  build_runner: ^2.1.10
+  freezed: ^2.0.3+1
   flutter_gen_runner:
 
   # Other

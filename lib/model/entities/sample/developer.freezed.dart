@@ -12,40 +12,11 @@ part of 'developer.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Developer _$DeveloperFromJson(Map<String, dynamic> json) {
   return _Developer.fromJson(json);
 }
-
-/// @nodoc
-class _$DeveloperTearOff {
-  const _$DeveloperTearOff();
-
-  _Developer call(
-      {required String developerId,
-      String? name,
-      StorageFile? image,
-      @DateTimeTimestampConverter() DateTime? birthdate,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) {
-    return _Developer(
-      developerId: developerId,
-      name: name,
-      image: image,
-      birthdate: birthdate,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  Developer fromJson(Map<String, Object?> json) {
-    return Developer.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Developer = _$DeveloperTearOff();
 
 /// @nodoc
 mixin _$Developer {
@@ -138,10 +109,10 @@ class _$DeveloperCopyWithImpl<$Res> implements $DeveloperCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
-  factory _$DeveloperCopyWith(
-          _Developer value, $Res Function(_Developer) then) =
-      __$DeveloperCopyWithImpl<$Res>;
+abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
+  factory _$$_DeveloperCopyWith(
+          _$_Developer value, $Res Function(_$_Developer) then) =
+      __$$_DeveloperCopyWithImpl<$Res>;
   @override
   $Res call(
       {String developerId,
@@ -156,13 +127,14 @@ abstract class _$DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
-    implements _$DeveloperCopyWith<$Res> {
-  __$DeveloperCopyWithImpl(_Developer _value, $Res Function(_Developer) _then)
-      : super(_value, (v) => _then(v as _Developer));
+class __$$_DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
+    implements _$$_DeveloperCopyWith<$Res> {
+  __$$_DeveloperCopyWithImpl(
+      _$_Developer _value, $Res Function(_$_Developer) _then)
+      : super(_value, (v) => _then(v as _$_Developer));
 
   @override
-  _Developer get _value => super._value as _Developer;
+  _$_Developer get _value => super._value as _$_Developer;
 
   @override
   $Res call({
@@ -173,7 +145,7 @@ class __$DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_Developer(
+    return _then(_$_Developer(
       developerId: developerId == freezed
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
@@ -242,7 +214,7 @@ class _$_Developer extends _Developer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Developer &&
+            other is _$_Developer &&
             const DeepCollectionEquality()
                 .equals(other.developerId, developerId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -252,6 +224,7 @@ class _$_Developer extends _Developer {
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -264,8 +237,8 @@ class _$_Developer extends _Developer {
 
   @JsonKey(ignore: true)
   @override
-  _$DeveloperCopyWith<_Developer> get copyWith =>
-      __$DeveloperCopyWithImpl<_Developer>(this, _$identity);
+  _$$_DeveloperCopyWith<_$_Developer> get copyWith =>
+      __$$_DeveloperCopyWithImpl<_$_Developer>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -275,34 +248,34 @@ class _$_Developer extends _Developer {
 
 abstract class _Developer extends Developer {
   const factory _Developer(
-      {required String developerId,
-      String? name,
-      StorageFile? image,
-      @DateTimeTimestampConverter() DateTime? birthdate,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) = _$_Developer;
+      {required final String developerId,
+      final String? name,
+      final StorageFile? image,
+      @DateTimeTimestampConverter() final DateTime? birthdate,
+      @DateTimeTimestampConverter() final DateTime? createdAt,
+      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$_Developer;
   const _Developer._() : super._();
 
   factory _Developer.fromJson(Map<String, dynamic> json) =
       _$_Developer.fromJson;
 
   @override
-  String get developerId;
+  String get developerId => throw _privateConstructorUsedError;
   @override
-  String? get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  StorageFile? get image;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get birthdate;
+  StorageFile? get image => throw _privateConstructorUsedError;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get createdAt;
+  DateTime? get birthdate => throw _privateConstructorUsedError;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DeveloperCopyWith<_Developer> get copyWith =>
+  _$$_DeveloperCopyWith<_$_Developer> get copyWith =>
       throw _privateConstructorUsedError;
 }

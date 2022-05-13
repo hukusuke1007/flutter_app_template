@@ -46,7 +46,7 @@ Flutter Stable 3.0.0
 - デバイス向きは縦固定
 - 静的解析導入
 - その他アプリに必要なライブラリを設定済み
-- device_preview 導入
+- WIP device_preview 導入 → Flutter3系とFreezed2系対応までお見送り
 - Android/iOS の Flavor 設定
 - iOS 日本語デフォルト
 - 画面遷移は Navigator 1.0

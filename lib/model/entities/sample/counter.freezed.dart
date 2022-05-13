@@ -12,34 +12,11 @@ part of 'counter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Counter _$CounterFromJson(Map<String, dynamic> json) {
   return _Counter.fromJson(json);
 }
-
-/// @nodoc
-class _$CounterTearOff {
-  const _$CounterTearOff();
-
-  _Counter call(
-      {int? count,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) {
-    return _Counter(
-      count: count,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  Counter fromJson(Map<String, Object?> json) {
-    return Counter.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Counter = _$CounterTearOff();
 
 /// @nodoc
 mixin _$Counter {
@@ -96,9 +73,10 @@ class _$CounterCopyWithImpl<$Res> implements $CounterCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
-  factory _$CounterCopyWith(_Counter value, $Res Function(_Counter) then) =
-      __$CounterCopyWithImpl<$Res>;
+abstract class _$$_CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
+  factory _$$_CounterCopyWith(
+          _$_Counter value, $Res Function(_$_Counter) then) =
+      __$$_CounterCopyWithImpl<$Res>;
   @override
   $Res call(
       {int? count,
@@ -107,13 +85,13 @@ abstract class _$CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
-    implements _$CounterCopyWith<$Res> {
-  __$CounterCopyWithImpl(_Counter _value, $Res Function(_Counter) _then)
-      : super(_value, (v) => _then(v as _Counter));
+class __$$_CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
+    implements _$$_CounterCopyWith<$Res> {
+  __$$_CounterCopyWithImpl(_$_Counter _value, $Res Function(_$_Counter) _then)
+      : super(_value, (v) => _then(v as _$_Counter));
 
   @override
-  _Counter get _value => super._value as _Counter;
+  _$_Counter get _value => super._value as _$_Counter;
 
   @override
   $Res call({
@@ -121,7 +99,7 @@ class __$CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_Counter(
+    return _then(_$_Counter(
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -168,12 +146,13 @@ class _$_Counter extends _Counter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Counter &&
+            other is _$_Counter &&
             const DeepCollectionEquality().equals(other.count, count) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -183,8 +162,8 @@ class _$_Counter extends _Counter {
 
   @JsonKey(ignore: true)
   @override
-  _$CounterCopyWith<_Counter> get copyWith =>
-      __$CounterCopyWithImpl<_Counter>(this, _$identity);
+  _$$_CounterCopyWith<_$_Counter> get copyWith =>
+      __$$_CounterCopyWithImpl<_$_Counter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -194,23 +173,23 @@ class _$_Counter extends _Counter {
 
 abstract class _Counter extends Counter {
   const factory _Counter(
-      {int? count,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) = _$_Counter;
+      {final int? count,
+      @DateTimeTimestampConverter() final DateTime? createdAt,
+      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$_Counter;
   const _Counter._() : super._();
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$_Counter.fromJson;
 
   @override
-  int? get count;
+  int? get count => throw _privateConstructorUsedError;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get createdAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CounterCopyWith<_Counter> get copyWith =>
+  _$$_CounterCopyWith<_$_Counter> get copyWith =>
       throw _privateConstructorUsedError;
 }

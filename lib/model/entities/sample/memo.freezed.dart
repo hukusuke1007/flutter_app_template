@@ -12,36 +12,11 @@ part of 'memo.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Memo _$MemoFromJson(Map<String, dynamic> json) {
   return _Memo.fromJson(json);
 }
-
-/// @nodoc
-class _$MemoTearOff {
-  const _$MemoTearOff();
-
-  _Memo call(
-      {String? memoId,
-      String? text,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) {
-    return _Memo(
-      memoId: memoId,
-      text: text,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  Memo fromJson(Map<String, Object?> json) {
-    return Memo.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Memo = _$MemoTearOff();
 
 /// @nodoc
 mixin _$Memo {
@@ -105,9 +80,9 @@ class _$MemoCopyWithImpl<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
-  factory _$MemoCopyWith(_Memo value, $Res Function(_Memo) then) =
-      __$MemoCopyWithImpl<$Res>;
+abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
+  factory _$$_MemoCopyWith(_$_Memo value, $Res Function(_$_Memo) then) =
+      __$$_MemoCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? memoId,
@@ -117,13 +92,13 @@ abstract class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
-    implements _$MemoCopyWith<$Res> {
-  __$MemoCopyWithImpl(_Memo _value, $Res Function(_Memo) _then)
-      : super(_value, (v) => _then(v as _Memo));
+class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
+    implements _$$_MemoCopyWith<$Res> {
+  __$$_MemoCopyWithImpl(_$_Memo _value, $Res Function(_$_Memo) _then)
+      : super(_value, (v) => _then(v as _$_Memo));
 
   @override
-  _Memo get _value => super._value as _Memo;
+  _$_Memo get _value => super._value as _$_Memo;
 
   @override
   $Res call({
@@ -132,7 +107,7 @@ class __$MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_Memo(
+    return _then(_$_Memo(
       memoId: memoId == freezed
           ? _value.memoId
           : memoId // ignore: cast_nullable_to_non_nullable
@@ -185,13 +160,14 @@ class _$_Memo extends _Memo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Memo &&
+            other is _$_Memo &&
             const DeepCollectionEquality().equals(other.memoId, memoId) &&
             const DeepCollectionEquality().equals(other.text, text) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -202,8 +178,8 @@ class _$_Memo extends _Memo {
 
   @JsonKey(ignore: true)
   @override
-  _$MemoCopyWith<_Memo> get copyWith =>
-      __$MemoCopyWithImpl<_Memo>(this, _$identity);
+  _$$_MemoCopyWith<_$_Memo> get copyWith =>
+      __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -213,25 +189,25 @@ class _$_Memo extends _Memo {
 
 abstract class _Memo extends Memo {
   const factory _Memo(
-      {String? memoId,
-      String? text,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt}) = _$_Memo;
+      {final String? memoId,
+      final String? text,
+      @DateTimeTimestampConverter() final DateTime? createdAt,
+      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$_Memo;
   const _Memo._() : super._();
 
   factory _Memo.fromJson(Map<String, dynamic> json) = _$_Memo.fromJson;
 
   @override
-  String? get memoId;
+  String? get memoId => throw _privateConstructorUsedError;
   @override
-  String? get text;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt;
+  String? get text => throw _privateConstructorUsedError;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$MemoCopyWith<_Memo> get copyWith => throw _privateConstructorUsedError;
+  _$$_MemoCopyWith<_$_Memo> get copyWith => throw _privateConstructorUsedError;
 }
