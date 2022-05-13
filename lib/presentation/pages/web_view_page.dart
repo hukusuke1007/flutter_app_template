@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../extensions/context_extension.dart';
@@ -84,14 +87,19 @@ class WebViewPage extends HookConsumerWidget {
             ),
             itemBuilder: (BuildContext context) {
               final list = [
-                {'id': 0, 'text': 'URLをコピーする'},
-                {'id': 1, 'text': 'ブラウザで開く'},
+                'URLをコピーする',
+                'URLを共有する',
+                'ブラウザで開く',
               ];
+
               return list
-                  .map(
-                    (data) => PopupMenuItem<int>(
-                      value: data['id']! as int,
-                      child: Text(data['text']! as String),
+                  .mapIndexed(
+                    (index, data) => PopupMenuItem<int>(
+                      value: index,
+                      child: Text(
+                        data,
+                        style: context.bodyStyle,
+                      ),
                     ),
                   )
                   .toList();
@@ -105,6 +113,8 @@ class WebViewPage extends HookConsumerWidget {
                 await Clipboard.copy(value.toString());
                 context.showSnackBar('URLをコピーしました');
               } else if (value == 1) {
+                unawaited(Share.share(url));
+              } else if (value == 2) {
                 await launch(
                   url,
                   forceSafariVC: false,
