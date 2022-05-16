@@ -14,16 +14,14 @@ import 'tab_navigator.dart';
 class MainPage extends HookConsumerWidget {
   const MainPage({super.key});
 
-  static Future<void> show(BuildContext context) async {
-    await Navigator.of(context, rootNavigator: true)
-        .pushReplacement<MaterialPageRoute<dynamic>, void>(
-      PageTransition(
-        type: PageTransitionType.fade,
-        child: const MainPage(),
-        duration: const Duration(milliseconds: 500),
-      ),
-    );
-  }
+  static Future<void> show(BuildContext context) =>
+      Navigator.of(context, rootNavigator: true).pushReplacement<void, void>(
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: const MainPage(),
+          duration: const Duration(milliseconds: 500),
+        ),
+      );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,25 +32,25 @@ class MainPage extends HookConsumerWidget {
       const MemoPage(),
       const SettingPage(),
     ]);
-    final navigatorKeys = useState({
-      0: GlobalKey<NavigatorState>(),
-      1: GlobalKey<NavigatorState>(),
-      2: GlobalKey<NavigatorState>(),
-      3: GlobalKey<NavigatorState>(),
-      4: GlobalKey<NavigatorState>(),
-    });
+
+    final navigatorKeys = useState([
+      GlobalKey<NavigatorState>(),
+      GlobalKey<NavigatorState>(),
+      GlobalKey<NavigatorState>(),
+      GlobalKey<NavigatorState>(),
+      GlobalKey<NavigatorState>(),
+    ]);
+
     final selectedIndex = useState(0);
 
-    Future<bool> onWillPop() async {
-      final keyTab = navigatorKeys.value[selectedIndex.value]!;
-      if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
-        return !await keyTab.currentState!.maybePop();
-      }
-      return true;
-    }
-
     return WillPopScope(
-      onWillPop: onWillPop,
+      onWillPop: () async {
+        final keyTab = navigatorKeys.value[selectedIndex.value];
+        if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
+          return !await keyTab.currentState!.maybePop();
+        }
+        return true;
+      },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -61,7 +59,7 @@ class MainPage extends HookConsumerWidget {
             (index) => Offstage(
               offstage: index != selectedIndex.value,
               child: TabNavigator(
-                navigatorKey: navigatorKeys.value[index]!,
+                navigatorKey: navigatorKeys.value[index],
                 page: widgets.value[index],
               ),
             ),

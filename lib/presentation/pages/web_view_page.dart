@@ -115,6 +115,9 @@ class WebViewPage extends HookConsumerWidget {
               } else if (value == 1) {
                 unawaited(Share.share(url));
               } else if (value == 2) {
+                if (!await canLaunch(url)) {
+                  return;
+                }
                 await launch(
                   url,
                   forceSafariVC: false,

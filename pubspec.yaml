@@ -108,7 +108,7 @@ dependencies:
   flutter_cupertino_datetime_picker:
   flutter_app_badger:
   badges:
-  flutter_slidable:
+  flutter_slidable: ^1.2.1
   dismissible_page:
 
   # Other
