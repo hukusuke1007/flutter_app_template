@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  another_flushbar:
+    dependency: "direct main"
+    description:
+      name: another_flushbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.29"
   app_review:
     dependency: "direct main"
     description:
@@ -329,14 +336,14 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.0-dev.1"
+    version: "6.2.1"
   extended_image_library:
     dependency: transitive
     description:
       name: extended_image_library
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0-dev.1"
+    version: "3.3.0"
   extended_nested_scroll_view:
     dependency: "direct main"
     description:

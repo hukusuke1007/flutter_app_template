@@ -13,7 +13,6 @@ import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../model/use_cases/sample/my_profile/save_my_profile.dart';
 import '../../../model/use_cases/sample/my_profile/save_my_profile_image.dart';
 import '../../../utils/logger.dart';
-import '../../../utils/provider.dart';
 import '../../../utils/vibration.dart';
 import '../../custom_hooks/use_effect_once.dart';
 import '../../custom_hooks/use_form_field_state_key.dart';
@@ -84,8 +83,6 @@ class _Dialog extends HookConsumerWidget {
                   if (selectedImage == null) {
                     return;
                   }
-                  final globalContext =
-                      ref.read(navigatorKeyProvider).currentContext!;
 
                   logger.info(selectedImage.readAsBytesSync().length);
 
@@ -97,7 +94,7 @@ class _Dialog extends HookConsumerWidget {
                   }
                   logger.info(compressImage.lengthInBytes);
                   try {
-                    showIndicator(globalContext);
+                    showIndicator(context);
                     await ref
                         .read(saveMyProfileImageProvider)
                         .call(compressImage);
@@ -108,7 +105,7 @@ class _Dialog extends HookConsumerWidget {
                       title: '画像を保存できませんでした',
                     );
                   } finally {
-                    dismissIndicator(globalContext);
+                    dismissIndicator(context);
                   }
                 },
                 child: const Icon(
@@ -196,21 +193,19 @@ class _Dialog extends HookConsumerWidget {
               }
               final name = nameFormKey.currentState?.value?.trim() ?? '';
               final birthdate = birthdateState.value;
-              final globalContext =
-                  ref.read(navigatorKeyProvider).currentContext!;
               try {
-                showIndicator(globalContext);
+                showIndicator(context);
                 await ref.read(saveMyProfileProvider).call(
                       name: name,
                       birthdate: birthdate,
                     );
-                globalContext.showSnackBar('保存しました');
+                dismissIndicator(context);
+                context.showSnackBar('保存しました');
                 Navigator.of(context).pop();
               } on Exception catch (e) {
                 logger.shout(e);
+                dismissIndicator(context);
                 await showOkAlertDialog(context: context, title: '保存できませんでした');
-              } finally {
-                dismissIndicator(globalContext);
               }
             },
             color: ColorName.primary,

@@ -84,19 +84,18 @@ class _Dialog extends HookConsumerWidget {
               }
               final text = textKey.currentState?.value?.trim() ?? '';
               try {
-                showIndicator(context);
                 context.hideKeyboard();
-                final gContext = ref.read(navigatorKeyProvider).currentContext!;
+                showIndicator(context);
                 if (data != null) {
                   /// 更新
                   await ref
                       .read(memoProvider.notifier)
                       .update(data!.copyWith(text: text));
-                  gContext.showSnackBar('更新しました');
+                  context.showSnackBar('更新しました');
                 } else {
                   /// 新規作成
                   await ref.read(memoProvider.notifier).create(text);
-                  gContext.showSnackBar('作成しました');
+                  context.showSnackBar('作成しました');
                 }
                 dismissIndicator(context);
 

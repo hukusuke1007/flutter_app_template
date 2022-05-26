@@ -5,11 +5,13 @@ import '../../../extensions/context_extension.dart';
 Future<T?> showContentDialog<T>({
   required BuildContext context,
   bool barrierDismissible = true,
+  bool useRootNavigator = true,
   required Widget contentWidget,
 }) {
   return showDialog<T?>(
     context: context,
     barrierDismissible: barrierDismissible,
+    useRootNavigator: useRootNavigator,
     builder: (BuildContext context) => GestureDetector(
       onTap: context.hideKeyboard,
       child: AlertDialog(

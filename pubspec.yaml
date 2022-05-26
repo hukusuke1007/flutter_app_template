@@ -71,7 +71,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image: ^7.0.0-dev.1
+  extended_image: ^6.2.1
 
   # Picker
   numberpicker:
@@ -110,6 +110,7 @@ dependencies:
   badges:
   flutter_slidable: ^1.2.1
   dismissible_page:
+  another_flushbar: ^1.10.29
 
   # Other
   uuid:
