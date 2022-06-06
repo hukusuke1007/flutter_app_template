@@ -95,7 +95,7 @@ android {
         }
         debug {
             // TODO: debug.jks作成する。作成したdebug.jksの情報に変更する。debug.jksのパスワードは以下のように設定する
-            def storeFile = rootProject.file('debug.jks')
+            def storeFile = rootProject.file('../debug.jks')
             if (storeFile.exists()) {
                 keyAlias "androiddebugkey"
                 keyPassword "password"

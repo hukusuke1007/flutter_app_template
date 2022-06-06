@@ -24,7 +24,7 @@ extension ContextExtension on BuildContext {
     // https://github.com/flutter/flutter/issues/54277#issuecomment-640998757
     final currentScope = FocusScope.of(this);
     if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
-      FocusManager.instance.primaryFocus!.unfocus();
+      FocusManager.instance.primaryFocus?.unfocus();
     }
   }
 
