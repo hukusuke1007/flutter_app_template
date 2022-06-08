@@ -4,19 +4,19 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../extensions/context_extension.dart';
-import '../../../extensions/date_extension.dart';
-import '../../../model/entities/sample/developer.dart';
-import '../../../model/use_cases/auth/sign_out.dart';
-import '../../../model/use_cases/package_info/fetch_app_name.dart';
-import '../../../model/use_cases/package_info/fetch_app_version.dart';
-import '../../../model/use_cases/package_info/fetch_package_name.dart';
-import '../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
-import '../../widgets/ripple_tap_gesture.dart';
-import '../../widgets/thumbnail.dart';
-import '../image_viewer/image_viewer.dart';
-import '../start_up_page.dart';
-import '../web_view_page.dart';
+import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/date_extension.dart';
+import '../../../../model/entities/sample/developer.dart';
+import '../../../../model/use_cases/auth/sign_out.dart';
+import '../../../../model/use_cases/package_info/fetch_app_name.dart';
+import '../../../../model/use_cases/package_info/fetch_app_version.dart';
+import '../../../../model/use_cases/package_info/fetch_package_name.dart';
+import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
+import '../../../widgets/ripple_tap_gesture.dart';
+import '../../../widgets/thumbnail.dart';
+import '../../image_viewer/image_viewer.dart';
+import '../../start_up_page.dart';
+import '../../web_view_page.dart';
 import 'show_edit_profile_dialog.dart';
 
 class SettingPage extends HookConsumerWidget {
