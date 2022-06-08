@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../exceptions/app_exception.dart';
 import '../../../entities/sample/developer.dart';
-import '../../../exceptions/app_exception.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 import 'fetch_my_profile.dart';

@@ -7,8 +7,8 @@ import '../../../extensions/context_extension.dart';
 import '../sample/firestore_counter_page.dart';
 import '../sample/home/home_page.dart';
 import '../sample/local_counter_page.dart';
-import '../sample/memo_page.dart';
-import '../sample/setting_page.dart';
+import '../sample/memo/memo_page.dart';
+import '../sample/setting/setting_page.dart';
 import 'tab_navigator.dart';
 
 class MainPage extends HookConsumerWidget {

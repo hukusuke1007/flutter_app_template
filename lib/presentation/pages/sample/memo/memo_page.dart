@@ -5,13 +5,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../extensions/context_extension.dart';
-import '../../../extensions/exception_extension.dart';
-import '../../../model/use_cases/sample/memo_controller.dart';
-import '../../../utils/logger.dart';
-import '../../custom_hooks/use_effect_once.dart';
-import '../../custom_hooks/use_refresh_controller.dart';
-import '../../widgets/smart_refresher_custom.dart';
+import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/exception_extension.dart';
+import '../../../../model/use_cases/sample/memo_controller.dart';
+import '../../../custom_hooks/use_effect_once.dart';
+import '../../../custom_hooks/use_refresh_controller.dart';
+import '../../../widgets/smart_refresher_custom.dart';
 import 'show_edit_memo_dialog.dart';
 
 class MemoPage extends HookConsumerWidget {
@@ -28,15 +27,16 @@ class MemoPage extends HookConsumerWidget {
     /// カスタムフック
     useEffectOnce(() {
       Future(() async {
-        try {
-          await ref.read(memoProvider.notifier).fetch();
-        } on Exception catch (e) {
-          logger.shout(e);
-          context.showSnackBar(
-            e.errorMessage,
-            backgroundColor: Colors.grey,
-          );
-        }
+        final result = await ref.read(memoProvider.notifier).fetch();
+        result.when(
+          success: () {},
+          failure: (e) {
+            context.showSnackBar(
+              e.errorMessage,
+              backgroundColor: Colors.grey,
+            );
+          },
+        );
       });
       return null;
     });
@@ -64,28 +64,34 @@ class MemoPage extends HookConsumerWidget {
           controller: refreshController,
           physics: const BouncingScrollPhysics(),
           onRefresh: () async {
-            try {
-              await ref.read(memoProvider.notifier).fetch();
-            } on Exception catch (e) {
-              logger.shout(e);
-              context.showSnackBar(
-                e.errorMessage,
-                backgroundColor: Colors.grey,
-              );
-            }
-            refreshController.refreshCompleted();
+            final result = await ref.read(memoProvider.notifier).fetch();
+            result.when(
+              success: () {
+                refreshController.refreshCompleted();
+              },
+              failure: (e) {
+                refreshController.refreshCompleted();
+                context.showSnackBar(
+                  e.errorMessage,
+                  backgroundColor: Colors.grey,
+                );
+              },
+            );
           },
           onLoading: () async {
-            try {
-              await ref.read(memoProvider.notifier).fetchMore();
-            } on Exception catch (e) {
-              logger.shout(e);
-              context.showSnackBar(
-                e.errorMessage,
-                backgroundColor: Colors.grey,
-              );
-            }
-            refreshController.loadComplete();
+            final result = await ref.read(memoProvider.notifier).fetchMore();
+            result.when(
+              success: () {
+                refreshController.loadComplete();
+              },
+              failure: (e) {
+                refreshController.loadComplete();
+                context.showSnackBar(
+                  e.errorMessage,
+                  backgroundColor: Colors.grey,
+                );
+              },
+            );
           },
           child: ListView.separated(
             controller: scrollController,
@@ -101,23 +107,26 @@ class MemoPage extends HookConsumerWidget {
                         if (docId == null) {
                           return;
                         }
-                        final result = await showOkCancelAlertDialog(
+                        final alertResult = await showOkCancelAlertDialog(
                           context: context,
                           title: '削除しますか？',
                         );
-                        if (result == OkCancelResult.cancel) {
+                        if (alertResult == OkCancelResult.cancel) {
                           return;
                         }
-                        try {
-                          await ref.read(memoProvider.notifier).remove(docId);
-                          context.showSnackBar('削除しました');
-                        } on Exception catch (e) {
-                          logger.shout(e);
-                          context.showSnackBar(
-                            e.errorMessage,
-                            backgroundColor: Colors.grey,
-                          );
-                        }
+                        final result =
+                            await ref.read(memoProvider.notifier).remove(docId);
+                        result.when(
+                          success: () {
+                            context.showSnackBar('削除しました');
+                          },
+                          failure: (e) {
+                            context.showSnackBar(
+                              e.errorMessage,
+                              backgroundColor: Colors.grey,
+                            );
+                          },
+                        );
                       },
                       backgroundColor: Colors.redAccent,
                       foregroundColor: Colors.white,

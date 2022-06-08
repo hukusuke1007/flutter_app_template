@@ -72,18 +72,20 @@ Flutter Stable 3.0.0
 ### ディレクトリ構成
 
 - [lib/](./lib)
+  - [exceptions/](./lib/exceptions)
   - [extensions/](./lib/extensions)
   - [gen/](./lib/gen)
   - [model/](./lib/model)
     - [converters/](./lib/model/converters)
     - [entities/](./lib/model/entities)
-    - [exceptions/](./lib/model/exceptions)
     - [repositories/](./lib/model/repositories)
     - [use_cases/](./lib/model/use_cases)
   - [presentation/](./lib/presentation)
     - [pages/](./lib/presentation/pages)
     - [res/](./lib/presentation/res)
     - [widgets/](./lib/presentation/widgets)
+  - [results/](./lib/results)
+  - [utils/](./lib/utils)
   - [main.dart](./lib/main.dart)
 
 ### Flavor

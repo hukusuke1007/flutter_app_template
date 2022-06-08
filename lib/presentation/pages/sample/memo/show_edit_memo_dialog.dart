@@ -1,17 +1,16 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../extensions/context_extension.dart';
-import '../../../extensions/exception_extension.dart';
-import '../../../gen/colors.gen.dart';
-import '../../../model/entities/sample/memo.dart';
-import '../../../model/use_cases/sample/memo_controller.dart';
-import '../../../utils/logger.dart';
-import '../../../utils/provider.dart';
-import '../../custom_hooks/use_effect_once.dart';
-import '../../custom_hooks/use_form_field_state_key.dart';
-import '../../widgets/dialogs/show_content_dialog.dart';
-import '../../widgets/show_indicator.dart';
+import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/exception_extension.dart';
+import '../../../../gen/colors.gen.dart';
+import '../../../../model/entities/sample/memo.dart';
+import '../../../../model/use_cases/sample/memo_controller.dart';
+import '../../../custom_hooks/use_effect_once.dart';
+import '../../../custom_hooks/use_form_field_state_key.dart';
+import '../../../widgets/dialogs/show_content_dialog.dart';
+import '../../../widgets/show_indicator.dart';
 
 Future<void> showEditMemoDialog(
   BuildContext context, {
@@ -82,30 +81,40 @@ class _Dialog extends HookConsumerWidget {
               if (textKey.currentState?.validate() != true) {
                 return;
               }
-              final text = textKey.currentState?.value?.trim() ?? '';
-              try {
-                context.hideKeyboard();
-                showIndicator(context);
-                if (data != null) {
-                  /// 更新
-                  await ref
-                      .read(memoProvider.notifier)
-                      .update(data!.copyWith(text: text));
-                  context.showSnackBar('更新しました');
-                } else {
-                  /// 新規作成
-                  await ref.read(memoProvider.notifier).create(text);
-                  context.showSnackBar('作成しました');
-                }
-                dismissIndicator(context);
+              context.hideKeyboard();
 
-                Navigator.pop(context);
-              } on Exception catch (e) {
-                logger.shout(e);
+              final text = textKey.currentState?.value?.trim() ?? '';
+              showIndicator(context);
+              if (data != null) {
+                /// 更新
+
+                final result = await ref
+                    .read(memoProvider.notifier)
+                    .update(data!.copyWith(text: text));
                 dismissIndicator(context);
-                context.showSnackBar(
-                  e.errorMessage,
-                  backgroundColor: Colors.grey,
+                result.when(
+                  success: () {
+                    context.showSnackBar('更新しました');
+                    Navigator.pop(context);
+                  },
+                  failure: (e) {
+                    showOkAlertDialog(context: context, title: e.errorMessage);
+                  },
+                );
+              } else {
+                /// 新規作成
+
+                final result =
+                    await ref.read(memoProvider.notifier).create(text);
+                dismissIndicator(context);
+                result.when(
+                  success: () {
+                    context.showSnackBar('作成しました');
+                    Navigator.pop(context);
+                  },
+                  failure: (e) {
+                    showOkAlertDialog(context: context, title: e.errorMessage);
+                  },
                 );
               }
             },
