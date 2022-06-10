@@ -1,32 +1,39 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../exceptions/app_exception.dart';
-import '../../../../results/result_data.dart';
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
-final githubUsersControllerProvider =
-    StateNotifierProvider.autoDispose<GithubUsersController, List<User>>((ref) {
+final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
+    GithubUsersController, AsyncValue<List<User>>>((ref) {
   return GithubUsersController(ref.read);
 });
 
-class GithubUsersController extends StateNotifier<List<User>> {
+class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
   GithubUsersController(
     this._read,
-  ) : super([]);
+  ) : super(
+          const AsyncValue.loading(),
+        );
 
   final Reader _read;
 
   int _pageOffset = 0;
+  bool _loading = false;
   final _pageCount = 20;
 
   GithubApiRepository get _githubApiRepository =>
       _read(githubApiRepositoryProvider);
 
   /// 一覧取得
-  Future<ResultData<List<User>>> fetch() async {
-    try {
-      _pageOffset = 0;
+  Future<void> fetch() async {
+    if (_loading) {
+      return;
+    }
+    _loading = true;
+
+    _pageOffset = 0;
+
+    final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
         since: _pageOffset,
         perPage: _pageCount,
@@ -34,16 +41,21 @@ class GithubUsersController extends StateNotifier<List<User>> {
       if (data.isNotEmpty) {
         _pageOffset = data.length;
       }
-      state = data;
-      return ResultData.success(data);
-    } on AppException catch (e) {
-      return ResultData.failure(e);
-    }
+      return data;
+    });
+
+    _loading = false;
+    state = result;
   }
 
   /// ページング取得
-  Future<ResultData<List<User>>> fetchMore() async {
-    try {
+  Future<void> fetchMore() async {
+    if (_loading) {
+      return;
+    }
+    _loading = true;
+
+    final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
         since: _pageOffset,
         perPage: _pageCount,
@@ -51,10 +63,11 @@ class GithubUsersController extends StateNotifier<List<User>> {
       if (data.isNotEmpty) {
         _pageOffset += data.length;
       }
-      state = [...state, ...data];
-      return ResultData.success(data);
-    } on AppException catch (e) {
-      return ResultData.failure(e);
-    }
+      final value = state.value ?? [];
+      return [...value, ...data];
+    });
+
+    _loading = false;
+    state = result;
   }
 }
