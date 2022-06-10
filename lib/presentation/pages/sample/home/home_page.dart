@@ -54,10 +54,17 @@ class HomePage extends HookConsumerWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 32),
+                const Divider(height: 1),
                 ListTile(
                   title: Text(
                     'ローカルカウンターのサンプル',
-                    style: context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                    style:
+                        context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
                   ),
                   onTap: () {
                     LocalCounterPage.show(context);
@@ -67,7 +74,12 @@ class HomePage extends HookConsumerWidget {
                 ListTile(
                   title: Text(
                     'Firestoreカウンターのサンプル',
-                    style: context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                    style:
+                        context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
                   ),
                   onTap: () {
                     FirestoreCounterPage.show(context);

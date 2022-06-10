@@ -57,6 +57,9 @@ class FirestoreCounterPage extends HookConsumerWidget {
           ),
         ),
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

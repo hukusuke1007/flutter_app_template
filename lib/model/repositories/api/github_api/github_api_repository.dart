@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../exceptions/app_exception.dart';
+import '../../../../extensions/exception_extension.dart';
+import '../../../../utils/logger.dart';
 import '../../../entities/sample/github/user.dart';
 import 'github_api_client.dart';
 
@@ -25,9 +27,18 @@ class GithubApiRepository {
     int? perPage,
   }) async {
     try {
-      return _client.fetchUsers(since, perPage);
+      final result = await _client.fetchUsers(since, perPage);
+      return result;
     } on DioError catch (e) {
+      final response = e.response;
+      logger.shout(
+        'statusCode: ${response?.statusCode}, '
+        'message: ${response?.statusMessage}',
+      );
       throw AppException.error(e.message);
+    } on Exception catch (e) {
+      logger.shout(e);
+      throw AppException.error(e.errorMessage);
     }
   }
 }

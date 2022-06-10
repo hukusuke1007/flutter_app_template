@@ -43,7 +43,7 @@ class GithubUsersPage extends HookConsumerWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          'メモ',
+          'Github Users',
           style: context.subtitleStyle.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -103,12 +103,19 @@ class GithubUsersPage extends HookConsumerWidget {
                   data.login,
                   style: context.bodyStyle,
                 ),
-                trailing: Text(
-                  data.url,
+                subtitle: Text(
+                  data.htmlUrl ?? '-',
                   style: context.smallStyle,
                 ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                ),
                 onTap: () {
-                  launch(data.url);
+                  final url = data.htmlUrl;
+                  if (url != null) {
+                    launch(data.url);
+                  }
                 },
               );
             },

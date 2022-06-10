@@ -1,14 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../exceptions/app_exception.dart';
-import '../../../../extensions/exception_extension.dart';
 import '../../../../results/result_data.dart';
-import '../../../../utils/logger.dart';
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
 final githubUsersControllerProvider =
-    StateNotifierProvider<GithubUsersController, List<User>>((ref) {
+    StateNotifierProvider.autoDispose<GithubUsersController, List<User>>((ref) {
   return GithubUsersController(ref.read);
 });
 
@@ -20,6 +18,7 @@ class GithubUsersController extends StateNotifier<List<User>> {
   final Reader _read;
 
   int _pageOffset = 0;
+  final _pageCount = 20;
 
   GithubApiRepository get _githubApiRepository =>
       _read(githubApiRepositoryProvider);
@@ -30,6 +29,7 @@ class GithubUsersController extends StateNotifier<List<User>> {
       _pageOffset = 0;
       final data = await _githubApiRepository.fetchUsers(
         since: _pageOffset,
+        perPage: _pageCount,
       );
       if (data.isNotEmpty) {
         _pageOffset = data.length;
@@ -37,11 +37,7 @@ class GithubUsersController extends StateNotifier<List<User>> {
       state = data;
       return ResultData.success(data);
     } on AppException catch (e) {
-      logger.shout(e);
       return ResultData.failure(e);
-    } on Exception catch (e) {
-      logger.shout(e);
-      return ResultData.failure(AppException.error(e.errorMessage));
     }
   }
 
@@ -50,6 +46,7 @@ class GithubUsersController extends StateNotifier<List<User>> {
     try {
       final data = await _githubApiRepository.fetchUsers(
         since: _pageOffset,
+        perPage: _pageCount,
       );
       if (data.isNotEmpty) {
         _pageOffset += data.length;
@@ -57,11 +54,7 @@ class GithubUsersController extends StateNotifier<List<User>> {
       state = [...state, ...data];
       return ResultData.success(data);
     } on AppException catch (e) {
-      logger.shout(e);
       return ResultData.failure(e);
-    } on Exception catch (e) {
-      logger.shout(e);
-      return ResultData.failure(AppException.error(e.errorMessage));
     }
   }
 }
