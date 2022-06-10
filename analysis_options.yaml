@@ -3,7 +3,6 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
-    - lib/**/*.chopper.dart
     - lib/l10n/*.dart
   errors:
     invalid_annotation_target: ignore

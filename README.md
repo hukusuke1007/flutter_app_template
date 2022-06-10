@@ -21,7 +21,7 @@ Flutter Stable 3.0.1
   - SharedPreferences を用いた カウンター画面
   - Firestore を用いた カウンター画面
 - タブ 2
-  - GithubApi を用いた GithubUsers の一覧画面
+  - GithubApi を用いた Github Users の一覧画面
 - タブ 3
   - Firestore を用いた Memo データ一覧と CRUD
     - データの追加、更新、削除
