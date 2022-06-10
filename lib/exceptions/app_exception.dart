@@ -12,5 +12,5 @@ class AppException implements Exception {
   final String? detail;
 
   @override
-  String toString() => '$title, $detail';
+  String toString() => '${title ?? ''}${detail != null ? ', $detail' : ''}';
 }
