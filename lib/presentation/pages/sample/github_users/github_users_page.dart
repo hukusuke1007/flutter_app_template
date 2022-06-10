@@ -70,7 +70,7 @@ class GithubUsersPage extends HookConsumerWidget {
                   return ListTile(
                     leading: CircleThumbnail(
                       size: 40,
-                      url: data.url,
+                      url: data.avatarUrl,
                     ),
                     title: Text(
                       data.login,
@@ -87,7 +87,7 @@ class GithubUsersPage extends HookConsumerWidget {
                     onTap: () {
                       final url = data.htmlUrl;
                       if (url != null) {
-                        launch(data.url);
+                        launch(url);
                       }
                     },
                   );
