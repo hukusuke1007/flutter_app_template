@@ -103,6 +103,10 @@ dependencies:
   # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
 #  device_preview: ^1.0.0
 
+  # Api
+  retrofit:
+  dio:
+
   # Widget
   flutter_fadein:
   flutter_cupertino_datetime_picker:
@@ -141,6 +145,7 @@ dev_dependencies:
   build_runner: ^2.1.10
   freezed: ^2.0.3+1
   flutter_gen_runner:
+  retrofit_generator:
 
   # Other
   flutter_launcher_icons:

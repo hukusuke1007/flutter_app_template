@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,6 +9,14 @@ import '../../custom_hooks/use_effect_once.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});
+
+  static Future<void> show(BuildContext context) {
+    return Navigator.of(context).push<void>(
+      CupertinoPageRoute(
+        builder: (_) => const LocalCounterPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,6 +39,9 @@ class LocalCounterPage extends HookConsumerWidget {
           ),
         ),
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,15 +1,11 @@
 include: package:pedantic_mono/analysis_options.yaml
 analyzer:
-  #  errors:
-  #    missing_required_param: error
-  #    missing_return: warning
-  #    sdk_version_async_exported_from_core: ignore
-  #    import_of_legacy_library_into_null_safe: false
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
-    - lib/**/*.chopper.dart
     - lib/l10n/*.dart
+  errors:
+    invalid_annotation_target: ignore
 linter:
   rules:
     sort_pub_dependencies: false

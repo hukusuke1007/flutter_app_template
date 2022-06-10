@@ -72,12 +72,8 @@ class WebViewPage extends HookConsumerWidget {
           ),
           maxLines: 1,
         ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: Navigator.of(context).pop,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         actions: [
           PopupMenuButton<int>(

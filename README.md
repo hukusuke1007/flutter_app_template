@@ -2,31 +2,32 @@
 
 Flutter + Firebase アプリのスターターキット、新規アプリ開発はこのテンプレートをベースに始める。
 
-| カテゴリ      | 説明                          |
-| ------------- | ----------------------------- |
-| 状態管理と DI | flutter_hooks, hooks_riverpod |
-| データモデル  | freezed                       |
-| クラウド DB   | cloud_firestore               |
-| ローカル DB   | shared_preferences            |
+| カテゴリ         | 説明                          |
+| ---------------- | ----------------------------- |
+| 状態管理と DI    | flutter_hooks, hooks_riverpod |
+| データモデル     | freezed                       |
+| クラウド DB      | cloud_firestore               |
+| ローカル DB      | shared_preferences            |
+| API クライアント | retrofit                      |
 
 ### 環境
 
-Flutter Stable 3.0.0
+Flutter Stable 3.0.1
 
 ### 画面構成
 
 - タブ 1
   - Hero アニメーションによるモーダル表示
+  - SharedPreferences を用いた カウンター画面
+  - Firestore を用いた カウンター画面
 - タブ 2
-  - SharedPreferences を用いた カウンター
+  - GithubApi を用いた Github Users の一覧画面
 - タブ 3
-  - Firestore を用いた カウンター
-- タブ 4
   - Firestore を用いた Memo データ一覧と CRUD
     - データの追加、更新、削除
     - データ一覧の Pull-to-refresh
     - データ一覧の Infinite Scroll Pagination
-- タブ 5
+- タブ 4
   - 設定画面
     - プロフィール 「名前」「誕生日」「画像」の表示と保存
     - アプリ名、パッケージ名、バージョンを表示
@@ -38,6 +39,7 @@ Flutter Stable 3.0.0
 - iOS13、Android7 以上で動作
 - DDD ライクな設計で構築
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
+- retrofit を用いた サンプルコード
 - ボトムナビゲーション構成のサンプル画面
 - 画像選択・保存
 - カメラ、画像のパーミッション設定
@@ -46,7 +48,7 @@ Flutter Stable 3.0.0
 - デバイス向きは縦固定
 - 静的解析導入
 - その他アプリに必要なライブラリを設定済み
-- WIP device_preview 導入 → Flutter3系とFreezed2系対応までお見送り
+- WIP device_preview 導入 → Flutter3 系と Freezed2 系対応までお見送り
 - Android/iOS の Flavor 設定
 - iOS 日本語デフォルト
 - 画面遷移は Navigator 1.0
