@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
+import '../firestore_counter_page.dart';
+import '../local_counter_page.dart';
 import 'detail_page.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -52,6 +54,26 @@ class HomePage extends HookConsumerWidget {
                     ),
                   ),
                 ),
+                ListTile(
+                  title: Text(
+                    'ローカルカウンターのサンプル',
+                    style: context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    LocalCounterPage.show(context);
+                  },
+                ),
+                const Divider(height: 1),
+                ListTile(
+                  title: Text(
+                    'Firestoreカウンターのサンプル',
+                    style: context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    FirestoreCounterPage.show(context);
+                  },
+                ),
+                const Divider(height: 1),
               ],
             ),
           ),

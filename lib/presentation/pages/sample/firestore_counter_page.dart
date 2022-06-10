@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,6 +15,14 @@ import '../../../utils/logger.dart';
 
 class FirestoreCounterPage extends HookConsumerWidget {
   const FirestoreCounterPage({super.key});
+
+  static Future<void> show(BuildContext context) {
+    return Navigator.of(context).push<void>(
+      CupertinoPageRoute(
+        builder: (_) => const FirestoreCounterPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

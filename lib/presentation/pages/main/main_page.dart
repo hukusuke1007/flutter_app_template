@@ -4,9 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../sample/firestore_counter_page.dart';
+import '../sample/github_users/github_users_page.dart';
 import '../sample/home/home_page.dart';
-import '../sample/local_counter_page.dart';
 import '../sample/memo/memo_page.dart';
 import '../sample/setting/setting_page.dart';
 import 'tab_navigator.dart';
@@ -27,14 +26,12 @@ class MainPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final widgets = useState<List<Widget>>([
       const HomePage(),
-      const LocalCounterPage(),
-      const FirestoreCounterPage(),
+      const GithubUsersPage(),
       const MemoPage(),
       const SettingPage(),
     ]);
 
     final navigatorKeys = useState([
-      GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
@@ -73,18 +70,13 @@ class MainPage extends HookConsumerWidget {
               tooltip: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.star),
+              icon: Icon(Icons.people),
               label: 'タブ2',
               tooltip: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.edit),
               label: 'タブ3',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.event_note),
-              label: 'タブ4',
               tooltip: '',
             ),
             BottomNavigationBarItem(
