@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# 自動生成ファイル
+*.freezed.dart linguist-generated=true
+*.g.dart linguist-generated=true
+*.gen.dart linguist-generated=true
