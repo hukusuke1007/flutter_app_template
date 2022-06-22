@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
+/// GithubのユーザーリストをStateNotifierで管理する
 final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
     GithubUsersController, AsyncValue<List<User>>>((ref) {
   return GithubUsersController(ref.read);

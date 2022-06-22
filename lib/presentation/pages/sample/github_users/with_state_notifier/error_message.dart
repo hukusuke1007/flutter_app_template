@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../../extensions/context_extension.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../../../extensions/context_extension.dart';
+import '../../../../widgets/rounded_button.dart';
 
 class ErrorMessage extends StatelessWidget {
   const ErrorMessage({
-    required this.detail,
+    required this.message,
     required this.onTapRetry,
     super.key,
   });
 
-  final String detail;
+  final String message;
   final VoidCallback onTapRetry;
 
   @override
@@ -20,7 +20,7 @@ class ErrorMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'エラーが発生しました\n$detail',
+            'エラーが発生しました\n$message',
             style: context.bodyStyle.copyWith(
               color: Colors.red,
             ),

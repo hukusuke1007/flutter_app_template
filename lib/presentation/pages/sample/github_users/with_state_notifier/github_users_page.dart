@@ -11,7 +11,7 @@ import '../../../../custom_hooks/use_effect_once.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
 import '../../../../widgets/smart_refresher_custom.dart';
 import '../../../../widgets/thumbnail.dart';
-import '../error_message.dart';
+import 'error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});
@@ -23,7 +23,7 @@ class GithubUsersPage extends HookConsumerWidget {
     final refreshController = useRefreshController();
 
     useEffectOnce(() {
-      Future(() async {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         await ref.read(githubUsersControllerProvider.notifier).fetch();
       });
       return null;
@@ -101,7 +101,7 @@ class GithubUsersPage extends HookConsumerWidget {
           );
         },
         error: (e, _) => ErrorMessage(
-          detail: e.toString(),
+          message: e.toString(),
           onTapRetry: () async {
             await ref.read(githubUsersControllerProvider.notifier).fetch();
           },
