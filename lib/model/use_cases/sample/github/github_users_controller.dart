@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
+/// GithubのユーザーリストをStateNotifierで管理する
 final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
     GithubUsersController, AsyncValue<List<User>>>((ref) {
   return GithubUsersController(ref.read);
@@ -11,13 +12,11 @@ final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
 class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
   GithubUsersController(
     this._read,
-  ) : super(
-          const AsyncValue.loading(),
-        );
+  ) : super(const AsyncValue.loading());
 
   final Reader _read;
 
-  int _pageOffset = 0;
+  int? _lastUserId;
   bool _loading = false;
   final _pageCount = 20;
 
@@ -31,15 +30,15 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
     }
     _loading = true;
 
-    _pageOffset = 0;
+    _lastUserId = 0;
 
     final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
-        since: _pageOffset,
+        since: _lastUserId,
         perPage: _pageCount,
       );
       if (data.isNotEmpty) {
-        _pageOffset = data.length;
+        _lastUserId = data.last.id;
       }
       return data;
     });
@@ -57,11 +56,11 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
 
     final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
-        since: _pageOffset,
+        since: _lastUserId,
         perPage: _pageCount,
       );
       if (data.isNotEmpty) {
-        _pageOffset += data.length;
+        _lastUserId = data.last.id;
       }
       final value = state.value ?? [];
       return [...value, ...data];

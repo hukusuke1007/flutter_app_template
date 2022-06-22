@@ -16,11 +16,9 @@ final githubApiRepositoryProvider = Provider<GithubApiRepository>((ref) {
 class GithubApiRepository {
   GithubApiRepository(
     Reader read,
-  ) {
-    _client = read(githubApiClientProvider);
-  }
+  ) : _client = read(githubApiClientProvider);
 
-  late final GithubApiClient _client;
+  final GithubApiClient _client;
 
   Future<List<User>> fetchUsers({
     int? since,

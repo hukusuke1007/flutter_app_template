@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../sample/github_users/github_users_page.dart';
+import '../sample/github_users/with_state_notifier/github_users_page.dart';
 import '../sample/home/home_page.dart';
 import '../sample/memo/memo_page.dart';
 import '../sample/setting/setting_page.dart';

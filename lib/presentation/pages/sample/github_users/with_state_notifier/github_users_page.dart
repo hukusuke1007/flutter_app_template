@@ -5,13 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../extensions/context_extension.dart';
-import '../../../../model/use_cases/sample/github/github_users_controller.dart';
-import '../../../custom_hooks/use_effect_once.dart';
-import '../../../custom_hooks/use_refresh_controller.dart';
-import '../../../widgets/rounded_button.dart';
-import '../../../widgets/smart_refresher_custom.dart';
-import '../../../widgets/thumbnail.dart';
+import '../../../../../extensions/context_extension.dart';
+import '../../../../../model/use_cases/sample/github/github_users_controller.dart';
+import '../../../../custom_hooks/use_effect_once.dart';
+import '../../../../custom_hooks/use_refresh_controller.dart';
+import '../../../../widgets/smart_refresher_custom.dart';
+import '../../../../widgets/thumbnail.dart';
+import 'error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});
@@ -23,7 +23,7 @@ class GithubUsersPage extends HookConsumerWidget {
     final refreshController = useRefreshController();
 
     useEffectOnce(() {
-      Future(() async {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         await ref.read(githubUsersControllerProvider.notifier).fetch();
       });
       return null;
@@ -100,35 +100,11 @@ class GithubUsersPage extends HookConsumerWidget {
             ),
           );
         },
-        error: (e, _) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'エラーが発生しました\n${e.toString()}',
-                style: context.bodyStyle.copyWith(
-                  color: Colors.red,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: RoundedButton(
-                  onTap: () async {
-                    await ref
-                        .read(githubUsersControllerProvider.notifier)
-                        .fetch();
-                  },
-                  child: Text(
-                    '再試行',
-                    style: context.bodyStyle.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        error: (e, _) => ErrorMessage(
+          message: e.toString(),
+          onTapRetry: () async {
+            await ref.read(githubUsersControllerProvider.notifier).fetch();
+          },
         ),
         loading: () => const Center(
           child: CupertinoActivityIndicator(),
