@@ -15,7 +15,7 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
 
   final Reader _read;
 
-  int _pageOffset = 0;
+  int? _lastUserId;
   bool _loading = false;
   final _pageCount = 20;
 
@@ -29,15 +29,15 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
     }
     _loading = true;
 
-    _pageOffset = 0;
+    _lastUserId = 0;
 
     final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
-        since: _pageOffset,
+        since: _lastUserId,
         perPage: _pageCount,
       );
       if (data.isNotEmpty) {
-        _pageOffset = data.length;
+        _lastUserId = data.last.id;
       }
       return data;
     });
@@ -55,11 +55,11 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
 
     final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
-        since: _pageOffset,
+        since: _lastUserId,
         perPage: _pageCount,
       );
       if (data.isNotEmpty) {
-        _pageOffset += data.length;
+        _lastUserId = data.last.id;
       }
       final value = state.value ?? [];
       return [...value, ...data];
