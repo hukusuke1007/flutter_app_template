@@ -11,9 +11,7 @@ final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
 class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
   GithubUsersController(
     this._read,
-  ) : super(
-          const AsyncValue.loading(),
-        );
+  ) : super(const AsyncValue.loading());
 
   final Reader _read;
 

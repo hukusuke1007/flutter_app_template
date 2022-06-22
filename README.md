@@ -57,7 +57,6 @@ Flutter Stable 3.0.1
 
 ### やっていないこと
 
-- REST API を用いたサンプルコード
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
