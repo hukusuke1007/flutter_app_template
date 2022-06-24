@@ -53,108 +53,105 @@ class MemoPage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: Scrollbar(
-        controller: scrollController,
-        child: SmartRefresher(
-          header: const SmartRefreshHeader(),
-          footer: const SmartRefreshFooter(),
-          // ignore: avoid_redundant_argument_values
-          enablePullDown: true,
-          enablePullUp: true,
-          controller: refreshController,
-          physics: const BouncingScrollPhysics(),
-          onRefresh: () async {
-            final result = await ref.read(memoProvider.notifier).fetch();
-            result.when(
-              success: () {
-                refreshController.refreshCompleted();
-              },
-              failure: (e) {
-                refreshController.refreshCompleted();
-                context.showSnackBar(
-                  e.errorMessage,
-                  backgroundColor: Colors.grey,
-                );
-              },
-            );
-          },
-          onLoading: () async {
-            final result = await ref.read(memoProvider.notifier).fetchMore();
-            result.when(
-              success: () {
-                refreshController.loadComplete();
-              },
-              failure: (e) {
-                refreshController.loadComplete();
-                context.showSnackBar(
-                  e.errorMessage,
-                  backgroundColor: Colors.grey,
-                );
-              },
-            );
-          },
-          child: ListView.separated(
-            controller: scrollController,
-            itemBuilder: (BuildContext context, int index) {
-              final data = items[index];
-              return Slidable(
-                endActionPane: ActionPane(
-                  motion: const ScrollMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: (_) async {
-                        final docId = data.memoId;
-                        if (docId == null) {
-                          return;
-                        }
-                        final alertResult = await showOkCancelAlertDialog(
-                          context: context,
-                          title: '削除しますか？',
-                        );
-                        if (alertResult == OkCancelResult.cancel) {
-                          return;
-                        }
-                        final result =
-                            await ref.read(memoProvider.notifier).remove(docId);
-                        result.when(
-                          success: () {
-                            context.showSnackBar('削除しました');
-                          },
-                          failure: (e) {
-                            context.showSnackBar(
-                              e.errorMessage,
-                              backgroundColor: Colors.grey,
-                            );
-                          },
-                        );
-                      },
-                      backgroundColor: Colors.redAccent,
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: '削除',
-                    ),
-                  ],
-                ),
-                child: ListTile(
-                  title: Text(
-                    data.text ?? '',
-                    style: context.bodyStyle,
-                  ),
-                  trailing: Text(
-                    data.dateLabel,
-                    style: context.smallStyle,
-                  ),
-                  onTap: () {
-                    showEditMemoDialog(context, data: data);
-                  },
-                ),
+      body: SmartRefresher(
+        header: const SmartRefreshHeader(),
+        footer: const SmartRefreshFooter(),
+        // ignore: avoid_redundant_argument_values
+        enablePullDown: true,
+        enablePullUp: true,
+        controller: refreshController,
+        physics: const BouncingScrollPhysics(),
+        onRefresh: () async {
+          final result = await ref.read(memoProvider.notifier).fetch();
+          result.when(
+            success: () {
+              refreshController.refreshCompleted();
+            },
+            failure: (e) {
+              refreshController.refreshCompleted();
+              context.showSnackBar(
+                e.errorMessage,
+                backgroundColor: Colors.grey,
               );
             },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(height: 1);
+          );
+        },
+        onLoading: () async {
+          final result = await ref.read(memoProvider.notifier).fetchMore();
+          result.when(
+            success: () {
+              refreshController.loadComplete();
             },
-            itemCount: items.length,
-          ),
+            failure: (e) {
+              refreshController.loadComplete();
+              context.showSnackBar(
+                e.errorMessage,
+                backgroundColor: Colors.grey,
+              );
+            },
+          );
+        },
+        child: ListView.separated(
+          controller: scrollController,
+          itemBuilder: (BuildContext context, int index) {
+            final data = items[index];
+            return Slidable(
+              endActionPane: ActionPane(
+                motion: const ScrollMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (_) async {
+                      final docId = data.memoId;
+                      if (docId == null) {
+                        return;
+                      }
+                      final alertResult = await showOkCancelAlertDialog(
+                        context: context,
+                        title: '削除しますか？',
+                      );
+                      if (alertResult == OkCancelResult.cancel) {
+                        return;
+                      }
+                      final result =
+                          await ref.read(memoProvider.notifier).remove(docId);
+                      result.when(
+                        success: () {
+                          context.showSnackBar('削除しました');
+                        },
+                        failure: (e) {
+                          context.showSnackBar(
+                            e.errorMessage,
+                            backgroundColor: Colors.grey,
+                          );
+                        },
+                      );
+                    },
+                    backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete,
+                    label: '削除',
+                  ),
+                ],
+              ),
+              child: ListTile(
+                title: Text(
+                  data.text ?? '',
+                  style: context.bodyStyle,
+                ),
+                trailing: Text(
+                  data.dateLabel,
+                  style: context.smallStyle,
+                ),
+                onTap: () {
+                  showEditMemoDialog(context, data: data);
+                },
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider(height: 1);
+          },
+          itemCount: items.length,
         ),
       ),
       floatingActionButton: FloatingActionButton(

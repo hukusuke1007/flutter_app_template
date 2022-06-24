@@ -12,7 +12,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 
 ### 環境
 
-Flutter Stable 3.0.1
+Flutter Stable 3.0.3
 
 ### 画面構成
 
@@ -38,7 +38,7 @@ Flutter Stable 3.0.1
 
 - iOS13、Android7 以上で動作
 - DDD ライクな設計で構築
-- Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
+- Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics)
 - retrofit を用いた サンプルコード
 - ボトムナビゲーション構成のサンプル画面
 - 画像選択・保存

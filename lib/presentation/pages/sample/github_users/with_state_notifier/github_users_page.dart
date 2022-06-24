@@ -43,60 +43,57 @@ class GithubUsersPage extends HookConsumerWidget {
       ),
       body: githubUsers.when(
         data: (items) {
-          return Scrollbar(
-            controller: scrollController,
-            child: SmartRefresher(
-              header: const SmartRefreshHeader(),
-              footer: const SmartRefreshFooter(),
-              // ignore: avoid_redundant_argument_values
-              enablePullDown: true,
-              enablePullUp: true,
-              controller: refreshController,
-              physics: const BouncingScrollPhysics(),
-              onRefresh: () async {
-                await ref.read(githubUsersControllerProvider.notifier).fetch();
-                refreshController.refreshCompleted();
+          return SmartRefresher(
+            header: const SmartRefreshHeader(),
+            footer: const SmartRefreshFooter(),
+            // ignore: avoid_redundant_argument_values
+            enablePullDown: true,
+            enablePullUp: true,
+            controller: refreshController,
+            physics: const BouncingScrollPhysics(),
+            onRefresh: () async {
+              await ref.read(githubUsersControllerProvider.notifier).fetch();
+              refreshController.refreshCompleted();
+            },
+            onLoading: () async {
+              await ref
+                  .read(githubUsersControllerProvider.notifier)
+                  .fetchMore();
+              refreshController.loadComplete();
+            },
+            child: ListView.separated(
+              controller: scrollController,
+              itemBuilder: (BuildContext context, int index) {
+                final data = items[index];
+                return ListTile(
+                  leading: CircleThumbnail(
+                    size: 40,
+                    url: data.avatarUrl,
+                  ),
+                  title: Text(
+                    data.login,
+                    style: context.bodyStyle,
+                  ),
+                  subtitle: Text(
+                    data.htmlUrl ?? '-',
+                    style: context.smallStyle,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                  ),
+                  onTap: () {
+                    final url = data.htmlUrl;
+                    if (url != null) {
+                      launch(url);
+                    }
+                  },
+                );
               },
-              onLoading: () async {
-                await ref
-                    .read(githubUsersControllerProvider.notifier)
-                    .fetchMore();
-                refreshController.loadComplete();
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(height: 1);
               },
-              child: ListView.separated(
-                controller: scrollController,
-                itemBuilder: (BuildContext context, int index) {
-                  final data = items[index];
-                  return ListTile(
-                    leading: CircleThumbnail(
-                      size: 40,
-                      url: data.avatarUrl,
-                    ),
-                    title: Text(
-                      data.login,
-                      style: context.bodyStyle,
-                    ),
-                    subtitle: Text(
-                      data.htmlUrl ?? '-',
-                      style: context.smallStyle,
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                    ),
-                    onTap: () {
-                      final url = data.htmlUrl;
-                      if (url != null) {
-                        launch(url);
-                      }
-                    },
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider(height: 1);
-                },
-                itemCount: items.length,
-              ),
+              itemCount: items.length,
             ),
           );
         },

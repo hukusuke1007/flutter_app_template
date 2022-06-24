@@ -52,20 +52,35 @@ class GithubUsersPage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: Scrollbar(
-        controller: scrollController,
-        child: SmartRefresher(
-          header: const SmartRefreshHeader(),
-          footer: const SmartRefreshFooter(),
-          // ignore: avoid_redundant_argument_values
-          enablePullDown: true,
-          enablePullUp: true,
-          controller: refreshController,
-          physics: const BouncingScrollPhysics(),
-          onRefresh: () async {
-            final result = await ref.read(fetchGithubUsersProvider)();
+      body: SmartRefresher(
+        header: const SmartRefreshHeader(),
+        footer: const SmartRefreshFooter(),
+        // ignore: avoid_redundant_argument_values
+        enablePullDown: true,
+        enablePullUp: true,
+        controller: refreshController,
+        physics: const BouncingScrollPhysics(),
+        onRefresh: () async {
+          final result = await ref.read(fetchGithubUsersProvider)();
+          result.when(
+            success: (data) => githubUsersState.value = data,
+            failure: (e) {
+              showOkAlertDialog(
+                context: gContext,
+                title: 'エラーが発生しました\n${e.toString()}',
+              );
+            },
+          );
+          refreshController.refreshCompleted();
+        },
+        onLoading: () async {
+          final items = githubUsersState.value;
+          if (items.isNotEmpty) {
+            final result = await ref.read(fetchGithubUsersProvider)(
+              lastUserId: items.last.id,
+            );
             result.when(
-              success: (data) => githubUsersState.value = data,
+              success: (data) => githubUsersState.value = [...items, ...data],
               failure: (e) {
                 showOkAlertDialog(
                   context: gContext,
@@ -73,61 +88,43 @@ class GithubUsersPage extends HookConsumerWidget {
                 );
               },
             );
-            refreshController.refreshCompleted();
-          },
-          onLoading: () async {
-            final items = githubUsersState.value;
-            if (items.isNotEmpty) {
-              final result = await ref.read(fetchGithubUsersProvider)(
-                lastUserId: items.last.id,
-              );
-              result.when(
-                success: (data) => githubUsersState.value = [...items, ...data],
-                failure: (e) {
-                  showOkAlertDialog(
-                    context: gContext,
-                    title: 'エラーが発生しました\n${e.toString()}',
-                  );
-                },
-              );
-            }
-            refreshController.loadComplete();
-          },
+          }
+          refreshController.loadComplete();
+        },
 
-          child: ListView.separated(
-            controller: scrollController,
-            itemBuilder: (BuildContext context, int index) {
-              final data = githubUsersState.value[index];
-              return ListTile(
-                leading: CircleThumbnail(
-                  size: 40,
-                  url: data.avatarUrl,
-                ),
-                title: Text(
-                  data.login,
-                  style: context.bodyStyle,
-                ),
-                subtitle: Text(
-                  data.htmlUrl ?? '-',
-                  style: context.smallStyle,
-                ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                ),
-                onTap: () {
-                  final url = data.htmlUrl;
-                  if (url != null) {
-                    launch(url);
-                  }
-                },
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(height: 1);
-            },
-            itemCount: githubUsersState.value.length,
-          ),
+        child: ListView.separated(
+          controller: scrollController,
+          itemBuilder: (BuildContext context, int index) {
+            final data = githubUsersState.value[index];
+            return ListTile(
+              leading: CircleThumbnail(
+                size: 40,
+                url: data.avatarUrl,
+              ),
+              title: Text(
+                data.login,
+                style: context.bodyStyle,
+              ),
+              subtitle: Text(
+                data.htmlUrl ?? '-',
+                style: context.smallStyle,
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+              ),
+              onTap: () {
+                final url = data.htmlUrl;
+                if (url != null) {
+                  launch(url);
+                }
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider(height: 1);
+          },
+          itemCount: githubUsersState.value.length,
         ),
       ),
     );

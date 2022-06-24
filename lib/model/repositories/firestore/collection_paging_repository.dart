@@ -72,6 +72,9 @@ class CollectionPagingRepository<T extends Object> {
   Future<List<Document<T>>> fetchMore({
     Source source = Source.serverAndCache,
   }) async {
+    if (_startAfterDocument == null) {
+      return [];
+    }
     final documents =
         await _fetch(source: source, startAfterDocument: _startAfterDocument);
     return documents
