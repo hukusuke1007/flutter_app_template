@@ -27,7 +27,7 @@ class SharedPreferencesRepository {
     if (value is List<String>) {
       return _prefs.setStringList(key.value, value);
     }
-    return false;
+    throw UnsupportedError('Not support \'$value\'');
   }
 
   T? fetch<T>(SharedPreferencesKey key) {
