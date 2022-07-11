@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../model/use_cases/auth/fetch_logged_in_with_anonymously.dart';
 import '../../../model/use_cases/auth/sign_in_with_anonymously.dart';
 import '../../../presentation/pages/main/main_page.dart';
+import '../../presentation/custom_hooks/use_effect_once.dart';
 import '../../utils/provider.dart';
 
 class StartUpPage extends HookConsumerWidget {

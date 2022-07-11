@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +9,7 @@ import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
 import '../../../model/entities/sample/counter.dart';
 import '../../../model/use_cases/sample/firestore_counter.dart';
+import '../../../presentation/custom_hooks/use_effect_once.dart';
 import '../../../presentation/widgets/rounded_button.dart';
 import '../../../utils/logger.dart';
 
