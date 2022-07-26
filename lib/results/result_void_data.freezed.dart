@@ -300,7 +300,7 @@ class _$Failure implements Failure {
 abstract class Failure implements ResultVoidData {
   const factory Failure(final AppException error) = _$Failure;
 
-  AppException get error => throw _privateConstructorUsedError;
+  AppException get error;
   @JsonKey(ignore: true)
   _$$FailureCopyWith<_$Failure> get copyWith =>
       throw _privateConstructorUsedError;

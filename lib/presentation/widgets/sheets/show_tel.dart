@@ -17,14 +17,14 @@ Future<void> showTel(BuildContext context, String phoneNumber) async {
       cancelLabel: 'キャンセル',
     );
     if (result == true) {
-      await launch('tel:$phoneNumber');
+      await launchUrl(Uri.parse('tel:$phoneNumber'));
     }
   } else {
     if (_isTapped) {
       return;
     }
     _isTapped = true;
-    await launch('tel:$phoneNumber');
+    await launchUrl(Uri.parse('tel:$phoneNumber'));
     _isTapped = false;
   }
 }

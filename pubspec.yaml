@@ -20,9 +20,9 @@ dependencies:
   shared_preferences:
 
   # Riverpod
-  flutter_hooks: ^0.18.4
+  flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^1.0.4
-  freezed_annotation: ^2.0.3
+  freezed_annotation: ^2.1.0
   json_annotation:
 
   # Dialog
@@ -77,7 +77,7 @@ dependencies:
   numberpicker:
 
   # PullToRefresh
-  pull_to_refresh:
+  pull_to_refresh_flutter3:
 
   # Scroll
   extended_nested_scroll_view: ^6.0.0-dev.1
@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.16.0
+  firebase_core: ^1.20.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,7 +96,7 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.13
+  flutter_local_notifications: ^10.0.0-dev.17
   flutter_native_timezone:
 
   # Preview
@@ -112,9 +112,8 @@ dependencies:
   flutter_cupertino_datetime_picker:
   flutter_app_badger:
   badges:
-  flutter_slidable: ^1.2.1
+  flutter_slidable:
   dismissible_page:
-  another_flushbar: ^1.10.29
 
   # Other
   uuid:
@@ -136,14 +135,14 @@ dev_dependencies:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono: ^1.19.0+1
+  pedantic_mono:
 
   # Serializer
   json_serializable:
 
   # Code generator
-  build_runner: ^2.1.10
-  freezed: ^2.0.3+1
+  build_runner:
+  freezed: ^2.1.0
   flutter_gen_runner:
   retrofit_generator:
 

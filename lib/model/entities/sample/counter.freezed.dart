@@ -167,7 +167,9 @@ class _$_Counter extends _Counter {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CounterToJson(this);
+    return _$$_CounterToJson(
+      this,
+    );
   }
 }
 
@@ -181,13 +183,13 @@ abstract class _Counter extends Counter {
   factory _Counter.fromJson(Map<String, dynamic> json) = _$_Counter.fromJson;
 
   @override
-  int? get count => throw _privateConstructorUsedError;
+  int? get count;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_CounterCopyWith<_$_Counter> get copyWith =>

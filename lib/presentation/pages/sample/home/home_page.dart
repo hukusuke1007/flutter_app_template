@@ -45,7 +45,7 @@ class HomePage extends HookConsumerWidget {
                   child: Hero(
                     tag: 'neko',
                     child: Image.asset(
-                      Assets.images.neko.assetName,
+                      Assets.images.neko.path,
                       width: 200,
                       fit: BoxFit.fitWidth,
                     ),

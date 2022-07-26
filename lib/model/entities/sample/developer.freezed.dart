@@ -20,7 +20,7 @@ Developer _$DeveloperFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Developer {
-  String get developerId => throw _privateConstructorUsedError;
+  String? get developerId => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   StorageFile? get image => throw _privateConstructorUsedError;
   @DateTimeTimestampConverter()
@@ -41,7 +41,7 @@ abstract class $DeveloperCopyWith<$Res> {
   factory $DeveloperCopyWith(Developer value, $Res Function(Developer) then) =
       _$DeveloperCopyWithImpl<$Res>;
   $Res call(
-      {String developerId,
+      {String? developerId,
       String? name,
       StorageFile? image,
       @DateTimeTimestampConverter() DateTime? birthdate,
@@ -72,7 +72,7 @@ class _$DeveloperCopyWithImpl<$Res> implements $DeveloperCopyWith<$Res> {
       developerId: developerId == freezed
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
       __$$_DeveloperCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String developerId,
+      {String? developerId,
       String? name,
       StorageFile? image,
       @DateTimeTimestampConverter() DateTime? birthdate,
@@ -149,7 +149,7 @@ class __$$_DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
       developerId: developerId == freezed
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -178,7 +178,7 @@ class __$$_DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Developer extends _Developer {
   const _$_Developer(
-      {required this.developerId,
+      {this.developerId,
       this.name,
       this.image,
       @DateTimeTimestampConverter() this.birthdate,
@@ -190,7 +190,7 @@ class _$_Developer extends _Developer {
       _$$_DeveloperFromJson(json);
 
   @override
-  final String developerId;
+  final String? developerId;
   @override
   final String? name;
   @override
@@ -242,13 +242,15 @@ class _$_Developer extends _Developer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DeveloperToJson(this);
+    return _$$_DeveloperToJson(
+      this,
+    );
   }
 }
 
 abstract class _Developer extends Developer {
   const factory _Developer(
-      {required final String developerId,
+      {final String? developerId,
       final String? name,
       final StorageFile? image,
       @DateTimeTimestampConverter() final DateTime? birthdate,
@@ -260,20 +262,20 @@ abstract class _Developer extends Developer {
       _$_Developer.fromJson;
 
   @override
-  String get developerId => throw _privateConstructorUsedError;
+  String? get developerId;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
-  StorageFile? get image => throw _privateConstructorUsedError;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get birthdate => throw _privateConstructorUsedError;
+  StorageFile? get image;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get birthdate;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_DeveloperCopyWith<_$_Developer> get copyWith =>

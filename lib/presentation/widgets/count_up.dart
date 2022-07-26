@@ -41,10 +41,10 @@ class CountUp extends StatefulWidget {
   final String suffix;
 
   @override
-  _State createState() => _State();
+  CountUpState createState() => CountUpState();
 }
 
-class _State extends State<CountUp> with TickerProviderStateMixin {
+class CountUpState extends State<CountUp> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   double? _latestBegin;

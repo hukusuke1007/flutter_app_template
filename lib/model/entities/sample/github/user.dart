@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+/// build.yamlで `field_rename: snake` にしているためJsonKey指定しなくても良いけど、
+/// サンプルコードとして残したいのでJsonKeyを使う
 @freezed
 class User with _$User {
   const factory User({

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../extensions/context_extension.dart';
@@ -85,7 +85,7 @@ class GithubUsersPage extends HookConsumerWidget {
                   onTap: () {
                     final url = data.htmlUrl;
                     if (url != null) {
-                      launch(url);
+                      launchUrl(Uri.parse(url));
                     }
                   },
                 );

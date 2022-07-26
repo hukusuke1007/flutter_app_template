@@ -192,7 +192,9 @@ class _$_StorageFile extends _StorageFile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StorageFileToJson(this);
+    return _$$_StorageFileToJson(
+      this,
+    );
   }
 }
 
@@ -208,13 +210,13 @@ abstract class _StorageFile extends StorageFile {
       _$_StorageFile.fromJson;
 
   @override
-  String get url => throw _privateConstructorUsedError;
+  String get url;
   @override
-  String get path => throw _privateConstructorUsedError;
+  String get path;
   @override
-  String? get mimeType => throw _privateConstructorUsedError;
+  String? get mimeType;
   @override
-  Map<String, String>? get metadata => throw _privateConstructorUsedError;
+  Map<String, String>? get metadata;
   @override
   @JsonKey(ignore: true)
   _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
