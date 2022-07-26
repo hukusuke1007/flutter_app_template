@@ -183,7 +183,9 @@ class _$_Memo extends _Memo {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MemoToJson(this);
+    return _$$_MemoToJson(
+      this,
+    );
   }
 }
 
@@ -198,15 +200,15 @@ abstract class _Memo extends Memo {
   factory _Memo.fromJson(Map<String, dynamic> json) = _$_Memo.fromJson;
 
   @override
-  String? get memoId => throw _privateConstructorUsedError;
+  String? get memoId;
   @override
-  String? get text => throw _privateConstructorUsedError;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  String? get text;
   @override
   @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
+  @override
+  @DateTimeTimestampConverter()
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_MemoCopyWith<_$_Memo> get copyWith => throw _privateConstructorUsedError;

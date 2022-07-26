@@ -200,7 +200,7 @@ class _$Success<T> implements Success<T> {
 abstract class Success<T> implements ResultData<T> {
   const factory Success(final T data) = _$Success<T>;
 
-  T get data => throw _privateConstructorUsedError;
+  T get data;
   @JsonKey(ignore: true)
   _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -333,7 +333,7 @@ class _$Failure<T> implements Failure<T> {
 abstract class Failure<T> implements ResultData<T> {
   const factory Failure(final AppException error) = _$Failure<T>;
 
-  AppException get error => throw _privateConstructorUsedError;
+  AppException get error;
   @JsonKey(ignore: true)
   _$$FailureCopyWith<T, _$Failure<T>> get copyWith =>
       throw _privateConstructorUsedError;

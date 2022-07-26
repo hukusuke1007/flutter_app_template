@@ -32,7 +32,7 @@ class DetailPage extends StatelessWidget {
           child: Stack(
             children: [
               Image.asset(
-                Assets.images.neko.assetName,
+                Assets.images.neko.path,
                 fit: BoxFit.fitHeight,
                 height: 300,
               ),

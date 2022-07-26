@@ -38,7 +38,7 @@ Flutter Stable 3.0.5
 
 - iOS13、Android7 以上で動作
 - DDD ライクな設計で構築
-- Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics)
+- Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - retrofit を用いた サンプルコード
 - ボトムナビゲーション構成のサンプル画面
 - 画像選択・保存

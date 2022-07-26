@@ -12,7 +12,7 @@ part 'developer.g.dart';
 @freezed
 class Developer with _$Developer {
   const factory Developer({
-    required String developerId,
+    String? developerId,
     String? name,
     StorageFile? image,
     @DateTimeTimestampConverter() DateTime? birthdate,

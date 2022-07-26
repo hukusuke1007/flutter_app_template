@@ -466,7 +466,9 @@ class _$_User extends _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserToJson(
+      this,
+    );
   }
 }
 
@@ -495,55 +497,55 @@ abstract class _User extends User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String get login => throw _privateConstructorUsedError;
+  String get login;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(name: 'node_id')
-  String? get nodeId => throw _privateConstructorUsedError;
+  String? get nodeId;
   @override
   @JsonKey(name: 'avatar_url')
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get avatarUrl;
   @override
   @JsonKey(name: 'gravatar_id')
-  String? get gravatarId => throw _privateConstructorUsedError;
+  String? get gravatarId;
   @override
-  String get url => throw _privateConstructorUsedError;
+  String get url;
   @override
   @JsonKey(name: 'html_url')
-  String? get htmlUrl => throw _privateConstructorUsedError;
+  String? get htmlUrl;
   @override
   @JsonKey(name: 'followers_url')
-  String? get followersUrl => throw _privateConstructorUsedError;
+  String? get followersUrl;
   @override
   @JsonKey(name: 'following_url')
-  String? get followingUrl => throw _privateConstructorUsedError;
+  String? get followingUrl;
   @override
   @JsonKey(name: 'gists_url')
-  String? get gistsUrl => throw _privateConstructorUsedError;
+  String? get gistsUrl;
   @override
   @JsonKey(name: 'starred_url')
-  String? get starredUrl => throw _privateConstructorUsedError;
+  String? get starredUrl;
   @override
   @JsonKey(name: 'subscriptions_url')
-  String? get subscriptionsUrl => throw _privateConstructorUsedError;
+  String? get subscriptionsUrl;
   @override
   @JsonKey(name: 'organizations_url')
-  String? get organizationsUrl => throw _privateConstructorUsedError;
+  String? get organizationsUrl;
   @override
   @JsonKey(name: 'repos_url')
-  String? get reposUrl => throw _privateConstructorUsedError;
+  String? get reposUrl;
   @override
   @JsonKey(name: 'events_url')
-  String? get eventsUrl => throw _privateConstructorUsedError;
+  String? get eventsUrl;
   @override
   @JsonKey(name: 'received_events_url')
-  String? get receivedEventsUrl => throw _privateConstructorUsedError;
+  String? get receivedEventsUrl;
   @override
-  String? get type => throw _privateConstructorUsedError;
+  String? get type;
   @override
   @JsonKey(name: 'site_admin')
-  bool get siteAdmin => throw _privateConstructorUsedError;
+  bool get siteAdmin;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

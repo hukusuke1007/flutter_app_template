@@ -6,20 +6,36 @@ part of 'memo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => _$_Memo(
-      memoId: json['memoId'] as String?,
-      text: json['text'] as String?,
-      createdAt: const DateTimeTimestampConverter()
-          .fromJson(json['createdAt'] as Timestamp?),
-      updatedAt: const DateTimeTimestampConverter()
-          .fromJson(json['updatedAt'] as Timestamp?),
+_$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => $checkedCreate(
+      r'_$_Memo',
+      json,
+      ($checkedConvert) {
+        final val = _$_Memo(
+          memoId: $checkedConvert('memo_id', (v) => v as String?),
+          text: $checkedConvert('text', (v) => v as String?),
+          createdAt: $checkedConvert(
+              'created_at',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+          updatedAt: $checkedConvert(
+              'updated_at',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'memoId': 'memo_id',
+        'createdAt': 'created_at',
+        'updatedAt': 'updated_at'
+      },
     );
 
 Map<String, dynamic> _$$_MemoToJson(_$_Memo instance) => <String, dynamic>{
-      'memoId': instance.memoId,
+      'memo_id': instance.memoId,
       'text': instance.text,
-      'createdAt':
+      'created_at':
           const DateTimeTimestampConverter().toJson(instance.createdAt),
-      'updatedAt':
+      'updated_at':
           const DateTimeTimestampConverter().toJson(instance.updatedAt),
     };
