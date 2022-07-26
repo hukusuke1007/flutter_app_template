@@ -85,7 +85,7 @@ class GithubUsersPage extends HookConsumerWidget {
                   onTap: () {
                     final url = data.htmlUrl;
                     if (url != null) {
-                      launch(url);
+                      launchUrl(Uri.parse(url));
                     }
                   },
                 );

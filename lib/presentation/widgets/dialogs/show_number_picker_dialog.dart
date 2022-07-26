@@ -46,10 +46,10 @@ class DecimalPicker extends StatefulWidget {
   final void Function(double) onChange;
 
   @override
-  _DecimalPickerState createState() => _DecimalPickerState();
+  DecimalPickerState createState() => DecimalPickerState();
 }
 
-class _DecimalPickerState extends State<DecimalPicker> {
+class DecimalPickerState extends State<DecimalPicker> {
   double? _currentValue;
 
   @override

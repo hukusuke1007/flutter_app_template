@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.16.0
+  firebase_core: ^1.20.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -114,7 +114,6 @@ dependencies:
   badges:
   flutter_slidable: ^1.2.1
   dismissible_page:
-  another_flushbar: ^1.10.29
 
   # Other
   uuid:

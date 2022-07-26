@@ -18,14 +18,14 @@ Future<File?> showPhotoAndCropBottomSheet(
       return null;
     }
     final cropFile = await cropAvatar(file.path);
-    return cropFile;
+    return cropFile != null ? File(cropFile.path) : null;
   } else if (result == PhotoType.album) {
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file == null) {
       return null;
     }
     final cropFile = await cropAvatar(file.path);
-    return cropFile;
+    return cropFile != null ? File(cropFile.path) : null;
   }
   return null;
 }

@@ -5,13 +5,13 @@ import 'package:image_cropper/image_cropper.dart';
 
 import '../../gen/colors.gen.dart';
 
-Future<File?> cropAvatar(String path) =>
+Future<CroppedFile?> cropAvatar(String path) =>
     _cropImage(path, cropStyle: CropStyle.circle, toolbarTitle: 'プロフィール');
 
-Future<File?> cropThumbnail(String path, {String title = 'サムネイル'}) =>
+Future<CroppedFile?> cropThumbnail(String path, {String title = 'サムネイル'}) =>
     _cropImage(path, cropStyle: CropStyle.rectangle, toolbarTitle: title);
 
-Future<File?> _cropImage(
+Future<CroppedFile?> _cropImage(
   String path, {
   required CropStyle cropStyle,
   required String toolbarTitle,
@@ -39,17 +39,19 @@ Future<File?> _cropImage(
     }
   }
 
-  final file = await ImageCropper.cropImage(
+  final file = await ImageCropper().cropImage(
     sourcePath: path,
     cropStyle: cropStyle,
     aspectRatioPresets: getPresets(),
-    androidUiSettings: AndroidUiSettings(
-      toolbarTitle: toolbarTitle,
-      toolbarColor: ColorName.primary,
-      toolbarWidgetColor: Colors.white,
-      initAspectRatio: CropAspectRatioPreset.original,
-      lockAspectRatio: false,
-    ),
+    uiSettings: [
+      AndroidUiSettings(
+        toolbarTitle: toolbarTitle,
+        toolbarColor: ColorName.primary,
+        toolbarWidgetColor: Colors.white,
+        initAspectRatio: CropAspectRatioPreset.original,
+        lockAspectRatio: false,
+      ),
+    ],
   );
   return file;
 }
