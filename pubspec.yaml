@@ -77,7 +77,7 @@ dependencies:
   numberpicker:
 
   # PullToRefresh
-  pull_to_refresh:
+  pull_to_refresh_flutter3:
 
   # Scroll
   extended_nested_scroll_view: ^6.0.0-dev.1
