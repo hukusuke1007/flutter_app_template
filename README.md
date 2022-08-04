@@ -128,12 +128,8 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
 - iOS
 
-  `ExportOptions.plist` を用意してください。
-
-  [ExportOptions.plist サンプル](./ExportOptions.plist) （teamID は `Apple Developer -> Membership`から確認できます）
-
   ```sh
-  flutter build ipa --export-options-plist=ExportOptions.plist --release --dart-define=FLAVOR=prod
+  flutter build ipa --release --dart-define=FLAVOR=prod
   ```
 
 ## 新規プロジェクトへの移行方法
