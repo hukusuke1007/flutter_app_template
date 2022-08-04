@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-11, macos-12]
-        flutter-version: [stable, "3.0.5"]
+        flutter-version: [stable, 3.0.5]
 
     name: flutter_analyze
     runs-on: ${{ matrix.os }}
@@ -24,7 +24,7 @@ jobs:
       - name: set up flutter
         uses: subosito/flutter-action@v2.6.1
         with:
-          channel: ${{ matrix.os }}
+          channel: ${{ matrix.flutter-version }}
           cache: false
       - name: flutter doctor
         run: flutter doctor -v
