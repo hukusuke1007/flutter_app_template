@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: set up repository
-        uses: actions/checkout@latest
+        uses: actions/checkout@v3
       - name: set up flutter
-        uses: subosito/flutter-action@latest
+        uses: subosito/flutter-action@v2.6.1
         with:
           channel: "stable"
           cache: false
