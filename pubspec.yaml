@@ -1,10 +1,10 @@
 name: flutter_app_template
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
   flutter:
@@ -101,7 +101,7 @@ dependencies:
 
   # Preview
   # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
-#  device_preview: ^1.0.0
+  #  device_preview: ^1.0.0
 
   # Api
   retrofit:
@@ -172,7 +172,6 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-
 # flutter_launcher_iconsを利用してアイコンのリサイズする場合はここを設定する
 #flutter_icons:
 #  android: true
