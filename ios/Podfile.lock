@@ -3,11 +3,11 @@ PODS:
     - Flutter
   - "app_settings (3.0.0+1)":
     - Flutter
-  - cloud_firestore (3.4.1):
+  - cloud_firestore (3.4.4):
     - Firebase/Firestore (= 9.3.0)
     - firebase_core
     - Flutter
-  - cloud_functions (3.3.3):
+  - cloud_functions (3.3.4):
     - Firebase/Functions (= 9.3.0)
     - firebase_core
     - Flutter
@@ -38,26 +38,26 @@ PODS:
   - Firebase/Storage (9.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 9.3.0)
-  - firebase_analytics (9.3.0):
+  - firebase_analytics (9.3.1):
     - Firebase/Analytics (= 9.3.0)
     - firebase_core
     - Flutter
-  - firebase_auth (3.5.1):
+  - firebase_auth (3.6.3):
     - Firebase/Auth (= 9.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.20.0):
+  - firebase_core (1.20.1):
     - Firebase/CoreOnly (= 9.3.0)
     - Flutter
-  - firebase_crashlytics (2.8.6):
+  - firebase_crashlytics (2.8.7):
     - Firebase/Crashlytics (= 9.3.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (12.0.1):
+  - firebase_messaging (12.0.2):
     - Firebase/Messaging (= 9.3.0)
     - firebase_core
     - Flutter
-  - firebase_storage (10.3.3):
+  - firebase_storage (10.3.5):
     - Firebase/Storage (= 9.3.0)
     - firebase_core
     - Flutter
@@ -151,7 +151,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_app_badger (1.3.0):
     - Flutter
-  - flutter_image_compress (0.0.1):
+  - flutter_image_compress (1.0.0):
     - Flutter
     - Mantle
     - SDWebImage
@@ -393,16 +393,16 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   app_review: 6f51001269c59a2f4a5b5ae68b7d106401152764
   app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
-  cloud_firestore: bc004ee2498babe8c3df4abfd68754939b398135
-  cloud_functions: 646a1d8ecc5868b97e6c41cb2bc10b7509ba611c
+  cloud_firestore: 683679d43f60e55f9318a5cb03b13637e060a99c
+  cloud_functions: 775c6099a3d9dee3a1bf3e963ddb9596bebc42ac
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Firebase: ef75abb1cdbc746d5a38f4e26c422c807b189b8c
-  firebase_analytics: 8f772ccb3dad1e8968019a158823f99e63069d2b
-  firebase_auth: f6e32ca8921ff9fff94ba73745b67455fee8b22f
-  firebase_core: 96214f90497b808a2cf2a24517084c5f6de37b53
-  firebase_crashlytics: cdba3f556462dd5ee25cc7d28790ff2de2c0edcf
-  firebase_messaging: a2cd2c6dd7b5430bb9e4e50e9a474413ae3bce09
-  firebase_storage: 67c6bff2cda59f5973ea9fb2c4fca845c3055a5b
+  firebase_analytics: 76a3a81b95ea32c1f8dbd900ec751b342d26d543
+  firebase_auth: 3726552033ccc757ef90f046ff2bcf5a13cd34bd
+  firebase_core: e66a443ec996cb5e364dc70b4cfc1809c32cbb2e
+  firebase_crashlytics: 95cb124fe8ba64e9cedad8816b8aee6204f8dbeb
+  firebase_messaging: b414881f438b3b0b1bf1b0dd4b6767c4cfcf4dc7
+  firebase_storage: fcd8643b05fba82ce94633c828ebc9b945cb7c5b
   FirebaseAnalytics: bf46f5163f44097ce2c789de0b3e6f87f1da834a
   FirebaseAppCheckInterop: f6b9670fb1360cf12006ca426e9c3b9a35317d17
   FirebaseAuth: 9ebc3577fe0acf9092df21ac314024b70aebf21e
@@ -422,7 +422,7 @@ SPEC CHECKSUMS:
   FirebaseStorageInternal: f1a6d64cace780580d2b8ffa0a0c8cf3c376f3f8
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_app_badger: b87fc231847b03b92ce1412aa351842e7e97932f
-  flutter_image_compress: fd2b476345226e1a10ea352fa306af95704642c1
+  flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_native_timezone: 5f05b2de06c9776b4cc70e1839f03de178394d22
