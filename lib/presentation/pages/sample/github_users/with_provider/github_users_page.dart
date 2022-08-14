@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/entities/sample/github/user.dart';
 import '../../../../../model/use_cases/sample/github/fetch_github_users.dart';
-import '../../../../../utils/provider.dart';
 import '../../../../custom_hooks/use_effect_once.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
 import '../../../../widgets/show_indicator.dart';
@@ -23,25 +22,41 @@ class GithubUsersPage extends HookConsumerWidget {
     final scrollController = useScrollController();
     final refreshController = useRefreshController();
     final githubUsersState = useState(<User>[]);
-    final gContext = ref.watch(navigatorKeyProvider).currentContext!;
+
+    Future<void> onFetch({
+      int? lastUserId,
+    }) async {
+      final result = await ref.read(fetchGithubUsersProvider)(
+        lastUserId: lastUserId,
+      );
+      result.maybeWhen<void>(
+        error: (e, _) {
+          showOkAlertDialog(
+            context: context,
+            title: 'エラーが発生しました\n${e.toString()}',
+          );
+        },
+        orElse: () {
+          final data = result.value ?? [];
+          if (lastUserId != null && data.isNotEmpty) {
+            githubUsersState.value = [...githubUsersState.value, ...data];
+          } else {
+            githubUsersState.value = data;
+          }
+        },
+      );
+    }
 
     useEffectOnce(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        showIndicator(gContext);
-        final result = await ref.read(fetchGithubUsersProvider)();
-        result.when(
-          success: (data) => githubUsersState.value = data,
-          failure: (e) {
-            showOkAlertDialog(context: gContext, title: 'エラーが発生しました');
-          },
-        );
-        dismissIndicator(gContext);
+      Future(() async {
+        showIndicator(context);
+        await onFetch();
+        dismissIndicator(context);
       });
       return null;
     });
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Github Users',
@@ -61,33 +76,13 @@ class GithubUsersPage extends HookConsumerWidget {
         controller: refreshController,
         physics: const BouncingScrollPhysics(),
         onRefresh: () async {
-          final result = await ref.read(fetchGithubUsersProvider)();
-          result.when(
-            success: (data) => githubUsersState.value = data,
-            failure: (e) {
-              showOkAlertDialog(
-                context: gContext,
-                title: 'エラーが発生しました\n${e.toString()}',
-              );
-            },
-          );
+          await onFetch();
           refreshController.refreshCompleted();
         },
         onLoading: () async {
           final items = githubUsersState.value;
           if (items.isNotEmpty) {
-            final result = await ref.read(fetchGithubUsersProvider)(
-              lastUserId: items.last.id,
-            );
-            result.when(
-              success: (data) => githubUsersState.value = [...items, ...data],
-              failure: (e) {
-                showOkAlertDialog(
-                  context: gContext,
-                  title: 'エラーが発生しました\n${e.toString()}',
-                );
-              },
-            );
+            await onFetch(lastUserId: items.last.id);
           }
           refreshController.loadComplete();
         },

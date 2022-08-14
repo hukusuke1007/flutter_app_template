@@ -21,10 +21,8 @@ class MemoPage extends HookConsumerWidget {
     final items = ref.watch(memoProvider);
     final scrollController = useScrollController();
 
-    /// カスタムフック
     final refreshController = useRefreshController();
 
-    /// カスタムフック
     useEffectOnce(() {
       Future(() async {
         final result = await ref.read(memoProvider.notifier).fetch();

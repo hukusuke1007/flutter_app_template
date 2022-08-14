@@ -30,14 +30,10 @@ class _Dialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /// カスタムフック
     final textKey = useFormFieldStateKey();
 
-    /// カスタムフック
     useEffectOnce(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        textKey.currentState?.didChange(data?.text);
-      });
+      textKey.currentState?.didChange(data?.text);
       return null;
     });
 

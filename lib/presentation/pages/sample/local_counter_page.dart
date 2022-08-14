@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/sample/local_counter.dart';
 import '../../../presentation/widgets/rounded_button.dart';
-import '../../custom_hooks/use_effect_once.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});
@@ -21,13 +20,6 @@ class LocalCounterPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final counter = ref.watch(localCounterProvider);
-
-    useEffectOnce(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(localCounterProvider.notifier).fetch();
-      });
-      return null;
-    });
 
     return Scaffold(
       appBar: AppBar(

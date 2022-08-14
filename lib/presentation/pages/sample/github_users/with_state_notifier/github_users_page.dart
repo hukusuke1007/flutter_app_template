@@ -23,14 +23,13 @@ class GithubUsersPage extends HookConsumerWidget {
     final refreshController = useRefreshController();
 
     useEffectOnce(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Future(() async {
         await ref.read(githubUsersControllerProvider.notifier).fetch();
       });
       return null;
     });
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Github Users',

@@ -41,19 +41,14 @@ class _Dialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(fetchMyProfileProvider).value;
-    final birthdateState = useState<DateTime?>(null);
+    final birthdateState = useState<DateTime?>(profile?.birthdate);
 
-    /// カスタムフック
     final nameFormKey = useFormFieldStateKey();
     final birthdateFormKey = useFormFieldStateKey();
 
-    /// カスタムフック
     useEffectOnce(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        nameFormKey.currentState?.didChange(profile?.name);
-        birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
-        birthdateState.value = profile?.birthdate;
-      });
+      nameFormKey.currentState?.didChange(profile?.name);
+      birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
       return null;
     });
 
@@ -83,8 +78,6 @@ class _Dialog extends HookConsumerWidget {
                   if (selectedImage == null) {
                     return;
                   }
-
-                  logger.info(selectedImage.readAsBytesSync().length);
 
                   /// 圧縮して設定
                   final compressImage =

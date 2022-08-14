@@ -47,7 +47,7 @@ class MemoController extends StateNotifier<List<Memo>> {
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
 
-  /// 一覧取得
+  /// 一覧取得（ResultVoidDataサンプル）
   /// ※状態はstateで管理するので関数の戻り値では返さない
   Future<ResultVoidData> fetch() async {
     try {

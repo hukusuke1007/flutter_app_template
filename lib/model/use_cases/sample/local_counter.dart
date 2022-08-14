@@ -9,7 +9,9 @@ final localCounterProvider =
     StateNotifierProvider<LocalCounter, int>((ref) => LocalCounter(ref.read));
 
 class LocalCounter extends StateNotifier<int> {
-  LocalCounter(this._read) : super(0);
+  LocalCounter(this._read) : super(0) {
+    fetch();
+  }
 
   static SharedPreferencesKey get localCounterKey =>
       SharedPreferencesKey.sampleLocalCounter;

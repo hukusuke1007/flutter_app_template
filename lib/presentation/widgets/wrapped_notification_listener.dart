@@ -36,9 +36,7 @@ class _State extends State<WrappedNotificationListener> {
           if (offset > maxScrollExtent && !_isLoadMore) {
             _isLoadMore = true;
             if (widget.onLoadMore != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                widget.onLoadMore!();
-              });
+              widget.onLoadMore!();
             }
           } else if (_isLoadMore && offset <= maxScrollExtent) {
             _isLoadMore = false;
@@ -50,10 +48,7 @@ class _State extends State<WrappedNotificationListener> {
         if (offset >= maxScrollExtent && !_isLoadMore) {
           _isLoadMore = true;
           if (widget.onLoadMore != null) {
-            //widget.onLoadMore!();
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              widget.onLoadMore!();
-            });
+            widget.onLoadMore!();
           }
         } else if (_isLoadMore && offset < maxScrollExtent) {
           _isLoadMore = false;
