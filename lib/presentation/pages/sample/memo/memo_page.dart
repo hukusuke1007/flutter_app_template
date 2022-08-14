@@ -62,32 +62,28 @@ class MemoPage extends HookConsumerWidget {
         onRefresh: () async {
           final result = await ref.read(memoProvider.notifier).fetch();
           result.when(
-            success: () {
-              refreshController.refreshCompleted();
-            },
+            success: () {},
             failure: (e) {
-              refreshController.refreshCompleted();
               context.showSnackBar(
                 e.errorMessage,
                 backgroundColor: Colors.grey,
               );
             },
           );
+          refreshController.refreshCompleted();
         },
         onLoading: () async {
           final result = await ref.read(memoProvider.notifier).fetchMore();
           result.when(
-            success: () {
-              refreshController.loadComplete();
-            },
+            success: () {},
             failure: (e) {
-              refreshController.loadComplete();
               context.showSnackBar(
                 e.errorMessage,
                 backgroundColor: Colors.grey,
               );
             },
           );
+          refreshController.loadComplete();
         },
         child: ListView.separated(
           controller: scrollController,
