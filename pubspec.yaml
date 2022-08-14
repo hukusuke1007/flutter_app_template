@@ -48,7 +48,7 @@ dependencies:
   map_launcher:
 
   # Setting
-  app_settings: ^4.1.6
+  app_settings:
 
   # Review
   launch_review:
@@ -71,7 +71,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image: ^6.2.1
+  extended_image:
 
   # Picker
   numberpicker:
@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.20.0
+  firebase_core: ^1.20.1
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,12 +96,12 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.17
+  flutter_local_notifications: ^10.0.0-dev.18
   flutter_native_timezone:
 
   # Preview
   # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
-  #  device_preview: ^1.0.0
+  #  device_preview: ^1.1.0
 
   # Api
   retrofit:
