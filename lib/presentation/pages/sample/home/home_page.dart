@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/model/use_cases/sample/fetch_enable_screen_reader.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
+    final enableScreenReader = ref.watch(fetchEnableScreenReaderProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +54,21 @@ class HomePage extends HookConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: Text(
+                  '${() {
+                    if (context.isAndroid) {
+                      return 'Talkback';
+                    } else if (context.isIOS) {
+                      return 'VoiceOver';
+                    }
+                    return '-';
+                  }()}: ${enableScreenReader ? 'ON' : 'OFF'}',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
               const Divider(height: 1),
               ListTile(
                 title: Text(
