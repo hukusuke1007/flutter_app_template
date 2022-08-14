@@ -36,7 +36,7 @@ Flutter Stable 3.0.5
 
 ### 実装済み
 
-- iOS13、Android7 以上で動作
+- iOS14、Android7 以上で動作
 - DDD ライクな設計で構築
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - retrofit を用いた サンプルコード
@@ -47,11 +47,12 @@ Flutter Stable 3.0.5
 - ダークモード対応
 - デバイス向きは縦固定
 - 静的解析導入
-- その他アプリに必要なライブラリを設定済み
-- WIP device_preview 導入 → Flutter3 系と Freezed2 系対応までお見送り
 - Android/iOS の Flavor 設定
 - iOS 日本語デフォルト
 - 画面遷移は Navigator 1.0
+- MethodChannelとEventChannelのサンプルコード
+  - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
+- その他アプリに必要なライブラリを設定済み
 
 ※他プロジェクト移行によるビルドエラーを避けるため import は相対パスで実装していますが、移行後は import は絶対パスで利用します。
 
@@ -60,11 +61,12 @@ Flutter Stable 3.0.5
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
-- iPad 対応（Sizer 導入）
+- iPad 対応
 - ユニットテスト
 - UI テスト
 - dartdoc
 - fastlane
+- WIP device_preview 導入 → Flutter3 系と Freezed2 系対応までお見送り
 
 ## 設計指針
 
