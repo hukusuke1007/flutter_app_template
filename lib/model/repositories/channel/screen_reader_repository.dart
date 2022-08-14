@@ -7,8 +7,8 @@ final screenReaderRepositoryProvider = Provider<ScreenReaderRepository>((_) {
   // TODO(shohei): prefixNameを変更した場合はiOSとAndroidのネイティブ側の変更も必要
   const prefixName = 'com.example.app';
   return ScreenReaderRepository(
-    const MethodChannel('$prefixName.method/screenReader'),
-    const EventChannel('$prefixName.event/screenReader/fetchEnable'),
+    const MethodChannel('$prefixName/method/screenReader'),
+    const EventChannel('$prefixName/event/screenReader/fetchEnable'),
   );
 });
 
