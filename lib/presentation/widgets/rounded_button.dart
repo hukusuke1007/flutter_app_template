@@ -30,9 +30,9 @@ class RoundedButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: color,
+          foregroundColor: color,
           shape: const StadiumBorder().copyWith(side: side),
-          onPrimary: Colors.grey,
+          disabledBackgroundColor: Colors.grey,
           elevation: elevation,
         ),
         onPressed: onTap,
