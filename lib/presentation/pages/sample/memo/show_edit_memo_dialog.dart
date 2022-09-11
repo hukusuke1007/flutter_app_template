@@ -70,7 +70,7 @@ class _Dialog extends HookConsumerWidget {
         Center(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: ColorName.primary,
+              foregroundColor: ColorName.primary,
               shape: const StadiumBorder(),
             ),
             onPressed: () async {

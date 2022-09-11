@@ -4,7 +4,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.20.1
+  firebase_core: ^1.22.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,7 +96,7 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.18
+  flutter_local_notifications: ^10.0.0-dev.22
   flutter_native_timezone:
 
   # Preview
