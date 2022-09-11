@@ -84,8 +84,8 @@ class MemoController extends StateNotifier<List<Memo>> {
       final data = await repository.fetchMore();
       if (data.isNotEmpty) {
         state = [
-          ...state.toList(),
-          ...data.map((e) => e.entity).whereType<Memo>().toList(),
+          ...state,
+          ...data.map((e) => e.entity).whereType<Memo>(),
         ];
       }
       return const ResultVoidData.success();
