@@ -10,8 +10,6 @@ import '../../../../utils/constants.dart';
 import '../../../../utils/logger.dart';
 import '../../../model/repositories/shared_preferences/shared_preference_key.dart';
 import '../../../model/repositories/shared_preferences/shared_preference_repository.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/logger.dart';
 
 final reviewAppProvider = Provider<ReviewApp>((ref) => ReviewApp(ref.read));
 

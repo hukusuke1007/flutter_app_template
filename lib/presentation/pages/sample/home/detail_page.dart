@@ -20,7 +20,6 @@ class DetailPage extends StatelessWidget {
           heroTag: heroTag,
           pageBuilder: (_) => const DetailPage(),
         ),
-        rootNavigator: true,
       );
 
   @override

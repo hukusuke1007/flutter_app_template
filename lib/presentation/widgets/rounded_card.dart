@@ -4,13 +4,13 @@ class RoundedCard extends StatelessWidget {
   const RoundedCard({
     required this.child,
     this.color,
-    this.elevation = 0,
+    this.elevation,
     super.key,
   });
 
   final Widget child;
   final Color? color;
-  final double elevation;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {

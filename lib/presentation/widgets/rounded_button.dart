@@ -7,7 +7,8 @@ class RoundedButton extends StatelessWidget {
     this.width,
     required this.child,
     this.color,
-    this.elevation = 0,
+    this.disableColor,
+    this.elevation,
     this.side = BorderSide.none,
     this.isLoading = false,
     this.onTap,
@@ -18,7 +19,8 @@ class RoundedButton extends StatelessWidget {
   final double? width;
   final Widget child;
   final Color? color;
-  final double elevation;
+  final Color? disableColor;
+  final double? elevation;
   final BorderSide side;
   final bool isLoading;
   final VoidCallback? onTap;
@@ -32,7 +34,7 @@ class RoundedButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           foregroundColor: color,
           shape: const StadiumBorder().copyWith(side: side),
-          disabledBackgroundColor: Colors.grey,
+          disabledBackgroundColor: disableColor ?? Colors.grey,
           elevation: elevation,
         ),
         onPressed: onTap,
