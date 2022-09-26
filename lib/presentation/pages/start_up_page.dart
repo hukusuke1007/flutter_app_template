@@ -2,28 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/presentation/pages/sample/home/home_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../../../model/use_cases/auth/fetch_logged_in_with_anonymously.dart';
 import '../../../model/use_cases/auth/sign_in_with_anonymously.dart';
-import '../../../presentation/pages/main/main_page.dart';
 import '../../presentation/custom_hooks/use_effect_once.dart';
 import '../../utils/provider.dart';
 
 class StartUpPage extends HookConsumerWidget {
   const StartUpPage({super.key});
 
-  static Future<void> show(BuildContext context) async {
-    await Navigator.of(context, rootNavigator: true)
-        .pushReplacement<MaterialPageRoute<dynamic>, void>(
-      PageTransition(
-        type: PageTransitionType.fade,
-        child: const StartUpPage(),
-        duration: const Duration(milliseconds: 500),
-      ),
-    );
-  }
+  static String get pageName => 'start_up_page';
+  static String get pagePath => '/';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +29,8 @@ class StartUpPage extends HookConsumerWidget {
         } else {
           await ref.read(signInWithAnonymouslyProvider)();
         }
-        unawaited(MainPage.show(context));
+        print('fafafa');
+        context.go(HomePage.pagePath);
       });
       return null;
     });

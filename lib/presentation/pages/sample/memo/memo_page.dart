@@ -16,6 +16,9 @@ import 'show_edit_memo_dialog.dart';
 class MemoPage extends HookConsumerWidget {
   const MemoPage({super.key});
 
+  static String get pageName => 'memo_page';
+  static String get pagePath => '/$pageName';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(memoProvider);

@@ -2,17 +2,18 @@
 
 Flutter + Firebase アプリのスターターキット、新規アプリ開発はこのテンプレートをベースに始める。
 
-| カテゴリ         | 説明                          |
-| ---------------- | ----------------------------- |
-| 状態管理と DI    | flutter_hooks, hooks_riverpod |
+| カテゴリ       | 説明                            |
+|------------|-------------------------------|
+| 状態管理と DI   | flutter_hooks, hooks_riverpod |
 | データモデル     | freezed                       |
-| クラウド DB      | cloud_firestore               |
-| ローカル DB      | shared_preferences            |
+| クラウド DB    | cloud_firestore               |
+| ローカル DB    | shared_preferences            |
 | API クライアント | retrofit                      |
+| 画面遷移       | go_router                     |
 
 ### 環境
 
-Flutter Stable 3.3.1
+Flutter Stable 3.3.2
 
 ### 画面構成
 
@@ -49,7 +50,7 @@ Flutter Stable 3.3.1
 - 静的解析導入
 - Android/iOS の Flavor 設定
 - iOS 日本語デフォルト
-- 画面遷移は Navigator 1.0
+- 画面遷移は go_router
 - MethodChannelとEventChannelのサンプルコード
   - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
 - その他アプリに必要なライブラリを設定済み

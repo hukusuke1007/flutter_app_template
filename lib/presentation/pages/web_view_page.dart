@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -14,33 +13,31 @@ import '../../extensions/context_extension.dart';
 import '../../utils/clipboard.dart';
 import '../../utils/logger.dart';
 
-class WebViewPage extends HookConsumerWidget {
-  const WebViewPage({
-    super.key,
+@immutable
+class WebViewArgs {
+  const WebViewArgs({
     required this.url,
+    this.title = '',
+  });
+  final String url;
+  final String title;
+}
+
+class WebViewPage extends HookConsumerWidget {
+  const WebViewPage(
+    this.args, {
+    super.key,
   });
 
-  static String get screenName => 'WebViewPage';
+  static String get pageName => 'web_view_page';
+  static String get pagePath => '/$pageName';
 
-  static Future<void> show(
-    BuildContext context, {
-    required String url,
-  }) {
-    return Navigator.of(context).push<void>(
-      CupertinoPageRoute(
-        builder: (_) => WebViewPage(
-          url: url,
-        ),
-      ),
-    );
-  }
-
-  final String url;
+  final WebViewArgs args;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final titleState = useState<String>('');
-    final urlState = useState(url);
+    final titleState = useState<String>(args.title);
+    final urlState = useState(args.url);
     final progress = useState<double>(0);
     final webViewController = useState<InAppWebViewController?>(null);
 
@@ -109,9 +106,9 @@ class WebViewPage extends HookConsumerWidget {
                 await Clipboard.copy(value.toString());
                 context.showSnackBar('URLをコピーしました');
               } else if (value == 1) {
-                unawaited(Share.share(url));
+                unawaited(Share.share(urlState.value));
               } else if (value == 2) {
-                final uri = Uri.parse(url);
+                final uri = Uri.parse(urlState.value);
                 if (!await canLaunchUrl(uri)) {
                   return;
                 }
@@ -131,7 +128,7 @@ class WebViewPage extends HookConsumerWidget {
             children: [
               Expanded(
                 child: InAppWebView(
-                  initialUrlRequest: URLRequest(url: Uri.parse(url)),
+                  initialUrlRequest: URLRequest(url: Uri.parse(urlState.value)),
                   initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
                       useShouldOverrideUrlLoading: true,

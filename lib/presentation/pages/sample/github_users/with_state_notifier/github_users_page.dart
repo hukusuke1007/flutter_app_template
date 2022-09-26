@@ -16,6 +16,9 @@ import 'error_message.dart';
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});
 
+  static String get pageName => 'github_users_page';
+  static String get pagePath => '/$pageName';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final githubUsers = ref.watch(githubUsersControllerProvider);

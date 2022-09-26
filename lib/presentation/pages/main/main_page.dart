@@ -1,67 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_app_template/presentation/pages/sample/memo/memo_page.dart';
+import 'package:flutter_app_template/presentation/pages/sample/setting/setting_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../sample/github_users/with_state_notifier/github_users_page.dart';
 import '../sample/home/home_page.dart';
-import '../sample/memo/memo_page.dart';
-import '../sample/setting/setting_page.dart';
-import 'tab_navigator.dart';
 
 class MainPage extends HookConsumerWidget {
-  const MainPage({super.key});
+  const MainPage(
+    this.child, {
+    super.key,
+  });
 
-  static Future<void> show(BuildContext context) =>
-      Navigator.of(context, rootNavigator: true).pushReplacement<void, void>(
-        PageTransition(
-          type: PageTransitionType.fade,
-          child: const MainPage(),
-          duration: const Duration(milliseconds: 500),
-        ),
-      );
+  static String get pageName => 'main_page';
+  static String get pagePath => pageName;
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final widgets = useState<List<Widget>>([
-      const HomePage(),
-      const GithubUsersPage(),
-      const MemoPage(),
-      const SettingPage(),
-    ]);
-
-    final navigatorKeys = useState([
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
-    ]);
-
-    final selectedIndex = useState(0);
-
     return WillPopScope(
       onWillPop: () async {
-        final keyTab = navigatorKeys.value[selectedIndex.value];
-        if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
-          return !await keyTab.currentState!.maybePop();
-        }
+        // TODO(shohei): 未実装
+        // final keyTab = navigatorKeys.value[selectedIndex.value];
+        // if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
+        //   return !await keyTab.currentState!.maybePop();
+        // }
         return true;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: List.generate(
-            widgets.value.length,
-            (index) => Offstage(
-              offstage: index != selectedIndex.value,
-              child: TabNavigator(
-                navigatorKey: navigatorKeys.value[index],
-                page: widgets.value[index],
-              ),
-            ),
-          ),
-        ),
+        body: child,
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -86,15 +57,45 @@ class MainPage extends HookConsumerWidget {
             ),
           ],
           type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex.value,
+          currentIndex: _calculateSelectedIndex(context),
           showSelectedLabels: !context.isIphoneMiniSize,
           showUnselectedLabels: !context.isIphoneMiniSize,
           onTap: (index) {
-            selectedIndex.value = index;
+            switch (index) {
+              case 0:
+                context.go(HomePage.pagePath);
+                break;
+              case 1:
+                context.go(GithubUsersPage.pagePath);
+                break;
+              case 2:
+                context.go(MemoPage.pagePath);
+                break;
+              case 3:
+                context.go(SettingPage.pagePath);
+                break;
+            }
           },
           selectedFontSize: 12,
         ),
       ),
     );
+  }
+
+  int _calculateSelectedIndex(BuildContext context) {
+    final location = GoRouter.of(context).location;
+    if (location == HomePage.pagePath) {
+      return 0;
+    }
+    if (location == GithubUsersPage.pagePath) {
+      return 1;
+    }
+    if (location == MemoPage.pagePath) {
+      return 2;
+    }
+    if (location == SettingPage.pagePath) {
+      return 3;
+    }
+    return 0;
   }
 }

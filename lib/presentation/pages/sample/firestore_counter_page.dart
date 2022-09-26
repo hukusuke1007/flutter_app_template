@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/presentation/pages/sample/home/home_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,13 +17,8 @@ import '../../../utils/logger.dart';
 class FirestoreCounterPage extends HookConsumerWidget {
   const FirestoreCounterPage({super.key});
 
-  static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
-      CupertinoPageRoute(
-        builder: (_) => const FirestoreCounterPage(),
-      ),
-    );
-  }
+  static String get pageName => 'firestore_counter_page';
+  static String get pagePath => '/${HomePage.pageName}/$pageName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

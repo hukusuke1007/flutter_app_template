@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/use_cases/sample/fetch_enable_screen_reader.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -11,6 +12,9 @@ import 'detail_page.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
+
+  static String get pageName => 'home_page';
+  static String get pagePath => '/$pageName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -81,7 +85,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  LocalCounterPage.show(context);
+                  context.push(LocalCounterPage.pagePath);
                 },
               ),
               const Divider(height: 1),
@@ -96,7 +100,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  FirestoreCounterPage.show(context);
+                  context.push(FirestoreCounterPage.pagePath);
                 },
               ),
               const Divider(height: 1),

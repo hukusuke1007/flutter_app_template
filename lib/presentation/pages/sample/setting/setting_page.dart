@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -21,6 +20,9 @@ import 'show_edit_profile_dialog.dart';
 
 class SettingPage extends HookConsumerWidget {
   const SettingPage({super.key});
+
+  static String get pageName => 'setting_page';
+  static String get pagePath => '/$pageName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -140,9 +142,11 @@ class SettingPage extends HookConsumerWidget {
                   children: [
                     ListTile(
                       onTap: () {
-                        WebViewPage.show(
-                          context,
-                          url: 'https://neverjp.com/',
+                        context.push(
+                          WebViewPage.pagePath,
+                          extra: const WebViewArgs(
+                            url: 'https://neverjp.com/',
+                          ),
                         );
                       },
                       title: Text(
@@ -176,7 +180,7 @@ class SettingPage extends HookConsumerWidget {
                       );
                       if (result == OkCancelResult.ok) {
                         await ref.read(signOutProvider)();
-                        unawaited(StartUpPage.show(context));
+                        context.go(StartUpPage.pagePath);
                       }
                     },
                   ),

@@ -5,17 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/sample/local_counter.dart';
 import '../../../presentation/widgets/rounded_button.dart';
+import 'home/home_page.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});
 
-  static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
-      CupertinoPageRoute(
-        builder: (_) => const LocalCounterPage(),
-      ),
-    );
-  }
+  static String get pageName => 'local_counter_page';
+  static String get pagePath => '/${HomePage.pageName}/$pageName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
