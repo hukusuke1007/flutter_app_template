@@ -37,6 +37,8 @@ final routerProvider = Provider((ref) {
       ),
 
       /// ボトムタブ画面
+      /// 参考
+      /// https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/shell_route.dart
       ShellRoute(
         builder: (_, state, child) {
           return MainPage(child);
