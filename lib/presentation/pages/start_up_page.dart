@@ -29,7 +29,6 @@ class StartUpPage extends HookConsumerWidget {
         } else {
           await ref.read(signInWithAnonymouslyProvider)();
         }
-        print('fafafa');
         context.go(HomePage.pagePath);
       });
       return null;
