@@ -66,7 +66,6 @@ Flutter Stable 3.3.3
 - UI テスト
 - dartdoc
 - fastlane
-- WIP device_preview 導入 → Flutter3 系と Freezed2 系対応までお見送り
 
 ## 設計指針
 

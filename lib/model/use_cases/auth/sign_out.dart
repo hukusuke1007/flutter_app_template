@@ -12,7 +12,14 @@ class SignOut {
   Future<void> call() async {
     /// Firestoreのサインアウト前にStreamProvider経由のlistenを解除するため
     /// authStateProviderのstateを変更する cloud_firestore/permission-denied対策
+    final oldAuthState = _ref.read(authStateProvider.state).state;
     _ref.read(authStateProvider.state).update((state) => AuthState.noSignIn);
-    await _ref.read(firebaseAuthRepositoryProvider).signOut();
+    try {
+      await _ref.read(firebaseAuthRepositoryProvider).signOut();
+    } on Exception catch (_) {
+      /// サインアウトでエラーが発生した場合はauthStateProviderの状態を元に戻す
+      _ref.read(authStateProvider.state).update((state) => oldAuthState);
+      rethrow;
+    }
   }
 }
