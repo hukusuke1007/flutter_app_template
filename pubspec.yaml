@@ -21,7 +21,7 @@ dependencies:
 
   # Riverpod
   flutter_hooks: ^0.18.5+1
-  hooks_riverpod: ^2.0.0-dev.9
+  hooks_riverpod: ^2.0.0
   freezed_annotation: ^2.1.0
   json_annotation:
 
@@ -52,7 +52,7 @@ dependencies:
 
   # Review
   launch_review:
-  app_review:
+  in_app_review:
 
   # Text
   auto_size_text:
@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.22.0
+  firebase_core: ^1.24.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:
@@ -96,12 +96,8 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: ^10.0.0-dev.22
+  flutter_local_notifications:
   flutter_native_timezone:
-
-  # Preview
-  # TODO 一旦Flutter3系とfreezed2系が対応されるまでお見送り
-  #  device_preview: ^1.1.0
 
   # Api
   retrofit:
@@ -145,7 +141,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.1.0
+  freezed: ^2.1.1
   flutter_gen_runner:
   retrofit_generator:
 

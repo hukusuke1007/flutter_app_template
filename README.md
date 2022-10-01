@@ -13,7 +13,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 
 ### 環境
 
-Flutter Stable 3.3.2
+Flutter Stable 3.3.3
 
 ### 画面構成
 
@@ -67,7 +67,6 @@ Flutter Stable 3.3.2
 - UI テスト
 - dartdoc
 - fastlane
-- WIP device_preview 導入 → Flutter3 系と Freezed2 系対応までお見送り
 
 ## 設計指針
 

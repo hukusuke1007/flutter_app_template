@@ -6,22 +6,22 @@ import '../../../repositories/api/github_api/github_api_repository.dart';
 /// GithubのユーザーリストをStateNotifierで管理する
 final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
     GithubUsersController, AsyncValue<List<User>>>((ref) {
-  return GithubUsersController(ref.read);
+  return GithubUsersController(ref);
 });
 
 class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
   GithubUsersController(
-    this._read,
+    this._ref,
   ) : super(const AsyncValue.loading());
 
-  final Reader _read;
+  final Ref _ref;
 
   int? _lastUserId;
   bool _loading = false;
   final _pageCount = 20;
 
   GithubApiRepository get _githubApiRepository =>
-      _read(githubApiRepositoryProvider);
+      _ref.read(githubApiRepositoryProvider);
 
   /// 一覧取得
   Future<void> fetch() async {

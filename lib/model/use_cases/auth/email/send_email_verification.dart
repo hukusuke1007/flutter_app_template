@@ -7,16 +7,15 @@ import '../../../../utils/provider.dart';
 import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final sendEmailVerificationProvider =
-    Provider((ref) => SendEmailVerification(ref.read));
+final sendEmailVerificationProvider = Provider(SendEmailVerification.new);
 
 class SendEmailVerification {
-  SendEmailVerification(this._read);
-  final Reader _read;
+  SendEmailVerification(this._ref);
+  final Ref _ref;
 
   Future<void> call() async {
-    final repository = _read(firebaseAuthRepositoryProvider);
-    final authState = _read(authStateProvider.state);
+    final repository = _ref.read(firebaseAuthRepositoryProvider);
+    final authState = _ref.read(authStateProvider.state);
 
     final user = repository.authUser;
     if (user == null) {
