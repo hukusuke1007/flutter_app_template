@@ -7,13 +7,13 @@ import '../../repositories/channel/screen_reader_repository.dart';
 
 final fetchEnableScreenReaderProvider =
     StateNotifierProvider<FetchEnableScreenReader, bool>(
-  (ref) => FetchEnableScreenReader(ref.read),
+  FetchEnableScreenReader.new,
 );
 
 class FetchEnableScreenReader extends StateNotifier<bool> {
-  FetchEnableScreenReader(this._read) : super(false) {
+  FetchEnableScreenReader(this._ref) : super(false) {
     _disposer =
-        _read(screenReaderRepositoryProvider).enableStream.listen((event) {
+        _ref.read(screenReaderRepositoryProvider).enableStream.listen((event) {
       /// iOSの場合、1回の設定で通知が複数回飛んでくるためそれの対策
       if (mounted && state != event) {
         logger.info(event);
@@ -26,7 +26,7 @@ class FetchEnableScreenReader extends StateNotifier<bool> {
     });
   }
 
-  final Reader _read;
+  final Ref _ref;
   late StreamSubscription<bool> _disposer;
 
   @override
@@ -36,7 +36,7 @@ class FetchEnableScreenReader extends StateNotifier<bool> {
   }
 
   Future<bool> call() async {
-    final value = await _read(screenReaderRepositoryProvider).fetchEnable();
+    final value = await _ref.read(screenReaderRepositoryProvider).fetchEnable();
     logger.info(value);
     return value;
   }

@@ -7,22 +7,21 @@ import '../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../repositories/firestore/document_repository.dart';
 
 /// 取得（スナップショットリスナー未使用）
-final fetchFirestoreCounterProvider =
-    Provider((ref) => FetchFirestoreCounter(ref.read));
+final fetchFirestoreCounterProvider = Provider(FetchFirestoreCounter.new);
 
 class FetchFirestoreCounter {
-  FetchFirestoreCounter(this._read);
-  final Reader _read;
+  FetchFirestoreCounter(this._ref);
+  final Ref _ref;
 
   Future<Counter?> call() async {
-    final userId = _read(firebaseAuthRepositoryProvider).loggedInUserId;
+    final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    final doc = await _read(documentRepositoryProvider).fetch<Counter>(
-      Counter.docPath(userId),
-      decode: Counter.fromJson,
-    );
+    final doc = await _ref.read(documentRepositoryProvider).fetch<Counter>(
+          Counter.docPath(userId),
+          decode: Counter.fromJson,
+        );
     return doc.entity;
   }
 }
@@ -47,21 +46,20 @@ final fetchFirestoreCounterStreamProvider = StreamProvider<Counter?>((ref) {
 });
 
 /// 保存
-final saveFirestoreCounterProvider =
-    Provider((ref) => SaveFirestoreCounter(ref.read));
+final saveFirestoreCounterProvider = Provider(SaveFirestoreCounter.new);
 
 class SaveFirestoreCounter {
-  SaveFirestoreCounter(this._read);
-  final Reader _read;
+  SaveFirestoreCounter(this._ref);
+  final Ref<SaveFirestoreCounter> _ref;
 
   Future<void> call(Counter counter) async {
-    final userId = _read(firebaseAuthRepositoryProvider).loggedInUserId;
+    final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    await _read(documentRepositoryProvider).save(
-      Counter.docPath(userId),
-      data: counter.toDoc,
-    );
+    await _ref.read(documentRepositoryProvider).save(
+          Counter.docPath(userId),
+          data: counter.toDoc,
+        );
   }
 }

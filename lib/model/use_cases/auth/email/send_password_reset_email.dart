@@ -6,16 +6,15 @@ import '../../../../utils/logger.dart';
 import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final sendPasswordResetEmailProvider =
-    Provider((ref) => SendPasswordResetEmail(ref.read));
+final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
 
 class SendPasswordResetEmail {
-  SendPasswordResetEmail(this._read);
-  final Reader _read;
+  SendPasswordResetEmail(this._ref);
+  final Ref _ref;
 
   Future<void> call(String email) async {
     try {
-      final repository = _read(firebaseAuthRepositoryProvider);
+      final repository = _ref.read(firebaseAuthRepositoryProvider);
       await repository.sendPasswordResetEmail(email);
 
       logger.info('パスワード再設定メールを送信しました');

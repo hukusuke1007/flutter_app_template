@@ -10,13 +10,13 @@ import '../../../entities/sample/github/user.dart';
 import 'github_api_client.dart';
 
 final githubApiRepositoryProvider = Provider<GithubApiRepository>((ref) {
-  return GithubApiRepository(ref.read);
+  return GithubApiRepository(ref);
 });
 
 class GithubApiRepository {
   GithubApiRepository(
-    Reader read,
-  ) : _client = read(githubApiClientProvider);
+    Ref ref,
+  ) : _client = ref.read(githubApiClientProvider);
 
   final GithubApiClient _client;
 

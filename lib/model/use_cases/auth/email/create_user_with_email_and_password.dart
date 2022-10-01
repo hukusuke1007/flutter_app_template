@@ -8,17 +8,17 @@ import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final createUserWithEmailAndPasswordProvider =
-    Provider((ref) => CreateUserWithEmailAndPassword(ref.read));
+    Provider(CreateUserWithEmailAndPassword.new);
 
 class CreateUserWithEmailAndPassword {
-  CreateUserWithEmailAndPassword(this._read);
+  CreateUserWithEmailAndPassword(this._ref);
 
-  final Reader _read;
+  final Ref _ref;
 
   Future<void> call(String email, String password) async {
     try {
-      final repository = _read(firebaseAuthRepositoryProvider);
-      final authState = _read(authStateProvider.state);
+      final repository = _ref.read(firebaseAuthRepositoryProvider);
+      final authState = _ref.read(authStateProvider.state);
 
       await repository.createUserWithEmailAndPassword(email, password);
       // NOTE: メールアドレスの確認を完了させるまではsignInに変更しない
