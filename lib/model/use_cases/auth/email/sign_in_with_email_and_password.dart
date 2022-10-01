@@ -8,21 +8,21 @@ import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final signInWithEmailAndPasswordProvider =
-    Provider((ref) => SignInWithEmailAndPassword(ref.read));
+    Provider(SignInWithEmailAndPassword.new);
 
 class SignInWithEmailAndPassword {
-  SignInWithEmailAndPassword(this._read);
+  SignInWithEmailAndPassword(this._ref);
 
-  final Reader _read;
+  final Ref _ref;
 
   Future<void> call(String email, String password) async {
     try {
-      final repository = _read(firebaseAuthRepositoryProvider);
-      final authState = _read(authStateProvider.state);
+      final repository = _ref.read(firebaseAuthRepositoryProvider);
+      final authState = _ref.read(authStateProvider.state);
 
       await repository.signInWithEmailAndPassword(email, password);
 
-      final user = _read(firebaseAuthRepositoryProvider).authUser;
+      final user = _ref.read(firebaseAuthRepositoryProvider).authUser;
       if (user != null && user.emailVerified) {
         authState.update((state) => AuthState.signIn);
       } else {

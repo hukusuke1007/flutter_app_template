@@ -13,18 +13,18 @@ import '../../repositories/firestore/document_repository.dart';
 
 final memoProvider = StateNotifierProvider<MemoController, List<Memo>>((ref) {
   ref.watch(authStateProvider);
-  return MemoController(ref.read);
+  return MemoController(ref);
 });
 
 class MemoController extends StateNotifier<List<Memo>> {
   MemoController(
-    this._read,
+    this._ref,
   ) : super([]) {
     final userId = _firebaseAuthRepository.loggedInUserId;
     if (userId == null) {
       return;
     }
-    _collectionPagingRepository = _read(
+    _collectionPagingRepository = _ref.read(
       memoPagingProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
@@ -37,13 +37,13 @@ class MemoController extends StateNotifier<List<Memo>> {
     );
   }
 
-  final Reader _read;
+  final Ref _ref;
 
   FirebaseAuthRepository get _firebaseAuthRepository =>
-      _read(firebaseAuthRepositoryProvider);
+      _ref.read(firebaseAuthRepositoryProvider);
 
   DocumentRepository get _documentRepository =>
-      _read(documentRepositoryProvider);
+      _ref.read(documentRepositoryProvider);
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
 

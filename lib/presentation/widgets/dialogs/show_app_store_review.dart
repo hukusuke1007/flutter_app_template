@@ -11,13 +11,13 @@ import '../../../../utils/logger.dart';
 import '../../../model/repositories/shared_preferences/shared_preference_key.dart';
 import '../../../model/repositories/shared_preferences/shared_preference_repository.dart';
 
-final reviewAppProvider = Provider<ReviewApp>((ref) => ReviewApp(ref.read));
+final reviewAppProvider = Provider<ReviewApp>(ReviewApp.new);
 
 Future<void> showAppStoreReview(
   BuildContext context,
-  Reader read,
+  Ref ref,
 ) async {
-  final reviewApp = read(reviewAppProvider);
+  final reviewApp = ref.read(reviewAppProvider);
   final reviewed = reviewApp.fetchReviewed();
   if (reviewed) {
     logger.info('No showing review. already reviewed');
@@ -52,12 +52,12 @@ Future<void> showAppStoreReview(
 }
 
 class ReviewApp {
-  ReviewApp(this._read);
+  ReviewApp(this._ref);
 
-  final Reader _read;
+  final Ref _ref;
 
   SharedPreferencesRepository get sharedPreferencesRepository =>
-      _read(sharedPreferencesRepositoryProvider);
+      _ref.read(sharedPreferencesRepositoryProvider);
 
   bool fetchReviewed() {
     final result = sharedPreferencesRepository

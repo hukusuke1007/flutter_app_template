@@ -12,15 +12,14 @@ import '../../../repositories/firebase_storage/mime_type.dart';
 import '../../../repositories/firestore/document_repository.dart';
 import 'fetch_my_profile.dart';
 
-final saveMyProfileImageProvider =
-    Provider((ref) => SaveMyProfileImage(ref.read));
+final saveMyProfileImageProvider = Provider(SaveMyProfileImage.new);
 
 class SaveMyProfileImage {
-  SaveMyProfileImage(this._read);
-  final Reader _read;
+  SaveMyProfileImage(this._ref);
+  final Ref _ref;
 
   Future<void> call(Uint8List file) async {
-    final userId = _read(firebaseAuthRepositoryProvider).loggedInUserId;
+    final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
@@ -29,14 +28,14 @@ class SaveMyProfileImage {
     final filename = UuidGenerator.create();
     final imagePath = Developer.imagePath(userId, filename);
     const mimeType = MimeType.applicationOctetStream;
-    final imageUrl = await _read(firebaseStorageRepositoryProvider).save(
-      file,
-      path: imagePath,
-      mimeType: mimeType,
-    );
+    final imageUrl = await _ref.read(firebaseStorageRepositoryProvider).save(
+          file,
+          path: imagePath,
+          mimeType: mimeType,
+        );
 
     /// 画像情報をFirestoreへ保存
-    final profile = _read(fetchMyProfileProvider).value;
+    final profile = _ref.read(fetchMyProfileProvider).value;
     final newProfile = (profile ?? Developer(developerId: userId)).copyWith(
       image: StorageFile(
         url: imageUrl,
@@ -44,15 +43,15 @@ class SaveMyProfileImage {
         mimeType: mimeType.value,
       ),
     );
-    await _read(documentRepositoryProvider).save(
-      Developer.docPath(userId),
-      data: newProfile.toImageOnly,
-    );
+    await _ref.read(documentRepositoryProvider).save(
+          Developer.docPath(userId),
+          data: newProfile.toImageOnly,
+        );
 
     /// 古い画像をCloudStorageから削除
     final oldImage = profile?.image;
     if (oldImage != null) {
-      await _read(firebaseStorageRepositoryProvider).delete(oldImage.path);
+      await _ref.read(firebaseStorageRepositoryProvider).delete(oldImage.path);
     }
   }
 }

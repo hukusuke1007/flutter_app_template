@@ -5,15 +5,15 @@ import '../../repositories/firebase_auth/login_type.dart';
 
 final fetchLoggedInWithAnonymouslyProvider =
     Provider<FetchLoggedInWithAnonymously>(
-  (ref) => FetchLoggedInWithAnonymously(ref.read),
+  FetchLoggedInWithAnonymously.new,
 );
 
 class FetchLoggedInWithAnonymously {
-  FetchLoggedInWithAnonymously(this._read);
-  final Reader _read;
+  FetchLoggedInWithAnonymously(this._ref);
+  final Ref _ref;
 
   bool call() {
-    final loginType = _read(firebaseAuthRepositoryProvider).loginType;
+    final loginType = _ref.read(firebaseAuthRepositoryProvider).loginType;
     return loginType != null && loginType == LoginType.anonymously;
   }
 }
