@@ -21,7 +21,7 @@ dependencies:
 
   # Riverpod
   flutter_hooks: ^0.18.5+1
-  hooks_riverpod: ^2.0.0
+  hooks_riverpod: ^2.0.2
   freezed_annotation: ^2.1.0
   json_annotation:
 
