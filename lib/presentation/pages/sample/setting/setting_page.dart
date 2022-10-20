@@ -139,6 +139,9 @@ class SettingPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                       onTap: () {
                         WebViewPage.show(
                           context,

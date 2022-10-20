@@ -34,7 +34,8 @@ mixin _$Counter {
 /// @nodoc
 abstract class $CounterCopyWith<$Res> {
   factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
-      _$CounterCopyWithImpl<$Res>;
+      _$CounterCopyWithImpl<$Res, Counter>;
+  @useResult
   $Res call(
       {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
@@ -42,13 +43,16 @@ abstract class $CounterCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CounterCopyWithImpl<$Res> implements $CounterCopyWith<$Res> {
+class _$CounterCopyWithImpl<$Res, $Val extends Counter>
+    implements $CounterCopyWith<$Res> {
   _$CounterCopyWithImpl(this._value, this._then);
 
-  final Counter _value;
   // ignore: unused_field
-  final $Res Function(Counter) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? count = freezed,
@@ -56,19 +60,19 @@ class _$CounterCopyWithImpl<$Res> implements $CounterCopyWith<$Res> {
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed
+      count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -78,6 +82,7 @@ abstract class _$$_CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
           _$_Counter value, $Res Function(_$_Counter) then) =
       __$$_CounterCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? count,
       @DateTimeTimestampConverter() DateTime? createdAt,
@@ -85,14 +90,13 @@ abstract class _$$_CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
+class __$$_CounterCopyWithImpl<$Res>
+    extends _$CounterCopyWithImpl<$Res, _$_Counter>
     implements _$$_CounterCopyWith<$Res> {
   __$$_CounterCopyWithImpl(_$_Counter _value, $Res Function(_$_Counter) _then)
-      : super(_value, (v) => _then(v as _$_Counter));
+      : super(_value, _then);
 
-  @override
-  _$_Counter get _value => super._value as _$_Counter;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? count = freezed,
@@ -100,15 +104,15 @@ class __$$_CounterCopyWithImpl<$Res> extends _$CounterCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$_Counter(
-      count: count == freezed
+      count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -147,21 +151,20 @@ class _$_Counter extends _Counter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Counter &&
-            const DeepCollectionEquality().equals(other.count, count) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(count),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+  int get hashCode => Object.hash(runtimeType, count, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CounterCopyWith<_$_Counter> get copyWith =>
       __$$_CounterCopyWithImpl<_$_Counter>(this, _$identity);
 
