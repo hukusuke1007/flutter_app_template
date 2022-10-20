@@ -35,7 +35,8 @@ mixin _$Memo {
 /// @nodoc
 abstract class $MemoCopyWith<$Res> {
   factory $MemoCopyWith(Memo value, $Res Function(Memo) then) =
-      _$MemoCopyWithImpl<$Res>;
+      _$MemoCopyWithImpl<$Res, Memo>;
+  @useResult
   $Res call(
       {String? memoId,
       String? text,
@@ -44,13 +45,16 @@ abstract class $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MemoCopyWithImpl<$Res> implements $MemoCopyWith<$Res> {
+class _$MemoCopyWithImpl<$Res, $Val extends Memo>
+    implements $MemoCopyWith<$Res> {
   _$MemoCopyWithImpl(this._value, this._then);
 
-  final Memo _value;
   // ignore: unused_field
-  final $Res Function(Memo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? memoId = freezed,
@@ -59,23 +63,23 @@ class _$MemoCopyWithImpl<$Res> implements $MemoCopyWith<$Res> {
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      memoId: memoId == freezed
+      memoId: freezed == memoId
           ? _value.memoId
           : memoId // ignore: cast_nullable_to_non_nullable
               as String?,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -84,6 +88,7 @@ abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
   factory _$$_MemoCopyWith(_$_Memo value, $Res Function(_$_Memo) then) =
       __$$_MemoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? memoId,
       String? text,
@@ -92,14 +97,12 @@ abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
+class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
     implements _$$_MemoCopyWith<$Res> {
   __$$_MemoCopyWithImpl(_$_Memo _value, $Res Function(_$_Memo) _then)
-      : super(_value, (v) => _then(v as _$_Memo));
+      : super(_value, _then);
 
-  @override
-  _$_Memo get _value => super._value as _$_Memo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? memoId = freezed,
@@ -108,19 +111,19 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$_Memo(
-      memoId: memoId == freezed
+      memoId: freezed == memoId
           ? _value.memoId
           : memoId // ignore: cast_nullable_to_non_nullable
               as String?,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -161,23 +164,22 @@ class _$_Memo extends _Memo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Memo &&
-            const DeepCollectionEquality().equals(other.memoId, memoId) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            (identical(other.memoId, memoId) || other.memoId == memoId) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(memoId),
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+  int get hashCode =>
+      Object.hash(runtimeType, memoId, text, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MemoCopyWith<_$_Memo> get copyWith =>
       __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
 

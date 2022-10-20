@@ -22,7 +22,7 @@ dependencies:
   # Riverpod
   flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^2.0.2
-  freezed_annotation: ^2.1.0
+  freezed_annotation: ^2.2.0
   json_annotation:
 
   # Dialog
@@ -138,7 +138,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.1.1
+  freezed: ^2.2.0
   flutter_gen_runner:
   retrofit_generator:
 

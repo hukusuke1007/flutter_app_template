@@ -39,7 +39,8 @@ mixin _$Developer {
 /// @nodoc
 abstract class $DeveloperCopyWith<$Res> {
   factory $DeveloperCopyWith(Developer value, $Res Function(Developer) then) =
-      _$DeveloperCopyWithImpl<$Res>;
+      _$DeveloperCopyWithImpl<$Res, Developer>;
+  @useResult
   $Res call(
       {String? developerId,
       String? name,
@@ -52,13 +53,16 @@ abstract class $DeveloperCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DeveloperCopyWithImpl<$Res> implements $DeveloperCopyWith<$Res> {
+class _$DeveloperCopyWithImpl<$Res, $Val extends Developer>
+    implements $DeveloperCopyWith<$Res> {
   _$DeveloperCopyWithImpl(this._value, this._then);
 
-  final Developer _value;
   // ignore: unused_field
-  final $Res Function(Developer) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? developerId = freezed,
@@ -69,41 +73,42 @@ class _$DeveloperCopyWithImpl<$Res> implements $DeveloperCopyWith<$Res> {
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      developerId: developerId == freezed
+      developerId: freezed == developerId
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: image == freezed
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as StorageFile?,
-      birthdate: birthdate == freezed
+      birthdate: freezed == birthdate
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $StorageFileCopyWith<$Res>? get image {
     if (_value.image == null) {
       return null;
     }
 
     return $StorageFileCopyWith<$Res>(_value.image!, (value) {
-      return _then(_value.copyWith(image: value));
+      return _then(_value.copyWith(image: value) as $Val);
     });
   }
 }
@@ -114,6 +119,7 @@ abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
           _$_Developer value, $Res Function(_$_Developer) then) =
       __$$_DeveloperCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? developerId,
       String? name,
@@ -127,15 +133,14 @@ abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
+class __$$_DeveloperCopyWithImpl<$Res>
+    extends _$DeveloperCopyWithImpl<$Res, _$_Developer>
     implements _$$_DeveloperCopyWith<$Res> {
   __$$_DeveloperCopyWithImpl(
       _$_Developer _value, $Res Function(_$_Developer) _then)
-      : super(_value, (v) => _then(v as _$_Developer));
+      : super(_value, _then);
 
-  @override
-  _$_Developer get _value => super._value as _$_Developer;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? developerId = freezed,
@@ -146,27 +151,27 @@ class __$$_DeveloperCopyWithImpl<$Res> extends _$DeveloperCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$_Developer(
-      developerId: developerId == freezed
+      developerId: freezed == developerId
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: image == freezed
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as StorageFile?,
-      birthdate: birthdate == freezed
+      birthdate: freezed == birthdate
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      updatedAt: updatedAt == freezed
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -215,28 +220,26 @@ class _$_Developer extends _Developer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Developer &&
-            const DeepCollectionEquality()
-                .equals(other.developerId, developerId) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.birthdate, birthdate) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            (identical(other.developerId, developerId) ||
+                other.developerId == developerId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.birthdate, birthdate) ||
+                other.birthdate == birthdate) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(developerId),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(birthdate),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+      runtimeType, developerId, name, image, birthdate, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DeveloperCopyWith<_$_Developer> get copyWith =>
       __$$_DeveloperCopyWithImpl<_$_Developer>(this, _$identity);
 

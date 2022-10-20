@@ -35,7 +35,8 @@ mixin _$StorageFile {
 abstract class $StorageFileCopyWith<$Res> {
   factory $StorageFileCopyWith(
           StorageFile value, $Res Function(StorageFile) then) =
-      _$StorageFileCopyWithImpl<$Res>;
+      _$StorageFileCopyWithImpl<$Res, StorageFile>;
+  @useResult
   $Res call(
       {String url,
       String path,
@@ -44,38 +45,41 @@ abstract class $StorageFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StorageFileCopyWithImpl<$Res> implements $StorageFileCopyWith<$Res> {
+class _$StorageFileCopyWithImpl<$Res, $Val extends StorageFile>
+    implements $StorageFileCopyWith<$Res> {
   _$StorageFileCopyWithImpl(this._value, this._then);
 
-  final StorageFile _value;
   // ignore: unused_field
-  final $Res Function(StorageFile) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = freezed,
-    Object? path = freezed,
+    Object? url = null,
+    Object? path = null,
     Object? mimeType = freezed,
     Object? metadata = freezed,
   }) {
     return _then(_value.copyWith(
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      mimeType: mimeType == freezed
+      mimeType: freezed == mimeType
           ? _value.mimeType
           : mimeType // ignore: cast_nullable_to_non_nullable
               as String?,
-      metadata: metadata == freezed
+      metadata: freezed == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, String>?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -86,6 +90,7 @@ abstract class _$$_StorageFileCopyWith<$Res>
           _$_StorageFile value, $Res Function(_$_StorageFile) then) =
       __$$_StorageFileCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String url,
       String path,
@@ -94,36 +99,35 @@ abstract class _$$_StorageFileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StorageFileCopyWithImpl<$Res> extends _$StorageFileCopyWithImpl<$Res>
+class __$$_StorageFileCopyWithImpl<$Res>
+    extends _$StorageFileCopyWithImpl<$Res, _$_StorageFile>
     implements _$$_StorageFileCopyWith<$Res> {
   __$$_StorageFileCopyWithImpl(
       _$_StorageFile _value, $Res Function(_$_StorageFile) _then)
-      : super(_value, (v) => _then(v as _$_StorageFile));
+      : super(_value, _then);
 
-  @override
-  _$_StorageFile get _value => super._value as _$_StorageFile;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = freezed,
-    Object? path = freezed,
+    Object? url = null,
+    Object? path = null,
     Object? mimeType = freezed,
     Object? metadata = freezed,
   }) {
     return _then(_$_StorageFile(
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      mimeType: mimeType == freezed
+      mimeType: freezed == mimeType
           ? _value.mimeType
           : mimeType // ignore: cast_nullable_to_non_nullable
               as String?,
-      metadata: metadata == freezed
+      metadata: freezed == metadata
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, String>?,
@@ -170,23 +174,21 @@ class _$_StorageFile extends _StorageFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StorageFile &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.path, path) &&
-            const DeepCollectionEquality().equals(other.mimeType, mimeType) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.mimeType, mimeType) ||
+                other.mimeType == mimeType) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(path),
-      const DeepCollectionEquality().hash(mimeType),
+  int get hashCode => Object.hash(runtimeType, url, path, mimeType,
       const DeepCollectionEquality().hash(_metadata));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
       __$$_StorageFileCopyWithImpl<_$_StorageFile>(this, _$identity);
 

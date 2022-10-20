@@ -61,7 +61,8 @@ mixin _$User {
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+      _$UserCopyWithImpl<$Res, User>;
+  @useResult
   $Res call(
       {String login,
       int id,
@@ -84,21 +85,24 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res, $Val extends User>
+    implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
-  final User _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? login = freezed,
-    Object? id = freezed,
+    Object? login = null,
+    Object? id = null,
     Object? nodeId = freezed,
     Object? avatarUrl = freezed,
     Object? gravatarId = freezed,
-    Object? url = freezed,
+    Object? url = null,
     Object? htmlUrl = freezed,
     Object? followersUrl = freezed,
     Object? followingUrl = freezed,
@@ -110,82 +114,82 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? eventsUrl = freezed,
     Object? receivedEventsUrl = freezed,
     Object? type = freezed,
-    Object? siteAdmin = freezed,
+    Object? siteAdmin = null,
   }) {
     return _then(_value.copyWith(
-      login: login == freezed
+      login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nodeId: nodeId == freezed
+      nodeId: freezed == nodeId
           ? _value.nodeId
           : nodeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatarUrl: avatarUrl == freezed
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      gravatarId: gravatarId == freezed
+      gravatarId: freezed == gravatarId
           ? _value.gravatarId
           : gravatarId // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      htmlUrl: htmlUrl == freezed
+      htmlUrl: freezed == htmlUrl
           ? _value.htmlUrl
           : htmlUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      followersUrl: followersUrl == freezed
+      followersUrl: freezed == followersUrl
           ? _value.followersUrl
           : followersUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      followingUrl: followingUrl == freezed
+      followingUrl: freezed == followingUrl
           ? _value.followingUrl
           : followingUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      gistsUrl: gistsUrl == freezed
+      gistsUrl: freezed == gistsUrl
           ? _value.gistsUrl
           : gistsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      starredUrl: starredUrl == freezed
+      starredUrl: freezed == starredUrl
           ? _value.starredUrl
           : starredUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      subscriptionsUrl: subscriptionsUrl == freezed
+      subscriptionsUrl: freezed == subscriptionsUrl
           ? _value.subscriptionsUrl
           : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      organizationsUrl: organizationsUrl == freezed
+      organizationsUrl: freezed == organizationsUrl
           ? _value.organizationsUrl
           : organizationsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      reposUrl: reposUrl == freezed
+      reposUrl: freezed == reposUrl
           ? _value.reposUrl
           : reposUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      eventsUrl: eventsUrl == freezed
+      eventsUrl: freezed == eventsUrl
           ? _value.eventsUrl
           : eventsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      receivedEventsUrl: receivedEventsUrl == freezed
+      receivedEventsUrl: freezed == receivedEventsUrl
           ? _value.receivedEventsUrl
           : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      siteAdmin: siteAdmin == freezed
+      siteAdmin: null == siteAdmin
           ? _value.siteAdmin
           : siteAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -194,6 +198,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String login,
       int id,
@@ -216,22 +221,20 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     implements _$$_UserCopyWith<$Res> {
   __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
-      : super(_value, (v) => _then(v as _$_User));
+      : super(_value, _then);
 
-  @override
-  _$_User get _value => super._value as _$_User;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? login = freezed,
-    Object? id = freezed,
+    Object? login = null,
+    Object? id = null,
     Object? nodeId = freezed,
     Object? avatarUrl = freezed,
     Object? gravatarId = freezed,
-    Object? url = freezed,
+    Object? url = null,
     Object? htmlUrl = freezed,
     Object? followersUrl = freezed,
     Object? followingUrl = freezed,
@@ -243,78 +246,78 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? eventsUrl = freezed,
     Object? receivedEventsUrl = freezed,
     Object? type = freezed,
-    Object? siteAdmin = freezed,
+    Object? siteAdmin = null,
   }) {
     return _then(_$_User(
-      login: login == freezed
+      login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nodeId: nodeId == freezed
+      nodeId: freezed == nodeId
           ? _value.nodeId
           : nodeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatarUrl: avatarUrl == freezed
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      gravatarId: gravatarId == freezed
+      gravatarId: freezed == gravatarId
           ? _value.gravatarId
           : gravatarId // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      htmlUrl: htmlUrl == freezed
+      htmlUrl: freezed == htmlUrl
           ? _value.htmlUrl
           : htmlUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      followersUrl: followersUrl == freezed
+      followersUrl: freezed == followersUrl
           ? _value.followersUrl
           : followersUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      followingUrl: followingUrl == freezed
+      followingUrl: freezed == followingUrl
           ? _value.followingUrl
           : followingUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      gistsUrl: gistsUrl == freezed
+      gistsUrl: freezed == gistsUrl
           ? _value.gistsUrl
           : gistsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      starredUrl: starredUrl == freezed
+      starredUrl: freezed == starredUrl
           ? _value.starredUrl
           : starredUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      subscriptionsUrl: subscriptionsUrl == freezed
+      subscriptionsUrl: freezed == subscriptionsUrl
           ? _value.subscriptionsUrl
           : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      organizationsUrl: organizationsUrl == freezed
+      organizationsUrl: freezed == organizationsUrl
           ? _value.organizationsUrl
           : organizationsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      reposUrl: reposUrl == freezed
+      reposUrl: freezed == reposUrl
           ? _value.reposUrl
           : reposUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      eventsUrl: eventsUrl == freezed
+      eventsUrl: freezed == eventsUrl
           ? _value.eventsUrl
           : eventsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      receivedEventsUrl: receivedEventsUrl == freezed
+      receivedEventsUrl: freezed == receivedEventsUrl
           ? _value.receivedEventsUrl
           : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      siteAdmin: siteAdmin == freezed
+      siteAdmin: null == siteAdmin
           ? _value.siteAdmin
           : siteAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -409,58 +412,64 @@ class _$_User extends _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            const DeepCollectionEquality().equals(other.login, login) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.nodeId, nodeId) &&
-            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.gravatarId, gravatarId) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.htmlUrl, htmlUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.followersUrl, followersUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.followingUrl, followingUrl) &&
-            const DeepCollectionEquality().equals(other.gistsUrl, gistsUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.starredUrl, starredUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.subscriptionsUrl, subscriptionsUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.organizationsUrl, organizationsUrl) &&
-            const DeepCollectionEquality().equals(other.reposUrl, reposUrl) &&
-            const DeepCollectionEquality().equals(other.eventsUrl, eventsUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.receivedEventsUrl, receivedEventsUrl) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.siteAdmin, siteAdmin));
+            (identical(other.login, login) || other.login == login) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nodeId, nodeId) || other.nodeId == nodeId) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl) &&
+            (identical(other.gravatarId, gravatarId) ||
+                other.gravatarId == gravatarId) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl) &&
+            (identical(other.followersUrl, followersUrl) ||
+                other.followersUrl == followersUrl) &&
+            (identical(other.followingUrl, followingUrl) ||
+                other.followingUrl == followingUrl) &&
+            (identical(other.gistsUrl, gistsUrl) ||
+                other.gistsUrl == gistsUrl) &&
+            (identical(other.starredUrl, starredUrl) ||
+                other.starredUrl == starredUrl) &&
+            (identical(other.subscriptionsUrl, subscriptionsUrl) ||
+                other.subscriptionsUrl == subscriptionsUrl) &&
+            (identical(other.organizationsUrl, organizationsUrl) ||
+                other.organizationsUrl == organizationsUrl) &&
+            (identical(other.reposUrl, reposUrl) ||
+                other.reposUrl == reposUrl) &&
+            (identical(other.eventsUrl, eventsUrl) ||
+                other.eventsUrl == eventsUrl) &&
+            (identical(other.receivedEventsUrl, receivedEventsUrl) ||
+                other.receivedEventsUrl == receivedEventsUrl) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.siteAdmin, siteAdmin) ||
+                other.siteAdmin == siteAdmin));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(login),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(nodeId),
-      const DeepCollectionEquality().hash(avatarUrl),
-      const DeepCollectionEquality().hash(gravatarId),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(htmlUrl),
-      const DeepCollectionEquality().hash(followersUrl),
-      const DeepCollectionEquality().hash(followingUrl),
-      const DeepCollectionEquality().hash(gistsUrl),
-      const DeepCollectionEquality().hash(starredUrl),
-      const DeepCollectionEquality().hash(subscriptionsUrl),
-      const DeepCollectionEquality().hash(organizationsUrl),
-      const DeepCollectionEquality().hash(reposUrl),
-      const DeepCollectionEquality().hash(eventsUrl),
-      const DeepCollectionEquality().hash(receivedEventsUrl),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(siteAdmin));
+      login,
+      id,
+      nodeId,
+      avatarUrl,
+      gravatarId,
+      url,
+      htmlUrl,
+      followersUrl,
+      followingUrl,
+      gistsUrl,
+      starredUrl,
+      subscriptionsUrl,
+      organizationsUrl,
+      reposUrl,
+      eventsUrl,
+      receivedEventsUrl,
+      type,
+      siteAdmin);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 
