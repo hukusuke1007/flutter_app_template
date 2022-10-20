@@ -86,7 +86,7 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^1.24.0
+  firebase_core: ^2.0.0
   firebase_analytics:
   cloud_firestore:
   firebase_auth:

@@ -4,7 +4,7 @@
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
-$FirebaseSdkVersion = '9.6.0'
+$FirebaseSdkVersion = '10.0.0'
 
 project 'Runner', {
   'Debug' => :debug,
@@ -31,6 +31,7 @@ flutter_ios_podfile_setup
 
 target 'Runner' do
   # https://firebase.flutter.dev/docs/overview/#initializing-flutterfire
+  # https://github.com/firebase/flutterfire/issues/9761
   pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => $FirebaseSdkVersion
   use_frameworks!
   use_modular_headers!
