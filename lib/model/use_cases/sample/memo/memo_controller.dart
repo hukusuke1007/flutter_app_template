@@ -1,17 +1,19 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../exceptions/app_exception.dart';
-import '../../../extensions/exception_extension.dart';
-import '../../../results/result_void_data.dart';
-import '../../../utils/logger.dart';
-import '../../../utils/provider.dart';
-import '../../entities/sample/memo.dart';
-import '../../repositories/firebase_auth/firebase_auth_repository.dart';
-import '../../repositories/firestore/collection_paging_repository.dart';
-import '../../repositories/firestore/document.dart';
-import '../../repositories/firestore/document_repository.dart';
+import '../../../../../exceptions/app_exception.dart';
+import '../../../../extensions/exception_extension.dart';
+import '../../../../utils/logger.dart';
+import '../../../../utils/provider.dart';
+import '../../../entities/sample/memo.dart';
+import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../repositories/firestore/collection_paging_repository.dart';
+import '../../../repositories/firestore/document.dart';
+import '../../../repositories/firestore/document_repository.dart';
+import '../typedef.dart';
 
+/// StateNotifier & 非同期操作の結果を同期的に扱うサンプルコード
 final memoProvider = StateNotifierProvider<MemoController, List<Memo>>((ref) {
+  /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
   ref.watch(authStateProvider);
   return MemoController(ref);
 });
@@ -47,9 +49,8 @@ class MemoController extends StateNotifier<List<Memo>> {
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
 
-  /// 一覧取得（ResultVoidDataサンプル）
-  /// ※状態はstateで管理するので関数の戻り値では返さない
-  Future<ResultVoidData> fetch() async {
+  /// 一覧取得
+  Future<ErrorMessage?> onFetch() async {
     try {
       final repository = _collectionPagingRepository;
       if (repository == null) {
@@ -62,19 +63,15 @@ class MemoController extends StateNotifier<List<Memo>> {
         },
       );
       state = data.map((e) => e.entity).whereType<Memo>().toList();
-      return const ResultVoidData.success();
-    } on AppException catch (e) {
-      logger.shout(e);
-      return ResultVoidData.failure(e);
+      return null;
     } on Exception catch (e) {
       logger.shout(e);
-      return ResultVoidData.failure(AppException.error(e.errorMessage));
+      return e.errorMessage;
     }
   }
 
   /// ページング取得
-  /// ※状態はstateで管理するので関数の戻り値では返さない
-  Future<ResultVoidData> fetchMore() async {
+  Future<ErrorMessage?> onFetchMore() async {
     try {
       final repository = _collectionPagingRepository;
       if (repository == null) {
@@ -88,18 +85,15 @@ class MemoController extends StateNotifier<List<Memo>> {
           ...data.map((e) => e.entity).whereType<Memo>(),
         ];
       }
-      return const ResultVoidData.success();
-    } on AppException catch (e) {
-      logger.shout(e);
-      return ResultVoidData.failure(e);
+      return null;
     } on Exception catch (e) {
       logger.shout(e);
-      return ResultVoidData.failure(AppException.error(e.errorMessage));
+      return e.errorMessage;
     }
   }
 
   /// 作成
-  Future<ResultVoidData> create(String text) async {
+  Future<ErrorMessage?> onCreate(String text) async {
     try {
       final userId = _firebaseAuthRepository.loggedInUserId;
       if (userId == null) {
@@ -118,18 +112,15 @@ class MemoController extends StateNotifier<List<Memo>> {
         data: data.toCreateDoc,
       );
       state = [data, ...state];
-      return const ResultVoidData.success();
-    } on AppException catch (e) {
-      logger.shout(e);
-      return ResultVoidData.failure(e);
+      return null;
     } on Exception catch (e) {
       logger.shout(e);
-      return ResultVoidData.failure(AppException.error(e.errorMessage));
+      return e.errorMessage;
     }
   }
 
   /// 更新
-  Future<ResultVoidData> update(Memo memo) async {
+  Future<ErrorMessage?> onUpdate(Memo memo) async {
     try {
       final userId = _firebaseAuthRepository.loggedInUserId;
       if (userId == null) {
@@ -150,18 +141,15 @@ class MemoController extends StateNotifier<List<Memo>> {
             (e) => e.memoId == memo.memoId ? memo : e,
           )
           .toList();
-      return const ResultVoidData.success();
-    } on AppException catch (e) {
-      logger.shout(e);
-      return ResultVoidData.failure(e);
+      return null;
     } on Exception catch (e) {
       logger.shout(e);
-      return ResultVoidData.failure(AppException.error(e.errorMessage));
+      return e.errorMessage;
     }
   }
 
   /// 削除
-  Future<ResultVoidData> remove(String docId) async {
+  Future<ErrorMessage?> onRemove(String docId) async {
     try {
       final userId = _firebaseAuthRepository.loggedInUserId;
       if (userId == null) {
@@ -174,13 +162,10 @@ class MemoController extends StateNotifier<List<Memo>> {
             (e) => e.memoId != docId,
           )
           .toList();
-      return const ResultVoidData.success();
-    } on AppException catch (e) {
-      logger.shout(e);
-      return ResultVoidData.failure(e);
+      return null;
     } on Exception catch (e) {
       logger.shout(e);
-      return ResultVoidData.failure(AppException.error(e.errorMessage));
+      return e.errorMessage;
     }
   }
 }

@@ -1,12 +1,13 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../../extensions/exception_extension.dart';
 import '../../../../gen/colors.gen.dart';
 import '../../../../model/entities/sample/memo.dart';
-import '../../../../model/use_cases/sample/memo_controller.dart';
+import '../../../../model/use_cases/sample/typedef.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/dialogs/show_content_dialog.dart';
@@ -15,18 +16,21 @@ import '../../../widgets/show_indicator.dart';
 Future<void> showEditMemoDialog(
   BuildContext context, {
   Memo? data,
+  required Future<ErrorMessage?> Function(String text, bool isUpdate) onSave,
 }) =>
     showContentDialog<void>(
       context: context,
-      contentWidget: _Dialog(data),
+      contentWidget: _Dialog(data, onSave),
     );
 
 class _Dialog extends HookConsumerWidget {
   const _Dialog(
     this.data,
+    this.onSave,
   );
 
   final Memo? data;
+  final Future<ErrorMessage?> Function(String text, bool isUpdate) onSave;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,40 +81,21 @@ class _Dialog extends HookConsumerWidget {
               if (textKey.currentState?.validate() != true) {
                 return;
               }
-              context.hideKeyboard();
-
               final text = textKey.currentState?.value?.trim() ?? '';
+              context.hideKeyboard();
+              final isUpdate = data != null;
+
+              /// Providerを使った複数のサンプルコードがあるので、保存処理は呼び元へ委ねる
               showIndicator(context);
-              if (data != null) {
-                /// 更新
+              final errorMessage = await onSave(text, isUpdate);
+              dismissIndicator(context);
 
-                final result = await ref
-                    .read(memoProvider.notifier)
-                    .update(data!.copyWith(text: text));
-                dismissIndicator(context);
-                result.when(
-                  success: () {
-                    context.showSnackBar('更新しました');
-                    Navigator.pop(context);
-                  },
-                  failure: (e) {
-                    showOkAlertDialog(context: context, title: e.errorMessage);
-                  },
-                );
+              if (errorMessage == null) {
+                context.showSnackBar(isUpdate ? '更新しました' : '作成しました');
+                Navigator.pop(context);
               } else {
-                /// 新規作成
-
-                final result =
-                    await ref.read(memoProvider.notifier).create(text);
-                dismissIndicator(context);
-                result.when(
-                  success: () {
-                    context.showSnackBar('作成しました');
-                    Navigator.pop(context);
-                  },
-                  failure: (e) {
-                    showOkAlertDialog(context: context, title: e.errorMessage);
-                  },
+                unawaited(
+                  showOkAlertDialog(context: context, title: errorMessage),
                 );
               }
             },

@@ -16,7 +16,7 @@ ThemeData getAppTheme() {
       textTheme: ButtonTextTheme.normal,
     ),
     appBarTheme: base.appBarTheme.copyWith(
-      iconTheme: base.iconTheme.copyWith(color: Colors.grey),
+      iconTheme: base.iconTheme.copyWith(color: Colors.white),
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
       backgroundColor: ColorName.primary,
@@ -53,7 +53,7 @@ ThemeData getAppThemeDark() {
       textTheme: ButtonTextTheme.normal,
     ),
     appBarTheme: base.appBarTheme.copyWith(
-      iconTheme: base.iconTheme.copyWith(color: Colors.grey),
+      iconTheme: base.iconTheme.copyWith(color: Colors.white),
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
       backgroundColor: ColorName.primary,

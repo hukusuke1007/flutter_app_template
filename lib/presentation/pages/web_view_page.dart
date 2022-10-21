@@ -72,9 +72,6 @@ class WebViewPage extends HookConsumerWidget {
           ),
           maxLines: 1,
         ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
         actions: [
           PopupMenuButton<int>(
             icon: const Icon(
