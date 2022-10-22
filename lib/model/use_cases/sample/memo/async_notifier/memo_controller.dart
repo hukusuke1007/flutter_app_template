@@ -19,7 +19,7 @@ final memoProvider =
 
 class MemoController extends AsyncNotifier<List<Memo>> {
   @override
-  FutureOr<List<Memo>> build() {
+  FutureOr<List<Memo>> build() async {
     /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
     ref.watch(authStateProvider);
 
@@ -38,8 +38,16 @@ class MemoController extends AsyncNotifier<List<Memo>> {
         ),
       ),
     );
-    onFetch();
-    return [];
+    final repository = _collectionPagingRepository!;
+    final data = await repository.fetch(
+      fromCache: (cache) {
+        /// キャッシュから即時反映する
+        state = AsyncData(
+          cache.map((e) => e.entity).whereType<Memo>().toList(),
+        );
+      },
+    );
+    return data.map((e) => e.entity).whereType<Memo>().toList();
   }
 
   FirebaseAuthRepository get _firebaseAuthRepository =>
@@ -49,31 +57,6 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       ref.read(documentRepositoryProvider);
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
-
-  /// 一覧取得
-  Future<ErrorMessage?> onFetch() async {
-    try {
-      final repository = _collectionPagingRepository;
-      if (repository == null) {
-        throw AppException.irregular();
-      }
-      final data = await repository.fetch(
-        fromCache: (cache) {
-          /// キャッシュから即時反映する
-          state = AsyncData(
-            cache.map((e) => e.entity).whereType<Memo>().toList(),
-          );
-        },
-      );
-      state = AsyncData(
-        data.map((e) => e.entity).whereType<Memo>().toList(),
-      );
-      return null;
-    } on Exception catch (e) {
-      logger.shout(e);
-      return e.errorMessage;
-    }
-  }
 
   /// ページング取得
   Future<ErrorMessage?> onFetchMore() async {
@@ -104,6 +87,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
+
       final ref = Document.docRef(Memo.collectionPath(userId));
       final now = DateTime.now();
       final data = Memo(
@@ -118,8 +102,9 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       );
       state = AsyncData([data, ...state.value ?? []]);
       return null;
-    } on Exception catch (e) {
+    } on AppException catch (e) {
       logger.shout(e);
+
       return e.errorMessage;
     }
   }
