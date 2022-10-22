@@ -10,11 +10,13 @@ import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
 import '../../../repositories/firestore/document_repository.dart';
 import '../typedef.dart';
+import 'async_notifier/memo_controller.dart' as memo_async_notifier;
 
 /// StateNotifier & 非同期操作の結果を同期的に扱うサンプルコード
 final memoProvider = StateNotifierProvider<MemoController, List<Memo>>((ref) {
   /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
   ref.watch(authStateProvider);
+  logger.info('memoProvider create');
   return MemoController(ref);
 });
 
@@ -99,19 +101,23 @@ class MemoController extends StateNotifier<List<Memo>> {
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
-      final ref = Document.docRef(Memo.collectionPath(userId));
+      final docRef = Document.docRef(Memo.collectionPath(userId));
       final now = DateTime.now();
       final data = Memo(
-        memoId: ref.id,
+        memoId: docRef.id,
         text: text,
         createdAt: now,
         updatedAt: now,
       );
       await _documentRepository.save(
-        Memo.docPath(userId, ref.id),
+        Memo.docPath(userId, docRef.id),
         data: data.toCreateDoc,
       );
       state = [data, ...state];
+
+      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
+      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
+      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -141,6 +147,10 @@ class MemoController extends StateNotifier<List<Memo>> {
             (e) => e.memoId == memo.memoId ? memo : e,
           )
           .toList();
+
+      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
+      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
+      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -162,6 +172,10 @@ class MemoController extends StateNotifier<List<Memo>> {
             (e) => e.memoId != docId,
           )
           .toList();
+
+      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
+      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
+      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
