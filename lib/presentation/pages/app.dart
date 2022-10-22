@@ -15,7 +15,10 @@ class App extends ConsumerWidget {
     return MaterialApp(
       title: 'テンプレアプリ', // TODO(shohei): アプリ名を設定
       useInheritedMediaQuery: true,
+
+      /// スクロールバーをデフォルトで付与したい場合は設定する
       scrollBehavior: const HaveScrollBarBehavior(),
+
       theme: getAppTheme(),
       darkTheme: getAppThemeDark(),
       navigatorKey: ref.watch(navigatorKeyProvider),

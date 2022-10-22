@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/model/use_cases/sample/fetch_enable_screen_reader.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
 import '../firestore_counter_page.dart';
 import '../local_counter_page.dart';
 import 'detail_page.dart';
