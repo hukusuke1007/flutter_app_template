@@ -52,7 +52,7 @@ class MemoAsyncNotifierPage extends HookConsumerWidget {
             controller: refreshController,
             physics: const BouncingScrollPhysics(),
             onRefresh: () {
-              ref.refresh(memoProvider.notifier);
+              ref.invalidate(memoProvider);
               refreshController.refreshCompleted();
             },
             onLoading: () async {
@@ -138,29 +138,30 @@ class MemoAsyncNotifierPage extends HookConsumerWidget {
         },
         error: (e, __) {
           return Center(
-              child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: Text(
-                  'エラー: $e',
-                  style: context.bodyStyle,
-                ),
-              ),
-              TextButton(
-                child: Text(
-                  'リトライ',
-                  style: context.bodyStyle.copyWith(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: Text(
+                    'エラー: $e',
+                    style: context.bodyStyle,
                   ),
                 ),
-                onPressed: () {
-                  ref.refresh(memoProvider);
-                },
-              )
-            ],
-          ));
+                TextButton(
+                  child: Text(
+                    'リトライ',
+                    style: context.bodyStyle.copyWith(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () {
+                    ref.invalidate(memoProvider);
+                  },
+                )
+              ],
+            ),
+          );
         },
         loading: () => const Center(
           child: CupertinoActivityIndicator(),

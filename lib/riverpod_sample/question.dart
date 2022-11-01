@@ -11,8 +11,8 @@ import 'common.dart';
 import 'tag.dart';
 import 'user.dart';
 
-part 'question.g.dart';
 part 'question.freezed.dart';
+part 'question.g.dart';
 
 @freezed
 class QuestionsResponse with _$QuestionsResponse {
@@ -206,7 +206,6 @@ String _useAskedHowLongAgo(DateTime creationDate) {
   useEffect(
     () {
       void setLabel() {
-        // TODO use package:clock to make mock this value inside tests
         final now = DateTime.now();
         final diff = now.difference(creationDate);
 

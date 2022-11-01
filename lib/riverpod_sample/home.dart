@@ -54,7 +54,6 @@ class MyHomePage extends HookConsumerWidget {
                           ref
                               .watch(paginatedQuestionsProvider(index ~/ 50))
                               .whenData((page) {
-                            print(index % 50);
                             return page.items[index % 50];
                           }),
                         ),
