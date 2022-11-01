@@ -18,7 +18,7 @@ class SignInWithEmailAndPassword {
   Future<void> call(String email, String password) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      final authState = _ref.read(authStateProvider.state);
+      final authState = _ref.read(authStateProvider.notifier);
 
       await repository.signInWithEmailAndPassword(email, password);
 

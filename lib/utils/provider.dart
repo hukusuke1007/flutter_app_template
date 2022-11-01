@@ -14,21 +14,19 @@ enum AuthState {
   signInWithAnonymously,
 
   /// サインインしている
-  signIn,
+  signIn;
+
+  bool get isSignIn => this != noSignIn;
 }
 
 final authStateProvider = StateProvider<AuthState>((ref) {
-  final repository = ref.read(firebaseAuthRepositoryProvider);
+  final repository = ref.watch(firebaseAuthRepositoryProvider);
   final loginType = repository.loginType;
-  final user = repository.authUser;
-
   switch (loginType) {
     case null:
       return AuthState.noSignIn;
     case LoginType.email:
-      return user?.emailVerified == true
-          ? AuthState.signIn
-          : AuthState.noSignIn;
+      return AuthState.signIn;
     case LoginType.anonymously:
       return AuthState.signInWithAnonymously;
     case LoginType.apple:

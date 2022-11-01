@@ -1,46 +1,18 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../../extensions/exception_extension.dart';
-import '../../../../model/use_cases/sample/memo_controller.dart';
-import '../../../custom_hooks/use_effect_once.dart';
-import '../../../custom_hooks/use_refresh_controller.dart';
-import '../../../widgets/smart_refresher_custom.dart';
-import 'show_edit_memo_dialog.dart';
+import 'memo_async_notifier_page.dart';
+import 'memo_state_notifier_page.dart';
 
 class MemoPage extends HookConsumerWidget {
   const MemoPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final items = ref.watch(memoProvider);
     final scrollController = useScrollController();
-
-    final refreshController = useRefreshController();
-
-    useEffectOnce(() {
-      Future(() async {
-        final result = await ref.read(memoProvider.notifier).fetch();
-        result.when(
-          success: () {},
-          failure: (e) {
-            context.showSnackBar(
-              e.errorMessage,
-              backgroundColor: Colors.grey,
-            );
-          },
-        );
-      });
-      return null;
-    });
-
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'メモ',
@@ -51,108 +23,48 @@ class MemoPage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: SmartRefresher(
-        header: const SmartRefreshHeader(),
-        footer: const SmartRefreshFooter(),
-        // ignore: avoid_redundant_argument_values
-        enablePullDown: true,
-        enablePullUp: true,
-        controller: refreshController,
-        physics: const BouncingScrollPhysics(),
-        onRefresh: () async {
-          final result = await ref.read(memoProvider.notifier).fetch();
-          result.when(
-            success: () {},
-            failure: (e) {
-              context.showSnackBar(
-                e.errorMessage,
-                backgroundColor: Colors.grey,
-              );
-            },
-          );
-          refreshController.refreshCompleted();
-        },
-        onLoading: () async {
-          final result = await ref.read(memoProvider.notifier).fetchMore();
-          result.when(
-            success: () {},
-            failure: (e) {
-              context.showSnackBar(
-                e.errorMessage,
-                backgroundColor: Colors.grey,
-              );
-            },
-          );
-          refreshController.loadComplete();
-        },
-        child: ListView.separated(
-          controller: scrollController,
-          itemBuilder: (BuildContext context, int index) {
-            final data = items[index];
-            return Slidable(
-              endActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (_) async {
-                      final docId = data.memoId;
-                      if (docId == null) {
-                        return;
-                      }
-                      final alertResult = await showOkCancelAlertDialog(
-                        context: context,
-                        title: '削除しますか？',
-                      );
-                      if (alertResult == OkCancelResult.cancel) {
-                        return;
-                      }
-                      final result =
-                          await ref.read(memoProvider.notifier).remove(docId);
-                      result.when(
-                        success: () {
-                          context.showSnackBar('削除しました');
-                        },
-                        failure: (e) {
-                          context.showSnackBar(
-                            e.errorMessage,
-                            backgroundColor: Colors.grey,
-                          );
-                        },
-                      );
-                    },
-                    backgroundColor: Colors.redAccent,
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete,
-                    label: '削除',
-                  ),
-                ],
-              ),
-              child: ListTile(
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 16,
+          ),
+          child: Column(
+            children: [
+              ListTile(
                 title: Text(
-                  data.text ?? '',
-                  style: context.bodyStyle,
+                  'StateNotifierのサンプル',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
-                trailing: Text(
-                  data.dateLabel,
-                  style: context.smallStyle,
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
                 onTap: () {
-                  showEditMemoDialog(context, data: data);
+                  MemoStateNotifierPage.show(context);
                 },
               ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const Divider(height: 1);
-          },
-          itemCount: items.length,
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  'AsyncNotifierのサンプル',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  MemoAsyncNotifierPage.show(context);
+                },
+              ),
+              const Divider(height: 1),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showEditMemoDialog(context);
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

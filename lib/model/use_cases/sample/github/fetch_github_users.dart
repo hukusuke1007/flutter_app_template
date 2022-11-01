@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../results/result_data.dart';
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
@@ -14,10 +13,10 @@ class FetchGithubUsers {
 
   final Ref _ref;
 
-  Future<ResultData<List<User>>> call({
+  Future<AsyncValue<List<User>>> call({
     int? lastUserId,
   }) async {
-    final data = await ResultData.guard(
+    final data = await AsyncValue.guard(
       () => _ref.read(githubApiRepositoryProvider).fetchUsers(
             since: lastUserId,
             perPage: 20,

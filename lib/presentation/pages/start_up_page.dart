@@ -32,7 +32,7 @@ class StartUpPage extends HookConsumerWidget {
         final isLoggedIn = ref.read(fetchLoggedInWithAnonymouslyProvider)();
         if (isLoggedIn) {
           ref
-              .read(authStateProvider.state)
+              .read(authStateProvider.notifier)
               .update((state) => AuthState.signInWithAnonymously);
         } else {
           await ref.read(signInWithAnonymouslyProvider)();

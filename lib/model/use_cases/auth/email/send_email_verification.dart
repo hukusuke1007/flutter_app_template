@@ -15,7 +15,7 @@ class SendEmailVerification {
 
   Future<void> call() async {
     final repository = _ref.read(firebaseAuthRepositoryProvider);
-    final authState = _ref.read(authStateProvider.state);
+    final authState = _ref.read(authStateProvider.notifier);
 
     final user = repository.authUser;
     if (user == null) {
