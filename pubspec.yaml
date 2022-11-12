@@ -114,6 +114,8 @@ dependencies:
   # Other
   uuid:
   package_info_plus:
+  device_info_plus:
+  android_id:
   synchronized:
   nonce:
   crypto:
@@ -121,7 +123,6 @@ dependencies:
   encrypt:
   flutter_svg:
   recase:
-  device_info:
   flutter_linkify:
   timezone:
   collection:
