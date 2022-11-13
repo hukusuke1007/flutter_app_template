@@ -4,15 +4,20 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../analytics_logger/analytics_event.dart';
+import '../../../../analytics_logger/analytics_logger.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
 import '../../../../model/entities/sample/developer.dart';
+import '../../../../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../model/use_cases/auth/sign_out.dart';
 import '../../../../model/use_cases/package_info/fetch_app_name.dart';
 import '../../../../model/use_cases/package_info/fetch_app_version.dart';
 import '../../../../model/use_cases/package_info/fetch_package_name.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
+import '../../../../utils/logger.dart';
 import '../../../widgets/ripple_tap_gesture.dart';
+import '../../../widgets/show_indicator.dart';
 import '../../../widgets/thumbnail.dart';
 import '../../image_viewer/image_viewer.dart';
 import '../../start_up_page.dart';
@@ -178,8 +183,33 @@ class SettingPage extends HookConsumerWidget {
                         message: 'ログアウトしますか？',
                       );
                       if (result == OkCancelResult.ok) {
-                        await ref.read(signOutProvider)();
-                        unawaited(StartUpPage.show(context));
+                        showIndicator(context);
+                        try {
+                          /// ログアウトしたユーザーIDを記録したいため、サインアウトする前に取得する
+                          final userId = ref
+                              .read(firebaseAuthRepositoryProvider)
+                              .loggedInUserId;
+
+                          /// ログアウト実施
+                          await ref.read(signOutProvider)();
+
+                          /// アナリティクス送信
+                          await ref.read(analyticsLoggerProvider).onEvent(
+                                AnalyticsEvent.signOut,
+                                params: AnalyticsEventParams.signOut(
+                                  userId: userId,
+                                ),
+                              );
+                          dismissIndicator(context);
+                          unawaited(StartUpPage.show(context));
+                        } on Exception catch (e) {
+                          dismissIndicator(context);
+                          context.showSnackBar(
+                            'ログアウトに失敗しました',
+                            backgroundColor: Colors.grey,
+                          );
+                          logger.shout(e);
+                        }
                       }
                     },
                   ),
