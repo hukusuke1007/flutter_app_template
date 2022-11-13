@@ -115,7 +115,6 @@ dependencies:
   uuid:
   package_info_plus:
   device_info_plus:
-  android_id:
   synchronized:
   nonce:
   crypto:
