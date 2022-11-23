@@ -17,7 +17,7 @@ _$_QuestionsResponse _$$_QuestionsResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_QuestionsResponseToJson(
         _$_QuestionsResponse instance) =>
     <String, dynamic>{
-      'items': instance.items,
+      'items': instance.items.map((e) => e.toJson()).toList(),
       'total': instance.total,
     };
 
@@ -46,7 +46,7 @@ Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
       'score': instance.score,
       'bounty_amount': instance.bountyAmount,
       'accepted_answer_id': instance.acceptedAnswerId,
-      'owner': instance.owner,
+      'owner': instance.owner.toJson(),
       'answer_count': instance.answerCount,
       'creation_date': const TimestampParser().toJson(instance.creationDate),
       'question_id': instance.questionId,

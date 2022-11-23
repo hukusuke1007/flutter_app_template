@@ -21,7 +21,7 @@ dependencies:
 
   # Riverpod
   flutter_hooks: ^0.18.5+1
-  hooks_riverpod: ^2.1.0
+  hooks_riverpod: ^2.1.1
   freezed_annotation: ^2.2.0
   json_annotation:
 
@@ -114,6 +114,7 @@ dependencies:
   # Other
   uuid:
   package_info_plus:
+  device_info_plus:
   synchronized:
   nonce:
   crypto:
@@ -121,7 +122,6 @@ dependencies:
   encrypt:
   flutter_svg:
   recase:
-  device_info:
   flutter_linkify:
   timezone:
   collection:
@@ -139,7 +139,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.2.0
+  freezed: ^2.2.1
   flutter_gen_runner:
   retrofit_generator:
 
