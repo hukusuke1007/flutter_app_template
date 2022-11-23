@@ -23,7 +23,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'reputation': instance.reputation,
       'user_id': instance.userId,
-      'badge_counts': instance.badgeCounts,
+      'badge_counts': instance.badgeCounts?.toJson(),
       'display_name': instance.displayName,
       'profile_image': instance.profileImage,
       'link': instance.link,

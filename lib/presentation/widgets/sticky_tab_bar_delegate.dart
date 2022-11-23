@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   const StickyTabBarDelegate(
     this.tabBar, {
-    required this.color,
+    this.color,
   });
 
   final TabBar tabBar;
-  final Color color;
+  final Color? color;
 
   @override
   double get minExtent => tabBar.preferredSize.height;
@@ -21,9 +21,10 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return SizedBox(
-      child: ColoredBox(color: color, child: tabBar),
-    );
+    if (color != null) {
+      return ColoredBox(color: color!, child: tabBar);
+    }
+    return tabBar;
   }
 
   @override

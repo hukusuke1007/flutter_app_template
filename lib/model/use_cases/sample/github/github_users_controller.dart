@@ -16,7 +16,7 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
 
   final Ref _ref;
 
-  int? _lastUserId;
+  int _lastUserId = 0;
   bool _loading = false;
   final _pageCount = 20;
 
