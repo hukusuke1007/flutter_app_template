@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_app_template/utils/logger.dart';
-import 'package:flutter_app_template/utils/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../exceptions/app_exception.dart';
 import '../../../../../extensions/exception_extension.dart';
+import '../../../../../utils/logger.dart';
+import '../../../../../utils/provider.dart';
 import '../../../../entities/sample/memo.dart';
 import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../repositories/firestore/collection_paging_repository.dart';
