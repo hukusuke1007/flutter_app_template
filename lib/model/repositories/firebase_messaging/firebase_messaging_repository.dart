@@ -48,6 +48,9 @@ class FirebaseMessagingRepository {
   Future<void> subscribeToTopic(Topics topic) =>
       _firebaseMessaging.subscribeToTopic(topic.name);
 
+  Future<void> unsubscribeFromTopic(Topics topic) =>
+      _firebaseMessaging.unsubscribeFromTopic(topic.name);
+
   Future<void> deleteToken() => _firebaseMessaging.deleteToken();
 
   Future<void> dispose() async {
