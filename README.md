@@ -169,6 +169,12 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
         - MainActivity.kt
           - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
+
+        - ScreenReaderPlugin.kt
+          - [package1](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L1)
+          - [package2](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L15)
+          - [package3](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L25)
+
         - kotlin 配下のディレクトリ名を変更する
 
           （例）`com.example.app` から `com.never.jp` へ変更した場合
