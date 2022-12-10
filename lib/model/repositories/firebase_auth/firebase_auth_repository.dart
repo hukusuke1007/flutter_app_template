@@ -70,6 +70,19 @@ class FirebaseAuthRepository {
     return user.linkWithCredential(authCredential);
   }
 
+  Future<String?> getIdToken({bool forceRefresh = false}) async {
+    return _auth.currentUser?.getIdToken(forceRefresh);
+  }
+
+  Future<IdTokenResult?> getIdTokenResult({bool forceRefresh = false}) async {
+    return _auth.currentUser?.getIdTokenResult(forceRefresh);
+  }
+
+  Future<Map<String, dynamic>?> getClaim({bool forceRefresh = false}) async {
+    final result = await _auth.currentUser?.getIdTokenResult(forceRefresh);
+    return result?.claims;
+  }
+
   Future<void> userDelete(User user) => user.delete();
 
   Future<void> signOut() => _auth.signOut();
