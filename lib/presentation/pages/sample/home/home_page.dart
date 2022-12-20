@@ -30,10 +30,7 @@ class HomePage extends HookConsumerWidget {
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 16,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
             children: [
               GestureDetector(
@@ -55,7 +52,10 @@ class HomePage extends HookConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 32,
+                  horizontal: 16,
+                ),
                 child: Text(
                   '${() {
                     if (context.isAndroid) {

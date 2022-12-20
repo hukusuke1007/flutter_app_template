@@ -9,26 +9,40 @@ part of 'github_api_client.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _GithubApiClient implements GithubApiClient {
-  _GithubApiClient(this._dio, {this.baseUrl});
+  _GithubApiClient(
+    this._dio, {
+    this.baseUrl,
+  });
 
   final Dio _dio;
 
   String? baseUrl;
 
   @override
-  Future<List<User>> fetchUsers(since, perPage) async {
+  Future<List<User>> fetchUsers(
+    since,
+    perPage,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'since': since,
-      r'per_page': perPage
+      r'per_page': perPage,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/users',
-                queryParameters: queryParameters, data: _data)
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
