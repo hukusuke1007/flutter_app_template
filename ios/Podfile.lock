@@ -1,12 +1,12 @@
 PODS:
   - "app_settings (3.0.0+1)":
     - Flutter
-  - cloud_firestore (4.2.0):
+  - cloud_firestore (4.3.1):
     - Firebase/Firestore (= 10.3.0)
     - firebase_core
     - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - cloud_functions (4.0.6):
+  - cloud_functions (4.0.7):
     - Firebase/Functions (= 10.3.0)
     - firebase_core
     - Flutter
@@ -37,26 +37,26 @@ PODS:
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
-  - firebase_analytics (10.0.7):
+  - firebase_analytics (10.1.0):
     - Firebase/Analytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_auth (4.2.1):
+  - firebase_auth (4.2.5):
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.4.0):
+  - firebase_core (2.4.1):
     - Firebase/CoreOnly (= 10.3.0)
     - Flutter
-  - firebase_crashlytics (3.0.7):
+  - firebase_crashlytics (3.0.11):
     - Firebase/Crashlytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.1.4):
+  - firebase_messaging (14.2.1):
     - Firebase/Messaging (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.0.8):
+  - firebase_storage (11.0.10):
     - Firebase/Storage (= 10.3.0)
     - firebase_core
     - Flutter
@@ -247,8 +247,9 @@ PODS:
     - SDWebImage/Core (~> 5.13)
   - share_plus (0.0.1):
     - Flutter
-  - shared_preferences_ios (0.0.1):
+  - shared_preferences_foundation (0.0.1):
     - Flutter
+    - FlutterMacOS
   - TOCropViewController (2.6.1)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -281,7 +282,7 @@ DEPENDENCIES:
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
-  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -370,8 +371,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
-  shared_preferences_ios:
-    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -382,16 +383,16 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
-  cloud_firestore: cf019e947a49ebb56ddf4ae7f6f2ca13469da1b1
-  cloud_functions: 0e65c0abbc4c12022448dd613a13c2e2bc8e7e46
+  cloud_firestore: 5e5bb98722f66e820bf1aa7b3c98ffc9b2450ffb
+  cloud_functions: 6182195e30567bc6a081fb2b81c8563f548a4215
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
-  firebase_analytics: fd9cc19a31206f636cb3f7775b4b2ad41f4503d2
-  firebase_auth: 30cbdb28d5c38f572c331a8590a93e2a1201d75c
-  firebase_core: 6f2f753e316765799d88568232ed59e300ff53db
-  firebase_crashlytics: 4aecad95b85802572a72804e4ca57385357e5255
-  firebase_messaging: 4b60bd563e1d21e3fe91afd398b59d0eda79cc60
-  firebase_storage: 5d5ae6888014dbd66190a47b54817e9c27b14e5f
+  firebase_analytics: 9f3a4cb560a59976b2c48707abae2d4cb94bcb3a
+  firebase_auth: 3bab991fe1df91c2f948156e9dee976e01a19ab9
+  firebase_core: bf59c32d2e53814f558efa20840c1902fa2fe461
+  firebase_crashlytics: b19405931669c882e0d08542e69ae9e86633c636
+  firebase_messaging: ee597229fc260f8fa491fa8f2d4a32dfbfa406fa
+  firebase_storage: 8b85bf19de50a1886f9387924fbddf066a718965
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAppCheckInterop: 9fc57dfa08f0abb737b185ea065422b55355c909
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
@@ -434,9 +435,9 @@ SPEC CHECKSUMS:
   SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
   SDWebImageWebPCoder: 18503de6621dd2c420d680e33d46bf8e1d5169b0
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
-  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
-  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
 
 PODFILE CHECKSUM: 5cf0f30ee52d796e06161808e1724f95d499d999
 

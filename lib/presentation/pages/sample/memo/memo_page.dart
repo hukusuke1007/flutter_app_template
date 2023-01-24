@@ -23,13 +23,10 @@ class MemoPage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Scrollbar(
         controller: scrollController,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 16,
-          ),
+        child: SingleChildScrollView(
+          controller: scrollController,
           child: Column(
             children: [
               ListTile(
