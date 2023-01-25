@@ -8,12 +8,12 @@ extension ContextExtension on BuildContext {
   double get deviceHeight => MediaQuery.of(this).size.height;
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
   bool get isIOS => Theme.of(this).platform == TargetPlatform.iOS;
-  TextStyle get titleStyle => Theme.of(this).textTheme.headline5!;
-  TextStyle get subtitleStyle => Theme.of(this).textTheme.subtitle1!;
-  TextStyle get bodyStyle => Theme.of(this).textTheme.bodyText2!;
-  TextStyle get smallStyle => Theme.of(this).textTheme.caption!;
+  TextStyle get titleStyle => Theme.of(this).textTheme.headlineSmall!;
+  TextStyle get subtitleStyle => Theme.of(this).textTheme.titleMedium!;
+  TextStyle get bodyStyle => Theme.of(this).textTheme.bodyMedium!;
+  TextStyle get smallStyle => Theme.of(this).textTheme.bodySmall!;
   TextStyle get verySmallStyle =>
-      Theme.of(this).textTheme.caption!.copyWith(fontSize: 10);
+      Theme.of(this).textTheme.bodySmall!.copyWith(fontSize: 10);
   bool get isIphoneMiniSize =>
       deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
   double get appBarHeight => MediaQuery.of(this).padding.top + kToolbarHeight;

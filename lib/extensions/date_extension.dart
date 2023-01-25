@@ -33,11 +33,11 @@ extension DateExtension on DateTime {
     if (sec >= 60 * 60 * 24 * 30) {
       return format(pattern: 'yyyy.M.d');
     } else if (sec >= 60 * 60 * 24) {
-      return '${difference.inDays.toString()}日前';
+      return '${difference.inDays}日前';
     } else if (sec >= 60 * 60) {
-      return '${difference.inHours.toString()}時間前';
+      return '${difference.inHours}時間前';
     } else if (sec >= 60) {
-      return '${difference.inMinutes.toString()}分前';
+      return '${difference.inMinutes}分前';
     } else {
       return '$sec秒前';
     }
