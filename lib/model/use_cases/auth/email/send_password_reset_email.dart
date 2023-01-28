@@ -16,8 +16,6 @@ class SendPasswordResetEmail {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
       await repository.sendPasswordResetEmail(email);
-
-      logger.info('パスワード再設定メールを送信しました');
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
@@ -28,7 +26,7 @@ class SendPasswordResetEmail {
           e.code == AuthErrorCode.authInvalidContinueUri.value ||
           e.code == AuthErrorCode.authUnauthorizedContinueUri.value ||
           e.code == AuthErrorCode.authUserNotFound.value) {
-        throw AppException(title: '接続エラーが発生しました');
+        throw AppException(title: 'エラーが発生しました');
       } else {
         throw AppException(title: '不明なエラーです ${e.message}');
       }
