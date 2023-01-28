@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
-import '../../../../model/use_cases/auth/email/send_password_reset_email.dart';
+import '../../../../model/use_cases/sample/auth/email/send_password_reset_email.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';

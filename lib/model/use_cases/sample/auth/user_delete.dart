@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../utils/provider.dart';
-import '../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../../utils/provider.dart';
+import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final userDeleteProvider = Provider(UserDelete.new);
 

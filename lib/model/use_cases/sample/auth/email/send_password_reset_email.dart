@@ -1,32 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../exceptions/app_exception.dart';
-import '../../../../utils/logger.dart';
-import '../../../repositories/firebase_auth/auth_error_code.dart';
-import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../../../exceptions/app_exception.dart';
+import '../../../../../utils/logger.dart';
+import '../../../../repositories/firebase_auth/auth_error_code.dart';
+import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final changeEmailAddressProvider = Provider(ChangeEmailAddress.new);
+final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
 
-class ChangeEmailAddress {
-  ChangeEmailAddress(this._ref);
+class SendPasswordResetEmail {
+  SendPasswordResetEmail(this._ref);
 
   final Ref _ref;
 
-  Future<void> call({
-    required String newEmail,
-    required String password,
-  }) async {
+  Future<void> call(String email) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      final oldEmail = repository.authUser?.email;
-      if (oldEmail == null) {
-        throw AppException(title: 'ログインしてください');
-      }
-      // TODO(shohei): 未実装
-      throw AppException(
-        title: 'メールアドレスの変更はFirebaseFunctionでしかできませんので実装してください',
-      );
+      await repository.sendPasswordResetEmail(email);
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 

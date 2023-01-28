@@ -1,22 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../exceptions/app_exception.dart';
-import '../../../../utils/logger.dart';
-import '../../../repositories/firebase_auth/auth_error_code.dart';
-import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../../../exceptions/app_exception.dart';
+import '../../../../../utils/logger.dart';
+import '../../../../repositories/firebase_auth/auth_error_code.dart';
+import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
+final changeEmailPasswordProvider = Provider(ChangeEmailPassword.new);
 
-class SendPasswordResetEmail {
-  SendPasswordResetEmail(this._ref);
+class ChangeEmailPassword {
+  ChangeEmailPassword(this._ref);
 
   final Ref _ref;
 
-  Future<void> call(String email) async {
+  Future<void> call({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      await repository.sendPasswordResetEmail(email);
+      final email = repository.authUser?.email;
+      if (email == null) {
+        throw AppException(title: 'ログインしてください');
+      }
+      await repository.changeEmailPassword(
+        email: email,
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 
