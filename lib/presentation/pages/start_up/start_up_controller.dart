@@ -12,14 +12,17 @@ enum StartUpResultType {
 
 final startUpControllerProvider =
     FutureProvider.autoDispose<StartUpResultType>((ref) async {
+  /// ログイン状態を確認
   final loginType = ref.read(fetchLoggedInTypeProvider)();
   if (loginType != null) {
+    /// アプリ内の認証状態を設定する
     ref.read(authStateProvider.notifier).update(
           (state) => loginType == LoginType.anonymously
               ? AuthState.signInWithAnonymously
               : AuthState.signIn,
         );
   } else {
+    /// ログインしていなければ匿名認証でログインする
     await ref.read(signInWithAnonymouslyProvider)();
   }
 
