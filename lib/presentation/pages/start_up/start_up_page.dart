@@ -8,7 +8,6 @@ import 'package:page_transition/page_transition.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
 import '../../custom_hooks/use_effect_once.dart';
-import '../../widgets/rounded_button.dart';
 import '../main/main_page.dart';
 import 'start_up_controller.dart';
 
@@ -32,7 +31,11 @@ class StartUpPage extends HookConsumerWidget {
 
     useEffectOnce(() {
       Future(() async {
-        await ref.read(startUpControllerProvider.future);
+        final result = await ref.read(startUpControllerProvider.future);
+        if (result == StartUpResultType.forcedVersionUpgrade) {
+          // TODO(shohei): 強制バージョンアップのダイアログ出したりする
+          return;
+        }
         unawaited(MainPage.show(context));
       });
       return null;
@@ -41,33 +44,56 @@ class StartUpPage extends HookConsumerWidget {
     return Scaffold(
       body: Center(
         child: asyncValue.when(
-          data: (_) {
-            return const CupertinoActivityIndicator();
-          },
-          error: (e, __) {
-            final error = e as Exception?;
-            return Center(
-              child: Column(
+          data: (data) {
+            if (data == StartUpResultType.forcedVersionUpgrade) {
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'エラー\n${error?.errorMessage}',
-                    style: context.bodyStyle.copyWith(
-                      color: Colors.redAccent,
-                    ),
+                    '最新バージョンがリリースされています\nアップグレードしてください',
+                    style: context.bodyStyle,
                     textAlign: TextAlign.center,
                   ),
-                  RoundedButton(
+                  TextButton(
                     child: Text(
-                      'リトライ',
-                      style: context.bodyStyle.copyWith(color: Colors.white),
+                      'アプリストアを確認',
+                      style: context.bodyStyle.copyWith(
+                        color: Colors.blueAccent,
+                      ),
                     ),
-                    onTap: () {
-                      ref.invalidate(startUpControllerProvider);
+                    onPressed: () {
+                      // TODO(shohei): アプリストアへ遷移
                     },
                   ),
                 ],
-              ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+          error: (e, __) {
+            final error = e as Exception?;
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'エラー\n${error?.errorMessage}',
+                  style: context.bodyStyle.copyWith(
+                    color: Colors.redAccent,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                TextButton(
+                  child: Text(
+                    'リトライ',
+                    style: context.bodyStyle.copyWith(
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                  onPressed: () {
+                    ref.invalidate(startUpControllerProvider);
+                  },
+                ),
+              ],
             );
           },
           loading: () {
