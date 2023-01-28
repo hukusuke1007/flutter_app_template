@@ -20,33 +20,6 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
 
   @override
   FutureOr<List<Post>> build() async {
-    /// クエリを設定したRepositoryを設定
-    _collectionPagingRepository = ref.read(
-      postCollectionPagingProvider(
-        CollectionParam<Post>(
-          query: Document.colGroupQuery(
-            Post.collectionName,
-          ).orderBy('createdAt', descending: true),
-          limit: 20,
-          decode: Post.fromJson,
-        ),
-      ),
-    );
-
-    /// 投稿一覧を取得する
-    final data = await _collectionPagingRepository.fetch(
-      fromCache: (cache) async {
-        /// キャッシュから取得して即時反映
-        if (cache.isNotEmpty) {
-          state = AsyncData(
-            cache.map((e) => e.entity).whereType<Post>().toList(
-                  growable: false,
-                ),
-          );
-        }
-      },
-    );
-
     /// 自身が投稿した情報を監視してstateに反映する
     _observerDisposer = ref.read(postOperationObserverProvider).listen((value) {
       final list = state.value ?? [];
@@ -84,6 +57,33 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
     ref.onDispose(() async {
       await _observerDisposer.cancel();
     });
+
+    /// クエリを設定したRepositoryを設定
+    _collectionPagingRepository = ref.read(
+      postCollectionPagingProvider(
+        CollectionParam<Post>(
+          query: Document.colGroupQuery(
+            Post.collectionName,
+          ).orderBy('createdAt', descending: true), // インデックス設定する必要がある
+          limit: 20,
+          decode: Post.fromJson,
+        ),
+      ),
+    );
+
+    /// 投稿一覧を取得する
+    final data = await _collectionPagingRepository.fetch(
+      fromCache: (cache) async {
+        /// キャッシュから取得して即時反映
+        if (cache.isNotEmpty) {
+          state = AsyncData(
+            cache.map((e) => e.entity).whereType<Post>().toList(
+                  growable: false,
+                ),
+          );
+        }
+      },
+    );
 
     return data.map((e) => e.entity).whereType<Post>().toList(growable: false);
   }

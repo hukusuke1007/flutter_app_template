@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../extensions/date_extension.dart';
 import '../../../../model/repositories/firestore/document.dart';
 import '../../../converters/date_time_timestamp_converter.dart';
 import '../../../repositories/firestore/collection_paging_repository.dart';
@@ -38,6 +39,15 @@ class Post with _$Post {
   static String docPath(String docId) => '$collectionName/$docId';
   static DocumentReference<SnapType> docRef(String docId) =>
       Document.docRefWithDocPath(docPath(docId));
+
+  /// 日付
+  String get dateLabel {
+    final date = createdAt;
+    if (date == null) {
+      return '-';
+    }
+    return date.timelineLabel;
+  }
 
   /// サーバーへ保存するMap（作成）
   Map<String, dynamic> get toCreateDoc => <String, dynamic>{
