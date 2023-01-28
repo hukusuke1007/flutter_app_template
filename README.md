@@ -20,6 +20,7 @@ Flutter Stable 3.7.0
   - Hero アニメーションによるモーダル表示
   - SharedPreferences を用いた カウンター画面
   - Firestore を用いた カウンター画面
+  - メールアドレス認証のサンプル
 - タブ 2
   - GithubApi を用いた Github Users の一覧画面
 - タブ 3
