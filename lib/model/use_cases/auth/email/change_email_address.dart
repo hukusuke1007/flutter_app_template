@@ -10,6 +10,7 @@ final changeEmailAddressProvider = Provider(ChangeEmailAddress.new);
 
 class ChangeEmailAddress {
   ChangeEmailAddress(this._ref);
+
   final Ref _ref;
 
   Future<void> call({

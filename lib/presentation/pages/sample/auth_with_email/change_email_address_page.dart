@@ -11,12 +11,11 @@ import '../../../../extensions/exception_extension.dart';
 import '../../../../extensions/string_extension.dart';
 import '../../../../model/use_cases/auth/email/change_email_address.dart';
 import '../../../../model/use_cases/auth/email/fetch_email.dart';
-import '../../../../utils/clipboard.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
-import '../../../widgets/ripple_tap_gesture.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
+import 'widgets/current_email_address_text.dart';
 import 'widgets/email_text_field.dart';
 import 'widgets/passward_text_field.dart';
 
@@ -64,36 +63,10 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
             child: Column(
               children: [
                 /// 現在のメールアドレス
-                Padding(
+                CurrentEmailAddressText(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '現在のメールアドレス',
-                          style: context.bodyStyle
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        RippleTapGesture(
-                          onTap: () {
-                            final value = currentEmail;
-                            if (value != null) {
-                              Clipboard.copy(value);
-                              context.showSnackBar('メールアドレスをコピーしました');
-                            }
-                          },
-                          child: Text(
-                            currentEmail ?? '-',
-                            style: context.bodyStyle
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  email: currentEmail ?? '-',
                 ),
 
                 /// 新しいメールアドレス

@@ -10,6 +10,7 @@ final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
 
 class SendPasswordResetEmail {
   SendPasswordResetEmail(this._ref);
+
   final Ref _ref;
 
   Future<void> call(String email) async {

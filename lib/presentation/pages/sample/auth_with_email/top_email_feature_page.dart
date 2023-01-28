@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import 'change_email_address_page.dart';
 import 'change_email_password_page.dart';
-import 'identification_email_page.dart';
+import 'email_verification_page.dart';
 import 'reset_email_password_page.dart';
 import 'sign_in_with_email_page.dart';
 import 'sign_up_with_email_page.dart';
@@ -122,7 +122,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
               const Divider(height: 1),
               ListTile(
                 title: Text(
-                  '本人確認',
+                  'メールアドレス本人認証',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -131,7 +131,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  IdentificationEmailPage.show(context);
+                  EmailVerificationPage.show(context);
                 },
               ),
               const Divider(height: 1),

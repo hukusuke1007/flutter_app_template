@@ -10,6 +10,7 @@ final changeEmailPasswordProvider = Provider(ChangeEmailPassword.new);
 
 class ChangeEmailPassword {
   ChangeEmailPassword(this._ref);
+
   final Ref _ref;
 
   Future<void> call({
