@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../entities/sample/developer.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
@@ -14,6 +15,7 @@ final fetchMyProfileProvider = StreamProvider<Developer?>((ref) {
   if (userId == null) {
     return Stream.value(null);
   }
+  logger.info('userId: $userId');
   return ref
       .read(documentRepositoryProvider)
       .snapshots(Developer.docPath(userId))

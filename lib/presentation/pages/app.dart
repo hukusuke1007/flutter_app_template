@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../utils/provider.dart';
 import '../res/theme.dart';
 import '../widgets/have_scroll_bar_behavior.dart';
-import 'start_up_page.dart';
+import 'start_up/start_up_page.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});

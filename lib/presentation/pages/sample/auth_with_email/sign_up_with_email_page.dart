@@ -61,6 +61,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                   textFormFieldKey: emailFormFieldKey,
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  hintText: 'メールアドレスを入力',
                 ),
 
                 /// パスワード
@@ -69,7 +70,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 32).copyWith(
                     bottom: 16,
                   ),
-                  title: 'パスワード（英数字8文字以上）',
+                  hintText: '大文字小文字含む英数字8桁以上',
                 ),
 
                 /// 確認用パスワード
@@ -77,6 +78,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                   textFormFieldKey: confirmPasswordFormFieldKey,
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   title: '確認用パスワード',
+                  hintText: '確認用パスワードを入力',
                   validator: (value) {
                     final passwordText =
                         passwordFormFieldKey.currentState?.value?.trim();
@@ -133,7 +135,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                 dismissIndicator(context);
                 await showOkAlertDialog(
                   context: context,
-                  title: 'サインアップしました',
+                  title: '新規登録しました',
                 );
                 Navigator.of(context).pop();
               } on Exception catch (e) {

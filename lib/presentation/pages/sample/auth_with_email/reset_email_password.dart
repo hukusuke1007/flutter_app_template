@@ -22,25 +22,28 @@ class ResetEmailPasswordPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'パスワードリセット',
-          style: context.subtitleStyle.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return GestureDetector(
+      onTap: context.hideKeyboard,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'パスワードリセット',
+            style: context.subtitleStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: Scrollbar(
-        controller: scrollController,
-        child: SingleChildScrollView(
+        body: Scrollbar(
           controller: scrollController,
-          child: Column(
-            children: [
-              ///
-            ],
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              children: [
+                ///
+              ],
+            ),
           ),
         ),
       ),
