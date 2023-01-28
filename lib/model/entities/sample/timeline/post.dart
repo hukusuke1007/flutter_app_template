@@ -33,11 +33,22 @@ class Post with _$Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  static String get collectionPath => 'sample/v1/posts';
-  static CollectionReference<SnapType> colRef() =>
-      Document.colRef(collectionPath);
+  /// ドキュメントパス
+  static String get collectionName => 'posts';
+  static String docPath(String docId) => '$collectionName/$docId';
+  static DocumentReference<SnapType> docRef(String docId) =>
+      Document.docRefWithDocPath(docPath(docId));
 
-  static String docPath(String id) => '$collectionPath/$id';
-  static DocumentReference<SnapType> docRef(String id) =>
-      Document.docRefWithDocPath(docPath(id));
+  /// サーバーへ保存するMap（作成）
+  Map<String, dynamic> get toCreateDoc => <String, dynamic>{
+        ...toJson(),
+        'createdAt': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+
+  /// サーバーへ保存するMap（更新）
+  Map<String, dynamic> get toUpdateDoc => <String, dynamic>{
+        'text': text,
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
 }

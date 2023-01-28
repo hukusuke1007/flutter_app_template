@@ -1,7 +1,7 @@
-import 'package:flutter_app_template/utils/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/entities/sample/developer.dart';
+import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../repositories/firestore/document_repository.dart';
 

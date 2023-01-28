@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../entities/sample/timeline/post.dart';
+import '../../../../entities/sample/timeline/post.dart';
 
 /// 操作種類
 enum OperationType {

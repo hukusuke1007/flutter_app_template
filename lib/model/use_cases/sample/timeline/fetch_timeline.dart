@@ -3,17 +3,17 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/entities/sample/timeline/post.dart';
-import '../../../../model/use_cases/sample/timeline/post_operation_observer.dart';
 import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
+import 'post/post_operation_observer.dart';
 
-/// 投稿のタイムラインを取得
-final fetchTimelinePostsAsyncProvider =
-    AsyncNotifierProvider.autoDispose<FetchTimelinePosts, List<Post>>(
-  FetchTimelinePosts.new,
+/// タイムラインを取得
+final fetchTimelineAsyncProvider =
+    AsyncNotifierProvider.autoDispose<FetchTimeline, List<Post>>(
+  FetchTimeline.new,
 );
 
-class FetchTimelinePosts extends AutoDisposeAsyncNotifier<List<Post>> {
+class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
   late final CollectionPagingRepository<Post> _collectionPagingRepository;
 
   late final StreamSubscription<OperationData> _observerDisposer;
@@ -24,8 +24,8 @@ class FetchTimelinePosts extends AutoDisposeAsyncNotifier<List<Post>> {
     _collectionPagingRepository = ref.read(
       postCollectionPagingProvider(
         CollectionParam<Post>(
-          query: Document.colRef(
-            Post.collectionPath,
+          query: Document.colGroupQuery(
+            Post.collectionName,
           ).orderBy('createdAt', descending: true),
           limit: 20,
           decode: Post.fromJson,
