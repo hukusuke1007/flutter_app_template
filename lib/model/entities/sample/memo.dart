@@ -10,8 +10,7 @@ import '../../repositories/firestore/collection_paging_repository.dart';
 part 'memo.freezed.dart';
 part 'memo.g.dart';
 
-/// CollectionPagingRepositoryProvider
-final memoPagingProvider = Provider.family
+final memoCollectionPagingProvider = Provider.family
     .autoDispose<CollectionPagingRepository<Memo>, CollectionParam<Memo>>(
         (ref, query) {
   return CollectionPagingRepository<Memo>(
