@@ -5,8 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import 'change_email_page.dart';
+import 'change_email_password_page.dart';
 import 'identification_email_page.dart';
-import 'reset_email_password.dart';
+import 'reset_email_password_page.dart';
 import 'sign_in_with_email_page.dart';
 import 'sign_up_with_email_page.dart';
 
@@ -71,6 +72,21 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                 ),
                 onTap: () {
                   SignInWithEmailPage.show(context);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  'パスワード変更',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  ChangeEmailPasswordPage.show(context);
                 },
               ),
               const Divider(height: 1),
