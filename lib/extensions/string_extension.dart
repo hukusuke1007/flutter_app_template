@@ -8,7 +8,7 @@ extension StringExtension on String {
   bool get isEmail =>
       RegExp('[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}').hasMatch(this);
 
-  /// 大文字の英数字8文字以上
+  /// 大文字小文字含む英数字8桁以上
   bool get isPassword =>
       RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9.?/-]{8,}$')
           .hasMatch(this);
