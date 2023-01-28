@@ -13,6 +13,8 @@ import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
+import 'reset_email_password_page.dart';
+import 'widgets/forget_password_button.dart';
 import 'widgets/passward_text_field.dart';
 
 class ChangeEmailPasswordPage extends HookConsumerWidget {
@@ -71,6 +73,13 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                   hintText: '大文字小文字含む英数字8桁以上',
                   title: '変更後のパスワードを入力',
                 ),
+
+                /// パスワードを忘れた
+                ForgetPasswordButton(
+                  onTap: () {
+                    ResetEmailPasswordPage.show(context);
+                  },
+                )
               ],
             ),
           ),
