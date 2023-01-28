@@ -117,7 +117,7 @@ class _Dialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Text('名前', style: context.bodyStyle),
             ),
             TextFormField(
@@ -139,7 +139,7 @@ class _Dialog extends HookConsumerWidget {
             ),
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Text('誕生日', style: context.bodyStyle),
             ),
             RippleTapGesture(

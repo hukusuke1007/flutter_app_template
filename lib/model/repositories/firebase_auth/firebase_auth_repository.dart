@@ -57,10 +57,23 @@ class FirebaseAuthRepository {
   ) =>
       _auth.signInWithEmailAndPassword(email: email, password: password);
 
-  Future<void> sendEmailVerification(User user) => user.sendEmailVerification();
+  Future<void> sendEmailVerification() async {
+    await _auth.currentUser?.sendEmailVerification();
+  }
 
   Future<void> sendPasswordResetEmail(String email) =>
       _auth.sendPasswordResetEmail(email: email);
+
+  Future<void> changeEmailPassword({
+    required String email,
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final credential =
+        EmailAuthProvider.credential(email: email, password: oldPassword);
+    await _auth.currentUser?.reauthenticateWithCredential(credential);
+    await _auth.currentUser?.updatePassword(newPassword);
+  }
 
   Future<UserCredential> signInWithLink(AuthCredential authCredential) async {
     final user = _auth.currentUser;

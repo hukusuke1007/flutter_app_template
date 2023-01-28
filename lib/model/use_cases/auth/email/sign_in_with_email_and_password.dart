@@ -15,21 +15,17 @@ class SignInWithEmailAndPassword {
 
   final Ref _ref;
 
-  Future<void> call(String email, String password) async {
+  Future<void> call({
+    required String email,
+    required String password,
+  }) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
       final authState = _ref.read(authStateProvider.notifier);
 
       await repository.signInWithEmailAndPassword(email, password);
 
-      final user = _ref.read(firebaseAuthRepositoryProvider).authUser;
-      if (user != null && user.emailVerified) {
-        authState.update((state) => AuthState.signIn);
-      } else {
-        authState.update((state) => AuthState.noSignIn);
-      }
-
-      logger.info('Emailサインインに成功しました');
+      authState.update((state) => AuthState.signIn);
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 

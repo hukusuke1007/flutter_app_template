@@ -6,17 +6,27 @@ import '../../../../utils/logger.dart';
 import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
+final changeEmailAddressProvider = Provider(ChangeEmailAddress.new);
 
-class SendPasswordResetEmail {
-  SendPasswordResetEmail(this._ref);
+class ChangeEmailAddress {
+  ChangeEmailAddress(this._ref);
 
   final Ref _ref;
 
-  Future<void> call(String email) async {
+  Future<void> call({
+    required String newEmail,
+    required String password,
+  }) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      await repository.sendPasswordResetEmail(email);
+      final oldEmail = repository.authUser?.email;
+      if (oldEmail == null) {
+        throw AppException(title: 'ログインしてください');
+      }
+      // TODO(shohei): 未実装
+      throw AppException(
+        title: 'メールアドレスの変更はFirebaseFunctionでしかできませんので実装してください',
+      );
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 

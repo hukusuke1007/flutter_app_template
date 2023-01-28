@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
+import '../auth_with_email/top_email_feature_page.dart';
 import '../firestore_counter_page.dart';
 import '../local_counter_page.dart';
 import 'detail_page.dart';
@@ -97,6 +98,21 @@ class HomePage extends HookConsumerWidget {
                 ),
                 onTap: () {
                   FirestoreCounterPage.show(context);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  'メールアドレス認証のサンプル',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  TopEmailFeaturePage.show(context);
                 },
               ),
               const Divider(height: 1),

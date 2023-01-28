@@ -20,7 +20,7 @@ import '../../../widgets/ripple_tap_gesture.dart';
 import '../../../widgets/show_indicator.dart';
 import '../../../widgets/thumbnail.dart';
 import '../../image_viewer/image_viewer.dart';
-import '../../start_up_page.dart';
+import '../../start_up/start_up_page.dart';
 import '../../web_view_page.dart';
 import 'show_edit_profile_dialog.dart';
 
