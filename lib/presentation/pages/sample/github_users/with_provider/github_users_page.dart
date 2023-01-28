@@ -33,7 +33,7 @@ class GithubUsersPage extends HookConsumerWidget {
         error: (e, _) {
           showOkAlertDialog(
             context: context,
-            title: 'エラーが発生しました\n${e.toString()}',
+            title: 'エラーが発生しました\n$e',
           );
         },
         orElse: () {

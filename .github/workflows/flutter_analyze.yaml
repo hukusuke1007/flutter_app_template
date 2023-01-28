@@ -13,8 +13,9 @@ jobs:
   lint:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-11, macos-12]
-        flutter-version: [stable]
+        os: [macos-12]
+        flutter-version: ['3.7.0']
+        flutter-channel: [stable]
 
     name: flutter_analyze
     runs-on: ${{ matrix.os }}
@@ -22,9 +23,10 @@ jobs:
       - name: set up repository
         uses: actions/checkout@v3
       - name: set up flutter
-        uses: subosito/flutter-action@v2.6.1
+        uses: subosito/flutter-action@v2
         with:
-          channel: ${{ matrix.flutter-version }}
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: ${{ matrix.flutter-channel }}
           cache: false
       - name: flutter doctor
         run: flutter doctor -v

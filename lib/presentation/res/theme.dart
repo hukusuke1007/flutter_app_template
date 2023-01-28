@@ -30,7 +30,7 @@ ThemeData getAppTheme() {
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.light,
       textTheme: CupertinoTextThemeData(
-        dateTimePickerTextStyle: base.textTheme.bodyText2!.copyWith(
+        dateTimePickerTextStyle: base.textTheme.bodyMedium!.copyWith(
           fontSize: 15,
         ),
       ),
@@ -65,7 +65,7 @@ ThemeData getAppThemeDark() {
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.dark,
       textTheme: CupertinoTextThemeData(
-        dateTimePickerTextStyle: base.textTheme.bodyText2!.copyWith(
+        dateTimePickerTextStyle: base.textTheme.bodyMedium!.copyWith(
           fontSize: 15,
         ),
       ),
