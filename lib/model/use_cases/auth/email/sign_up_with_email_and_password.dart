@@ -7,22 +7,25 @@ import '../../../../utils/provider.dart';
 import '../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
-final createUserWithEmailAndPasswordProvider =
-    Provider(CreateUserWithEmailAndPassword.new);
+final signUpWithEmailAndPasswordProvider =
+    Provider(SignUpWithEmailAndPassword.new);
 
-class CreateUserWithEmailAndPassword {
-  CreateUserWithEmailAndPassword(this._ref);
+class SignUpWithEmailAndPassword {
+  SignUpWithEmailAndPassword(this._ref);
 
   final Ref _ref;
 
-  Future<void> call(String email, String password) async {
+  Future<void> call({
+    required String email,
+    required String password,
+  }) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
       final authState = _ref.read(authStateProvider.notifier);
 
       await repository.createUserWithEmailAndPassword(email, password);
-      // NOTE: メールアドレスの確認を完了させるまではsignInに変更しない
-      authState.update((state) => AuthState.noSignIn);
+
+      authState.update((state) => AuthState.signIn);
 
       logger.info('Emailサインアップに成功しました');
     } on FirebaseAuthException catch (e) {
