@@ -1,26 +1,36 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../../gen/assets.gen.dart';
-import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
-import '../auth_with_email/top_email_feature_page.dart';
-import '../firestore_counter_page.dart';
-import '../local_counter_page.dart';
-import 'detail_page.dart';
+import 'change_email_page.dart';
+import 'identification_email_page.dart';
+import 'reset_email_password.dart';
+import 'sign_in_with_email_page.dart';
+import 'sign_up_with_email_page.dart';
 
-class HomePage extends HookConsumerWidget {
-  const HomePage({super.key});
+class TopEmailFeaturePage extends HookConsumerWidget {
+  const TopEmailFeaturePage({super.key});
+
+  static String get pageName => 'top_email_feature';
+  static String get pagePath => '/$pageName';
+
+  static Future<void> show(BuildContext context) {
+    return Navigator.of(context, rootNavigator: true).push<void>(
+      CupertinoPageRoute(
+        builder: (_) => const TopEmailFeaturePage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final enableScreenReader = ref.watch(fetchEnableScreenReaderProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'ホーム',
+          'メールアドレス認証のサンプル',
           style: context.subtitleStyle.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -28,52 +38,15 @@ class HomePage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Scrollbar(
         controller: scrollController,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+        child: SingleChildScrollView(
+          controller: scrollController,
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  DetailPage.show(
-                    context,
-                    heroTag: 'neko',
-                  );
-                },
-                child: Center(
-                  child: Hero(
-                    tag: 'neko',
-                    child: Image.asset(
-                      Assets.images.neko.path,
-                      width: 200,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 32,
-                  horizontal: 16,
-                ),
-                child: Text(
-                  '${() {
-                    if (context.isAndroid) {
-                      return 'Talkback';
-                    } else if (context.isIOS) {
-                      return 'VoiceOver';
-                    }
-                    return '-';
-                  }()}: ${enableScreenReader ? 'ON' : 'OFF'}',
-                  style:
-                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              const Divider(height: 1),
               ListTile(
                 title: Text(
-                  'ローカルカウンターのサンプル',
+                  'サインアップ',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -82,13 +55,13 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  LocalCounterPage.show(context);
+                  SignUpWithEmailPage.show(context);
                 },
               ),
               const Divider(height: 1),
               ListTile(
                 title: Text(
-                  'Firestoreカウンターのサンプル',
+                  'サインイン',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -97,13 +70,13 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  FirestoreCounterPage.show(context);
+                  SignInWithEmailPage.show(context);
                 },
               ),
               const Divider(height: 1),
               ListTile(
                 title: Text(
-                  'メールアドレス認証のサンプル',
+                  'パスワードリセット',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -112,7 +85,37 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  TopEmailFeaturePage.show(context);
+                  ResetEmailPasswordPage.show(context);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  'メールアドレス変更',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  ChangeEmailPage.show(context);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  '本人確認',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  IdentificationEmailPage.show(context);
                 },
               ),
               const Divider(height: 1),
