@@ -8,6 +8,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
 import '../../custom_hooks/use_effect_once.dart';
+import '../../widgets/error_text.dart';
 import '../main/main_page.dart';
 import 'start_up_controller.dart';
 
@@ -72,28 +73,12 @@ class StartUpPage extends HookConsumerWidget {
           },
           error: (e, __) {
             final error = e as Exception?;
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'エラー\n${error?.errorMessage}',
-                  style: context.bodyStyle.copyWith(
-                    color: Colors.redAccent,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                TextButton(
-                  child: Text(
-                    'リトライ',
-                    style: context.bodyStyle.copyWith(
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                  onPressed: () {
-                    ref.invalidate(startUpControllerProvider);
-                  },
-                ),
-              ],
+            final message = 'エラー\n${error?.errorMessage}';
+            return ErrorText(
+              message: message,
+              onRetry: () {
+                ref.invalidate(startUpControllerProvider);
+              },
             );
           },
           loading: () {
