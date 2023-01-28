@@ -29,8 +29,8 @@ class CreatePost {
       postId: postId,
       userId: userId,
       text: text,
-      createdAt: now,
-      updatedAt: now,
+      createdAt: now, // オブザーバー用に設定
+      updatedAt: now, // オブザーバー用に設定
     );
 
     /// サーバーへ保存する

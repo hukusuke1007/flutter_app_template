@@ -26,7 +26,7 @@ class UpdatePost {
     final postId = oldPost.postId;
     final newPost = oldPost.copyWith(
       text: text,
-      updatedAt: DateTime.now(),
+      updatedAt: DateTime.now(), // オブザーバー用に設定
     );
 
     /// サーバーへ保存する

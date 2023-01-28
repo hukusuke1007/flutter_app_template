@@ -39,7 +39,9 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
         /// キャッシュから取得して即時反映
         if (cache.isNotEmpty) {
           state = AsyncData(
-            cache.map((e) => e.entity).whereType<Post>().toList(),
+            cache.map((e) => e.entity).whereType<Post>().toList(
+                  growable: false,
+                ),
           );
         }
       },
@@ -64,12 +66,16 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
               .map(
                 (element) => element.postId == target.postId ? target : element,
               )
-              .toList(),
+              .toList(
+                growable: false,
+              ),
         );
       } else if (value.type == OperationType.delete) {
         /// 削除する
         state = AsyncData(
-          list.where((element) => element.postId != target.postId).toList(),
+          list.where((element) => element.postId != target.postId).toList(
+                growable: false,
+              ),
         );
       }
     });
@@ -79,7 +85,17 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
       await _observerDisposer.cancel();
     });
 
-    return data.map((e) => e.entity).whereType<Post>().toList();
+    return data.map((e) => e.entity).whereType<Post>().toList(growable: false);
+  }
+
+  /// リフレッシュ
+  Future<void> refresh() async {
+    final data = await _collectionPagingRepository.fetch();
+    state = AsyncData(
+      data.map((e) => e.entity).whereType<Post>().toList(
+            growable: false,
+          ),
+    );
   }
 
   /// 次ページの一覧を取得する
