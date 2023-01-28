@@ -83,7 +83,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                     final passwordText =
                         passwordFormFieldKey.currentState?.value?.trim();
                     if (value == null ||
-                        !value.isEmail ||
+                        !value.trim().isPassword ||
                         value != passwordText) {
                       return '正しいパスワードを入力してください';
                     }

@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
-import 'change_email_page.dart';
+import 'change_email_address_page.dart';
 import 'change_email_password_page.dart';
 import 'identification_email_page.dart';
 import 'reset_email_password_page.dart';
@@ -116,7 +116,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  ChangeEmailPage.show(context);
+                  ChangeEmailAddressPage.show(context);
                 },
               ),
               const Divider(height: 1),
