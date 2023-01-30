@@ -50,7 +50,7 @@ class PostDetailPage extends HookConsumerWidget {
     final asyncValue = ref.watch(fetchPostAsyncProviders(param));
     final data = asyncValue.value;
 
-    final poster = ref.watch(fetchPosterStreamProvider(param.userId)).value;
+    final poster = ref.watch(fetchPosterProviders(param.userId)).value;
     final myProfile = ref.watch(fetchMyProfileProvider).value;
     final isMyData = data != null &&
         myProfile != null &&
@@ -93,7 +93,7 @@ class PostDetailPage extends HookConsumerWidget {
                 return [
                   MenuResultType.share,
                   MenuResultType.copy,
-                  MenuResultType.issueReport,
+                  if (!isMyData) MenuResultType.issueReport,
                 ]
                     .map(
                       (data) => PopupMenuItem<MenuResultType>(

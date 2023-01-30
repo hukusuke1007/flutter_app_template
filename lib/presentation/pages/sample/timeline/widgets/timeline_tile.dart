@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/entities/sample/timeline/post.dart';
+import '../../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../../utils/clipboard.dart';
 import '../../../../widgets/ripple_tap_gesture.dart';
@@ -25,7 +26,9 @@ class TimelineTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final poster = ref.watch(fetchPosterStreamProvider(data.userId)).value;
+    final poster = ref.watch(fetchPosterProviders(data.userId)).value;
+    final myProfile = ref.watch(fetchMyProfileProvider).value;
+    final isMyData = myProfile != null && data.userId == myProfile.developerId;
     return RippleTapGesture(
       onTap: onTap,
       child: Column(
@@ -102,6 +105,7 @@ class TimelineTile extends HookConsumerWidget {
                               padding: const EdgeInsets.only(right: 4),
                               child: TileMenu(
                                 data: data,
+                                isMyData: isMyData,
                                 onTapMenu: (result) {
                                   if (result == MenuResultType.share) {
                                     Share.share(data.text);

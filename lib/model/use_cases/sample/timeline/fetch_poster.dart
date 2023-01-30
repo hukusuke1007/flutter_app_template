@@ -5,8 +5,41 @@ import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
 import '../../../repositories/firestore/document_repository.dart';
 
+/// 投稿者を取得
+final fetchPosterProviders =
+    AsyncNotifierProvider.autoDispose.family<FetchPoster, Developer?, String>(
+  FetchPoster.new,
+);
+
+class FetchPoster extends AutoDisposeFamilyAsyncNotifier<Developer?, String> {
+  @override
+  Future<Developer?> build(String arg) async {
+    final userId = arg;
+
+    /// キャッシュから取得して即時反映
+    final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(
+          Developer.docPath(userId),
+          decode: Developer.fromJson,
+        );
+    if (cache.exists) {
+      state = AsyncData(cache.entity);
+    }
+
+    /// サーバーから取得して最新情報を反映
+    final data = await ref.read(documentRepositoryProvider).fetch(
+          Developer.docPath(userId),
+          decode: Developer.fromJson,
+        );
+    if (data.exists) {
+      return data.entity;
+    } else {
+      return null;
+    }
+  }
+}
+
 /// 投稿者を取得（スナップショットリスナー使用）
-final fetchPosterStreamProvider =
+final fetchPosterStreamProviders =
     StreamProvider.autoDispose.family<Developer?, String>((ref, userId) {
   final authState = ref.watch(authStateProvider);
   if (authState == AuthState.noSignIn) {

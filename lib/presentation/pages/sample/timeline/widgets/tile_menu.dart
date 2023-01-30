@@ -10,11 +10,13 @@ import '../enum/menu_result_type.dart';
 class TileMenu extends StatelessWidget {
   const TileMenu({
     required this.data,
+    required this.isMyData,
     required this.onTapMenu,
     super.key,
   });
 
   final Post data;
+  final bool isMyData;
   final void Function(MenuResultType) onTapMenu;
 
   @override
@@ -41,11 +43,12 @@ class TileMenu extends StatelessWidget {
                 key: MenuResultType.copy,
                 icon: Icons.check,
               ),
-              SheetAction<MenuResultType>(
-                label: MenuResultType.issueReport.label,
-                key: MenuResultType.issueReport,
-                icon: Icons.report_sharp,
-              ),
+              if (!isMyData)
+                SheetAction<MenuResultType>(
+                  label: MenuResultType.issueReport.label,
+                  key: MenuResultType.issueReport,
+                  icon: Icons.report_sharp,
+                ),
             ],
             cancelLabel: '閉じる',
           );
