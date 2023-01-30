@@ -10,6 +10,7 @@ import '../../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../../utils/clipboard.dart';
 import '../../../../widgets/ripple_tap_gesture.dart';
 import '../../../../widgets/thumbnail.dart';
+import '../enum/menu_result_type.dart';
 import 'tile_menu.dart';
 
 class TimelineTile extends HookConsumerWidget {
@@ -102,13 +103,13 @@ class TimelineTile extends HookConsumerWidget {
                               child: TileMenu(
                                 data: data,
                                 onTapMenu: (result) {
-                                  if (result == TileMenuResult.share) {
+                                  if (result == MenuResultType.share) {
                                     Share.share(data.text);
-                                  } else if (result == TileMenuResult.copy) {
+                                  } else if (result == MenuResultType.copy) {
                                     Clipboard.copy(data.text);
                                     context.showSnackBar('コピーしました');
                                   } else if (result ==
-                                      TileMenuResult.issueReport) {
+                                      MenuResultType.issueReport) {
                                     // TODO(shohei): 未実装
                                   }
                                 },

@@ -5,12 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../model/entities/sample/timeline/post.dart';
 import '../../../../../utils/vibration.dart';
-
-enum TileMenuResult {
-  share,
-  copy,
-  issueReport,
-}
+import '../enum/menu_result_type.dart';
 
 class TileMenu extends StatelessWidget {
   const TileMenu({
@@ -20,7 +15,7 @@ class TileMenu extends StatelessWidget {
   });
 
   final Post data;
-  final void Function(TileMenuResult) onTapMenu;
+  final void Function(MenuResultType) onTapMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +28,22 @@ class TileMenu extends StatelessWidget {
         padding: const EdgeInsets.only(left: 4),
         onPressed: () async {
           unawaited(Vibration.select());
-          final result = await showModalActionSheet<TileMenuResult>(
+          final result = await showModalActionSheet<MenuResultType>(
             context: context,
             actions: [
-              const SheetAction<TileMenuResult>(
-                label: 'シェアする',
-                key: TileMenuResult.share,
+              SheetAction<MenuResultType>(
+                label: MenuResultType.share.label,
+                key: MenuResultType.share,
                 icon: Icons.share,
               ),
-              const SheetAction<TileMenuResult>(
-                label: 'コピー',
-                key: TileMenuResult.copy,
+              SheetAction<MenuResultType>(
+                label: MenuResultType.copy.label,
+                key: MenuResultType.copy,
                 icon: Icons.check,
               ),
-              const SheetAction<TileMenuResult>(
-                label: '通報する',
-                key: TileMenuResult.issueReport,
+              SheetAction<MenuResultType>(
+                label: MenuResultType.issueReport.label,
+                key: MenuResultType.issueReport,
                 icon: Icons.report_sharp,
               ),
             ],

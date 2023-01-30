@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 
@@ -25,11 +26,12 @@ final fetchPostAsyncProviders =
 class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostParam> {
   @override
   FutureOr<Post?> build(FetchPostParam arg) async {
+    final userId = arg.userId;
     final docId = arg.postId;
 
     /// キャッシュから取得して即時反映
     final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(
-          Post.docPath(docId),
+          Developer.postDocPath(userId: userId, docId: docId),
           decode: Post.fromJson,
         );
     if (cache.exists) {
@@ -38,13 +40,13 @@ class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostParam> {
 
     /// サーバーから取得して最新情報を反映
     final data = await ref.read(documentRepositoryProvider).fetch(
-          Post.docPath(docId),
+          Developer.postDocPath(userId: userId, docId: docId),
           decode: Post.fromJson,
         );
     if (data.exists) {
-      state = AsyncData(data.entity);
+      return data.entity;
+    } else {
+      return null;
     }
-
-    return null;
   }
 }

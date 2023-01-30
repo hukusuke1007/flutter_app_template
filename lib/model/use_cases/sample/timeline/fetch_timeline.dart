@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/entities/sample/timeline/post.dart';
+import '../../../entities/sample/enum/operation_type.dart';
 import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
 import 'post/post_operation_observer.dart';
