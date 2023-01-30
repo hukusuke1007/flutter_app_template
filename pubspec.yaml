@@ -80,7 +80,7 @@ dependencies:
   pull_to_refresh_flutter3:
 
   # Scroll
-  extended_nested_scroll_view: ^6.0.0-dev.1
+  extended_nested_scroll_view: ^6.0.0
 
   # Permission
   permission_handler:
