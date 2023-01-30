@@ -10,9 +10,13 @@ import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/error_text.dart';
 import '../../../widgets/smart_refresher_custom.dart';
+import 'edit_timeline_page.dart';
 
 class TimelinePage extends HookConsumerWidget {
   const TimelinePage({super.key});
+
+  static String get pageName => 'timeline';
+  static String get pagePath => '/$pageName';
 
   static Future<void> show(BuildContext context) {
     return Navigator.of(context, rootNavigator: true).push<void>(
@@ -34,7 +38,7 @@ class TimelinePage extends HookConsumerWidget {
       appBar: AppBar(
         title: Text(
           'タイムライン',
-          style: context.bodyStyle.copyWith(
+          style: context.subtitleStyle.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -78,7 +82,7 @@ class TimelinePage extends HookConsumerWidget {
                   final data = items[index];
                   return ListTile(
                     title: Text(
-                      data.text ?? '',
+                      data.text,
                       style: context.bodyStyle,
                     ),
                     trailing: Text(
@@ -114,7 +118,7 @@ class TimelinePage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO(shohei): 未実装
+          EditTimelinePage.show(context);
         },
         child: const Icon(Icons.add),
       ),
