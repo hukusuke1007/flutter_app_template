@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -16,7 +17,13 @@ class MainPage extends HookConsumerWidget {
   static String get pageName => 'main';
   static String get pagePath => '/$pageName';
 
-  static Future<void> show(BuildContext context) =>
+  /// go_routerの画面遷移
+  static void show(BuildContext context) {
+    context.go(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) =>
       Navigator.of(context, rootNavigator: true).pushReplacement<void, void>(
         PageTransition(
           type: PageTransitionType.fade,
