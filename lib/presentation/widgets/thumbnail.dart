@@ -189,7 +189,7 @@ class CircleThumbnail extends StatelessWidget {
           fit: BoxFit.cover,
           // ignore: avoid_redundant_argument_values
           cache: true,
-          cacheMaxAge: cacheMaxAge ?? const Duration(days: 90),
+          cacheMaxAge: cacheMaxAge ?? const Duration(days: 7),
           loadStateChanged: (ExtendedImageState state) {
             switch (state.extendedImageLoadState) {
               case LoadState.loading:

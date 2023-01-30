@@ -11,6 +11,7 @@ import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/error_text.dart';
 import '../../../widgets/smart_refresher_custom.dart';
 import 'edit_timeline_page.dart';
+import 'widgets/timeline_tile.dart';
 
 class TimelinePage extends HookConsumerWidget {
   const TimelinePage({super.key});
@@ -80,15 +81,8 @@ class TimelinePage extends HookConsumerWidget {
                 controller: scrollController,
                 itemBuilder: (BuildContext context, int index) {
                   final data = items[index];
-                  return ListTile(
-                    title: Text(
-                      data.text,
-                      style: context.bodyStyle,
-                    ),
-                    trailing: Text(
-                      data.dateLabel,
-                      style: context.smallStyle,
-                    ),
+                  return TimelineTile(
+                    data: data,
                     onTap: () {
                       // TODO(shohei): 未実装
                     },
