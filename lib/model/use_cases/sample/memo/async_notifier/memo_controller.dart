@@ -29,7 +29,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       return [];
     }
     _collectionPagingRepository = ref.read(
-      memoPagingProvider(
+      memoCollectionPagingProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
             Memo.collectionPath(userId),

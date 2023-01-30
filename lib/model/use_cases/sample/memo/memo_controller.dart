@@ -29,7 +29,7 @@ class MemoController extends StateNotifier<List<Memo>> {
       return;
     }
     _collectionPagingRepository = _ref.read(
-      memoPagingProvider(
+      memoCollectionPagingProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
             Memo.collectionPath(userId),
