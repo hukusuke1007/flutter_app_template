@@ -16,8 +16,11 @@ import 'show_edit_memo_dialog.dart';
 class MemoStateNotifierPage extends HookConsumerWidget {
   const MemoStateNotifierPage({super.key});
 
+  static String get pageName => 'memo_state_notifier';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const MemoStateNotifierPage(),
       ),

@@ -7,22 +7,28 @@ class EmailTextField extends StatelessWidget {
   const EmailTextField({
     required this.textFormFieldKey,
     this.padding = EdgeInsets.zero,
+    this.focusNode,
     this.title = 'メールアドレス',
     this.hintText,
     this.initialValue,
     this.counterText,
     this.validator,
+    this.textInputAction,
+    this.onFieldSubmitted,
     this.maxLength,
     super.key,
   });
 
   final GlobalKey<FormFieldState<String>> textFormFieldKey;
   final EdgeInsets padding;
+  final FocusNode? focusNode;
   final String title;
   final String? hintText;
   final String? initialValue;
   final String? counterText;
   final FormFieldValidator<String>? validator;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
   final int? maxLength;
 
   @override
@@ -39,6 +45,7 @@ class EmailTextField extends StatelessWidget {
           ),
           TextFormField(
             style: context.bodyStyle,
+            focusNode: focusNode,
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding:
@@ -59,6 +66,8 @@ class EmailTextField extends StatelessWidget {
                     ? '正しいメールアドレスを入力してください'
                     : null,
             keyboardType: TextInputType.emailAddress,
+            textInputAction: textInputAction ?? TextInputAction.done,
+            onFieldSubmitted: onFieldSubmitted,
             autocorrect: false,
             autofillHints: const [
               AutofillHints.username,

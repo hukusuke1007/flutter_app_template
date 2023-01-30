@@ -10,6 +10,9 @@ class DetailPage extends StatelessWidget {
     super.key,
   });
 
+  static String get pageName => 'detail';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(
     BuildContext context, {
     required String heroTag,

@@ -16,8 +16,11 @@ import '../../../utils/logger.dart';
 class FirestoreCounterPage extends HookConsumerWidget {
   const FirestoreCounterPage({super.key});
 
+  static String get pageName => 'firestore_counter';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const FirestoreCounterPage(),
       ),

@@ -10,6 +10,7 @@ import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
 import '../../../../model/use_cases/sample/auth/email/sign_in_with_email_and_password.dart';
 import '../../../../utils/logger.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
@@ -37,6 +38,17 @@ class SignInWithEmailPage extends HookConsumerWidget {
     final scrollController = useScrollController();
     final emailFormFieldKey = useFormFieldStateKey();
     final passwordFormFieldKey = useFormFieldStateKey();
+
+    final focusNode = useFocusNode();
+
+    useEffectOnce(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        /// フォーカスを当ててキーボード表示
+        focusNode.requestFocus();
+      });
+      return null;
+    });
+
     return GestureDetector(
       onTap: context.hideKeyboard,
       child: Scaffold(
@@ -59,9 +71,12 @@ class SignInWithEmailPage extends HookConsumerWidget {
                 /// メールアドレス
                 EmailTextField(
                   textFormFieldKey: emailFormFieldKey,
+                  focusNode: focusNode,
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                   hintText: 'メールアドレスを入力',
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) => focusNode.nextFocus(),
                 ),
 
                 /// パスワード

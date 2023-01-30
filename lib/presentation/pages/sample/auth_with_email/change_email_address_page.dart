@@ -12,6 +12,7 @@ import '../../../../extensions/string_extension.dart';
 import '../../../../model/use_cases/sample/auth/email/change_email_address.dart';
 import '../../../../model/use_cases/sample/auth/email/fetch_email.dart';
 import '../../../../utils/logger.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
@@ -36,12 +37,20 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-
     final newEmailFormFieldKey = useFormFieldStateKey();
     final newConfirmEmailFormFieldKey = useFormFieldStateKey();
     final passwordFormFieldKey = useFormFieldStateKey();
-
     final currentEmail = ref.watch(fetchEmailProvider);
+
+    final focusNode = useFocusNode();
+
+    useEffectOnce(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        /// フォーカスを当ててキーボード表示
+        focusNode.requestFocus();
+      });
+      return null;
+    });
 
     return GestureDetector(
       onTap: context.hideKeyboard,
@@ -72,11 +81,14 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
                 /// 新しいメールアドレス
                 EmailTextField(
                   textFormFieldKey: newEmailFormFieldKey,
+                  focusNode: focusNode,
                   padding: const EdgeInsets.symmetric(horizontal: 32).copyWith(
                     bottom: 16,
                   ),
                   title: '新しいメールアドレス',
                   hintText: 'メールアドレスを入力',
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) => focusNode.nextFocus(),
                 ),
 
                 /// 新しいメールアドレス（確認）
@@ -97,6 +109,8 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
                     }
                     return null;
                   },
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) => focusNode.nextFocus(),
                 ),
 
                 /// パスワード

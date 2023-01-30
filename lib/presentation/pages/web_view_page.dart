@@ -20,13 +20,14 @@ class WebViewPage extends HookConsumerWidget {
     required this.url,
   });
 
-  static String get screenName => 'WebViewPage';
+  static String get pageName => 'web_view';
+  static String get pagePath => '/$pageName';
 
   static Future<void> show(
     BuildContext context, {
     required String url,
   }) {
-    return Navigator.of(context).push<void>(
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => WebViewPage(
           url: url,
@@ -122,97 +123,99 @@ class WebViewPage extends HookConsumerWidget {
         ],
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: InAppWebView(
-                  initialUrlRequest: URLRequest(url: Uri.parse(url)),
-                  initialOptions: InAppWebViewGroupOptions(
-                    crossPlatform: InAppWebViewOptions(
-                      useShouldOverrideUrlLoading: true,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: InAppWebView(
+                    initialUrlRequest: URLRequest(url: Uri.parse(url)),
+                    initialOptions: InAppWebViewGroupOptions(
+                      crossPlatform: InAppWebViewOptions(
+                        useShouldOverrideUrlLoading: true,
+                      ),
+                      android: AndroidInAppWebViewOptions(
+                        useHybridComposition: true,
+                        displayZoomControls: true,
+                      ),
+                      ios: IOSInAppWebViewOptions(
+                        allowsInlineMediaPlayback: true,
+                      ),
                     ),
-                    android: AndroidInAppWebViewOptions(
-                      useHybridComposition: true,
-                      displayZoomControls: true,
-                    ),
-                    ios: IOSInAppWebViewOptions(
-                      allowsInlineMediaPlayback: true,
-                    ),
-                  ),
-                  pullToRefreshController: pullToRefreshController.value,
-                  onWebViewCreated: (controller) {
-                    webViewController.value = controller;
-                  },
-                  androidOnPermissionRequest:
-                      (controller, origin, resources) async {
-                    return PermissionRequestResponse(
-                      resources: resources,
-                      action: PermissionRequestResponseAction.GRANT,
-                    );
-                  },
-                  onProgressChanged: (controller, value) {
-                    progress.value = value / 100;
-                  },
-                  onConsoleMessage: (controller, consoleMessage) {
-                    logger.info(consoleMessage);
-                  },
-                  onLoadStart: (_, url) {
-                    urlState.value = url?.toString() ?? '';
-                  },
-                  onLoadStop: (controller, _) async {
-                    if (!mounted()) {
-                      return;
-                    }
-                    titleState.value =
-                        (await webViewController.value?.getTitle()) ?? '';
+                    pullToRefreshController: pullToRefreshController.value,
+                    onWebViewCreated: (controller) {
+                      webViewController.value = controller;
+                    },
+                    androidOnPermissionRequest:
+                        (controller, origin, resources) async {
+                      return PermissionRequestResponse(
+                        resources: resources,
+                        action: PermissionRequestResponseAction.GRANT,
+                      );
+                    },
+                    onProgressChanged: (controller, value) {
+                      progress.value = value / 100;
+                    },
+                    onConsoleMessage: (controller, consoleMessage) {
+                      logger.info(consoleMessage);
+                    },
+                    onLoadStart: (_, url) {
+                      urlState.value = url?.toString() ?? '';
+                    },
+                    onLoadStop: (controller, _) async {
+                      if (!mounted()) {
+                        return;
+                      }
+                      titleState.value =
+                          (await webViewController.value?.getTitle()) ?? '';
 
-                    await pullToRefreshController.value.endRefreshing();
-                  },
+                      await pullToRefreshController.value.endRefreshing();
+                    },
+                  ),
                 ),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 24,
-                      color: Colors.grey,
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 24,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        webViewController.value?.goBack();
+                      },
                     ),
-                    onPressed: () {
-                      webViewController.value?.goBack();
-                    },
-                  ),
-                  Expanded(
-                    child: Text(
-                      urlState.value,
-                      style: context.smallStyle,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.visible,
-                      maxLines: 1,
+                    Expanded(
+                      child: Text(
+                        urlState.value,
+                        style: context.smallStyle,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
+                        maxLines: 1,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      size: 24,
-                      color: Colors.grey,
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        size: 24,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        webViewController.value?.goForward();
+                      },
                     ),
-                    onPressed: () {
-                      webViewController.value?.goForward();
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-          if (progress.value < 1.0)
-            Align(
-              alignment: Alignment.topCenter,
-              child: LinearProgressIndicator(value: progress.value),
+                  ],
+                ),
+              ],
             ),
-        ],
+            if (progress.value < 1.0)
+              Align(
+                alignment: Alignment.topCenter,
+                child: LinearProgressIndicator(value: progress.value),
+              ),
+          ],
+        ),
       ),
     );
   }

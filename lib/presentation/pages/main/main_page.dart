@@ -13,6 +13,9 @@ import 'tab_navigator.dart';
 class MainPage extends HookConsumerWidget {
   const MainPage({super.key});
 
+  static String get pageName => 'main';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(BuildContext context) =>
       Navigator.of(context, rootNavigator: true).pushReplacement<void, void>(
         PageTransition(

@@ -9,8 +9,11 @@ import '../../../presentation/widgets/rounded_button.dart';
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});
 
+  static String get pageName => 'local_counter';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const LocalCounterPage(),
       ),

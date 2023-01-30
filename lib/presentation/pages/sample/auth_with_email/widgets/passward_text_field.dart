@@ -8,11 +8,14 @@ class PasswordTextField extends HookWidget {
   const PasswordTextField({
     required this.textFormFieldKey,
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    this.focusNode,
     this.title = 'パスワード',
     this.hintText,
     this.initialValue,
     this.counterText,
     this.validator,
+    this.textInputAction,
+    this.onFieldSubmitted,
     this.maxLength,
     super.key,
   });
@@ -20,10 +23,13 @@ class PasswordTextField extends HookWidget {
   final String title;
   final GlobalKey<FormFieldState<String>> textFormFieldKey;
   final EdgeInsets padding;
+  final FocusNode? focusNode;
   final String? hintText;
   final String? initialValue;
   final String? counterText;
   final FormFieldValidator<String>? validator;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
   final int? maxLength;
 
   @override
@@ -41,6 +47,7 @@ class PasswordTextField extends HookWidget {
           ),
           TextFormField(
             style: context.bodyStyle,
+            focusNode: focusNode,
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding:
@@ -63,6 +70,8 @@ class PasswordTextField extends HookWidget {
                     ? '正しいパスワードを入力してください'
                     : null,
             keyboardType: TextInputType.visiblePassword,
+            textInputAction: textInputAction ?? TextInputAction.done,
+            onFieldSubmitted: onFieldSubmitted,
             autocorrect: false,
             autofillHints: const [AutofillHints.password],
             maxLength: maxLength,

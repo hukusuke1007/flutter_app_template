@@ -15,6 +15,9 @@ import 'start_up_controller.dart';
 class StartUpPage extends HookConsumerWidget {
   const StartUpPage({super.key});
 
+  static String get pageName => 'start_up';
+  static String get pagePath => '/$pageName';
+
   static Future<void> show(BuildContext context) async {
     await Navigator.of(context, rootNavigator: true)
         .pushReplacement<MaterialPageRoute<dynamic>, void>(

@@ -10,6 +10,7 @@ import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
 import '../../../../model/use_cases/sample/auth/email/send_password_reset_email.dart';
 import '../../../../utils/logger.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
@@ -33,6 +34,17 @@ class ResetEmailPasswordPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final emailFormFieldKey = useFormFieldStateKey();
+
+    final focusNode = useFocusNode();
+
+    useEffectOnce(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        /// フォーカスを当ててキーボード表示
+        focusNode.requestFocus();
+      });
+      return null;
+    });
+
     return GestureDetector(
       onTap: context.hideKeyboard,
       child: Scaffold(
@@ -55,6 +67,7 @@ class ResetEmailPasswordPage extends HookConsumerWidget {
                 /// メールアドレス
                 EmailTextField(
                   textFormFieldKey: emailFormFieldKey,
+                  focusNode: focusNode,
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                   hintText: 'メールアドレスを入力',
