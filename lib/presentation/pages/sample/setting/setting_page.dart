@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -148,7 +146,7 @@ class SettingPage extends HookConsumerWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       onTap: () {
-                        WebViewPage.show(
+                        WebViewPage.push(
                           context,
                           url: 'https://neverjp.com/',
                         );
@@ -201,7 +199,7 @@ class SettingPage extends HookConsumerWidget {
                                 ),
                               );
                           dismissIndicator(context);
-                          unawaited(StartUpPage.show(context));
+                          StartUpPage.pushReplacement(context);
                         } on Exception catch (e) {
                           dismissIndicator(context);
                           context.showSnackBar(

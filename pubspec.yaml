@@ -103,6 +103,9 @@ dependencies:
   retrofit:
   dio:
 
+  # Navigation
+  go_router: ^6.0.1
+
   # Widget
   flutter_fadein:
   flutter_cupertino_datetime_picker:

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../main/main_page.dart';
 import 'change_email_address_page.dart';
 import 'change_email_password_page.dart';
 import 'email_verification_page.dart';
@@ -15,9 +17,15 @@ class TopEmailFeaturePage extends HookConsumerWidget {
   const TopEmailFeaturePage({super.key});
 
   static String get pageName => 'top_email_feature';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${MainPage.pagePath}/$pageName';
 
-  static Future<void> show(BuildContext context) {
+  /// go_routerの画面遷移
+  static void push(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const TopEmailFeaturePage(),
@@ -56,7 +64,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  SignUpWithEmailPage.show(context);
+                  SignUpWithEmailPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -71,7 +79,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  SignInWithEmailPage.show(context);
+                  SignInWithEmailPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -86,7 +94,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  ChangeEmailPasswordPage.show(context);
+                  ChangeEmailPasswordPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -101,7 +109,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  ResetEmailPasswordPage.show(context);
+                  ResetEmailPasswordPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -116,7 +124,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  ChangeEmailAddressPage.show(context);
+                  ChangeEmailAddressPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -131,7 +139,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  EmailVerificationPage.show(context);
+                  EmailVerificationPage.push(context);
                 },
               ),
               const Divider(height: 1),

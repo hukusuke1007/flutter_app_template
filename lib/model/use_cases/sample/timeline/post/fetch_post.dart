@@ -8,8 +8,8 @@ import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 
 @immutable
-class FetchPostParam {
-  const FetchPostParam({
+class FetchPostArgs {
+  const FetchPostArgs({
     required this.postId,
     required this.userId,
   });
@@ -19,15 +19,31 @@ class FetchPostParam {
 
 /// 投稿を取得
 final fetchPostAsyncProviders =
-    AsyncNotifierProvider.autoDispose.family<FetchPost, Post?, FetchPostParam>(
+    AsyncNotifierProvider.autoDispose.family<FetchPost, Post?, FetchPostArgs>(
   FetchPost.new,
 );
 
-class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostParam> {
+class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
+  // late final StreamSubscription<OperationData> _observerDisposer;
+
   @override
-  FutureOr<Post?> build(FetchPostParam arg) async {
+  FutureOr<Post?> build(FetchPostArgs arg) async {
     final userId = arg.userId;
     final docId = arg.postId;
+
+    // /// 自身が投稿した情報を監視してstateに反映する
+    // _observerDisposer = ref.read(postOperationObserverProvider).listen((value) {
+    //   final target = value.post;
+    //   if (value.type == OperationType.update) {
+    //     /// 更新する
+    //     state = AsyncData(target);
+    //   }
+    // });
+
+    // /// 破棄されたらobserverも破棄する
+    // ref.onDispose(() async {
+    //   await _observerDisposer.cancel();
+    // });
 
     /// キャッシュから取得して即時反映
     final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(

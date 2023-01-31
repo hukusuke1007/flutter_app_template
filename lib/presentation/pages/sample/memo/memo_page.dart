@@ -40,7 +40,7 @@ class MemoPage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  MemoStateNotifierPage.show(context);
+                  MemoStateNotifierPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -55,7 +55,7 @@ class MemoPage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  MemoAsyncNotifierPage.show(context);
+                  MemoAsyncNotifierPage.push(context);
                 },
               ),
               const Divider(height: 1),

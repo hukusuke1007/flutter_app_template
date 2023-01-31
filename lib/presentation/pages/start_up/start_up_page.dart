@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -16,9 +17,15 @@ class StartUpPage extends HookConsumerWidget {
   const StartUpPage({super.key});
 
   static String get pageName => 'start_up';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '/';
 
-  static Future<void> show(BuildContext context) async {
+  /// go_routerの画面遷移
+  static void pushReplacement(BuildContext context) {
+    context.pushReplacement(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) async {
     await Navigator.of(context, rootNavigator: true)
         .pushReplacement<MaterialPageRoute<dynamic>, void>(
       PageTransition(
@@ -40,7 +47,7 @@ class StartUpPage extends HookConsumerWidget {
           // TODO(shohei): 強制バージョンアップのダイアログ出したりする
           return;
         }
-        unawaited(MainPage.show(context));
+        MainPage.go(context);
       });
       return null;
     });

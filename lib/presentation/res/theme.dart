@@ -35,6 +35,17 @@ ThemeData getAppTheme() {
         ),
       ),
     ),
+
+    /// AndroidもCupertinoPageTransitionsBuilderに設定する
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+      },
+    ),
   );
 }
 
@@ -69,6 +80,17 @@ ThemeData getAppThemeDark() {
           fontSize: 15,
         ),
       ),
+    ),
+
+    /// AndroidもCupertinoPageTransitionsBuilderに設定する
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+      },
     ),
   );
 }
