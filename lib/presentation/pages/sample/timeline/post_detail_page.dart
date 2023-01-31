@@ -11,7 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
+import '../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/clipboard.dart';
@@ -61,10 +61,9 @@ class PostDetailPage extends HookConsumerWidget {
     final data = asyncValue.value;
 
     final poster = ref.watch(fetchPosterProviders(args.userId)).value;
-    final myProfile = ref.watch(fetchMyProfileProvider).value;
-    final isMyData = data != null &&
-        myProfile != null &&
-        data.userId == myProfile.developerId;
+    final myUserId = ref.watch(fetchMyUserIdProvider);
+    final isMyData =
+        data != null && myUserId != null && data.userId == myUserId;
 
     useEffectOnce(() {
       Future(() async {

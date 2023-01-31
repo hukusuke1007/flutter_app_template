@@ -24,26 +24,10 @@ final fetchPostAsyncProviders =
 );
 
 class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
-  // late final StreamSubscription<OperationData> _observerDisposer;
-
   @override
   FutureOr<Post?> build(FetchPostArgs arg) async {
     final userId = arg.userId;
     final docId = arg.postId;
-
-    // /// 自身が投稿した情報を監視してstateに反映する
-    // _observerDisposer = ref.read(postOperationObserverProvider).listen((value) {
-    //   final target = value.post;
-    //   if (value.type == OperationType.update) {
-    //     /// 更新する
-    //     state = AsyncData(target);
-    //   }
-    // });
-
-    // /// 破棄されたらobserverも破棄する
-    // ref.onDispose(() async {
-    //   await _observerDisposer.cancel();
-    // });
 
     /// キャッシュから取得して即時反映
     final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(

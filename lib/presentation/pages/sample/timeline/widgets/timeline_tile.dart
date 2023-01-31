@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/entities/sample/timeline/post.dart';
-import '../../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
+import '../../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../../utils/clipboard.dart';
 import '../../../../widgets/ripple_tap_gesture.dart';
@@ -27,8 +27,8 @@ class TimelineTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final poster = ref.watch(fetchPosterProviders(data.userId)).value;
-    final myProfile = ref.watch(fetchMyProfileProvider).value;
-    final isMyData = myProfile != null && data.userId == myProfile.developerId;
+    final myUserId = ref.watch(fetchMyUserIdProvider);
+    final isMyData = myUserId != null && data.userId == myUserId;
     return RippleTapGesture(
       onTap: onTap,
       child: Column(
