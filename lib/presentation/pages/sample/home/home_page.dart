@@ -83,7 +83,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  LocalCounterPage.show(context);
+                  LocalCounterPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -98,7 +98,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  FirestoreCounterPage.show(context);
+                  FirestoreCounterPage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -113,7 +113,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  TopEmailFeaturePage.show(context);
+                  TopEmailFeaturePage.push(context);
                 },
               ),
               const Divider(height: 1),
@@ -128,7 +128,7 @@ class HomePage extends HookConsumerWidget {
                   size: 16,
                 ),
                 onTap: () {
-                  TimelinePage.show(context);
+                  TimelinePage.push(context);
                 },
               ),
               const Divider(height: 1),

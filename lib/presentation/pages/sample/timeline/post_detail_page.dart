@@ -31,14 +31,11 @@ class PostDetailPage extends HookConsumerWidget {
   static String get pagePath => '${TimelinePage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(
+  static void push(
     BuildContext context, {
     required FetchPostArgs args,
   }) {
-    context.push(
-      pagePath,
-      extra: args,
-    );
+    context.push(pagePath, extra: args);
   }
 
   /// 従来の画面遷移
@@ -77,7 +74,7 @@ class PostDetailPage extends HookConsumerWidget {
             context: context,
             title: '投稿が削除されています',
           );
-          Navigator.pop(context);
+          context.pop();
         }
       });
       return null;
@@ -246,23 +243,14 @@ class PostDetailPage extends HookConsumerWidget {
         ),
         floatingActionButton: isMyData
             ? FloatingActionButton(
-                onPressed: () async {
-                  EditPostPage.show(context, oldPost: data);
-
-                  // final result = await EditPostPage.show(
-                  //   context,
-                  //   oldPost: data,
-                  // );
-                  // final operationType = result?.operationType;
-                  // if (operationType == null) {
-                  //   return;
-                  // }
-                  //
-                  // if (operationType == OperationType.update) {
-                  //   ref.invalidate(fetchPostAsyncProviders(param));
-                  // } else if (operationType == OperationType.delete) {
-                  //   Navigator.pop(context);
-                  // }
+                onPressed: () {
+                  EditPostPage.push(
+                    context,
+                    args: EditPostPageArgs(
+                      fetchPostArgs: args,
+                      oldPost: data,
+                    ),
+                  );
                 },
                 child: const Icon(Icons.edit),
               )

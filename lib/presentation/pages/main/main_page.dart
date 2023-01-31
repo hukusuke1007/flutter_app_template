@@ -18,7 +18,7 @@ class MainPage extends HookConsumerWidget {
   static String get pagePath => '/$pageName';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void go(BuildContext context) {
     context.go(pagePath);
   }
 

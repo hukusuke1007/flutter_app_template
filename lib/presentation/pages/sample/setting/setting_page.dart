@@ -146,7 +146,7 @@ class SettingPage extends HookConsumerWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       onTap: () {
-                        WebViewPage.show(
+                        WebViewPage.push(
                           context,
                           url: 'https://neverjp.com/',
                         );
@@ -199,7 +199,7 @@ class SettingPage extends HookConsumerWidget {
                                 ),
                               );
                           dismissIndicator(context);
-                          StartUpPage.show(context);
+                          StartUpPage.pushReplacement(context);
                         } on Exception catch (e) {
                           dismissIndicator(context);
                           context.showSnackBar(

@@ -9,10 +9,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
-import '../../../../model/entities/sample/enum/operation_type.dart';
 import '../../../../model/entities/sample/timeline/post.dart';
 import '../../../../model/use_cases/sample/timeline/post/create_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/delete_post.dart';
+import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/update_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
@@ -21,16 +21,19 @@ import '../../../widgets/show_indicator.dart';
 import 'timeline_page.dart';
 
 @immutable
-class EditPostPageResult {
-  const EditPostPageResult({
-    required this.operationType,
+class EditPostPageArgs {
+  const EditPostPageArgs({
+    required this.fetchPostArgs,
+    required this.oldPost,
   });
-  final OperationType operationType;
+
+  final FetchPostArgs fetchPostArgs;
+  final Post oldPost;
 }
 
 class EditPostPage extends HookConsumerWidget {
   const EditPostPage({
-    this.oldPost,
+    this.args,
     super.key,
   });
 
@@ -38,31 +41,32 @@ class EditPostPage extends HookConsumerWidget {
   static String get pagePath => '${TimelinePage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(
+  static void push(
     BuildContext context, {
-    Post? oldPost,
+    EditPostPageArgs? args,
   }) {
     context.push(
       pagePath,
-      extra: oldPost,
+      extra: args,
     );
   }
 
   /// 従来の画面遷移
-  static Future<EditPostPageResult?> showNav1(
+  static Future<void> showNav1(
     BuildContext context, {
-    Post? oldPost,
+    EditPostPageArgs? args,
   }) {
-    return Navigator.of(context, rootNavigator: true).push<EditPostPageResult?>(
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => EditPostPage(
-          oldPost: oldPost,
+          args: args,
         ),
       ),
     );
   }
 
-  final Post? oldPost;
+  final EditPostPageArgs? args;
+  Post? get oldPost => args?.oldPost;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -105,11 +109,8 @@ class EditPostPage extends HookConsumerWidget {
                     await ref.read(deletePostProvider)(post);
                     dismissIndicator(context);
                     context.showSnackBar('削除しました');
-                    Navigator.of(context).pop(
-                      const EditPostPageResult(
-                        operationType: OperationType.delete,
-                      ),
-                    );
+
+                    TimelinePage.go(context);
                   } on Exception catch (e) {
                     dismissIndicator(context);
                     unawaited(
@@ -196,25 +197,26 @@ class EditPostPage extends HookConsumerWidget {
               try {
                 showIndicator(context);
                 if (isUpdatePost) {
-                  final data = oldPost;
-                  if (data != null) {
+                  final args = this.args;
+                  if (args != null) {
+                    /// 投稿内容を更新する
                     await ref.read(updatePostProvider)(
-                      oldPost: data,
+                      oldPost: args.oldPost,
                       text: text,
                     );
+
+                    /// 更新した投稿内容を反映する
+                    final fetchPostArgs = args.fetchPostArgs;
+                    ref.invalidate(fetchPostAsyncProviders(fetchPostArgs));
                   }
                 } else {
+                  /// 投稿内容を作成する
                   await ref.read(createPostProvider)(text: text);
                 }
                 dismissIndicator(context);
-                context.showSnackBar(isUpdatePost ? '更新しました' : '投稿しました');
-                Navigator.of(context).pop(
-                  EditPostPageResult(
-                    operationType: isUpdatePost
-                        ? OperationType.update
-                        : OperationType.create,
-                  ),
-                );
+                context
+                  ..showSnackBar(isUpdatePost ? '更新しました' : '投稿しました')
+                  ..pop();
               } on Exception catch (e) {
                 dismissIndicator(context);
                 unawaited(

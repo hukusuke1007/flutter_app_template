@@ -38,7 +38,7 @@ class ErrorPage extends HookWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {
-                  MainPage.show(context);
+                  MainPage.go(context);
                 },
               ),
             ),

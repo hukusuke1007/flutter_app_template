@@ -12,6 +12,7 @@ import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/error_text.dart';
 import '../../../widgets/smart_refresher_custom.dart';
+import '../../main/main_page.dart';
 import 'edit_post_page.dart';
 import 'post_detail_page.dart';
 import 'widgets/timeline_tile.dart';
@@ -20,11 +21,16 @@ class TimelinePage extends HookConsumerWidget {
   const TimelinePage({super.key});
 
   static String get pageName => 'timeline';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${MainPage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void push(BuildContext context) {
     context.push(pagePath);
+  }
+
+  /// go_routerの画面遷移
+  static void go(BuildContext context) {
+    context.go(pagePath);
   }
 
   /// 従来の画面遷移
@@ -93,7 +99,7 @@ class TimelinePage extends HookConsumerWidget {
                   return TimelineTile(
                     data: data,
                     onTap: () {
-                      PostDetailPage.show(
+                      PostDetailPage.push(
                         context,
                         args: FetchPostArgs(
                           postId: data.postId,
@@ -127,7 +133,7 @@ class TimelinePage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          EditPostPage.show(context);
+          EditPostPage.push(context);
         },
         child: const Icon(Icons.edit),
       ),

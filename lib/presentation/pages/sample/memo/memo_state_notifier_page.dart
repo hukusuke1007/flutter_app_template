@@ -12,16 +12,17 @@ import '../../../../model/use_cases/sample/memo/memo_controller.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/smart_refresher_custom.dart';
+import '../../main/main_page.dart';
 import 'show_edit_memo_dialog.dart';
 
 class MemoStateNotifierPage extends HookConsumerWidget {
   const MemoStateNotifierPage({super.key});
 
   static String get pageName => 'memo_state_notifier';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${MainPage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void push(BuildContext context) {
     context.push(pagePath);
   }
 

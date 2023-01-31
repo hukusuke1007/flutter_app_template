@@ -11,16 +11,17 @@ import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/memo/async_notifier/memo_controller.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/smart_refresher_custom.dart';
+import '../../main/main_page.dart';
 import 'show_edit_memo_dialog.dart';
 
 class MemoAsyncNotifierPage extends HookConsumerWidget {
   const MemoAsyncNotifierPage({super.key});
 
   static String get pageName => 'memo_async_notifier';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${MainPage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void push(BuildContext context) {
     context.push(pagePath);
   }
 

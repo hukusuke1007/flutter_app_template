@@ -24,7 +24,7 @@ class EmailVerificationPage extends HookConsumerWidget {
   static String get pagePath => '${TopEmailFeaturePage.pagePath}/$pageName';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void push(BuildContext context) {
     context.push(pagePath);
   }
 

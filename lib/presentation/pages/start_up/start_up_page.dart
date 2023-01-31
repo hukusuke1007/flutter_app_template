@@ -20,7 +20,7 @@ class StartUpPage extends HookConsumerWidget {
   static String get pagePath => '/';
 
   /// go_routerの画面遷移
-  static void show(BuildContext context) {
+  static void pushReplacement(BuildContext context) {
     context.pushReplacement(pagePath);
   }
 
@@ -47,7 +47,7 @@ class StartUpPage extends HookConsumerWidget {
           // TODO(shohei): 強制バージョンアップのダイアログ出したりする
           return;
         }
-        MainPage.show(context);
+        MainPage.go(context);
       });
       return null;
     });

@@ -35,7 +35,7 @@ class WebViewPage extends HookConsumerWidget {
   static String get pagePath => '/$pageName';
 
   /// go_routerの画面遷移
-  static void show(
+  static void push(
     BuildContext context, {
     required String url,
     String? title,
