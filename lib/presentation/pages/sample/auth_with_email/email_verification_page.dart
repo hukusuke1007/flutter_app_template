@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -13,16 +14,23 @@ import '../../../../model/use_cases/sample/auth/email/fetch_email_verified.dart'
 import '../../../../model/use_cases/sample/auth/email/send_email_verification.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
+import 'top_email_feature_page.dart';
 import 'widgets/current_email_address_text.dart';
 
 class EmailVerificationPage extends HookConsumerWidget {
   const EmailVerificationPage({super.key});
 
   static String get pageName => 'email_verification';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${TopEmailFeaturePage.pagePath}/$pageName';
 
-  static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
+  /// go_routerの画面遷移
+  static void show(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) {
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const EmailVerificationPage(),
       ),
@@ -99,7 +107,7 @@ class EmailVerificationPage extends HookConsumerWidget {
                 context: context,
                 title: '確認用メールを送信しました',
               );
-              Navigator.of(context).pop();
+              context.pop();
             } on Exception catch (e) {
               dismissIndicator(context);
               unawaited(

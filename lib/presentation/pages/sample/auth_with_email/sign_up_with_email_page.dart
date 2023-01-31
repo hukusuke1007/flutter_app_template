@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -15,6 +16,7 @@ import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
+import 'top_email_feature_page.dart';
 import 'widgets/email_text_field.dart';
 import 'widgets/passward_text_field.dart';
 
@@ -22,10 +24,16 @@ class SignUpWithEmailPage extends HookConsumerWidget {
   const SignUpWithEmailPage({super.key});
 
   static String get pageName => 'sign_up_with_email';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${TopEmailFeaturePage.pagePath}/$pageName';
 
-  static Future<void> show(BuildContext context) {
-    return Navigator.of(context).push<void>(
+  /// go_routerの画面遷移
+  static void show(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) {
+    return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const SignUpWithEmailPage(),
       ),
@@ -155,7 +163,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
                   context: context,
                   title: '新規登録しました',
                 );
-                Navigator.of(context).pop();
+                context.pop();
               } on Exception catch (e) {
                 dismissIndicator(context);
                 unawaited(

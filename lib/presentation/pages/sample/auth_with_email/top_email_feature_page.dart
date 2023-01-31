@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -17,7 +18,13 @@ class TopEmailFeaturePage extends HookConsumerWidget {
   static String get pageName => 'top_email_feature';
   static String get pagePath => '/$pageName';
 
-  static Future<void> show(BuildContext context) {
+  /// go_routerの画面遷移
+  static void show(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const TopEmailFeaturePage(),

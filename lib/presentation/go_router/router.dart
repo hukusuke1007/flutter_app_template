@@ -5,6 +5,13 @@ import '../../utils/logger.dart';
 import '../../utils/provider.dart';
 import '../pages/error_page.dart';
 import '../pages/main/main_page.dart';
+import '../pages/sample/auth_with_email/change_email_address_page.dart';
+import '../pages/sample/auth_with_email/change_email_password_page.dart';
+import '../pages/sample/auth_with_email/email_verification_page.dart';
+import '../pages/sample/auth_with_email/reset_email_password_page.dart';
+import '../pages/sample/auth_with_email/sign_in_with_email_page.dart';
+import '../pages/sample/auth_with_email/sign_up_with_email_page.dart';
+import '../pages/sample/auth_with_email/top_email_feature_page.dart';
 import '../pages/sample/firestore_counter_page.dart';
 import '../pages/sample/local_counter_page.dart';
 import '../pages/sample/memo/memo_async_notifier_page.dart';
@@ -79,6 +86,56 @@ final routerProvider = Provider((ref) {
         path: MemoAsyncNotifierPage.pagePath,
         name: MemoAsyncNotifierPage.pageName,
         builder: (_, __) => const MemoAsyncNotifierPage(),
+      ),
+
+      /// メールアドレス認証
+      GoRoute(
+        path: TopEmailFeaturePage.pagePath,
+        name: TopEmailFeaturePage.pageName,
+        builder: (_, __) => const TopEmailFeaturePage(),
+        routes: [
+          /// サインアップ
+          GoRoute(
+            path: SignUpWithEmailPage.pageName,
+            name: SignUpWithEmailPage.pageName,
+            builder: (_, __) => const SignUpWithEmailPage(),
+          ),
+
+          /// サインイン
+          GoRoute(
+            path: SignInWithEmailPage.pageName,
+            name: SignInWithEmailPage.pageName,
+            builder: (_, __) => const SignInWithEmailPage(),
+          ),
+
+          /// パスワード変更
+          GoRoute(
+            path: ChangeEmailPasswordPage.pageName,
+            name: ChangeEmailPasswordPage.pageName,
+            builder: (_, __) => const ChangeEmailPasswordPage(),
+          ),
+
+          /// パスワードリセット
+          GoRoute(
+            path: ResetEmailPasswordPage.pageName,
+            name: ResetEmailPasswordPage.pageName,
+            builder: (_, __) => const ResetEmailPasswordPage(),
+          ),
+
+          /// メールアドレス変更
+          GoRoute(
+            path: ChangeEmailAddressPage.pageName,
+            name: ChangeEmailAddressPage.pageName,
+            builder: (_, __) => const ChangeEmailAddressPage(),
+          ),
+
+          /// メールアドレス本人認証
+          GoRoute(
+            path: EmailVerificationPage.pageName,
+            name: EmailVerificationPage.pageName,
+            builder: (_, __) => const EmailVerificationPage(),
+          ),
+        ],
       ),
     ],
     errorBuilder: (context, state) {
