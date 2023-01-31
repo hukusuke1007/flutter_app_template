@@ -24,6 +24,7 @@ import '../pages/sample/timeline/timeline_page.dart';
 import '../pages/start_up/start_up_page.dart';
 import '../pages/web_view_page.dart';
 
+// TODO(shohei): ShellRouteは未対応。タブを切り替えるとWidgetインスタンスが再生成されるため
 final routerProvider = Provider((ref) {
   final navigatorKey = ref.watch(navigatorKeyProvider);
   return GoRouter(

@@ -44,7 +44,7 @@ Flutter Stable 3.7.0
 - DDD ライクな設計で構築
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - retrofit を用いた サンプルコード
-- 画面遷移は go_router
+- 画面遷移は go_router（ShellRouteは未対応）
 - ボトムナビゲーション構成のサンプル画面
 - 画像選択・保存
 - カメラ、画像のパーミッション設定
