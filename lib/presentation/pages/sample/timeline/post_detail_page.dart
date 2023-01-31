@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/model/entities/sample/enum/operation_type.dart';
-import 'package:flutter_app_template/presentation/custom_hooks/use_effect_once.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -16,41 +15,55 @@ import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/clipboard.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../../widgets/thumbnail.dart';
 import 'edit_post_page.dart';
 import 'enum/menu_result_type.dart';
+import 'timeline_page.dart';
 
 class PostDetailPage extends HookConsumerWidget {
   const PostDetailPage({
-    required this.param,
+    required this.args,
     super.key,
   });
 
   static String get pageName => 'post_detail';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${TimelinePage.pagePath}/$pageName';
 
-  static Future<void> show(
+  /// go_routerの画面遷移
+  static void show(
     BuildContext context, {
-    required FetchPostParam param,
+    required FetchPostArgs args,
+  }) {
+    context.push(
+      pagePath,
+      extra: args,
+    );
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(
+    BuildContext context, {
+    required FetchPostArgs args,
   }) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => PostDetailPage(
-          param: param,
+          args: args,
         ),
       ),
     );
   }
 
-  final FetchPostParam param;
+  final FetchPostArgs args;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final asyncValue = ref.watch(fetchPostAsyncProviders(param));
+    final asyncValue = ref.watch(fetchPostAsyncProviders(args));
     final data = asyncValue.value;
 
-    final poster = ref.watch(fetchPosterProviders(param.userId)).value;
+    final poster = ref.watch(fetchPosterProviders(args.userId)).value;
     final myProfile = ref.watch(fetchMyProfileProvider).value;
     final isMyData = data != null &&
         myProfile != null &&
@@ -58,7 +71,7 @@ class PostDetailPage extends HookConsumerWidget {
 
     useEffectOnce(() {
       Future(() async {
-        final value = await ref.read(fetchPostAsyncProviders(param).future);
+        final value = await ref.read(fetchPostAsyncProviders(args).future);
         if (value == null) {
           await showOkAlertDialog(
             context: context,
@@ -234,20 +247,22 @@ class PostDetailPage extends HookConsumerWidget {
         floatingActionButton: isMyData
             ? FloatingActionButton(
                 onPressed: () async {
-                  final result = await EditPostPage.show(
-                    context,
-                    oldPost: data,
-                  );
-                  final operationType = result?.operationType;
-                  if (operationType == null) {
-                    return;
-                  }
+                  EditPostPage.show(context, oldPost: data);
 
-                  if (operationType == OperationType.update) {
-                    ref.invalidate(fetchPostAsyncProviders(param));
-                  } else if (operationType == OperationType.delete) {
-                    Navigator.pop(context);
-                  }
+                  // final result = await EditPostPage.show(
+                  //   context,
+                  //   oldPost: data,
+                  // );
+                  // final operationType = result?.operationType;
+                  // if (operationType == null) {
+                  //   return;
+                  // }
+                  //
+                  // if (operationType == OperationType.update) {
+                  //   ref.invalidate(fetchPostAsyncProviders(param));
+                  // } else if (operationType == OperationType.delete) {
+                  //   Navigator.pop(context);
+                  // }
                 },
                 child: const Icon(Icons.edit),
               )

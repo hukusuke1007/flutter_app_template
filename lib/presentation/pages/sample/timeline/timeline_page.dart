@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/model/use_cases/sample/timeline/post/fetch_post.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline.dart';
+import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/error_text.dart';
@@ -21,7 +22,13 @@ class TimelinePage extends HookConsumerWidget {
   static String get pageName => 'timeline';
   static String get pagePath => '/$pageName';
 
-  static Future<void> show(BuildContext context) {
+  /// go_routerの画面遷移
+  static void show(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来の画面遷移
+  static Future<void> showNav1(BuildContext context) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         builder: (_) => const TimelinePage(),
@@ -86,11 +93,13 @@ class TimelinePage extends HookConsumerWidget {
                   return TimelineTile(
                     data: data,
                     onTap: () {
-                      final param = FetchPostParam(
-                        postId: data.postId,
-                        userId: data.userId,
+                      PostDetailPage.show(
+                        context,
+                        args: FetchPostArgs(
+                          postId: data.postId,
+                          userId: data.userId,
+                        ),
                       );
-                      PostDetailPage.show(context, param: param);
                     },
                   );
                 },

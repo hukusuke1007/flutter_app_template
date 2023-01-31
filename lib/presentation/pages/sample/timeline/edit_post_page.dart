@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
@@ -17,6 +18,7 @@ import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
+import 'timeline_page.dart';
 
 @immutable
 class EditPostPageResult {
@@ -33,9 +35,21 @@ class EditPostPage extends HookConsumerWidget {
   });
 
   static String get pageName => 'edit_post';
-  static String get pagePath => '/$pageName';
+  static String get pagePath => '${TimelinePage.pagePath}/$pageName';
 
-  static Future<EditPostPageResult?> show(
+  /// go_routerの画面遷移
+  static void show(
+    BuildContext context, {
+    Post? oldPost,
+  }) {
+    context.push(
+      pagePath,
+      extra: oldPost,
+    );
+  }
+
+  /// 従来の画面遷移
+  static Future<EditPostPageResult?> showNav1(
     BuildContext context, {
     Post? oldPost,
   }) {

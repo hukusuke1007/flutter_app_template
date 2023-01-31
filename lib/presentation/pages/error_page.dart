@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/presentation/widgets/rounded_button.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
+
+import '../widgets/rounded_button.dart';
+import 'main/main_page.dart';
 
 class ErrorPage extends HookWidget {
   const ErrorPage({
@@ -37,7 +38,7 @@ class ErrorPage extends HookWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {
-                  context.pop();
+                  MainPage.show(context);
                 },
               ),
             ),

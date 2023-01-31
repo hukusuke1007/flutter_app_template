@@ -8,8 +8,8 @@ import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 
 @immutable
-class FetchPostParam {
-  const FetchPostParam({
+class FetchPostArgs {
+  const FetchPostArgs({
     required this.postId,
     required this.userId,
   });
@@ -19,13 +19,13 @@ class FetchPostParam {
 
 /// 投稿を取得
 final fetchPostAsyncProviders =
-    AsyncNotifierProvider.autoDispose.family<FetchPost, Post?, FetchPostParam>(
+    AsyncNotifierProvider.autoDispose.family<FetchPost, Post?, FetchPostArgs>(
   FetchPost.new,
 );
 
-class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostParam> {
+class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
   @override
-  FutureOr<Post?> build(FetchPostParam arg) async {
+  FutureOr<Post?> build(FetchPostArgs arg) async {
     final userId = arg.userId;
     final docId = arg.postId;
 

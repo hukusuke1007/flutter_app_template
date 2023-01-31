@@ -1,6 +1,11 @@
+import 'package:flutter_app_template/presentation/go_router/modal_transition_page.dart';
+import 'package:flutter_app_template/presentation/pages/sample/timeline/edit_post_page.dart';
+import 'package:flutter_app_template/presentation/pages/sample/timeline/timeline_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../model/entities/sample/timeline/post.dart';
+import '../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../utils/logger.dart';
 import '../../utils/provider.dart';
 import '../pages/error_page.dart';
@@ -16,6 +21,7 @@ import '../pages/sample/firestore_counter_page.dart';
 import '../pages/sample/local_counter_page.dart';
 import '../pages/sample/memo/memo_async_notifier_page.dart';
 import '../pages/sample/memo/memo_state_notifier_page.dart';
+import '../pages/sample/timeline/post_detail_page.dart';
 import '../pages/start_up/start_up_page.dart';
 import '../pages/web_view_page.dart';
 
@@ -134,6 +140,37 @@ final routerProvider = Provider((ref) {
             path: EmailVerificationPage.pageName,
             name: EmailVerificationPage.pageName,
             builder: (_, __) => const EmailVerificationPage(),
+          ),
+        ],
+      ),
+
+      /// タイムライン
+      GoRoute(
+        path: TimelinePage.pagePath,
+        name: TimelinePage.pageName,
+        builder: (_, __) => const TimelinePage(),
+        routes: [
+          /// 投稿の作成・更新・削除
+          GoRoute(
+            path: EditPostPage.pageName,
+            name: EditPostPage.pageName,
+            pageBuilder: (_, state) {
+              final args = state.extra as Post?;
+              return ModalTransitionPage<void>(
+                key: state.pageKey,
+                child: EditPostPage(oldPost: args),
+              );
+            },
+          ),
+
+          /// 投稿詳細
+          GoRoute(
+            path: PostDetailPage.pageName,
+            name: PostDetailPage.pageName,
+            builder: (_, state) {
+              final args = state.extra! as FetchPostArgs;
+              return PostDetailPage(args: args);
+            },
           ),
         ],
       ),
