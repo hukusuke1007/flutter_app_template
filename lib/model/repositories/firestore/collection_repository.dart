@@ -17,7 +17,4 @@ class CollectionRepository {
 
   Query<SnapType> group(String collectionName) =>
       _firestore.collectionGroup(collectionName);
-
-  Stream<QuerySnapshot<SnapType>?> snapshots(Query<SnapType> query) =>
-      query.snapshots();
 }
