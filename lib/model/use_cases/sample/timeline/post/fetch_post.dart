@@ -1,20 +1,23 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 
-@immutable
-class FetchPostArgs {
+/// https://docs-v2.riverpod.dev/docs/concepts/modifiers/family#passing-multiple-parameters-to-a-family
+class FetchPostArgs extends Equatable {
   const FetchPostArgs({
     required this.postId,
     required this.userId,
   });
   final String postId;
   final String userId;
+
+  @override
+  List<Object?> get props => [postId, userId];
 }
 
 /// 投稿を取得

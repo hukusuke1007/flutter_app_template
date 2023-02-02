@@ -115,6 +115,7 @@ dependencies:
   dismissible_page:
 
   # Other
+  equatable:
   uuid:
   package_info_plus:
   device_info_plus:
