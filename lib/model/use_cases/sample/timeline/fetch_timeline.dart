@@ -6,6 +6,7 @@ import '../../../../model/entities/sample/timeline/post.dart';
 import '../../../entities/sample/enum/operation_type.dart';
 import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
+import 'fetch_timeline_post_count.dart';
 import 'post/post_operation_observer.dart';
 
 /// タイムラインを取得
@@ -33,6 +34,9 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
             ...list,
           ],
         );
+
+        /// 投稿数を取得するProviderを再ビルドする
+        ref.invalidate(fetchTimelinePostCountAsyncProvider);
       } else if (value.type == OperationType.update) {
         /// 更新する
         state = AsyncData(
@@ -51,6 +55,9 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
                 growable: false,
               ),
         );
+
+        /// 投稿数を取得するProviderを再ビルドする
+        ref.invalidate(fetchTimelinePostCountAsyncProvider);
       }
     });
 

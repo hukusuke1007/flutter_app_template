@@ -12,8 +12,11 @@ class CollectionRepository {
 
   final FirebaseFirestore _firestore;
 
-  CollectionReference<SnapType> collectionRef(String collectionPath) =>
+  CollectionReference<SnapType> ref(String collectionPath) =>
       _firestore.collection(collectionPath);
+
+  Query<SnapType> group(String collectionName) =>
+      _firestore.collectionGroup(collectionName);
 
   Stream<QuerySnapshot<SnapType>?> snapshots(Query<SnapType> query) =>
       query.snapshots();

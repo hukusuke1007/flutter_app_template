@@ -7,6 +7,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline.dart';
+import '../../../../model/use_cases/sample/timeline/fetch_timeline_post_count.dart';
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
@@ -49,6 +50,8 @@ class TimelinePage extends HookConsumerWidget {
 
     final asyncValue = ref.watch(fetchTimelineAsyncProvider);
 
+    final count = ref.watch(fetchTimelinePostCountAsyncProvider).value ?? 0;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -60,6 +63,18 @@ class TimelinePage extends HookConsumerWidget {
           ),
         ),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16, top: 16),
+            child: Text(
+              '$count件',
+              style: context.bodyStyle.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
       body: asyncValue.when(
         data: (items) {
@@ -86,6 +101,7 @@ class TimelinePage extends HookConsumerWidget {
               physics: const BouncingScrollPhysics(),
               onRefresh: () async {
                 await ref.read(fetchTimelineAsyncProvider.notifier).refresh();
+                ref.invalidate(fetchTimelinePostCountAsyncProvider);
                 refreshController.refreshCompleted();
               },
               onLoading: () async {
