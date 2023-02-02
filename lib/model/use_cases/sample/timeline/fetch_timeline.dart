@@ -36,7 +36,7 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
         );
 
         /// 投稿数を取得するProviderを再ビルドする
-        ref.invalidate(fetchTimelinePostCountAsyncProvider);
+        ref.invalidate(fetchTimelinePostCountFutureProvider);
       } else if (value.type == OperationType.update) {
         /// 更新する
         state = AsyncData(
@@ -57,7 +57,7 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
         );
 
         /// 投稿数を取得するProviderを再ビルドする
-        ref.invalidate(fetchTimelinePostCountAsyncProvider);
+        ref.invalidate(fetchTimelinePostCountFutureProvider);
       }
     });
 

@@ -50,7 +50,7 @@ class TimelinePage extends HookConsumerWidget {
 
     final asyncValue = ref.watch(fetchTimelineAsyncProvider);
 
-    final count = ref.watch(fetchTimelinePostCountAsyncProvider).value ?? 0;
+    final count = ref.watch(fetchTimelinePostCountFutureProvider).value ?? 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -101,7 +101,7 @@ class TimelinePage extends HookConsumerWidget {
               physics: const BouncingScrollPhysics(),
               onRefresh: () async {
                 await ref.read(fetchTimelineAsyncProvider.notifier).refresh();
-                ref.invalidate(fetchTimelinePostCountAsyncProvider);
+                ref.invalidate(fetchTimelinePostCountFutureProvider);
                 refreshController.refreshCompleted();
               },
               onLoading: () async {
