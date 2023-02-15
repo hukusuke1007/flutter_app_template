@@ -17,6 +17,7 @@ import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/clipboard.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../widgets/thumbnail.dart';
+import '../../image_viewer/image_viewer.dart';
 import 'edit_post_page.dart';
 import 'enum/menu_result_type.dart';
 import 'timeline_page.dart';
@@ -58,9 +59,9 @@ class PostDetailPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final asyncValue = ref.watch(fetchPostAsyncProviders(args));
-    final data = asyncValue.value;
+    final data = asyncValue.asData?.value;
 
-    final poster = ref.watch(fetchPosterProviders(args.userId)).value;
+    final poster = ref.watch(fetchPosterProviders(args.userId)).asData?.value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData =
         data != null && myUserId != null && data.userId == myUserId;
@@ -79,182 +80,196 @@ class PostDetailPage extends HookConsumerWidget {
       return null;
     });
 
-    return GestureDetector(
-      onTap: context.hideKeyboard,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(
-            '投稿内容',
-            style: context.subtitleStyle.copyWith(
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '投稿内容',
+          style: context.subtitleStyle.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          PopupMenuButton<MenuResultType>(
+            icon: const Icon(
+              Icons.more_horiz,
               color: Colors.white,
             ),
-          ),
-          centerTitle: true,
-          actions: [
-            PopupMenuButton<MenuResultType>(
-              icon: const Icon(
-                Icons.more_horiz,
-                color: Colors.white,
-              ),
-              itemBuilder: (BuildContext context) {
-                return [
-                  MenuResultType.share,
-                  MenuResultType.copy,
-                  if (!isMyData) MenuResultType.issueReport,
-                ]
-                    .map(
-                      (data) => PopupMenuItem<MenuResultType>(
-                        value: data,
-                        child: Text(
-                          data.label,
-                          style: context.bodyStyle,
-                        ),
-                      ),
-                    )
-                    .toList();
-              },
-              onSelected: (result) async {
-                final text = data?.text;
-                if (text == null) {
-                  return;
-                }
-
-                if (result == MenuResultType.share) {
-                  unawaited(Share.share(text));
-                } else if (result == MenuResultType.copy) {
-                  unawaited(Clipboard.copy(text));
-                  context.showSnackBar('コピーしました');
-                } else if (result == MenuResultType.issueReport) {
-                  // TODO(shohei): 未実装
-                }
-              },
-            ),
-          ],
-        ),
-        body: Scrollbar(
-          controller: scrollController,
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// 投稿者
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 12),
-                              child: CircleThumbnail(
-                                size: 48,
-                                url: poster?.image?.url,
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  RichText(
-                                    maxLines: 3,
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: poster?.name ?? '投稿者',
-                                          style: context.bodyStyle.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  RichText(
-                                    maxLines: 1,
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: poster?.developerId ?? '-',
-                                          style: context.smallStyle,
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              height: 48,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        data?.dateLabel ?? '-',
-                                        style: context.smallStyle,
-                                        maxLines: 2,
-                                        textAlign: TextAlign.end,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      /// テキスト
-                      Linkify(
-                        onOpen: (link) {
-                          launchUrlString(
-                            link.url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        },
-                        text: data?.text ?? '',
+            itemBuilder: (BuildContext context) {
+              return [
+                MenuResultType.share,
+                MenuResultType.copy,
+                if (!isMyData) MenuResultType.issueReport,
+                if (!isMyData) MenuResultType.mute,
+                if (!isMyData) MenuResultType.block,
+              ]
+                  .map(
+                    (data) => PopupMenuItem<MenuResultType>(
+                      value: data,
+                      child: Text(
+                        data.label,
                         style: context.bodyStyle,
-                        maxLines: 4,
-                        overflow: TextOverflow.fade,
-                        linkStyle:
-                            context.bodyStyle.copyWith(color: Colors.blue),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  )
+                  .toList();
+            },
+            onSelected: (result) async {
+              final text = data?.text;
+              if (text == null) {
+                return;
+              }
 
-                const Divider(height: 1),
-              ],
-            ),
+              if (result == MenuResultType.share) {
+                unawaited(Share.share(text));
+              } else if (result == MenuResultType.copy) {
+                unawaited(Clipboard.copy(text));
+                context.showSnackBar('コピーしました');
+              } else if (result == MenuResultType.issueReport) {
+                unawaited(
+                  showOkAlertDialog(context: context, title: '実装してください'),
+                );
+              } else if (result == MenuResultType.mute) {
+                unawaited(
+                  showOkAlertDialog(context: context, title: '実装してください'),
+                );
+              } else if (result == MenuResultType.block) {
+                unawaited(
+                  showOkAlertDialog(context: context, title: '実装してください'),
+                );
+              }
+            },
+          ),
+        ],
+      ),
+      body: Scrollbar(
+        controller: scrollController,
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// 投稿者
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: CircleThumbnail(
+                              size: 48,
+                              url: poster?.image?.url,
+                              onTap: () {
+                                final url = poster?.image?.url;
+                                if (url != null) {
+                                  ImageViewer.show(
+                                    context,
+                                    urls: [url],
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  maxLines: 3,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: poster?.name ?? '投稿者',
+                                        style: context.bodyStyle.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                                RichText(
+                                  maxLines: 1,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: poster?.developerId ?? '-',
+                                        style: context.smallStyle,
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 100,
+                            height: 48,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Text(
+                                      data?.dateLabel ?? '-',
+                                      style: context.smallStyle,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.end,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    /// テキスト
+                    SelectableLinkify(
+                      onOpen: (link) {
+                        launchUrlString(
+                          link.url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      },
+                      text: data?.text ?? '',
+                      style: context.bodyStyle,
+                      linkStyle: context.bodyStyle.copyWith(color: Colors.blue),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Divider(height: 1),
+            ],
           ),
         ),
-        floatingActionButton: isMyData
-            ? FloatingActionButton(
-                onPressed: () {
-                  EditPostPage.push(
-                    context,
-                    args: EditPostPageArgs(
-                      fetchPostArgs: args,
-                      oldPost: data,
-                    ),
-                  );
-                },
-                child: const Icon(Icons.edit),
-              )
-            : null,
       ),
+      floatingActionButton: isMyData
+          ? FloatingActionButton(
+              onPressed: () {
+                EditPostPage.push(
+                  context,
+                  args: EditPostPageArgs(
+                    fetchPostArgs: args,
+                    oldPost: data,
+                  ),
+                );
+              },
+              child: const Icon(Icons.edit),
+            )
+          : null,
     );
   }
 }

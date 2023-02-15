@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../../extensions/context_extension.dart';
+import '../../../../../model/entities/sample/developer.dart';
 import '../../../../../model/entities/sample/timeline/post.dart';
 import '../../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../../model/use_cases/sample/timeline/fetch_poster.dart';
@@ -18,15 +22,17 @@ class TimelineTile extends HookConsumerWidget {
   const TimelineTile({
     required this.data,
     this.onTap,
+    this.onTapAvatar,
     super.key,
   });
 
   final Post data;
   final VoidCallback? onTap;
+  final void Function(Developer?)? onTapAvatar;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final poster = ref.watch(fetchPosterProviders(data.userId)).value;
+    final poster = ref.watch(fetchPosterProviders(data.userId)).asData?.value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData = myUserId != null && data.userId == myUserId;
     return RippleTapGesture(
@@ -48,6 +54,11 @@ class TimelineTile extends HookConsumerWidget {
                         child: CircleThumbnail(
                           size: 48,
                           url: poster?.image?.url,
+                          onTap: onTapAvatar != null
+                              ? () {
+                                  onTapAvatar!(poster);
+                                }
+                              : null,
                         ),
                       ),
                       Expanded(
@@ -106,15 +117,34 @@ class TimelineTile extends HookConsumerWidget {
                               child: TileMenu(
                                 data: data,
                                 isMyData: isMyData,
-                                onTapMenu: (result) {
+                                onTapMenu: (result) async {
                                   if (result == MenuResultType.share) {
-                                    Share.share(data.text);
+                                    unawaited(Share.share(data.text));
                                   } else if (result == MenuResultType.copy) {
-                                    Clipboard.copy(data.text);
+                                    await Clipboard.copy(data.text);
                                     context.showSnackBar('コピーしました');
                                   } else if (result ==
                                       MenuResultType.issueReport) {
-                                    // TODO(shohei): 未実装
+                                    unawaited(
+                                      showOkAlertDialog(
+                                        context: context,
+                                        title: '実装してください',
+                                      ),
+                                    );
+                                  } else if (result == MenuResultType.mute) {
+                                    unawaited(
+                                      showOkAlertDialog(
+                                        context: context,
+                                        title: '実装してください',
+                                      ),
+                                    );
+                                  } else if (result == MenuResultType.block) {
+                                    unawaited(
+                                      showOkAlertDialog(
+                                        context: context,
+                                        title: '実装してください',
+                                      ),
+                                    );
                                   }
                                 },
                               ),

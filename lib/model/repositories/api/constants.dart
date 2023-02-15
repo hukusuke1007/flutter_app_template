@@ -6,7 +6,7 @@ const baseHeader = {
 
 final dioDefaultOptions = BaseOptions(
   headers: baseHeader,
-  connectTimeout: 30 * 1000,
-  receiveTimeout: 30 * 1000,
-  sendTimeout: 30 * 1000,
+  connectTimeout: const Duration(seconds: 30),
+  receiveTimeout: const Duration(seconds: 30),
+  sendTimeout: const Duration(seconds: 30),
 );

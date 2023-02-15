@@ -70,10 +70,11 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       final data = await repository.fetchMore();
       if (data.isNotEmpty) {
         state = AsyncData([
-          ...state.value ?? [],
+          ...state.asData?.value ?? [],
           ...data.map((e) => e.entity).whereType<Memo>(),
         ]);
       }
+
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -101,7 +102,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
         Memo.docPath(userId, docRef.id),
         data: data.toCreateDoc,
       );
-      state = AsyncData([data, ...state.value ?? []]);
+      state = AsyncData([data, ...state.asData?.value ?? []]);
 
       /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
       /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
@@ -121,7 +122,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
-      final value = state.value ?? [];
+      final value = state.asData?.value ?? [];
       if (value.isEmpty) {
         throw AppException(title: '更新できません');
       }
@@ -159,7 +160,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
-      final value = state.value ?? [];
+      final value = state.asData?.value ?? [];
       if (value.isEmpty) {
         throw AppException(title: '削除できません');
       }

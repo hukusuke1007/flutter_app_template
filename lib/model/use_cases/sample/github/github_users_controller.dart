@@ -62,7 +62,7 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
       if (data.isNotEmpty) {
         _lastUserId = data.last.id;
       }
-      final value = state.value ?? [];
+      final value = state.asData?.value ?? [];
       return [...value, ...data];
     });
 

@@ -53,10 +53,10 @@ class SettingPage extends HookConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: ProfileTile(
-                  profile.value,
+                  profile.asData?.value,
                   heroTag: 'profile',
                   onTapImage: () {
-                    final url = profile.value?.image?.url;
+                    final url = profile.asData?.value?.image?.url;
                     if (url != null) {
                       ImageViewer.show(
                         context,

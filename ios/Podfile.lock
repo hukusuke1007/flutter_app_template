@@ -1,12 +1,12 @@
 PODS:
   - "app_settings (3.0.0+1)":
     - Flutter
-  - cloud_firestore (4.3.1):
+  - cloud_firestore (4.4.0):
     - Firebase/Firestore (= 10.3.0)
     - firebase_core
     - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - cloud_functions (4.0.7):
+  - cloud_functions (4.0.8):
     - Firebase/Functions (= 10.3.0)
     - firebase_core
     - Flutter
@@ -37,26 +37,26 @@ PODS:
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
-  - firebase_analytics (10.1.0):
+  - firebase_analytics (10.1.1):
     - Firebase/Analytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_auth (4.2.5):
+  - firebase_auth (4.2.6):
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.4.1):
+  - firebase_core (2.5.0):
     - Firebase/CoreOnly (= 10.3.0)
     - Flutter
-  - firebase_crashlytics (3.0.11):
+  - firebase_crashlytics (3.0.12):
     - Firebase/Crashlytics (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.2.1):
+  - firebase_messaging (14.2.2):
     - Firebase/Messaging (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.0.10):
+  - firebase_storage (11.0.11):
     - Firebase/Storage (= 10.3.0)
     - firebase_core
     - Flutter
@@ -384,16 +384,16 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
-  cloud_firestore: 5e5bb98722f66e820bf1aa7b3c98ffc9b2450ffb
-  cloud_functions: 6182195e30567bc6a081fb2b81c8563f548a4215
+  cloud_firestore: d0bd3ada43c3124fc06b3c488f6a471388275a0d
+  cloud_functions: a2726f70f64877eb8ba47e3bd0e4e52f6e8bfc8e
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
-  firebase_analytics: 9f3a4cb560a59976b2c48707abae2d4cb94bcb3a
-  firebase_auth: 3bab991fe1df91c2f948156e9dee976e01a19ab9
-  firebase_core: bf59c32d2e53814f558efa20840c1902fa2fe461
-  firebase_crashlytics: b19405931669c882e0d08542e69ae9e86633c636
-  firebase_messaging: ee597229fc260f8fa491fa8f2d4a32dfbfa406fa
-  firebase_storage: 8b85bf19de50a1886f9387924fbddf066a718965
+  firebase_analytics: dac6569da61142e7148697efb8ace6bd37fe771d
+  firebase_auth: b196f91b4f7c6d72015c3c12aaa82eb6972b2c2c
+  firebase_core: f95c8bbe65213d406d592573ad42a12d64849cb8
+  firebase_crashlytics: 5d22873d5e7f8b807d1a787ed1cab903f1d83e5a
+  firebase_messaging: 3daef9f9ee5b91de2f282895ec91cc5e5ca78556
+  firebase_storage: 31bd20813d7c4780b1075d2d069d8338291c39c1
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAppCheckInterop: 9fc57dfa08f0abb737b185ea065422b55355c909
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
@@ -438,7 +438,7 @@ SPEC CHECKSUMS:
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
-  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
+  url_launcher_ios: fb12c43172927bb5cf75aeebd073f883801f1993
 
 PODFILE CHECKSUM: 5cf0f30ee52d796e06161808e1724f95d499d999
 

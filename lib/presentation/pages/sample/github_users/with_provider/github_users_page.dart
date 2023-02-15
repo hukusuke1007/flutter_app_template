@@ -37,7 +37,7 @@ class GithubUsersPage extends HookConsumerWidget {
           );
         },
         orElse: () {
-          final data = result.value ?? [];
+          final data = result.asData?.value ?? [];
           if (lastUserId != null) {
             githubUsersState.value = [...githubUsersState.value, ...data];
           } else {

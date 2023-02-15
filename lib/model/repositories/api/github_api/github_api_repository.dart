@@ -33,7 +33,7 @@ class GithubApiRepository {
         'statusCode: ${response?.statusCode}, '
         'message: ${response?.statusMessage}',
       );
-      throw AppException.error(e.message);
+      throw AppException.error(e.message ?? 'error');
     } on Exception catch (e) {
       logger.shout(e);
       throw AppException.error(e.errorMessage);

@@ -13,6 +13,7 @@ import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/error_text.dart';
 import '../../../widgets/smart_refresher_custom.dart';
+import '../../image_viewer/image_viewer.dart';
 import '../../main/main_page.dart';
 import 'edit_post_page.dart';
 import 'post_detail_page.dart';
@@ -50,7 +51,8 @@ class TimelinePage extends HookConsumerWidget {
 
     final asyncValue = ref.watch(fetchTimelineAsyncProvider);
 
-    final count = ref.watch(fetchTimelinePostCountFutureProvider).value ?? 0;
+    final count =
+        ref.watch(fetchTimelinePostCountFutureProvider).asData?.value ?? 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -122,6 +124,15 @@ class TimelinePage extends HookConsumerWidget {
                           userId: data.userId,
                         ),
                       );
+                    },
+                    onTapAvatar: (poster) {
+                      final url = poster?.image?.url;
+                      if (url != null) {
+                        ImageViewer.show(
+                          context,
+                          urls: [url],
+                        );
+                      }
                     },
                   );
                 },

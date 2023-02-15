@@ -1,16 +1,11 @@
 enum MenuResultType {
-  share,
-  copy,
-  issueReport;
+  share('シェアする'),
+  copy('コピー'),
+  issueReport('通報する'),
+  mute('ミュート'),
+  block('ブロック'),
+  ;
 
-  String get label {
-    if (this == MenuResultType.share) {
-      return 'シェアする';
-    } else if (this == MenuResultType.copy) {
-      return 'コピー';
-    } else if (this == MenuResultType.issueReport) {
-      return '通報する';
-    }
-    return '';
-  }
+  const MenuResultType(this.label);
+  final String label;
 }
