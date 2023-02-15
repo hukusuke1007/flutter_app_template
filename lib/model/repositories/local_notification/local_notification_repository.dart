@@ -112,7 +112,8 @@ class LocalNotificationRepository {
     Priority priority = Priority.high,
     String ticker = 'ticker',
     String? payload,
-    bool androidAllowWhileIdle = true, // 低電力アイドルモードでも通知する設定
+    AndroidScheduleMode androidScheduleMode =
+        AndroidScheduleMode.exactAllowWhileIdle, // 低電力アイドルモードでも通知する設定
   }) async {
     /// https://pub.dev/packages/flutter_local_notifications#scheduling-a-notification
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
@@ -132,7 +133,7 @@ class LocalNotificationRepository {
       NotificationDetails(android: androidPlatformChannelSpecifics),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: androidAllowWhileIdle,
+      androidScheduleMode: androidScheduleMode,
       payload: payload,
       matchDateTimeComponents: dateTimeComponents,
     );
@@ -150,7 +151,8 @@ class LocalNotificationRepository {
     Priority priority = Priority.high,
     String ticker = 'ticker',
     String? payload,
-    bool androidAllowWhileIdle = true, // 低電力アイドルモードでも通知する設定
+    AndroidScheduleMode androidScheduleMode =
+        AndroidScheduleMode.exactAllowWhileIdle, // 低電力アイドルモードでも通知する設定
   }) async {
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
       androidChannelId,
@@ -168,7 +170,7 @@ class LocalNotificationRepository {
       interval,
       NotificationDetails(android: androidPlatformChannelSpecifics),
       payload: payload,
-      androidAllowWhileIdle: androidAllowWhileIdle,
+      androidScheduleMode: androidScheduleMode,
     );
   }
 
