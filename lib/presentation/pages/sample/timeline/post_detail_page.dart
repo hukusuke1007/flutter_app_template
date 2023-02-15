@@ -100,9 +100,11 @@ class PostDetailPage extends HookConsumerWidget {
               return [
                 MenuResultType.share,
                 MenuResultType.copy,
-                if (!isMyData) MenuResultType.issueReport,
-                if (!isMyData) MenuResultType.mute,
-                if (!isMyData) MenuResultType.block,
+                if (!isMyData) ...[
+                  MenuResultType.issueReport,
+                  MenuResultType.mute,
+                  MenuResultType.block,
+                ]
               ]
                   .map(
                     (data) => PopupMenuItem<MenuResultType>(

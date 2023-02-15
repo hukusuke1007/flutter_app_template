@@ -43,24 +43,23 @@ class TileMenu extends StatelessWidget {
                 key: MenuResultType.copy,
                 icon: Icons.check,
               ),
-              if (!isMyData)
+              if (!isMyData) ...[
                 SheetAction<MenuResultType>(
                   label: MenuResultType.issueReport.label,
                   key: MenuResultType.issueReport,
                   icon: Icons.report_sharp,
                 ),
-              if (!isMyData)
                 SheetAction<MenuResultType>(
                   label: MenuResultType.mute.label,
                   key: MenuResultType.mute,
                   icon: Icons.back_hand,
                 ),
-              if (!isMyData)
                 SheetAction<MenuResultType>(
                   label: MenuResultType.block.label,
                   key: MenuResultType.block,
                   icon: Icons.block,
                 ),
+              ]
             ],
             cancelLabel: '閉じる',
           );
