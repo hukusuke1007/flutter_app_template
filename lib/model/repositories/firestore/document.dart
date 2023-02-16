@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:equatable/equatable.dart';
 
 typedef SnapType = Map<String, dynamic>;
 
-@immutable
-class Document<T extends Object> {
+class Document<T extends Object> extends Equatable {
   const Document({
     required this.ref,
     required this.exists,
@@ -42,4 +41,7 @@ class Document<T extends Object> {
         exists: exists,
         entity: newEntity,
       );
+
+  @override
+  List<Object?> get props => [ref, exists, entity];
 }

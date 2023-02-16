@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,8 +21,7 @@ import '../../../widgets/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
 import 'timeline_page.dart';
 
-@immutable
-class EditPostPageArgs {
+class EditPostPageArgs extends Equatable {
   const EditPostPageArgs({
     required this.fetchPostArgs,
     required this.oldPost,
@@ -29,6 +29,9 @@ class EditPostPageArgs {
 
   final FetchPostArgs fetchPostArgs;
   final Post oldPost;
+
+  @override
+  List<Object?> get props => [fetchPostArgs, oldPost];
 }
 
 class EditPostPage extends HookConsumerWidget {
