@@ -15,10 +15,19 @@ import '../../typedef.dart';
 import '../memo_controller.dart' as memo_state_notifier;
 
 /// AsyncNotifier & 非同期操作の結果を同期的に扱うサンプルコード
-final memoProvider =
-    AsyncNotifierProvider<MemoController, List<Memo>>(MemoController.new);
+final memoProvider = AsyncNotifierProvider<MemoController, List<Memo>>(
+  MemoController.new,
+);
 
 class MemoController extends AsyncNotifier<List<Memo>> {
+  FirebaseAuthRepository get _firebaseAuthRepository =>
+      ref.read(firebaseAuthRepositoryProvider);
+
+  DocumentRepository get _documentRepository =>
+      ref.read(documentRepositoryProvider);
+
+  CollectionPagingRepository<Memo>? _collectionPagingRepository;
+
   @override
   FutureOr<List<Memo>> build() async {
     /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
@@ -50,14 +59,6 @@ class MemoController extends AsyncNotifier<List<Memo>> {
     );
     return data.map((e) => e.entity).whereType<Memo>().toList();
   }
-
-  FirebaseAuthRepository get _firebaseAuthRepository =>
-      ref.read(firebaseAuthRepositoryProvider);
-
-  DocumentRepository get _documentRepository =>
-      ref.read(documentRepositoryProvider);
-
-  CollectionPagingRepository<Memo>? _collectionPagingRepository;
 
   /// ページング取得
   Future<ErrorMessage?> onFetchMore() async {

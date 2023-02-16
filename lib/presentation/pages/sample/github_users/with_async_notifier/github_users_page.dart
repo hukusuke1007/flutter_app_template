@@ -41,13 +41,13 @@ class GithubUsersPage extends HookConsumerWidget {
             controller: refreshController,
             physics: const BouncingScrollPhysics(),
             onRefresh: () async {
-              await ref.read(githubUsersControllerProvider.notifier).fetch();
+              await ref.read(githubUsersControllerProvider.notifier).onFetch();
               refreshController.refreshCompleted();
             },
             onLoading: () async {
               await ref
                   .read(githubUsersControllerProvider.notifier)
-                  .fetchMore();
+                  .onFetchMore();
               refreshController.loadComplete();
             },
             child: ListView.separated(

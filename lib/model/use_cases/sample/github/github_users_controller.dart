@@ -36,7 +36,7 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
   }
 
   /// 取得（PullToRefresh時に使用する）
-  Future<void> fetch() async {
+  Future<void> onFetch() async {
     if (_loading) {
       return;
     }
@@ -60,7 +60,7 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
   }
 
   /// ページング取得（リストの最下部到達時に使用する）
-  Future<void> fetchMore() async {
+  Future<void> onFetchMore() async {
     if (_loading) {
       return;
     }

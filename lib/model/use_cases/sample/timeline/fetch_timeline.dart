@@ -96,8 +96,8 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
     return data.map((e) => e.entity).whereType<Post>().toList(growable: false);
   }
 
-  /// リフレッシュ
-  Future<void> refresh() async {
+  /// 取得
+  Future<void> onFetch() async {
     final data = await _collectionPagingRepository.fetch();
     state = AsyncData(
       data.map((e) => e.entity).whereType<Post>().toList(
@@ -107,7 +107,7 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
   }
 
   /// 次ページの一覧を取得する
-  Future<void> fetchMore() async {
+  Future<void> onFetchMore() async {
     final data = await _collectionPagingRepository.fetchMore();
     final list = state.value ?? [];
     state = AsyncData(

@@ -102,12 +102,14 @@ class TimelinePage extends HookConsumerWidget {
               controller: refreshController,
               physics: const BouncingScrollPhysics(),
               onRefresh: () async {
-                await ref.read(fetchTimelineAsyncProvider.notifier).refresh();
+                await ref.read(fetchTimelineAsyncProvider.notifier).onFetch();
                 ref.invalidate(fetchTimelinePostCountFutureProvider);
                 refreshController.refreshCompleted();
               },
               onLoading: () async {
-                await ref.read(fetchTimelineAsyncProvider.notifier).fetchMore();
+                await ref
+                    .read(fetchTimelineAsyncProvider.notifier)
+                    .onFetchMore();
                 refreshController.loadComplete();
               },
               child: ListView.separated(
