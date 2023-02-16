@@ -1,29 +1,41 @@
+import 'dart:async';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/api/github_api/github_api_repository.dart';
 
-/// GithubのユーザーリストをStateNotifierで管理する
-final githubUsersControllerProvider = StateNotifierProvider.autoDispose<
-    GithubUsersController, AsyncValue<List<User>>>((ref) {
-  return GithubUsersController(ref);
-});
+/// GithubのユーザーリストをAsyncNotifierで管理する
+final githubUsersControllerProvider =
+    AutoDisposeAsyncNotifierProvider<GithubUsersController, List<User>>(
+  GithubUsersController.new,
+);
 
-class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
-  GithubUsersController(
-    this._ref,
-  ) : super(const AsyncValue.loading());
-
-  final Ref _ref;
-
-  int _lastUserId = 0;
+class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
+  /// 重複読み込み防止フラグ
   bool _loading = false;
+
+  /// クエリパラメータ
+  int _lastUserId = 0;
   final _pageCount = 20;
 
   GithubApiRepository get _githubApiRepository =>
-      _ref.read(githubApiRepositoryProvider);
+      ref.read(githubApiRepositoryProvider);
 
-  /// 一覧取得
+  /// インスタンス生成時に初回読み込み
+  @override
+  FutureOr<List<User>> build() async {
+    final data = await _githubApiRepository.fetchUsers(
+      since: 0,
+      perPage: _pageCount,
+    );
+    if (data.isNotEmpty) {
+      _lastUserId = data.last.id;
+    }
+    return data;
+  }
+
+  /// 取得（PullToRefresh時に使用する）
   Future<void> fetch() async {
     if (_loading) {
       return;
@@ -47,7 +59,7 @@ class GithubUsersController extends StateNotifier<AsyncValue<List<User>>> {
     state = result;
   }
 
-  /// ページング取得
+  /// ページング取得（リストの最下部到達時に使用する）
   Future<void> fetchMore() async {
     if (_loading) {
       return;

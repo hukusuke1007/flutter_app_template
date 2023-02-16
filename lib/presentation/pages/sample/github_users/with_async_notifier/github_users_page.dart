@@ -7,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/use_cases/sample/github/github_users_controller.dart';
-import '../../../../custom_hooks/use_effect_once.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
 import '../../../../widgets/smart_refresher_custom.dart';
 import '../../../../widgets/thumbnail.dart';
@@ -21,13 +20,6 @@ class GithubUsersPage extends HookConsumerWidget {
     final githubUsers = ref.watch(githubUsersControllerProvider);
     final scrollController = useScrollController();
     final refreshController = useRefreshController();
-
-    useEffectOnce(() {
-      Future(() async {
-        await ref.read(githubUsersControllerProvider.notifier).fetch();
-      });
-      return null;
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -45,8 +37,6 @@ class GithubUsersPage extends HookConsumerWidget {
           return SmartRefresher(
             header: const SmartRefreshHeader(),
             footer: const SmartRefreshFooter(),
-            // ignore: avoid_redundant_argument_values
-            enablePullDown: true,
             enablePullUp: true,
             controller: refreshController,
             physics: const BouncingScrollPhysics(),
@@ -99,7 +89,7 @@ class GithubUsersPage extends HookConsumerWidget {
         error: (e, _) => ErrorMessage(
           message: e.toString(),
           onTapRetry: () async {
-            await ref.read(githubUsersControllerProvider.notifier).fetch();
+            ref.invalidate(githubUsersControllerProvider);
           },
         ),
         loading: () => const Center(
