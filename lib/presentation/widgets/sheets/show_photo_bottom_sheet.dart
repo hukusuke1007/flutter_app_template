@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -51,11 +52,19 @@ Future<PhotoType?> showPhotoBottomSheet(
       return PhotoType.camera;
     }
   } else if (result == 1) {
-    final status = await Future(
-      () => Platform.isIOS
-          ? Permission.photos.request()
-          : Permission.storage.request(),
-    );
+    final status = await Future(() async {
+      if (Platform.isAndroid) {
+        final deviceInfo = DeviceInfoPlugin();
+        final androidInfo = await deviceInfo.androidInfo;
+        if (androidInfo.version.sdkInt >= 33) {
+          return Permission.photos.request();
+        } else {
+          return Permission.storage.request();
+        }
+      } else {
+        return Permission.photos.request();
+      }
+    });
     if (!status.isGranted) {
       final result = await showOkAlertDialog(
         context: context,
