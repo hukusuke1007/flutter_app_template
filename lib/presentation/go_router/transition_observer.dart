@@ -5,6 +5,7 @@ import '../../utils/logger.dart';
 
 class TransitionObserver extends NavigatorObserver {
   TransitionObserver(this._ref);
+  // ignore: unused_field
   final Ref _ref;
 
   @override
