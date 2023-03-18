@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/utils/logger.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TransitionObserver extends NavigatorObserver {
+  TransitionObserver(this._ref);
+  final Ref _ref;
+
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
@@ -19,6 +23,8 @@ class TransitionObserver extends NavigatorObserver {
     Route<dynamic>? previousRoute,
     String transitionType,
   ) {
-    logger.info('Transition: $transitionType, ${route.settings.name}');
+    logger.info(
+      'Transition: $transitionType, ${route.settings.name}',
+    );
   }
 }

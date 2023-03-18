@@ -32,7 +32,7 @@ final routerProvider = Provider((ref) {
     navigatorKey: navigatorKey,
     initialLocation: StartUpPage.pagePath,
     debugLogDiagnostics: true,
-    observers: [TransitionObserver()],
+    observers: [TransitionObserver(ref)],
     routes: [
       /// 起動画面
       GoRoute(
