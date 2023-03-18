@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/utils/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../utils/logger.dart';
 
 class TransitionObserver extends NavigatorObserver {
   TransitionObserver(this._ref);
