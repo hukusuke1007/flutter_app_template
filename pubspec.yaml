@@ -96,7 +96,7 @@ dependencies:
   firebase_crashlytics:
 
   # LocalNotification
-  flutter_local_notifications: 14.0.0-dev.1
+  flutter_local_notifications: 14.0.0-dev.2
   flutter_native_timezone:
 
   # Api
@@ -104,7 +104,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^6.0.7
+  go_router: ^6.5.0
 
   # Widget
   flutter_fadein:
@@ -173,6 +173,7 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
 # flutter_launcher_iconsを利用してアイコンのリサイズする場合はここを設定する
 #flutter_icons:
 #  android: true

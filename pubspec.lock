@@ -690,26 +690,26 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: "120a4e2431dfd2e6c42e04b8b4c299e3ab4756267b3bc4a93561390413fb66e4"
+      sha256: f3c83915330bc3ef4b68aa664e5ea277978379da58f3b3cb8cab36afd4f5ddbc
       url: "https://pub.dev"
     source: hosted
-    version: "14.0.0-dev.1"
+    version: "14.0.0-dev.2"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
       name: flutter_local_notifications_linux
-      sha256: "8f6c1611e0c4a88a382691a97bb3c3feb24cc0c0b54152b8b5fb7ffb837f7fbf"
+      sha256: "8ec32fa41ff376ad5dab8dd05c8a641d98b0ed2d3a96c1fa3595868d3bb7c517"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0-dev.1"
   flutter_local_notifications_platform_interface:
     dependency: transitive
     description:
       name: flutter_local_notifications_platform_interface
-      sha256: "5ec1feac5f7f7d9266759488bc5f76416152baba9aa1b26fe572246caa00d1ab"
+      sha256: "9eb4d90656e7ed495663f11bf4c8ac5a271bba3e0f39dc881a59face5e6095f0"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "7.0.0-dev.1"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -801,10 +801,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "6dd6b05db749756996b727521b9b9b4ee0968ea4aeb59af2e59383683d6ef34f"
+      sha256: "432409518740645ce7f28802171b78783197d01149fad44f9b8ae55f40277139"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.7"
+    version: "6.5.0"
   graphs:
     dependency: transitive
     description:
