@@ -1,11 +1,11 @@
-import 'package:flutter_app_template/model/use_cases/sample/timeline/fetch_timeline.dart';
-import 'package:flutter_app_template/model/use_cases/sample/timeline/fetch_timeline_post_count.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../repositories/firestore/document_repository.dart';
+import '../fetch_timeline.dart';
+import '../fetch_timeline_post_count.dart';
 
 final deletePostProvider = Provider(DeletePost.new);
 
