@@ -14,7 +14,7 @@ final fetchTimelineAsyncProvider =
 );
 
 class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
-  static int get defaultLimit => 5;
+  static int get defaultLimit => 20;
 
   CollectionPagingRepository<Post>? _collectionPagingRepository;
 
