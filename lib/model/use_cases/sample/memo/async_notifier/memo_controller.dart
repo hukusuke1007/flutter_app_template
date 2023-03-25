@@ -20,6 +20,8 @@ final memoProvider = AsyncNotifierProvider<MemoController, List<Memo>>(
 );
 
 class MemoController extends AsyncNotifier<List<Memo>> {
+  static int get defaultLimit => 20;
+
   FirebaseAuthRepository get _firebaseAuthRepository =>
       ref.read(firebaseAuthRepositoryProvider);
 
@@ -43,7 +45,8 @@ class MemoController extends AsyncNotifier<List<Memo>> {
           query: Document.colRef(
             Memo.collectionPath(userId),
           ).orderBy('createdAt', descending: true),
-          limit: 20,
+          initialLimit: state.asData?.value.length ?? defaultLimit,
+          pagingLimit: defaultLimit,
           decode: Memo.fromJson,
         ),
       ),

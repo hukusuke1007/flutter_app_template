@@ -15,7 +15,8 @@ final memoCollectionPagingProvider = Provider.family
         (ref, query) {
   return CollectionPagingRepository<Memo>(
     query: query.query,
-    limit: query.limit,
+    initialLimit: query.initialLimit,
+    pagingLimit: query.pagingLimit,
     decode: query.decode,
   );
 });

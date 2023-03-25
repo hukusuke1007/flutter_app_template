@@ -34,7 +34,9 @@ class MemoController extends StateNotifier<List<Memo>> {
           query: Document.colRef(
             Memo.collectionPath(userId),
           ).orderBy('createdAt', descending: true),
-          limit: 20,
+          initialLimit:
+              state.length > defaultLimit ? state.length : defaultLimit,
+          pagingLimit: defaultLimit,
           decode: Memo.fromJson,
         ),
       ),
@@ -42,6 +44,8 @@ class MemoController extends StateNotifier<List<Memo>> {
   }
 
   final Ref _ref;
+
+  static int get defaultLimit => 20;
 
   FirebaseAuthRepository get _firebaseAuthRepository =>
       _ref.read(firebaseAuthRepositoryProvider);

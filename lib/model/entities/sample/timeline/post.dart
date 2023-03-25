@@ -15,7 +15,8 @@ final postCollectionPagingProvider = Provider.family
         (ref, query) {
   return CollectionPagingRepository<Post>(
     query: query.query,
-    limit: query.limit,
+    initialLimit: query.initialLimit,
+    pagingLimit: query.pagingLimit,
     decode: query.decode,
   );
 });
