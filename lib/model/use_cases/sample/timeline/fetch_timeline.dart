@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_app_template/utils/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/entities/sample/timeline/post.dart';
@@ -20,8 +19,6 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
 
   @override
   FutureOr<List<Post>> build() async {
-    logger.info(state.asData?.value.length);
-
     /// クエリを設定したRepositoryを設定
     final repository = ref.read(
       postCollectionPagingProvider(
