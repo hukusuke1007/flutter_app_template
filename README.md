@@ -2,19 +2,19 @@
 
 Flutter + Firebase アプリのスターターキット、新規アプリ開発はこのテンプレートをベースに始める。
 
-| カテゴリ       | 説明                          |
-|------------| ----------------------------- |
+| カテゴリ       | 説明                            |
+|------------|-------------------------------|
 | 状態管理と DI   | flutter_hooks, hooks_riverpod |
-| データモデル     | freezed                       |
+| データモデル     | freezed, equatable          |
 | クラウド DB    | cloud_firestore               |
 | ローカル DB    | shared_preferences            |
 | API クライアント | retrofit                      |
-| 画面遷移       | go_router                      |
+| 画面遷移       | go_router                     |
 
 
 ### 環境
 
-Flutter Stable 3.7.7
+Flutter Stable 3.7.8
 
 ### 画面構成
 
