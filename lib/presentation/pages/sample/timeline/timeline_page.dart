@@ -69,7 +69,7 @@ class TimelinePage extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16, top: 16),
             child: Text(
-              '$count件',
+              '全$count件',
               style: context.bodyStyle.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

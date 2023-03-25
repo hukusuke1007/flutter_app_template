@@ -8,7 +8,8 @@ final collectionPagingRepositoryProvider = Provider.family
     .autoDispose<CollectionPagingRepository, CollectionParam>((ref, query) {
   return CollectionPagingRepository(
     query: query.query,
-    limit: query.limit,
+    initialLimit: query.initialLimit,
+    pagingLimit: query.pagingLimit,
     decode: query.decode,
   );
 });
@@ -17,26 +18,30 @@ final collectionPagingRepositoryProvider = Provider.family
 class CollectionParam<T extends Object> extends Equatable {
   const CollectionParam({
     required this.query,
-    this.limit,
+    this.initialLimit,
+    this.pagingLimit,
     required this.decode,
   });
   final Query<Map<String, dynamic>> query;
-  final int? limit;
+  final int? initialLimit;
+  final int? pagingLimit;
   final T Function(Map<String, dynamic>) decode;
 
   @override
-  List<Object?> get props => [query, limit, decode];
+  List<Object?> get props => [query, initialLimit, pagingLimit, decode];
 }
 
 class CollectionPagingRepository<T extends Object> {
   CollectionPagingRepository({
     required this.query,
-    this.limit,
+    this.initialLimit,
+    this.pagingLimit,
     required this.decode,
   });
 
   final Query<Map<String, dynamic>> query;
-  final int? limit;
+  final int? initialLimit;
+  final int? pagingLimit;
   final T Function(Map<String, dynamic>) decode;
   DocumentSnapshot<Map<String, dynamic>>? _startAfterDocument;
 
@@ -62,7 +67,10 @@ class CollectionPagingRepository<T extends Object> {
         fromCache([]);
       }
     }
-    final documents = await _fetch(source: source);
+    final documents = await _fetch(
+      limit: initialLimit,
+      source: source,
+    );
     return documents
         .map(
           (e) => Document(
@@ -80,8 +88,11 @@ class CollectionPagingRepository<T extends Object> {
     if (_startAfterDocument == null) {
       return [];
     }
-    final documents =
-        await _fetch(source: source, startAfterDocument: _startAfterDocument);
+    final documents = await _fetch(
+      source: source,
+      limit: pagingLimit,
+      startAfterDocument: _startAfterDocument,
+    );
     return documents
         .map(
           (e) => Document(
@@ -95,18 +106,18 @@ class CollectionPagingRepository<T extends Object> {
 
   Future<List<DocumentSnapshot<Map<String, dynamic>>>> _fetch({
     Source source = Source.serverAndCache,
+    int? limit,
     DocumentSnapshot? startAfterDocument,
   }) async {
     var dataSource = query;
     if (limit != null) {
-      dataSource = dataSource.limit(limit!);
+      dataSource = dataSource.limit(limit);
     }
     if (startAfterDocument != null) {
       dataSource = dataSource.startAfterDocument(startAfterDocument);
     }
     final result = await dataSource.get(GetOptions(source: source));
-    final documents = result.docs.toList();
-
+    final documents = result.docs;
     if (documents.isNotEmpty) {
       _startAfterDocument = documents.last;
     }

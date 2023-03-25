@@ -1,11 +1,11 @@
+import 'package:flutter_app_template/model/use_cases/sample/timeline/fetch_timeline.dart';
+import 'package:flutter_app_template/model/use_cases/sample/timeline/fetch_timeline_post_count.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../entities/sample/developer.dart';
-import '../../../../entities/sample/enum/operation_type.dart';
 import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../repositories/firestore/document_repository.dart';
-import 'post_operation_observer.dart';
 
 final updatePostProvider = Provider(UpdatePost.new);
 
@@ -39,12 +39,9 @@ class UpdatePost {
           data: newPost.toUpdateDoc,
         );
 
-    /// 更新したことをアプリ内へ通知
-    _ref.read(postOperationObserverProvider).add(
-          OperationData(
-            type: OperationType.update,
-            post: newPost,
-          ),
-        );
+    /// 作成したことを反映
+    _ref
+      ..invalidate(fetchTimelineAsyncProvider)
+      ..invalidate(fetchTimelinePostCountFutureProvider);
   }
 }
