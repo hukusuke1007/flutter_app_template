@@ -10,7 +10,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 | ローカル DB    | shared_preferences            |
 | API クライアント | retrofit                      |
 | 画面遷移       | go_router                     |
-
+| Flavor設定       | --dart-define-from-file                     |
 
 ### 環境
 
@@ -101,25 +101,29 @@ Flutter Stable 3.7.8
 | 開発 | com.example.app.dev | dev.テンプレアプリ |
 | 本番 | com.example.app     | 　テンプレアプリ   |
 
-引用: [Flutter で Dart-define のみを使って開発環境と本番環境を分ける](https://zenn.dev/riscait/articles/separating-environments-in-flutter)
 
 #### 実行コマンド
 
 - 開発
 
   ```sh
-  flutter run --debug --dart-define=FLAVOR=dev
+  flutter run --debug --dart-define-from-file=dart_defines/dev.json
   ```
 
 - 本番
 
   ```sh
-  flutter run --debug --dart-define=FLAVOR=prod
+  flutter run --debug --dart-define-from-file=dart_defines/prod.json
   ```
 
-Android Studio から実行する場合は以下のように Run Configurations を設定する。
+Android Studio から実行する場合は、以下のように Run Configurations の Additional run args に `--dart-define-from-file` を設定する。
+
+- dev環境でビルドする場合
 
 ![dev](./doc/images/run_configuration_debug_dev.png)
+
+
+- prod環境でビルドする場合
 
 ![prod](./doc/images/run_configuration_debug_prod.png)
 
@@ -128,13 +132,13 @@ Android Studio から実行する場合は以下のように Run Configurations 
 - Android
 
   ```sh
-  flutter build appbundle --release --dart-define=FLAVOR=prod
+  flutter build appbundle --release --dart-define-from-file=dart_defines/prod.json
   ```
 
 - iOS
 
   ```sh
-  flutter build ipa --release --dart-define=FLAVOR=prod
+  flutter build ipa --release --dart-define-from-file=dart_defines/prod.json
   ```
 
 ## 新規プロジェクトへの移行方法
@@ -153,8 +157,10 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
 3.  `com.example.app` を変更したいパッケージ名 にする
 
+    - アプリ名を変更する
+      - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
+  
     - パッケージ名を変更する
-
       - iOS:
 
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
@@ -164,7 +170,7 @@ Android Studio から実行する場合は以下のように Run Configurations 
       - Android:
 
         - android/app/build.gradle
-          - [applicationId](./android/app/build.gradle#L70)
+          - [applicationId](./android/app/build.gradle#L63)
         - AndroidManifest.xml - package
 
           - [main](./android/app/src/main/AndroidManifest.xml#L2)
@@ -187,21 +193,6 @@ Android Studio から実行する場合は以下のように Run Configurations 
             変更前: android/app/src/main/kotlin/com/example/app
             変更後: android/app/src/main/kotlin/com/never/jp
           ```
-
-    - アプリ名を変更する
-
-      - iOS:
-
-        `$(APP_NAME_PREFIX)`はそのままでそれ以外を変更する
-
-        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
-        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
-
-      - Android:
-
-        `android/app/build.gradle`
-
-        - [resValue](./android/app/build.gradle#L80)
 
     - プロジェクト名を変更する
 
@@ -243,7 +234,7 @@ Android Studio から実行する場合は以下のように Run Configurations 
 
 5.  Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
-6.  flutter のライブラリを取り込む。 pub get を実行する。
+6.  Flutter のライブラリを取り込む。 pub get を実行する。
     利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
 7.  [実行コマンド](#実行コマンド)を用いて動作確認する。
@@ -259,6 +250,6 @@ Android Studio から実行する場合は以下のように Run Configurations 
 - [Riverpod の Provider 命名手引き](https://medium.com/flutter-jp/riverpod-naming-5031504fc692)
 - [mono0926/wdb106-flutter](https://github.com/mono0926/wdb106-flutter)
 - [Flutter x Riverpod でアプリ開発！実践入門](https://zenn.dev/riscait/books/flutter-riverpod-practical-introduction)
-- [Flutter で Dart-define のみを使って開発環境と本番環境を分ける](https://zenn.dev/riscait/articles/separating-environments-in-flutter)
+- [【Flutter 3.7以上】Dart-define-from-fileを使って開発環境と本番環境を分ける](https://zenn.dev/altiveinc/articles/separating-environments-in-flutter)
 - [altive/flutter_app_template](https://github.com/altive/flutter_app_template)
 - [現場で役立つシステム設計の原則](https://www.amazon.co.jp/%E7%8F%BE%E5%A0%B4%E3%81%A7%E5%BD%B9%E7%AB%8B%E3%81%A4%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E8%A8%AD%E8%A8%88%E3%81%AE%E5%8E%9F%E5%89%87-%E5%A4%89%E6%9B%B4%E3%82%92%E6%A5%BD%E3%81%A7%E5%AE%89%E5%85%A8%E3%81%AB%E3%81%99%E3%82%8B%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91%E3%81%AE%E5%AE%9F%E8%B7%B5%E6%8A%80%E6%B3%95-%E5%A2%97%E7%94%B0-%E4%BA%A8/dp/477419087X)
