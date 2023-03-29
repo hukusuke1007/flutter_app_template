@@ -20,7 +20,7 @@ class DeletePost {
       return;
     }
 
-    /// 削除する投稿データを設定
+    /// 削除する投稿ID
     final postId = post.postId;
 
     /// サーバーへ保存する

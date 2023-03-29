@@ -51,14 +51,14 @@ class Post with _$Post {
   }
 
   /// サーバーへ保存するMap（作成）
-  Map<String, dynamic> get toCreateDoc => <String, dynamic>{
+  Map<String, dynamic> toCreateDoc() => <String, dynamic>{
         ...toJson(),
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       };
 
   /// サーバーへ保存するMap（更新）
-  Map<String, dynamic> get toUpdateDoc => <String, dynamic>{
+  Map<String, dynamic> toUpdateDoc() => <String, dynamic>{
         'text': text,
         'updatedAt': FieldValue.serverTimestamp(),
       };

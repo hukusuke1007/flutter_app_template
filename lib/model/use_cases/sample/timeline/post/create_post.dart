@@ -25,13 +25,10 @@ class CreatePost {
 
     /// 保存する投稿データを設定
     final postId = Document.docId(Post.collectionName);
-    final now = DateTime.now();
     final post = Post(
       postId: postId,
       userId: userId,
       text: text,
-      createdAt: now, // オブザーバー用に設定
-      updatedAt: now, // オブザーバー用に設定
     );
 
     /// サーバーへ保存する
@@ -40,7 +37,7 @@ class CreatePost {
             userId: userId,
             docId: postId,
           ),
-          data: post.toCreateDoc,
+          data: post.toCreateDoc(),
         );
 
     /// 作成したことを反映

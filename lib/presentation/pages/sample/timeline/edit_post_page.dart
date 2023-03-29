@@ -207,10 +207,6 @@ class EditPostPage extends HookConsumerWidget {
                       oldPost: args.oldPost,
                       text: text,
                     );
-
-                    /// 更新した投稿内容を反映する
-                    final fetchPostArgs = args.fetchPostArgs;
-                    ref.invalidate(fetchPostAsyncProviders(fetchPostArgs));
                   }
                 } else {
                   /// 投稿内容を作成する
