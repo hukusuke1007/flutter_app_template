@@ -71,7 +71,6 @@ class LocalCounterPage extends HookConsumerWidget {
                     ),
                     onTap: () async {
                       await ref.read(localCounterProvider.notifier).decrement();
-                      // counter.value = value;
                     },
                   ),
                 ),
