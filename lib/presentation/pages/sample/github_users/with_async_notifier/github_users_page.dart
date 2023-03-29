@@ -41,7 +41,7 @@ class GithubUsersPage extends HookConsumerWidget {
             controller: refreshController,
             physics: const BouncingScrollPhysics(),
             onRefresh: () async {
-              await ref.read(githubUsersControllerProvider.notifier).onFetch();
+              ref.invalidate(githubUsersControllerProvider);
               refreshController.refreshCompleted();
             },
             onLoading: () async {

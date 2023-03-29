@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,9 +16,17 @@ Future<void> saveImageToMediaFolder(
   Uint8List imageBytes,
 ) async {
   final status = await Future(() async {
-    return Platform.isIOS
-        ? Permission.photos.request()
-        : Permission.storage.request();
+    if (Platform.isAndroid) {
+      final deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        return Permission.photos.request();
+      } else {
+        return Permission.storage.request();
+      }
+    } else {
+      return Permission.photos.request();
+    }
   });
   if (!status.isGranted) {
     final result = await showOkAlertDialog(

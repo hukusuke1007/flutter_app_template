@@ -12,60 +12,32 @@ final githubUsersControllerProvider =
 );
 
 class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
-  /// 重複読み込み防止フラグ
-  bool _loading = false;
+  static int get _pageCount => 20;
 
-  /// クエリパラメータ
   int _lastUserId = 0;
-  final _pageCount = 20;
 
   GithubApiRepository get _githubApiRepository =>
       ref.read(githubApiRepositoryProvider);
 
-  /// インスタンス生成時に初回読み込み
+  /// インスタンス生成時に取得
   @override
   FutureOr<List<User>> build() async {
     final data = await _githubApiRepository.fetchUsers(
       since: 0,
-      perPage: _pageCount,
+
+      /// invalidate時に取得済みのリスト個数分をperPageに設定して取得する
+      perPage: state.asData?.value.length ?? _pageCount,
     );
     if (data.isNotEmpty) {
       _lastUserId = data.last.id;
+    } else {
+      _lastUserId = 0;
     }
     return data;
   }
 
-  /// 取得（PullToRefresh時に使用する）
-  Future<void> onFetch() async {
-    if (_loading) {
-      return;
-    }
-    _loading = true;
-
-    _lastUserId = 0;
-
-    final result = await AsyncValue.guard(() async {
-      final data = await _githubApiRepository.fetchUsers(
-        since: _lastUserId,
-        perPage: _pageCount,
-      );
-      if (data.isNotEmpty) {
-        _lastUserId = data.last.id;
-      }
-      return data;
-    });
-
-    _loading = false;
-    state = result;
-  }
-
   /// ページング取得（リストの最下部到達時に使用する）
   Future<void> onFetchMore() async {
-    if (_loading) {
-      return;
-    }
-    _loading = true;
-
     final result = await AsyncValue.guard(() async {
       final data = await _githubApiRepository.fetchUsers(
         since: _lastUserId,
@@ -78,7 +50,6 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
       return [...value, ...data];
     });
 
-    _loading = false;
     state = result;
   }
 }
