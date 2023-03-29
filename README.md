@@ -155,12 +155,12 @@ Android Studio から実行する場合は、以下のように Run Configuratio
     rm -rf .git
     ```
 
-3.  `com.example.app` を変更したいパッケージ名 にする
+3.  変更したいアプリ名、パッケージ名、プロジェクト名 にする
 
     - アプリ名を変更する
       - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
   
-    - パッケージ名を変更する
+    - `com.example.app` のパッケージ名を変更する
       - iOS:
 
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
