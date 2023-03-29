@@ -164,7 +164,7 @@ Android Studio から実行する場合は、以下のように Run Configuratio
       - iOS:
 
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
-        Debug, Profile, Release の全てを変更する。`$(APP_ID_SUFFIX)`はそのままにしてください。
+        Debug, Profile, Release の全てを変更する。`$(appIdSuffix)`はそのままにしてください。
         ![dev](./doc/images/product_bundle_identifier.png)
 
       - Android:
