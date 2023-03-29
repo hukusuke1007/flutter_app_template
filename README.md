@@ -119,7 +119,12 @@ Flutter Stable 3.7.8
 
 Android Studio から実行する場合は以下のように Run Configurations を設定する。
 
+- dev環境でビルドする場合
+
 ![dev](./doc/images/run_configuration_debug_dev.png)
+
+
+- prod環境でビルドする場合
 
 ![prod](./doc/images/run_configuration_debug_prod.png)
 
