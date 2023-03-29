@@ -39,7 +39,7 @@ class UpdatePost {
           data: newPost.toUpdateDoc,
         );
 
-    /// 作成したことを反映
+    /// 更新したことを反映
     _ref
       ..invalidate(fetchTimelineAsyncProvider)
       ..invalidate(fetchTimelinePostCountFutureProvider);
