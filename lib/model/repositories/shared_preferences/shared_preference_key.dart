@@ -1,8 +1,4 @@
 enum SharedPreferencesKey {
-  /// アプリレビュー
-  isReviewedAppStore,
-  showingReviewAt,
-
   /// サンプル
   sampleLocalCounter,
 }
