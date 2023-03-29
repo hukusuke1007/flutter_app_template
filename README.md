@@ -195,18 +195,7 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
     - アプリ名を変更する
 
-      - iOS:
-
-        `$(APP_NAME_PREFIX)`はそのままでそれ以外を変更する
-
-        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
-        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
-
-      - Android:
-
-        `android/app/build.gradle`
-
-        - [resValue](./android/app/build.gradle#L80)
+      - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
 
     - プロジェクト名を変更する
 
