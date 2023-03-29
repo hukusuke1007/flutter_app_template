@@ -117,7 +117,7 @@ Flutter Stable 3.7.8
   flutter run --debug --dart-define-from-file=dart_defines/prod.json
   ```
 
-Android Studio から実行する場合は以下のように Run Configurations を設定する。
+Android Studio から実行する場合は、以下のように Run Configurations の Additional run args に `--dart-define-from-file` を設定する。
 
 - dev環境でビルドする場合
 
