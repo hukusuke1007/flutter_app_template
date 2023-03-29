@@ -101,7 +101,6 @@ Flutter Stable 3.7.8
 | 開発 | com.example.app.dev | dev.テンプレアプリ |
 | 本番 | com.example.app     | 　テンプレアプリ   |
 
-引用: [Flutter で Dart-define のみを使って開発環境と本番環境を分ける](https://zenn.dev/riscait/articles/separating-environments-in-flutter)
 
 #### 実行コマンド
 
@@ -158,8 +157,10 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 3.  `com.example.app` を変更したいパッケージ名 にする
 
+    - アプリ名を変更する
+      - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
+  
     - パッケージ名を変更する
-
       - iOS:
 
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
@@ -169,7 +170,7 @@ Android Studio から実行する場合は、以下のように Run Configuratio
       - Android:
 
         - android/app/build.gradle
-          - [applicationId](./android/app/build.gradle#L70)
+          - [applicationId](./android/app/build.gradle#L63)
         - AndroidManifest.xml - package
 
           - [main](./android/app/src/main/AndroidManifest.xml#L2)
@@ -192,10 +193,6 @@ Android Studio から実行する場合は、以下のように Run Configuratio
             変更前: android/app/src/main/kotlin/com/example/app
             変更後: android/app/src/main/kotlin/com/never/jp
           ```
-
-    - アプリ名を変更する
-
-      - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
 
     - プロジェクト名を変更する
 
@@ -237,7 +234,7 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 5.  Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
-6.  flutter のライブラリを取り込む。 pub get を実行する。
+6.  Flutter のライブラリを取り込む。 pub get を実行する。
     利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
 7.  [実行コマンド](#実行コマンド)を用いて動作確認する。
