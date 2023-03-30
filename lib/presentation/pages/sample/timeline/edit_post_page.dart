@@ -111,9 +111,11 @@ class EditPostPage extends HookConsumerWidget {
                     showIndicator(context);
                     await ref.read(deletePostProvider)(post);
                     dismissIndicator(context);
-                    context.showSnackBar('削除しました');
-
-                    TimelinePage.go(context);
+                    context
+                      ..showSnackBar('削除しました')
+                      // TODO(shohei): 修正予定
+                      ..pop()
+                      ..pop();
                   } on Exception catch (e) {
                     dismissIndicator(context);
                     unawaited(

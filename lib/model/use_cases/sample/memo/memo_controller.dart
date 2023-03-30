@@ -35,7 +35,7 @@ class MemoController extends StateNotifier<List<Memo>> {
             Memo.collectionPath(userId),
           ).orderBy('createdAt', descending: true),
           initialLimit:
-              state.length > defaultLimit ? state.length : defaultLimit,
+              state.length > defaultLimit ? state.length + 1 : defaultLimit,
           pagingLimit: defaultLimit,
           decode: Memo.fromJson,
         ),

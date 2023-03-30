@@ -22,11 +22,12 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
   /// インスタンス生成時に取得
   @override
   FutureOr<List<User>> build() async {
+    final length = state.asData?.value.length ?? 0;
     final data = await _githubApiRepository.fetchUsers(
       since: 0,
 
       /// invalidate時に取得済みのリスト個数分をperPageに設定して取得する
-      perPage: state.asData?.value.length ?? _pageCount,
+      perPage: length > _pageCount ? length : _pageCount,
     );
     if (data.isNotEmpty) {
       _lastUserId = data.last.id;

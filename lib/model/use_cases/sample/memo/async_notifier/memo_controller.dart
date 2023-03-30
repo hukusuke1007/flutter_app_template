@@ -39,19 +39,22 @@ class MemoController extends AsyncNotifier<List<Memo>> {
     if (userId == null) {
       return [];
     }
-    _collectionPagingRepository = ref.read(
+
+    final length = state.asData?.value.length ?? 0;
+    final repository = ref.read(
       memoCollectionPagingProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
             Memo.collectionPath(userId),
           ).orderBy('createdAt', descending: true),
-          initialLimit: state.asData?.value.length ?? defaultLimit,
+          initialLimit: length > defaultLimit ? length + 1 : defaultLimit,
           pagingLimit: defaultLimit,
           decode: Memo.fromJson,
         ),
       ),
     );
-    final repository = _collectionPagingRepository!;
+    _collectionPagingRepository = repository;
+
     final data = await repository.fetch(
       fromCache: (cache) {
         /// キャッシュから即時反映する
