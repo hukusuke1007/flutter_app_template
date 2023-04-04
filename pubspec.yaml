@@ -86,14 +86,14 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^2.8.0
-  firebase_analytics:
-  cloud_firestore:
-  firebase_auth:
-  firebase_storage:
-  cloud_functions:
-  firebase_messaging:
-  firebase_crashlytics:
+  firebase_core: ^2.9.0
+  firebase_analytics: ^10.2.0
+  cloud_firestore: ^4.5.0
+  firebase_auth: ^4.4.0
+  firebase_storage: ^11.1.0
+  cloud_functions: ^4.1.0
+  firebase_messaging: ^14.4.0
+  firebase_crashlytics: ^3.1.0
 
   # LocalNotification
   flutter_local_notifications: 14.0.0-dev.2
