@@ -84,7 +84,7 @@ class TimelineTile extends HookConsumerWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: poster?.developerId ?? '-',
+                                    text: data.userId,
                                     style: context.smallStyle,
                                   ),
                                 ],

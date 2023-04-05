@@ -35,7 +35,7 @@ class Memo with _$Memo {
   factory Memo.fromJson(Map<String, dynamic> json) => _$MemoFromJson(json);
 
   static String collectionPath(String userId) =>
-      'sample/v1/users/$userId/memos';
+      'sample/v1/developers/$userId/memos';
   static CollectionReference<SnapType> colRef(String userId) =>
       Document.colRef(collectionPath(userId));
 
