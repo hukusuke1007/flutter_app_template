@@ -46,6 +46,7 @@ class PostDetailPage extends HookConsumerWidget {
   }) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
         builder: (_) => PostDetailPage(
           args: args,
         ),

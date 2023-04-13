@@ -28,6 +28,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
   static Future<void> showNav1(BuildContext context) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
         builder: (_) => const TopEmailFeaturePage(),
       ),
     );

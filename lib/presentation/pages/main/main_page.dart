@@ -29,6 +29,7 @@ class MainPage extends HookConsumerWidget {
           type: PageTransitionType.fade,
           child: const MainPage(),
           duration: const Duration(milliseconds: 500),
+          settings: RouteSettings(name: pageName),
         ),
       );
 

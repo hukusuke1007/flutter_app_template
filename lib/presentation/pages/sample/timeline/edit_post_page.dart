@@ -61,6 +61,7 @@ class EditPostPage extends HookConsumerWidget {
   }) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
         builder: (_) => EditPostPage(
           args: args,
         ),

@@ -22,12 +22,13 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
     final length = state.asData?.value.length ?? 0;
 
     /// クエリを設定したRepositoryを生成
+    final query = Document.colGroupQuery(
+      Post.collectionName,
+    ).orderBy('createdAt', descending: true);
     final repository = ref.read(
       postCollectionPagingProvider(
         CollectionParam<Post>(
-          query: Document.colGroupQuery(
-            Post.collectionName,
-          ).orderBy('createdAt', descending: true), // インデックス設定する必要がある
+          query: query, // インデックス設定する必要がある
 
           /// invalidate後は、FetchTimelineが保持していた状態（state）はキャッシュされている。
           /// そのためinvalidate前に保持されていた個数分取得するようlimitを設定する。

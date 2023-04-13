@@ -32,6 +32,7 @@ class StartUpPage extends HookConsumerWidget {
         type: PageTransitionType.fade,
         child: const StartUpPage(),
         duration: const Duration(milliseconds: 500),
+        settings: RouteSettings(name: pageName),
       ),
     );
   }

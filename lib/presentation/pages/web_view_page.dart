@@ -60,6 +60,7 @@ class WebViewPage extends HookConsumerWidget {
   }) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
         builder: (_) => WebViewPage(
           args: WebViewArgs(
             url: url,
