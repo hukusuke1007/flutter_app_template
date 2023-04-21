@@ -12,7 +12,7 @@ import '../../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../../repositories/firestore/document.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 import '../../typedef.dart';
-import '../memo_controller.dart' as memo_state_notifier;
+import '../state_notifier/memo_controller.dart' as memo_state_notifier;
 
 /// AsyncNotifier & 非同期操作の結果を同期的に扱うサンプルコード
 final memoProvider = AsyncNotifierProvider<MemoController, List<Memo>>(
