@@ -34,7 +34,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final counterAsyncValue = ref.watch(firestoreCounterProvider);
     final counter = counterAsyncValue.asData?.value;
-    final counterFromStream = ref.watch(fetchFirestoreCounterStreamProvider);
+    final counterFromStream = ref.watch(fetchFirestoreCounterProvider);
 
     return Scaffold(
       appBar: AppBar(

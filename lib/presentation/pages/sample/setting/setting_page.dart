@@ -6,6 +6,7 @@ import '../../../../analytics_logger/analytics_event.dart';
 import '../../../../analytics_logger/analytics_logger.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
+import '../../../../extensions/exception_extension.dart';
 import '../../../../model/entities/sample/developer.dart';
 import '../../../../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../model/use_cases/package_info/fetch_app_name.dart';
@@ -203,7 +204,7 @@ class SettingPage extends HookConsumerWidget {
                         } on Exception catch (e) {
                           dismissIndicator(context);
                           context.showSnackBar(
-                            'ログアウトに失敗しました',
+                            e.errorMessage,
                             backgroundColor: Colors.grey,
                           );
                           logger.shout(e);
