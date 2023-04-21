@@ -1,19 +1,19 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
-import '../../../entities/sample/developer.dart';
+import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 
-final fetchMyProfileProvider =
-    StreamNotifierProvider.autoDispose<FetchMyProfile, Developer?>(() {
-  return FetchMyProfile();
+/// 取得（スナップショットリスナー使用）
+final fetchFirestoreCounterProvider =
+    StreamNotifierProvider.autoDispose<FetchFirestoreCounter, Counter?>(() {
+  return FetchFirestoreCounter();
 });
 
-class FetchMyProfile extends AutoDisposeStreamNotifier<Developer?> {
+class FetchFirestoreCounter extends AutoDisposeStreamNotifier<Counter?> {
   @override
-  Stream<Developer?> build() {
+  Stream<Counter?> build() {
     final authState = ref.watch(authStateProvider);
     if (authState == AuthState.noSignIn) {
       return Stream.value(null);
@@ -22,13 +22,12 @@ class FetchMyProfile extends AutoDisposeStreamNotifier<Developer?> {
     if (userId == null) {
       return Stream.value(null);
     }
-    logger.info('userId: $userId');
     return ref
         .read(documentRepositoryProvider)
-        .snapshots(Developer.docPath(userId))
+        .snapshots(Counter.docPath(userId))
         .map((event) {
       final data = event.data();
-      return data != null ? Developer.fromJson(data) : null;
+      return data != null ? Counter.fromJson(data) : null;
     });
   }
 }

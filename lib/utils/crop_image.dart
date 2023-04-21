@@ -3,13 +3,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../../gen/colors.gen.dart';
+import '../gen/colors.gen.dart';
 
-Future<CroppedFile?> cropAvatar(String path) =>
-    _cropImage(path, cropStyle: CropStyle.circle, toolbarTitle: 'プロフィール');
+Future<CroppedFile?> cropAvatar(String path) => _cropImage(
+      path,
+      cropStyle: CropStyle.circle,
+      toolbarTitle: 'プロフィール',
+    );
 
 Future<CroppedFile?> cropThumbnail(String path, {String title = 'サムネイル'}) =>
-    _cropImage(path, cropStyle: CropStyle.rectangle, toolbarTitle: title);
+    _cropImage(
+      path,
+      cropStyle: CropStyle.rectangle,
+      toolbarTitle: title,
+    );
 
 Future<CroppedFile?> _cropImage(
   String path, {

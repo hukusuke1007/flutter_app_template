@@ -8,10 +8,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../../model/use_cases/sample/memo/memo_controller.dart';
+import '../../../../model/use_cases/sample/memo/state_notifier/memo_controller.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
-import '../../../widgets/smart_refresher_custom.dart';
+import '../../../widgets/smart_refresher/smart_refresher_custom.dart';
 import '../../main/main_page.dart';
 import 'show_edit_memo_dialog.dart';
 

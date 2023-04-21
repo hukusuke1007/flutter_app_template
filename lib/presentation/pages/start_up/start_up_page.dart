@@ -9,7 +9,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../../extensions/context_extension.dart';
 import '../../../extensions/exception_extension.dart';
 import '../../custom_hooks/use_effect_once.dart';
-import '../../widgets/error_text.dart';
+import '../../widgets/texts/error_text.dart';
 import '../main/main_page.dart';
 import 'start_up_controller.dart';
 

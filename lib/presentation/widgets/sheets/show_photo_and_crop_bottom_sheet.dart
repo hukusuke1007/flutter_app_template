@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../wrapped_image_cropper.dart';
+import '../../../utils/crop_image.dart';
 import 'show_photo_bottom_sheet.dart';
 
 Future<File?> showPhotoAndCropBottomSheet(
-  BuildContext context, {
+  WidgetRef ref, {
   String? title,
 }) async {
-  final result = await showPhotoBottomSheet(context, title: title);
+  final result = await showPhotoBottomSheet(ref, title: title);
   if (result == PhotoType.camera) {
     final file = await ImagePicker().pickImage(source: ImageSource.camera);
     if (file == null) {

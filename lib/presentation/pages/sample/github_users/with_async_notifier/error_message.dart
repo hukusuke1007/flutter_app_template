@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../extensions/context_extension.dart';
-import '../../../../widgets/rounded_button.dart';
+import '../../../../widgets/buttons/rounded_button.dart';
 
 class ErrorMessage extends StatelessWidget {
   const ErrorMessage({

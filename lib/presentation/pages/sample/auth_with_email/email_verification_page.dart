@@ -12,7 +12,7 @@ import '../../../../extensions/exception_extension.dart';
 import '../../../../model/use_cases/sample/auth/email/fetch_email.dart';
 import '../../../../model/use_cases/sample/auth/email/fetch_email_verified.dart';
 import '../../../../model/use_cases/sample/auth/email/send_email_verification.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
 import 'top_email_feature_page.dart';
 import 'widgets/current_email_address_text.dart';

@@ -15,7 +15,7 @@ import 'package:timezone/timezone.dart' as tz;
 import '../utils/logger.dart';
 import 'model/repositories/package_info/package_info_repository.dart';
 import 'model/repositories/shared_preferences/shared_preference_repository.dart';
-import 'model/use_cases/image_compress.dart';
+import 'model/use_cases/images/image_compress.dart';
 import 'presentation/pages/app.dart';
 import 'utils/flavor.dart';
 

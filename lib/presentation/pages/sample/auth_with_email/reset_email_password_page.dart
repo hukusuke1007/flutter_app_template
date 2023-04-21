@@ -13,7 +13,7 @@ import '../../../../model/use_cases/sample/auth/email/send_password_reset_email.
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
 import 'top_email_feature_page.dart';
 import 'widgets/email_text_field.dart';

@@ -17,7 +17,7 @@ import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/update_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
 import 'timeline_page.dart';
 

@@ -3,6 +3,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/logger.dart';
 
+enum TransitionType {
+  push,
+  pop,
+}
+
+final transitionObserverProvider = Provider(
+  TransitionObserver.new,
+);
+
 class TransitionObserver extends NavigatorObserver {
   TransitionObserver(this._ref);
   // ignore: unused_field
@@ -11,22 +20,21 @@ class TransitionObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
-    _onTransition(route, previousRoute, 'push');
+    _onTransition(route, previousRoute, TransitionType.push);
   }
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
-    _onTransition(route, previousRoute, 'pop');
+    _onTransition(route, previousRoute, TransitionType.pop);
   }
 
   void _onTransition(
     Route<dynamic> route,
     Route<dynamic>? previousRoute,
-    String transitionType,
+    TransitionType transitionType,
   ) {
-    logger.info(
-      'Transition: $transitionType, ${route.settings.name}',
-    );
+    final pageName = route.settings.name;
+    logger.info('pageName: $pageName, ${transitionType.name}');
   }
 }

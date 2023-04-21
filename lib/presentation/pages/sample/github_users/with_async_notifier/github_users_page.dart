@@ -8,8 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/use_cases/sample/github/github_users_controller.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
-import '../../../../widgets/smart_refresher_custom.dart';
-import '../../../../widgets/thumbnail.dart';
+import '../../../../widgets/images/thumbnail.dart';
+import '../../../../widgets/smart_refresher/smart_refresher_custom.dart';
 import 'error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {

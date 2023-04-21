@@ -6,6 +6,7 @@ import '../../../../analytics_logger/analytics_event.dart';
 import '../../../../analytics_logger/analytics_logger.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
+import '../../../../extensions/exception_extension.dart';
 import '../../../../model/entities/sample/developer.dart';
 import '../../../../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../model/use_cases/package_info/fetch_app_name.dart';
@@ -14,10 +15,10 @@ import '../../../../model/use_cases/package_info/fetch_package_name.dart';
 import '../../../../model/use_cases/sample/auth/sign_out.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../utils/logger.dart';
-import '../../../widgets/ripple_tap_gesture.dart';
+import '../../../widgets/buttons/ripple_tap_gesture.dart';
+import '../../../widgets/images/image_viewer.dart';
+import '../../../widgets/images/thumbnail.dart';
 import '../../../widgets/show_indicator.dart';
-import '../../../widgets/thumbnail.dart';
-import '../../image_viewer/image_viewer.dart';
 import '../../start_up/start_up_page.dart';
 import '../../web_view_page.dart';
 import 'show_edit_profile_dialog.dart';
@@ -203,7 +204,7 @@ class SettingPage extends HookConsumerWidget {
                         } on Exception catch (e) {
                           dismissIndicator(context);
                           context.showSnackBar(
-                            'ログアウトに失敗しました',
+                            e.errorMessage,
                             backgroundColor: Colors.grey,
                           );
                           logger.shout(e);

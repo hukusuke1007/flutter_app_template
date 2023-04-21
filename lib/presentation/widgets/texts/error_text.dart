@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../extensions/context_extension.dart';
+import '../../../extensions/context_extension.dart';
 
 class ErrorText extends StatelessWidget {
   const ErrorText({

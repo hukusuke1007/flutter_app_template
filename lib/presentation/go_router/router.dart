@@ -28,11 +28,12 @@ import 'transition_observer.dart';
 // TODO(shohei): ShellRouteは未対応。タブを切り替えるとWidgetインスタンスが再生成されるため
 final routerProvider = Provider((ref) {
   final navigatorKey = ref.watch(navigatorKeyProvider);
+  final transitionObserver = ref.watch(transitionObserverProvider);
   return GoRouter(
     navigatorKey: navigatorKey,
     initialLocation: StartUpPage.pagePath,
     debugLogDiagnostics: true,
-    observers: [TransitionObserver(ref)],
+    observers: [transitionObserver],
     routes: [
       /// 起動画面
       GoRoute(
