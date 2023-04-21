@@ -16,14 +16,14 @@ import '../../../../utils/logger.dart';
 import '../../../../utils/vibration.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
+import '../../../widgets/buttons/ripple_tap_gesture.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/color_circle.dart';
 import '../../../widgets/dialogs/show_content_dialog.dart';
-import '../../../widgets/ripple_tap_gesture.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/images/thumbnail.dart';
 import '../../../widgets/sheets/show_date_picker_sheet.dart';
 import '../../../widgets/sheets/show_photo_and_crop_bottom_sheet.dart';
 import '../../../widgets/show_indicator.dart';
-import '../../../widgets/thumbnail.dart';
 import '../../image_viewer/image_viewer.dart';
 
 Future<void> showEditProfileDialog({

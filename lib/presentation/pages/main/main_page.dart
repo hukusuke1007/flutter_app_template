@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
@@ -33,27 +32,36 @@ class MainPage extends HookConsumerWidget {
         ),
       );
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final widgets = useState<List<Widget>>([
+  static final widgetsProvider = Provider.autoDispose(
+    (ref) => [
       const HomePage(),
       const GithubUsersPage(),
       const MemoPage(),
       const SettingPage(),
-    ]);
+    ],
+  );
 
-    final navigatorKeys = useState([
+  static final navigatorKeysProvider = Provider.autoDispose(
+    (ref) => [
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
       GlobalKey<NavigatorState>(),
-    ]);
+    ],
+  );
 
-    final selectedIndex = useState(0);
+  static final selectedTabIndexStateProvider =
+      StateProvider.autoDispose((ref) => 0);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final widgets = ref.watch(widgetsProvider);
+    final navigatorKeys = ref.watch(navigatorKeysProvider);
+    final selectedTabIndex = ref.watch(selectedTabIndexStateProvider);
 
     return WillPopScope(
       onWillPop: () async {
-        final keyTab = navigatorKeys.value[selectedIndex.value];
+        final keyTab = navigatorKeys[selectedTabIndex];
         if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
           return !await keyTab.currentState!.maybePop();
         }
@@ -63,12 +71,12 @@ class MainPage extends HookConsumerWidget {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: List.generate(
-            widgets.value.length,
+            widgets.length,
             (index) => Offstage(
-              offstage: index != selectedIndex.value,
+              offstage: index != selectedTabIndex,
               child: TabNavigator(
-                navigatorKey: navigatorKeys.value[index],
-                page: widgets.value[index],
+                navigatorKey: navigatorKeys[index],
+                page: widgets[index],
               ),
             ),
           ),
@@ -97,11 +105,13 @@ class MainPage extends HookConsumerWidget {
             ),
           ],
           type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex.value,
+          currentIndex: selectedTabIndex,
           showSelectedLabels: !context.isIphoneMiniSize,
           showUnselectedLabels: !context.isIphoneMiniSize,
           onTap: (index) {
-            selectedIndex.value = index;
+            ref.read(selectedTabIndexStateProvider.notifier).update(
+                  (state) => index,
+                );
           },
           selectedFontSize: 12,
         ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
 }
 
-class TabNavigator extends StatelessWidget {
+class TabNavigator extends ConsumerWidget {
   const TabNavigator({
     super.key,
     required this.navigatorKey,
@@ -21,7 +22,7 @@ class TabNavigator extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,

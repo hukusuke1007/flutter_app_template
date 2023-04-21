@@ -11,7 +11,7 @@ import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/memo/memo_controller.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
-import '../../../widgets/smart_refresher_custom.dart';
+import '../../../widgets/smart_refresher/smart_refresher_custom.dart';
 import '../../main/main_page.dart';
 import 'show_edit_memo_dialog.dart';
 

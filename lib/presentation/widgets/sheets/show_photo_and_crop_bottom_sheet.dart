@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../wrapped_image_cropper.dart';
+import '../../../utils/crop_image.dart';
 import 'show_photo_bottom_sheet.dart';
 
 Future<File?> showPhotoAndCropBottomSheet(

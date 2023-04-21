@@ -10,9 +10,9 @@ import '../../../../../model/entities/sample/github/user.dart';
 import '../../../../../model/use_cases/sample/github/fetch_github_users.dart';
 import '../../../../custom_hooks/use_effect_once.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
+import '../../../../widgets/images/thumbnail.dart';
 import '../../../../widgets/show_indicator.dart';
-import '../../../../widgets/smart_refresher_custom.dart';
-import '../../../../widgets/thumbnail.dart';
+import '../../../../widgets/smart_refresher/smart_refresher_custom.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});

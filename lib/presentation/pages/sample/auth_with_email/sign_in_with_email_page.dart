@@ -13,7 +13,7 @@ import '../../../../model/use_cases/sample/auth/email/sign_in_with_email_and_pas
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/show_indicator.dart';
 import 'reset_email_password_page.dart';
 import 'top_email_feature_page.dart';

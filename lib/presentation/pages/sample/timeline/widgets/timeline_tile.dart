@@ -13,8 +13,8 @@ import '../../../../../model/entities/sample/timeline/post.dart';
 import '../../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../../utils/clipboard.dart';
-import '../../../../widgets/ripple_tap_gesture.dart';
-import '../../../../widgets/thumbnail.dart';
+import '../../../../widgets/buttons/ripple_tap_gesture.dart';
+import '../../../../widgets/images/thumbnail.dart';
 import '../enum/menu_result_type.dart';
 import 'tile_menu.dart';
 

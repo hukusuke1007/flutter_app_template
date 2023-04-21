@@ -11,8 +11,8 @@ import '../../../../model/use_cases/sample/timeline/fetch_timeline_post_count.da
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_refresh_controller.dart';
-import '../../../widgets/error_text.dart';
-import '../../../widgets/smart_refresher_custom.dart';
+import '../../../widgets/smart_refresher/smart_refresher_custom.dart';
+import '../../../widgets/texts/error_text.dart';
 import '../../image_viewer/image_viewer.dart';
 import '../../main/main_page.dart';
 import 'edit_post_page.dart';

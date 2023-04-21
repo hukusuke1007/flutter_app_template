@@ -11,8 +11,8 @@ import '../../../extensions/exception_extension.dart';
 import '../../../model/entities/sample/counter.dart';
 import '../../../model/use_cases/sample/firestore_counter.dart';
 import '../../../presentation/custom_hooks/use_effect_once.dart';
-import '../../../presentation/widgets/rounded_button.dart';
 import '../../../utils/logger.dart';
+import '../../widgets/buttons/rounded_button.dart';
 import '../main/main_page.dart';
 
 class FirestoreCounterPage extends HookConsumerWidget {

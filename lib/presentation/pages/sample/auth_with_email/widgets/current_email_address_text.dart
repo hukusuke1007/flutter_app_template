@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../utils/clipboard.dart';
-import '../../../../widgets/ripple_tap_gesture.dart';
+import '../../../../widgets/buttons/ripple_tap_gesture.dart';
 
 class CurrentEmailAddressText extends StatelessWidget {
   const CurrentEmailAddressText({
