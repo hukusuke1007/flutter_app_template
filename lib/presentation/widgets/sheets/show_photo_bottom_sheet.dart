@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/utils/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../model/use_cases/permission/request_album_permission.dart';
 import '../../../utils/vibration.dart';
 
 enum PhotoType {
@@ -14,12 +15,13 @@ enum PhotoType {
 }
 
 Future<PhotoType?> showPhotoBottomSheet(
-  BuildContext context, {
+  WidgetRef ref, {
   String? title,
 }) async {
   unawaited(Vibration.select());
+  final gContext = ref.watch(navigatorKeyProvider).currentContext!;
   final result = await showModalActionSheet<int>(
-    context: context,
+    context: gContext,
     title: title,
     actions: const [
       SheetAction<int>(
@@ -40,7 +42,7 @@ Future<PhotoType?> showPhotoBottomSheet(
     final status = await Permission.camera.request();
     if (!status.isGranted) {
       final result = await showOkAlertDialog(
-        context: context,
+        context: gContext,
         title: 'カメラのパーミッション',
         message: 'アプリの設定画面よりカメラを許可してください。',
         okLabel: '設定画面を開く',
@@ -52,22 +54,10 @@ Future<PhotoType?> showPhotoBottomSheet(
       return PhotoType.camera;
     }
   } else if (result == 1) {
-    final status = await Future(() async {
-      if (Platform.isAndroid) {
-        final deviceInfo = DeviceInfoPlugin();
-        final androidInfo = await deviceInfo.androidInfo;
-        if (androidInfo.version.sdkInt >= 33) {
-          return Permission.photos.request();
-        } else {
-          return Permission.storage.request();
-        }
-      } else {
-        return Permission.photos.request();
-      }
-    });
-    if (!status.isGranted) {
+    final isGranted = await ref.read(requestAlbumPermissionProvider.future);
+    if (!isGranted) {
       final result = await showOkAlertDialog(
-        context: context,
+        context: gContext,
         title: '写真のパーミッション',
         message: 'アプリの設定画面より写真のアクセスを許可してください。',
         okLabel: '設定画面を開く',

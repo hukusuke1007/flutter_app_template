@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
 import '../../../../gen/colors.gen.dart';
-import '../../../../model/use_cases/image_compress.dart';
+import '../../../../model/use_cases/images/image_compress.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../model/use_cases/sample/my_profile/save_my_profile.dart';
 import '../../../../model/use_cases/sample/my_profile/save_my_profile_image.dart';
@@ -20,11 +20,11 @@ import '../../../widgets/buttons/ripple_tap_gesture.dart';
 import '../../../widgets/buttons/rounded_button.dart';
 import '../../../widgets/color_circle.dart';
 import '../../../widgets/dialogs/show_content_dialog.dart';
+import '../../../widgets/images/image_viewer.dart';
 import '../../../widgets/images/thumbnail.dart';
 import '../../../widgets/sheets/show_date_picker_sheet.dart';
 import '../../../widgets/sheets/show_photo_and_crop_bottom_sheet.dart';
 import '../../../widgets/show_indicator.dart';
-import '../../image_viewer/image_viewer.dart';
 
 Future<void> showEditProfileDialog({
   required BuildContext context,
@@ -72,7 +72,7 @@ class _Dialog extends HookConsumerWidget {
               child: ColorCircleIcon(
                 onTap: () async {
                   final selectedImage = await showPhotoAndCropBottomSheet(
-                    context,
+                    ref,
                     title: 'プロフィール画像',
                   );
                   if (selectedImage == null) {
