@@ -1,17 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../../../extensions/exception_extension.dart';
-import '../../../model/entities/sample/counter.dart';
-import '../../../model/use_cases/sample/firestore_counter.dart';
-import '../../../presentation/custom_hooks/use_effect_once.dart';
-import '../../../utils/logger.dart';
+import '../../../model/use_cases/sample/counter/fetch_firestore_counter_stream.dart';
+import '../../../model/use_cases/sample/counter/firestore_counter.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import '../main/main_page.dart';
 
@@ -38,26 +32,9 @@ class FirestoreCounterPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = useState<Counter?>(null);
-    final isLoading = useState<bool>(false);
+    final counterAsyncValue = ref.watch(firestoreCounterProvider);
+    final counter = counterAsyncValue.asData?.value;
     final counterFromStream = ref.watch(fetchFirestoreCounterStreamProvider);
-
-    useEffectOnce(() {
-      Future(() async {
-        isLoading.value = true;
-        try {
-          counter.value = await ref.read(fetchFirestoreCounterProvider).call();
-        } on Exception catch (e) {
-          logger.shout(e);
-          context.showSnackBar(
-            e.errorMessage,
-            backgroundColor: Colors.grey,
-          );
-        }
-        isLoading.value = false;
-      });
-      return null;
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -89,7 +66,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        (counter.value?.count ?? 0).toString(),
+                        (counter?.count ?? 0).toString(),
                         style: context.titleStyle,
                       ),
                       Text(
@@ -129,32 +106,9 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       color: Colors.white,
                     ),
                     onTap: () async {
-                      if (isLoading.value) {
-                        return;
-                      }
-                      isLoading.value = true;
-                      try {
-                        final newCounter = () {
-                          final value = counter.value ?? const Counter();
-                          final count = value.count ?? 0;
-                          return value.copyWith(count: max(count - 1, 0));
-                        }();
-                        await ref
-                            .read(saveFirestoreCounterProvider)
-                            .call(newCounter);
-                        final now = DateTime.now();
-                        counter.value = newCounter.copyWith(
-                          createdAt: counter.value?.createdAt ?? now,
-                          updatedAt: now,
-                        );
-                      } on Exception catch (e) {
-                        logger.shout(e);
-                        context.showSnackBar(
-                          e.errorMessage,
-                          backgroundColor: Colors.grey,
-                        );
-                      }
-                      isLoading.value = false;
+                      await ref
+                          .read(firestoreCounterProvider.notifier)
+                          .save(-1);
                     },
                   ),
                 ),
@@ -167,31 +121,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                       color: Colors.white,
                     ),
                     onTap: () async {
-                      if (isLoading.value) {
-                        return;
-                      }
-                      isLoading.value = true;
-                      try {
-                        final newCounter = () {
-                          final now = DateTime.now();
-                          final value =
-                              counter.value?.copyWith(updatedAt: now) ??
-                                  Counter(createdAt: now, updatedAt: now);
-                          final count = value.count ?? 0;
-                          return value.copyWith(count: count + 1);
-                        }();
-                        await ref
-                            .read(saveFirestoreCounterProvider)
-                            .call(newCounter);
-                        counter.value = newCounter;
-                      } on Exception catch (e) {
-                        logger.shout(e);
-                        context.showSnackBar(
-                          e.errorMessage,
-                          backgroundColor: Colors.grey,
-                        );
-                      }
-                      isLoading.value = false;
+                      await ref.read(firestoreCounterProvider.notifier).save(1);
                     },
                   ),
                 ),
@@ -200,6 +130,18 @@ class FirestoreCounterPage extends HookConsumerWidget {
           )
         ],
       ),
+      persistentFooterButtons: counterAsyncValue.error != null
+          ? [
+              Center(
+                child: Text(
+                  counterAsyncValue.error?.toString() ?? '',
+                  style: context.bodyStyle.copyWith(
+                    color: Colors.redAccent,
+                  ),
+                ),
+              )
+            ]
+          : null,
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../../../model/use_cases/sample/local_counter.dart';
+import '../../../model/use_cases/sample/counter/local_counter.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import '../main/main_page.dart';
 

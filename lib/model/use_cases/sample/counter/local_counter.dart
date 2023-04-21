@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../repositories/shared_preferences/shared_preference_key.dart';
-import '../../repositories/shared_preferences/shared_preference_repository.dart';
+import '../../../repositories/shared_preferences/shared_preference_key.dart';
+import '../../../repositories/shared_preferences/shared_preference_repository.dart';
 
 final localCounterProvider =
     StateNotifierProvider<LocalCounter, int>(LocalCounter.new);
