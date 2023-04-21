@@ -5,7 +5,7 @@ import '../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../utils/logger.dart';
 import '../../utils/provider.dart';
 import '../go_router/modal_transition_page.dart';
-import '../pages/error_page.dart';
+import '../pages/error/error_page.dart';
 import '../pages/main/main_page.dart';
 import '../pages/sample/auth_with_email/change_email_address_page.dart';
 import '../pages/sample/auth_with_email/change_email_password_page.dart';
@@ -22,7 +22,7 @@ import '../pages/sample/timeline/edit_post_page.dart';
 import '../pages/sample/timeline/post_detail_page.dart';
 import '../pages/sample/timeline/timeline_page.dart';
 import '../pages/start_up/start_up_page.dart';
-import '../pages/web_view_page.dart';
+import '../pages/web_view/web_view_page.dart';
 import 'transition_observer.dart';
 
 // TODO(shohei): ShellRouteは未対応。タブを切り替えるとWidgetインスタンスが再生成されるため

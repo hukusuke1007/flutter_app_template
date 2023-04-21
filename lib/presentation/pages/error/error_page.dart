@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../widgets/buttons/rounded_button.dart';
-import 'main/main_page.dart';
+import '../../widgets/buttons/rounded_button.dart';
+import '../main/main_page.dart';
 
 class ErrorPage extends HookWidget {
   const ErrorPage({

@@ -12,9 +12,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../extensions/context_extension.dart';
-import '../../utils/clipboard.dart';
-import '../../utils/logger.dart';
+import '../../../extensions/context_extension.dart';
+import '../../../utils/clipboard.dart';
+import '../../../utils/logger.dart';
 
 class WebViewArgs extends Equatable {
   const WebViewArgs({
