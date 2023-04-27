@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TabNavigatorRoutes {
-  static const String root = '/';
-}
-
 class TabNavigator extends ConsumerWidget {
   const TabNavigator({
     super.key,
@@ -15,9 +11,11 @@ class TabNavigator extends ConsumerWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget page;
 
+  static const String root = '/';
+
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
-      TabNavigatorRoutes.root: (context) => page,
+      root: (context) => page,
     };
   }
 
@@ -26,7 +24,7 @@ class TabNavigator extends ConsumerWidget {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
-      initialRoute: TabNavigatorRoutes.root,
+      initialRoute: root,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute<void>(
           builder: routeBuilders[routeSettings.name]!,

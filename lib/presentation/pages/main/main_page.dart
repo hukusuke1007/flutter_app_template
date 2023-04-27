@@ -69,15 +69,13 @@ class MainPage extends HookConsumerWidget {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(
+        body: IndexedStack(
+          index: selectedTabIndex,
           children: List.generate(
             widgets.length,
-            (index) => Offstage(
-              offstage: index != selectedTabIndex,
-              child: TabNavigator(
-                navigatorKey: navigatorKeys[index],
-                page: widgets[index],
-              ),
+            (index) => TabNavigator(
+              navigatorKey: navigatorKeys[index],
+              page: widgets[index],
             ),
           ),
         ),
