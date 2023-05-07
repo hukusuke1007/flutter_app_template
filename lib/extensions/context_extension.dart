@@ -18,6 +18,9 @@ extension ContextExtension on BuildContext {
       deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
   double get appBarHeight => MediaQuery.of(this).padding.top + kToolbarHeight;
 
+  /// https://stackoverflow.com/a/54136738
+  bool get isTablet => MediaQuery.of(this).size.shortestSide >= 600;
+
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
   void hideKeyboard() {
