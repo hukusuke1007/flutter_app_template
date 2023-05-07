@@ -120,12 +120,12 @@ class TimelineTile extends HookConsumerWidget {
                                     data: data,
                                     isMyData: isMyData,
                                     onTapMenu: (result) async {
-                                      final box = context.findRenderObject()
-                                          as RenderBox?;
-                                      if (box == null) {
-                                        return;
-                                      }
                                       if (result == MenuResultType.share) {
+                                        final box = context.findRenderObject()
+                                            as RenderBox?;
+                                        if (box == null) {
+                                          return;
+                                        }
                                         unawaited(
                                           Share.share(
                                             data.text,
