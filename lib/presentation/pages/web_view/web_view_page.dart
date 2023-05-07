@@ -77,7 +77,8 @@ class WebViewPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final titleState = useState<String>(args.title ?? '');
     final urlState = useState(args.url);
-    final progress = useState<double>(0);
+    final progressState = useState<double>(0);
+    final progress = progressState.value;
     final webViewController = useState<InAppWebViewController?>(null);
 
     final pullToRefreshController = useState(
@@ -96,8 +97,6 @@ class WebViewPage extends HookConsumerWidget {
       ),
     );
 
-    final mounted = useIsMounted();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -109,50 +108,63 @@ class WebViewPage extends HookConsumerWidget {
           maxLines: 1,
         ),
         actions: [
-          PopupMenuButton<int>(
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.white,
-            ),
-            itemBuilder: (BuildContext context) {
-              final list = [
-                'URLをコピーする',
-                'URLを共有する',
-                'ブラウザで開く',
-              ];
+          Builder(
+            builder: (context) {
+              return PopupMenuButton<int>(
+                icon: const Icon(
+                  Icons.more_horiz,
+                  color: Colors.white,
+                ),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    'リンクをコピー',
+                    'リンクを共有',
+                    'ブラウザで開く',
+                  ]
+                      .mapIndexed(
+                        (index, data) => PopupMenuItem<int>(
+                          value: index,
+                          child: Text(
+                            data,
+                            style: context.bodyStyle,
+                          ),
+                        ),
+                      )
+                      .toList();
+                },
+                onSelected: (value) async {
+                  if (value == 0) {
+                    final value = await webViewController.value?.getUrl();
+                    if (value == null) {
+                      return;
+                    }
+                    await Clipboard.copy(value.toString());
+                    context.showSnackBar('URLをコピーしました');
+                  } else if (value == 1) {
+                    final box = context.findRenderObject() as RenderBox?;
+                    if (box == null) {
+                      return;
+                    }
 
-              return list
-                  .mapIndexed(
-                    (index, data) => PopupMenuItem<int>(
-                      value: index,
-                      child: Text(
-                        data,
-                        style: context.bodyStyle,
+                    unawaited(
+                      Share.share(
+                        urlState.value,
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size,
                       ),
-                    ),
-                  )
-                  .toList();
-            },
-            onSelected: (value) async {
-              if (value == 0) {
-                final value = await webViewController.value?.getUrl();
-                if (value == null) {
-                  return;
-                }
-                await Clipboard.copy(value.toString());
-                context.showSnackBar('URLをコピーしました');
-              } else if (value == 1) {
-                unawaited(Share.share(urlState.value));
-              } else if (value == 2) {
-                final uri = Uri.parse(urlState.value);
-                if (!await canLaunchUrl(uri)) {
-                  return;
-                }
-                await launchUrl(
-                  uri,
-                  mode: LaunchMode.externalApplication,
-                );
-              }
+                    );
+                  } else if (value == 2) {
+                    final uri = Uri.parse(urlState.value);
+                    if (!await canLaunchUrl(uri)) {
+                      return;
+                    }
+                    await launchUrl(
+                      uri,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              );
             },
           ),
         ],
@@ -191,7 +203,7 @@ class WebViewPage extends HookConsumerWidget {
                       );
                     },
                     onProgressChanged: (controller, value) {
-                      progress.value = value / 100;
+                      progressState.value = value / 100;
                     },
                     onConsoleMessage: (controller, consoleMessage) {
                       logger.info(consoleMessage);
@@ -200,7 +212,7 @@ class WebViewPage extends HookConsumerWidget {
                       urlState.value = url?.toString() ?? '';
                     },
                     onLoadStop: (controller, _) async {
-                      if (!mounted()) {
+                      if (!context.mounted) {
                         return;
                       }
                       titleState.value =
@@ -245,10 +257,10 @@ class WebViewPage extends HookConsumerWidget {
                 ),
               ],
             ),
-            if (progress.value < 1.0)
+            if (progress < 1.0)
               Align(
                 alignment: Alignment.topCenter,
-                child: LinearProgressIndicator(value: progress.value),
+                child: LinearProgressIndicator(value: progress),
               ),
           ],
         ),

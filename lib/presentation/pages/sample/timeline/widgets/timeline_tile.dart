@@ -114,38 +114,57 @@ class TimelineTile extends HookConsumerWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 4),
-                              child: TileMenu(
-                                data: data,
-                                isMyData: isMyData,
-                                onTapMenu: (result) async {
-                                  if (result == MenuResultType.share) {
-                                    unawaited(Share.share(data.text));
-                                  } else if (result == MenuResultType.copy) {
-                                    await Clipboard.copy(data.text);
-                                    context.showSnackBar('コピーしました');
-                                  } else if (result ==
-                                      MenuResultType.issueReport) {
-                                    unawaited(
-                                      showOkAlertDialog(
-                                        context: context,
-                                        title: '実装してください',
-                                      ),
-                                    );
-                                  } else if (result == MenuResultType.mute) {
-                                    unawaited(
-                                      showOkAlertDialog(
-                                        context: context,
-                                        title: '実装してください',
-                                      ),
-                                    );
-                                  } else if (result == MenuResultType.block) {
-                                    unawaited(
-                                      showOkAlertDialog(
-                                        context: context,
-                                        title: '実装してください',
-                                      ),
-                                    );
-                                  }
+                              child: Builder(
+                                builder: (context) {
+                                  return TileMenu(
+                                    data: data,
+                                    isMyData: isMyData,
+                                    onTapMenu: (result) async {
+                                      final box = context.findRenderObject()
+                                          as RenderBox?;
+                                      if (box == null) {
+                                        return;
+                                      }
+                                      if (result == MenuResultType.share) {
+                                        unawaited(
+                                          Share.share(
+                                            data.text,
+                                            sharePositionOrigin:
+                                                box.localToGlobal(Offset.zero) &
+                                                    box.size,
+                                          ),
+                                        );
+                                      } else if (result ==
+                                          MenuResultType.copy) {
+                                        await Clipboard.copy(data.text);
+                                        context.showSnackBar('コピーしました');
+                                      } else if (result ==
+                                          MenuResultType.issueReport) {
+                                        unawaited(
+                                          showOkAlertDialog(
+                                            context: context,
+                                            title: '実装してください',
+                                          ),
+                                        );
+                                      } else if (result ==
+                                          MenuResultType.mute) {
+                                        unawaited(
+                                          showOkAlertDialog(
+                                            context: context,
+                                            title: '実装してください',
+                                          ),
+                                        );
+                                      } else if (result ==
+                                          MenuResultType.block) {
+                                        unawaited(
+                                          showOkAlertDialog(
+                                            context: context,
+                                            title: '実装してください',
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  );
                                 },
                               ),
                             ),

@@ -26,7 +26,7 @@ class ImageCompress {
         minHeight: minHeight,
       );
 
-  Future<File?> callWithPath(
+  Future<XFile?> callWithPath(
     String path, {
     int quality = 95,
     int minWidth = 1024,

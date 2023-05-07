@@ -21,8 +21,11 @@ dependencies:
   # Riverpod
   flutter_hooks:
   hooks_riverpod:
+
+  # Entity
   freezed_annotation:
   json_annotation:
+  equatable:
 
   # Dialog
   adaptive_dialog:
@@ -46,22 +49,6 @@ dependencies:
   url_launcher:
   map_launcher:
 
-  # Setting
-  app_settings:
-
-  # Review
-  launch_review:
-  in_app_review:
-
-  # Text
-  auto_size_text:
-
-  # Carousel
-  carousel_slider:
-
-  # Switch
-  toggle_switch:
-
   # Transition
   page_transition:
 
@@ -71,15 +58,13 @@ dependencies:
   image_cropper:
   flutter_image_compress:
   extended_image:
+  flutter_svg:
 
   # Picker
   numberpicker:
 
   # PullToRefresh
   pull_to_refresh_flutter3:
-
-  # Scroll
-  extended_nested_scroll_view: ^6.0.0
 
   # Permission
   permission_handler:
@@ -98,6 +83,7 @@ dependencies:
   # LocalNotification
   flutter_local_notifications: ^14.0.0+1
   flutter_native_timezone:
+  timezone:
 
   # Api
   retrofit:
@@ -106,28 +92,22 @@ dependencies:
   # Navigation
   go_router: ^7.0.0
 
+  # Info
+  package_info_plus:
+  device_info_plus:
+
+  # Text
+  flutter_linkify:
+
   # Widget
-  flutter_fadein:
-  flutter_cupertino_datetime_picker:
-  flutter_app_badger:
-  badges:
   flutter_slidable:
   dismissible_page:
 
   # Other
-  equatable:
   uuid:
-  package_info_plus:
-  device_info_plus:
   synchronized:
-  nonce:
-  crypto:
   hashids2:
-  encrypt:
-  flutter_svg:
   recase:
-  flutter_linkify:
-  timezone:
   collection:
   quiver:
   html:
@@ -144,7 +124,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.3.2
+  freezed: ^2.3.3
   flutter_gen_runner:
   retrofit_generator:
 

@@ -92,56 +92,70 @@ class PostDetailPage extends HookConsumerWidget {
         ),
         centerTitle: true,
         actions: [
-          PopupMenuButton<MenuResultType>(
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.white,
-            ),
-            itemBuilder: (BuildContext context) {
-              return [
-                MenuResultType.share,
-                MenuResultType.copy,
-                if (!isMyData) ...[
-                  MenuResultType.issueReport,
-                  MenuResultType.mute,
-                  MenuResultType.block,
-                ]
-              ]
-                  .map(
-                    (data) => PopupMenuItem<MenuResultType>(
-                      value: data,
-                      child: Text(
-                        data.label,
-                        style: context.bodyStyle,
-                      ),
-                    ),
-                  )
-                  .toList();
-            },
-            onSelected: (result) async {
-              final text = data?.text;
-              if (text == null) {
-                return;
-              }
+          Builder(
+            builder: (context) {
+              return PopupMenuButton<MenuResultType>(
+                icon: const Icon(
+                  Icons.more_horiz,
+                  color: Colors.white,
+                ),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    MenuResultType.share,
+                    MenuResultType.copy,
+                    if (!isMyData) ...[
+                      MenuResultType.issueReport,
+                      MenuResultType.mute,
+                      MenuResultType.block,
+                    ]
+                  ]
+                      .map(
+                        (data) => PopupMenuItem<MenuResultType>(
+                          value: data,
+                          child: Text(
+                            data.label,
+                            style: context.bodyStyle,
+                          ),
+                        ),
+                      )
+                      .toList();
+                },
+                onSelected: (result) async {
+                  final text = data?.text;
+                  if (text == null) {
+                    return;
+                  }
 
-              if (result == MenuResultType.share) {
-                unawaited(Share.share(text));
-              } else if (result == MenuResultType.copy) {
-                unawaited(Clipboard.copy(text));
-                context.showSnackBar('コピーしました');
-              } else if (result == MenuResultType.issueReport) {
-                unawaited(
-                  showOkAlertDialog(context: context, title: '実装してください'),
-                );
-              } else if (result == MenuResultType.mute) {
-                unawaited(
-                  showOkAlertDialog(context: context, title: '実装してください'),
-                );
-              } else if (result == MenuResultType.block) {
-                unawaited(
-                  showOkAlertDialog(context: context, title: '実装してください'),
-                );
-              }
+                  if (result == MenuResultType.share) {
+                    final box = context.findRenderObject() as RenderBox?;
+                    if (box == null) {
+                      return;
+                    }
+                    unawaited(
+                      Share.share(
+                        text,
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size,
+                      ),
+                    );
+                  } else if (result == MenuResultType.copy) {
+                    unawaited(Clipboard.copy(text));
+                    context.showSnackBar('コピーしました');
+                  } else if (result == MenuResultType.issueReport) {
+                    unawaited(
+                      showOkAlertDialog(context: context, title: '実装してください'),
+                    );
+                  } else if (result == MenuResultType.mute) {
+                    unawaited(
+                      showOkAlertDialog(context: context, title: '実装してください'),
+                    );
+                  } else if (result == MenuResultType.block) {
+                    unawaited(
+                      showOkAlertDialog(context: context, title: '実装してください'),
+                    );
+                  }
+                },
+              );
             },
           ),
         ],
