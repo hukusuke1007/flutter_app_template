@@ -3,7 +3,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -34,7 +34,7 @@ dependencies:
   path_provider:
 
   # Date
-  intl:
+  intl: 0.18.0
 
   # Reactive
   rxdart:
@@ -57,7 +57,13 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
+
+  # TODO ビルドエラー対応
   extended_image:
+    git:
+      url: https://github.com/SuaMusica/extended_image.git
+      ref: feature/flutter310
+
   flutter_svg:
 
   # Picker
@@ -111,6 +117,16 @@ dependencies:
   collection:
   quiver:
   html:
+
+  # TODO ビルドエラー対応
+  macos_ui:
+    git:
+      url: https://github.com/Mayb3Nots/macos_ui
+      ref: dev
+
+# TODO firebase_auth_web と flutter_localizations が参照するバージョンが異なるため暫定対応
+dependency_overrides:
+  intl: 0.18.0
 
 dev_dependencies:
   flutter_test:
