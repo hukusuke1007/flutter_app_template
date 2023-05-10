@@ -12,3 +12,4 @@ linter:
     sort_pub_dependencies: false
     use_build_context_synchronously: false
     lines_longer_than_80_chars: false
+    avoid_positional_boolean_parameters: false
