@@ -57,13 +57,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-
-  # TODO ビルドエラー対応
-  extended_image:
-    git:
-      url: https://github.com/SuaMusica/extended_image.git
-      ref: feature/flutter310
-
+  extended_image: ^8.0.0
   flutter_svg:
 
   # Picker
