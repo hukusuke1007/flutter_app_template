@@ -1,9 +1,10 @@
 name: flutter_app_template
 description: A new Flutter project.
+publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -34,7 +35,7 @@ dependencies:
   path_provider:
 
   # Date
-  intl:
+  intl: 0.18.0
 
   # Reactive
   rxdart:
@@ -57,7 +58,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image:
+  extended_image: ^8.0.0
   flutter_svg:
 
   # Picker
@@ -70,18 +71,18 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^2.11.0
-  firebase_analytics: ^10.3.0
-  cloud_firestore: ^4.6.0
-  firebase_auth: ^4.5.0
-  firebase_storage: ^11.1.2
-  cloud_functions: ^4.2.0
-  firebase_messaging: ^14.5.0
-  firebase_crashlytics: ^3.2.0
-  firebase_remote_config: ^4.1.0
+  firebase_core: ^2.12.0
+  firebase_analytics: ^10.4.0
+  cloud_firestore: ^4.7.0
+  firebase_auth: ^4.6.0
+  firebase_storage: ^11.2.0
+  cloud_functions: ^4.3.0
+  firebase_messaging: ^14.6.0
+  firebase_crashlytics: ^3.3.0
+  firebase_remote_config: ^4.2.0
 
   # LocalNotification
-  flutter_local_notifications: ^14.0.0+1
+  flutter_local_notifications: ^14.0.0+2
   flutter_native_timezone:
   timezone:
 
@@ -112,19 +113,25 @@ dependencies:
   quiver:
   html:
 
+  # TODO 3.10.0ビルドエラー対応
+  macos_ui:
+    git:
+      url: https://github.com/Mayb3Nots/macos_ui
+      ref: dev
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono: ^1.21.1
+  pedantic_mono: ^1.22.0
 
   # Serializer
   json_serializable:
 
   # Code generator
   build_runner:
-  freezed: ^2.3.3
+  freezed: ^2.3.4
   flutter_gen_runner:
   retrofit_generator:
 

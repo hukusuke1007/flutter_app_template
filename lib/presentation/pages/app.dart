@@ -14,7 +14,6 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'テンプレアプリ', // TODO(shohei): アプリ名を設定
-      useInheritedMediaQuery: true,
 
       /// スクロールバーをデフォルトで付与したい場合は設定する
       scrollBehavior: const HaveScrollBarBehavior(),
