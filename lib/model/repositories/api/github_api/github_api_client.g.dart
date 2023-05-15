@@ -20,8 +20,8 @@ class _GithubApiClient implements GithubApiClient {
 
   @override
   Future<List<User>> fetchUsers(
-    since,
-    perPage,
+    int? since,
+    int? perPage,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

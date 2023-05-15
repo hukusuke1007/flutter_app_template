@@ -124,14 +124,14 @@ dev_dependencies:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono: ^1.21.1
+  pedantic_mono: ^1.22.0
 
   # Serializer
   json_serializable:
 
   # Code generator
   build_runner:
-  freezed: ^2.3.3
+  freezed: ^2.3.4
   flutter_gen_runner:
   retrofit_generator:
 
