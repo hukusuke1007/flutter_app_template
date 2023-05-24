@@ -4,7 +4,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.0.1 <4.0.0'
 
 dependencies:
   flutter:
@@ -91,7 +91,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^7.0.0
+  go_router: ^7.1.1
 
   # Info
   package_info_plus:
