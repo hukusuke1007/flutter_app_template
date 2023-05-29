@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TabNavigator extends ConsumerWidget {
+class TabNavigator extends StatelessWidget {
   const TabNavigator({
     super.key,
     required this.navigatorKey,
@@ -20,7 +19,7 @@ class TabNavigator extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
