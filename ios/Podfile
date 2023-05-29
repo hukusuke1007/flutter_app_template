@@ -4,7 +4,7 @@
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
-$FirebaseSdkVersion = '10.7.0'
+$FirebaseSdkVersion = '10.9.0'
 
 project 'Runner', {
   'Debug' => :debug,

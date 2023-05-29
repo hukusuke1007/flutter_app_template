@@ -58,7 +58,7 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image: ^8.0.0
+  extended_image: ^8.0.2
   flutter_svg:
 
   # Picker
@@ -71,15 +71,15 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^2.12.0
-  firebase_analytics: ^10.4.0
-  cloud_firestore: ^4.7.0
-  firebase_auth: ^4.6.0
-  firebase_storage: ^11.2.0
-  cloud_functions: ^4.3.0
-  firebase_messaging: ^14.6.0
-  firebase_crashlytics: ^3.3.0
-  firebase_remote_config: ^4.2.0
+  firebase_core: ^2.13.0
+  firebase_analytics: ^10.4.1
+  cloud_firestore: ^4.7.1
+  firebase_auth: ^4.6.1
+  firebase_storage: ^11.2.1
+  cloud_functions: ^4.3.1
+  firebase_messaging: ^14.6.1
+  firebase_crashlytics: ^3.3.1
+  firebase_remote_config: ^4.2.1
 
   # LocalNotification
   flutter_local_notifications: ^14.0.0+2
