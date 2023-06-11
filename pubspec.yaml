@@ -29,7 +29,7 @@ dependencies:
   equatable:
 
   # Dialog
-  adaptive_dialog:
+  adaptive_dialog: ^1.9.0-no-macos.2
 
   # Access local storage
   path_provider:
@@ -91,7 +91,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^7.0.0
+  go_router: ^8.0.1
 
   # Info
   package_info_plus:
@@ -113,12 +113,6 @@ dependencies:
   quiver:
   html:
 
-  # TODO 3.10.0ビルドエラー対応
-  macos_ui:
-    git:
-      url: https://github.com/Mayb3Nots/macos_ui
-      ref: dev
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -131,7 +125,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.3.4
+  freezed: ^2.3.5
   flutter_gen_runner:
   retrofit_generator:
 
