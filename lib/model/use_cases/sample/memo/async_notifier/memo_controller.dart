@@ -15,18 +15,13 @@ import '../../typedef.dart';
 import '../state_notifier/memo_controller.dart' as memo_state_notifier;
 
 /// AsyncNotifier & 非同期操作の結果を同期的に扱うサンプルコード
-final memoProvider = AsyncNotifierProvider<MemoController, List<Memo>>(
+final memoProvider =
+    AutoDisposeAsyncNotifierProvider<MemoController, List<Memo>>(
   MemoController.new,
 );
 
-class MemoController extends AsyncNotifier<List<Memo>> {
+class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
   static int get defaultLimit => 20;
-
-  FirebaseAuthRepository get _firebaseAuthRepository =>
-      ref.read(firebaseAuthRepositoryProvider);
-
-  DocumentRepository get _documentRepository =>
-      ref.read(documentRepositoryProvider);
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
 
@@ -35,13 +30,13 @@ class MemoController extends AsyncNotifier<List<Memo>> {
     /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
     ref.watch(authStateProvider);
 
-    final userId = _firebaseAuthRepository.loggedInUserId;
+    final userId = ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       return [];
     }
 
     final length = state.asData?.value.length ?? 0;
-    final repository = ref.read(
+    final repository = ref.watch(
       memoCollectionPagingProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
@@ -92,7 +87,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
   /// 作成
   Future<ErrorMessage?> onCreate(String text) async {
     try {
-      final userId = _firebaseAuthRepository.loggedInUserId;
+      final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
@@ -105,10 +100,10 @@ class MemoController extends AsyncNotifier<List<Memo>> {
         createdAt: now,
         updatedAt: now,
       );
-      await _documentRepository.save(
-        Memo.docPath(userId, docRef.id),
-        data: data.toCreateDoc,
-      );
+      await ref.read(documentRepositoryProvider).save(
+            Memo.docPath(userId, docRef.id),
+            data: data.toCreateDoc,
+          );
       state = AsyncData([data, ...state.asData?.value ?? []]);
 
       /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
@@ -125,7 +120,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
   /// 更新
   Future<ErrorMessage?> onUpdate(Memo memo) async {
     try {
-      final userId = _firebaseAuthRepository.loggedInUserId;
+      final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
@@ -138,10 +133,10 @@ class MemoController extends AsyncNotifier<List<Memo>> {
         throw AppException.irregular();
       }
       final data = memo.copyWith(updatedAt: DateTime.now());
-      await _documentRepository.update(
-        Memo.docPath(userId, docId),
-        data: data.toUpdateDoc,
-      );
+      await ref.read(documentRepositoryProvider).update(
+            Memo.docPath(userId, docId),
+            data: data.toUpdateDoc,
+          );
       state = AsyncData(
         value
             .map(
@@ -163,7 +158,7 @@ class MemoController extends AsyncNotifier<List<Memo>> {
   /// 削除
   Future<ErrorMessage?> onRemove(String docId) async {
     try {
-      final userId = _firebaseAuthRepository.loggedInUserId;
+      final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
@@ -171,7 +166,9 @@ class MemoController extends AsyncNotifier<List<Memo>> {
       if (value.isEmpty) {
         throw AppException(title: '削除できません');
       }
-      await _documentRepository.remove(Memo.docPath(userId, docId));
+      await ref
+          .read(documentRepositoryProvider)
+          .remove(Memo.docPath(userId, docId));
       state = AsyncData(
         value
             .where(

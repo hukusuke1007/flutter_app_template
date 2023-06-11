@@ -7,7 +7,7 @@ import '../../../entities/sample/timeline/post.dart';
 final fetchTimelinePostCountFutureProvider = FutureProvider.autoDispose(
   (ref) async {
     final query = ref
-        .read(collectionRepositoryProvider)
+        .watch(collectionRepositoryProvider)
         .group(Post.collectionName)
         .count();
     final snap = await query.get();

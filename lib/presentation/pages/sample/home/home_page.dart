@@ -17,7 +17,8 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final enableScreenReader = ref.watch(fetchEnableScreenReaderProvider);
+    final enableScreenReader =
+        ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
     return Scaffold(
       appBar: AppBar(
         title: Text(

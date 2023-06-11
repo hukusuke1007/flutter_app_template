@@ -16,19 +16,16 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
 
   int _lastUserId = 0;
 
-  GithubApiRepository get _githubApiRepository =>
-      ref.read(githubApiRepositoryProvider);
-
   /// インスタンス生成時に取得
   @override
   FutureOr<List<User>> build() async {
     final length = state.asData?.value.length ?? 0;
-    final data = await _githubApiRepository.fetchUsers(
-      since: 0,
+    final data = await ref.watch(githubApiRepositoryProvider).fetchUsers(
+          since: 0,
 
-      /// invalidate時に取得済みのリスト個数分をperPageに設定して取得する
-      perPage: length > _pageCount ? length : _pageCount,
-    );
+          /// invalidate時に取得済みのリスト個数分をperPageに設定して取得する
+          perPage: length > _pageCount ? length : _pageCount,
+        );
     if (data.isNotEmpty) {
       _lastUserId = data.last.id;
     } else {
@@ -40,10 +37,10 @@ class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
   /// ページング取得（リストの最下部到達時に使用する）
   Future<void> onFetchMore() async {
     final result = await AsyncValue.guard(() async {
-      final data = await _githubApiRepository.fetchUsers(
-        since: _lastUserId,
-        perPage: _pageCount,
-      );
+      final data = await ref.read(githubApiRepositoryProvider).fetchUsers(
+            since: _lastUserId,
+            perPage: _pageCount,
+          );
       if (data.isNotEmpty) {
         _lastUserId = data.last.id;
       }

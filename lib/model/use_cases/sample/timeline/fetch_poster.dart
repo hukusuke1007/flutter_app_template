@@ -17,7 +17,7 @@ class FetchPoster extends AutoDisposeFamilyAsyncNotifier<Developer?, String> {
     final userId = arg;
 
     /// キャッシュから取得して即時反映
-    final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(
+    final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
           Developer.docPath(userId),
           decode: Developer.fromJson,
         );
@@ -26,7 +26,7 @@ class FetchPoster extends AutoDisposeFamilyAsyncNotifier<Developer?, String> {
     }
 
     /// サーバーから取得して最新情報を反映
-    final data = await ref.read(documentRepositoryProvider).fetch(
+    final data = await ref.watch(documentRepositoryProvider).fetch(
           Developer.docPath(userId),
           decode: Developer.fromJson,
         );
@@ -47,7 +47,7 @@ final fetchPosterStreamProviders =
   }
 
   return ref
-      .read(documentRepositoryProvider)
+      .watch(documentRepositoryProvider)
       .snapshots(Developer.docPath(userId))
       .map((event) {
     /// スナップショットリスナーを使うことで2回発火する

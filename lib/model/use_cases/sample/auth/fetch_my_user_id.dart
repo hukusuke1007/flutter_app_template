@@ -5,5 +5,5 @@ import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 
 final fetchMyUserIdProvider = Provider.autoDispose<String?>((ref) {
   ref.watch(authStateProvider);
-  return ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
+  return ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;
 });

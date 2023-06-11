@@ -1,6 +1,5 @@
 import 'dart:async';
 
-// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,9 +7,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'auth_provider_id.dart';
 import 'login_type.dart';
 
-final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>((_) {
-  return FirebaseAuthRepository(FirebaseAuth.instance);
-});
+final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>(
+  (_) => FirebaseAuthRepository(FirebaseAuth.instance),
+);
 
 class FirebaseAuthRepository {
   FirebaseAuthRepository(this._auth);

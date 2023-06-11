@@ -4,15 +4,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'document.dart';
 
-final collectionPagingRepositoryProvider = Provider.family
-    .autoDispose<CollectionPagingRepository, CollectionParam>((ref, query) {
-  return CollectionPagingRepository(
+final collectionPagingRepositoryProvider =
+    Provider.family.autoDispose<CollectionPagingRepository, CollectionParam>(
+  (_, query) => CollectionPagingRepository(
     query: query.query,
     initialLimit: query.initialLimit,
     pagingLimit: query.pagingLimit,
     decode: query.decode,
-  );
-});
+  ),
+);
 
 /// https://docs-v2.riverpod.dev/docs/concepts/modifiers/family#passing-multiple-parameters-to-a-family
 class CollectionParam<T extends Object> extends Equatable {

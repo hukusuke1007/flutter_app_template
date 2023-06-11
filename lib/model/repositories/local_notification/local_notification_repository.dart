@@ -3,9 +3,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 final localNotificationRepositoryProvider =
-    Provider<LocalNotificationRepository>((ref) {
-  return LocalNotificationRepository(FlutterLocalNotificationsPlugin());
-});
+    Provider<LocalNotificationRepository>(
+  (_) => LocalNotificationRepository(
+    FlutterLocalNotificationsPlugin(),
+  ),
+);
 
 class LocalNotificationRepository {
   LocalNotificationRepository(this._flutterLocalNotificationsPlugin);

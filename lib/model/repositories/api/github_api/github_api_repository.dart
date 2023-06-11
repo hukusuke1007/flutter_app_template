@@ -9,9 +9,9 @@ import '../../../../utils/logger.dart';
 import '../../../entities/sample/github/user.dart';
 import 'github_api_client.dart';
 
-final githubApiRepositoryProvider = Provider<GithubApiRepository>((ref) {
-  return GithubApiRepository(ref);
-});
+final githubApiRepositoryProvider = Provider<GithubApiRepository>(
+  GithubApiRepository.new,
+);
 
 class GithubApiRepository {
   GithubApiRepository(

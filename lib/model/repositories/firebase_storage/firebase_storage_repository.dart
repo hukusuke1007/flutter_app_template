@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart';
 import 'mime_type.dart';
 
 final firebaseStorageRepositoryProvider = Provider<FirebaseStorageRepository>(
-  (ref) => FirebaseStorageRepository(FirebaseStorage.instance),
+  (_) => FirebaseStorageRepository(FirebaseStorage.instance),
 );
 
 class FirebaseStorageRepository {

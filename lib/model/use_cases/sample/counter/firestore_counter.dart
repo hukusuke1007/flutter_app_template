@@ -20,11 +20,11 @@ class FirestoreCounter extends AutoDisposeAsyncNotifier<Counter?> {
   FutureOr<Counter?> build() async {
     ref.watch(authStateProvider);
 
-    final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
+    final userId = ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    final doc = await ref.read(documentRepositoryProvider).fetch<Counter>(
+    final doc = await ref.watch(documentRepositoryProvider).fetch<Counter>(
           Counter.docPath(userId),
           decode: Counter.fromJson,
         );

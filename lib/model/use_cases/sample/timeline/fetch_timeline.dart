@@ -25,7 +25,7 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
     final query = Document.colGroupQuery(
       Post.collectionName,
     ).orderBy('createdAt', descending: true);
-    final repository = ref.read(
+    final repository = ref.watch(
       postCollectionPagingProvider(
         CollectionParam<Post>(
           query: query, // インデックス設定する必要がある

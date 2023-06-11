@@ -33,7 +33,7 @@ class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
     final docId = arg.postId;
 
     /// キャッシュから取得して即時反映
-    final cache = await ref.read(documentRepositoryProvider).fetchCacheOnly(
+    final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
           Developer.postDocPath(userId: userId, docId: docId),
           decode: Post.fromJson,
         );
@@ -42,7 +42,7 @@ class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
     }
 
     /// サーバーから取得して最新情報を反映
-    final data = await ref.read(documentRepositoryProvider).fetch(
+    final data = await ref.watch(documentRepositoryProvider).fetch(
           Developer.postDocPath(userId: userId, docId: docId),
           decode: Post.fromJson,
         );

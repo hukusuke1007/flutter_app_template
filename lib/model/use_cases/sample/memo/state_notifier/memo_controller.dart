@@ -10,7 +10,6 @@ import '../../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../../repositories/firestore/document.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 import '../../typedef.dart';
-import '../async_notifier/memo_controller.dart' as memo_async_notifier;
 
 /// StateNotifier & 非同期操作の結果を同期的に扱うサンプルコード
 final memoProvider = StateNotifierProvider<MemoController, List<Memo>>((ref) {
@@ -119,9 +118,6 @@ class MemoController extends StateNotifier<List<Memo>> {
       );
       state = [data, ...state];
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -152,9 +148,6 @@ class MemoController extends StateNotifier<List<Memo>> {
           )
           .toList();
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -177,9 +170,6 @@ class MemoController extends StateNotifier<List<Memo>> {
           )
           .toList();
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      _ref.invalidate(memo_async_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
