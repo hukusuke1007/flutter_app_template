@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import '../gen/colors.gen.dart';
 
 extension ContextExtension on BuildContext {
-  bool get isDark => MediaQuery.of(this).platformBrightness == Brightness.dark;
-  double get deviceWidth => MediaQuery.of(this).size.width;
-  double get deviceHeight => MediaQuery.of(this).size.height;
+  bool get isDark => MediaQuery.platformBrightnessOf(this) == Brightness.dark;
+  double get deviceWidth => MediaQuery.sizeOf(this).width;
+  double get deviceHeight => MediaQuery.sizeOf(this).height;
+  double get appBarHeight => MediaQuery.paddingOf(this).top + kToolbarHeight;
+  // https://stackoverflow.com/a/54136738
+  bool get isTablet => MediaQuery.sizeOf(this).shortestSide >= 600;
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
   bool get isIOS => Theme.of(this).platform == TargetPlatform.iOS;
   TextStyle get titleStyle => Theme.of(this).textTheme.headlineSmall!;
@@ -16,10 +19,6 @@ extension ContextExtension on BuildContext {
       Theme.of(this).textTheme.bodySmall!.copyWith(fontSize: 10);
   bool get isIphoneMiniSize =>
       deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
-  double get appBarHeight => MediaQuery.of(this).padding.top + kToolbarHeight;
-
-  /// https://stackoverflow.com/a/54136738
-  bool get isTablet => MediaQuery.of(this).size.shortestSide >= 600;
 
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 

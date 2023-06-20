@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
@@ -25,7 +26,7 @@ Future<void> main() async {
   late final SharedPreferences sharedPreferences;
   late final Directory tempDirectory;
   Logger.configure();
-  await Future.wait([
+  await (
     /// Firebase
     Firebase.initializeApp(),
 
@@ -49,12 +50,16 @@ Future<void> main() async {
     Future(() async {
       tempDirectory = await getTemporaryDirectory();
     }),
-  ]);
+  ).wait;
 
   logger.info(Flavor.environment);
 
   /// Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   runApp(
     ProviderScope(
