@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import '../gen/colors.gen.dart';
 
 extension ContextExtension on BuildContext {
+  /// MediaQuery
   bool get isDark => MediaQuery.platformBrightnessOf(this) == Brightness.dark;
   double get deviceWidth => MediaQuery.sizeOf(this).width;
   double get deviceHeight => MediaQuery.sizeOf(this).height;
+  bool get isIphoneSE1 =>
+      deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
+  bool get isTablet =>
+      MediaQuery.sizeOf(this).shortestSide >=
+      600; // https://stackoverflow.com/a/54136738
   double get appBarHeight => MediaQuery.paddingOf(this).top + kToolbarHeight;
-  // https://stackoverflow.com/a/54136738
-  bool get isTablet => MediaQuery.sizeOf(this).shortestSide >= 600;
+  Orientation get orientation => MediaQuery.orientationOf(this);
+
+  /// Theme
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
   bool get isIOS => Theme.of(this).platform == TargetPlatform.iOS;
   TextStyle get titleStyle => Theme.of(this).textTheme.headlineSmall!;
@@ -17,11 +24,9 @@ extension ContextExtension on BuildContext {
   TextStyle get smallStyle => Theme.of(this).textTheme.bodySmall!;
   TextStyle get verySmallStyle =>
       Theme.of(this).textTheme.bodySmall!.copyWith(fontSize: 10);
-  bool get isIphoneMiniSize =>
-      deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
-
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
+  /// Function
   void hideKeyboard() {
     // https://github.com/flutter/flutter/issues/54277#issuecomment-640998757
     final currentScope = FocusScope.of(this);

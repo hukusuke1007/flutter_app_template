@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../../extensions/context_extension.dart';
 import '../sample/github_users/with_async_notifier/github_users_page.dart';
 import '../sample/home/home_page.dart';
 import '../sample/memo/memo_page.dart';
@@ -104,8 +103,6 @@ class MainPage extends HookConsumerWidget {
           ],
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedTabIndex,
-          showSelectedLabels: !context.isIphoneMiniSize,
-          showUnselectedLabels: !context.isIphoneMiniSize,
           onTap: (index) {
             ref.read(selectedTabIndexStateProvider.notifier).update(
                   (state) => index,
