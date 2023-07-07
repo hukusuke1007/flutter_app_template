@@ -216,8 +216,8 @@ class CircleThumbnail extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: isLoading != true ? onTap : null,
-          child: isLoading == true
+          onTap: isLoading ? null : onTap,
+          child: isLoading
               ? loadingWidget ??
                   Center(
                     child: SizedBox(

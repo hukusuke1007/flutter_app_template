@@ -56,7 +56,7 @@ class CollectionPagingListenerRepository<T extends Object> {
   }
 
   void fetch() {
-    assert(_initLoaded == false);
+    assert(!_initLoaded);
     _disposer = _pagingListenerController.data.listen((event) {
       if (_limit != null) {
         _hasMore = event.length >= _limit!;

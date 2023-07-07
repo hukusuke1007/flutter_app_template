@@ -7,6 +7,7 @@ extension ContextExtension on BuildContext {
   bool get isDark => MediaQuery.platformBrightnessOf(this) == Brightness.dark;
   double get deviceWidth => MediaQuery.sizeOf(this).width;
   double get deviceHeight => MediaQuery.sizeOf(this).height;
+  double get viewInsetsBottom => MediaQuery.viewInsetsOf(this).bottom;
   bool get isIphoneSE1 =>
       deviceWidth == 320 && deviceHeight == 568; // iPhone SE 1st
   bool get isTablet =>

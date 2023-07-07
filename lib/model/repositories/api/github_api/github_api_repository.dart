@@ -27,7 +27,7 @@ class GithubApiRepository {
     try {
       final result = await _client.fetchUsers(since, perPage);
       return result;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final response = e.response;
       logger.shout(
         'statusCode: ${response?.statusCode}, '

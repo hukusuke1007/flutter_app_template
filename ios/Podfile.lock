@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (4.8.1):
+  - cloud_firestore (4.8.2):
     - Firebase/Firestore (= 10.10.0)
     - firebase_core
     - Flutter
@@ -53,7 +53,7 @@ PODS:
     - Firebase/Crashlytics (= 10.10.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.6.3):
+  - firebase_messaging (14.6.4):
     - Firebase/Messaging (= 10.10.0)
     - firebase_core
     - Flutter
@@ -61,7 +61,7 @@ PODS:
     - Firebase/RemoteConfig (= 10.10.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.2.3):
+  - firebase_storage (11.2.4):
     - Firebase/Storage (= 10.10.0)
     - firebase_core
     - Flutter
@@ -254,7 +254,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - permission_handler_apple (9.0.4):
+  - permission_handler_apple (9.1.1):
     - Flutter
   - PromisesObjC (2.2.0)
   - PromisesSwift (2.2.0):
@@ -397,7 +397,7 @@ CHECKOUT OPTIONS:
     :tag: 10.10.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: eb6bea100a5957ac15e911a317a52738813e72ef
+  cloud_firestore: 818ebb1a8235177a0dcf7005c14aed5408b8342c
   cloud_functions: 24c6c0f2b37a3adde7ce00a8eb82a74ca71ef413
   device_info_plus: 7545d84d8d1b896cb16a4ff98c19f07ec4b298ea
   Firebase: facd334e557a979bd03a0b58d90fd56b52b8aba0
@@ -405,9 +405,9 @@ SPEC CHECKSUMS:
   firebase_auth: 9905bc3d82328b5050a8b7cb410a959f150b6549
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
   firebase_crashlytics: cd12245f604099a4ef6557fb36490abe309a118a
-  firebase_messaging: db0dab2713aafcf69591a1dc4ee8af7d8bba2abd
+  firebase_messaging: c55f70dd48a998dea00a29ccf94572e1e4d454b2
   firebase_remote_config: 1d054d8de1d52ac654797526ad442e92802a64a1
-  firebase_storage: 1fe4f5725285159f87dd30aca1a5825105a09dcd
+  firebase_storage: b840c83ddfe3af84f0560a7403b7c0c09bb13069
   FirebaseABTesting: b2a87808d90f02766fcffb3957d3e397e7accc15
   FirebaseAnalytics: 7bc7de519111dae802f5bc0c9c083918f8b8870d
   FirebaseAppCheckInterop: 7d3521f56872cf74a01792c0a095a30e054ff6ae
@@ -445,7 +445,7 @@ SPEC CHECKSUMS:
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   PromisesSwift: cf9eb58666a43bbe007302226e510b16c1e10959
   SDWebImage: cb032eba469c54e0000e78bcb0a13cdde0a52798

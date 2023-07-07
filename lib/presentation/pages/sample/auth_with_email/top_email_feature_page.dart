@@ -116,7 +116,7 @@ class TopEmailFeaturePage extends HookConsumerWidget {
               const Divider(height: 1),
               ListTile(
                 title: Text(
-                  'メールアドレス変更',
+                  'メールアドレスの変更',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
                 ),

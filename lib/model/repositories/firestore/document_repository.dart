@@ -48,7 +48,7 @@ class DocumentRepository {
           Document(
             ref: cache.reference,
             exists: cache.exists,
-            entity: cache.exists == true ? decode(cache.data()!) : null,
+            entity: cache.exists ? decode(cache.data()!) : null,
           ),
         );
       } on Exception catch (_) {

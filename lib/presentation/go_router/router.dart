@@ -116,7 +116,7 @@ final routerProvider = Provider((ref) {
                 builder: (_, __) => const ResetEmailPasswordPage(),
               ),
 
-              /// メールアドレス変更
+              /// メールアドレスの変更
               GoRoute(
                 path: ChangeEmailAddressPage.pageName,
                 name: ChangeEmailAddressPage.pageName,

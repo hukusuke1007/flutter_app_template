@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:leak_tracker/leak_tracker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,6 +27,13 @@ Future<void> main() async {
   late final SharedPreferences sharedPreferences;
   late final Directory tempDirectory;
   Logger.configure();
+
+  /// Leak Tracker
+  enableLeakTracking();
+  MemoryAllocations.instance.addListener(
+    (ObjectEvent event) => dispatchObjectEvent(event.toMap()),
+  );
+
   await (
     /// Firebase
     Firebase.initializeApp(),

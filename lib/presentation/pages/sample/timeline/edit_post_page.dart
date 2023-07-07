@@ -114,7 +114,7 @@ class EditPostPage extends HookConsumerWidget {
                     dismissIndicator(context);
                     context
                       ..showSnackBar('削除しました')
-                      // TODO(shohei): 修正予定
+                      // TODO(shohei): 暫定対応
                       ..pop()
                       ..pop();
                   } on Exception catch (e) {
@@ -138,7 +138,9 @@ class EditPostPage extends HookConsumerWidget {
         body: Scrollbar(
           controller: scrollController,
           child: SingleChildScrollView(
+            reverse: true,
             controller: scrollController,
+            padding: EdgeInsets.only(bottom: context.viewInsetsBottom),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Column(
@@ -164,74 +166,74 @@ class EditPostPage extends HookConsumerWidget {
                             ? '内容を入力してください'
                             : null,
                     minLines: 4,
-                    maxLines: 8,
+                    maxLines: 16,
                     maxLength: 1024,
                     textInputAction: TextInputAction.newline,
+                  ),
+                  Center(
+                    child: RoundedButton(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          '送信する',
+                          style: context.bodyStyle.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      onTap: () async {
+                        final isValidText =
+                            textFormFieldKey.currentState?.validate() ?? false;
+
+                        if (!isValidText) {
+                          logger.info('invalid input data');
+                          return;
+                        }
+                        final text = textFormFieldKey.currentState?.value;
+
+                        if (text == null) {
+                          return;
+                        }
+
+                        try {
+                          context.hideKeyboard();
+                          showIndicator(context);
+                          if (isUpdatePost) {
+                            final args = this.args;
+                            if (args != null) {
+                              /// 投稿内容を更新する
+                              await ref.read(updatePostProvider)(
+                                oldPost: args.oldPost,
+                                text: text,
+                              );
+                            }
+                          } else {
+                            /// 投稿内容を作成する
+                            await ref.read(createPostProvider)(text: text);
+                          }
+                          dismissIndicator(context);
+                          context
+                            ..showSnackBar(isUpdatePost ? '更新しました' : '投稿しました')
+                            ..pop();
+                        } on Exception catch (e) {
+                          dismissIndicator(context);
+                          unawaited(
+                            showOkAlertDialog(
+                              context: context,
+                              title: 'エラー',
+                              message: e.errorMessage,
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
           ),
         ),
-        persistentFooterAlignment: AlignmentDirectional.center,
-        persistentFooterButtons: [
-          RoundedButton(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                isUpdatePost ? '更新する' : '投稿する',
-                style: context.bodyStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            onTap: () async {
-              final isValidText =
-                  textFormFieldKey.currentState?.validate() ?? false;
-
-              if (!isValidText) {
-                logger.info('invalid input data');
-                return;
-              }
-              final text = textFormFieldKey.currentState?.value;
-
-              if (text == null) {
-                return;
-              }
-
-              try {
-                showIndicator(context);
-                if (isUpdatePost) {
-                  final args = this.args;
-                  if (args != null) {
-                    /// 投稿内容を更新する
-                    await ref.read(updatePostProvider)(
-                      oldPost: args.oldPost,
-                      text: text,
-                    );
-                  }
-                } else {
-                  /// 投稿内容を作成する
-                  await ref.read(createPostProvider)(text: text);
-                }
-                dismissIndicator(context);
-                context
-                  ..showSnackBar(isUpdatePost ? '更新しました' : '投稿しました')
-                  ..pop();
-              } on Exception catch (e) {
-                dismissIndicator(context);
-                unawaited(
-                  showOkAlertDialog(
-                    context: context,
-                    title: 'エラー',
-                    message: e.errorMessage,
-                  ),
-                );
-              }
-            },
-          ),
-        ],
       ),
     );
   }

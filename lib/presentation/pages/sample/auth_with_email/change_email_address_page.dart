@@ -66,7 +66,7 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'メールアドレス変更',
+            'メールアドレスの変更',
             style: context.subtitleStyle.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
