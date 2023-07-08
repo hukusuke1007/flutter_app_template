@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../exceptions/app_exception.dart';
 import '../../../../extensions/exception_extension.dart';
 import '../../../../utils/logger.dart';
-import '../../../entities/sample/github/user.dart';
+import '../../entities/sample/github/user.dart';
 import 'github_api_client.dart';
 
 final githubApiRepositoryProvider = Provider<GithubApiRepository>(

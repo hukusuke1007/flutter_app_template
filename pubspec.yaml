@@ -135,6 +135,9 @@ dev_dependencies:
   flutter_gen_runner:
   retrofit_generator:
 
+  # Test
+  mockito: ^5.4.2
+
   # Other
   flutter_launcher_icons:
 

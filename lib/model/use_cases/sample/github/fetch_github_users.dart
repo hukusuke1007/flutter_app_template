@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../entities/sample/github/user.dart';
-import '../../../repositories/api/github_api/github_api_repository.dart';
+import '../../../repositories/github_api/github_api_repository.dart';
 
 /// Githubのユーザーリストを取得するProvider
 /// 状態の保持は利用者（Page側）に委ねる

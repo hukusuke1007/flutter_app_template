@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../entities/sample/github/user.dart';
-import '../constants.dart';
+import '../../entities/sample/github/user.dart';
 import 'auth_header_interceptor.dart';
+import 'constants.dart';
 
 part 'github_api_client.g.dart';
 

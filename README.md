@@ -65,8 +65,8 @@ Flutter Stable 3.10.5
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
-- ユニットテスト
-- UI テスト
+- ユニットテスト（作成中）
+- UI テスト（作成中）
 - dartdoc
 - fastlane
 
