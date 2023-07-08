@@ -23,7 +23,7 @@ void main() {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// テストが実施前に呼ばれる（テスト毎に呼ばれる）
+    /// テスト実施前に毎回呼ばれる
     setUp(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
@@ -65,7 +65,7 @@ void main() {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// テストが実施前に呼ばれる（テスト毎に呼ばれる）
+    /// テスト実施前に毎回呼ばれる
     setUp(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
