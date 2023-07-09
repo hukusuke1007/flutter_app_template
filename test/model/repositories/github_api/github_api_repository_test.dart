@@ -22,7 +22,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] GithubApiRepositoryのオフラインテスト', () {
+  group('[正常系] GithubApiRepositoryオフラインテスト', () {
     late final MockDio dio;
     late final GithubApiClient client;
 
@@ -63,7 +63,7 @@ void main() {
   });
 
   /// 異常系テストケース
-  group('[異常系] GithubApiRepositoryのオフラインテスト', () {
+  group('[異常系] GithubApiRepositoryオフラインテスト', () {
     late final MockDio dio;
     late final GithubApiClient client;
 
