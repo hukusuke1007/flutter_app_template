@@ -13,17 +13,22 @@ import 'package:mockito/mockito.dart';
 
 import 'github_api_repository_test.mocks.dart';
 
-/// GithubApiRepositoryのオフラインテスト
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
-  Logger.configure();
   const baseUrl = 'https://api.github.com';
 
-  group('正常系', () {
+  /// 準備（テスト実施前に1度呼ばれる）
+  // ignore: unnecessary_lambdas
+  setUpAll(() {
+    Logger.configure();
+  });
+
+  /// 正常系テストケース
+  group('[正常系] GithubApiRepositoryのオフラインテスト', () {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// テスト実施前に毎回呼ばれる
+    /// 準備（テスト実施前に毎回呼ばれる）
     setUp(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
@@ -54,18 +59,19 @@ void main() {
             .fetchUsers(since: 0, perPage: 20);
 
         /// テスト結果を検証
-        expect(result.length, 2); // テスト実施のreturn結果と期待する結果が一致していること
+        expect(result.length, 2); // 実施結果と期待値が一致していること
         verify(dio.fetch<Map<String, dynamic>>(any))
             .called(1); // 注入したMockの関数が1回呼ばれていること
       },
     );
   });
 
-  group('異常系', () {
+  /// 異常系テストケース
+  group('[異常系] GithubApiRepositoryのオフラインテスト', () {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// テスト実施前に毎回呼ばれる
+    /// 準備（テスト実施前に毎回呼ばれる）
     setUp(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
@@ -77,7 +83,7 @@ void main() {
         /// MockにdioDefaultOptionsをセットする
         when(dio.options).thenReturn(dioDefaultOptions);
 
-        /// MockにダミーのJsonデータをセットする
+        /// Mockにダミーのjsonをセットする
         final requestOption = RequestOptions(path: '/users');
         when(dio.fetch<List<dynamic>>(any)).thenThrow(
           DioException(
@@ -103,7 +109,7 @@ void main() {
           fail('failed');
         } on AppException catch (e) {
           /// テスト結果を検証
-          expect(e.title, 'error'); // エラーメッセージが期待する結果であること
+          expect(e.title, 'error'); // エラーメッセージが期待値であること
           verify(dio.fetch<Map<String, dynamic>>(any))
               .called(1); // 注入したMockの関数が1回呼ばれていること
         }
@@ -112,7 +118,7 @@ void main() {
   });
 }
 
-/// ダミーデータ（JsonデータをStringで管理）
+/// ダミーデータ（jsonをStringで管理）
 const _userListData = '''
 [
   {
