@@ -74,7 +74,7 @@ void main() {
     });
 
     test(
-      'ユーザーリスト取得APIがエラーを発生した場合にAppExceptionが発生すること',
+      'ユーザーリスト取得APIでエラーが発生した場合、AppExceptionが発生すること',
       () async {
         /// Mockにデータをセットする
         when(dio.options).thenReturn(dioDefaultOptions);
@@ -106,6 +106,8 @@ void main() {
           expect(e.title, 'error'); // エラーメッセージが期待値であること
           verify(dio.fetch<Map<String, dynamic>>(any))
               .called(1); // 注入したMockの関数が1回呼ばれていること
+        } on Exception catch (_) {
+          fail('failed');
         }
       },
     );
