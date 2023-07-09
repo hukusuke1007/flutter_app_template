@@ -6,10 +6,10 @@ import 'package:flutter_app_template/model/use_cases/sample/auth/email/sign_in_w
 import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_app_template/utils/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../../utils.dart';
 import 'sign_in_with_email_and_password_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -42,7 +42,7 @@ void main() {
         });
 
         /// MockをProviderにセットする
-        final container = ProviderContainer(
+        final container = createContainer(
           overrides: [
             firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
           ],
@@ -85,7 +85,7 @@ void main() {
       );
 
       /// MockをProviderにセットする
-      final container = ProviderContainer(
+      final container = createContainer(
         overrides: [
           firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
         ],

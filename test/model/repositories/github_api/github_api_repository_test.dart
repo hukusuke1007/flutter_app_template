@@ -7,10 +7,10 @@ import 'package:flutter_app_template/model/repositories/github_api/github_api_cl
 import 'package:flutter_app_template/model/repositories/github_api/github_api_repository.dart';
 import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../utils.dart';
 import 'github_api_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
@@ -45,7 +45,7 @@ void main() {
         );
 
         /// MockをProviderにセットする
-        final container = ProviderContainer(
+        final container = createContainer(
           overrides: [githubApiClientProvider.overrideWith((ref) => client)],
         );
 
@@ -91,7 +91,7 @@ void main() {
         );
 
         /// MockをProviderにセットする
-        final container = ProviderContainer(
+        final container = createContainer(
           overrides: [githubApiClientProvider.overrideWith((ref) => client)],
         );
 

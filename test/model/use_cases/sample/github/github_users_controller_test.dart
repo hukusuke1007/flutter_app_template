@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../utils.dart';
 import 'github_users_controller_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -48,12 +49,11 @@ void main() {
         }); // ページング取得用にセット
 
         /// MockをProviderにセットする
-        final container = ProviderContainer(
+        final container = createContainer(
           overrides: [
             githubApiRepositoryProvider.overrideWith((ref) => repository)
           ],
         );
-        addTearDown(container.dispose);
 
         /// テスト実施
         await container.read(
@@ -118,12 +118,11 @@ void main() {
         );
 
         /// MockをProviderにセットする
-        final container = ProviderContainer(
+        final container = createContainer(
           overrides: [
             githubApiRepositoryProvider.overrideWith((ref) => repository)
           ],
         );
-        addTearDown(container.dispose);
 
         /// テスト実施
         try {
