@@ -56,8 +56,9 @@ void main() {
         addTearDown(container.dispose);
 
         /// テスト実施
-        container.read(githubUsersControllerProvider);
-        await Future<void>.value(); // build内が処理されるまで待つ
+        await container.read(
+          githubUsersControllerProvider.future,
+        ); // build内が処理されるまで待つ
 
         expect(
           container.exists(githubUsersControllerProvider),
@@ -125,8 +126,12 @@ void main() {
         addTearDown(container.dispose);
 
         /// テスト実施
-        container.read(githubUsersControllerProvider);
-        await Future<void>.value(); // build内が処理されるまで待つ
+        try {
+          await container.read(
+            githubUsersControllerProvider.future,
+          ); // build内が処理されるまで待つ
+          fail('failed');
+        } on Exception catch (_) {}
 
         expect(
           container.exists(githubUsersControllerProvider),
