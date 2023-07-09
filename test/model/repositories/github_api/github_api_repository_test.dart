@@ -15,13 +15,11 @@ import 'github_api_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
+  /// テストで利用する定数を定義
   const baseUrl = 'https://api.github.com';
 
   /// 準備（テスト実施前に1度呼ばれる）
-  // ignore: unnecessary_lambdas
-  setUpAll(() {
-    Logger.configure();
-  });
+  setUpAll(Logger.configure);
 
   /// 正常系テストケース
   group('[正常系] GithubApiRepositoryのオフラインテスト', () {
@@ -37,10 +35,8 @@ void main() {
     test(
       'ユーザーリスト取得APIのレスポンス結果が正しいこと',
       () async {
-        /// MockにdioDefaultOptionsをセットする
+        /// Mockにデータをセットする
         when(dio.options).thenReturn(dioDefaultOptions);
-
-        /// MockにダミーのJsonデータをセットする
         when(dio.fetch<List<dynamic>>(any)).thenAnswer(
           (_) async => Response(
             data: json.decode(_userListData) as List<dynamic>,
@@ -48,7 +44,7 @@ void main() {
           ),
         );
 
-        /// Mock化したGithubApiClientをProviderにセットする
+        /// MockをProviderにセットする
         final container = ProviderContainer(
           overrides: [githubApiClientProvider.overrideWith((ref) => client)],
         );
@@ -80,10 +76,8 @@ void main() {
     test(
       'ユーザーリスト取得APIがエラーを発生した場合にAppExceptionが発生すること',
       () async {
-        /// MockにdioDefaultOptionsをセットする
+        /// Mockにデータをセットする
         when(dio.options).thenReturn(dioDefaultOptions);
-
-        /// Mockにダミーのjsonをセットする
         final requestOption = RequestOptions(path: '/users');
         when(dio.fetch<List<dynamic>>(any)).thenThrow(
           DioException(
@@ -96,7 +90,7 @@ void main() {
           ),
         );
 
-        /// Mock化したGithubApiClientをProviderにセットする
+        /// MockをProviderにセットする
         final container = ProviderContainer(
           overrides: [githubApiClientProvider.overrideWith((ref) => client)],
         );
