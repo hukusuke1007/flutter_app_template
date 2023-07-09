@@ -57,6 +57,7 @@ Flutter Stable 3.10.5
 - MethodChannelとEventChannelのサンプルコード
   - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
 - その他アプリに必要なライブラリを設定済み
+- ユニットテスト（オフラインテスト）
 
 ※他プロジェクト移行によるビルドエラーを避けるため import は相対パスで実装していますが、移行後は import は絶対パスで利用します。
 
@@ -65,7 +66,6 @@ Flutter Stable 3.10.5
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
-- ユニットテスト（作成中）
 - UI テスト（作成中）
 - dartdoc
 - fastlane
