@@ -27,8 +27,8 @@ void main() {
   group('[正常系] SignInWithEmailAndPasswordオフラインテスト', () {
     late final MockFirebaseAuthRepository repository;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       repository = MockFirebaseAuthRepository();
     });
 
@@ -73,8 +73,8 @@ void main() {
   group('[異常系] SignInWithEmailAndPasswordオフラインテスト', () {
     late final MockFirebaseAuthRepository repository;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       repository = MockFirebaseAuthRepository();
     });
 

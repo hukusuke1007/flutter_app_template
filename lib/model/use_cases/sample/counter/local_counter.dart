@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../repositories/shared_preferences/shared_preference_key.dart';
@@ -31,7 +29,7 @@ class LocalCounter extends StateNotifier<int> {
   }
 
   Future<void> decrement() async {
-    state = max(state - 1, 0);
+    state -= 1;
     await _ref
         .read(sharedPreferencesRepositoryProvider)
         .save<int>(localCounterKey, state);

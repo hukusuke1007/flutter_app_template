@@ -22,8 +22,8 @@ void main() {
   group('[正常系] GithubUsersControllerオフラインテスト', () {
     late final MockGithubApiRepository repository;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       repository = MockGithubApiRepository();
     });
 
@@ -103,8 +103,8 @@ void main() {
   group('[異常系] GithubUsersControllerオフラインテスト', () {
     late final MockGithubApiRepository repository;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       repository = MockGithubApiRepository();
     });
 

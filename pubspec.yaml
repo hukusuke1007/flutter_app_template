@@ -104,8 +104,8 @@ dependencies:
   flutter_slidable:
   dismissible_page:
 
-  # Leak Tracker
-  leak_tracker: ^7.0.4
+#  # Leak Tracker
+#  leak_tracker: ^7.0.4
 
   # Other
   uuid:
@@ -120,8 +120,12 @@ dependency_overrides:
   intl: 0.18.0
 
 dev_dependencies:
+  # Test
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.2
 
   # Static analysis
   pedantic_mono: ^1.23.0
@@ -134,9 +138,6 @@ dev_dependencies:
   freezed: ^2.3.5
   flutter_gen_runner:
   retrofit_generator:
-
-  # Test
-  mockito: ^5.4.2
 
   # Other
   flutter_launcher_icons:

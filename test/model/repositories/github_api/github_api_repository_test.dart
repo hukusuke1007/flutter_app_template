@@ -18,7 +18,7 @@ void main() {
   /// テストで利用する定数を定義
   const baseUrl = 'https://api.github.com';
 
-  /// 準備（テスト実施前に1度呼ばれる）
+  /// 準備（テスト実施前に1回呼ばれる）
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
@@ -26,8 +26,8 @@ void main() {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
     });
@@ -67,8 +67,8 @@ void main() {
     late final MockDio dio;
     late final GithubApiClient client;
 
-    /// 準備（テスト実施前に毎回呼ばれる）
-    setUp(() {
+    /// 準備（テスト実施前に1回呼ばれる）
+    setUpAll(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
     });
