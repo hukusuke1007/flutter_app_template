@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_repository.dart';
 import 'package:flutter_app_template/presentation/pages/sample/local_counter/local_counter_page.dart';
+import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
@@ -16,11 +17,20 @@ import 'local_counter_page_test.mocks.dart';
   [MockSpec<SharedPreferencesRepository>()],
 )
 void main() {
+  /// 準備（テスト実施前に1回呼ばれる）
+  setUpAll(Logger.configure);
+
   group('[正常系] LocalCounterPageオフラインテスト', () {
     late final MockSharedPreferencesRepository mockSharedPreferencesRepository;
 
+    /// 準備（テスト実施前に1回呼ばれる）
     setUpAll(() {
       mockSharedPreferencesRepository = MockSharedPreferencesRepository();
+    });
+
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      reset(mockSharedPreferencesRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     testWidgets('カウントアップして、期待する数値が表示されること', (tester) async {

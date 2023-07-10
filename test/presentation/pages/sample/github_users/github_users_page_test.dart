@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/entities/sample/github/user.dart';
 import 'package:flutter_app_template/model/repositories/github_api/github_api_repository.dart';
 import 'package:flutter_app_template/presentation/pages/sample/github_users/with_async_notifier/github_users_page.dart';
+import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
@@ -17,11 +18,20 @@ import 'github_users_page_test.mocks.dart';
   [MockSpec<GithubApiRepository>()],
 )
 void main() {
+  /// 準備（テスト実施前に1回呼ばれる）
+  setUpAll(Logger.configure);
+
   group('[正常系] GithubUsersPageオフラインテスト', () {
     late final MockGithubApiRepository mockGithubApiRepository;
 
+    /// 準備（テスト実施前に1回呼ばれる）
     setUpAll(() {
       mockGithubApiRepository = MockGithubApiRepository();
+    });
+
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      reset(mockGithubApiRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     testWidgets('ユーザーリストを一番下までスクロールして、期待する情報が表示されること', (tester) async {

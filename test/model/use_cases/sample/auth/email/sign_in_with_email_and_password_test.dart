@@ -23,7 +23,7 @@ void main() {
   const email = 'sample@sample.com';
   const password = 'password';
 
-  /// 準備（テスト実施前に1度呼ばれる）
+  /// 準備（テスト実施前に1回呼ばれる）
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
@@ -33,6 +33,11 @@ void main() {
     /// 準備（テスト実施前に1回呼ばれる）
     setUpAll(() {
       repository = MockFirebaseAuthRepository();
+    });
+
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      reset(repository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(

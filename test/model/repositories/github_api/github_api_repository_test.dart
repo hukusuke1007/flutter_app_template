@@ -35,6 +35,12 @@ void main() {
       client = GithubApiClient(dio, baseUrl: baseUrl);
     });
 
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      // セットされたデータを初期化するためにモックをリセットする
+      reset(dio);
+    });
+
     test(
       'ユーザーリスト取得APIのレスポンス結果が正しいこと',
       () async {
