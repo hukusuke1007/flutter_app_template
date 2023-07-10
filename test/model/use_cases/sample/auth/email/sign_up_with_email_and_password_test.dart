@@ -62,27 +62,23 @@ void main() {
           ],
         );
 
-        /// テスト実施して結果を取得
-        try {
-          await container.read(signUpWithEmailAndPasswordProvider)(
-            email: email,
-            password: password,
-          );
+        /// テスト実施
+        await container.read(signUpWithEmailAndPasswordProvider)(
+          email: email,
+          password: password,
+        );
 
-          /// テスト結果を検証
-          verify(
-            mockFirebaseAuthRepository.createUserWithEmailAndPassword(
-              email,
-              password,
-            ),
-          ).called(1); // 注入したMockの関数が1回呼ばれていること
-          expect(
-            container.read(authStateProvider),
-            AuthState.signIn,
-          ); // 期待する状態であること
-        } on Exception catch (_) {
-          fail('failed');
-        }
+        /// テスト結果を検証
+        expect(
+          container.read(authStateProvider),
+          AuthState.signIn,
+        ); // 期待する状態であること
+        verify(
+          mockFirebaseAuthRepository.createUserWithEmailAndPassword(
+            email,
+            password,
+          ),
+        ).called(1); // 注入したMockの関数が1回呼ばれていること
       },
     );
   });
@@ -121,7 +117,7 @@ void main() {
         ],
       );
 
-      /// テスト実施して結果を取得
+      /// テスト実施
       try {
         await container.read(signUpWithEmailAndPasswordProvider)(
           email: email,
@@ -130,17 +126,17 @@ void main() {
         fail('failed');
       } on AppException catch (e) {
         /// テスト結果を検証
+        expect(e.title, 'このアカウントは既に存在します');
+        expect(
+          container.read(authStateProvider),
+          AuthState.noSignIn,
+        ); // 期待する状態であること
         verify(
           mockFirebaseAuthRepository.createUserWithEmailAndPassword(
             email,
             password,
           ),
         ).called(1); // 注入したMockの関数が1回呼ばれていること
-        expect(e.title, 'このアカウントは既に存在します');
-        expect(
-          container.read(authStateProvider),
-          AuthState.noSignIn,
-        ); // 期待する状態であること
       } on Exception catch (_) {
         fail('failed');
       }
