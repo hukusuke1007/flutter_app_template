@@ -65,18 +65,21 @@ void main() {
 
         /// テスト実施
         final repository = container.read(sharedPreferencesRepositoryProvider);
-        await repository.save<int>(key, 0);
-        await repository.save<double>(key, 0.1);
-        await repository.save<bool>(key, true);
-        await repository.save<String>(key, '0');
-        await repository.save<List<String>>(key, ['0', '1']);
+        await Future.wait([
+          repository.save<int>(key, 0),
+          repository.save<double>(key, 0.1),
+          repository.save<bool>(key, true),
+          repository.save<String>(key, '0'),
+          repository.save<List<String>>(key, ['0', '1']),
+        ]);
 
         /// テスト結果を検証 注入したMockの関数が1回呼ばれていること
-        verify(mockSharedPreferences.setInt(key.value, any)).called(1);
-        verify(mockSharedPreferences.setDouble(key.value, any)).called(1);
-        verify(mockSharedPreferences.setBool(key.value, any)).called(1);
-        verify(mockSharedPreferences.setString(key.value, any)).called(1);
-        verify(mockSharedPreferences.setStringList(key.value, any)).called(1);
+        verify(mockSharedPreferences.setInt(key.value, 0)).called(1);
+        verify(mockSharedPreferences.setDouble(key.value, 0.1)).called(1);
+        verify(mockSharedPreferences.setBool(key.value, true)).called(1);
+        verify(mockSharedPreferences.setString(key.value, '0')).called(1);
+        verify(mockSharedPreferences.setStringList(key.value, ['0', '1']))
+            .called(1);
       },
     );
 
