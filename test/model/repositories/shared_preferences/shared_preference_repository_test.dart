@@ -54,7 +54,7 @@ void main() {
           mockSharedPreferences.setStringList(key.value, any),
         ).thenAnswer((_) async => true);
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             sharedPreferencesRepositoryProvider.overrideWith(
@@ -103,7 +103,7 @@ void main() {
           mockSharedPreferences.getStringList(key.value),
         ).thenAnswer((_) => ['0', '1']);
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             sharedPreferencesRepositoryProvider.overrideWith(

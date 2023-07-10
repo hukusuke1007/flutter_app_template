@@ -62,7 +62,7 @@ void main() {
           });
         }); // ページング取得用にセット
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             githubApiRepositoryProvider.overrideWithValue(
@@ -139,7 +139,7 @@ void main() {
           appException,
         );
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             githubApiRepositoryProvider.overrideWithValue(

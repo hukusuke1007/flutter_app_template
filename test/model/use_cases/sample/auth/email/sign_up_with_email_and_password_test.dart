@@ -53,7 +53,7 @@ void main() {
           return MockUserCredential();
         });
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             firebaseAuthRepositoryProvider.overrideWithValue(
@@ -112,7 +112,7 @@ void main() {
         FirebaseAuthException(code: AuthErrorCode.emailAlreadyInUse.value),
       );
 
-      /// MockをProviderにセットする
+      /// ProviderにMockをセットする
       final container = createContainer(
         overrides: [
           firebaseAuthRepositoryProvider.overrideWithValue(

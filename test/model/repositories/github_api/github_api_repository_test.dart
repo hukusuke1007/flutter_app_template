@@ -50,7 +50,7 @@ void main() {
           ),
         );
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             githubApiClientProvider.overrideWithValue(
@@ -103,7 +103,7 @@ void main() {
           ),
         );
 
-        /// MockをProviderにセットする
+        /// ProviderにMockをセットする
         final container = createContainer(
           overrides: [
             githubApiClientProvider.overrideWithValue(
