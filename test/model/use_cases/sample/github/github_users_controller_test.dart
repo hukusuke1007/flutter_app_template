@@ -22,7 +22,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] GithubUsersControllerオフラインテスト', () {
+  group('[正常系] GithubUsersController オフラインテスト', () {
     late final MockGithubApiRepository repository;
 
     /// 前処理（テスト前に1回呼ばれる）
@@ -114,7 +114,7 @@ void main() {
   });
 
   /// 異常系テストケース
-  group('[異常系] GithubUsersControllerオフラインテスト', () {
+  group('[異常系] GithubUsersController オフラインテスト', () {
     late final MockGithubApiRepository repository;
 
     /// 前処理（テスト前に1回呼ばれる）

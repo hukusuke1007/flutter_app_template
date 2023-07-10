@@ -21,7 +21,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] LocalCounterPageオフラインテスト', () {
+  group('[正常系] LocalCounterPage オフラインテスト', () {
     late final MockSharedPreferencesRepository mockSharedPreferencesRepository;
 
     /// 前処理（テスト前に1回呼ばれる）

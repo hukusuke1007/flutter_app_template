@@ -27,7 +27,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] SignInWithEmailPageオフラインテスト', () {
+  group('[正常系] SignInWithEmailPage オフラインテスト', () {
     late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
@@ -84,7 +84,7 @@ void main() {
   });
 
   /// 異常系テストケース
-  group('[異常系] SignInWithEmailPageオフラインテスト', () {
+  group('[異常系] SignInWithEmailPage オフラインテスト', () {
     late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）

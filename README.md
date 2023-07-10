@@ -59,7 +59,7 @@ Flutter Stable 3.10.5
 - その他アプリに必要なライブラリを設定済み
 - Unit tests（オフラインテスト）
 - Widget tests（オフラインテスト）
-- Integration tests（オフラインテスト）
+- Integration tests（E2Eテスト）
 
 ※他プロジェクト移行によるビルドエラーを避けるため import は相対パスで実装していますが、移行後は import は絶対パスで利用します。
 
@@ -147,11 +147,19 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 [ドキュメント](https://docs.flutter.dev/testing#unit-tests)
 
+```sh
+flutter test
+```
+
 ### Widget tests
 
 [テストコード](./test/presentation)
 
 [ドキュメント](https://docs.flutter.dev/testing#widget-tests)
+
+```sh
+flutter test
+```
 
 ### Integration tests
 
@@ -159,19 +167,22 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 [ドキュメント](https://docs.flutter.dev/testing#integration-tests)
 
+```sh
+flutter test integration_test --dart-define-from-file=dart_defines/dev.json
+```
+
 ### モック
 
 [mockito](https://pub.dev/packages/mockito)を利用しています。
 
 [ドキュメント](https://docs.flutter.dev/cookbook/testing/unit/mocking)
 
-#### モックのDI
-
-[Riverpod](https://riverpod.dev/)のoverrideを利用して、モックをセットします。
+モックのDIは[Riverpod](https://riverpod.dev/)のoverrideを利用して、ダミーデータをセットします。
 
 [ドキュメント](https://docs-v2.riverpod.dev/docs/cookbooks/testing)
 
 [How to Unit Test AsyncNotifier Subclasses with Riverpod 2.0 in Flutter](https://codewithandrea.com/articles/unit-test-async-notifier-riverpod/)
+
 
 ## 新規プロジェクトへの移行方法
 

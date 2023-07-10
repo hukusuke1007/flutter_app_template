@@ -22,7 +22,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] GithubUsersPageオフラインテスト', () {
+  group('[正常系] GithubUsersPage オフラインテスト', () {
     late final MockGithubApiRepository mockGithubApiRepository;
 
     /// 前処理（テスト前に1回呼ばれる）

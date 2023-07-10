@@ -55,6 +55,7 @@ class LocalCounterPage extends HookConsumerWidget {
             style: context.bodyStyle,
           ),
           Text(
+            key: const Key('counter'),
             counter.toString(),
             style: context.titleStyle,
           ),
