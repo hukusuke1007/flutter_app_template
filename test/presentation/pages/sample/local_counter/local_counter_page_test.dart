@@ -76,7 +76,7 @@ void main() {
             .fetch<int>(SharedPreferencesKey.sampleLocalCounter),
       ).thenAnswer((_) => 0);
       when(
-        mockSharedPreferencesRepository.save<int>(
+        mockSharedPreferencesRepository.save(
           SharedPreferencesKey.sampleLocalCounter,
           any,
         ),
