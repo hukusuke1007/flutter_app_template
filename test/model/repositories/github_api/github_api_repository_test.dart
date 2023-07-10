@@ -37,8 +37,7 @@ void main() {
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      // セットされたデータを初期化するためにモックをリセットする
-      reset(dio);
+      reset(dio); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
@@ -80,6 +79,11 @@ void main() {
     setUpAll(() {
       dio = MockDio();
       client = GithubApiClient(dio, baseUrl: baseUrl);
+    });
+
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      reset(dio); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(

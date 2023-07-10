@@ -86,6 +86,11 @@ void main() {
       repository = MockFirebaseAuthRepository();
     });
 
+    /// 後処理（テスト後に毎回呼ばれる）
+    tearDown(() {
+      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+    });
+
     test('メールアドレス認証でエラーが発生した場合、「メールアドレスが正しくない」エラーが発生すること', () async {
       /// Mockにデータをセットする
       when(repository.signInWithEmailAndPassword(email, password)).thenThrow(
