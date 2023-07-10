@@ -51,6 +51,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            // ProviderにMockをセットする
             sharedPreferencesRepositoryProvider.overrideWithValue(
               mockSharedPreferencesRepository,
             ),
@@ -86,6 +87,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            // ProviderにMockをセットする
             sharedPreferencesRepositoryProvider.overrideWithValue(
               mockSharedPreferencesRepository,
             ),

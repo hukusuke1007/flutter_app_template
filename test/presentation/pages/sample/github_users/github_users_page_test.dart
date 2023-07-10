@@ -64,6 +64,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            // ProviderにMockをセットする
             githubApiRepositoryProvider.overrideWithValue(
               mockGithubApiRepository,
             ),

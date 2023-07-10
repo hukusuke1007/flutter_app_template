@@ -55,6 +55,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            // ProviderにMockをセットする
             firebaseAuthRepositoryProvider.overrideWithValue(
               mockFirebaseAuthRepository,
             ),
@@ -123,6 +124,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            // ProviderにMockをセットする
             firebaseAuthRepositoryProvider.overrideWithValue(
               mockFirebaseAuthRepository,
             ),
