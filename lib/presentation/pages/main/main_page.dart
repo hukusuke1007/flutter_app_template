@@ -97,7 +97,7 @@ class MainPage extends HookConsumerWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: 'タブ5',
+              label: 'タブ4',
               tooltip: '',
             ),
           ],
