@@ -18,14 +18,14 @@ import 'github_users_controller_test.mocks.dart';
   [MockSpec<GithubApiRepository>()],
 )
 void main() {
-  /// 準備（テスト実施前に1回呼ばれる）
+  /// 前処理（テスト前に1回呼ばれる）
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
   group('[正常系] GithubUsersControllerオフラインテスト', () {
     late final MockGithubApiRepository repository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       repository = MockGithubApiRepository();
     });
@@ -39,21 +39,27 @@ void main() {
       'ユーザーリストを取得できること',
       () async {
         /// Mockにデータをセットする
-        final dataList = List.generate(
-          20,
-          (index) => User(
-            login: index.toString(),
-            id: index,
-            url: 'https://example/$index',
-          ),
-        );
         when(repository.fetchUsers(since: 0, perPage: 20))
             .thenAnswer((_) async {
-          return dataList;
+          return List.generate(20, (index) {
+            final id = index;
+            return User(
+              login: 'User $id',
+              id: id,
+              url: 'https://example/$id',
+            );
+          });
         });
         when(repository.fetchUsers(since: 19, perPage: 20))
             .thenAnswer((_) async {
-          return dataList;
+          return List.generate(20, (index) {
+            final id = index + 20;
+            return User(
+              login: 'User $id',
+              id: id,
+              url: 'https://example/$id',
+            );
+          });
         }); // ページング取得用にセット
 
         /// MockをProviderにセットする
@@ -63,7 +69,7 @@ void main() {
           ],
         );
 
-        /// テスト実施
+        /// テスト実施（初回取得）
         await container.read(
           githubUsersControllerProvider.future,
         ); // build内が処理されるまで待つ
@@ -77,7 +83,7 @@ void main() {
           20,
         ); // リスト個数が期待値であるか確認
 
-        /// ページング取得を実施
+        /// テスト実施（ページング処理）
         await container
             .read(githubUsersControllerProvider.notifier)
             .onFetchMore();
@@ -111,7 +117,7 @@ void main() {
   group('[異常系] GithubUsersControllerオフラインテスト', () {
     late final MockGithubApiRepository repository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       repository = MockGithubApiRepository();
     });

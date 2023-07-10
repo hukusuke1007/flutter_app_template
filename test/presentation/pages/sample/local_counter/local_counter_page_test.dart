@@ -17,13 +17,14 @@ import 'local_counter_page_test.mocks.dart';
   [MockSpec<SharedPreferencesRepository>()],
 )
 void main() {
-  /// 準備（テスト実施前に1回呼ばれる）
+  /// 前処理（テスト前に1回呼ばれる）
   setUpAll(Logger.configure);
 
+  /// 正常系テストケース
   group('[正常系] LocalCounterPageオフラインテスト', () {
     late final MockSharedPreferencesRepository mockSharedPreferencesRepository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       mockSharedPreferencesRepository = MockSharedPreferencesRepository();
     });

@@ -21,16 +21,16 @@ import 'sign_in_with_email_and_password_test.mocks.dart';
 void main() {
   /// テストで利用する定数を定義
   const email = 'sample@sample.com';
-  const password = 'password';
+  const password = 'Password1234';
 
-  /// 準備（テスト実施前に1回呼ばれる）
+  /// 前処理（テスト前に1回呼ばれる）
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
   group('[正常系] SignInWithEmailAndPasswordオフラインテスト', () {
     late final MockFirebaseAuthRepository repository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       repository = MockFirebaseAuthRepository();
     });
@@ -81,7 +81,7 @@ void main() {
   group('[異常系] SignInWithEmailAndPasswordオフラインテスト', () {
     late final MockFirebaseAuthRepository repository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       repository = MockFirebaseAuthRepository();
     });

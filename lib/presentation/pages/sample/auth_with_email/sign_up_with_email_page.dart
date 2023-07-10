@@ -78,6 +78,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
               children: [
                 /// メールアドレス
                 EmailTextField(
+                  key: const Key('emailTextField'),
                   textFormFieldKey: emailFormFieldKey,
                   focusNode: focusNode,
                   padding: const EdgeInsets.symmetric(
@@ -91,6 +92,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
 
                 /// パスワード
                 PasswordTextField(
+                  key: const Key('passwordTextField'),
                   textFormFieldKey: passwordFormFieldKey,
                   padding: const EdgeInsets.symmetric(horizontal: 32).copyWith(
                     bottom: 16,
@@ -102,6 +104,7 @@ class SignUpWithEmailPage extends HookConsumerWidget {
 
                 /// 確認用パスワード
                 PasswordTextField(
+                  key: const Key('confirmPasswordTextField'),
                   textFormFieldKey: confirmPasswordFormFieldKey,
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   title: '確認用パスワード',

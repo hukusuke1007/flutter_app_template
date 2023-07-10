@@ -18,13 +18,14 @@ import 'github_users_page_test.mocks.dart';
   [MockSpec<GithubApiRepository>()],
 )
 void main() {
-  /// 準備（テスト実施前に1回呼ばれる）
+  /// 前処理（テスト前に1回呼ばれる）
   setUpAll(Logger.configure);
 
+  /// 正常系テストケース
   group('[正常系] GithubUsersPageオフラインテスト', () {
     late final MockGithubApiRepository mockGithubApiRepository;
 
-    /// 準備（テスト実施前に1回呼ばれる）
+    /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
       mockGithubApiRepository = MockGithubApiRepository();
     });
@@ -82,7 +83,7 @@ void main() {
         500,
         scrollable: listFinder,
       );
-      expect(item1Finder, findsOneWidget); // テスト結果を検証 期待する状態のWidgetが1つ見つかること
+      expect(item1Finder, findsOneWidget); // 期待する状態のWidgetが1つ見つかること
 
       /// テスト実施（ページング後）
       await tester.drag(
@@ -96,7 +97,7 @@ void main() {
         500,
         scrollable: listFinder,
       );
-      expect(item2Finder, findsOneWidget); // テスト結果を検証 期待する状態のWidgetが1つ見つかること
+      expect(item2Finder, findsOneWidget); // 期待する状態のWidgetが1つ見つかること
     });
   });
 }
