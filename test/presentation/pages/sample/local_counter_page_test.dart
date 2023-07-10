@@ -9,10 +9,11 @@ import 'package:mockito/mockito.dart';
 
 import 'local_counter_page_test.mocks.dart';
 
+/// Widget tests
+/// https://docs.flutter.dev/testing#widget-tests
+/// https://docs.flutter.dev/cookbook/testing/unit/mocking
 @GenerateNiceMocks(
-  [
-    MockSpec<SharedPreferencesRepository>(),
-  ],
+  [MockSpec<SharedPreferencesRepository>()],
 )
 void main() {
   group('[正常系] LocalCounterPageオフラインテスト', () {

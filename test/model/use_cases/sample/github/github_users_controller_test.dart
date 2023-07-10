@@ -11,6 +11,9 @@ import 'package:mockito/mockito.dart';
 import '../../../../utils.dart';
 import 'github_users_controller_test.mocks.dart';
 
+/// Unit tests
+/// https://docs.flutter.dev/testing#unit-tests
+/// https://docs.flutter.dev/cookbook/testing/unit/mocking
 @GenerateNiceMocks(
   [MockSpec<GithubApiRepository>()],
 )

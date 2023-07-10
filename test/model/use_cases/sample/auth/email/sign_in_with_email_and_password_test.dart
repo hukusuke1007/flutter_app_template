@@ -12,6 +12,9 @@ import 'package:mockito/mockito.dart';
 import '../../../../../utils.dart';
 import 'sign_in_with_email_and_password_test.mocks.dart';
 
+/// Unit tests
+/// https://docs.flutter.dev/testing#unit-tests
+/// https://docs.flutter.dev/cookbook/testing/unit/mocking
 @GenerateNiceMocks(
   [MockSpec<FirebaseAuthRepository>(), MockSpec<UserCredential>()],
 )

@@ -13,6 +13,9 @@ import 'package:mockito/mockito.dart';
 import '../../../utils.dart';
 import 'github_api_repository_test.mocks.dart';
 
+/// Unit tests
+/// https://docs.flutter.dev/testing#unit-tests
+/// https://docs.flutter.dev/cookbook/testing/unit/mocking
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
   /// テストで利用する定数を定義
