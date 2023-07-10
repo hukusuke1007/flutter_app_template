@@ -59,7 +59,7 @@ void main() {
           ],
         );
 
-        /// テスト実施して結果を取得
+        /// テスト実施
         final result = await container
             .read(githubApiRepositoryProvider)
             .fetchUsers(since: 0, perPage: 20);
@@ -112,7 +112,7 @@ void main() {
           ],
         );
 
-        /// テスト実施して結果を取得
+        /// テスト実施
         try {
           await container
               .read(githubApiRepositoryProvider)
