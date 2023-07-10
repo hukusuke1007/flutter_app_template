@@ -28,31 +28,37 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] SignInWithEmailAndPassword オフラインテスト', () {
-    late final MockFirebaseAuthRepository repository;
+    late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockFirebaseAuthRepository();
+      mockFirebaseAuthRepository = MockFirebaseAuthRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockFirebaseAuthRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
       'メールアドレス認証ができること',
       () async {
         /// Mockにデータをセットする
-        when(repository.signInWithEmailAndPassword(email, password))
-            .thenAnswer((_) async {
+        when(
+          mockFirebaseAuthRepository.signInWithEmailAndPassword(
+            email,
+            password,
+          ),
+        ).thenAnswer((_) async {
           return MockUserCredential();
         });
 
         /// MockをProviderにセットする
         final container = createContainer(
           overrides: [
-            firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
+            firebaseAuthRepositoryProvider.overrideWithValue(
+              mockFirebaseAuthRepository,
+            )
           ],
         );
 
@@ -64,8 +70,12 @@ void main() {
           );
 
           /// テスト結果を検証
-          verify(repository.signInWithEmailAndPassword(email, password))
-              .called(1); // 注入したMockの関数が1回呼ばれていること
+          verify(
+            mockFirebaseAuthRepository.signInWithEmailAndPassword(
+              email,
+              password,
+            ),
+          ).called(1); // 注入したMockの関数が1回呼ばれていること
           expect(
             container.read(authStateProvider),
             AuthState.signIn,
@@ -79,28 +89,35 @@ void main() {
 
   /// 異常系テストケース
   group('[異常系] SignInWithEmailAndPassword オフラインテスト', () {
-    late final MockFirebaseAuthRepository repository;
+    late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockFirebaseAuthRepository();
+      mockFirebaseAuthRepository = MockFirebaseAuthRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockFirebaseAuthRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test('メールアドレス認証でエラーが発生した場合、「メールアドレスが正しくない」エラーが発生すること', () async {
       /// Mockにデータをセットする
-      when(repository.signInWithEmailAndPassword(email, password)).thenThrow(
+      when(
+        mockFirebaseAuthRepository.signInWithEmailAndPassword(
+          email,
+          password,
+        ),
+      ).thenThrow(
         FirebaseAuthException(code: AuthErrorCode.invalidEmail.value),
       );
 
       /// MockをProviderにセットする
       final container = createContainer(
         overrides: [
-          firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
+          firebaseAuthRepositoryProvider.overrideWithValue(
+            mockFirebaseAuthRepository,
+          )
         ],
       );
 
@@ -113,8 +130,12 @@ void main() {
         fail('failed');
       } on AppException catch (e) {
         /// テスト結果を検証
-        verify(repository.signInWithEmailAndPassword(email, password))
-            .called(1); // 注入したMockの関数が1回呼ばれていること
+        verify(
+          mockFirebaseAuthRepository.signInWithEmailAndPassword(
+            email,
+            password,
+          ),
+        ).called(1); // 注入したMockの関数が1回呼ばれていること
         expect(e.title, 'メールアドレスもしくはパスワードが正しくありません');
         expect(
           container.read(authStateProvider),

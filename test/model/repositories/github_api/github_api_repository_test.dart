@@ -26,26 +26,24 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] GithubApiRepository オフラインテスト', () {
-    late final MockDio dio;
-    late final GithubApiClient client;
+    late final MockDio mockDio;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      dio = MockDio();
-      client = GithubApiClient(dio, baseUrl: baseUrl);
+      mockDio = MockDio();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(dio); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockDio); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
       'ユーザーリスト取得APIのレスポンス結果が正しいこと',
       () async {
         /// Mockにデータをセットする
-        when(dio.options).thenReturn(dioDefaultOptions);
-        when(dio.fetch<List<dynamic>>(any)).thenAnswer(
+        when(mockDio.options).thenReturn(dioDefaultOptions);
+        when(mockDio.fetch<List<dynamic>>(any)).thenAnswer(
           (_) async => Response(
             data: json.decode(_userListData) as List<dynamic>,
             requestOptions: RequestOptions(path: '/users'),
@@ -54,7 +52,11 @@ void main() {
 
         /// MockをProviderにセットする
         final container = createContainer(
-          overrides: [githubApiClientProvider.overrideWith((ref) => client)],
+          overrides: [
+            githubApiClientProvider.overrideWithValue(
+              GithubApiClient(mockDio, baseUrl: baseUrl),
+            )
+          ],
         );
 
         /// テスト実施して結果を取得
@@ -64,7 +66,7 @@ void main() {
 
         /// テスト結果を検証
         expect(result.length, 2); // 実施結果と期待値が一致していること
-        verify(dio.fetch<Map<String, dynamic>>(any))
+        verify(mockDio.fetch<Map<String, dynamic>>(any))
             .called(1); // 注入したMockの関数が1回呼ばれていること
       },
     );
@@ -72,27 +74,25 @@ void main() {
 
   /// 異常系テストケース
   group('[異常系] GithubApiRepository オフラインテスト', () {
-    late final MockDio dio;
-    late final GithubApiClient client;
+    late final MockDio mockDio;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      dio = MockDio();
-      client = GithubApiClient(dio, baseUrl: baseUrl);
+      mockDio = MockDio();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(dio); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockDio); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
       'ユーザーリスト取得APIでエラーが発生した場合、AppExceptionが発生すること',
       () async {
         /// Mockにデータをセットする
-        when(dio.options).thenReturn(dioDefaultOptions);
+        when(mockDio.options).thenReturn(dioDefaultOptions);
         final requestOption = RequestOptions(path: '/users');
-        when(dio.fetch<List<dynamic>>(any)).thenThrow(
+        when(mockDio.fetch<List<dynamic>>(any)).thenThrow(
           DioException(
             requestOptions: requestOption,
             response: Response(
@@ -105,7 +105,11 @@ void main() {
 
         /// MockをProviderにセットする
         final container = createContainer(
-          overrides: [githubApiClientProvider.overrideWith((ref) => client)],
+          overrides: [
+            githubApiClientProvider.overrideWithValue(
+              GithubApiClient(mockDio, baseUrl: baseUrl),
+            )
+          ],
         );
 
         /// テスト実施して結果を取得
@@ -117,7 +121,7 @@ void main() {
         } on AppException catch (e) {
           /// テスト結果を検証
           expect(e.title, 'error'); // エラーメッセージが期待値であること
-          verify(dio.fetch<Map<String, dynamic>>(any))
+          verify(mockDio.fetch<Map<String, dynamic>>(any))
               .called(1); // 注入したMockの関数が1回呼ばれていること
         } on Exception catch (_) {
           fail('failed');

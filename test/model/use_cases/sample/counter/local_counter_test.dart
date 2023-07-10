@@ -21,16 +21,16 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] LocalCounter オフラインテスト（モック）', () {
-    late final MockSharedPreferencesRepository repository;
+    late final MockSharedPreferencesRepository mockSharedPreferencesRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockSharedPreferencesRepository();
+      mockSharedPreferencesRepository = MockSharedPreferencesRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockSharedPreferencesRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
@@ -38,10 +38,11 @@ void main() {
       () async {
         /// Mockにデータをセットする
         when(
-          repository.fetch<int>(SharedPreferencesKey.sampleLocalCounter),
+          mockSharedPreferencesRepository
+              .fetch<int>(SharedPreferencesKey.sampleLocalCounter),
         ).thenAnswer((_) => 0);
         when(
-          repository.save(
+          mockSharedPreferencesRepository.save(
             SharedPreferencesKey.sampleLocalCounter,
             any,
           ),
@@ -50,7 +51,9 @@ void main() {
         /// MockをProviderにセットし、テスト実施
         final container = createContainer(
           overrides: [
-            sharedPreferencesRepositoryProvider.overrideWithValue(repository)
+            sharedPreferencesRepositoryProvider.overrideWithValue(
+              mockSharedPreferencesRepository,
+            )
           ],
         )..read(localCounterProvider);
 

@@ -23,23 +23,23 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] GithubUsersController オフラインテスト', () {
-    late final MockGithubApiRepository repository;
+    late final MockGithubApiRepository mockGithubApiRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockGithubApiRepository();
+      mockGithubApiRepository = MockGithubApiRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockGithubApiRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
       'ユーザーリストを取得できること',
       () async {
         /// Mockにデータをセットする
-        when(repository.fetchUsers(since: 0, perPage: 20))
+        when(mockGithubApiRepository.fetchUsers(since: 0, perPage: 20))
             .thenAnswer((_) async {
           return List.generate(20, (index) {
             final id = index;
@@ -50,7 +50,7 @@ void main() {
             );
           });
         });
-        when(repository.fetchUsers(since: 19, perPage: 20))
+        when(mockGithubApiRepository.fetchUsers(since: 19, perPage: 20))
             .thenAnswer((_) async {
           return List.generate(20, (index) {
             final id = index + 20;
@@ -65,7 +65,9 @@ void main() {
         /// MockをProviderにセットする
         final container = createContainer(
           overrides: [
-            githubApiRepositoryProvider.overrideWith((ref) => repository)
+            githubApiRepositoryProvider.overrideWithValue(
+              mockGithubApiRepository,
+            ),
           ],
         );
 
@@ -115,16 +117,16 @@ void main() {
 
   /// 異常系テストケース
   group('[異常系] GithubUsersController オフラインテスト', () {
-    late final MockGithubApiRepository repository;
+    late final MockGithubApiRepository mockGithubApiRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockGithubApiRepository();
+      mockGithubApiRepository = MockGithubApiRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockGithubApiRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
@@ -132,14 +134,17 @@ void main() {
       () async {
         /// Mockにデータをセットする
         final appException = AppException.error('error');
-        when(repository.fetchUsers(since: 0, perPage: 20)).thenThrow(
+        when(mockGithubApiRepository.fetchUsers(since: 0, perPage: 20))
+            .thenThrow(
           appException,
         );
 
         /// MockをProviderにセットする
         final container = createContainer(
           overrides: [
-            githubApiRepositoryProvider.overrideWith((ref) => repository)
+            githubApiRepositoryProvider.overrideWithValue(
+              mockGithubApiRepository,
+            ),
           ],
         );
 

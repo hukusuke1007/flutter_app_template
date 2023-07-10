@@ -28,31 +28,37 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] SignUpWithEmailAndPassword オフラインテスト', () {
-    late final MockFirebaseAuthRepository repository;
+    late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockFirebaseAuthRepository();
+      mockFirebaseAuthRepository = MockFirebaseAuthRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockFirebaseAuthRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test(
       'メールアドレス認証でアカウント作成できること',
       () async {
         /// Mockにデータをセットする
-        when(repository.createUserWithEmailAndPassword(email, password))
-            .thenAnswer((_) async {
+        when(
+          mockFirebaseAuthRepository.createUserWithEmailAndPassword(
+            email,
+            password,
+          ),
+        ).thenAnswer((_) async {
           return MockUserCredential();
         });
 
         /// MockをProviderにセットする
         final container = createContainer(
           overrides: [
-            firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
+            firebaseAuthRepositoryProvider.overrideWithValue(
+              mockFirebaseAuthRepository,
+            )
           ],
         );
 
@@ -64,8 +70,12 @@ void main() {
           );
 
           /// テスト結果を検証
-          verify(repository.createUserWithEmailAndPassword(email, password))
-              .called(1); // 注入したMockの関数が1回呼ばれていること
+          verify(
+            mockFirebaseAuthRepository.createUserWithEmailAndPassword(
+              email,
+              password,
+            ),
+          ).called(1); // 注入したMockの関数が1回呼ばれていること
           expect(
             container.read(authStateProvider),
             AuthState.signIn,
@@ -79,29 +89,35 @@ void main() {
 
   /// 異常系テストケース
   group('[異常系] SignUpWithEmailAndPassword オフラインテスト', () {
-    late final MockFirebaseAuthRepository repository;
+    late final MockFirebaseAuthRepository mockFirebaseAuthRepository;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      repository = MockFirebaseAuthRepository();
+      mockFirebaseAuthRepository = MockFirebaseAuthRepository();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
     tearDown(() {
-      reset(repository); // セットされたデータを初期化するためにモックをリセットする
+      reset(mockFirebaseAuthRepository); // セットされたデータを初期化するためにモックをリセットする
     });
 
     test('メールアドレス認証でエラーが発生した場合、「このアカウントは既に存在します」エラーが発生すること', () async {
       /// Mockにデータをセットする
-      when(repository.createUserWithEmailAndPassword(email, password))
-          .thenThrow(
+      when(
+        mockFirebaseAuthRepository.createUserWithEmailAndPassword(
+          email,
+          password,
+        ),
+      ).thenThrow(
         FirebaseAuthException(code: AuthErrorCode.emailAlreadyInUse.value),
       );
 
       /// MockをProviderにセットする
       final container = createContainer(
         overrides: [
-          firebaseAuthRepositoryProvider.overrideWith((ref) => repository)
+          firebaseAuthRepositoryProvider.overrideWithValue(
+            mockFirebaseAuthRepository,
+          )
         ],
       );
 
@@ -114,8 +130,12 @@ void main() {
         fail('failed');
       } on AppException catch (e) {
         /// テスト結果を検証
-        verify(repository.createUserWithEmailAndPassword(email, password))
-            .called(1); // 注入したMockの関数が1回呼ばれていること
+        verify(
+          mockFirebaseAuthRepository.createUserWithEmailAndPassword(
+            email,
+            password,
+          ),
+        ).called(1); // 注入したMockの関数が1回呼ばれていること
         expect(e.title, 'このアカウントは既に存在します');
         expect(
           container.read(authStateProvider),
