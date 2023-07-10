@@ -17,7 +17,7 @@ void main() {
       unawaited(app.main());
       await tester.pumpAndSettle();
 
-      /// ローカルカウンター画面へ遷移
+      /// ローカルカウンター画面へ移動
       await tester.tap(find.text('ローカルカウンターのサンプル'));
       await tester.pumpAndSettle();
 
@@ -30,7 +30,7 @@ void main() {
 
       /// カウントアップを確認
       await tester.tap(find.byIcon(Icons.add)); // ボタンタップ
-      await tester.pump(); // リビルドして状態を反映
+      await tester.pumpAndSettle(); // アニメーションが終わるまで待ち、処理後の状態を反映する
       counter += 1;
       expect(
         find.text('$counter'),
@@ -39,7 +39,7 @@ void main() {
 
       /// カウントダウンを確認
       await tester.tap(find.byIcon(Icons.remove)); // ボタンタップ
-      await tester.pump(); // リビルドして状態を反映
+      await tester.pumpAndSettle(); // アニメーションが終わるまで待ち、処理後の状態を反映する
       counter -= 1;
       expect(
         find.text('$counter'),
