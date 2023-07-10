@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_repository.dart';
-import 'package:flutter_app_template/presentation/pages/sample/local_counter_page.dart';
+import 'package:flutter_app_template/presentation/pages/sample/local_counter/local_counter_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';

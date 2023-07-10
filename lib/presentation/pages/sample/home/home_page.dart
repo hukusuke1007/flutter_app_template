@@ -7,8 +7,8 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
 import '../../sample/timeline/timeline_page.dart';
 import '../auth_with_email/top_email_feature_page.dart';
-import '../firestore_counter_page.dart';
-import '../local_counter_page.dart';
+import '../firestore_counter/firestore_counter_page.dart';
+import '../local_counter/local_counter_page.dart';
 import 'detail_page.dart';
 
 class HomePage extends HookConsumerWidget {

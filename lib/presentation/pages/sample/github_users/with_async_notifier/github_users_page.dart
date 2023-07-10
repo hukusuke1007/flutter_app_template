@@ -20,7 +20,6 @@ class GithubUsersPage extends HookConsumerWidget {
     final githubUsers = ref.watch(githubUsersControllerProvider);
     final scrollController = useScrollController();
     final refreshController = useRefreshController();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_app_template/model/entities/sample/github/user.dart';
+import 'package:flutter_app_template/model/repositories/github_api/github_api_repository.dart';
+import 'package:flutter_app_template/presentation/pages/sample/github_users/with_async_notifier/github_users_page.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+
+import 'github_users_page_test.mocks.dart';
+
+/// Widget tests
+/// https://docs.flutter.dev/testing#widget-tests
+/// https://docs.flutter.dev/cookbook/testing/unit/mocking
+@GenerateNiceMocks(
+  [MockSpec<GithubApiRepository>()],
+)
+void main() {
+  group('[正常系] GithubUsersPageオフラインテスト', () {
+    late final MockGithubApiRepository mockGithubApiRepository;
+
+    setUpAll(() {
+      mockGithubApiRepository = MockGithubApiRepository();
+    });
+
+    testWidgets('ユーザーリストを一番下までスクロールして、期待する情報が表示されること', (tester) async {
+      /// Mockにデータをセットする
+      when(mockGithubApiRepository.fetchUsers(since: 0, perPage: 20))
+          .thenAnswer((_) async {
+        return List.generate(20, (index) {
+          final id = index;
+          return User(
+            login: 'User $id',
+            id: id,
+            url: 'https://example/$id',
+          );
+        });
+      });
+      when(mockGithubApiRepository.fetchUsers(since: 19, perPage: 20))
+          .thenAnswer((_) async {
+        return List.generate(20, (index) {
+          final id = index + 20;
+          return User(
+            login: 'User $id',
+            id: id,
+            url: 'https://example/$id',
+          );
+        });
+      }); // ページング取得用にセット
+
+      /// Widgetを構築
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            githubApiRepositoryProvider.overrideWithValue(
+              mockGithubApiRepository,
+            ),
+          ],
+          child: const MaterialApp(
+            home: GithubUsersPage(),
+          ),
+        ),
+      );
+      await tester.pump(); // Providerの非同期buildが処理されるので、処理後の状態を反映する
+
+      /// テスト実施（初回表示）
+      final listFinder = find.byType(Scrollable);
+      final item1Finder = find.text('User 19'); // リストの最後の情報を見つける
+      await tester.scrollUntilVisible(
+        item1Finder,
+        500,
+        scrollable: listFinder,
+      );
+      expect(item1Finder, findsOneWidget); // テスト結果を検証 期待する状態のWidgetが1つ見つかること
+
+      /// テスト実施（ページング後）
+      await tester.drag(
+        find.byType(SmartRefresher),
+        const Offset(100, 0),
+      ); // 上にスワイプ
+      await tester.pumpAndSettle(); // ページング処理のアニメーションが終わるまで待ち、処理後の状態を反映する
+      final item2Finder = find.text('User 39'); // ページング処理後、リストの最後の情報を見つける
+      await tester.scrollUntilVisible(
+        item2Finder,
+        500,
+        scrollable: listFinder,
+      );
+      expect(item2Finder, findsOneWidget); // テスト結果を検証 期待する状態のWidgetが1つ見つかること
+    });
+  });
+}
