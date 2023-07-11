@@ -145,44 +145,71 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 [テストコード](./test/model)
 
-[ドキュメント](https://docs.flutter.dev/testing#unit-tests)
+実行コマンド
 
 ```sh
+# all test
 flutter test
+
+# target test
+flutter test test/model/repositories/github_api/github_api_repository_test.dart
 ```
+
+ドキュメント
+
+- [Testing Flutter apps: Unit tests](https://docs.flutter.dev/testing#unit-tests)
 
 ### Widget tests
 
 [テストコード](./test/presentation)
 
-[ドキュメント](https://docs.flutter.dev/testing#widget-tests)
+実行コマンド
 
 ```sh
+# all test
 flutter test
+
+# target test
+flutter test test/presentation/pages/sample/github_users/github_users_page_test.dart
 ```
+
+ドキュメント
+
+- [Testing Flutter apps: Widget tests](https://docs.flutter.dev/testing#widget-tests)
 
 ### Integration tests
 
 [テストコード](./integration_test)
 
-[ドキュメント](https://docs.flutter.dev/testing#integration-tests)
+実機・シミュレータを起動させるため、flavor設定等のjsonを指定してください。
+
+実行コマンド
 
 ```sh
-flutter test integration_test --dart-define-from-file=dart_defines/dev.json
+# all test
+flutter test --dart-define-from-file=dart_defines/dev.json integration_test
+
+# target test
+flutter test --dart-define-from-file=dart_defines/dev.json integration_test/github_users/github_users_page_test.dart
 ```
+
+ドキュメント
+
+- [Testing Flutter apps: Integration tests](https://docs.flutter.dev/testing#integration-tests)
 
 ### モック
 
 [mockito](https://pub.dev/packages/mockito)を利用しています。
 
-[ドキュメント](https://docs.flutter.dev/cookbook/testing/unit/mocking)
-
 モックのDIは[Riverpod](https://riverpod.dev/)のoverrideを利用して、ダミーデータをセットします。
 
-[ドキュメント](https://docs-v2.riverpod.dev/docs/cookbooks/testing)
+ドキュメント
 
-[How to Unit Test AsyncNotifier Subclasses with Riverpod 2.0 in Flutter](https://codewithandrea.com/articles/unit-test-async-notifier-riverpod/)
+- [Mock dependencies using Mockito](https://docs.flutter.dev/cookbook/testing/unit/mocking)
 
+- [Riverpod Testing](https://docs-v2.riverpod.dev/docs/cookbooks/testing)
+
+- [How to Unit Test AsyncNotifier Subclasses with Riverpod 2.0 in Flutter](https://codewithandrea.com/articles/unit-test-async-notifier-riverpod/)
 
 ## 新規プロジェクトへの移行方法
 
