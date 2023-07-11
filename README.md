@@ -11,6 +11,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 | API クライアント | retrofit                      |
 | 画面遷移       | go_router                     |
 | Flavor設定       | --dart-define-from-file                     |
+| テスト | flutter_test, integration_test, mockito |
 
 ## 環境
 
@@ -181,7 +182,7 @@ flutter test test/presentation/pages/sample/github_users/github_users_page_test.
 
 [テストコード](./integration_test)
 
-実機・シミュレータを起動させるため、flavor設定等のjsonを指定してください。
+実機・シミュレータを起動させるので、実行コマンドにflavor設定のjsonを指定してください。
 
 実行コマンド
 
@@ -199,9 +200,7 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/gith
 
 ### モック
 
-[mockito](https://pub.dev/packages/mockito)を利用しています。
-
-モックのDIは[Riverpod](https://riverpod.dev/)のoverrideを利用して、ダミーデータをセットします。
+[mockito](https://pub.dev/packages/mockito)を利用しています。モックのDIは[Riverpod](https://riverpod.dev/)の overrides を利用しています。
 
 ドキュメント
 
