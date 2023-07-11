@@ -146,13 +146,11 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 [テストコード](./test/model)
 
-実行コマンド
-
 ```sh
-# all test
+# Run all tests
 flutter test
 
-# target test
+# Run target test
 flutter test test/model/repositories/github_api/github_api_repository_test.dart
 ```
 
@@ -164,13 +162,11 @@ flutter test test/model/repositories/github_api/github_api_repository_test.dart
 
 [テストコード](./test/presentation)
 
-実行コマンド
-
 ```sh
-# all test
+# Run all tests
 flutter test
 
-# target test
+# Run target test
 flutter test test/presentation/pages/sample/github_users/github_users_page_test.dart
 ```
 
@@ -184,13 +180,11 @@ flutter test test/presentation/pages/sample/github_users/github_users_page_test.
 
 実機・シミュレータを起動させるので、実行コマンドにflavor設定のjsonを指定してください。
 
-実行コマンド
-
 ```sh
-# all test
+# Run all tests
 flutter test --dart-define-from-file=dart_defines/dev.json integration_test
 
-# target test
+# Run target test
 flutter test --dart-define-from-file=dart_defines/dev.json integration_test/github_users/github_users_page_test.dart
 ```
 
