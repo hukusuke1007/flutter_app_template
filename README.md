@@ -71,6 +71,7 @@ Flutter Stable 3.10.5
 - ローカライズ対応
 - dartdoc
 - fastlane
+- テストでスクリーンショット撮影
 
 ## 設計指針
 
