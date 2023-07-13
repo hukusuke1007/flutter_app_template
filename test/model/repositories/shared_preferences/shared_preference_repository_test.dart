@@ -21,7 +21,7 @@ void main() {
   setUpAll(Logger.configure);
 
   /// 正常系テストケース
-  group('[正常系] GithubApiRepository オフラインテスト', () {
+  group('[正常系] SharedPreferencesRepository オフラインテスト', () {
     late final MockSharedPreferences mockSharedPreferences;
 
     /// 前処理（テスト前に1回呼ばれる）
