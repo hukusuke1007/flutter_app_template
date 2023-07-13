@@ -23,16 +23,16 @@ class GithubUsersPage extends HookConsumerWidget {
     final githubUsers = ref.watch(githubUsersControllerProvider);
     final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final refreshController = useRefreshController();
+    final tabTapAction = ref.watch(tabTapActionProviders(pageName));
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
-      final listener = ref.read(tabTapActionProviders(pageName))
-        ..addListener((value) {
-          if (value == TapActionType.duplication) {
-            scrollController.animateToTop();
-          }
-        });
-      return listener.dispose;
+      tabTapAction.addListener((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return null;
     });
 
     return Scaffold(

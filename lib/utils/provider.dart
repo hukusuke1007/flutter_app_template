@@ -50,7 +50,6 @@ final scrollControllerProviders =
 );
 
 /// タブのタップ操作
-
 typedef PageName = String;
 
 enum TapActionType {
@@ -58,11 +57,13 @@ enum TapActionType {
 }
 
 final tabTapActionProviders =
-    Provider.family<TapActionListener, PageName>((ref, _) {
-  return TapActionListener();
+    Provider.family.autoDispose<TabTapAction, PageName>((ref, _) {
+  final tabTapAction = TabTapAction();
+  ref.onDispose(tabTapAction.dispose);
+  return tabTapAction;
 });
 
-class TapActionListener {
+class TabTapAction {
   void Function(TapActionType)? _listener;
 
   // ignore: use_setters_to_change_properties

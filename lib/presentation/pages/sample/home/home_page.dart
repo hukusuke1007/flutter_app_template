@@ -23,16 +23,16 @@ class HomePage extends HookConsumerWidget {
     final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final enableScreenReader =
         ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
+    final tabTapAction = ref.watch(tabTapActionProviders(pageName));
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
-      final listener = ref.read(tabTapActionProviders(pageName))
-        ..addListener((value) {
-          if (value == TapActionType.duplication) {
-            scrollController.animateToTop();
-          }
-        });
-      return listener.dispose;
+      tabTapAction.addListener((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return null;
     });
 
     return Scaffold(
