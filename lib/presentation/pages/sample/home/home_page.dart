@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
+import '../../../../utils/provider.dart';
 import '../../sample/timeline/timeline_page.dart';
 import '../auth_with_email/top_email_feature_page.dart';
 import '../firestore_counter/firestore_counter_page.dart';
@@ -16,7 +16,7 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scrollController = useScrollController();
+    final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final enableScreenReader =
         ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
     return Scaffold(

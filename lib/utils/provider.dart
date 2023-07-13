@@ -4,8 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../model/repositories/firebase_auth/login_type.dart';
 
+/// NavigatorState
 final navigatorKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
 
+/// 認証状態
 enum AuthState {
   /// サインインしていない
   noSignIn,
@@ -34,3 +36,11 @@ final authStateProvider = StateProvider<AuthState>((ref) {
       return AuthState.signIn;
   }
 });
+
+/// ScrollController
+typedef HashCode = int;
+
+final scrollControllerProviders =
+    Provider.family.autoDispose<ScrollController, HashCode>(
+  (_, __) => ScrollController(),
+);

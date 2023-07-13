@@ -15,6 +15,7 @@ import '../../../../model/use_cases/package_info/fetch_package_name.dart';
 import '../../../../model/use_cases/sample/auth/sign_out.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../utils/logger.dart';
+import '../../../../utils/provider.dart';
 import '../../../widgets/buttons/ripple_tap_gesture.dart';
 import '../../../widgets/images/image_viewer.dart';
 import '../../../widgets/images/thumbnail.dart';
@@ -28,6 +29,7 @@ class SettingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final appName = ref.watch(fetchAppNameProvider);
     final appVersion = ref.watch(fetchAppVersionProvider);
     final packageName = ref.watch(fetchPackageNameProvider);
@@ -45,6 +47,7 @@ class SettingPage extends HookConsumerWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
