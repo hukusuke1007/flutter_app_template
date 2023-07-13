@@ -39,20 +39,20 @@ class SettingPage extends HookConsumerWidget {
     final appVersion = ref.watch(fetchAppVersionProvider);
     final packageName = ref.watch(fetchPackageNameProvider);
     final profile = ref.watch(fetchMyProfileProvider);
-    final tabTapAction = ref.watch(tabTapActionProviders(pageName));
 
-    final tileTrailingWidth = context.deviceWidth * 0.5;
+    final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
-      tabTapAction.addListener((value) {
-        if (value == TapActionType.duplication) {
+      tabTapOperation.addListener((value) {
+        if (value == TabTapOperationType.duplication) {
           scrollController.animateToTop();
         }
       });
       return null;
     });
 
+    final tileTrailingWidth = context.deviceWidth * 0.5;
     return Scaffold(
       appBar: AppBar(
         title: Text(

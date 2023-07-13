@@ -17,12 +17,12 @@ class MemoPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final tabTapAction = ref.watch(tabTapActionProviders(pageName));
+    final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
-      tabTapAction.addListener((value) {
-        if (value == TapActionType.duplication) {
+      tabTapOperation.addListener((value) {
+        if (value == TabTapOperationType.duplication) {
           scrollController.animateToTop();
         }
       });

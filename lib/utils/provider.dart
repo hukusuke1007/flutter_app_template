@@ -52,26 +52,25 @@ final scrollControllerProviders =
 /// タブのタップ操作
 typedef PageName = String;
 
-enum TapActionType {
+enum TabTapOperationType {
   duplication,
 }
 
-final tabTapActionProviders =
-    Provider.family.autoDispose<TabTapAction, PageName>((ref, _) {
-  final tabTapAction = TabTapAction();
+final tabTapOperationProviders =
+    Provider.family.autoDispose<TabTapOperation, PageName>((ref, _) {
+  final tabTapAction = TabTapOperation();
   ref.onDispose(tabTapAction.dispose);
   return tabTapAction;
 });
 
-class TabTapAction {
-  void Function(TapActionType)? _listener;
+class TabTapOperation {
+  void Function(TabTapOperationType)? _listener;
 
-  // ignore: use_setters_to_change_properties
-  void addListener(void Function(TapActionType) listener) {
+  void addListener(void Function(TabTapOperationType) listener) {
     _listener = listener;
   }
 
-  void call(TapActionType actionType) {
+  void call(TabTapOperationType actionType) {
     _listener?.call(actionType);
   }
 

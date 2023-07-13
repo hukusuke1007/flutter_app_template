@@ -116,11 +116,10 @@ class MainPage extends HookConsumerWidget {
           onTap: (index) {
             /// 同じタブが選択されたことを通知する
             if (index == selectedTabIndex) {
+              final pageName = ref.read(widgetsProvider)[index].$2;
               ref
-                  .read(
-                    tabTapActionProviders(ref.read(widgetsProvider)[index].$2),
-                  )
-                  .call(TapActionType.duplication);
+                  .read(tabTapOperationProviders(pageName))
+                  .call(TabTapOperationType.duplication);
             }
 
             /// タブを切り替える
