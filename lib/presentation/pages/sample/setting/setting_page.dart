@@ -42,13 +42,13 @@ class SettingPage extends HookConsumerWidget {
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
-      final disposer =
-          ref.read(tabTapActionProviders(pageName)).listen((value) {
-        if (value == TapActionType.duplication) {
-          scrollController.animateToTop();
-        }
-      });
-      return disposer.cancel;
+      final listener = ref.read(tabTapActionProviders(pageName))
+        ..addListener((value) {
+          if (value == TapActionType.duplication) {
+            scrollController.animateToTop();
+          }
+        });
+      return listener.dispose;
     });
 
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:rxdart/rxdart.dart';
 
 import '../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../model/repositories/firebase_auth/login_type.dart';
@@ -58,8 +57,24 @@ enum TapActionType {
   duplication,
 }
 
-// TODO(shohei): RiverpodにPublishSubjectと同機能を持つ代替手段は無いのか？
 final tabTapActionProviders =
-    Provider.family<PublishSubject<TapActionType>, PageName>(
-  (ref, _) => PublishSubject<TapActionType>(),
-);
+    Provider.family<TapActionListener, PageName>((ref, _) {
+  return TapActionListener();
+});
+
+class TapActionListener {
+  void Function(TapActionType)? _listener;
+
+  // ignore: use_setters_to_change_properties
+  void addListener(void Function(TapActionType) listener) {
+    _listener = listener;
+  }
+
+  void call(TapActionType actionType) {
+    _listener?.call(actionType);
+  }
+
+  void dispose() {
+    _listener = null;
+  }
+}

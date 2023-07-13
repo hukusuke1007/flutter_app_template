@@ -120,7 +120,7 @@ class MainPage extends HookConsumerWidget {
                   .read(
                     tabTapActionProviders(ref.read(widgetsProvider)[index].$2),
                   )
-                  .add(TapActionType.duplication);
+                  .call(TapActionType.duplication);
             }
 
             /// タブを切り替える
