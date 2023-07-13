@@ -32,21 +32,29 @@ class MainPage extends HookConsumerWidget {
         ),
       );
 
-  static final widgetsProvider = Provider.autoDispose(
+  static final widgetsProvider =
+      Provider.autoDispose<List<(GlobalKey<NavigatorState>, String, Widget)>>(
     (ref) => [
-      const HomePage(),
-      const GithubUsersPage(),
-      const MemoPage(),
-      const SettingPage(),
-    ],
-  );
-
-  static final navigatorKeysProvider = Provider.autoDispose(
-    (ref) => [
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
-      GlobalKey<NavigatorState>(),
+      (
+        GlobalKey<NavigatorState>(),
+        HomePage.pageName,
+        const HomePage(),
+      ),
+      (
+        GlobalKey<NavigatorState>(),
+        GithubUsersPage.pageName,
+        const GithubUsersPage()
+      ),
+      (
+        GlobalKey<NavigatorState>(),
+        MemoPage.pageName,
+        const MemoPage(),
+      ),
+      (
+        GlobalKey<NavigatorState>(),
+        SettingPage.pageName,
+        const SettingPage(),
+      ),
     ],
   );
 
@@ -56,12 +64,11 @@ class MainPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final widgets = ref.watch(widgetsProvider);
-    final navigatorKeys = ref.watch(navigatorKeysProvider);
     final selectedTabIndex = ref.watch(selectedTabIndexStateProvider);
 
     return WillPopScope(
       onWillPop: () async {
-        final keyTab = navigatorKeys[selectedTabIndex];
+        final keyTab = widgets[selectedTabIndex].$1;
         if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
           return !await keyTab.currentState!.maybePop();
         }
@@ -74,8 +81,8 @@ class MainPage extends HookConsumerWidget {
           children: List.generate(
             widgets.length,
             (index) => TabNavigator(
-              navigatorKey: navigatorKeys[index],
-              page: widgets[index],
+              navigatorKey: widgets[index].$1,
+              page: widgets[index].$3,
             ),
           ),
         ),
@@ -105,18 +112,13 @@ class MainPage extends HookConsumerWidget {
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedTabIndex,
           onTap: (index) {
-            /// 同じタブを選択したら上にスクロールする
+            /// 同じタブが選択されたことを通知する
             if (index == selectedTabIndex) {
-              final hashCode = ref.read(widgetsProvider)[index].hashCode;
-              final scrollController =
-                  ref.read(scrollControllerProviders(hashCode));
-              if (scrollController.hasClients) {
-                scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.linear,
-                );
-              }
+              ref
+                  .read(
+                    tabTapActionProviders(ref.read(widgetsProvider)[index].$2),
+                  )
+                  .add(TapActionType.duplication);
             }
 
             /// タブを切り替える

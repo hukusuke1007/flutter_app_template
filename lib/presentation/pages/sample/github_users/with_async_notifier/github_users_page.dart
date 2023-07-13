@@ -5,8 +5,10 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../extensions/context_extension.dart';
+import '../../../../../extensions/scroll_controller_extension.dart';
 import '../../../../../model/use_cases/sample/github/github_users_controller.dart';
 import '../../../../../utils/provider.dart';
+import '../../../../custom_hooks/use_effect_once.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
 import '../../../../widgets/images/thumbnail.dart';
 import '../../../../widgets/smart_refresher/smart_refresher_custom.dart';
@@ -21,6 +23,17 @@ class GithubUsersPage extends HookConsumerWidget {
     final githubUsers = ref.watch(githubUsersControllerProvider);
     final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final refreshController = useRefreshController();
+
+    useEffectOnce(() {
+      /// 同じタブが選択された場合、上にスクロールする
+      final disposer =
+          ref.read(tabTapActionProviders(pageName)).listen((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return disposer.cancel;
+    });
 
     return Scaffold(
       appBar: AppBar(

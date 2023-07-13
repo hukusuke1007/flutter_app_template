@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/scroll_controller_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../model/use_cases/sample/fetch_enable_screen_reader.dart';
 import '../../../../utils/provider.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../sample/timeline/timeline_page.dart';
 import '../auth_with_email/top_email_feature_page.dart';
 import '../firestore_counter/firestore_counter_page.dart';
@@ -14,11 +16,25 @@ import 'detail_page.dart';
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
 
+  static String get pageName => 'home';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final enableScreenReader =
         ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
+
+    useEffectOnce(() {
+      /// 同じタブが選択された場合、上にスクロールする
+      final disposer =
+          ref.read(tabTapActionProviders(pageName)).listen((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return disposer.cancel;
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

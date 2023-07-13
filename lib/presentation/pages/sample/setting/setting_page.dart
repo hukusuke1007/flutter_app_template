@@ -7,6 +7,7 @@ import '../../../../analytics_logger/analytics_logger.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
 import '../../../../extensions/exception_extension.dart';
+import '../../../../extensions/scroll_controller_extension.dart';
 import '../../../../model/entities/sample/developer.dart';
 import '../../../../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../../model/use_cases/package_info/fetch_app_name.dart';
@@ -16,6 +17,7 @@ import '../../../../model/use_cases/sample/auth/sign_out.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../utils/logger.dart';
 import '../../../../utils/provider.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import '../../../widgets/buttons/ripple_tap_gesture.dart';
 import '../../../widgets/images/image_viewer.dart';
 import '../../../widgets/images/thumbnail.dart';
@@ -27,6 +29,8 @@ import 'show_edit_profile_dialog.dart';
 class SettingPage extends HookConsumerWidget {
   const SettingPage({super.key});
 
+  static String get pageName => 'setting';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ref.watch(scrollControllerProviders(hashCode));
@@ -35,6 +39,18 @@ class SettingPage extends HookConsumerWidget {
     final packageName = ref.watch(fetchPackageNameProvider);
     final profile = ref.watch(fetchMyProfileProvider);
     final tileTrailingWidth = context.deviceWidth * 0.5;
+
+    useEffectOnce(() {
+      /// 同じタブが選択された場合、上にスクロールする
+      final disposer =
+          ref.read(tabTapActionProviders(pageName)).listen((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return disposer.cancel;
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

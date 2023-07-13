@@ -9,6 +9,8 @@ import 'memo_state_notifier_page.dart';
 class MemoPage extends HookConsumerWidget {
   const MemoPage({super.key});
 
+  static String get pageName => 'memo';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ref.watch(scrollControllerProviders(hashCode));

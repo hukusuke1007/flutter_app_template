@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../model/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../model/repositories/firebase_auth/login_type.dart';
@@ -42,9 +43,23 @@ typedef HashCode = int;
 
 final scrollControllerProviders =
     Provider.family.autoDispose<ScrollController, HashCode>(
-  (ref, __) {
+  (ref, _) {
     final scrollController = ScrollController();
     ref.onDispose(scrollController.dispose);
     return scrollController;
   },
+);
+
+/// タブのタップ操作
+
+typedef PageName = String;
+
+enum TapActionType {
+  duplication,
+}
+
+// TODO(shohei): RiverpodにPublishSubjectと同機能を持つ代替手段は無いのか？
+final tabTapActionProviders =
+    Provider.family<PublishSubject<TapActionType>, PageName>(
+  (ref, _) => PublishSubject<TapActionType>(),
 );
