@@ -69,8 +69,10 @@ class MainPage extends HookConsumerWidget {
     return WillPopScope(
       onWillPop: () async {
         final keyTab = widgets[selectedTabIndex].$1;
-        if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
-          return !await keyTab.currentState!.maybePop();
+        final currentState = keyTab.currentState;
+        if (currentState != null && currentState.canPop()) {
+          final maybePop = await currentState.maybePop();
+          return !maybePop;
         }
         return true;
       },
