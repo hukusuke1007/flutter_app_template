@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/scroll_controller_extension.dart';
 import '../../../../utils/provider.dart';
+import '../../../custom_hooks/use_effect_once.dart';
 import 'memo_async_notifier_page.dart';
 import 'memo_state_notifier_page.dart';
 
@@ -13,7 +16,19 @@ class MemoPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scrollController = ref.watch(scrollControllerProviders(hashCode));
+    final scrollController = useScrollController();
+    final tabTapAction = ref.watch(tabTapActionProviders(pageName));
+
+    useEffectOnce(() {
+      /// 同じタブが選択された場合、上にスクロールする
+      tabTapAction.addListener((value) {
+        if (value == TapActionType.duplication) {
+          scrollController.animateToTop();
+        }
+      });
+      return null;
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

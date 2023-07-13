@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +22,7 @@ class GithubUsersPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final githubUsers = ref.watch(githubUsersControllerProvider);
-    final scrollController = ref.watch(scrollControllerProviders(hashCode));
+    final scrollController = useScrollController();
     final refreshController = useRefreshController();
     final tabTapAction = ref.watch(tabTapActionProviders(pageName));
 
