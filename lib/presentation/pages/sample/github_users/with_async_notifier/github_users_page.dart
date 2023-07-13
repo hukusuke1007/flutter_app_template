@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../extensions/context_extension.dart';
 import '../../../../../model/use_cases/sample/github/github_users_controller.dart';
+import '../../../../../utils/provider.dart';
 import '../../../../custom_hooks/use_refresh_controller.dart';
 import '../../../../widgets/images/thumbnail.dart';
 import '../../../../widgets/smart_refresher/smart_refresher_custom.dart';
@@ -14,12 +14,14 @@ import 'error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});
+  static String get pageName => 'github_users';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final githubUsers = ref.watch(githubUsersControllerProvider);
-    final scrollController = useScrollController();
+    final scrollController = ref.watch(scrollControllerProviders(hashCode));
     final refreshController = useRefreshController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../../utils/provider.dart';
 import '../sample/github_users/with_async_notifier/github_users_page.dart';
 import '../sample/home/home_page.dart';
 import '../sample/memo/memo_page.dart';
@@ -104,6 +105,21 @@ class MainPage extends HookConsumerWidget {
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedTabIndex,
           onTap: (index) {
+            /// 同じタブを選択したら上にスクロールする
+            if (index == selectedTabIndex) {
+              final hashCode = ref.read(widgetsProvider)[index].hashCode;
+              final scrollController =
+                  ref.read(scrollControllerProviders(hashCode));
+              if (scrollController.hasClients) {
+                scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.linear,
+                );
+              }
+            }
+
+            /// タブを切り替える
             ref.read(selectedTabIndexStateProvider.notifier).update(
                   (state) => index,
                 );
