@@ -42,5 +42,9 @@ typedef HashCode = int;
 
 final scrollControllerProviders =
     Provider.family.autoDispose<ScrollController, HashCode>(
-  (_, __) => ScrollController(),
+  (ref, __) {
+    final scrollController = ScrollController();
+    ref.onDispose(scrollController.dispose);
+    return scrollController;
+  },
 );
