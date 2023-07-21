@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/date_extension.dart';
 import '../../../../gen/colors.gen.dart';
+import '../../../../model/repositories/file/file_repository.dart';
 import '../../../../model/use_cases/images/image_compress.dart';
 import '../../../../model/use_cases/sample/my_profile/fetch_my_profile.dart';
 import '../../../../model/use_cases/sample/my_profile/save_my_profile.dart';
@@ -99,6 +100,10 @@ class _Dialog extends HookConsumerWidget {
                     );
                   } finally {
                     dismissIndicator(context);
+
+                    ref
+                        .read(fileRepositoryProvider)
+                        .deleteFile(selectedImage.path); // fileがtmpに残ってしまうので削除
                   }
                 },
                 child: const Icon(
