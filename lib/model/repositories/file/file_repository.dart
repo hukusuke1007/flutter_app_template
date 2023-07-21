@@ -1,27 +1,31 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../utils/logger.dart';
 
 final fileRepositoryProvider = Provider<FileRepository>(
   (_) => FileRepository(),
 );
 
 class FileRepository {
-  bool deleteFile(String path) {
+  Future<bool> delete(String path) async {
+    final result = await compute(deleteSync, path);
+    return result;
+  }
+
+  bool deleteSync(String path) {
     try {
       final file = File(path);
       if (file.existsSync()) {
-        File(path).deleteSync();
-        logger.info('Deleted: $path');
+        file.deleteSync();
+        debugPrint('Deleted: $path');
       } else {
-        logger.info('No exists: $path');
+        debugPrint('No exists: $path');
       }
       return true;
       // ignore: avoid_catches_without_on_clauses
     } catch (e) {
-      logger.info(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }

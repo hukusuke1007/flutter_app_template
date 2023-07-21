@@ -24,7 +24,7 @@ Future<File?> showPhotoAndCropBottomSheet(
     final cropFile = await cropAvatar(file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除
-    ref.read(fileRepositoryProvider).deleteFile(file.path);
+    await ref.read(fileRepositoryProvider).delete(file.path);
 
     return cropFile != null ? File(cropFile.path) : null;
   } else if (result == PhotoType.album) {
@@ -38,7 +38,7 @@ Future<File?> showPhotoAndCropBottomSheet(
     final cropFile = await cropAvatar(file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除
-    ref.read(fileRepositoryProvider).deleteFile(file.path);
+    await ref.read(fileRepositoryProvider).delete(file.path);
 
     return cropFile != null ? File(cropFile.path) : null;
   }

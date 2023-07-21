@@ -101,9 +101,9 @@ class _Dialog extends HookConsumerWidget {
                   } finally {
                     dismissIndicator(context);
 
-                    ref
+                    await ref
                         .read(fileRepositoryProvider)
-                        .deleteFile(selectedImage.path); // fileがtmpに残ってしまうので削除
+                        .delete(selectedImage.path); // fileがtmpに残ってしまうので削除
                   }
                 },
                 child: const Icon(
