@@ -92,8 +92,7 @@ class TimelinePage extends HookConsumerWidget {
           }
           return NotificationListener<ScrollUpdateNotification>(
             onNotification: (notification) {
-              final metrics = notification.metrics;
-              if (metrics.extentAfter == 0) {
+              if (notification.metrics.extentAfter == 0) {
                 Future(() async {
                   if (loadingState.value) {
                     return;
@@ -103,13 +102,15 @@ class TimelinePage extends HookConsumerWidget {
                     await ref
                         .read(fetchTimelineAsyncProvider.notifier)
                         .onFetchMore();
+                  } on Exception catch (e) {
+                    logger.shout(e);
+                    // TODO(shohei): エラーハンドリング
+                  } finally {
                     await Future<void>.delayed(
                       const Duration(milliseconds: 1000),
                     );
-                  } on Exception catch (e) {
-                    logger.shout(e);
+                    loadingState.value = false;
                   }
-                  loadingState.value = false;
                 });
               }
               return true;
