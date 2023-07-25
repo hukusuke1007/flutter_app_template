@@ -76,22 +76,10 @@ class TimelinePage extends HookConsumerWidget {
       ),
       body: asyncValue.when(
         data: (items) {
-          if (items.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16)
-                    .copyWith(bottom: 80),
-                child: Text(
-                  'タイムラインはありません',
-                  style: context.bodyStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            );
-          }
           return NotificationListener<ScrollUpdateNotification>(
             onNotification: (notification) {
-              if (notification.metrics.extentAfter == 0) {
+              if (items.length >= FetchTimeline.defaultLimit &&
+                  notification.metrics.extentAfter == 0) {
                 Future(() async {
                   if (loadingState.value) {
                     return;
@@ -108,7 +96,9 @@ class TimelinePage extends HookConsumerWidget {
                     await Future<void>.delayed(
                       const Duration(milliseconds: 1000),
                     );
-                    loadingState.value = false;
+                    if (context.mounted) {
+                      loadingState.value = false;
+                    }
                   }
                 });
               }
@@ -121,7 +111,8 @@ class TimelinePage extends HookConsumerWidget {
                 CupertinoSliverRefreshControl(
                   builder: (_, refreshState, __, ___, ____) {
                     // TODO(shohei): サイズを変更したいためにbuilderで実装
-                    if (refreshState == RefreshIndicatorMode.inactive ||
+                    if (refreshState == RefreshIndicatorMode.done ||
+                        refreshState == RefreshIndicatorMode.inactive ||
                         refreshState == RefreshIndicatorMode.drag) {
                       return const SizedBox.shrink();
                     }
@@ -139,6 +130,20 @@ class TimelinePage extends HookConsumerWidget {
                     );
                   },
                 ),
+                if (items.isEmpty)
+                  SliverFillRemaining(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16)
+                            .copyWith(bottom: 80),
+                        child: Text(
+                          'タイムラインはありません',
+                          style: context.bodyStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
                 SliverList.separated(
                   itemBuilder: (context, index) {
                     final data = items[index];
