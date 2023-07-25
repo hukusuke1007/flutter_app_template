@@ -116,6 +116,7 @@ class TimelinePage extends HookConsumerWidget {
             },
             child: CustomScrollView(
               controller: scrollController,
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 CupertinoSliverRefreshControl(
                   builder: (_, refreshState, __, ___, ____) {
