@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline_post_count.dart';
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/logger.dart';
-import '../../../custom_hooks/use_refresh_controller.dart';
 import '../../../widgets/images/image_viewer.dart';
-import '../../../widgets/smart_refresher/smart_refresher_custom.dart';
 import '../../../widgets/texts/error_text.dart';
 import '../../main/main_page.dart';
 import 'edit_post_page.dart';
@@ -48,10 +45,9 @@ class TimelinePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final refreshController = useRefreshController();
+    final loadingState = useState(false);
 
     final asyncValue = ref.watch(fetchTimelineAsyncProvider);
-
     final count =
         ref.watch(fetchTimelinePostCountFutureProvider).asData?.value ?? 0;
 
@@ -94,57 +90,91 @@ class TimelinePage extends HookConsumerWidget {
               ),
             );
           }
-          return Scrollbar(
-            controller: scrollController,
-            child: SmartRefresher(
-              header: const SmartRefreshHeader(),
-              footer: const SmartRefreshFooter(),
-              enablePullUp: true,
-              controller: refreshController,
-              physics: const BouncingScrollPhysics(),
-              onRefresh: () async {
-                ref
-                  ..invalidate(fetchTimelineAsyncProvider)
-                  ..invalidate(fetchTimelinePostCountFutureProvider);
-                refreshController.refreshCompleted();
-              },
-              onLoading: () async {
-                await ref
-                    .read(fetchTimelineAsyncProvider.notifier)
-                    .onFetchMore();
-                refreshController.loadComplete();
-              },
-              child: ListView.separated(
-                controller: scrollController,
-                itemBuilder: (BuildContext context, int index) {
-                  final data = items[index];
-                  return TimelineTile(
-                    data: data,
-                    onTap: () {
-                      PostDetailPage.push(
-                        context,
-                        args: FetchPostArgs(
-                          postId: data.postId,
-                          userId: data.userId,
-                        ),
-                      );
-                    },
-                    onTapAvatar: (poster) {
-                      final url = poster?.image?.url;
-                      if (url != null) {
-                        ImageViewer.show(
+          return NotificationListener<ScrollUpdateNotification>(
+            onNotification: (notification) {
+              final metrics = notification.metrics;
+              if (metrics.extentAfter == 0) {
+                Future(() async {
+                  if (loadingState.value) {
+                    return;
+                  }
+                  loadingState.value = true;
+                  try {
+                    await ref
+                        .read(fetchTimelineAsyncProvider.notifier)
+                        .onFetchMore();
+                    await Future<void>.delayed(
+                      const Duration(milliseconds: 1000),
+                    );
+                  } on Exception catch (e) {
+                    logger.shout(e);
+                  }
+                  loadingState.value = false;
+                });
+              }
+              return true;
+            },
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                CupertinoSliverRefreshControl(
+                  builder: (_, refreshState, __, ___, ____) {
+                    if (refreshState == RefreshIndicatorMode.drag) {
+                      return const SizedBox.shrink();
+                    }
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: CupertinoActivityIndicator(),
+                    );
+                  },
+                  onRefresh: () async {
+                    ref
+                      ..invalidate(fetchTimelineAsyncProvider)
+                      ..invalidate(fetchTimelinePostCountFutureProvider);
+                    await Future<void>.delayed(
+                      const Duration(milliseconds: 1000),
+                    );
+                  },
+                ),
+                SliverList.separated(
+                  itemBuilder: (context, index) {
+                    final data = items[index];
+                    return TimelineTile(
+                      data: data,
+                      onTap: () {
+                        PostDetailPage.push(
                           context,
-                          urls: [url],
+                          args: FetchPostArgs(
+                            postId: data.postId,
+                            userId: data.userId,
+                          ),
                         );
-                      }
-                    },
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider(height: 1);
-                },
-                itemCount: items.length,
-              ),
+                      },
+                      onTapAvatar: (poster) {
+                        final url = poster?.image?.url;
+                        if (url != null) {
+                          ImageViewer.show(
+                            context,
+                            urls: [url],
+                          );
+                        }
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider(height: 1);
+                  },
+                  itemCount: items.length,
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 56),
+                  sliver: SliverToBoxAdapter(
+                    child: loadingState.value
+                        ? const CupertinoActivityIndicator()
+                        : const SizedBox.shrink(),
+                  ),
+                ),
+              ],
             ),
           );
         },
