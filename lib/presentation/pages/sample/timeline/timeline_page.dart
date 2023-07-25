@@ -47,9 +47,8 @@ class TimelinePage extends HookConsumerWidget {
     final scrollController = useScrollController();
     final loadingState = useState(false);
 
-    final asyncValue = ref.watch(fetchTimelineAsyncProvider);
-    final count =
-        ref.watch(fetchTimelinePostCountFutureProvider).asData?.value ?? 0;
+    final asyncValue = ref.watch(fetchTimelineProvider);
+    final count = ref.watch(fetchTimelinePostCountProvider).asData?.value ?? 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -100,7 +99,7 @@ class TimelinePage extends HookConsumerWidget {
                   loadingState.value = true;
                   try {
                     await ref
-                        .read(fetchTimelineAsyncProvider.notifier)
+                        .read(fetchTimelineProvider.notifier)
                         .onFetchMore();
                   } on Exception catch (e) {
                     logger.shout(e);
@@ -121,7 +120,9 @@ class TimelinePage extends HookConsumerWidget {
               slivers: [
                 CupertinoSliverRefreshControl(
                   builder: (_, refreshState, __, ___, ____) {
-                    if (refreshState == RefreshIndicatorMode.drag) {
+                    // TODO(shohei): サイズを変更したいためにbuilderで実装
+                    if (refreshState == RefreshIndicatorMode.inactive ||
+                        refreshState == RefreshIndicatorMode.drag) {
                       return const SizedBox.shrink();
                     }
                     return const Padding(
@@ -131,8 +132,8 @@ class TimelinePage extends HookConsumerWidget {
                   },
                   onRefresh: () async {
                     ref
-                      ..invalidate(fetchTimelineAsyncProvider)
-                      ..invalidate(fetchTimelinePostCountFutureProvider);
+                      ..invalidate(fetchTimelineProvider)
+                      ..invalidate(fetchTimelinePostCountProvider);
                     await Future<void>.delayed(
                       const Duration(milliseconds: 1000),
                     );
@@ -186,7 +187,7 @@ class TimelinePage extends HookConsumerWidget {
           return ErrorText(
             message: message,
             onRetry: () {
-              ref.invalidate(fetchTimelineAsyncProvider);
+              ref.invalidate(fetchTimelineProvider);
             },
           );
         },

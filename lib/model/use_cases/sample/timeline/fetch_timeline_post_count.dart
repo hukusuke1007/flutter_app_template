@@ -4,7 +4,7 @@ import '../../../../model/repositories/firestore/collection_repository.dart';
 import '../../../entities/sample/timeline/post.dart';
 
 /// タイムラインの投稿数を取得
-final fetchTimelinePostCountFutureProvider = FutureProvider.autoDispose(
+final fetchTimelinePostCountProvider = FutureProvider.autoDispose(
   (ref) async {
     final query = ref
         .watch(collectionRepositoryProvider)

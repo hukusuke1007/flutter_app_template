@@ -33,7 +33,7 @@ class DeletePost {
 
     /// 削除したことを反映
     _ref
-      ..invalidate(fetchTimelineAsyncProvider)
-      ..invalidate(fetchTimelinePostCountFutureProvider);
+      ..invalidate(fetchTimelineProvider)
+      ..invalidate(fetchTimelinePostCountProvider);
   }
 }

@@ -7,7 +7,7 @@ import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
 
 /// タイムラインを取得
-final fetchTimelineAsyncProvider =
+final fetchTimelineProvider =
     AsyncNotifierProvider.autoDispose<FetchTimeline, List<Post>>(
   FetchTimeline.new,
 );

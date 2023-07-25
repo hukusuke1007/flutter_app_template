@@ -44,7 +44,7 @@ class UpdatePost {
           FetchPostArgs(postId: postId, userId: userId),
         ),
       )
-      ..invalidate(fetchTimelineAsyncProvider)
-      ..invalidate(fetchTimelinePostCountFutureProvider);
+      ..invalidate(fetchTimelineProvider)
+      ..invalidate(fetchTimelinePostCountProvider);
   }
 }
