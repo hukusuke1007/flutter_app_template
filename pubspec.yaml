@@ -71,15 +71,15 @@ dependencies:
   permission_handler: ^10.4.1
 
   # Firebase
-  firebase_core: ^2.14.0
-  firebase_analytics: ^10.4.3
-  cloud_firestore: ^4.8.2
-  firebase_auth: ^4.6.3
-  firebase_storage: ^11.2.4
-  cloud_functions: ^4.3.3
-  firebase_messaging: ^14.6.4
-  firebase_crashlytics: ^3.3.3
-  firebase_remote_config: ^4.2.3
+  firebase_core: ^2.15.0
+  firebase_analytics: ^10.4.4
+  cloud_firestore: ^4.8.4
+  firebase_auth: ^4.7.2
+  firebase_storage: ^11.2.5
+  cloud_functions: ^4.3.4
+  firebase_messaging: ^14.6.5
+  firebase_crashlytics: ^3.3.4
+  firebase_remote_config: ^4.2.4
 
   # LocalNotification
   flutter_local_notifications: ^15.0.1
