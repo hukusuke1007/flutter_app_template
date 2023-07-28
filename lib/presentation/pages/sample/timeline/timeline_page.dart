@@ -106,8 +106,13 @@ class TimelinePage extends HookConsumerWidget {
             },
             child: CustomScrollView(
               controller: scrollController,
-              physics: const BouncingScrollPhysics(),
+
+              /// スクロールできる領域がなくても、Pull To Refreshできるようにスクロール可能にする
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
               slivers: [
+                /// Pull To Refresh
                 CupertinoSliverRefreshControl(
                   builder: (_, refreshState, __, ___, ____) {
                     // TODO(shohei): インジケータのサイズを変更したいためbuilderで実装
@@ -130,6 +135,8 @@ class TimelinePage extends HookConsumerWidget {
                     );
                   },
                 ),
+
+                /// リストがない時の表示
                 if (items.isEmpty)
                   SliverFillRemaining(
                     child: Center(
@@ -144,6 +151,8 @@ class TimelinePage extends HookConsumerWidget {
                       ),
                     ),
                   ),
+
+                /// リスト
                 SliverList.separated(
                   itemBuilder: (context, index) {
                     final data = items[index];
@@ -174,6 +183,8 @@ class TimelinePage extends HookConsumerWidget {
                   },
                   itemCount: items.length,
                 ),
+
+                /// Pagination処理中のインジケータ
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 16, bottom: 56),
                   sliver: SliverToBoxAdapter(
