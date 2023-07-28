@@ -177,9 +177,10 @@ class TimelinePage extends HookConsumerWidget {
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 16, bottom: 56),
                   sliver: SliverToBoxAdapter(
-                    child: loadingState.value
-                        ? const CupertinoActivityIndicator()
-                        : const SizedBox.shrink(),
+                    child: Visibility(
+                      visible: loadingState.value,
+                      child: const CupertinoActivityIndicator(),
+                    ),
                   ),
                 ),
               ],
