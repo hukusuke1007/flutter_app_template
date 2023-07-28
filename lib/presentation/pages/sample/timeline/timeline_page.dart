@@ -86,6 +86,9 @@ class TimelinePage extends HookConsumerWidget {
                   }
                   loadingState.value = true;
                   try {
+                    await Future<void>.delayed(
+                      const Duration(milliseconds: 1000),
+                    );
                     await ref
                         .read(fetchTimelineProvider.notifier)
                         .onFetchMore();
@@ -93,9 +96,6 @@ class TimelinePage extends HookConsumerWidget {
                     logger.shout(e);
                     // TODO(shohei): エラーハンドリング
                   } finally {
-                    await Future<void>.delayed(
-                      const Duration(milliseconds: 1000),
-                    );
                     if (context.mounted) {
                       loadingState.value = false;
                     }
@@ -110,7 +110,7 @@ class TimelinePage extends HookConsumerWidget {
               slivers: [
                 CupertinoSliverRefreshControl(
                   builder: (_, refreshState, __, ___, ____) {
-                    // TODO(shohei): サイズを変更したいためにbuilderで実装
+                    // TODO(shohei): インジケータのサイズを変更したいためbuilderで実装
                     if (refreshState == RefreshIndicatorMode.done ||
                         refreshState == RefreshIndicatorMode.inactive ||
                         refreshState == RefreshIndicatorMode.drag) {
