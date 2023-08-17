@@ -136,6 +136,9 @@ dev_dependencies:
   # Other
   flutter_launcher_icons:
 
+  # TODO Fix: Error: The class 'FileSystemEvent' can't be extended, implemented
+  watcher: ^1.1.0
+
 flutter_gen:
   output: lib/gen/
   colors:
