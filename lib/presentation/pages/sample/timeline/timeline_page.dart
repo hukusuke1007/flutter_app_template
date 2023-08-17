@@ -136,13 +136,60 @@ class TimelinePage extends HookConsumerWidget {
                   },
                 ),
 
+                /// リスト + Paginationのインジケータ
+                SliverMainAxisGroup(
+                  slivers: [
+                    SliverList.separated(
+                      itemBuilder: (context, index) {
+                        final data = items[index];
+                        return TimelineTile(
+                          data: data,
+                          onTap: () {
+                            PostDetailPage.push(
+                              context,
+                              args: FetchPostArgs(
+                                postId: data.postId,
+                                userId: data.userId,
+                              ),
+                            );
+                          },
+                          onTapAvatar: (poster) {
+                            final url = poster?.image?.url;
+                            if (url != null) {
+                              ImageViewer.show(
+                                context,
+                                urls: [url],
+                              );
+                            }
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Divider(height: 1);
+                      },
+                      itemCount: items.length,
+                    ),
+
+                    /// Pagination処理中のインジケータ
+                    SliverPadding(
+                      padding: const EdgeInsets.only(top: 16, bottom: 56),
+                      sliver: SliverToBoxAdapter(
+                        child: Visibility(
+                          visible: loadingState.value,
+                          child: const CupertinoActivityIndicator(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
                 /// リストがない時の表示
                 if (items.isEmpty)
                   SliverFillRemaining(
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16)
-                            .copyWith(bottom: 80),
+                            .copyWith(bottom: 108),
                         child: Text(
                           'タイムラインはありません',
                           style: context.bodyStyle,
@@ -151,49 +198,6 @@ class TimelinePage extends HookConsumerWidget {
                       ),
                     ),
                   ),
-
-                /// リスト
-                SliverList.separated(
-                  itemBuilder: (context, index) {
-                    final data = items[index];
-                    return TimelineTile(
-                      data: data,
-                      onTap: () {
-                        PostDetailPage.push(
-                          context,
-                          args: FetchPostArgs(
-                            postId: data.postId,
-                            userId: data.userId,
-                          ),
-                        );
-                      },
-                      onTapAvatar: (poster) {
-                        final url = poster?.image?.url;
-                        if (url != null) {
-                          ImageViewer.show(
-                            context,
-                            urls: [url],
-                          );
-                        }
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider(height: 1);
-                  },
-                  itemCount: items.length,
-                ),
-
-                /// Pagination処理中のインジケータ
-                SliverPadding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 56),
-                  sliver: SliverToBoxAdapter(
-                    child: Visibility(
-                      visible: loadingState.value,
-                      child: const CupertinoActivityIndicator(),
-                    ),
-                  ),
-                ),
               ],
             ),
           );

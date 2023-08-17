@@ -29,13 +29,13 @@ dependencies:
   equatable:
 
   # Dialog
-  adaptive_dialog: ^1.9.0-no-macos.2
+  adaptive_dialog:
 
   # Access local storage
   path_provider:
 
   # Date
-  intl: 0.18.0
+  intl:
 
   # Reactive
   rxdart:
@@ -58,7 +58,12 @@ dependencies:
   image_gallery_saver:
   image_cropper:
   flutter_image_compress:
-  extended_image: ^8.0.2
+
+  # TODO https://github:com/fluttercandies/extended_image/issues/602
+  extended_image:
+    git:
+      url: https://github.com/laiiihz/extended_image
+      ref: migrate-to-3.13
   flutter_svg:
 
   # Picker
@@ -68,7 +73,7 @@ dependencies:
   pull_to_refresh_flutter3:
 
   # Permission
-  permission_handler: ^10.4.1
+  permission_handler: ^10.4.3
 
   # Firebase
   firebase_core: ^2.15.0
@@ -91,7 +96,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^9.0.2
+  go_router: ^10.0.0
 
   # Info
   package_info_plus:
@@ -104,9 +109,6 @@ dependencies:
   flutter_slidable:
   dismissible_page:
 
-#  # Leak Tracker
-#  leak_tracker: ^7.0.4
-
   # Other
   uuid:
   synchronized:
@@ -115,9 +117,6 @@ dependencies:
   collection:
   quiver:
   html:
-
-dependency_overrides:
-  intl: 0.18.0
 
 dev_dependencies:
   # Test
@@ -135,7 +134,7 @@ dev_dependencies:
 
   # Code generator
   build_runner:
-  freezed: ^2.3.5
+  freezed:
   flutter_gen_runner:
   retrofit_generator:
 

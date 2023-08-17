@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../utils/logger.dart';
 import '../../utils/provider.dart';
-import '../go_router/modal_transition_page.dart';
 import '../pages/error/error_page.dart';
 import '../pages/main/main_page.dart';
 import '../pages/sample/auth_with_email/change_email_address_page.dart';
@@ -25,7 +25,7 @@ import '../pages/start_up/start_up_page.dart';
 import '../pages/web_view/web_view_page.dart';
 import 'transition_observer.dart';
 
-// TODO(shohei): ShellRouteは未対応。タブを切り替えるとWidgetインスタンスが再生成されるため
+// TODO(shohei): StatefulShellRoute は未対応
 final routerProvider = Provider((ref) {
   final navigatorKey = ref.watch(navigatorKeyProvider);
   final transitionObserver = ref.watch(transitionObserverProvider);
@@ -144,8 +144,9 @@ final routerProvider = Provider((ref) {
                 name: EditPostPage.pageName,
                 pageBuilder: (_, state) {
                   final args = state.extra as EditPostPageArgs?;
-                  return ModalTransitionPage<void>(
+                  return MaterialPage(
                     key: state.pageKey,
+                    fullscreenDialog: true,
                     child: EditPostPage(args: args),
                   );
                 },
