@@ -55,7 +55,7 @@ void main() {
           overrides: [
             githubApiClientProvider.overrideWithValue(
               GithubApiClient(mockDio, baseUrl: baseUrl),
-            )
+            ),
           ],
         );
 
@@ -108,7 +108,7 @@ void main() {
           overrides: [
             githubApiClientProvider.overrideWithValue(
               GithubApiClient(mockDio, baseUrl: baseUrl),
-            )
+            ),
           ],
         );
 

@@ -69,7 +69,7 @@ Future<void> main() async {
             .overrideWithValue(SharedPreferencesRepository(sharedPreferences)),
         packageInfoRepositoryProvider
             .overrideWithValue(PackageInfoRepository(packageInfo)),
-        imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory))
+        imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory)),
       ],
       child: const App(),
     ),

@@ -59,7 +59,7 @@ class TileMenu extends StatelessWidget {
                   key: MenuResultType.block,
                   icon: Icons.block,
                 ),
-              ]
+              ],
             ],
             cancelLabel: '閉じる',
           );

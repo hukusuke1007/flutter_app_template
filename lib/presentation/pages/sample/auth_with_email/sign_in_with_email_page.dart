@@ -104,7 +104,7 @@ class SignInWithEmailPage extends HookConsumerWidget {
                   onTap: () {
                     ResetEmailPasswordPage.push(context);
                   },
-                )
+                ),
               ],
             ),
           ),

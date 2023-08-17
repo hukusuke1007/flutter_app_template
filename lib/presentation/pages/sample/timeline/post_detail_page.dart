@@ -107,7 +107,7 @@ class PostDetailPage extends HookConsumerWidget {
                       MenuResultType.issueReport,
                       MenuResultType.mute,
                       MenuResultType.block,
-                    ]
+                    ],
                   ]
                       .map(
                         (data) => PopupMenuItem<MenuResultType>(

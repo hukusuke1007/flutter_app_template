@@ -58,7 +58,7 @@ void main() {
           overrides: [
             firebaseAuthRepositoryProvider.overrideWithValue(
               mockFirebaseAuthRepository,
-            )
+            ),
           ],
         );
 
@@ -113,7 +113,7 @@ void main() {
         overrides: [
           firebaseAuthRepositoryProvider.overrideWithValue(
             mockFirebaseAuthRepository,
-          )
+          ),
         ],
       );
 

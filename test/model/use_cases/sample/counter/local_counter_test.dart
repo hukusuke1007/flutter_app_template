@@ -53,7 +53,7 @@ void main() {
           overrides: [
             sharedPreferencesRepositoryProvider.overrideWithValue(
               mockSharedPreferencesRepository,
-            )
+            ),
           ],
         )..read(localCounterProvider);
 

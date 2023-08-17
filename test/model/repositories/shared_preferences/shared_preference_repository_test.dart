@@ -59,7 +59,7 @@ void main() {
           overrides: [
             sharedPreferencesRepositoryProvider.overrideWith(
               (ref) => SharedPreferencesRepository(mockSharedPreferences),
-            )
+            ),
           ],
         );
 

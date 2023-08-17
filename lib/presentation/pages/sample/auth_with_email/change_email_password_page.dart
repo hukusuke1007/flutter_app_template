@@ -103,7 +103,7 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                   onTap: () {
                     ResetEmailPasswordPage.push(context);
                   },
-                )
+                ),
               ],
             ),
           ),

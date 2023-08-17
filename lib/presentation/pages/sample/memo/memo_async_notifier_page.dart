@@ -170,7 +170,7 @@ class MemoAsyncNotifierPage extends HookConsumerWidget {
                   onPressed: () {
                     ref.invalidate(memoProvider);
                   },
-                )
+                ),
               ],
             ),
           );

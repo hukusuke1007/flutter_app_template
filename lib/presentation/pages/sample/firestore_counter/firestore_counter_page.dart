@@ -127,7 +127,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
       persistentFooterButtons: counterAsyncValue.error != null
@@ -139,7 +139,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
                     color: Colors.redAccent,
                   ),
                 ),
-              )
+              ),
             ]
           : null,
     );
