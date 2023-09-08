@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/exception_extension.dart';
 import '../../../../extensions/scroll_controller_extension.dart';
 import '../../../../model/use_cases/sample/memo/memo_controller.dart';
 import '../../../../utils/provider.dart';
@@ -65,14 +66,15 @@ class MemoPage extends HookConsumerWidget {
               refreshController.refreshCompleted();
             },
             onLoading: () async {
-              final errorMessage = await controller.onFetchMore();
-              if (errorMessage != null) {
+              try {
+                await controller.onFetchMore();
+                refreshController.loadComplete();
+              } on Exception catch (e) {
                 context.showSnackBar(
-                  errorMessage,
+                  e.errorMessage,
                   backgroundColor: Colors.grey,
                 );
               }
-              refreshController.loadComplete();
             },
             child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
@@ -94,14 +96,14 @@ class MemoPage extends HookConsumerWidget {
                           if (alertResult == OkCancelResult.cancel) {
                             return;
                           }
-                          final errorMessage = await controller.onRemove(docId);
-                          if (errorMessage != null) {
+                          try {
+                            await controller.onRemove(docId);
+                            context.showSnackBar('削除しました');
+                          } on Exception catch (e) {
                             context.showSnackBar(
-                              errorMessage,
+                              e.errorMessage,
                               backgroundColor: Colors.grey,
                             );
-                          } else {
-                            context.showSnackBar('削除しました');
                           }
                         },
                         backgroundColor: Colors.redAccent,
@@ -125,9 +127,13 @@ class MemoPage extends HookConsumerWidget {
                         context,
                         data: data,
                         onSave: (text, _) async {
-                          final errorMessage = await controller
-                              .onUpdate(data.copyWith(text: text));
-                          return errorMessage;
+                          try {
+                            await controller
+                                .onUpdate(data.copyWith(text: text));
+                            return null;
+                          } on Exception catch (e) {
+                            return e.errorMessage;
+                          }
                         },
                       );
                     },
@@ -177,8 +183,12 @@ class MemoPage extends HookConsumerWidget {
           showEditMemoDialog(
             context,
             onSave: (text, _) async {
-              final errorMessage = await controller.onCreate(text);
-              return errorMessage;
+              try {
+                await controller.onCreate(text);
+                return null;
+              } on Exception catch (e) {
+                return e.errorMessage;
+              }
             },
           );
         },
