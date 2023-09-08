@@ -28,4 +28,6 @@ class DeviceInfoRepository {
     }
     return null;
   }
+
+  Future<AndroidDeviceInfo> get androidInfo => _deviceInfo.androidInfo;
 }
