@@ -30,10 +30,10 @@ class FirestoreCounter extends _$FirestoreCounter {
   }
 
   Future<void> save(int incrementCount) async {
-    try {
-      if (state.isLoading) {
-        return;
-      }
+    if (state.isLoading) {
+      return;
+    }
+    state = await AsyncValue.guard(() async {
       final userId = ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
@@ -48,13 +48,7 @@ class FirestoreCounter extends _$FirestoreCounter {
             Counter.docPath(userId),
             data: data.toDoc,
           );
-      state = AsyncData(data);
-    } on Exception catch (e) {
-      logger.shout(e);
-      state = AsyncError(
-        AppException(title: e.errorMessage),
-        StackTrace.current,
-      );
-    }
+      return data;
+    });
   }
 }

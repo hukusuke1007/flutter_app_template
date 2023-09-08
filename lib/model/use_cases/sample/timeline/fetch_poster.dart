@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../model/entities/sample/developer.dart';
 import '../../../../utils/logger.dart';
 import '../../../repositories/firestore/document_repository.dart';
-import '../auth/auth_state_controller.dart';
 
 part 'fetch_poster.g.dart';
 
@@ -39,11 +38,6 @@ class FetchPoster extends _$FetchPoster {
 class FetchPosterStream extends _$FetchPosterStream {
   @override
   Stream<Developer?> build(String userId) {
-    final authState = ref.watch(authStateControllerProvider);
-    if (authState == AuthState.noSignIn) {
-      return Stream.value(null);
-    }
-
     return ref
         .watch(documentRepositoryProvider)
         .snapshots(Developer.docPath(userId))

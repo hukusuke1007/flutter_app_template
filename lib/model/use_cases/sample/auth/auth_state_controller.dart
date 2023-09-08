@@ -27,9 +27,11 @@ class AuthStateController extends _$AuthStateController {
     final loginType = repository.loginType;
     return switch (loginType) {
       null => AuthState.noSignIn,
-      LoginType.email => AuthState.signIn,
       LoginType.anonymously => AuthState.signInWithAnonymously,
-      LoginType.apple || LoginType.google => AuthState.signIn,
+      LoginType.email ||
+      LoginType.apple ||
+      LoginType.google =>
+        AuthState.signIn,
     };
   }
 
