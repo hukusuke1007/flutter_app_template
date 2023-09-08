@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
 import '../../../../extensions/exception_extension.dart';
@@ -9,9 +10,12 @@ import '../../../../utils/logger.dart';
 import '../../entities/sample/github/user.dart';
 import 'github_api_client.dart';
 
-final githubApiRepositoryProvider = Provider<GithubApiRepository>(
-  GithubApiRepository.new,
-);
+part 'github_api_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+GithubApiRepository githubApiRepository(GithubApiRepositoryRef ref) {
+  return GithubApiRepository(ref);
+}
 
 class GithubApiRepository {
   GithubApiRepository(

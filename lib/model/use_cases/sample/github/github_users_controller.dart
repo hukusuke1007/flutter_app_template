@@ -1,17 +1,15 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../entities/sample/github/user.dart';
 import '../../../repositories/github_api/github_api_repository.dart';
 
-/// GithubのユーザーリストをAsyncNotifierで管理する
-final githubUsersControllerProvider =
-    AutoDisposeAsyncNotifierProvider<GithubUsersController, List<User>>(
-  GithubUsersController.new,
-);
+part 'github_users_controller.g.dart';
 
-class GithubUsersController extends AutoDisposeAsyncNotifier<List<User>> {
+/// GithubのユーザーリストをAsyncNotifierで管理する
+@riverpod
+class GithubUsersController extends _$GithubUsersController {
   static int get _pageCount => 20;
 
   int _lastUserId = 0;

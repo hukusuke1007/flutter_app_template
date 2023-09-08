@@ -20,8 +20,11 @@ dependencies:
   shared_preferences:
 
   # Riverpod
-  flutter_hooks:
   hooks_riverpod:
+  riverpod_annotation:
+
+  # Hooks
+  flutter_hooks:
 
   # Entity
   freezed_annotation:
@@ -68,7 +71,7 @@ dependencies:
   pull_to_refresh_flutter3:
 
   # Permission
-  permission_handler: ^10.4.3
+  permission_handler:
 
   # Firebase
   firebase_core: ^2.15.1
@@ -82,7 +85,7 @@ dependencies:
   firebase_remote_config: ^4.2.5
 
   # LocalNotification
-  flutter_local_notifications: ^15.1.1
+  flutter_local_notifications:
   flutter_native_timezone:
   timezone:
 
@@ -91,7 +94,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^10.1.2
+  go_router:
 
   # Info
   package_info_plus:
@@ -119,10 +122,12 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.2
+  mockito:
 
   # Static analysis
-  pedantic_mono: ^1.23.0
+  pedantic_mono:
+  custom_lint:
+  riverpod_lint:
 
   # Serializer
   json_serializable:
@@ -132,12 +137,10 @@ dev_dependencies:
   freezed:
   flutter_gen_runner:
   retrofit_generator:
+  riverpod_generator:
 
   # Other
   flutter_launcher_icons:
-
-  # TODO Fix: Error: The class 'FileSystemEvent' can't be extended, implemented
-  watcher: ^1.1.0
 
 flutter_gen:
   output: lib/gen/

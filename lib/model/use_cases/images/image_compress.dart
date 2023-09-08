@@ -2,11 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final imageCompressProvider = Provider<ImageCompress>(
-  (_) => throw UnimplementedError(),
-);
+part 'image_compress.g.dart';
+
+@Riverpod(keepAlive: true)
+ImageCompress imageCompress(ImageCompressRef ref) {
+  throw UnimplementedError();
+}
 
 class ImageCompress {
   ImageCompress(this._tempDirectory);

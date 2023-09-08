@@ -1,7 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../repositories/package_info/package_info_repository.dart';
 
-final fetchPackageNameProvider = Provider<String>(
-  (ref) => ref.watch(packageInfoRepositoryProvider).packageName,
-);
+part 'fetch_package_name.g.dart';
+
+@riverpod
+String fetchPackageName(FetchPackageNameRef ref) {
+  return ref.watch(packageInfoRepositoryProvider).packageName;
+}

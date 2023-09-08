@@ -1,10 +1,16 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'shared_preference_key.dart';
 
-final sharedPreferencesRepositoryProvider =
-    Provider<SharedPreferencesRepository>((_) => throw UnimplementedError());
+part 'shared_preference_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+SharedPreferencesRepository sharedPreferencesRepository(
+  SharedPreferencesRepositoryRef ref,
+) {
+  throw UnimplementedError();
+}
 
 class SharedPreferencesRepository {
   SharedPreferencesRepository(this._prefs);

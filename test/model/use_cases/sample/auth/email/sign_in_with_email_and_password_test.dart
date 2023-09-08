@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app_template/exceptions/app_exception.dart';
 import 'package:flutter_app_template/model/repositories/firebase_auth/auth_error_code.dart';
 import 'package:flutter_app_template/model/repositories/firebase_auth/firebase_auth_repository.dart';
+import 'package:flutter_app_template/model/use_cases/sample/auth/auth_state_controller.dart';
 import 'package:flutter_app_template/model/use_cases/sample/auth/email/sign_in_with_email_and_password.dart';
 import 'package:flutter_app_template/utils/logger.dart';
-import 'package:flutter_app_template/utils/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -70,7 +70,7 @@ void main() {
 
         /// テスト結果を検証
         expect(
-          container.read(authStateProvider),
+          container.read(authStateControllerProvider),
           AuthState.signIn,
         ); // 期待する状態であること
         verify(
@@ -128,7 +128,7 @@ void main() {
         /// テスト結果を検証
         expect(e.title, 'メールアドレスもしくはパスワードが正しくありません');
         expect(
-          container.read(authStateProvider),
+          container.read(authStateControllerProvider),
           AuthState.noSignIn,
         ); // 期待する状態であること
         verify(

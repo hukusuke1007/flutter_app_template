@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final requestAlbumPermissionProvider =
-    FutureProvider.autoDispose<bool>((ref) async {
+part 'request_album_permission.g.dart';
+
+@riverpod
+Future<bool> requestAlbumPermission(RequestAlbumPermissionRef ref) async {
   final status = await Future(() async {
     if (Platform.isAndroid) {
       final deviceInfo = DeviceInfoPlugin();
@@ -20,4 +22,4 @@ final requestAlbumPermissionProvider =
     }
   });
   return status.isGranted;
-});
+}

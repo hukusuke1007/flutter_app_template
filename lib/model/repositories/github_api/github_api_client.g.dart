@@ -43,7 +43,11 @@ class _GithubApiClient implements GithubApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     var value = _result.data!
         .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
         .toList();
@@ -62,4 +66,43 @@ class _GithubApiClient implements GithubApiClient {
     }
     return requestOptions;
   }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
+  }
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$githubApiClientHash() => r'caa0351a600976320da92b9be79e19c67b52c94e';
+
+/// See also [githubApiClient].
+@ProviderFor(githubApiClient)
+final githubApiClientProvider = Provider<GithubApiClient>.internal(
+  githubApiClient,
+  name: r'githubApiClientProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$githubApiClientHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GithubApiClientRef = ProviderRef<GithubApiClient>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,7 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../repositories/package_info/package_info_repository.dart';
 
-final fetchAppVersionProvider = Provider<String>(
-  (ref) => ref.watch(packageInfoRepositoryProvider).appVersion,
-);
+part 'fetch_app_version.g.dart';
+
+@riverpod
+String fetchAppVersion(FetchAppVersionRef ref) {
+  return ref.watch(packageInfoRepositoryProvider).appVersion;
+}

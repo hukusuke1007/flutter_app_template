@@ -3,9 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../exceptions/app_exception.dart';
 import '../../../../../utils/logger.dart';
-import '../../../../../utils/provider.dart';
 import '../../../../repositories/firebase_auth/auth_error_code.dart';
 import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../auth_state_controller.dart';
 
 final signInWithEmailAndPasswordProvider =
     Provider(SignInWithEmailAndPassword.new);
@@ -21,11 +21,12 @@ class SignInWithEmailAndPassword {
   }) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      final authState = _ref.read(authStateProvider.notifier);
+      final authStateController =
+          _ref.read(authStateControllerProvider.notifier);
 
       await repository.signInWithEmailAndPassword(email, password);
 
-      authState.update((state) => AuthState.signIn);
+      authStateController.update(AuthState.signIn);
     } on FirebaseAuthException catch (e) {
       logger.shout(e);
 

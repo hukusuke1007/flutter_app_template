@@ -62,7 +62,7 @@ class PostDetailPage extends HookConsumerWidget {
     final asyncValue = ref.watch(fetchPostAsyncProviders(args));
     final data = asyncValue.asData?.value;
 
-    final poster = ref.watch(fetchPosterProviders(args.userId)).asData?.value;
+    final poster = ref.watch(fetchPosterProvider(args.userId)).asData?.value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData =
         data != null && myUserId != null && data.userId == myUserId;

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../entities/sample/github/user.dart';
 import 'auth_header_interceptor.dart';
@@ -8,7 +8,8 @@ import 'constants.dart';
 
 part 'github_api_client.g.dart';
 
-final githubApiClientProvider = Provider((ref) {
+@Riverpod(keepAlive: true)
+GithubApiClient githubApiClient(GithubApiClientRef ref) {
   return GithubApiClient(
     Dio(dioDefaultOptions)
       ..interceptors.addAll(
@@ -19,7 +20,7 @@ final githubApiClientProvider = Provider((ref) {
       ),
     baseUrl: 'https://api.github.com',
   );
-});
+}
 
 @RestApi()
 abstract class GithubApiClient {

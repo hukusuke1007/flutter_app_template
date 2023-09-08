@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../extensions/context_extension.dart';
-import '../../../extensions/exception_extension.dart';
+import '../../../utils/logger.dart';
 import '../../custom_hooks/use_effect_once.dart';
 import '../../widgets/texts/error_text.dart';
 import '../main/main_page.dart';
@@ -83,8 +83,8 @@ class StartUpPage extends HookConsumerWidget {
             return const SizedBox.shrink();
           },
           error: (e, __) {
-            final error = e as Exception?;
-            final message = 'エラー\n${error?.errorMessage}';
+            logger.shout(e);
+            final message = 'エラー\n$e';
             return ErrorText(
               message: message,
               onRetry: () {

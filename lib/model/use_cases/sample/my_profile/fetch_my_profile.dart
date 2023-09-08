@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../utils/logger.dart';
-import '../../../../utils/provider.dart';
 import '../../../entities/sample/developer.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
+import '../auth/auth_state_controller.dart';
 
 final fetchMyProfileProvider =
     StreamNotifierProvider.autoDispose<FetchMyProfile, Developer?>(() {
@@ -14,7 +14,7 @@ final fetchMyProfileProvider =
 class FetchMyProfile extends AutoDisposeStreamNotifier<Developer?> {
   @override
   Stream<Developer?> build() {
-    final authState = ref.watch(authStateProvider);
+    final authState = ref.watch(authStateControllerProvider);
     if (authState == AuthState.noSignIn) {
       return Stream.value(null);
     }
