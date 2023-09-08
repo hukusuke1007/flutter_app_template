@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firestore_counter.dart';
+part of 'document_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreCounterHash() => r'a0005e060af3725731171171e687c01b0c42b6bc';
+String _$documentRepositoryHash() =>
+    r'7cabda996378e18b156cd7fd330435b9cd99d6b6';
 
-/// See also [FirestoreCounter].
-@ProviderFor(FirestoreCounter)
-final firestoreCounterProvider =
-    AutoDisposeAsyncNotifierProvider<FirestoreCounter, Counter?>.internal(
-  FirestoreCounter.new,
-  name: r'firestoreCounterProvider',
+/// See also [documentRepository].
+@ProviderFor(documentRepository)
+final documentRepositoryProvider = Provider<DocumentRepository>.internal(
+  documentRepository,
+  name: r'documentRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$firestoreCounterHash,
+      : _$documentRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FirestoreCounter = AutoDisposeAsyncNotifier<Counter?>;
+typedef DocumentRepositoryRef = ProviderRef<DocumentRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -7,7 +7,7 @@ part of 'fetch_firestore_counter_stream.dart';
 // **************************************************************************
 
 String _$fetchFirestoreCounterHash() =>
-    r'fe1df49cfeffd31a04953742d295e26fee8b7f81';
+    r'9554f5ddc96253a464078be15f81ec371dc0fb7d';
 
 /// 取得（スナップショットリスナー使用）
 ///

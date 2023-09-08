@@ -1,3 +1,4 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_repository.dart';

@@ -1,26 +1,35 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../../exceptions/app_exception.dart';
-import '../../../../../extensions/exception_extension.dart';
-import '../../../../../utils/logger.dart';
-import '../../../../../utils/provider.dart';
-import '../../../../entities/sample/memo.dart';
-import '../../../../repositories/firebase_auth/firebase_auth_repository.dart';
-import '../../../../repositories/firestore/collection_paging_repository.dart';
-import '../../../../repositories/firestore/document.dart';
-import '../../../../repositories/firestore/document_repository.dart';
-import '../../typedef.dart';
-import '../state_notifier/memo_controller.dart' as memo_state_notifier;
+import '../../../../exceptions/app_exception.dart';
+import '../../../../extensions/exception_extension.dart';
+import '../../../../utils/logger.dart';
+import '../../../entities/sample/memo.dart';
+import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../repositories/firestore/collection_paging_repository.dart';
+import '../../../repositories/firestore/document.dart';
+import '../../../repositories/firestore/document_repository.dart';
+import '../auth/auth_state_controller.dart';
+import '../typedef.dart';
 
-/// AsyncNotifier & 非同期操作の結果を同期的に扱うサンプルコード
-final memoProvider =
-    AutoDisposeAsyncNotifierProvider<MemoController, List<Memo>>(
-  MemoController.new,
-);
+part 'memo_controller.g.dart';
 
-class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
+@riverpod
+CollectionPagingRepository<Memo> collectionPagingRepository(
+  CollectionPagingRepositoryRef ref,
+  CollectionParam<Memo> query,
+) {
+  return CollectionPagingRepository<Memo>(
+    query: query.query,
+    initialLimit: query.initialLimit,
+    pagingLimit: query.pagingLimit,
+    decode: query.decode,
+  );
+}
+
+@riverpod
+class MemoController extends _$MemoController {
   static int get defaultLimit => 20;
 
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
@@ -28,7 +37,7 @@ class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
   @override
   FutureOr<List<Memo>> build() async {
     /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
-    ref.watch(authStateProvider);
+    ref.watch(authStateControllerProvider);
 
     final userId = ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
@@ -37,7 +46,7 @@ class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
 
     final length = state.asData?.value.length ?? 0;
     final repository = ref.watch(
-      memoCollectionPagingProvider(
+      collectionPagingRepositoryProvider(
         CollectionParam<Memo>(
           query: Document.colRef(
             Memo.collectionPath(userId),
@@ -106,9 +115,6 @@ class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
           );
       state = AsyncData([data, ...state.asData?.value ?? []]);
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      ref.invalidate(memo_state_notifier.memoProvider);
       return null;
     } on AppException catch (e) {
       logger.shout(e);
@@ -145,9 +151,6 @@ class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
             .toList(),
       );
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      ref.invalidate(memo_state_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);
@@ -177,9 +180,6 @@ class MemoController extends AutoDisposeAsyncNotifier<List<Memo>> {
             .toList(),
       );
 
-      /// 同じデータソースを参照しているproviderでデータの再取得させるためにProviderを再生成する
-      /// refreshと違い、該当するprovider参照されたタイミングでインスタンスを再生成する
-      ref.invalidate(memo_state_notifier.memoProvider);
       return null;
     } on Exception catch (e) {
       logger.shout(e);

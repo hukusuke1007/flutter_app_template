@@ -1,10 +1,9 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../utils/provider.dart';
 import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
+import '../auth/auth_state_controller.dart';
 
 part 'fetch_firestore_counter_stream.g.dart';
 
@@ -13,7 +12,7 @@ part 'fetch_firestore_counter_stream.g.dart';
 class FetchFirestoreCounter extends _$FetchFirestoreCounter {
   @override
   Stream<Counter?> build() {
-    final authState = ref.watch(authStateProvider);
+    final authState = ref.watch(authStateControllerProvider);
     if (authState == AuthState.noSignIn) {
       return Stream.value(null);
     }

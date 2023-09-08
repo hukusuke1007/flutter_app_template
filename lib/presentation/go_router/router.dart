@@ -16,8 +16,6 @@ import '../pages/sample/auth_with_email/sign_up_with_email_page.dart';
 import '../pages/sample/auth_with_email/top_email_feature_page.dart';
 import '../pages/sample/firestore_counter/firestore_counter_page.dart';
 import '../pages/sample/local_counter/local_counter_page.dart';
-import '../pages/sample/memo/memo_async_notifier_page.dart';
-import '../pages/sample/memo/memo_state_notifier_page.dart';
 import '../pages/sample/timeline/edit_post_page.dart';
 import '../pages/sample/timeline/post_detail_page.dart';
 import '../pages/sample/timeline/timeline_page.dart';
@@ -162,20 +160,6 @@ final routerProvider = Provider((ref) {
                 },
               ),
             ],
-          ),
-
-          /// メモ（StateNotifier）
-          GoRoute(
-            path: MemoStateNotifierPage.pageName,
-            name: MemoStateNotifierPage.pageName,
-            builder: (_, __) => const MemoStateNotifierPage(),
-          ),
-
-          /// メモ（AsyncNotifier）
-          GoRoute(
-            path: MemoAsyncNotifierPage.pageName,
-            name: MemoAsyncNotifierPage.pageName,
-            builder: (_, __) => const MemoAsyncNotifierPage(),
           ),
         ],
       ),

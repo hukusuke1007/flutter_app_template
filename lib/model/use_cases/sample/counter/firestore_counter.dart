@@ -5,10 +5,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../exceptions/app_exception.dart';
 import '../../../../extensions/exception_extension.dart';
 import '../../../../utils/logger.dart';
-import '../../../../utils/provider.dart';
 import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
+import '../auth/auth_state_controller.dart';
 
 part 'firestore_counter.g.dart';
 
@@ -16,7 +16,7 @@ part 'firestore_counter.g.dart';
 class FirestoreCounter extends _$FirestoreCounter {
   @override
   FutureOr<Counter?> build() async {
-    ref.watch(authStateProvider);
+    ref.watch(authStateControllerProvider);
 
     final userId = ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {

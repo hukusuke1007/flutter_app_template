@@ -2,8 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/entities/sample/developer.dart';
 import '../../../../utils/logger.dart';
-import '../../../../utils/provider.dart';
 import '../../../repositories/firestore/document_repository.dart';
+import '../auth/auth_state_controller.dart';
 
 /// 投稿者を取得
 final fetchPosterProviders =
@@ -41,7 +41,7 @@ class FetchPoster extends AutoDisposeFamilyAsyncNotifier<Developer?, String> {
 /// 投稿者を取得（スナップショットリスナー使用）
 final fetchPosterStreamProviders =
     StreamProvider.autoDispose.family<Developer?, String>((ref, userId) {
-  final authState = ref.watch(authStateProvider);
+  final authState = ref.watch(authStateControllerProvider);
   if (authState == AuthState.noSignIn) {
     return Stream.value(null);
   }

@@ -1,3 +1,4 @@
+// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/model/entities/sample/github/user.dart';
 import 'package:flutter_app_template/model/repositories/github_api/github_api_repository.dart';

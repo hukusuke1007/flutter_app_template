@@ -2,14 +2,17 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'auth_provider_id.dart';
 import 'login_type.dart';
 
-final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>(
-  (_) => FirebaseAuthRepository(FirebaseAuth.instance),
-);
+part 'firebase_auth_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+FirebaseAuthRepository firebaseAuthRepository(FirebaseAuthRepositoryRef ref) {
+  return FirebaseAuthRepository(FirebaseAuth.instance);
+}
 
 class FirebaseAuthRepository {
   FirebaseAuthRepository(this._auth);
