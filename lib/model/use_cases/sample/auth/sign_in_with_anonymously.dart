@@ -1,14 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import 'auth_state_controller.dart';
 
-final signInWithAnonymouslyProvider = Provider(SignInWithAnonymously.new);
+part 'sign_in_with_anonymously.g.dart';
+
+@Riverpod(keepAlive: true)
+SignInWithAnonymously signInWithAnonymously(SignInWithAnonymouslyRef ref) {
+  return SignInWithAnonymously(ref);
+}
 
 class SignInWithAnonymously {
   SignInWithAnonymously(this._ref);
-  final Ref _ref;
+  final SignInWithAnonymouslyRef _ref;
 
   Future<User?> call() async {
     final userCredential =
