@@ -1,17 +1,15 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../repositories/channel/screen_reader_repository.dart';
 
-final fetchEnableScreenReaderProvider =
-    StreamNotifierProvider.autoDispose<FetchEnableScreenReader, bool>(
-  FetchEnableScreenReader.new,
-);
+part 'fetch_enable_screen_reader.g.dart';
 
-class FetchEnableScreenReader extends AutoDisposeStreamNotifier<bool> {
+@riverpod
+class FetchEnableScreenReader extends _$FetchEnableScreenReader {
   @override
   Stream<bool> build() {
-    return ref.read(screenReaderRepositoryProvider).enableStream;
+    return ref.watch(screenReaderRepositoryProvider).enableStream;
   }
 }

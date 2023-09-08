@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
-import '../../../../extensions/exception_extension.dart';
-import '../../../../utils/logger.dart';
 import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';

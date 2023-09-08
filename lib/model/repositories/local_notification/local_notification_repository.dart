@@ -1,13 +1,15 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-final localNotificationRepositoryProvider =
-    Provider<LocalNotificationRepository>(
-  (_) => LocalNotificationRepository(
-    FlutterLocalNotificationsPlugin(),
-  ),
-);
+part 'local_notification_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+LocalNotificationRepository localNotificationRepository(
+  LocalNotificationRepositoryRef ref,
+) {
+  return LocalNotificationRepository(FlutterLocalNotificationsPlugin());
+}
 
 class LocalNotificationRepository {
   LocalNotificationRepository(this._flutterLocalNotificationsPlugin);

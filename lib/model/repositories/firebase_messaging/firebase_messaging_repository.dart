@@ -2,15 +2,19 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'topics.dart';
 
-final firebaseMessagingRepositoryProvider =
-    Provider<FirebaseMessagingRepository>(
-  (_) => FirebaseMessagingRepository(FirebaseMessaging.instance),
-);
+part 'firebase_messaging_repository.g.dart';
+
+@Riverpod(keepAlive: true)
+FirebaseMessagingRepository firebaseMessagingRepository(
+  FirebaseMessagingRepositoryRef ref,
+) {
+  return FirebaseMessagingRepository(FirebaseMessaging.instance);
+}
 
 class FirebaseMessagingRepository {
   FirebaseMessagingRepository(this._firebaseMessaging);

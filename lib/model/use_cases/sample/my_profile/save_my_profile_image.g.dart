@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firestore_counter.dart';
+part of 'save_my_profile_image.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreCounterHash() => r'7fd018b9e51b77c810d74e1bbe8a1837c51f7eee';
+String _$saveMyProfileImageHash() =>
+    r'a3a0f842bafde15e9c4ccc8721ed8326c147c854';
 
-/// See also [FirestoreCounter].
-@ProviderFor(FirestoreCounter)
-final firestoreCounterProvider =
-    AutoDisposeAsyncNotifierProvider<FirestoreCounter, Counter?>.internal(
-  FirestoreCounter.new,
-  name: r'firestoreCounterProvider',
+/// See also [saveMyProfileImage].
+@ProviderFor(saveMyProfileImage)
+final saveMyProfileImageProvider = Provider<SaveMyProfileImage>.internal(
+  saveMyProfileImage,
+  name: r'saveMyProfileImageProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$firestoreCounterHash,
+      : _$saveMyProfileImageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FirestoreCounter = AutoDisposeAsyncNotifier<Counter?>;
+typedef SaveMyProfileImageRef = ProviderRef<SaveMyProfileImage>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

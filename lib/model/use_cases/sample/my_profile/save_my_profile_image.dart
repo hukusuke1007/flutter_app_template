@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
 import '../../../../utils/uuid_generator.dart';
@@ -12,7 +13,12 @@ import '../../../repositories/firebase_storage/mime_type.dart';
 import '../../../repositories/firestore/document_repository.dart';
 import 'fetch_my_profile.dart';
 
-final saveMyProfileImageProvider = Provider(SaveMyProfileImage.new);
+part 'save_my_profile_image.g.dart';
+
+@Riverpod(keepAlive: true)
+SaveMyProfileImage saveMyProfileImage(SaveMyProfileImageRef ref) {
+  return SaveMyProfileImage(ref);
+}
 
 class SaveMyProfileImage {
   SaveMyProfileImage(this._ref);

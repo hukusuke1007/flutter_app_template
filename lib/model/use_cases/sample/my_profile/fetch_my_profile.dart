@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../utils/logger.dart';
 import '../../../entities/sample/developer.dart';
@@ -6,12 +6,10 @@ import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 import '../auth/auth_state_controller.dart';
 
-final fetchMyProfileProvider =
-    StreamNotifierProvider.autoDispose<FetchMyProfile, Developer?>(() {
-  return FetchMyProfile();
-});
+part 'fetch_my_profile.g.dart';
 
-class FetchMyProfile extends AutoDisposeStreamNotifier<Developer?> {
+@riverpod
+class FetchMyProfile extends _$FetchMyProfile {
   @override
   Stream<Developer?> build() {
     final authState = ref.watch(authStateControllerProvider);

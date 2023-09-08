@@ -183,7 +183,7 @@ class _FetchPosterProviderElement
   String get userId => (origin as FetchPosterProvider).userId;
 }
 
-String _$fetchPosterStreamHash() => r'1eb9ae247440cf4d144f09346b6bdb3ae56674a8';
+String _$fetchPosterStreamHash() => r'da0d5d761af295337309129f779ea32e794b5ee7';
 
 abstract class _$FetchPosterStream
     extends BuildlessAutoDisposeStreamNotifier<Developer?> {

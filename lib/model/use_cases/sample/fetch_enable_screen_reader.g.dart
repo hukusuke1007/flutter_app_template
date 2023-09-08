@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firestore_counter.dart';
+part of 'fetch_enable_screen_reader.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreCounterHash() => r'7fd018b9e51b77c810d74e1bbe8a1837c51f7eee';
+String _$fetchEnableScreenReaderHash() =>
+    r'23d688b0e67ac73e0060fd9743063b1991c14458';
 
-/// See also [FirestoreCounter].
-@ProviderFor(FirestoreCounter)
-final firestoreCounterProvider =
-    AutoDisposeAsyncNotifierProvider<FirestoreCounter, Counter?>.internal(
-  FirestoreCounter.new,
-  name: r'firestoreCounterProvider',
+/// See also [FetchEnableScreenReader].
+@ProviderFor(FetchEnableScreenReader)
+final fetchEnableScreenReaderProvider =
+    AutoDisposeStreamNotifierProvider<FetchEnableScreenReader, bool>.internal(
+  FetchEnableScreenReader.new,
+  name: r'fetchEnableScreenReaderProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$firestoreCounterHash,
+      : _$fetchEnableScreenReaderHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FirestoreCounter = AutoDisposeAsyncNotifier<Counter?>;
+typedef _$FetchEnableScreenReader = AutoDisposeStreamNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
