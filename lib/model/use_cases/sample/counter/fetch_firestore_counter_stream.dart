@@ -1,17 +1,16 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../utils/provider.dart';
 import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 
-/// 取得（スナップショットリスナー使用）
-final fetchFirestoreCounterProvider =
-    StreamNotifierProvider.autoDispose<FetchFirestoreCounter, Counter?>(() {
-  return FetchFirestoreCounter();
-});
+part 'fetch_firestore_counter_stream.g.dart';
 
-class FetchFirestoreCounter extends AutoDisposeStreamNotifier<Counter?> {
+/// 取得（スナップショットリスナー使用）
+@riverpod
+class FetchFirestoreCounter extends _$FetchFirestoreCounter {
   @override
   Stream<Counter?> build() {
     final authState = ref.watch(authStateProvider);

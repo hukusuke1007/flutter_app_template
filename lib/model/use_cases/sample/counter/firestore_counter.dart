@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
 import '../../../../extensions/exception_extension.dart';
@@ -10,12 +10,10 @@ import '../../../entities/sample/counter.dart';
 import '../../../repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../repositories/firestore/document_repository.dart';
 
-final firestoreCounterProvider =
-    AsyncNotifierProvider.autoDispose<FirestoreCounter, Counter?>(
-  FirestoreCounter.new,
-);
+part 'firestore_counter.g.dart';
 
-class FirestoreCounter extends AutoDisposeAsyncNotifier<Counter?> {
+@riverpod
+class FirestoreCounter extends _$FirestoreCounter {
   @override
   FutureOr<Counter?> build() async {
     ref.watch(authStateProvider);
