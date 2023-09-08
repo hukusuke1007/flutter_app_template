@@ -45,7 +45,7 @@ class MemoPage extends HookConsumerWidget {
       appBar: AppBar(
         title: Text(
           'メモ',
-          style: context.bodyStyle.copyWith(
+          style: context.subtitleStyle.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),

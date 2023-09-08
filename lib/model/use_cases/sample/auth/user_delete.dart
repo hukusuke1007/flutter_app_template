@@ -11,7 +11,7 @@ class UserDelete {
   final Ref _ref;
 
   Future<void> call(User user) async {
-    /// Firestoreのサインアウト・認証情報削除前にStreamProvider経由のlistenを解除するため
+    /// Firestoreのサインアウト・認証情報削除前にStream経由のlistenを解除するため
     /// authStateProviderのstateを変更する cloud_firestore/permission-denied対策
     final oldAuthState = _ref.read(authStateControllerProvider);
     _ref.read(authStateControllerProvider.notifier).update(AuthState.noSignIn);
