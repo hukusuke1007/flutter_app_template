@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
@@ -22,7 +21,7 @@ SaveMyProfileImage saveMyProfileImage(SaveMyProfileImageRef ref) {
 
 class SaveMyProfileImage {
   SaveMyProfileImage(this._ref);
-  final Ref _ref;
+  final SaveMyProfileImageRef _ref;
 
   Future<void> call(Uint8List file) async {
     final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;

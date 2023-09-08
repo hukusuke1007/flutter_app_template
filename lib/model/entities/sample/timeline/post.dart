@@ -1,25 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/date_extension.dart';
 import '../../../../model/repositories/firestore/document.dart';
 import '../../../converters/date_time_timestamp_converter.dart';
-import '../../../repositories/firestore/collection_paging_repository.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
-
-final postCollectionPagingProvider = Provider.family
-    .autoDispose<CollectionPagingRepository<Post>, CollectionParam<Post>>(
-        (ref, query) {
-  return CollectionPagingRepository<Post>(
-    query: query.query,
-    initialLimit: query.initialLimit,
-    pagingLimit: query.pagingLimit,
-    decode: query.decode,
-  );
-});
 
 @freezed
 class Post with _$Post {

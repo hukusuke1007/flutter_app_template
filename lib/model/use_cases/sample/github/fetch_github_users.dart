@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../entities/sample/github/user.dart';
@@ -16,7 +15,7 @@ FetchGithubUsers fetchGithubUsers(FetchGithubUsersRef ref) {
 class FetchGithubUsers {
   const FetchGithubUsers(this._ref);
 
-  final Ref _ref;
+  final FetchGithubUsersRef _ref;
 
   Future<AsyncValue<List<User>>> call({
     int? lastUserId,

@@ -1,18 +1,29 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../model/entities/sample/timeline/post.dart';
 import '../../../repositories/firestore/collection_paging_repository.dart';
 import '../../../repositories/firestore/document.dart';
 
-/// タイムラインを取得
-final fetchTimelineProvider =
-    AsyncNotifierProvider.autoDispose<FetchTimeline, List<Post>>(
-  FetchTimeline.new,
-);
+part 'fetch_timeline.g.dart';
 
-class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
+@riverpod
+CollectionPagingRepository<Post> collectionPagingRepository(
+  CollectionPagingRepositoryRef ref,
+  CollectionParam<Post> query,
+) {
+  return CollectionPagingRepository<Post>(
+    query: query.query,
+    initialLimit: query.initialLimit,
+    pagingLimit: query.pagingLimit,
+    decode: query.decode,
+  );
+}
+
+/// タイムラインを取得
+@riverpod
+class FetchTimeline extends _$FetchTimeline {
   static int get defaultLimit => 20;
 
   CollectionPagingRepository<Post>? _collectionPagingRepository;
@@ -26,7 +37,7 @@ class FetchTimeline extends AutoDisposeAsyncNotifier<List<Post>> {
       Post.collectionName,
     ).orderBy('createdAt', descending: true);
     final repository = ref.watch(
-      postCollectionPagingProvider(
+      collectionPagingRepositoryProvider(
         CollectionParam<Post>(
           query: query, // インデックス設定する必要がある
 

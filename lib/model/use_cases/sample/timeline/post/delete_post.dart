@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
@@ -7,11 +7,16 @@ import '../../../../repositories/firestore/document_repository.dart';
 import '../fetch_timeline.dart';
 import '../fetch_timeline_post_count.dart';
 
-final deletePostProvider = Provider(DeletePost.new);
+part 'delete_post.g.dart';
+
+@Riverpod(keepAlive: true)
+DeletePost deletePost(DeletePostRef ref) {
+  return DeletePost(ref);
+}
 
 class DeletePost {
   DeletePost(this._ref);
-  final Ref _ref;
+  final DeletePostRef _ref;
 
   Future<void> call(Post post) async {
     /// 自身のユーザIDを取得

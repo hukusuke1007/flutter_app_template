@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
@@ -8,11 +8,16 @@ import '../fetch_timeline.dart';
 import '../fetch_timeline_post_count.dart';
 import 'fetch_post.dart';
 
-final updatePostProvider = Provider(UpdatePost.new);
+part 'update_post.g.dart';
+
+@Riverpod(keepAlive: true)
+UpdatePost updatePost(UpdatePostRef ref) {
+  return UpdatePost(ref);
+}
 
 class UpdatePost {
   UpdatePost(this._ref);
-  final Ref _ref;
+  final UpdatePostRef _ref;
 
   Future<void> call({
     required Post oldPost,
@@ -40,7 +45,7 @@ class UpdatePost {
     /// 更新したことを反映
     _ref
       ..invalidate(
-        fetchPostAsyncProviders(
+        fetchPostProvider(
           FetchPostArgs(postId: postId, userId: userId),
         ),
       )

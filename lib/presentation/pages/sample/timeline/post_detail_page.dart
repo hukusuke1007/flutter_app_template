@@ -59,7 +59,7 @@ class PostDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final asyncValue = ref.watch(fetchPostAsyncProviders(args));
+    final asyncValue = ref.watch(fetchPostProvider(args));
     final data = asyncValue.asData?.value;
 
     final poster = ref.watch(fetchPosterProvider(args.userId)).asData?.value;
@@ -69,7 +69,7 @@ class PostDetailPage extends HookConsumerWidget {
 
     useEffectOnce(() {
       Future(() async {
-        final value = await ref.read(fetchPostAsyncProviders(args).future);
+        final value = await ref.read(fetchPostProvider(args).future);
         if (value == null) {
           await showOkAlertDialog(
             context: context,

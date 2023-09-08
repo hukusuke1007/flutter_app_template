@@ -1,13 +1,12 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../entities/sample/developer.dart';
 import '../../../../entities/sample/timeline/post.dart';
 import '../../../../repositories/firestore/document_repository.dart';
 
-/// https://docs-v2.riverpod.dev/docs/concepts/modifiers/family#passing-multiple-parameters-to-a-family
+part 'fetch_post.g.dart';
+
 class FetchPostArgs extends Equatable {
   const FetchPostArgs({
     required this.postId,
@@ -21,12 +20,9 @@ class FetchPostArgs extends Equatable {
 }
 
 /// 投稿を取得
-final fetchPostAsyncProviders =
-    AsyncNotifierProvider.autoDispose.family<FetchPost, Post?, FetchPostArgs>(
-  FetchPost.new,
-);
 
-class FetchPost extends AutoDisposeFamilyAsyncNotifier<Post?, FetchPostArgs> {
+@riverpod
+class FetchPost extends _$FetchPost {
   @override
   FutureOr<Post?> build(FetchPostArgs arg) async {
     final userId = arg.userId;

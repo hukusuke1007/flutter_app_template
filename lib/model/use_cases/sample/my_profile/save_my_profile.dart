@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
@@ -16,7 +15,7 @@ SaveMyProfile saveMyProfile(SaveMyProfileRef ref) {
 
 class SaveMyProfile {
   SaveMyProfile(this._ref);
-  final Ref _ref;
+  final SaveMyProfileRef _ref;
 
   Future<void> call({
     String? name,
