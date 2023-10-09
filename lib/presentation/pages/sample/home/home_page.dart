@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -87,6 +88,48 @@ class HomePage extends HookConsumerWidget {
                   }()}: ${enableScreenReader ? 'ON' : 'OFF'}',
                   style:
                       context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ).copyWith(bottom: 8),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      const TextSpan(text: 'こんにちは'),
+                      TextSpan(
+                        text: 'こんにちは',
+                        style: context.bodyStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'タップできる',
+                        style: context.bodyStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            debugPrint('tap');
+                          },
+                      ),
+                      const WidgetSpan(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 2),
+                          child: Icon(
+                            Icons.check_circle,
+                            size: 20,
+                            color: Colors.green,
+                          ),
+                        ),
+                        alignment: PlaceholderAlignment.middle,
+                      ),
+                    ],
+                  ),
+                  style: context.bodyStyle,
                 ),
               ),
               const Divider(height: 1),
