@@ -76,7 +76,7 @@ class FetchTimeline extends _$FetchTimeline {
       return;
     }
     final data = await repository.fetchMore();
-    final list = state.value ?? [];
+    final list = await future;
     state = AsyncData(
       [
         ...list,

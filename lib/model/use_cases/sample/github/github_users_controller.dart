@@ -42,8 +42,8 @@ class GithubUsersController extends _$GithubUsersController {
       if (data.isNotEmpty) {
         _lastUserId = data.last.id;
       }
-      final value = state.asData?.value ?? [];
-      return [...value, ...data];
+      final previousState = await future;
+      return [...previousState, ...data];
     });
 
     state = result;

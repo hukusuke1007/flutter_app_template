@@ -75,9 +75,10 @@ class MemoController extends _$MemoController {
     }
 
     final data = await repository.fetchMore();
+    final previousState = await future;
     if (data.isNotEmpty) {
       state = AsyncData([
-        ...state.asData?.value ?? [],
+        ...previousState,
         ...data.map((e) => e.entity).whereType<Memo>(),
       ]);
     }
@@ -102,7 +103,8 @@ class MemoController extends _$MemoController {
           Memo.docPath(userId, docRef.id),
           data: data.toCreateDoc,
         );
-    state = AsyncData([data, ...state.asData?.value ?? []]);
+    final previousState = await future;
+    state = AsyncData([data, ...previousState]);
   }
 
   /// 更新
@@ -111,7 +113,7 @@ class MemoController extends _$MemoController {
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    final value = state.asData?.value ?? [];
+    final value = await future;
     if (value.isEmpty) {
       throw AppException(title: '更新できません');
     }
@@ -139,7 +141,7 @@ class MemoController extends _$MemoController {
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    final value = state.asData?.value ?? [];
+    final value = await future;
     if (value.isEmpty) {
       throw AppException(title: '削除できません');
     }
