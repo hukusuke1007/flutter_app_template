@@ -22,7 +22,7 @@ class SaveImageToMediaFolder {
   Future<void> call(
     Uint8List imageBytes,
   ) async {
-    final status = await _ref.read(requestAlbumPermissionProvider.future);
+    final status = await _ref.read(requestAlbumPermissionProvider).call();
     final gContext = _ref.read(navigatorKeyProvider).currentContext!;
     if (!status) {
       final result = await showOkAlertDialog(

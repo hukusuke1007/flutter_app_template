@@ -54,7 +54,7 @@ Future<PhotoType?> showPhotoBottomSheet(
       return PhotoType.camera;
     }
   } else if (result == 1) {
-    final isGranted = await ref.read(requestAlbumPermissionProvider.future);
+    final isGranted = await ref.read(requestAlbumPermissionProvider).call();
     if (!isGranted) {
       final result = await showOkAlertDialog(
         context: gContext,

@@ -11,9 +11,7 @@ DeviceInfoRepository deviceInfoRepository(DeviceInfoRepositoryRef ref) {
 }
 
 class DeviceInfoRepository {
-  DeviceInfoRepository(
-    this._deviceInfo,
-  );
+  DeviceInfoRepository(this._deviceInfo);
 
   final DeviceInfoPlugin _deviceInfo;
 

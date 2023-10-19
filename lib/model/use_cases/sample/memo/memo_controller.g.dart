@@ -163,7 +163,7 @@ class _CollectionPagingRepositoryProviderElement
       (origin as CollectionPagingRepositoryProvider).query;
 }
 
-String _$memoControllerHash() => r'57eb11e96e5d601462aee263bae3e2a9b49d2612';
+String _$memoControllerHash() => r'b1b58c38ee916161f32d0f27bff66f029d8cfaf4';
 
 /// See also [MemoController].
 @ProviderFor(MemoController)
