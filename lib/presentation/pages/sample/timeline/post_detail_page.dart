@@ -7,10 +7,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/share_extension.dart';
 import '../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_poster.dart';
 import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
@@ -127,15 +127,10 @@ class PostDetailPage extends HookConsumerWidget {
                   }
 
                   if (result == MenuResultType.share) {
-                    final box = context.findRenderObject() as RenderBox?;
-                    if (box == null) {
-                      return;
-                    }
                     unawaited(
-                      Share.share(
+                      ShareExtension.shareText(
+                        context,
                         text,
-                        sharePositionOrigin:
-                            box.localToGlobal(Offset.zero) & box.size,
                       ),
                     );
                   } else if (result == MenuResultType.copy) {

@@ -12,6 +12,7 @@ Future<int> fetchTimelinePostCount(FetchTimelinePostCountRef ref) async {
       .watch(collectionRepositoryProvider)
       .group(Post.collectionName)
       .count();
+  // TODO(shohei): Firestoreのバージョンを上げたら0件になった。バグ？
   final snap = await query.get();
   return snap.count;
 }

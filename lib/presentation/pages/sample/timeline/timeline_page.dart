@@ -217,6 +217,7 @@ class TimelinePage extends HookConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: null,
         onPressed: () {
           EditPostPage.push(context);
         },

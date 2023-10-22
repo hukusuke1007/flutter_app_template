@@ -4,10 +4,10 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../../extensions/context_extension.dart';
+import '../../../../../extensions/share_extension.dart';
 import '../../../../../model/entities/sample/developer.dart';
 import '../../../../../model/entities/sample/timeline/post.dart';
 import '../../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
@@ -121,17 +121,10 @@ class TimelineTile extends HookConsumerWidget {
                                     isMyData: isMyData,
                                     onTapMenu: (result) async {
                                       if (result == MenuResultType.share) {
-                                        final box = context.findRenderObject()
-                                            as RenderBox?;
-                                        if (box == null) {
-                                          return;
-                                        }
                                         unawaited(
-                                          Share.share(
+                                          ShareExtension.shareText(
+                                            context,
                                             data.text,
-                                            sharePositionOrigin:
-                                                box.localToGlobal(Offset.zero) &
-                                                    box.size,
                                           ),
                                         );
                                       } else if (result ==
