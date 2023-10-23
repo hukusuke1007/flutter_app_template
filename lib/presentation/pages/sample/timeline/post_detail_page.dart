@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:go_router/go_router.dart';
@@ -65,12 +64,13 @@ class PostDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final asyncValue =
-        ref.watch(fetchPostProvider(posterId: posterId, postId: postId));
-    final data = asyncValue.asData?.value;
-    logger.info(data?.postId);
+    final data = ref
+        .watch(fetchPostProvider(posterId: posterId, postId: postId))
+        .asData
+        ?.value;
 
     final poster = ref.watch(fetchPosterProvider(posterId)).asData?.value;
+
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData =
         data != null && myUserId != null && data.userId == myUserId;
@@ -164,117 +164,113 @@ class PostDetailPage extends HookConsumerWidget {
           ),
         ],
       ),
-      body: Scrollbar(
+      body: SingleChildScrollView(
         controller: scrollController,
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// 投稿者
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 12),
-                            child: CircleThumbnail(
-                              size: 48,
-                              url: poster?.image?.url,
-                              onTap: () {
-                                final url = poster?.image?.url;
-                                if (url != null) {
-                                  ImageViewer.show(
-                                    context,
-                                    urls: [url],
-                                  );
-                                }
-                              },
-                            ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// 投稿者
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: CircleThumbnail(
+                            size: 48,
+                            url: poster?.image?.url,
+                            onTap: () {
+                              final url = poster?.image?.url;
+                              if (url != null) {
+                                ImageViewer.show(
+                                  context,
+                                  urls: [url],
+                                );
+                              }
+                            },
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                RichText(
-                                  maxLines: 3,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: poster?.name ?? '投稿者',
-                                        style: context.bodyStyle.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: poster?.name ?? '投稿者',
+                                      style: context.bodyStyle.copyWith(
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                RichText(
-                                  maxLines: 1,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: poster?.developerId ?? '-',
-                                        style: context.smallStyle,
-                                      ),
-                                    ],
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 100,
-                            height: 48,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Text(
-                                      data?.dateLabel ?? '-',
-                                      style: context.smallStyle,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.end,
                                     ),
+                                  ],
+                                ),
+                                maxLines: 3,
+                                textAlign: TextAlign.left,
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: data?.userId ?? '-',
+                                      style: context.smallStyle,
+                                    ),
+                                  ],
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          height: 48,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    data?.dateLabel ?? '-',
+                                    style: context.smallStyle,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.end,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    /// テキスト
-                    SelectableLinkify(
-                      onOpen: (link) {
-                        launchUrlString(
-                          link.url,
-                          mode: LaunchMode.externalApplication,
-                        );
-                      },
-                      text: data?.text ?? '',
-                      style: context.bodyStyle,
-                      linkStyle: context.bodyStyle.copyWith(color: Colors.blue),
-                    ),
-                  ],
-                ),
+                  /// テキスト
+                  SelectableLinkify(
+                    onOpen: (link) {
+                      launchUrlString(
+                        link.url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
+                    text: data?.text ?? '',
+                    style: context.bodyStyle,
+                    linkStyle: context.bodyStyle.copyWith(color: Colors.blue),
+                  ),
+                ],
               ),
+            ),
 
-              const Divider(height: 1),
-            ],
-          ),
+            const Divider(height: 1),
+          ],
         ),
       ),
       floatingActionButton: isMyData
@@ -285,7 +281,6 @@ class PostDetailPage extends HookConsumerWidget {
                   args: EditPostPageArgs(
                     posterId: posterId,
                     postId: postId,
-                    oldPost: data,
                   ),
                 );
               },

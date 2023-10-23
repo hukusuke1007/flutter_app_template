@@ -10,9 +10,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
-import '../../../../model/entities/sample/timeline/post.dart';
 import '../../../../model/use_cases/sample/timeline/post/create_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/delete_post.dart';
+import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/update_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
@@ -24,15 +24,13 @@ class EditPostPageArgs extends Equatable {
   const EditPostPageArgs({
     required this.posterId,
     required this.postId,
-    required this.oldPost,
   });
 
   final String posterId;
   final String postId;
-  final Post oldPost;
 
   @override
-  List<Object?> get props => [posterId, postId, oldPost];
+  List<Object?> get props => [posterId, postId];
 }
 
 class EditPostPage extends HookConsumerWidget {
@@ -71,14 +69,20 @@ class EditPostPage extends HookConsumerWidget {
   }
 
   final EditPostPageArgs? args;
-  Post? get oldPost => args?.oldPost;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final textFormFieldKey = useFormFieldStateKey();
-
-    final isUpdatePost = oldPost != null;
+    final posterId = args?.posterId;
+    final postId = args?.postId;
+    final isUpdatePost = posterId != null && postId != null;
+    final post = isUpdatePost
+        ? ref
+            .watch(fetchPostProvider(posterId: posterId, postId: postId))
+            .asData
+            ?.value
+        : null;
 
     return GestureDetector(
       onTap: context.hideKeyboard,
@@ -97,7 +101,6 @@ class EditPostPage extends HookConsumerWidget {
             if (isUpdatePost)
               IconButton(
                 onPressed: () async {
-                  final post = oldPost;
                   if (post == null) {
                     return;
                   }
@@ -154,7 +157,7 @@ class EditPostPage extends HookConsumerWidget {
                   ),
                   TextFormField(
                     key: textFormFieldKey,
-                    initialValue: oldPost?.text ?? '',
+                    initialValue: post?.text ?? '',
                     style: context.bodyStyle,
                     decoration: const InputDecoration(
                       hintText: 'Aa',
@@ -200,15 +203,12 @@ class EditPostPage extends HookConsumerWidget {
                         try {
                           context.hideKeyboard();
                           showIndicator(context);
-                          if (isUpdatePost) {
-                            final args = this.args;
-                            if (args != null) {
-                              /// 投稿内容を更新する
-                              await ref.read(updatePostProvider)(
-                                oldPost: args.oldPost,
-                                text: text,
-                              );
-                            }
+                          if (isUpdatePost && post != null) {
+                            /// 投稿内容を更新する
+                            await ref.read(updatePostProvider)(
+                              oldPost: post,
+                              text: text,
+                            );
                           } else {
                             /// 投稿内容を作成する
                             await ref.read(createPostProvider)(text: text);

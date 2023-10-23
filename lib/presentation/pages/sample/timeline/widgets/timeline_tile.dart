@@ -65,9 +65,8 @@ class TimelineTile extends HookConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RichText(
-                              maxLines: 3,
-                              text: TextSpan(
+                            Text.rich(
+                              TextSpan(
                                 children: [
                                   TextSpan(
                                     text: poster?.name ?? '投稿者',
@@ -77,11 +76,11 @@ class TimelineTile extends HookConsumerWidget {
                                   ),
                                 ],
                               ),
+                              maxLines: 3,
                               textAlign: TextAlign.left,
                             ),
-                            RichText(
-                              maxLines: 1,
-                              text: TextSpan(
+                            Text.rich(
+                              TextSpan(
                                 children: [
                                   TextSpan(
                                     text: data.userId,
@@ -89,6 +88,7 @@ class TimelineTile extends HookConsumerWidget {
                                   ),
                                 ],
                               ),
+                              maxLines: 1,
                               textAlign: TextAlign.left,
                             ),
                           ],
