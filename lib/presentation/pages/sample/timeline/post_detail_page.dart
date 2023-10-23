@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,8 @@ import 'timeline_page.dart';
 
 class PostDetailPage extends HookConsumerWidget {
   const PostDetailPage({
-    required this.args,
+    required this.posterId,
+    required this.postId,
     super.key,
   });
 
@@ -34,42 +36,49 @@ class PostDetailPage extends HookConsumerWidget {
   /// go_routerの画面遷移
   static void push(
     BuildContext context, {
-    required FetchPostArgs args,
+    required String posterId,
+    required String postId,
   }) {
-    context.push(pagePath, extra: args);
+    context.push(pagePath, extra: (posterId, postId));
   }
 
   /// 従来の画面遷移
   static Future<void> showNav1(
     BuildContext context, {
-    required FetchPostArgs args,
+    required String posterId,
+    required String postId,
   }) {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         settings: RouteSettings(name: pageName),
         builder: (_) => PostDetailPage(
-          args: args,
+          posterId: posterId,
+          postId: postId,
         ),
       ),
     );
   }
 
-  final FetchPostArgs args;
+  final String posterId;
+  final String postId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final asyncValue = ref.watch(fetchPostProvider(args));
+    final asyncValue =
+        ref.watch(fetchPostProvider(posterId: posterId, postId: postId));
     final data = asyncValue.asData?.value;
+    logger.info(data?.postId);
 
-    final poster = ref.watch(fetchPosterProvider(args.userId)).asData?.value;
+    final poster = ref.watch(fetchPosterProvider(posterId)).asData?.value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData =
         data != null && myUserId != null && data.userId == myUserId;
 
     useEffectOnce(() {
-      Future(() async {
-        final value = await ref.read(fetchPostProvider(args).future);
+      Future.microtask(() async {
+        final value = await ref
+            .read(fetchPostProvider(posterId: posterId, postId: postId).future);
         if (value == null) {
           await showOkAlertDialog(
             context: context,
@@ -274,7 +283,8 @@ class PostDetailPage extends HookConsumerWidget {
                 EditPostPage.push(
                   context,
                   args: EditPostPageArgs(
-                    fetchPostArgs: args,
+                    posterId: posterId,
+                    postId: postId,
                     oldPost: data,
                   ),
                 );

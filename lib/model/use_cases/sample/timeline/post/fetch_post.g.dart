@@ -6,7 +6,7 @@ part of 'fetch_post.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchPostHash() => r'0499d5ecc3ea8c0db52fccee50c7a56f7c2b276b';
+String _$fetchPostHash() => r'fa46d3dbbf3e9721e1e53e7fed8d1746776fffc9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,11 +30,13 @@ class _SystemHash {
 }
 
 abstract class _$FetchPost extends BuildlessAutoDisposeAsyncNotifier<Post?> {
-  late final FetchPostArgs arg;
+  late final String posterId;
+  late final String postId;
 
-  FutureOr<Post?> build(
-    FetchPostArgs arg,
-  );
+  FutureOr<Post?> build({
+    required String posterId,
+    required String postId,
+  });
 }
 
 /// 投稿を取得
@@ -55,11 +57,13 @@ class FetchPostFamily extends Family<AsyncValue<Post?>> {
   /// 投稿を取得
   ///
   /// Copied from [FetchPost].
-  FetchPostProvider call(
-    FetchPostArgs arg,
-  ) {
+  FetchPostProvider call({
+    required String posterId,
+    required String postId,
+  }) {
     return FetchPostProvider(
-      arg,
+      posterId: posterId,
+      postId: postId,
     );
   }
 
@@ -68,7 +72,8 @@ class FetchPostFamily extends Family<AsyncValue<Post?>> {
     covariant FetchPostProvider provider,
   ) {
     return call(
-      provider.arg,
+      posterId: provider.posterId,
+      postId: provider.postId,
     );
   }
 
@@ -95,10 +100,13 @@ class FetchPostProvider
   /// 投稿を取得
   ///
   /// Copied from [FetchPost].
-  FetchPostProvider(
-    FetchPostArgs arg,
-  ) : this._internal(
-          () => FetchPost()..arg = arg,
+  FetchPostProvider({
+    required String posterId,
+    required String postId,
+  }) : this._internal(
+          () => FetchPost()
+            ..posterId = posterId
+            ..postId = postId,
           from: fetchPostProvider,
           name: r'fetchPostProvider',
           debugGetCreateSourceHash:
@@ -107,7 +115,8 @@ class FetchPostProvider
                   : _$fetchPostHash,
           dependencies: FetchPostFamily._dependencies,
           allTransitiveDependencies: FetchPostFamily._allTransitiveDependencies,
-          arg: arg,
+          posterId: posterId,
+          postId: postId,
         );
 
   FetchPostProvider._internal(
@@ -117,17 +126,20 @@ class FetchPostProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.arg,
+    required this.posterId,
+    required this.postId,
   }) : super.internal();
 
-  final FetchPostArgs arg;
+  final String posterId;
+  final String postId;
 
   @override
   FutureOr<Post?> runNotifierBuild(
     covariant FetchPost notifier,
   ) {
     return notifier.build(
-      arg,
+      posterId: posterId,
+      postId: postId,
     );
   }
 
@@ -136,13 +148,16 @@ class FetchPostProvider
     return ProviderOverride(
       origin: this,
       override: FetchPostProvider._internal(
-        () => create()..arg = arg,
+        () => create()
+          ..posterId = posterId
+          ..postId = postId,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        arg: arg,
+        posterId: posterId,
+        postId: postId,
       ),
     );
   }
@@ -154,21 +169,27 @@ class FetchPostProvider
 
   @override
   bool operator ==(Object other) {
-    return other is FetchPostProvider && other.arg == arg;
+    return other is FetchPostProvider &&
+        other.posterId == posterId &&
+        other.postId == postId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, arg.hashCode);
+    hash = _SystemHash.combine(hash, posterId.hashCode);
+    hash = _SystemHash.combine(hash, postId.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin FetchPostRef on AutoDisposeAsyncNotifierProviderRef<Post?> {
-  /// The parameter `arg` of this provider.
-  FetchPostArgs get arg;
+  /// The parameter `posterId` of this provider.
+  String get posterId;
+
+  /// The parameter `postId` of this provider.
+  String get postId;
 }
 
 class _FetchPostProviderElement
@@ -177,7 +198,9 @@ class _FetchPostProviderElement
   _FetchPostProviderElement(super.provider);
 
   @override
-  FetchPostArgs get arg => (origin as FetchPostProvider).arg;
+  String get posterId => (origin as FetchPostProvider).posterId;
+  @override
+  String get postId => (origin as FetchPostProvider).postId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

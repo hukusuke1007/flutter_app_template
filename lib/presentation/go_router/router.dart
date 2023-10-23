@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../utils/logger.dart';
 import '../../utils/provider.dart';
 import '../pages/error/error_page.dart';
@@ -155,8 +154,11 @@ final routerProvider = Provider((ref) {
                 path: PostDetailPage.pageName,
                 name: PostDetailPage.pageName,
                 builder: (_, state) {
-                  final args = state.extra! as FetchPostArgs;
-                  return PostDetailPage(args: args);
+                  final args = state.extra! as (String posterId, String postId);
+                  return PostDetailPage(
+                    posterId: args.$1,
+                    postId: args.$2,
+                  );
                 },
               ),
             ],

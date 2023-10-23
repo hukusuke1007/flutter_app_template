@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../extensions/context_extension.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_timeline_post_count.dart';
-import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../widgets/images/image_viewer.dart';
 import '../../../widgets/texts/error_text.dart';
@@ -147,10 +146,8 @@ class TimelinePage extends HookConsumerWidget {
                           onTap: () {
                             PostDetailPage.push(
                               context,
-                              args: FetchPostArgs(
-                                postId: data.postId,
-                                userId: data.userId,
-                              ),
+                              posterId: data.userId,
+                              postId: data.postId,
                             );
                           },
                           onTapAvatar: (poster) {

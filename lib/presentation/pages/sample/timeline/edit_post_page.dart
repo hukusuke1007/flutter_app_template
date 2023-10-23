@@ -13,7 +13,6 @@ import '../../../../extensions/exception_extension.dart';
 import '../../../../model/entities/sample/timeline/post.dart';
 import '../../../../model/use_cases/sample/timeline/post/create_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/delete_post.dart';
-import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../model/use_cases/sample/timeline/post/update_post.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
@@ -23,15 +22,17 @@ import 'timeline_page.dart';
 
 class EditPostPageArgs extends Equatable {
   const EditPostPageArgs({
-    required this.fetchPostArgs,
+    required this.posterId,
+    required this.postId,
     required this.oldPost,
   });
 
-  final FetchPostArgs fetchPostArgs;
+  final String posterId;
+  final String postId;
   final Post oldPost;
 
   @override
-  List<Object?> get props => [fetchPostArgs, oldPost];
+  List<Object?> get props => [posterId, postId, oldPost];
 }
 
 class EditPostPage extends HookConsumerWidget {

@@ -46,7 +46,8 @@ class UpdatePost {
     _ref
       ..invalidate(
         fetchPostProvider(
-          FetchPostArgs(postId: postId, userId: userId),
+          posterId: userId,
+          postId: postId,
         ),
       )
       ..invalidate(fetchTimelineProvider)
