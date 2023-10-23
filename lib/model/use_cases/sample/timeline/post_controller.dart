@@ -44,7 +44,7 @@ class PostController extends _$PostController {
     /**
      * タイムラインになければドキュメントから取得する
      */
-    /// キャッシュから取得して即時反映
+    /// ローカルキャッシュから取得して即時反映
     final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
           Developer.postDocPath(userId: posterId, docId: postId),
           decode: Post.fromJson,
@@ -76,7 +76,7 @@ class PostController extends _$PostController {
       text: text,
     );
 
-    /// サーバーへ保存する
+    /// サーバーへデータを作成
     await _documentRepository.save(
       Developer.postDocPath(userId: userId, docId: postId),
       data: post.toCreateDoc(),
@@ -98,7 +98,7 @@ class PostController extends _$PostController {
       return;
     }
 
-    /// サーバーへ保存する
+    /// サーバーにあるデータを更新
     await _documentRepository.update(
       Developer.postDocPath(userId: userId, docId: postId),
       data: newPost.toUpdateDoc(),
@@ -119,7 +119,7 @@ class PostController extends _$PostController {
       return;
     }
 
-    /// サーバーへ保存する
+    /// サーバーにあるデータを削除
     await _documentRepository.remove(
       Developer.postDocPath(userId: userId, docId: postId),
     );
