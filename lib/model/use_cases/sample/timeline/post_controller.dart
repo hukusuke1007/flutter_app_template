@@ -26,11 +26,10 @@ class PostController extends _$PostController {
     if (posterId == null || postId == null) {
       return null;
     }
-    final docId = postId;
 
     /// キャッシュから取得して即時反映
     final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
-          Developer.postDocPath(userId: posterId, docId: docId),
+          Developer.postDocPath(userId: posterId, docId: postId),
           decode: Post.fromJson,
         );
     if (cache.exists) {
@@ -39,14 +38,10 @@ class PostController extends _$PostController {
 
     /// サーバーから取得して最新情報を反映
     final data = await ref.watch(documentRepositoryProvider).fetch(
-          Developer.postDocPath(userId: posterId, docId: docId),
+          Developer.postDocPath(userId: posterId, docId: postId),
           decode: Post.fromJson,
         );
-    if (data.exists) {
-      return data.entity;
-    } else {
-      return null;
-    }
+    return data.entity;
   }
 
   /// 作成
