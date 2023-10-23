@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/model/use_cases/sample/timeline/post_controller.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,6 @@ import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/share_extension.dart';
 import '../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_poster.dart';
-import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
 import '../../../../utils/clipboard.dart';
 import '../../../custom_hooks/use_effect_once.dart';
 import '../../../widgets/images/image_viewer.dart';
@@ -64,10 +64,8 @@ class PostDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final data = ref
-        .watch(fetchPostProvider(posterId: posterId, postId: postId))
-        .asData
-        ?.value;
+    final provider = postControllerProvider(posterId: posterId, postId: postId);
+    final data = ref.watch(provider).asData?.value;
 
     final poster = ref.watch(fetchPosterProvider(posterId)).asData?.value;
 
@@ -77,8 +75,7 @@ class PostDetailPage extends HookConsumerWidget {
 
     useEffectOnce(() {
       Future.microtask(() async {
-        final value = await ref
-            .read(fetchPostProvider(posterId: posterId, postId: postId).future);
+        final value = await ref.read(provider.future);
         if (value == null) {
           await showOkAlertDialog(
             context: context,

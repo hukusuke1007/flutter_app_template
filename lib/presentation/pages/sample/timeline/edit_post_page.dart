@@ -10,10 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../extensions/context_extension.dart';
 import '../../../../extensions/exception_extension.dart';
-import '../../../../model/use_cases/sample/timeline/post/create_post.dart';
-import '../../../../model/use_cases/sample/timeline/post/delete_post.dart';
-import '../../../../model/use_cases/sample/timeline/post/fetch_post.dart';
-import '../../../../model/use_cases/sample/timeline/post/update_post.dart';
+import '../../../../model/use_cases/sample/timeline/post_controller.dart';
 import '../../../../utils/logger.dart';
 import '../../../custom_hooks/use_form_field_state_key.dart';
 import '../../../widgets/buttons/rounded_button.dart';
@@ -77,12 +74,11 @@ class EditPostPage extends HookConsumerWidget {
     final posterId = args?.posterId;
     final postId = args?.postId;
     final isUpdatePost = posterId != null && postId != null;
-    final post = isUpdatePost
-        ? ref
-            .watch(fetchPostProvider(posterId: posterId, postId: postId))
-            .asData
-            ?.value
-        : null;
+    final provider = postControllerProvider(posterId: posterId, postId: postId);
+    final post = ref
+        .watch(postControllerProvider(posterId: posterId, postId: postId))
+        .asData
+        ?.value;
 
     return GestureDetector(
       onTap: context.hideKeyboard,
@@ -114,7 +110,7 @@ class EditPostPage extends HookConsumerWidget {
                   }
                   try {
                     showIndicator(context);
-                    await ref.read(deletePostProvider)(post);
+                    await ref.read(provider.notifier).onDelete();
                     dismissIndicator(context);
                     context
                       ..showSnackBar('削除しました')
@@ -205,13 +201,14 @@ class EditPostPage extends HookConsumerWidget {
                           showIndicator(context);
                           if (isUpdatePost && post != null) {
                             /// 投稿内容を更新する
-                            await ref.read(updatePostProvider)(
-                              oldPost: post,
-                              text: text,
-                            );
+                            await ref
+                                .read(provider.notifier)
+                                .onUpdate(text: text);
                           } else {
                             /// 投稿内容を作成する
-                            await ref.read(createPostProvider)(text: text);
+                            await ref
+                                .read(provider.notifier)
+                                .onCreate(text: text);
                           }
                           dismissIndicator(context);
                           context

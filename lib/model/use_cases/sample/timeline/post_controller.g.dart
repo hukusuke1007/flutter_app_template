@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fetch_post.dart';
+part of 'post_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchPostHash() => r'fa46d3dbbf3e9721e1e53e7fed8d1746776fffc9';
+String _$postControllerHash() => r'a22be3868b6112b19331625a34fdb90c0124f4a5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,47 +29,40 @@ class _SystemHash {
   }
 }
 
-abstract class _$FetchPost extends BuildlessAutoDisposeAsyncNotifier<Post?> {
-  late final String posterId;
-  late final String postId;
+abstract class _$PostController
+    extends BuildlessAutoDisposeAsyncNotifier<Post?> {
+  late final String? posterId;
+  late final String? postId;
 
   FutureOr<Post?> build({
-    required String posterId,
-    required String postId,
+    required String? posterId,
+    required String? postId,
   });
 }
 
-/// 投稿を取得
-///
-/// Copied from [FetchPost].
-@ProviderFor(FetchPost)
-const fetchPostProvider = FetchPostFamily();
+/// See also [PostController].
+@ProviderFor(PostController)
+const postControllerProvider = PostControllerFamily();
 
-/// 投稿を取得
-///
-/// Copied from [FetchPost].
-class FetchPostFamily extends Family<AsyncValue<Post?>> {
-  /// 投稿を取得
-  ///
-  /// Copied from [FetchPost].
-  const FetchPostFamily();
+/// See also [PostController].
+class PostControllerFamily extends Family<AsyncValue<Post?>> {
+  /// See also [PostController].
+  const PostControllerFamily();
 
-  /// 投稿を取得
-  ///
-  /// Copied from [FetchPost].
-  FetchPostProvider call({
-    required String posterId,
-    required String postId,
+  /// See also [PostController].
+  PostControllerProvider call({
+    required String? posterId,
+    required String? postId,
   }) {
-    return FetchPostProvider(
+    return PostControllerProvider(
       posterId: posterId,
       postId: postId,
     );
   }
 
   @override
-  FetchPostProvider getProviderOverride(
-    covariant FetchPostProvider provider,
+  PostControllerProvider getProviderOverride(
+    covariant PostControllerProvider provider,
   ) {
     return call(
       posterId: provider.posterId,
@@ -89,37 +82,34 @@ class FetchPostFamily extends Family<AsyncValue<Post?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'fetchPostProvider';
+  String? get name => r'postControllerProvider';
 }
 
-/// 投稿を取得
-///
-/// Copied from [FetchPost].
-class FetchPostProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<FetchPost, Post?> {
-  /// 投稿を取得
-  ///
-  /// Copied from [FetchPost].
-  FetchPostProvider({
-    required String posterId,
-    required String postId,
+/// See also [PostController].
+class PostControllerProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<PostController, Post?> {
+  /// See also [PostController].
+  PostControllerProvider({
+    required String? posterId,
+    required String? postId,
   }) : this._internal(
-          () => FetchPost()
+          () => PostController()
             ..posterId = posterId
             ..postId = postId,
-          from: fetchPostProvider,
-          name: r'fetchPostProvider',
+          from: postControllerProvider,
+          name: r'postControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$fetchPostHash,
-          dependencies: FetchPostFamily._dependencies,
-          allTransitiveDependencies: FetchPostFamily._allTransitiveDependencies,
+                  : _$postControllerHash,
+          dependencies: PostControllerFamily._dependencies,
+          allTransitiveDependencies:
+              PostControllerFamily._allTransitiveDependencies,
           posterId: posterId,
           postId: postId,
         );
 
-  FetchPostProvider._internal(
+  PostControllerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -130,12 +120,12 @@ class FetchPostProvider
     required this.postId,
   }) : super.internal();
 
-  final String posterId;
-  final String postId;
+  final String? posterId;
+  final String? postId;
 
   @override
   FutureOr<Post?> runNotifierBuild(
-    covariant FetchPost notifier,
+    covariant PostController notifier,
   ) {
     return notifier.build(
       posterId: posterId,
@@ -144,10 +134,10 @@ class FetchPostProvider
   }
 
   @override
-  Override overrideWith(FetchPost Function() create) {
+  Override overrideWith(PostController Function() create) {
     return ProviderOverride(
       origin: this,
-      override: FetchPostProvider._internal(
+      override: PostControllerProvider._internal(
         () => create()
           ..posterId = posterId
           ..postId = postId,
@@ -163,13 +153,14 @@ class FetchPostProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<FetchPost, Post?> createElement() {
-    return _FetchPostProviderElement(this);
+  AutoDisposeAsyncNotifierProviderElement<PostController, Post?>
+      createElement() {
+    return _PostControllerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchPostProvider &&
+    return other is PostControllerProvider &&
         other.posterId == posterId &&
         other.postId == postId;
   }
@@ -184,23 +175,23 @@ class FetchPostProvider
   }
 }
 
-mixin FetchPostRef on AutoDisposeAsyncNotifierProviderRef<Post?> {
+mixin PostControllerRef on AutoDisposeAsyncNotifierProviderRef<Post?> {
   /// The parameter `posterId` of this provider.
-  String get posterId;
+  String? get posterId;
 
   /// The parameter `postId` of this provider.
-  String get postId;
+  String? get postId;
 }
 
-class _FetchPostProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<FetchPost, Post?>
-    with FetchPostRef {
-  _FetchPostProviderElement(super.provider);
+class _PostControllerProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<PostController, Post?>
+    with PostControllerRef {
+  _PostControllerProviderElement(super.provider);
 
   @override
-  String get posterId => (origin as FetchPostProvider).posterId;
+  String? get posterId => (origin as PostControllerProvider).posterId;
   @override
-  String get postId => (origin as FetchPostProvider).postId;
+  String? get postId => (origin as PostControllerProvider).postId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
