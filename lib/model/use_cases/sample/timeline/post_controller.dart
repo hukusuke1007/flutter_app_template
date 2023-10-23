@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../entities/sample/developer.dart';
@@ -27,6 +28,22 @@ class PostController extends _$PostController {
       return null;
     }
 
+    /**
+     * タイムラインから取得する
+     */
+    final dataOfTimeline = ref.watch(
+      fetchTimelineProvider.select(
+        (value) =>
+            value.asData?.value.firstWhereOrNull((e) => e.postId == postId),
+      ),
+    );
+    if (dataOfTimeline != null) {
+      return dataOfTimeline;
+    }
+
+    /**
+     * タイムラインになければドキュメントから取得する
+     */
     /// キャッシュから取得して即時反映
     final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
           Developer.postDocPath(userId: posterId, docId: postId),
