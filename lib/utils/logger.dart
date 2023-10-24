@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:simple_logger/simple_logger.dart';
 
 late SimpleLogger _logger;
@@ -8,8 +9,8 @@ class Logger {
   static void configure() {
     _logger = SimpleLogger()
       ..setLevel(
-        Level.FINE,
-        includeCallerInfo: true,
+        kDebugMode ? Level.FINE : Level.OFF,
+        includeCallerInfo: kDebugMode,
       );
   }
 }

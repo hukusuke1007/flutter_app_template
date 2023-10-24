@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,7 +15,7 @@ GithubApiClient githubApiClient(GithubApiClientRef ref) {
     Dio(dioDefaultOptions)
       ..interceptors.addAll(
         [
-          LogInterceptor(requestBody: true, responseBody: true),
+          if (kDebugMode) LogInterceptor(requestBody: true, responseBody: true),
           authHeaderInterceptor,
         ],
       ),

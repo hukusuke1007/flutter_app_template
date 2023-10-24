@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,7 +30,7 @@ final routerProvider = Provider((ref) {
   return GoRouter(
     navigatorKey: navigatorKey,
     initialLocation: StartUpPage.pagePath,
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: kDebugMode,
     observers: [transitionObserver],
     routes: [
       /// 起動画面
