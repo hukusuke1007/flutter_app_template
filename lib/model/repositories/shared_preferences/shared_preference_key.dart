@@ -1,8 +1,8 @@
 enum SharedPreferencesKey {
   /// サンプル
-  sampleLocalCounter,
-}
+  sampleLocalCounter('sampleLocalCounter'),
+  ;
 
-extension SharedPreferencesKeyExtension on SharedPreferencesKey {
-  String get value => name;
+  const SharedPreferencesKey(this.value);
+  final String value;
 }

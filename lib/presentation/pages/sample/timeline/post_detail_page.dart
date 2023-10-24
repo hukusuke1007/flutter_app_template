@@ -11,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../extensions/context_extension.dart';
+import '../../../../extensions/selectable_linkify_extension.dart';
 import '../../../../extensions/share_extension.dart';
 import '../../../../model/use_cases/sample/auth/fetch_my_user_id.dart';
 import '../../../../model/use_cases/sample/timeline/fetch_poster.dart';
@@ -261,6 +262,8 @@ class PostDetailPage extends HookConsumerWidget {
                     text: data?.text ?? '',
                     style: context.bodyStyle,
                     linkStyle: context.bodyStyle.copyWith(color: Colors.blue),
+                    contextMenuBuilder:
+                        SelectableLinkifyExtension.defaultContextMenuBuilder,
                   ),
                 ],
               ),

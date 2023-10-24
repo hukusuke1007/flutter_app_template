@@ -29,7 +29,7 @@ class AnalyticsLogger {
     Map<String, dynamic>? params,
   }) async {
     await _analytics.logEvent(
-      name: event.valueWithSnakeCase,
+      name: event.value,
       parameters: params,
     );
   }

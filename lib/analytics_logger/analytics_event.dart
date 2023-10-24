@@ -1,10 +1,9 @@
-import 'package:recase/recase.dart';
-
 enum AnalyticsEvent {
-  signOut,
+  signOut('sign_out'),
   ;
 
-  String get valueWithSnakeCase => ReCase(name).snakeCase;
+  const AnalyticsEvent(this.value);
+  final String value;
 }
 
 extension AnalyticsEventParams on AnalyticsEvent {
