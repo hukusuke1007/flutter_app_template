@@ -58,6 +58,7 @@ Flutter Stable 3.13.8
 - MethodChannelとEventChannelのサンプルコード
   - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
 - その他アプリに必要なライブラリを設定済み
+- fvm
 - Unit tests（オフラインテスト）
 - Widget tests（オフラインテスト）
 - Integration tests（E2Eテスト）
@@ -66,7 +67,6 @@ Flutter Stable 3.13.8
 
 ## やっていないこと
 
-- fvm
 - Android/iOS ローカル通知とプッシュ通知の設定
 - Android の keystore の設定（debug, release）
 - ローカライズ対応
