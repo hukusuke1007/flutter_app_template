@@ -84,11 +84,11 @@ class _$StorageFileCopyWithImpl<$Res, $Val extends StorageFile>
 }
 
 /// @nodoc
-abstract class _$$_StorageFileCopyWith<$Res>
+abstract class _$$StorageFileImplCopyWith<$Res>
     implements $StorageFileCopyWith<$Res> {
-  factory _$$_StorageFileCopyWith(
-          _$_StorageFile value, $Res Function(_$_StorageFile) then) =
-      __$$_StorageFileCopyWithImpl<$Res>;
+  factory _$$StorageFileImplCopyWith(
+          _$StorageFileImpl value, $Res Function(_$StorageFileImpl) then) =
+      __$$StorageFileImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_StorageFileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StorageFileCopyWithImpl<$Res>
-    extends _$StorageFileCopyWithImpl<$Res, _$_StorageFile>
-    implements _$$_StorageFileCopyWith<$Res> {
-  __$$_StorageFileCopyWithImpl(
-      _$_StorageFile _value, $Res Function(_$_StorageFile) _then)
+class __$$StorageFileImplCopyWithImpl<$Res>
+    extends _$StorageFileCopyWithImpl<$Res, _$StorageFileImpl>
+    implements _$$StorageFileImplCopyWith<$Res> {
+  __$$StorageFileImplCopyWithImpl(
+      _$StorageFileImpl _value, $Res Function(_$StorageFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_StorageFileCopyWithImpl<$Res>
     Object? mimeType = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(_$_StorageFile(
+    return _then(_$StorageFileImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_StorageFileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StorageFile extends _StorageFile {
-  _$_StorageFile(
+class _$StorageFileImpl extends _StorageFile {
+  _$StorageFileImpl(
       {required this.url,
       required this.path,
       this.mimeType,
@@ -146,8 +146,8 @@ class _$_StorageFile extends _StorageFile {
       : _metadata = metadata,
         super._();
 
-  factory _$_StorageFile.fromJson(Map<String, dynamic> json) =>
-      _$$_StorageFileFromJson(json);
+  factory _$StorageFileImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StorageFileImplFromJson(json);
 
   @override
   final String url;
@@ -174,7 +174,7 @@ class _$_StorageFile extends _StorageFile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StorageFile &&
+            other is _$StorageFileImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.mimeType, mimeType) ||
@@ -190,12 +190,12 @@ class _$_StorageFile extends _StorageFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
-      __$$_StorageFileCopyWithImpl<_$_StorageFile>(this, _$identity);
+  _$$StorageFileImplCopyWith<_$StorageFileImpl> get copyWith =>
+      __$$StorageFileImplCopyWithImpl<_$StorageFileImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StorageFileToJson(
+    return _$$StorageFileImplToJson(
       this,
     );
   }
@@ -206,11 +206,11 @@ abstract class _StorageFile extends StorageFile {
       {required final String url,
       required final String path,
       final String? mimeType,
-      final Map<String, String>? metadata}) = _$_StorageFile;
+      final Map<String, String>? metadata}) = _$StorageFileImpl;
   _StorageFile._() : super._();
 
   factory _StorageFile.fromJson(Map<String, dynamic> json) =
-      _$_StorageFile.fromJson;
+      _$StorageFileImpl.fromJson;
 
   @override
   String get url;
@@ -222,6 +222,6 @@ abstract class _StorageFile extends StorageFile {
   Map<String, String>? get metadata;
   @override
   @JsonKey(ignore: true)
-  _$$_StorageFileCopyWith<_$_StorageFile> get copyWith =>
+  _$$StorageFileImplCopyWith<_$StorageFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

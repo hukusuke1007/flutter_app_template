@@ -6,7 +6,7 @@ part of 'memo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => _$_Memo(
+_$MemoImpl _$$MemoImplFromJson(Map<String, dynamic> json) => _$MemoImpl(
       memoId: json['memoId'] as String?,
       text: json['text'] as String?,
       createdAt: const DateTimeTimestampConverter()
@@ -15,7 +15,8 @@ _$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => _$_Memo(
           .fromJson(json['updatedAt'] as Timestamp?),
     );
 
-Map<String, dynamic> _$$_MemoToJson(_$_Memo instance) => <String, dynamic>{
+Map<String, dynamic> _$$MemoImplToJson(_$MemoImpl instance) =>
+    <String, dynamic>{
       'memoId': instance.memoId,
       'text': instance.text,
       'createdAt':

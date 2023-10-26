@@ -43,30 +43,35 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Stream<_i2.User?>.empty(),
         returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
       ) as _i4.Stream<_i2.User?>);
+
   @override
   _i4.Stream<_i2.User?> get onUserChanged => (super.noSuchMethod(
         Invocation.getter(#onUserChanged),
         returnValue: _i4.Stream<_i2.User?>.empty(),
         returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
       ) as _i4.Stream<_i2.User?>);
+
   @override
   bool get isAnonymously => (super.noSuchMethod(
         Invocation.getter(#isAnonymously),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get isEmailVerified => (super.noSuchMethod(
         Invocation.getter(#isEmailVerified),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i4.Future<String?> get idToken => (super.noSuchMethod(
         Invocation.getter(#idToken),
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<_i2.UserCredential> signInWithAnonymously() => (super.noSuchMethod(
         Invocation.method(
@@ -89,6 +94,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.UserCredential>);
+
   @override
   _i4.Future<_i2.UserCredential> signInWithAuthCredential(
           _i2.AuthCredential? authCredential) =>
@@ -113,6 +119,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.UserCredential>);
+
   @override
   _i4.Future<_i2.UserCredential> createUserWithEmailAndPassword(
     String? email,
@@ -148,6 +155,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.UserCredential>);
+
   @override
   _i4.Future<_i2.UserCredential> signInWithEmailAndPassword(
     String? email,
@@ -183,6 +191,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.UserCredential>);
+
   @override
   _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -192,6 +201,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> sendPasswordResetEmail(String? email) => (super.noSuchMethod(
         Invocation.method(
@@ -201,6 +211,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> changeEmailPassword({
     required String? email,
@@ -220,6 +231,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<_i2.UserCredential> signInWithLink(
           _i2.AuthCredential? authCredential) =>
@@ -244,6 +256,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.UserCredential>);
+
   @override
   _i4.Future<String?> getIdToken({bool? forceRefresh = false}) =>
       (super.noSuchMethod(
@@ -255,6 +268,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<_i2.IdTokenResult?> getIdTokenResult(
           {bool? forceRefresh = false}) =>
@@ -267,6 +281,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<_i2.IdTokenResult?>.value(),
         returnValueForMissingStub: _i4.Future<_i2.IdTokenResult?>.value(),
       ) as _i4.Future<_i2.IdTokenResult?>);
+
   @override
   _i4.Future<Map<String, dynamic>?> getClaim({bool? forceRefresh = false}) =>
       (super.noSuchMethod(
@@ -278,6 +293,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<Map<String, dynamic>?>.value(),
         returnValueForMissingStub: _i4.Future<Map<String, dynamic>?>.value(),
       ) as _i4.Future<Map<String, dynamic>?>);
+
   @override
   _i4.Future<void> userDelete(_i2.User? user) => (super.noSuchMethod(
         Invocation.method(
@@ -287,6 +303,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(

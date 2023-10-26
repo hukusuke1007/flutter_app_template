@@ -43,6 +43,7 @@ class MockSharedPreferencesRepository extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   T? fetch<T>(_i4.SharedPreferencesKey? key) => (super.noSuchMethod(
         Invocation.method(
@@ -51,6 +52,7 @@ class MockSharedPreferencesRepository extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       ) as T?);
+
   @override
   _i3.Future<bool> remove(_i4.SharedPreferencesKey? key) => (super.noSuchMethod(
         Invocation.method(

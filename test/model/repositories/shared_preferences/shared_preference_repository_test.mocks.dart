@@ -32,6 +32,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: <String>{},
         returnValueForMissingStub: <String>{},
       ) as Set<String>);
+
   @override
   Object? get(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -40,6 +41,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as Object?);
+
   @override
   bool? getBool(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -48,6 +50,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as bool?);
+
   @override
   int? getInt(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -56,6 +59,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as int?);
+
   @override
   double? getDouble(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -64,6 +68,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as double?);
+
   @override
   String? getString(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -72,6 +77,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as String?);
+
   @override
   bool containsKey(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -81,6 +87,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   List<String>? getStringList(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -89,6 +96,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         ),
         returnValueForMissingStub: null,
       ) as List<String>?);
+
   @override
   _i3.Future<bool> setBool(
     String? key,
@@ -105,6 +113,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> setInt(
     String? key,
@@ -121,6 +130,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> setDouble(
     String? key,
@@ -137,6 +147,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> setString(
     String? key,
@@ -153,6 +164,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> setStringList(
     String? key,
@@ -169,6 +181,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> remove(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -178,6 +191,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> commit() => (super.noSuchMethod(
         Invocation.method(
@@ -187,6 +201,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> clear() => (super.noSuchMethod(
         Invocation.method(
@@ -196,6 +211,7 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(

@@ -6,7 +6,8 @@ part of 'developer.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Developer _$$_DeveloperFromJson(Map<String, dynamic> json) => _$_Developer(
+_$DeveloperImpl _$$DeveloperImplFromJson(Map<String, dynamic> json) =>
+    _$DeveloperImpl(
       developerId: json['developerId'] as String?,
       name: json['name'] as String?,
       image: json['image'] == null
@@ -20,7 +21,7 @@ _$_Developer _$$_DeveloperFromJson(Map<String, dynamic> json) => _$_Developer(
           .fromJson(json['updatedAt'] as Timestamp?),
     );
 
-Map<String, dynamic> _$$_DeveloperToJson(_$_Developer instance) =>
+Map<String, dynamic> _$$DeveloperImplToJson(_$DeveloperImpl instance) =>
     <String, dynamic>{
       'developerId': instance.developerId,
       'name': instance.name,

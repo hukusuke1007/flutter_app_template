@@ -89,7 +89,7 @@ class _GithubApiClient implements GithubApiClient {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$githubApiClientHash() => r'caa0351a600976320da92b9be79e19c67b52c94e';
+String _$githubApiClientHash() => r'42f62961f13c614efe5b6a3702ea8f44c44f91de';
 
 /// See also [githubApiClient].
 @ProviderFor(githubApiClient)

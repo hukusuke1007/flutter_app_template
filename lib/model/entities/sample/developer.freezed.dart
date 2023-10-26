@@ -114,10 +114,11 @@ class _$DeveloperCopyWithImpl<$Res, $Val extends Developer>
 }
 
 /// @nodoc
-abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
-  factory _$$_DeveloperCopyWith(
-          _$_Developer value, $Res Function(_$_Developer) then) =
-      __$$_DeveloperCopyWithImpl<$Res>;
+abstract class _$$DeveloperImplCopyWith<$Res>
+    implements $DeveloperCopyWith<$Res> {
+  factory _$$DeveloperImplCopyWith(
+          _$DeveloperImpl value, $Res Function(_$DeveloperImpl) then) =
+      __$$DeveloperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -133,11 +134,11 @@ abstract class _$$_DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeveloperCopyWithImpl<$Res>
-    extends _$DeveloperCopyWithImpl<$Res, _$_Developer>
-    implements _$$_DeveloperCopyWith<$Res> {
-  __$$_DeveloperCopyWithImpl(
-      _$_Developer _value, $Res Function(_$_Developer) _then)
+class __$$DeveloperImplCopyWithImpl<$Res>
+    extends _$DeveloperCopyWithImpl<$Res, _$DeveloperImpl>
+    implements _$$DeveloperImplCopyWith<$Res> {
+  __$$DeveloperImplCopyWithImpl(
+      _$DeveloperImpl _value, $Res Function(_$DeveloperImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +151,7 @@ class __$$_DeveloperCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_Developer(
+    return _then(_$DeveloperImpl(
       developerId: freezed == developerId
           ? _value.developerId
           : developerId // ignore: cast_nullable_to_non_nullable
@@ -181,8 +182,8 @@ class __$$_DeveloperCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Developer extends _Developer {
-  const _$_Developer(
+class _$DeveloperImpl extends _Developer {
+  const _$DeveloperImpl(
       {this.developerId,
       this.name,
       this.image,
@@ -191,8 +192,8 @@ class _$_Developer extends _Developer {
       @DateTimeTimestampConverter() this.updatedAt})
       : super._();
 
-  factory _$_Developer.fromJson(Map<String, dynamic> json) =>
-      _$$_DeveloperFromJson(json);
+  factory _$DeveloperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DeveloperImplFromJson(json);
 
   @override
   final String? developerId;
@@ -219,7 +220,7 @@ class _$_Developer extends _Developer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Developer &&
+            other is _$DeveloperImpl &&
             (identical(other.developerId, developerId) ||
                 other.developerId == developerId) &&
             (identical(other.name, name) || other.name == name) &&
@@ -240,12 +241,12 @@ class _$_Developer extends _Developer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeveloperCopyWith<_$_Developer> get copyWith =>
-      __$$_DeveloperCopyWithImpl<_$_Developer>(this, _$identity);
+  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
+      __$$DeveloperImplCopyWithImpl<_$DeveloperImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DeveloperToJson(
+    return _$$DeveloperImplToJson(
       this,
     );
   }
@@ -253,16 +254,17 @@ class _$_Developer extends _Developer {
 
 abstract class _Developer extends Developer {
   const factory _Developer(
-      {final String? developerId,
-      final String? name,
-      final StorageFile? image,
-      @DateTimeTimestampConverter() final DateTime? birthdate,
-      @DateTimeTimestampConverter() final DateTime? createdAt,
-      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$_Developer;
+          {final String? developerId,
+          final String? name,
+          final StorageFile? image,
+          @DateTimeTimestampConverter() final DateTime? birthdate,
+          @DateTimeTimestampConverter() final DateTime? createdAt,
+          @DateTimeTimestampConverter() final DateTime? updatedAt}) =
+      _$DeveloperImpl;
   const _Developer._() : super._();
 
   factory _Developer.fromJson(Map<String, dynamic> json) =
-      _$_Developer.fromJson;
+      _$DeveloperImpl.fromJson;
 
   @override
   String? get developerId;
@@ -281,6 +283,6 @@ abstract class _Developer extends Developer {
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_DeveloperCopyWith<_$_Developer> get copyWith =>
+  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
