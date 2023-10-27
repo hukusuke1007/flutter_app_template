@@ -2,5 +2,6 @@
     "cSpell.words": [
         "subosito"
     ],
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "dart.flutterSdkPath": ".fvm/flutter_sdk"
 }
