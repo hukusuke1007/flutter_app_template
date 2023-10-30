@@ -1,38 +1,42 @@
-# name: flutter_analyze
+name: flutter_analyze
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-#   pull_request:
-#     branches:
-#       - main
+  pull_request:
+    branches:
+      - main
 
-# jobs:
-#   lint:
-#     strategy:
-#       matrix:
-#         os: [macos-12]
-#         flutter-version: ['3.13.8']
-#         flutter-channel: [stable]
+jobs:
+  lint:
+    strategy:
+      matrix:
+        os: [macos-12]
+        flutter-version: ['3.13.9']
+        flutter-channel: [stable]
 
-#     name: flutter_analyze
-#     runs-on: ${{ matrix.os }}
-#     steps:
-#       - name: set up repository
-#         uses: actions/checkout@v3
-#       - name: set up flutter
-#         uses: subosito/flutter-action@v2
-#         with:
-#           flutter-version: ${{ matrix.flutter-version }}
-#           channel: ${{ matrix.flutter-channel }}
-#           cache: false
-#       - name: flutter doctor
-#         run: flutter doctor -v
-#       - name: flutter pub get
-#         run: flutter pub get
-#       - name: flutter analyze
-#         run: flutter analyze
-#       - name: flutter test
-#         run: flutter test
+    name: flutter_analyze
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: set up repository
+        uses: actions/checkout@v3
+      - name: set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: ${{ matrix.flutter-channel }}
+          cache: false
+      - name: flutter doctor
+        working-directory: ./feature_first
+        run: flutter doctor -v
+      - name: flutter pub get
+        working-directory: ./feature_first
+        run: flutter pub get
+      - name: flutter analyze
+        working-directory: ./feature_first
+        run: flutter analyze
+      - name: flutter test
+        working-directory: ./feature_first
+        run: flutter test
