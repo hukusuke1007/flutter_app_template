@@ -221,7 +221,7 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
     rm -rf .git
     ```
 
-3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り、手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
+3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
 
     - アプリ名を変更する
       - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
