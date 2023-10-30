@@ -1,0 +1,5 @@
+bricks:
+  feature:
+    git:
+      url: https://github.com/never-inc/mason.git
+      path: bricks/feature
