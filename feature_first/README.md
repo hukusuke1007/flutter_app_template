@@ -70,7 +70,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 
 ## 設計指針
 
-[こちらの資料](https://docs.google.com/presentation/d/19XERQBG-aWWD7R5NEJCyS8VXSeUL9KTENOe0ChYz_1M)にまとめました。
+TODO
 
 ### ディレクトリ構成
 

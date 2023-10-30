@@ -5,8 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../core/utils/tab_tap_operation_provider.dart';
+import '../../github_users/pages/github_users_page.dart';
+import '../../home/pages/home_page.dart';
+import '../../memo/pages/memo_page.dart';
+import '../../setting/pages/setting_page.dart';
 import 'widgets/tab_navigator.dart';
-import 'widgets_provider.dart';
 
 class MainPage extends HookConsumerWidget {
   const MainPage({super.key});
@@ -32,7 +35,33 @@ class MainPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final widgets = ref.watch(widgetsProvider);
+    final widgetsState =
+        useState<List<(GlobalKey<NavigatorState>, String, Widget)>>(
+      [
+        (
+          GlobalKey<NavigatorState>(),
+          HomePage.pageName,
+          const HomePage(),
+        ),
+        (
+          GlobalKey<NavigatorState>(),
+          GithubUsersPage.pageName,
+          const GithubUsersPage()
+        ),
+        (
+          GlobalKey<NavigatorState>(),
+          MemoPage.pageName,
+          const MemoPage(),
+        ),
+        (
+          GlobalKey<NavigatorState>(),
+          SettingPage.pageName,
+          const SettingPage(),
+        ),
+      ],
+    );
+    final widgets = widgetsState.value;
+
     final selectedTabIndexState = useState(0);
     final selectedTabIndex = selectedTabIndexState.value;
 
@@ -86,7 +115,7 @@ class MainPage extends HookConsumerWidget {
           onTap: (index) {
             /// 同じタブが選択されたことを通知する
             if (index == selectedTabIndex) {
-              final pageName = ref.read(widgetsProvider)[index].$2;
+              final pageName = widgets[index].$2;
               ref
                   .read(tabTapOperationProviders(pageName))
                   .call(TabTapOperationType.duplication);
