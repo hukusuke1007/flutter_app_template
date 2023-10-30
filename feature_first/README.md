@@ -207,19 +207,19 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
 ## 新規プロジェクトへの移行方法
 
-1.  git clone で取り込む
+1. git clone で取り込む
 
-    ```
+    ```sh
     git clone https://github.com/hukusuke1007/flutter_app_template.git
     ```
 
-2.  取り込んだら .git を削除する
+2. 取り込み後、`.git`を削除する
 
-    ```
+    ```sh
     rm -rf .git
     ```
 
-3.  変更したいアプリ名、パッケージ名、プロジェクト名 にする
+3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする
 
     - アプリ名を変更する
       - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
@@ -253,7 +253,7 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
           （例）`com.example.app` から `com.never.jp` へ変更した場合
 
-          ```
+          ```md
             変更前: android/app/src/main/kotlin/com/example/app
             変更後: android/app/src/main/kotlin/com/never/jp
           ```
@@ -264,14 +264,14 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
         （例）`flutter_app_template`　から `never_app` へ変更
 
-        ```
+        ```md
           変更前: flutter_app_template/
           変更後: never_app/
         ```
 
       - [pubspec.yaml の name](./pubspec.yaml#L1)
 
-4.  新しい Firebase プロジェクトを構築する。
+4. 新しい Firebase プロジェクトを構築する。
     開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
 
     - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
@@ -280,7 +280,7 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
     - Android
 
-      ```
+      ```md
       # 開発環境
       android/app/src/dev/google-services.json
       # 本番環境
@@ -289,20 +289,20 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
     - iOS
 
-      ```
+      ```md
       # 開発環境
       ios/dev/GoogleService-Info.plist
       # 本番環境
       ios/prod/GoogleService-Info.plist
       ```
 
-5.  Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
+5. Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
-6.  Flutter のライブラリを取り込む。 pub get を実行する。
+6. Flutter のライブラリを取り込む。 pub get を実行する。
     利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
-7.  [実行コマンド](#実行コマンド)を用いて動作確認する。
+7. [実行コマンド](#実行コマンド)を用いて動作確認する。
 
-8.  問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
+8. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
 
-9.  あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
+9. あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
