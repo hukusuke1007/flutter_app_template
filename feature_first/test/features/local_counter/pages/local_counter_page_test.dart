@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/core/repositories/shared_preferences/shared_preference_repository.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/features/local_counter/pages/local_counter_page.dart';
+import 'package:flutter_app_template/features/counter/pages/local_counter_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';

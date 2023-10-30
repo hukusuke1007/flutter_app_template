@@ -1,7 +1,7 @@
 import 'package:flutter_app_template/core/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/core/repositories/shared_preferences/shared_preference_repository.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/features/local_counter/use_cases/local_counter.dart';
+import 'package:flutter_app_template/features/counter/use_cases/local_counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

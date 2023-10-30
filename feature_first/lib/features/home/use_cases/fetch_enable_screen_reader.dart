@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/repositories/channel/screen_reader_repository.dart';
+import '../repositories/screen_reader_repository.dart';
 
 part 'fetch_enable_screen_reader.g.dart';
 

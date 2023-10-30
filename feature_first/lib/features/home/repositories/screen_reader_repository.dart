@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../utils/logger.dart';
+import '../../../core/utils/logger.dart';
 
 part 'screen_reader_repository.g.dart';
 
