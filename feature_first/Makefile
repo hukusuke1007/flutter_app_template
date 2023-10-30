@@ -20,7 +20,7 @@ release_build_obfuscate_android:
 
 # [iOS] リリースビルド
 release_build_ios:
-	flutter build ipa --release --split-debug-info=obfuscate/ios --dart-define=FLAVOR=prod --target lib/main.dart
+	flutter build ipa --release --dart-define=FLAVOR=prod --target lib/main.dart
 
 # [iOS + 難読化] リリースビルド
 release_build_obfuscate_ios:
