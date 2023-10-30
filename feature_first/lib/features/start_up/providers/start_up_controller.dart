@@ -12,12 +12,12 @@ enum StartUpResultType {
 final startUpControllerProvider =
     FutureProvider.autoDispose<StartUpResultType>((ref) async {
   /// ログイン状態を確認
-  final loginType = ref.read(fetchLoggedInTypeProvider)();
+  final loginType = ref.watch(fetchLoggedInTypeProvider)();
   logger.info(loginType);
 
   if (loginType == null) {
     /// ログインしていなければ匿名認証でログインする
-    await ref.read(signInWithAnonymouslyProvider)();
+    await ref.watch(signInWithAnonymouslyProvider)();
   }
 
   // TODO(shohei): 強制バージョンアップを実装する場合はここで確認して StartUpResultType.forcedVersionUpgrade を返却する
