@@ -207,19 +207,21 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 
 ## 新規プロジェクトへの移行方法
 
-1. git clone で取り込む
+1. git clone で取り込み、作業用ディレクトリへコピーする
 
     ```sh
     git clone https://github.com/hukusuke1007/flutter_app_template.git
+    cp -rf feature_first/ [作業用ディレクトリのパス]
+    cd [作業用ディレクトリのパス]
     ```
 
-2. 取り込み後、`.git`を削除する
+2. 取り込み後、作業用ディレクトリ内の`.git`を削除する
 
     ```sh
     rm -rf .git
     ```
 
-3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする
+3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り、手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
 
     - アプリ名を変更する
       - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
@@ -259,16 +261,6 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
           ```
 
     - プロジェクト名を変更する
-
-      - `flutter_app_template` のディレクトリ名を変更する
-
-        （例）`flutter_app_template`　から `never_app` へ変更
-
-        ```md
-          変更前: flutter_app_template/
-          変更後: never_app/
-        ```
-
       - [pubspec.yaml の name](./pubspec.yaml#L1)
 
 4. 新しい Firebase プロジェクトを構築する。
