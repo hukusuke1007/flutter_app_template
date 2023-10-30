@@ -6,7 +6,7 @@ part of 'local_counter.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localCounterHash() => r'e1ff7fa277df22b9cb02985961410a907ffbff56';
+String _$localCounterHash() => r'aec790379baec50aef62d7fe870ae581941b59e9';
 
 /// See also [LocalCounter].
 @ProviderFor(LocalCounter)

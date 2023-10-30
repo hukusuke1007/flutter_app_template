@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'analytics_event.dart';
 
-final analyticsLoggerProvider = Provider<AnalyticsLogger>((ref) {
-  return AnalyticsLogger(FirebaseAnalytics.instance);
-});
+part 'analytics_logger.g.dart';
+
+@Riverpod(keepAlive: true)
+AnalyticsLogger analyticsLogger(AnalyticsLoggerRef ref) =>
+    AnalyticsLogger(FirebaseAnalytics.instance);
 
 class AnalyticsLogger {
   AnalyticsLogger(this._analytics);

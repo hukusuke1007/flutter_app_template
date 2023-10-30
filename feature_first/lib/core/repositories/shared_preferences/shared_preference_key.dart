@@ -1,6 +1,5 @@
 enum SharedPreferencesKey {
-  /// サンプル
-  sampleLocalCounter('sampleLocalCounter'),
+  localCounter('localCounter'),
   ;
 
   const SharedPreferencesKey(this.value);

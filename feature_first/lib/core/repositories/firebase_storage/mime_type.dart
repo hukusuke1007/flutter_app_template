@@ -1,10 +1,7 @@
-enum MimeType { applicationOctetStream }
+enum MimeType {
+  applicationOctetStream('application/octet-stream'),
+  ;
 
-extension MimeTypeExtensio on MimeType {
-  String? get value {
-    if (this == MimeType.applicationOctetStream) {
-      return 'application/octet-stream';
-    }
-    throw AssertionError();
-  }
+  const MimeType(this.value);
+  final String value;
 }

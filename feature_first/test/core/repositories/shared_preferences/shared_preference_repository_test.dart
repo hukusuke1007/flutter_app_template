@@ -15,7 +15,7 @@ import 'shared_preference_repository_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])
 void main() {
   /// テストで利用する定数を定義
-  const key = SharedPreferencesKey.sampleLocalCounter;
+  const key = SharedPreferencesKey.localCounter;
 
   /// 前処理（テスト前に1回呼ばれる）
   setUpAll(Logger.configure);

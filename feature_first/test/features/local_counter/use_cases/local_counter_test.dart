@@ -39,11 +39,11 @@ void main() {
         /// Mockにデータをセットする
         when(
           mockSharedPreferencesRepository
-              .fetch<int>(SharedPreferencesKey.sampleLocalCounter),
+              .fetch<int>(SharedPreferencesKey.localCounter),
         ).thenAnswer((_) => 0);
         when(
           mockSharedPreferencesRepository.save(
-            SharedPreferencesKey.sampleLocalCounter,
+            SharedPreferencesKey.localCounter,
             any,
           ),
         ).thenAnswer((_) async => true);
@@ -76,12 +76,12 @@ void main() {
         verify(
           container
               .read(sharedPreferencesRepositoryProvider)
-              .fetch<int>(SharedPreferencesKey.sampleLocalCounter),
+              .fetch<int>(SharedPreferencesKey.localCounter),
         ).called(1); // 注入したMockの関数が1回呼ばれていること
         verify(
           container
               .read(sharedPreferencesRepositoryProvider)
-              .save(SharedPreferencesKey.sampleLocalCounter, any),
+              .save(SharedPreferencesKey.localCounter, any),
         ).called(2); // 注入したMockの関数が1回呼ばれていること
       },
     );

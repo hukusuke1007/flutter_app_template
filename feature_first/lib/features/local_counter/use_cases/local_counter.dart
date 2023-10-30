@@ -17,7 +17,7 @@ class LocalCounter extends _$LocalCounter {
   }
 
   static SharedPreferencesKey get localCounterKey =>
-      SharedPreferencesKey.sampleLocalCounter;
+      SharedPreferencesKey.localCounter;
 
   Future<void> increment() async {
     state += 1;
