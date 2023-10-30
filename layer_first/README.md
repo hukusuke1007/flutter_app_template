@@ -24,6 +24,6 @@
     - [custom_hooks/](./lib/presentation/custom_hooks)
     - [pages/](./lib/presentation/pages)
     - [res/](./lib/presentation/res)
-    - [res/](./lib/presentation/widgets)
+    - [widgets/](./lib/presentation/widgets)
   - [app.dart](./lib/app.dart)
   - [main.dart](./lib/main.dart)
