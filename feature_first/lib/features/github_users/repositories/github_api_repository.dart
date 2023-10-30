@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/exceptions/app_exception.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/utils/logger.dart';
-import '../entities/github/user.dart';
+import '../entities/user.dart';
 import 'github_api_client.dart';
 
 part 'github_api_repository.g.dart';

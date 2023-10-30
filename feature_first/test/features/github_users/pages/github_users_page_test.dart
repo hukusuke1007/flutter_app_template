@@ -1,7 +1,7 @@
 // ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/features/github_users/entities/github/user.dart';
+import 'package:flutter_app_template/features/github_users/entities/user.dart';
 import 'package:flutter_app_template/features/github_users/pages/github_users_page.dart';
 import 'package:flutter_app_template/features/github_users/repositories/github_api_repository.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_app_template/core/exceptions/app_exception.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/features/github_users/entities/github/user.dart';
+import 'package:flutter_app_template/features/github_users/entities/user.dart';
 import 'package:flutter_app_template/features/github_users/repositories/github_api_repository.dart';
 import 'package:flutter_app_template/features/github_users/use_cases/github_users_controller.dart';
 import 'package:flutter_test/flutter_test.dart';

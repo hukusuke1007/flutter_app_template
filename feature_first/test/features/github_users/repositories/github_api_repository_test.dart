@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_app_template/core/exceptions/app_exception.dart';
+import 'package:flutter_app_template/core/repositories/dio/constants.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/features/github_users/repositories/constants.dart';
 import 'package:flutter_app_template/features/github_users/repositories/github_api_client.dart';
 import 'package:flutter_app_template/features/github_users/repositories/github_api_repository.dart';
 import 'package:flutter_test/flutter_test.dart';

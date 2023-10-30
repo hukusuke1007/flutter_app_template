@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../entities/github/user.dart';
-import 'auth_header_interceptor.dart';
-import 'constants.dart';
+import '../../../core/repositories/dio/auth_header_interceptor.dart';
+import '../../../core/repositories/dio/constants.dart';
+import '../entities/user.dart';
 
 part 'github_api_client.g.dart';
 

@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:flutter_app_template/features/github_users/entities/github/user.dart'
+import 'package:flutter_app_template/features/github_users/entities/user.dart'
     as _i4;
 import 'package:flutter_app_template/features/github_users/repositories/github_api_repository.dart'
     as _i2;
