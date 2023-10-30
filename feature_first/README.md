@@ -140,14 +140,12 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 ### Unit tests
 
-[テストコード](./test/model)
-
 ```sh
 # Run all tests
 flutter test
 
 # Run target test
-flutter test test/model/repositories/github_api/github_api_repository_test.dart
+flutter test test/features/github_users/repositories/github_api_repository_test.dart
 ```
 
 ドキュメント
@@ -156,14 +154,12 @@ flutter test test/model/repositories/github_api/github_api_repository_test.dart
 
 ### Widget tests
 
-[テストコード](./test/presentation)
-
 ```sh
 # Run all tests
 flutter test
 
 # Run target test
-flutter test test/presentation/pages/sample/github_users/github_users_page_test.dart
+flutter test test/features/github_users/pages/github_users_page_test.dart
 ```
 
 ドキュメント
@@ -172,8 +168,6 @@ flutter test test/presentation/pages/sample/github_users/github_users_page_test.
 
 ### Integration tests
 
-[テストコード](./integration_test)
-
 実機・シミュレータを起動させるので、実行コマンドにflavor設定のjsonを指定してください。
 
 ```sh
@@ -181,7 +175,7 @@ flutter test test/presentation/pages/sample/github_users/github_users_page_test.
 flutter test --dart-define-from-file=dart_defines/dev.json integration_test
 
 # Run target test
-flutter test --dart-define-from-file=dart_defines/dev.json integration_test/github_users/github_users_page_test.dart
+flutter test --dart-define-from-file=dart_defines/dev.json integration_test/features/github_users/pages/github_users_page_test.dart
 ```
 
 ドキュメント
