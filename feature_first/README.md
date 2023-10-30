@@ -132,6 +132,22 @@ Android Studio から実行する場合は、以下のように Run Configuratio
 
 ![prod](./doc/images/run_configuration_debug_prod.png)
 
+### Masonを使ってFeatureディレクトリを作成する
+
+masonに登録されているbrickを取り込む
+
+```sh
+mason get
+```
+
+featureを実行してディレクトリを作成する
+
+```sh
+mason make feature
+```
+
+作成したディレクトリを[lib/features](lib/features/)へ移動して実装する
+
 ### リリースビルド
 
 - Android
