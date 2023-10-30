@@ -1,6 +1,6 @@
+import 'package:flutter_app_template/features/local_counter/providers/local_counter.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_key.dart';
 import 'package:flutter_app_template/model/repositories/shared_preferences/shared_preference_repository.dart';
-import 'package:flutter_app_template/model/use_cases/sample/counter/local_counter.dart';
 import 'package:flutter_app_template/utils/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

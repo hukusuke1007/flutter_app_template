@@ -13,12 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-import '../utils/logger.dart';
-import 'model/repositories/package_info/package_info_repository.dart';
-import 'model/repositories/shared_preferences/shared_preference_repository.dart';
-import 'model/use_cases/images/image_compress.dart';
-import 'presentation/pages/app.dart';
-import 'utils/flavor.dart';
+import 'app.dart';
+import 'core/providers/images/image_compress.dart';
+import 'core/repositories/package_info/package_info_repository.dart';
+import 'core/repositories/shared_preferences/shared_preference_repository.dart';
+import 'core/utils/flavor.dart';
+import 'core/utils/logger.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

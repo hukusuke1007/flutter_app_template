@@ -142,7 +142,7 @@ dev_dependencies:
   flutter_launcher_icons:
 
 flutter_gen:
-  output: lib/gen/
+  output: lib/core/res/gen/
   colors:
     inputs:
       - assets/color/colors.xml

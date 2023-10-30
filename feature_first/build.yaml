@@ -7,8 +7,7 @@ targets:
       freezed:
         generate_for:
           include:
-            - lib/model/entities/*.dart
-            - lib/model/entities/**/*.dart
-            - lib/model/use_cases/*.dart
-            - lib/model/use_cases/**/*.dart
-            - lib/results/*.dart
+            - lib/core/entities/*.dart
+            - lib/core/entities/**/*.dart
+            - lib/features/**/entities/*.dart
+            - lib/features/**/entities/**/*.dart
