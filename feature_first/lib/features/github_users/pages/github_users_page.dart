@@ -9,11 +9,11 @@ import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/custom_hooks/use_refresh_controller.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/scroll_controller_extension.dart';
-import '../../../core/providers/tab_tap_operation_provider.dart';
+import '../../../core/utils/tab_tap_operation_provider.dart';
 import '../../../core/widgets/images/thumbnail.dart';
 import '../../../core/widgets/smart_refresher/smart_refresher_custom.dart';
-import '../providers/github_users_controller.dart';
-import '../widgets/error_message.dart';
+import '../use_cases/github_users_controller.dart';
+import 'widgets/error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
   const GithubUsersPage({super.key});

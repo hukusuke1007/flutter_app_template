@@ -15,11 +15,11 @@ import '../../../core/extensions/exception_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/sign_in_with_email_and_password.dart';
-import '../widgets/email_text_field.dart';
-import '../widgets/forget_password_button.dart';
-import '../widgets/passward_text_field.dart';
+import '../use_cases/sign_in_with_email_and_password.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/email_text_field.dart';
+import 'widgets/forget_password_button.dart';
+import 'widgets/passward_text_field.dart';
 
 class SignInWithEmailPage extends HookConsumerWidget {
   const SignInWithEmailPage({super.key});

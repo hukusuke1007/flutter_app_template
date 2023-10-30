@@ -15,12 +15,12 @@ import '../../../core/extensions/string_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/change_email_address.dart';
-import '../providers/fetch_email.dart';
-import '../widgets/current_email_address_text.dart';
-import '../widgets/email_text_field.dart';
-import '../widgets/passward_text_field.dart';
+import '../use_cases/change_email_address.dart';
+import '../use_cases/fetch_email.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/current_email_address_text.dart';
+import 'widgets/email_text_field.dart';
+import 'widgets/passward_text_field.dart';
 
 class ChangeEmailAddressPage extends HookConsumerWidget {
   const ChangeEmailAddressPage({super.key});

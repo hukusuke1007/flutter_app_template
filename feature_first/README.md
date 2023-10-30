@@ -75,21 +75,22 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 ### ディレクトリ構成
 
 - [lib/](./lib)
-  - [exceptions/](lib/core/exceptions)
-  - [extensions/](lib/core/extensions)
-  - [gen/](lib/core/res/gen)
-  - [model/](./lib/model)
-    - [converters/](lib/core/converters)
-    - [entities/](lib/features/memo/entities)
-    - [repositories/](lib/core/repositories)
-    - [use_cases/](./lib/model/use_cases)
-  - [presentation/](./lib/presentation)
-    - [pages/](./lib/presentation/pages)
-    - [res/](lib/core/res)
-    - [widgets/](lib/core/widgets)
-  - [results/](./lib/results)
-  - [utils/](lib/core/utils)
-  - [main.dart](./lib/main.dart)
+  - [core/](lib/core/)
+    - [exceptions/](lib/core/exceptions)
+    - [extensions/](lib/core/extensions)
+    - [gen/](lib/core/res/gen)
+    - [model/](./lib/model)
+     
+      - [entities/](lib/features/memo/entities)
+      - [repositories/](lib/core/repositories)
+      - [use_cases/](./lib/model/use_cases)
+    - [presentation/](./lib/presentation)
+      - [pages/](./lib/presentation/pages)
+      - [res/](lib/core/res)
+      - [widgets/](lib/core/widgets)
+    - [results/](./lib/results)
+    - [utils/](lib/core/utils)
+    - [main.dart](./lib/main.dart)
 
 ### Flavor
 

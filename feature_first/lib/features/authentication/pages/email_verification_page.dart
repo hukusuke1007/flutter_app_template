@@ -11,11 +11,11 @@ import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/fetch_email.dart';
-import '../providers/fetch_email_verified.dart';
-import '../providers/send_email_verification.dart';
-import '../widgets/current_email_address_text.dart';
+import '../use_cases/fetch_email.dart';
+import '../use_cases/fetch_email_verified.dart';
+import '../use_cases/send_email_verification.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/current_email_address_text.dart';
 
 class EmailVerificationPage extends HookConsumerWidget {
   const EmailVerificationPage({super.key});

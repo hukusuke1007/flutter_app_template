@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../features/features.dart';
-import '../providers/navigator_key_provider.dart';
 import '../utils/logger.dart';
+import '../utils/navigator_key_provider.dart';
 import 'transition_observer.dart';
 
 // TODO(shohei): StatefulShellRoute は未対応

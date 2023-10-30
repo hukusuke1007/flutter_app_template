@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../../core/providers/tab_tap_operation_provider.dart';
-import '../providers/selected_tab_index_state_provider.dart';
-import '../providers/widgets_provider.dart';
-import '../widgets/tab_navigator.dart';
+import '../../../core/utils/tab_tap_operation_provider.dart';
+import 'providers/selected_tab_index_state_provider.dart';
+import 'providers/widgets_provider.dart';
+import 'widgets/tab_navigator.dart';
 
 class MainPage extends HookConsumerWidget {
   const MainPage({super.key});

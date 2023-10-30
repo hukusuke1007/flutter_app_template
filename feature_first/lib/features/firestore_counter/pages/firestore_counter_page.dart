@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
-import '../providers/fetch_firestore_counter_stream.dart';
-import '../providers/firestore_counter.dart';
+import '../use_cases/fetch_firestore_counter_stream.dart';
+import '../use_cases/firestore_counter.dart';
 
 class FirestoreCounterPage extends HookConsumerWidget {
   const FirestoreCounterPage({super.key});

@@ -15,10 +15,10 @@ import '../../../core/extensions/string_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/sign_up_with_email_and_password.dart';
-import '../widgets/email_text_field.dart';
-import '../widgets/passward_text_field.dart';
+import '../use_cases/sign_up_with_email_and_password.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/email_text_field.dart';
+import 'widgets/passward_text_field.dart';
 
 class SignUpWithEmailPage extends HookConsumerWidget {
   const SignUpWithEmailPage({super.key});

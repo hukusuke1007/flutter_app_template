@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/analytics_logger/analytics_event.dart';
-import '../../../core/analytics_logger/analytics_logger.dart';
 import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/entities/developer/developer.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/date_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/extensions/scroll_controller_extension.dart';
-import '../../../core/providers/tab_tap_operation_provider.dart';
 import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
+import '../../../core/use_cases/analytics/analytics_event.dart';
+import '../../../core/use_cases/analytics/analytics_logger.dart';
 import '../../../core/utils/logger.dart';
+import '../../../core/utils/tab_tap_operation_provider.dart';
 import '../../../core/widgets/buttons/ripple_tap_gesture.dart';
 import '../../../core/widgets/images/image_viewer.dart';
 import '../../../core/widgets/images/thumbnail.dart';
 import '../../../core/widgets/show_indicator.dart';
 import '../../start_up/pages/start_up_page.dart';
-import '../dialogs/show_edit_profile_dialog.dart';
-import '../providers/fetch_app_name.dart';
-import '../providers/fetch_app_version.dart';
-import '../providers/fetch_my_profile.dart';
-import '../providers/fetch_package_name.dart';
-import '../providers/sign_out.dart';
+import '../use_cases/fetch_app_name.dart';
+import '../use_cases/fetch_app_version.dart';
+import '../use_cases/fetch_my_profile.dart';
+import '../use_cases/fetch_package_name.dart';
+import '../use_cases/sign_out.dart';
+import 'dialogs/show_edit_profile_dialog.dart';
 import 'web_view_page.dart';
 
 class SettingPage extends HookConsumerWidget {

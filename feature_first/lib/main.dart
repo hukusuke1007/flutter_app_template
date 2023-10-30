@@ -14,9 +14,9 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import 'app.dart';
-import 'core/providers/images/image_compress.dart';
 import 'core/repositories/package_info/package_info_repository.dart';
 import 'core/repositories/shared_preferences/shared_preference_repository.dart';
+import 'core/use_cases/images/image_compress.dart';
 import 'core/utils/flavor.dart';
 import 'core/utils/logger.dart';
 

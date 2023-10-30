@@ -14,11 +14,11 @@ import '../../../core/extensions/exception_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/change_email_password.dart';
-import '../widgets/forget_password_button.dart';
-import '../widgets/passward_text_field.dart';
+import '../use_cases/change_email_password.dart';
 import 'reset_email_password_page.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/forget_password_button.dart';
+import 'widgets/passward_text_field.dart';
 
 class ChangeEmailPasswordPage extends HookConsumerWidget {
   const ChangeEmailPasswordPage({super.key});

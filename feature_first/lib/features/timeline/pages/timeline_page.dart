@@ -9,11 +9,11 @@ import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/widgets/images/image_viewer.dart';
 import '../../../../core/widgets/texts/error_text.dart';
-import '../providers/fetch_timeline.dart';
-import '../providers/fetch_timeline_post_count.dart';
-import '../widgets/timeline_tile.dart';
+import '../use_cases/fetch_timeline.dart';
+import '../use_cases/fetch_timeline_post_count.dart';
 import 'edit_post_page.dart';
 import 'post_detail_page.dart';
+import 'widgets/timeline_tile.dart';
 
 class TimelinePage extends HookConsumerWidget {
   const TimelinePage({super.key});

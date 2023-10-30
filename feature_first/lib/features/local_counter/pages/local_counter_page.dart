@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
-import '../providers/local_counter.dart';
+import '../use_cases/local_counter.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});

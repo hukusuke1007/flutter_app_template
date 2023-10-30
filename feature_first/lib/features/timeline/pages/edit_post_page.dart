@@ -14,7 +14,7 @@ import '../../../../core/extensions/exception_extension.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../core/widgets/show_indicator.dart';
-import '../providers/post_controller.dart';
+import '../use_cases/post_controller.dart';
 import 'timeline_page.dart';
 
 class EditPostPageArgs extends Equatable {

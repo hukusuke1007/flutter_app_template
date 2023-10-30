@@ -11,7 +11,7 @@ import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/texts/error_text.dart';
-import '../providers/start_up_controller.dart';
+import '../use_cases/start_up_controller.dart';
 
 class StartUpPage extends HookConsumerWidget {
   const StartUpPage({super.key});

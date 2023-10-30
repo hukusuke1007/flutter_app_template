@@ -6,13 +6,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/scroll_controller_extension.dart';
-import '../../../core/providers/tab_tap_operation_provider.dart';
 import '../../../core/res/gen/assets.gen.dart';
+import '../../../core/utils/tab_tap_operation_provider.dart';
 import '../../authentication/pages/top_email_feature_page.dart';
 import '../../firestore_counter/pages/firestore_counter_page.dart';
 import '../../local_counter/pages/local_counter_page.dart';
 import '../../timeline/pages/timeline_page.dart';
-import '../providers/fetch_enable_screen_reader.dart';
+import '../use_cases/fetch_enable_screen_reader.dart';
 import 'detail_page.dart';
 
 class HomePage extends HookConsumerWidget {

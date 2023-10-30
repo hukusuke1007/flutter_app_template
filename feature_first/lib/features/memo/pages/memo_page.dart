@@ -11,10 +11,10 @@ import '../../../core/custom_hooks/use_refresh_controller.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/extensions/scroll_controller_extension.dart';
-import '../../../core/providers/tab_tap_operation_provider.dart';
+import '../../../core/utils/tab_tap_operation_provider.dart';
 import '../../../core/widgets/smart_refresher/smart_refresher_custom.dart';
-import '../dialogs/show_edit_memo_dialog.dart';
-import '../providers/memo_controller.dart';
+import '../use_cases/memo_controller.dart';
+import 'dialogs/show_edit_memo_dialog.dart';
 
 class MemoPage extends HookConsumerWidget {
   const MemoPage({super.key});

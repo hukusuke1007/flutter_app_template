@@ -14,9 +14,9 @@ import '../../../core/extensions/exception_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
-import '../providers/send_password_reset_email.dart';
-import '../widgets/email_text_field.dart';
+import '../use_cases/send_password_reset_email.dart';
 import 'top_email_feature_page.dart';
+import 'widgets/email_text_field.dart';
 
 class ResetEmailPasswordPage extends HookConsumerWidget {
   const ResetEmailPasswordPage({super.key});
