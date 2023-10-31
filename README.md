@@ -3,6 +3,10 @@
 - [FeatureFirst](./feature_first)
 - [LayerFirst](./layer_first)
 
+## 設計指針
+
+[こちらの資料](https://www.notion.so/Never-0ee09657e5744cc8bb3c99cf9cdb2cff)にまとめました。
+
 ## 参考文献
 
 - 設計
