@@ -321,3 +321,9 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
 8. 問題なければ新しい git repository を作成して本プロジェクトをプッシュする。
 
 9. あとは良しなに使わないプラグインやコードを削除して開発を進めてください。
+
+### 注意
+
+タイムライン機能を確認するためには、Firestoreの`posts`コレクションのindexを設定してください。
+
+![firestore_posts_index](./doc/images/firestore_posts_index.png)
