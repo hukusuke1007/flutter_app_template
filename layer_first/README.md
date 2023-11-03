@@ -7,6 +7,9 @@
 - タブ 2
   - GithubApi を用いた Github Users の一覧画面
 
+![screenshot_local_counter](./doc/images/screenshot_local_counter.png)
+![screenshot_github](./doc/images/screenshot_github.png)
+
 ## 設計指針
 
 ### ディレクトリ構成
