@@ -44,13 +44,15 @@ Future<bool?> showDatePickerSheet(
               ),
             ),
             Flexible(
-              child: CupertinoDatePicker(
-                backgroundColor: context.isDark ? Colors.black : Colors.white,
-                initialDateTime: date,
-                maximumYear: DateTime.now().year,
-                onDateTimeChanged: onDateTimeChanged,
-                minimumYear: 1900,
-                mode: CupertinoDatePickerMode.date,
+              child: ColoredBox(
+                color: context.isDark ? Colors.black : Colors.white,
+                child: CupertinoDatePicker(
+                  initialDateTime: date,
+                  maximumYear: DateTime.now().year,
+                  onDateTimeChanged: onDateTimeChanged,
+                  minimumYear: 1900,
+                  mode: CupertinoDatePickerMode.date,
+                ),
               ),
             ),
           ],
