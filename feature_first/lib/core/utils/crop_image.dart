@@ -3,22 +3,30 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../res/gen/colors.gen.dart';
+import '../extensions/context_extension.dart';
 
-Future<CroppedFile?> cropAvatar(String path) => _cropImage(
+Future<CroppedFile?> cropAvatar(BuildContext context, String path) =>
+    _cropImage(
+      context,
       path,
       cropStyle: CropStyle.circle,
       toolbarTitle: 'プロフィール',
     );
 
-Future<CroppedFile?> cropThumbnail(String path, {String title = 'サムネイル'}) =>
+Future<CroppedFile?> cropThumbnail(
+  BuildContext context,
+  String path, {
+  String title = 'サムネイル',
+}) =>
     _cropImage(
+      context,
       path,
       cropStyle: CropStyle.rectangle,
       toolbarTitle: title,
     );
 
 Future<CroppedFile?> _cropImage(
+  BuildContext context,
   String path, {
   required CropStyle cropStyle,
   required String toolbarTitle,
@@ -53,7 +61,7 @@ Future<CroppedFile?> _cropImage(
     uiSettings: [
       AndroidUiSettings(
         toolbarTitle: toolbarTitle,
-        toolbarColor: ColorName.primary,
+        toolbarColor: context.primaryColor,
         toolbarWidgetColor: Colors.white,
         initAspectRatio: CropAspectRatioPreset.original,
         lockAspectRatio: false,

@@ -6,12 +6,17 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../repositories/file/file_repository.dart';
 import '../../utils/crop_image.dart';
+import '../../utils/navigator_key_provider.dart';
 import 'show_photo_bottom_sheet.dart';
 
 Future<File?> showPhotoAndCropBottomSheet(
   WidgetRef ref, {
   String? title,
 }) async {
+  final context = ref.read(navigatorKeyProvider).currentContext;
+  if (context == null) {
+    return null;
+  }
   final result = await showPhotoBottomSheet(ref, title: title);
   if (result == PhotoType.camera) {
     /// ImagePickerからfileを取得
@@ -21,7 +26,7 @@ Future<File?> showPhotoAndCropBottomSheet(
     }
 
     /// ImageCropperで加工したfileを取得
-    final cropFile = await cropAvatar(file.path);
+    final cropFile = await cropAvatar(context, file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除
     await ref.read(fileRepositoryProvider).delete(file.path);
@@ -35,7 +40,7 @@ Future<File?> showPhotoAndCropBottomSheet(
     }
 
     /// ImageCropperで加工したfileを取得
-    final cropFile = await cropAvatar(file.path);
+    final cropFile = await cropAvatar(context, file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除
     await ref.read(fileRepositoryProvider).delete(file.path);

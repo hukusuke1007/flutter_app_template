@@ -3,28 +3,40 @@ import 'package:flutter/material.dart';
 
 import './gen/colors.gen.dart';
 
-/// https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties#migration-guide
+/// Migrating a Flutter app to Material 3
+/// https://blog.codemagic.io/migrating-a-flutter-app-to-material-3/
+
 ThemeData getAppTheme() {
+  const primaryColor = ColorName.primary;
+
   final base = ThemeData(
-    useMaterial3: false,
-    brightness: Brightness.light,
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      surfaceTint: Colors.white,
+    ),
   );
+
   return base.copyWith(
-    primaryColor: ColorName.primary,
-    buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: ColorName.primary,
-      textTheme: ButtonTextTheme.normal,
+    primaryColor: primaryColor,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: primaryColor,
+      ), //ButtonStyleでも可
     ),
     appBarTheme: base.appBarTheme.copyWith(
       iconTheme: base.iconTheme.copyWith(color: Colors.white),
+      backgroundColor: primaryColor,
+      foregroundColor: Colors.white,
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
-      backgroundColor: ColorName.primary,
+      backgroundColor: primaryColor,
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
       backgroundColor: Colors.white,
-      selectedItemColor: ColorName.primary,
+      selectedItemColor: primaryColor,
       unselectedItemColor: Colors.black.withOpacity(0.4),
     ),
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
@@ -50,28 +62,39 @@ ThemeData getAppTheme() {
 }
 
 ThemeData getAppThemeDark() {
-  final base = ThemeData.from(
-    useMaterial3: false,
-    colorScheme: const ColorScheme.dark(),
+  const primaryColor = ColorName.primary;
+
+  final base = ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      brightness: Brightness.dark,
+      surfaceTint: Colors.white,
+    ),
   );
   return base.copyWith(
-    primaryColor: ColorName.primary,
+    primaryColor: primaryColor,
+
     colorScheme: base.colorScheme.copyWith(
-      primary: ColorName.primary,
+      primary: primaryColor,
     ),
-    buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: ColorName.primary,
-      textTheme: ButtonTextTheme.normal,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: primaryColor,
+      ), //ButtonStyleでも可
     ),
     appBarTheme: base.appBarTheme.copyWith(
       iconTheme: base.iconTheme.copyWith(color: Colors.white),
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
-      backgroundColor: ColorName.primary,
+      backgroundColor: primaryColor,
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
-      selectedItemColor: ColorName.primary,
+      selectedItemColor: primaryColor,
     ),
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.dark,

@@ -8,7 +8,7 @@ import '../../../../core/custom_hooks/use_effect_once.dart';
 import '../../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../../core/entities/typedef.dart';
 import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/res/gen/colors.gen.dart';
+import '../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../core/widgets/dialogs/show_content_dialog.dart';
 import '../../../../core/widgets/show_indicator.dart';
 import '../../entities/memo.dart';
@@ -72,12 +72,8 @@ class _Dialog extends HookConsumerWidget {
         ),
         const SizedBox(height: 16),
         Center(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: ColorName.primary,
-              shape: const StadiumBorder(),
-            ),
-            onPressed: () async {
+          child: RoundedButton(
+            onTap: () async {
               if (textKey.currentState?.validate() != true) {
                 return;
               }

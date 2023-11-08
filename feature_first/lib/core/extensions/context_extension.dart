@@ -25,6 +25,8 @@ extension ContextExtension on BuildContext {
   TextStyle get smallStyle => Theme.of(this).textTheme.bodySmall!;
   TextStyle get verySmallStyle =>
       Theme.of(this).textTheme.bodySmall!.copyWith(fontSize: 10);
+
+  Color get primaryColor => Theme.of(this).primaryColor;
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
   /// Function

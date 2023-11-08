@@ -10,7 +10,6 @@ import '../../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/date_extension.dart';
 import '../../../../core/repositories/file/file_repository.dart';
-import '../../../../core/res/gen/colors.gen.dart';
 import '../../../../core/use_cases/images/image_compress.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/utils/vibration.dart';
@@ -206,7 +205,6 @@ class _Dialog extends HookConsumerWidget {
                 await showOkAlertDialog(context: context, title: '保存できませんでした');
               }
             },
-            color: ColorName.primary,
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(

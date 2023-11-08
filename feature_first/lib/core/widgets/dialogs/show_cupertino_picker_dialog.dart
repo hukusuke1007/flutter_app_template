@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../extensions/context_extension.dart';
-import '../../res/gen/colors.gen.dart';
 
 Future<int?> showCupertinoPickerDialog(
   BuildContext context,
@@ -33,8 +32,9 @@ Future<int?> showCupertinoPickerDialog(
                     },
                     child: Text(
                       doneText,
-                      style:
-                          context.bodyStyle.copyWith(color: ColorName.primary),
+                      style: context.bodyStyle.copyWith(
+                        color: context.primaryColor,
+                      ),
                     ),
                   ),
                 ),
