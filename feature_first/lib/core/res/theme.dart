@@ -23,7 +23,7 @@ ThemeData getAppTheme() {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: primaryColor,
-      ), //ButtonStyleでも可
+      ),
     ),
     appBarTheme: base.appBarTheme.copyWith(
       iconTheme: base.iconTheme.copyWith(color: Colors.white),
@@ -82,7 +82,7 @@ ThemeData getAppThemeDark() {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: primaryColor,
-      ), //ButtonStyleでも可
+      ),
     ),
     appBarTheme: base.appBarTheme.copyWith(
       iconTheme: base.iconTheme.copyWith(color: Colors.white),
