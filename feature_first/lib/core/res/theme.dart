@@ -11,14 +11,15 @@ ThemeData getAppTheme() {
 
   final base = ThemeData(
     useMaterial3: true,
+    primaryColor: primaryColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
+      primary: primaryColor,
       surfaceTint: Colors.white,
     ),
   );
 
   return base.copyWith(
-    primaryColor: primaryColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
@@ -47,11 +48,10 @@ ThemeData getAppTheme() {
         ),
       ),
     ),
-
-    /// AndroidもCupertinoPageTransitionsBuilderに設定する
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android:
+            CupertinoPageTransitionsBuilder(), // AndroidもCupertinoPageTransitionsBuilderに設定する
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
         TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
@@ -66,18 +66,16 @@ ThemeData getAppThemeDark() {
 
   final base = ThemeData(
     useMaterial3: true,
+    primaryColor: primaryColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
+      primary: primaryColor,
       brightness: Brightness.dark,
       surfaceTint: Colors.white,
     ),
   );
-  return base.copyWith(
-    primaryColor: primaryColor,
 
-    colorScheme: base.colorScheme.copyWith(
-      primary: primaryColor,
-    ),
+  return base.copyWith(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
@@ -104,11 +102,10 @@ ThemeData getAppThemeDark() {
         ),
       ),
     ),
-
-    /// AndroidもCupertinoPageTransitionsBuilderに設定する
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android:
+            CupertinoPageTransitionsBuilder(), // AndroidもCupertinoPageTransitionsBuilderに設定する
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
         TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
