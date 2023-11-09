@@ -1,4 +1,8 @@
 bricks:
+  project_template:
+    git:
+      url: https://github.com/never-inc/mason.git
+      path: bricks/project_template
   feature:
     git:
       url: https://github.com/never-inc/mason.git

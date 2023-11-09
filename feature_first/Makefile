@@ -30,6 +30,10 @@ release_build_obfuscate_ios:
 mason_get:
 	mason get
 
+# Masonのbricksのアップグレードする
+mason_upgrade:
+	mason upgrade
+
 # Masonで新しいfeatureディレクトリを作成する
 mason_make_feature:
 	mason make feature
