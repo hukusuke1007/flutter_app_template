@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../res/gen/colors.gen.dart';
-
 extension ContextExtension on BuildContext {
   /// MediaQuery
   bool get isDark => MediaQuery.platformBrightnessOf(this) == Brightness.dark;
@@ -40,26 +38,20 @@ extension ContextExtension on BuildContext {
 
   void showSnackBar(
     String text, {
-    Color backgroundColor = ColorName.primary,
+    Color? backgroundColor,
     Duration duration = const Duration(milliseconds: 1500),
     VoidCallback? onTap,
     String closeLabel = '閉じる',
   }) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        backgroundColor: backgroundColor,
-        content: Text(
-          text,
-          style: bodyStyle.copyWith(color: Colors.white),
-        ),
+        backgroundColor: backgroundColor ?? primaryColor,
+        content: Text(text),
         duration: duration,
         action: SnackBarAction(
           label: closeLabel,
-          textColor: Colors.white,
           onPressed: () {
-            if (onTap != null) {
-              onTap();
-            }
+            onTap?.call();
           },
         ),
       ),
