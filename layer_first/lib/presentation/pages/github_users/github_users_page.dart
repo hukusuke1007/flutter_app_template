@@ -41,10 +41,7 @@ class GithubUsersPage extends HookConsumerWidget {
       appBar: AppBar(
         title: Text(
           'Github Users',
-          style: context.subtitleStyle.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: context.subtitleStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),

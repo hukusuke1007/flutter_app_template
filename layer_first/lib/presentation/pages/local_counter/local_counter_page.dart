@@ -18,10 +18,7 @@ class LocalCounterPage extends HookConsumerWidget {
       appBar: AppBar(
         title: Text(
           'ローカルカウンター',
-          style: context.subtitleStyle.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: context.subtitleStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         iconTheme: const IconThemeData(
@@ -48,26 +45,28 @@ class LocalCounterPage extends HookConsumerWidget {
                 Flexible(
                   child: RoundedButton(
                     width: 80,
+                    backgroundColor: Colors.purpleAccent,
+                    onTap: () async {
+                      await ref.read(localCounterProvider.notifier).decrement();
+                    },
                     child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    onTap: () async {
-                      await ref.read(localCounterProvider.notifier).decrement();
-                    },
                   ),
                 ),
                 const SizedBox(width: 16),
                 Flexible(
                   child: RoundedButton(
                     width: 80,
+                    backgroundColor: Colors.purpleAccent,
+                    onTap: () async {
+                      await ref.read(localCounterProvider.notifier).increment();
+                    },
                     child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onTap: () async {
-                      await ref.read(localCounterProvider.notifier).increment();
-                    },
                   ),
                 ),
               ],

@@ -54,3 +54,4 @@ ios/**/GoogleService-Info.plist
 # Mason
 mason-lock.json
 .mason
+.fvm/flutter_sdk

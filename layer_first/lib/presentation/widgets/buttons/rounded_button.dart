@@ -6,7 +6,8 @@ class RoundedButton extends StatelessWidget {
     this.height,
     this.width,
     required this.child,
-    this.color,
+    this.backgroundColor,
+    this.foregroundColor,
     this.disableColor,
     this.elevation,
     this.side = BorderSide.none,
@@ -19,7 +20,8 @@ class RoundedButton extends StatelessWidget {
   final double? height;
   final double? width;
   final Widget child;
-  final Color? color;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
   final Color? disableColor;
   final double? elevation;
   final BorderSide side;
@@ -34,7 +36,8 @@ class RoundedButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: color,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           shape: const StadiumBorder().copyWith(side: side),
           disabledBackgroundColor: disableColor ?? Colors.grey,
           elevation: elevation,

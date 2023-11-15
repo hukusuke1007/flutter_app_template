@@ -65,16 +65,8 @@ class MainPage extends HookConsumerWidget {
     final selectedTabIndexState = useState(0);
     final selectedTabIndex = selectedTabIndexState.value;
 
-    return WillPopScope(
-      onWillPop: () async {
-        final keyTab = widgets[selectedTabIndex].$1;
-        final currentState = keyTab.currentState;
-        if (currentState != null && currentState.canPop()) {
-          final maybePop = await currentState.maybePop();
-          return !maybePop;
-        }
-        return true;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: IndexedStack(
@@ -87,32 +79,8 @@ class MainPage extends HookConsumerWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'タブ1',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: 'タブ2',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.edit),
-              label: 'タブ3',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'タブ4',
-              tooltip: '',
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-          currentIndex: selectedTabIndex,
-          onTap: (index) {
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
             /// 同じタブが選択されたことを通知する
             if (index == selectedTabIndex) {
               final pageName = widgets[index].$2;
@@ -124,7 +92,29 @@ class MainPage extends HookConsumerWidget {
             /// タブを切り替える
             selectedTabIndexState.value = index;
           },
-          selectedFontSize: 12,
+          selectedIndex: selectedTabIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              selectedIcon: Icon(Icons.home),
+              icon: Icon(Icons.home_outlined),
+              label: 'タブ1',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.people),
+              icon: Icon(Icons.people_outlined),
+              label: 'タブ2',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.edit),
+              icon: Icon(Icons.edit_outlined),
+              label: 'タブ3',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.settings),
+              icon: Icon(Icons.settings_outlined),
+              label: 'タブ4',
+            ),
+          ],
         ),
       ),
     );
