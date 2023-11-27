@@ -120,41 +120,22 @@ class TimelineTile extends HookConsumerWidget {
                                     data: data,
                                     isMyData: isMyData,
                                     onTapMenu: (result) async {
-                                      if (result == MenuResultType.share) {
-                                        unawaited(
+                                      switch (result) {
+                                        case MenuResultType.share:
                                           ShareExtension.shareText(
                                             context,
                                             data.text,
-                                          ),
-                                        );
-                                      } else if (result ==
-                                          MenuResultType.copy) {
-                                        await Clipboard.copy(data.text);
-                                        context.showSnackBar('コピーしました');
-                                      } else if (result ==
-                                          MenuResultType.issueReport) {
-                                        unawaited(
+                                          ).ignore();
+                                        case MenuResultType.copy:
+                                          Clipboard.copy(data.text).ignore();
+                                          context.showSnackBar('コピーしました');
+                                        case MenuResultType.issueReport ||
+                                              MenuResultType.mute ||
+                                              MenuResultType.block:
                                           showOkAlertDialog(
                                             context: context,
                                             title: '実装してください',
-                                          ),
-                                        );
-                                      } else if (result ==
-                                          MenuResultType.mute) {
-                                        unawaited(
-                                          showOkAlertDialog(
-                                            context: context,
-                                            title: '実装してください',
-                                          ),
-                                        );
-                                      } else if (result ==
-                                          MenuResultType.block) {
-                                        unawaited(
-                                          showOkAlertDialog(
-                                            context: context,
-                                            title: '実装してください',
-                                          ),
-                                        );
+                                          ).ignore();
                                       }
                                     },
                                   );

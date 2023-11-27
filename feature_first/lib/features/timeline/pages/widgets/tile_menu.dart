@@ -29,7 +29,7 @@ class TileMenu extends StatelessWidget {
         iconSize: size,
         padding: const EdgeInsets.only(left: 4),
         onPressed: () async {
-          unawaited(Vibration.select());
+          Vibration.select().ignore();
           final result = await showModalActionSheet<MenuResultType>(
             context: context,
             actions: [

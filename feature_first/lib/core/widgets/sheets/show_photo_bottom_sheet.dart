@@ -18,7 +18,7 @@ Future<PhotoType?> showPhotoBottomSheet(
   WidgetRef ref, {
   String? title,
 }) async {
-  unawaited(Vibration.select());
+  Vibration.select().ignore();
   final gContext = ref.watch(navigatorKeyProvider).currentContext!;
   final result = await showModalActionSheet<int>(
     context: gContext,
@@ -40,7 +40,7 @@ Future<PhotoType?> showPhotoBottomSheet(
 
   if (result == 0) {
     final status = await Permission.camera.request();
-    if (!status.isGranted) {
+    if (!status.isGranted && gContext.mounted) {
       final result = await showOkAlertDialog(
         context: gContext,
         title: 'カメラのパーミッション',
@@ -55,7 +55,7 @@ Future<PhotoType?> showPhotoBottomSheet(
     }
   } else if (result == 1) {
     final isGranted = await ref.read(requestAlbumPermissionProvider).call();
-    if (!isGranted) {
+    if (!isGranted && gContext.mounted) {
       final result = await showOkAlertDialog(
         context: gContext,
         title: '写真のパーミッション',

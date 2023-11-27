@@ -146,13 +146,11 @@ class WebViewPage extends HookConsumerWidget {
                       return;
                     }
 
-                    unawaited(
-                      Share.share(
-                        urlState.value,
-                        sharePositionOrigin:
-                            box.localToGlobal(Offset.zero) & box.size,
-                      ),
-                    );
+                    Share.share(
+                      urlState.value,
+                      sharePositionOrigin:
+                          box.localToGlobal(Offset.zero) & box.size,
+                    ).ignore();
                   } else if (value == 2) {
                     final uri = Uri.parse(urlState.value);
                     if (!await canLaunchUrl(uri)) {

@@ -25,6 +25,9 @@ class SaveImageToMediaFolder {
     final status = await _ref.read(requestAlbumPermissionProvider).call();
     final gContext = _ref.read(navigatorKeyProvider).currentContext!;
     if (!status) {
+      if (!gContext.mounted) {
+        return;
+      }
       final result = await showOkAlertDialog(
         context: gContext,
         title: '写真のパーミッション',
@@ -37,14 +40,23 @@ class SaveImageToMediaFolder {
       return;
     }
 
+    if (!gContext.mounted) {
+      return;
+    }
     try {
       showIndicator(gContext);
       await ImageGallerySaver.saveImage(imageBytes);
-      gContext.showSnackBar('画像を保存しました');
+      if (gContext.mounted) {
+        gContext.showSnackBar('画像を保存しました');
+      }
     } on Exception catch (e) {
       logger.shout(e);
-      gContext.showSnackBar('保存に失敗しました', backgroundColor: Colors.red);
+      if (gContext.mounted) {
+        gContext.showSnackBar('保存に失敗しました', backgroundColor: Colors.red);
+      }
     }
-    dismissIndicator(gContext);
+    if (gContext.mounted) {
+      dismissIndicator(gContext);
+    }
   }
 }

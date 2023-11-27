@@ -152,13 +152,11 @@ class SignInWithEmailPage extends HookConsumerWidget {
                 context.pop();
               } on Exception catch (e) {
                 dismissIndicator(context);
-                unawaited(
-                  showOkAlertDialog(
-                    context: context,
-                    title: 'エラー',
-                    message: e.errorMessage,
-                  ),
-                );
+                showOkAlertDialog(
+                  context: context,
+                  title: 'エラー',
+                  message: e.errorMessage,
+                ).ignore();
               }
             },
           ),

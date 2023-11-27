@@ -14,7 +14,7 @@ void main() {
   group('[正常系] LocalCounterPage E2Eテスト', () {
     testWidgets('カウントアップ/ダウンして、期待する数値が表示されること', (tester) async {
       /// メイン画面が表示されるまで待つ
-      unawaited(app.main());
+      app.main().ignore();
       await tester.pumpAndSettle();
 
       /// ローカルカウンター画面へ移動

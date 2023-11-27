@@ -26,6 +26,9 @@ Future<File?> showPhotoAndCropBottomSheet(
     }
 
     /// ImageCropperで加工したfileを取得
+    if (!context.mounted) {
+      return null;
+    }
     final cropFile = await cropAvatar(context, file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除
@@ -40,6 +43,9 @@ Future<File?> showPhotoAndCropBottomSheet(
     }
 
     /// ImageCropperで加工したfileを取得
+    if (!context.mounted) {
+      return null;
+    }
     final cropFile = await cropAvatar(context, file.path);
 
     /// ImagePickerで取得したfileがtmpに残ってしまうので削除

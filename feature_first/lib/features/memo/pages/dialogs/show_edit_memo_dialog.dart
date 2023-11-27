@@ -90,9 +90,8 @@ class _Dialog extends HookConsumerWidget {
                 context.showSnackBar(isUpdate ? '更新しました' : '作成しました');
                 Navigator.pop(context);
               } else {
-                unawaited(
-                  showOkAlertDialog(context: context, title: errorMessage),
-                );
+                showOkAlertDialog(context: context, title: errorMessage)
+                    .ignore();
               }
             },
             child: Padding(

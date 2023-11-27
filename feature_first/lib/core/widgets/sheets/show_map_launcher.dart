@@ -19,11 +19,14 @@ Future<void> showMapLauncher(
   double latitude,
   double longitude,
 ) async {
-  unawaited(Vibration.select());
+  Vibration.select().ignore();
   final maps = (await MapLauncher.installedMaps).where(
     (element) =>
         element.mapType == MapType.google || element.mapType == MapType.apple,
   );
+  if (!context.mounted) {
+    return;
+  }
   await showLocationMapBottomSheet(
     context,
     title,

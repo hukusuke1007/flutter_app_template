@@ -149,7 +149,7 @@ class _Dialog extends HookConsumerWidget {
             RippleTapGesture(
               onTap: () async {
                 context.hideKeyboard();
-                unawaited(Vibration.select());
+                Vibration.select().ignore();
                 final birthdate = birthdateState.value ?? DateTime.now();
                 await showDatePickerSheet(
                   context,

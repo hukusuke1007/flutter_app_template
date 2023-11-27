@@ -15,7 +15,7 @@ void main() {
   group('[正常系] GithubUsersPage E2Eテスト', () {
     testWidgets('ユーザーリストを一番下までスクロールして、期待する情報が表示されること', (tester) async {
       /// メイン画面が表示されるまで待つ
-      unawaited(app.main());
+      app.main().ignore();
       await tester.pumpAndSettle();
 
       /// Github Users画面へ移動

@@ -133,28 +133,20 @@ class PostDetailPage extends HookConsumerWidget {
                     return;
                   }
 
-                  if (result == MenuResultType.share) {
-                    unawaited(
+                  switch (result) {
+                    case MenuResultType.share:
                       ShareExtension.shareText(
                         context,
                         text,
-                      ),
-                    );
-                  } else if (result == MenuResultType.copy) {
-                    unawaited(Clipboard.copy(text));
-                    context.showSnackBar('コピーしました');
-                  } else if (result == MenuResultType.issueReport) {
-                    unawaited(
-                      showOkAlertDialog(context: context, title: '実装してください'),
-                    );
-                  } else if (result == MenuResultType.mute) {
-                    unawaited(
-                      showOkAlertDialog(context: context, title: '実装してください'),
-                    );
-                  } else if (result == MenuResultType.block) {
-                    unawaited(
-                      showOkAlertDialog(context: context, title: '実装してください'),
-                    );
+                      ).ignore();
+                    case MenuResultType.copy:
+                      Clipboard.copy(text).ignore();
+                      context.showSnackBar('コピーしました');
+                    case MenuResultType.issueReport ||
+                          MenuResultType.mute ||
+                          MenuResultType.block:
+                      showOkAlertDialog(context: context, title: '実装してください')
+                          .ignore();
                   }
                 },
               );

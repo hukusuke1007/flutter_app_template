@@ -119,13 +119,11 @@ class EditPostPage extends HookConsumerWidget {
                       ..pop();
                   } on Exception catch (e) {
                     dismissIndicator(context);
-                    unawaited(
-                      showOkAlertDialog(
-                        context: context,
-                        title: 'エラー',
-                        message: e.errorMessage,
-                      ),
-                    );
+                    showOkAlertDialog(
+                      context: context,
+                      title: 'エラー',
+                      message: e.errorMessage,
+                    ).ignore();
                   }
                 },
                 icon: const Icon(
@@ -216,13 +214,11 @@ class EditPostPage extends HookConsumerWidget {
                             ..pop();
                         } on Exception catch (e) {
                           dismissIndicator(context);
-                          unawaited(
-                            showOkAlertDialog(
-                              context: context,
-                              title: 'エラー',
-                              message: e.errorMessage,
-                            ),
-                          );
+                          showOkAlertDialog(
+                            context: context,
+                            title: 'エラー',
+                            message: e.errorMessage,
+                          ).ignore();
                         }
                       },
                     ),

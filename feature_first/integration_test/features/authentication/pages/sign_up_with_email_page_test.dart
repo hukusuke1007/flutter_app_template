@@ -18,7 +18,7 @@ void main() {
   group('[正常系] SignUpWithEmailPage E2Eテスト', () {
     testWidgets('サインアップして新しいアカウントが作成されること', (tester) async {
       /// メイン画面が表示されるまで待つ
-      unawaited(app.main());
+      app.main().ignore();
       await tester.pumpAndSettle();
 
       /// メールアドレス認証のサンプル画面へ移動
