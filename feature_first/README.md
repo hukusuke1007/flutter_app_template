@@ -64,7 +64,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 - MethodChannelとEventChannelのサンプルコード
   - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
 - その他アプリに必要なライブラリを設定済み
-- fvm
+- fvm, asdf
 - Unit tests（オフラインテスト）
 - Widget tests（オフラインテスト）
 - Integration tests（E2Eテスト）
