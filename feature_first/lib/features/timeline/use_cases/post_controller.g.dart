@@ -6,7 +6,7 @@ part of 'post_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postControllerHash() => r'9889edee69d74673e15507e364c62e14c80b5072';
+String _$postControllerHash() => r'8363d7ebb138dfef670cedce88930c19ca41ed3e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ abstract class _$PostController
   late final String? posterId;
   late final String? postId;
 
-  FutureOr<Post?> build({
+  Future<Post?> build({
     required String? posterId,
     required String? postId,
   });
@@ -124,7 +124,7 @@ class PostControllerProvider
   final String? postId;
 
   @override
-  FutureOr<Post?> runNotifierBuild(
+  Future<Post?> runNotifierBuild(
     covariant PostController notifier,
   ) {
     return notifier.build(

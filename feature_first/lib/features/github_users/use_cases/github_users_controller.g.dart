@@ -7,7 +7,7 @@ part of 'github_users_controller.dart';
 // **************************************************************************
 
 String _$githubUsersControllerHash() =>
-    r'8f13375ddcfc06c890e6259067110c5bdac8e427';
+    r'831a593aeb3f7e31580b665ce43495a2bb59af04';
 
 /// GithubのユーザーリストをAsyncNotifierで管理する
 ///

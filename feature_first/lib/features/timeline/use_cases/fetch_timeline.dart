@@ -29,7 +29,7 @@ class FetchTimeline extends _$FetchTimeline {
   CollectionPagingRepository<Post>? _collectionPagingRepository;
 
   @override
-  FutureOr<List<Post>> build() async {
+  Future<List<Post>> build() async {
     final length = state.asData?.value.length ?? 0;
 
     /// クエリを設定したRepositoryを生成

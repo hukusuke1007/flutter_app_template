@@ -32,7 +32,7 @@ class MemoController extends _$MemoController {
   CollectionPagingRepository<Memo>? _collectionPagingRepository;
 
   @override
-  FutureOr<List<Memo>> build() async {
+  Future<List<Memo>> build() async {
     /// ログアウト等でauthStateの状態が更新されたら発火されて新しいインスタンスを生成する
     ref.watch(authStateControllerProvider);
 

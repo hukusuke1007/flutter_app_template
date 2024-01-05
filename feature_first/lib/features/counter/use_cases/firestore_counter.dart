@@ -13,7 +13,7 @@ part 'firestore_counter.g.dart';
 @riverpod
 class FirestoreCounter extends _$FirestoreCounter {
   @override
-  FutureOr<Counter?> build() async {
+  Future<Counter?> build() async {
     ref.watch(authStateControllerProvider);
 
     final userId = ref.watch(firebaseAuthRepositoryProvider).loggedInUserId;

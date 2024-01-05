@@ -20,7 +20,7 @@ class PostController extends _$PostController {
       ref.read(documentRepositoryProvider);
 
   @override
-  FutureOr<Post?> build({
+  Future<Post?> build({
     required String? posterId,
     required String? postId,
   }) async {
