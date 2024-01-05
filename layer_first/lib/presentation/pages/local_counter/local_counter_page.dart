@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../extensions/context_extension.dart';
 import '../../../model/use_cases/local_counter/local_counter.dart';
-import '../../widgets/buttons/rounded_button.dart';
 
 class LocalCounterPage extends HookConsumerWidget {
   const LocalCounterPage({super.key});
@@ -43,10 +42,8 @@ class LocalCounterPage extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
-                  child: RoundedButton(
-                    width: 80,
-                    backgroundColor: Colors.purpleAccent,
-                    onTap: () async {
+                  child: FilledButton(
+                    onPressed: () async {
                       await ref.read(localCounterProvider.notifier).decrement();
                     },
                     child: const Icon(
@@ -57,10 +54,8 @@ class LocalCounterPage extends HookConsumerWidget {
                 ),
                 const SizedBox(width: 16),
                 Flexible(
-                  child: RoundedButton(
-                    width: 80,
-                    backgroundColor: Colors.purpleAccent,
-                    onTap: () async {
+                  child: FilledButton(
+                    onPressed: () async {
                       await ref.read(localCounterProvider.notifier).increment();
                     },
                     child: const Icon(

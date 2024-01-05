@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../extensions/context_extension.dart';
-import '../../../widgets/buttons/rounded_button.dart';
 
 class ErrorMessage extends StatelessWidget {
   const ErrorMessage({
@@ -28,8 +27,8 @@ class ErrorMessage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: RoundedButton(
-              onTap: onTapRetry,
+            child: FilledButton(
+              onPressed: onTapRetry,
               child: Text(
                 '再試行',
                 style: context.bodyStyle.copyWith(
