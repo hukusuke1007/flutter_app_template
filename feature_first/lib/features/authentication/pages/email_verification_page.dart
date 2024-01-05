@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
-import '../../../core/widgets/buttons/rounded_button.dart';
+import '../../../core/res/button_style.dart';
 import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/fetch_email.dart';
 import '../use_cases/fetch_email_verified.dart';
@@ -88,7 +88,8 @@ class EmailVerificationPage extends HookConsumerWidget {
       ),
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
-        RoundedButton(
+        FilledButton(
+          style: ButtonStyles.normal(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -99,7 +100,7 @@ class EmailVerificationPage extends HookConsumerWidget {
               ),
             ),
           ),
-          onTap: () async {
+          onPressed: () async {
             try {
               showIndicator(context);
               await ref.read(sendEmailVerificationProvider)();

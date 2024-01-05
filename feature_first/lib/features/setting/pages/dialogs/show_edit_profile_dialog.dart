@@ -10,11 +10,11 @@ import '../../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/date_extension.dart';
 import '../../../../core/repositories/file/file_repository.dart';
+import '../../../../core/res/button_style.dart';
 import '../../../../core/use_cases/images/image_compress.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/utils/vibration.dart';
 import '../../../../core/widgets/buttons/ripple_tap_gesture.dart';
-import '../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../core/widgets/color_circle.dart';
 import '../../../../core/widgets/dialogs/show_content_dialog.dart';
 import '../../../../core/widgets/images/image_viewer.dart';
@@ -181,9 +181,9 @@ class _Dialog extends HookConsumerWidget {
 
         Padding(
           padding: const EdgeInsets.only(top: 40),
-          child: RoundedButton(
-            elevation: 2,
-            onTap: () async {
+          child: FilledButton(
+            style: ButtonStyles.normal(),
+            onPressed: () async {
               context.hideKeyboard();
               if (!nameFormKey.currentState!.validate()) {
                 return;

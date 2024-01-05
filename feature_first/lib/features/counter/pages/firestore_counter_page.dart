@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../core/extensions/context_extension.dart';
-import '../../../core/widgets/buttons/rounded_button.dart';
+import '../../../core/res/button_style.dart';
 import '../use_cases/fetch_firestore_counter_stream.dart';
 import '../use_cases/firestore_counter.dart';
 
@@ -99,13 +99,13 @@ class FirestoreCounterPage extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
-                  child: RoundedButton(
-                    width: 80,
+                  child: FilledButton(
+                    style: ButtonStyles.normal(),
                     child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    onTap: () async {
+                    onPressed: () async {
                       await ref
                           .read(firestoreCounterProvider.notifier)
                           .save(-1);
@@ -114,13 +114,13 @@ class FirestoreCounterPage extends HookConsumerWidget {
                 ),
                 const SizedBox(width: 16),
                 Flexible(
-                  child: RoundedButton(
-                    width: 80,
+                  child: FilledButton(
+                    style: ButtonStyles.normal(),
                     child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onTap: () async {
+                    onPressed: () async {
                       await ref.read(firestoreCounterProvider.notifier).save(1);
                     },
                   ),

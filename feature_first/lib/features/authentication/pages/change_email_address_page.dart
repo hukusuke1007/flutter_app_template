@@ -12,8 +12,8 @@ import '../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/extensions/string_extension.dart';
+import '../../../core/res/button_style.dart';
 import '../../../core/utils/logger.dart';
-import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/change_email_address.dart';
 import '../use_cases/fetch_email.dart';
@@ -136,7 +136,8 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
         ),
         persistentFooterAlignment: AlignmentDirectional.center,
         persistentFooterButtons: [
-          RoundedButton(
+          FilledButton(
+            style: ButtonStyles.normal(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -147,7 +148,7 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            onTap: () async {
+            onPressed: () async {
               final isValidNewEmail =
                   newEmailFormFieldKey.currentState?.validate() ?? false;
               final isValidNewEmailConfirmPassword =

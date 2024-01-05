@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/core/widgets/buttons/rounded_button.dart';
 import 'package:flutter_app_template/main.dart' as app;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -57,7 +56,7 @@ void main() {
         ),
         password,
       ); // 確認用パスワードを入力
-      await tester.tap(find.byType(RoundedButton)); // ボタンをタップ
+      await tester.tap(find.byType(FilledButton)); // ボタンをタップ
       await tester.pumpAndSettle(); // アニメーションが終わるまで待ち、処理後の状態を反映する
       expect(find.text('新規登録しました'), findsOneWidget); // 期待する文言が表示されていること
     });

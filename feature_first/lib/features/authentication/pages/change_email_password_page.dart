@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/res/button_style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +13,6 @@ import '../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/utils/logger.dart';
-import '../../../core/widgets/buttons/rounded_button.dart';
 import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/change_email_password.dart';
 import 'reset_email_password_page.dart';
@@ -110,7 +110,8 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
         ),
         persistentFooterAlignment: AlignmentDirectional.center,
         persistentFooterButtons: [
-          RoundedButton(
+          FilledButton(
+            style: ButtonStyles.normal(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -121,7 +122,7 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            onTap: () async {
+            onPressed: () async {
               final isValidOldPassword =
                   oldPasswordFormFieldKey.currentState?.validate() ?? false;
               final isValidNewPassword =

@@ -12,8 +12,8 @@ import '../../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/exception_extension.dart';
 import '../../../../core/utils/logger.dart';
-import '../../../../core/widgets/buttons/rounded_button.dart';
 import '../../../../core/widgets/show_indicator.dart';
+import '../../../core/res/button_style.dart';
 import '../use_cases/post_controller.dart';
 import 'timeline_page.dart';
 
@@ -169,7 +169,8 @@ class EditPostPage extends HookConsumerWidget {
                     textInputAction: TextInputAction.newline,
                   ),
                   Center(
-                    child: RoundedButton(
+                    child: FilledButton(
+                      style: ButtonStyles.normal(),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
@@ -180,7 +181,7 @@ class EditPostPage extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      onTap: () async {
+                      onPressed: () async {
                         final isValidText =
                             textFormFieldKey.currentState?.validate() ?? false;
 

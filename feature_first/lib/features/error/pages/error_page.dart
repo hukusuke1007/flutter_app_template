@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../core/widgets/buttons/rounded_button.dart';
+import '../../../core/res/button_style.dart';
 import '../../app_wrapper/pages/main_page.dart';
 
 class ErrorPage extends HookWidget {
@@ -30,14 +30,13 @@ class ErrorPage extends HookWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: RoundedButton(
-                width: 200,
-                height: 40,
+              child: FilledButton(
+                style: ButtonStyles.normal(),
                 child: const Text(
                   'Go Back',
                   style: TextStyle(color: Colors.white),
                 ),
-                onTap: () {
+                onPressed: () {
                   MainPage.go(context);
                 },
               ),

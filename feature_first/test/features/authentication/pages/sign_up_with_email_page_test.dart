@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/repositories/firebase_auth/auth_error_code.dart';
 import 'package:flutter_app_template/core/repositories/firebase_auth/firebase_auth_repository.dart';
 import 'package:flutter_app_template/core/utils/logger.dart';
-import 'package:flutter_app_template/core/widgets/buttons/rounded_button.dart';
 import 'package:flutter_app_template/features/authentication/pages/sign_up_with_email_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -89,7 +88,7 @@ void main() {
         ),
         password,
       ); // 確認用パスワードを入力
-      await tester.tap(find.byType(RoundedButton)); // ボタンをタップ
+      await tester.tap(find.byType(FilledButton)); // ボタンをタップ
       await tester.pumpAndSettle(); // アニメーションが発生するので終わるまで待ち、処理後の状態を反映する
       expect(find.text('新規登録しました'), findsOneWidget); // 期待する文言が表示されていること
     });
@@ -158,7 +157,7 @@ void main() {
         ),
         password,
       ); // 確認用パスワードを入力
-      await tester.tap(find.byType(RoundedButton)); // ボタンをタップ
+      await tester.tap(find.byType(FilledButton)); // ボタンをタップ
       await tester.pumpAndSettle(); // アニメーションが発生するので終わるまで待ち、処理後の状態を反映する
       expect(
         find.text('このアカウントは既に存在します'),
