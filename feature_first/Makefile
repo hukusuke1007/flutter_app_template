@@ -30,6 +30,14 @@ release_build_ios:
 release_build_obfuscate_ios:
 	flutter build ipa --release --obfuscate --split-debug-info=obfuscate/ios --dart-define=FLAVOR=prod --target lib/main.dart
 
+# テスト（カバレッジ）
+flutter_test_c:
+	flutter test --coverage
+
+# lcov.info => html
+genhtml:
+	genhtml coverage/lcov.info -o coverage/html
+
 # Masonのbrickを取得する
 mason_get:
 	mason get

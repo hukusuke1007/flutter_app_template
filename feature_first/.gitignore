@@ -55,3 +55,6 @@ ios/**/GoogleService-Info.plist
 mason-lock.json
 .mason
 .fvm/flutter_sdk
+
+# Test
+coverage/
