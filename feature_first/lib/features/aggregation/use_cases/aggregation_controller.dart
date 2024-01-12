@@ -6,10 +6,10 @@ import 'package:flutter_app_template/features/aggregation/use_cases/fetch_count.
 import 'package:flutter_app_template/features/aggregation/use_cases/fetch_sum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'todo_controller.g.dart';
+part 'aggregation_controller.g.dart';
 
 @riverpod
-class TodoController extends _$TodoController {
+class AggregationController extends _$AggregationController {
   @override
   Future<List<int>> build() async {
     final snap =

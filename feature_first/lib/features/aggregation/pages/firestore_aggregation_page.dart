@@ -6,10 +6,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/double_extension.dart';
 import '../../app_wrapper/pages/main_page.dart';
+import '../use_cases/aggregation_controller.dart';
 import '../use_cases/fetch_average.dart';
 import '../use_cases/fetch_count.dart';
 import '../use_cases/fetch_sum.dart';
-import '../use_cases/todo_controller.dart';
 
 class FirestoreAggregationPage extends HookConsumerWidget {
   const FirestoreAggregationPage({super.key});
@@ -24,7 +24,7 @@ class FirestoreAggregationPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final items = ref.watch(todoControllerProvider).asData?.value ?? [];
+    final items = ref.watch(aggregationControllerProvider).asData?.value ?? [];
     final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
     final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
     final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
@@ -89,7 +89,7 @@ class FirestoreAggregationPage extends HookConsumerWidget {
         Center(
           child: FilledButton(
             onPressed: () async {
-              await ref.read(todoControllerProvider.notifier).add();
+              await ref.read(aggregationControllerProvider.notifier).add();
             },
             child: const Text(
               '追加する',
