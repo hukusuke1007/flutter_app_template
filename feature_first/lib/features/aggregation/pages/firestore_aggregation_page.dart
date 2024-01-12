@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/features/aggregation/use_cases/fetch_count.dart';
-import 'package:flutter_app_template/features/aggregation/use_cases/todo_controller.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/context_extension.dart';
+import '../../../core/extensions/double_extension.dart';
 import '../../app_wrapper/pages/main_page.dart';
+import '../use_cases/fetch_average.dart';
+import '../use_cases/fetch_count.dart';
+import '../use_cases/fetch_sum.dart';
+import '../use_cases/todo_controller.dart';
 
 class FirestoreAggregationPage extends HookConsumerWidget {
   const FirestoreAggregationPage({super.key});
@@ -22,7 +25,9 @@ class FirestoreAggregationPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final items = ref.watch(todoControllerProvider).asData?.value ?? [];
-    final count = ref.watch(fetchCountProvider).asData?.value;
+    final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
+    final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
+    final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +50,7 @@ class FirestoreAggregationPage extends HookConsumerWidget {
                 return Center(
                   child: Text(
                     item.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -59,11 +64,23 @@ class FirestoreAggregationPage extends HookConsumerWidget {
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
               child: Text(
                 'count: $count',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Flexible(
+              child: Text(
+                'sum: $sum',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Flexible(
+              child: Text(
+                'average: ${average.roundWithDigit(3)}',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

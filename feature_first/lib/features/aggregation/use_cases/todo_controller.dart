@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app_template/features/aggregation/use_cases/fetch_average.dart';
 import 'package:flutter_app_template/features/aggregation/use_cases/fetch_count.dart';
+import 'package:flutter_app_template/features/aggregation/use_cases/fetch_sum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'todo_controller.g.dart';
@@ -27,6 +29,8 @@ class TodoController extends _$TodoController {
     });
     ref
       ..invalidateSelf()
-      ..invalidate(fetchCountProvider);
+      ..invalidate(fetchCountProvider)
+      ..invalidate(fetchSumProvider)
+      ..invalidate(fetchAverageProvider);
   }
 }

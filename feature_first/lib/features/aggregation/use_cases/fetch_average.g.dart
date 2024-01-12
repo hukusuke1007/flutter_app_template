@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fetch_count.dart';
+part of 'fetch_average.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchCountHash() => r'914ae2fb28417fe8ab1c1c7bc87d800657f7b58d';
+String _$fetchAverageHash() => r'e790f7612ef71b5f0dc063c19e03025bb7f0cdd3';
 
-/// See also [FetchCount].
-@ProviderFor(FetchCount)
-final fetchCountProvider =
-    AutoDisposeAsyncNotifierProvider<FetchCount, int>.internal(
-  FetchCount.new,
-  name: r'fetchCountProvider',
+/// See also [FetchAverage].
+@ProviderFor(FetchAverage)
+final fetchAverageProvider =
+    AutoDisposeAsyncNotifierProvider<FetchAverage, double>.internal(
+  FetchAverage.new,
+  name: r'fetchAverageProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchCountHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchAverageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FetchCount = AutoDisposeAsyncNotifier<int>;
+typedef _$FetchAverage = AutoDisposeAsyncNotifier<double>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

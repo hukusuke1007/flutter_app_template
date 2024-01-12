@@ -7,7 +7,7 @@ part of 'fetch_timeline_post_count.dart';
 // **************************************************************************
 
 String _$fetchTimelinePostCountHash() =>
-    r'e90ddb643786866ef10b79f147c8fdb1bfcadd1e';
+    r'442e1700ce4ebfb580a4bf95a64c07a36aa2c8db';
 
 /// タイムラインの投稿数を取得
 ///
