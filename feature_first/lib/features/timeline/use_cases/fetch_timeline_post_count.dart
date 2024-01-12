@@ -13,5 +13,5 @@ Future<int> fetchTimelinePostCount(FetchTimelinePostCountRef ref) async {
       .group(Post.collectionName)
       .count();
   final snap = await query.get();
-  return snap.count;
+  return snap.count ?? 0;
 }
