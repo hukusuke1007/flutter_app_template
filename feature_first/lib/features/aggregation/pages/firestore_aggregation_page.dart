@@ -28,7 +28,6 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
     final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
     final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,61 +39,68 @@ class FirestoreAggregationPage extends HookConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) {
-                final item = items[i];
-                return Center(
-                  child: Text(
-                    item.toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+      body: Column(
+        children: [
+          Expanded(
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) {
+                      final item = items[i];
+                      return Center(
+                        child: Text(
+                          item.toString(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
+                    childCount: items.length,
                   ),
-                );
-              },
-              childCount: items.length,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Flexible(
+                  child: Text(
+                    'count: $count',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    'sum: $sum',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    'average: ${average.roundWithDigit(3)}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Flexible(
-              child: Text(
-                'count: $count',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Flexible(
-              child: Text(
-                'sum: $sum',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Flexible(
-              child: Text(
-                'average: ${average.roundWithDigit(3)}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-        Center(
-          child: FilledButton(
-            onPressed: () async {
-              await ref.read(aggregationControllerProvider.notifier).add();
-            },
-            child: const Text(
-              '追加する',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+        FilledButton(
+          onPressed: () async {
+            await ref.read(aggregationControllerProvider.notifier).add();
+          },
+          child: const Text(
+            '追加する',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],
