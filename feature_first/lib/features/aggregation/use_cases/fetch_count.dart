@@ -11,6 +11,7 @@ class FetchCount extends _$FetchCount {
         .collection('aggregation')
         .count()
         .get();
-    return snap.count;
+
+    return snap.count ?? 0;
   }
 }

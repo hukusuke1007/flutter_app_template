@@ -75,13 +75,13 @@ dependencies:
 
   # Firebase
   firebase_core: ^2.24.2
-  firebase_analytics: ^10.7.4
-  cloud_firestore: ^4.13.6
-  firebase_auth: ^4.15.3
-  firebase_storage: ^11.5.6
-  cloud_functions: ^4.5.8
-  firebase_messaging: ^14.7.9
-  firebase_crashlytics: ^3.4.8
+  firebase_analytics: ^10.8.0
+  cloud_firestore: ^4.14.0
+  firebase_auth: ^4.16.0
+  firebase_storage: ^11.6.0
+  cloud_functions: ^4.6.0
+  firebase_messaging: ^14.7.10
+  firebase_crashlytics: ^3.4.9
   firebase_remote_config: ^4.3.8
 
   # LocalNotification
