@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/features/aggregation/pages/firestore_aggregation_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -190,6 +191,21 @@ class HomePage extends HookConsumerWidget {
                 ),
                 onTap: () {
                   TimelinePage.push(context);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                title: Text(
+                  'Firestore Aggregationのサンプル',
+                  style:
+                      context.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                ),
+                onTap: () {
+                  FirestoreAggregationPage.push(context);
                 },
               ),
               const Divider(height: 1),

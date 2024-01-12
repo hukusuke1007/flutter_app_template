@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/features/aggregation/pages/firestore_aggregation_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -113,6 +114,13 @@ final routerProvider = Provider((ref) {
                 builder: (_, __) => const EmailVerificationPage(),
               ),
             ],
+          ),
+
+          /// Firestore Aggregation
+          GoRoute(
+            path: FirestoreAggregationPage.pageName,
+            name: FirestoreAggregationPage.pageName,
+            builder: (_, __) => const FirestoreAggregationPage(),
           ),
 
           /// タイムライン
