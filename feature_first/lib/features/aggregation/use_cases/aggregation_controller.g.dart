@@ -7,12 +7,12 @@ part of 'aggregation_controller.dart';
 // **************************************************************************
 
 String _$aggregationControllerHash() =>
-    r'd22136a8d8ef43dddfdc154f95a2e018a04a769b';
+    r'9c1a1d24572bb79d09acb3c18dc8b534db6771fe';
 
 /// See also [AggregationController].
 @ProviderFor(AggregationController)
-final aggregationControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AggregationController, List<int>>.internal(
+final aggregationControllerProvider = AutoDisposeAsyncNotifierProvider<
+    AggregationController, List<({int? status, int? value})>>.internal(
   AggregationController.new,
   name: r'aggregationControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,7 @@ final aggregationControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AggregationController = AutoDisposeAsyncNotifier<List<int>>;
+typedef _$AggregationController
+    = AutoDisposeAsyncNotifier<List<({int? status, int? value})>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -28,6 +28,10 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
     final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
     final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
+    final statusState = useState(0);
+    const statusList = [0, 1, 2];
+
+    print(ref.watch(fetchAverageProvider).error);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,26 +46,37 @@ class FirestoreAggregationPage extends HookConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, i) {
-                      final item = items[i];
-                      return Center(
-                        child: Text(
-                          item.toString(),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                ref
+                  ..invalidate(aggregationControllerProvider)
+                  ..invalidate(fetchCountProvider)
+                  ..invalidate(fetchSumProvider)
+                  ..invalidate(fetchAverageProvider);
+                await Future<void>.delayed(const Duration(milliseconds: 500));
+              },
+              child: CustomScrollView(
+                controller: scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, i) {
+                        final item = items[i];
+                        return Center(
+                          child: Text(
+                            item.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    childCount: items.length,
+                        );
+                      },
+                      childCount: items.length,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Padding(
@@ -94,9 +109,29 @@ class FirestoreAggregationPage extends HookConsumerWidget {
       ),
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
+        DropdownButton(
+          isDense: true,
+          items: statusList
+              .map(
+                (e) => DropdownMenuItem<int>(
+                  value: e,
+                  child: Text('status: $e'),
+                ),
+              )
+              .toList(),
+          onChanged: (int? value) {
+            if (value != null) {
+              statusState.value = value;
+            }
+          },
+          value: statusList[statusState.value],
+          underline: const SizedBox.shrink(),
+        ),
         FilledButton(
           onPressed: () async {
-            await ref.read(aggregationControllerProvider.notifier).add();
+            await ref.read(aggregationControllerProvider.notifier).add(
+                  statusState.value,
+                );
           },
           child: const Text(
             '追加する',
