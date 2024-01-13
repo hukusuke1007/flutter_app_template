@@ -4,6 +4,7 @@ import 'package:flutter_app_template/features/github_users/entities/user.dart';
 import 'package:flutter_app_template/features/github_users/repositories/github_api_repository.dart';
 import 'package:flutter_app_template/features/github_users/use_cases/github_users_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -164,7 +165,7 @@ void main() {
           appException,
         ); // リ
         expect(
-          container.read(githubUsersControllerProvider).value?.length,
+          container.read(githubUsersControllerProvider).asData?.value,
           isNull,
         ); // リスト個数が期待値であるか確認
 
