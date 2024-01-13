@@ -40,7 +40,7 @@ class SaveMyProfileImage {
         );
 
     /// 画像情報をFirestoreへ保存
-    final profile = _ref.read(fetchMyProfileProvider).asData?.value;
+    final profile = _ref.read(fetchMyProfileProvider).value;
     final newProfile = (profile ?? Developer(developerId: userId)).copyWith(
       image: StorageFile(
         url: imageUrl,

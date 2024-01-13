@@ -25,7 +25,7 @@ class SaveMyProfile {
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
     }
-    final profile = _ref.read(fetchMyProfileProvider).asData?.value;
+    final profile = _ref.read(fetchMyProfileProvider).value;
     final newProfile = (profile ?? Developer(developerId: userId)).copyWith(
       name: name,
       birthdate: birthdate,

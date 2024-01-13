@@ -30,7 +30,7 @@ class FetchTimeline extends _$FetchTimeline {
 
   @override
   Future<List<Post>> build() async {
-    final length = state.asData?.value.length ?? 0;
+    final length = state.value?.length ?? 0;
 
     /// クエリを設定したRepositoryを生成
     final query = Document.colGroupQuery(

@@ -41,7 +41,7 @@ class MemoController extends _$MemoController {
       return [];
     }
 
-    final length = state.asData?.value.length ?? 0;
+    final length = state.value?.length ?? 0;
     final repository = ref.watch(
       collectionPagingRepositoryProvider(
         CollectionParam<Memo>(

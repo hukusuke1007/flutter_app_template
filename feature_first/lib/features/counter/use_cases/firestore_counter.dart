@@ -36,8 +36,8 @@ class FirestoreCounter extends _$FirestoreCounter {
       if (userId == null) {
         throw AppException(title: 'ログインしてください');
       }
-      final prevCount = state.asData?.value?.count ?? 0;
-      final data = state.asData?.value?.copyWith(
+      final prevCount = state.value?.count ?? 0;
+      final data = state.value?.copyWith(
             count: prevCount + incrementCount,
           ) ??
           Counter(count: incrementCount);

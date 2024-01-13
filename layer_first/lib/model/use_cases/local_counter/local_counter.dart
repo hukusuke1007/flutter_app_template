@@ -5,7 +5,7 @@ import '../../repositories/shared_preferences/shared_preference_repository.dart'
 
 part 'local_counter.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class LocalCounter extends _$LocalCounter {
   @override
   int build() {

@@ -40,7 +40,7 @@ class _Dialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(fetchMyProfileProvider).asData?.value;
+    final profile = ref.watch(fetchMyProfileProvider).value;
     final birthdateState = useState<DateTime?>(profile?.birthdate);
 
     final nameFormKey = useFormFieldStateKey();

@@ -47,7 +47,7 @@ class TimelinePage extends HookConsumerWidget {
     final loadingState = useState(false);
 
     final asyncValue = ref.watch(fetchTimelineProvider);
-    final count = ref.watch(fetchTimelinePostCountProvider).asData?.value ?? 0;
+    final count = ref.watch(fetchTimelinePostCountProvider).value ?? 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

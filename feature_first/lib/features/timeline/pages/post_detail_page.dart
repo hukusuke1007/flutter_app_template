@@ -66,9 +66,9 @@ class PostDetailPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final provider = postControllerProvider(posterId: posterId, postId: postId);
-    final data = ref.watch(provider).asData?.value;
+    final data = ref.watch(provider).value;
 
-    final poster = ref.watch(fetchPosterProvider(posterId)).asData?.value;
+    final poster = ref.watch(fetchPosterProvider(posterId)).value;
 
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData =

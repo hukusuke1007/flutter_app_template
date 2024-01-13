@@ -25,7 +25,7 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final enableScreenReader =
-        ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
+        ref.watch(fetchEnableScreenReaderProvider).value ?? false;
     final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
 
     useEffectOnce(() {

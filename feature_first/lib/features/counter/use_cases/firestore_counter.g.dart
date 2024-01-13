@@ -6,7 +6,7 @@ part of 'firestore_counter.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreCounterHash() => r'af27257b54e0489970cd325b2faced8c5d64375a';
+String _$firestoreCounterHash() => r'7d4c20fea67498d90a0558ddbbd6e749ce82ecde';
 
 /// See also [FirestoreCounter].
 @ProviderFor(FirestoreCounter)
