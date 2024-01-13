@@ -6,7 +6,7 @@ part of 'fetch_aggregation.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchAggregationHash() => r'f8ae1cc4252fa49beb7ec78345c939bce78cb9e5';
+String _$fetchAggregationHash() => r'501f7c5de8450cb7d1d4bf843544ca4b3988fb77';
 
 /// See also [FetchAggregation].
 @ProviderFor(FetchAggregation)

@@ -11,17 +11,14 @@ class FetchAggregation extends _$FetchAggregation {
   Future<Result> build() async {
     final snap = await FirebaseFirestore.instance
         .collection('aggregation')
-        .aggregate(
-          count(),
-          sum('value'),
-          average('value'),
-        )
+        // 欲しい集計をセット（30個まで）
+        .aggregate(count(), sum('value'), average('value'))
         .get();
 
     return (
       count: snap.count ?? 0,
-      sum: snap.getAverage('value') ?? 0.0,
-      average: snap.getSum('value') ?? 0.0
+      sum: snap.getSum('value') ?? 0.0,
+      average: snap.getAverage('value') ?? 0.0,
     );
   }
 }
