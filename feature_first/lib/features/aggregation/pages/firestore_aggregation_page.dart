@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/features/aggregation/use_cases/fetch_aggregation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,8 +31,8 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
     final statusState = useState(0);
     const statusList = [0, 1, 2];
-
-    print(ref.watch(fetchAverageProvider).error);
+    final result = ref.watch(fetchAggregationProvider).value;
+    debugPrint(result?.toString());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +53,8 @@ class FirestoreAggregationPage extends HookConsumerWidget {
                   ..invalidate(aggregationControllerProvider)
                   ..invalidate(fetchCountProvider)
                   ..invalidate(fetchSumProvider)
-                  ..invalidate(fetchAverageProvider);
+                  ..invalidate(fetchAverageProvider)
+                  ..invalidate(fetchAggregationProvider);
                 await Future<void>.delayed(const Duration(milliseconds: 500));
               },
               child: CustomScrollView(

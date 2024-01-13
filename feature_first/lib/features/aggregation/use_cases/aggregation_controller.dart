@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_app_template/features/aggregation/use_cases/fetch_average.dart';
-import 'package:flutter_app_template/features/aggregation/use_cases/fetch_count.dart';
-import 'package:flutter_app_template/features/aggregation/use_cases/fetch_sum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'fetch_aggregation.dart';
+import 'fetch_average.dart';
+import 'fetch_count.dart';
+import 'fetch_sum.dart';
 
 part 'aggregation_controller.g.dart';
 
@@ -38,6 +40,7 @@ class AggregationController extends _$AggregationController {
       ..invalidateSelf()
       ..invalidate(fetchCountProvider)
       ..invalidate(fetchSumProvider)
-      ..invalidate(fetchAverageProvider);
+      ..invalidate(fetchAverageProvider)
+      ..invalidate(fetchAggregationProvider);
   }
 }

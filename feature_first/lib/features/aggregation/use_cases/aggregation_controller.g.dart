@@ -7,7 +7,7 @@ part of 'aggregation_controller.dart';
 // **************************************************************************
 
 String _$aggregationControllerHash() =>
-    r'9c1a1d24572bb79d09acb3c18dc8b534db6771fe';
+    r'82d51251f367fa702fc765b337e537dccb350fd7';
 
 /// See also [AggregationController].
 @ProviderFor(AggregationController)
