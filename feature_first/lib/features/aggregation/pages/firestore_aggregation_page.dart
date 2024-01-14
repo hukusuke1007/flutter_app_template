@@ -23,6 +23,17 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     context.push(pagePath);
   }
 
+  static final errorProvider = Provider.autoDispose((ref) {
+    final itemsAsyncValue = ref.watch(aggregationControllerProvider);
+    final countAsyncValue = ref.watch(fetchCountProvider);
+    final sumAsyncValue = ref.watch(fetchSumProvider);
+    final averageAsyncValue = ref.watch(fetchAverageProvider);
+    return itemsAsyncValue.error ??
+        countAsyncValue.error ??
+        sumAsyncValue.error ??
+        averageAsyncValue.error;
+  });
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final itemsAsyncValue = ref.watch(aggregationControllerProvider);
@@ -35,32 +46,13 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     final sum = sumAsyncValue.asData?.value ?? 0;
     final average = averageAsyncValue.asData?.value ?? 0;
 
-    useEffect(
-      () {
-        void showErrorDialog(String? title) {
-          showOkAlertDialog(context: context, title: title);
+    ref.listen(
+      errorProvider,
+      (prev, next) {
+        if (next != null) {
+          showOkAlertDialog(context: context, title: next.toString());
         }
-
-        Future.microtask(() {
-          if (itemsAsyncValue.hasError) {
-            showErrorDialog(itemsAsyncValue.error?.toString());
-          } else if (countAsyncValue.hasError) {
-            showErrorDialog(countAsyncValue.error?.toString());
-          } else if (sumAsyncValue.hasError) {
-            showErrorDialog(sumAsyncValue.error?.toString());
-          } else if (averageAsyncValue.hasError) {
-            showErrorDialog(averageAsyncValue.error?.toString());
-          }
-        });
-
-        return null;
       },
-      [
-        itemsAsyncValue.error,
-        countAsyncValue.error,
-        sumAsyncValue.error,
-        averageAsyncValue.error,
-      ],
     );
 
     final scrollController = useScrollController();
