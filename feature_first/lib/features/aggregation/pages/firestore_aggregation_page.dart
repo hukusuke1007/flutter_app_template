@@ -49,7 +49,7 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     ref.listen(
       errorProvider,
       (prev, next) {
-        if (next != null) {
+        if (next != null && next is Exception) {
           showOkAlertDialog(context: context, title: next.toString());
         }
       },
