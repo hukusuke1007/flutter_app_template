@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,8 +34,16 @@ class FirestoreCounterPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final counterAsyncValue = ref.watch(firestoreCounterProvider);
-    final counter = counterAsyncValue.value;
     final counterFromStream = ref.watch(fetchFirestoreCounterProvider);
+
+    ref.listen(firestoreCounterProvider, (previous, next) {
+      if (next.error != null) {
+        showOkAlertDialog(
+          context: context,
+          title: next.error?.toString(),
+        );
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +75,8 @@ class FirestoreCounterPage extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        (counter?.count ?? 0).toString(),
+                        (counterAsyncValue.asData?.value?.count ?? 0)
+                            .toString(),
                         style: context.titleStyle,
                       ),
                       Text(
@@ -80,7 +90,8 @@ class FirestoreCounterPage extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        (counterFromStream.value?.count ?? 0).toString(),
+                        (counterFromStream.asData?.value?.count ?? 0)
+                            .toString(),
                         style: context.titleStyle,
                       ),
                       Text(
@@ -130,11 +141,11 @@ class FirestoreCounterPage extends HookConsumerWidget {
           ),
         ],
       ),
-      persistentFooterButtons: counterAsyncValue.error != null
+      persistentFooterButtons: counterFromStream.error != null
           ? [
               Center(
                 child: Text(
-                  counterAsyncValue.error?.toString() ?? '',
+                  counterFromStream.error?.toString() ?? '',
                   style: context.bodyStyle.copyWith(
                     color: Colors.redAccent,
                   ),
