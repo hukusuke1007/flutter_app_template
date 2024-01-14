@@ -7,7 +7,7 @@ part of 'firebase_auth_repository.dart';
 // **************************************************************************
 
 String _$firebaseAuthRepositoryHash() =>
-    r'14b5a21e04979e3a9e5aa287eb179a87b3085f25';
+    r'dc4adaef041663d665b9caa645b087782a5570d5';
 
 /// See also [firebaseAuthRepository].
 @ProviderFor(firebaseAuthRepository)
@@ -18,8 +18,8 @@ final firebaseAuthRepositoryProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$firebaseAuthRepositoryHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
 
 typedef FirebaseAuthRepositoryRef = ProviderRef<FirebaseAuthRepository>;

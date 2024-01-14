@@ -7,7 +7,7 @@ part of 'document_repository.dart';
 // **************************************************************************
 
 String _$documentRepositoryHash() =>
-    r'dd065c8efe8c4bd59ea5defd0c2e6fbefcddfc3b';
+    r'7cabda996378e18b156cd7fd330435b9cd99d6b6';
 
 /// See also [documentRepository].
 @ProviderFor(documentRepository)
@@ -17,8 +17,8 @@ final documentRepositoryProvider = Provider<DocumentRepository>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$documentRepositoryHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
 
 typedef DocumentRepositoryRef = ProviderRef<DocumentRepository>;

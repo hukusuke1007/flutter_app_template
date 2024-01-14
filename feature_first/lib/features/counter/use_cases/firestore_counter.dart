@@ -10,13 +10,7 @@ import '../entities/counter.dart';
 
 part 'firestore_counter.g.dart';
 
-@Riverpod(
-  dependencies: [
-    AuthStateController,
-    firebaseAuthRepository,
-    documentRepository,
-  ],
-)
+@riverpod
 class FirestoreCounter extends _$FirestoreCounter {
   @override
   Future<Counter?> build() async {

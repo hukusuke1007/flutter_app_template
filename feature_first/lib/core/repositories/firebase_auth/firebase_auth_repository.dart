@@ -9,7 +9,7 @@ import 'login_type.dart';
 
 part 'firebase_auth_repository.g.dart';
 
-@Riverpod(keepAlive: true, dependencies: [])
+@Riverpod(keepAlive: true)
 FirebaseAuthRepository firebaseAuthRepository(FirebaseAuthRepositoryRef ref) {
   return FirebaseAuthRepository(FirebaseAuth.instance);
 }

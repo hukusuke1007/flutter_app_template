@@ -5,7 +5,7 @@ import 'document.dart';
 
 part 'document_repository.g.dart';
 
-@Riverpod(keepAlive: true, dependencies: [])
+@Riverpod(keepAlive: true)
 DocumentRepository documentRepository(DocumentRepositoryRef ref) {
   return DocumentRepository(FirebaseFirestore.instance);
 }
