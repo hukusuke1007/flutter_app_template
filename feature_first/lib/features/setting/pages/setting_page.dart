@@ -48,7 +48,9 @@ class SettingPage extends HookConsumerWidget {
         Future.microtask(() {
           if (profileAsyncValue.hasError) {
             showOkAlertDialog(
-                context: context, title: profileAsyncValue.error?.toString());
+              context: context,
+              title: profileAsyncValue.error?.toString(),
+            );
           }
         });
         return null;
