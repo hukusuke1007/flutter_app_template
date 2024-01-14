@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/features/aggregation/use_cases/fetch_aggregation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -24,15 +25,48 @@ class FirestoreAggregationPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final itemsAsyncValue = ref.watch(aggregationControllerProvider);
+    final countAsyncValue = ref.watch(fetchCountProvider);
+    final sumAsyncValue = ref.watch(fetchSumProvider);
+    final averageAsyncValue = ref.watch(fetchAverageProvider);
+
+    final items = itemsAsyncValue.asData?.value ?? [];
+    final count = countAsyncValue.asData?.value ?? 0;
+    final sum = sumAsyncValue.asData?.value ?? 0;
+    final average = averageAsyncValue.asData?.value ?? 0;
+
+    useEffect(
+      () {
+        void showErrorDialog(String? title) {
+          showOkAlertDialog(context: context, title: title);
+        }
+
+        Future.microtask(() {
+          if (itemsAsyncValue.error != null) {
+            showErrorDialog(itemsAsyncValue.error?.toString());
+          } else if (countAsyncValue.error != null) {
+            showErrorDialog(countAsyncValue.error?.toString());
+          } else if (sumAsyncValue.error != null) {
+            showErrorDialog(sumAsyncValue.error?.toString());
+          } else if (averageAsyncValue.error != null) {
+            showErrorDialog(averageAsyncValue.error?.toString());
+          }
+        });
+
+        return null;
+      },
+      [
+        itemsAsyncValue.error,
+        countAsyncValue.error,
+        sumAsyncValue.error,
+        averageAsyncValue.error,
+      ],
+    );
+
     final scrollController = useScrollController();
-
-    final items = ref.watch(aggregationControllerProvider).asData?.value ?? [];
-    final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
-    final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
-    final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
-
     final statusState = useState(0);
     const statusList = [0, 1, 2];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
