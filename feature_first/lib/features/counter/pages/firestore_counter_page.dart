@@ -37,7 +37,7 @@ class FirestoreCounterPage extends HookConsumerWidget {
     final counterFromStream = ref.watch(fetchFirestoreCounterProvider);
 
     ref.listen(firestoreCounterProvider, (previous, next) {
-      if (next.error != null) {
+      if (!next.isLoading && next.error != null) {
         showOkAlertDialog(
           context: context,
           title: next.error?.toString(),
