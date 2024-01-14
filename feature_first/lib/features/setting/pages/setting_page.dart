@@ -38,9 +38,23 @@ class SettingPage extends HookConsumerWidget {
     final appName = ref.watch(fetchAppNameProvider);
     final appVersion = ref.watch(fetchAppVersionProvider);
     final packageName = ref.watch(fetchPackageNameProvider);
-    final profile = ref.watch(fetchMyProfileProvider);
+    final profileAsyncValue = ref.watch(fetchMyProfileProvider);
+    final profile = profileAsyncValue.asData?.value;
 
     final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
+
+    useEffect(
+      () {
+        Future.microtask(() {
+          if (profileAsyncValue.hasError) {
+            showOkAlertDialog(
+                context: context, title: profileAsyncValue.error?.toString());
+          }
+        });
+        return null;
+      },
+      [profileAsyncValue.error],
+    );
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする
@@ -75,10 +89,10 @@ class SettingPage extends HookConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: ProfileTile(
-                  profile.value,
+                  profile,
                   heroTag: 'profile',
                   onTapImage: () {
-                    final url = profile.value?.image?.url;
+                    final url = profile?.image?.url;
                     if (url != null) {
                       ImageViewer.show(
                         context,

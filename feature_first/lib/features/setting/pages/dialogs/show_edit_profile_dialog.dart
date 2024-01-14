@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/custom_hooks/use_effect_once.dart';
 import '../../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/date_extension.dart';
@@ -40,17 +39,27 @@ class _Dialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(fetchMyProfileProvider).value;
+    final profileAsyncValue = ref.watch(fetchMyProfileProvider);
+    final profile = profileAsyncValue.asData?.value;
     final birthdateState = useState<DateTime?>(profile?.birthdate);
+
+    useEffect(
+      () {
+        Future.microtask(() {
+          if (profileAsyncValue.hasError) {
+            showOkAlertDialog(
+              context: context,
+              title: profileAsyncValue.error?.toString(),
+            );
+          }
+        });
+        return null;
+      },
+      [profileAsyncValue.error],
+    );
 
     final nameFormKey = useFormFieldStateKey();
     final birthdateFormKey = useFormFieldStateKey();
-
-    useEffectOnce(() {
-      nameFormKey.currentState?.didChange(profile?.name);
-      birthdateFormKey.currentState?.didChange(profile?.birthdateLabel);
-      return null;
-    });
 
     return Column(
       children: [

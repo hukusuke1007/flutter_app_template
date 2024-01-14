@@ -42,13 +42,13 @@ class FirestoreAggregationPage extends HookConsumerWidget {
         }
 
         Future.microtask(() {
-          if (itemsAsyncValue.error != null) {
+          if (itemsAsyncValue.hasError) {
             showErrorDialog(itemsAsyncValue.error?.toString());
-          } else if (countAsyncValue.error != null) {
+          } else if (countAsyncValue.hasError) {
             showErrorDialog(countAsyncValue.error?.toString());
-          } else if (sumAsyncValue.error != null) {
+          } else if (sumAsyncValue.hasError) {
             showErrorDialog(sumAsyncValue.error?.toString());
-          } else if (averageAsyncValue.error != null) {
+          } else if (averageAsyncValue.hasError) {
             showErrorDialog(averageAsyncValue.error?.toString());
           }
         });
