@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -48,6 +49,12 @@ class TimelinePage extends HookConsumerWidget {
 
     final asyncValue = ref.watch(fetchTimelineProvider);
     final count = ref.watch(fetchTimelinePostCountProvider).asData?.value ?? 0;
+
+    ref.listen(fetchTimelinePostCountProvider, (prev, next) {
+      if (!next.isLoading && next.hasError) {
+        showOkAlertDialog(context: context, title: next.error?.toString());
+      }
+    });
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
