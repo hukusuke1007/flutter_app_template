@@ -33,7 +33,7 @@ abstract class _$FetchPoster
     extends BuildlessAutoDisposeAsyncNotifier<Developer?> {
   late final String userId;
 
-  Future<Developer?> build(
+  FutureOr<Developer?> build(
     String userId,
   );
 }
@@ -125,7 +125,7 @@ class FetchPosterProvider
   final String userId;
 
   @override
-  Future<Developer?> runNotifierBuild(
+  FutureOr<Developer?> runNotifierBuild(
     covariant FetchPoster notifier,
   ) {
     return notifier.build(

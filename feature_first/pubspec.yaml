@@ -20,11 +20,11 @@ dependencies:
   shared_preferences:
 
   # Riverpod
-  hooks_riverpod:
-  riverpod_annotation:
+  hooks_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
 
   # Hooks
-  flutter_hooks:
+  flutter_hooks: ^0.20.4
 
   # Entity
   freezed_annotation:
@@ -124,9 +124,9 @@ dev_dependencies:
   mockito:
 
   # Static analysis
-  pedantic_mono:
-  custom_lint:
-  riverpod_lint:
+  pedantic_mono: ^1.25.0
+  custom_lint: ^0.5.8
+  riverpod_lint: ^2.3.7
 
   # Serializer
   json_serializable:
@@ -136,7 +136,7 @@ dev_dependencies:
   freezed:
   flutter_gen_runner:
   retrofit_generator:
-  riverpod_generator:
+  riverpod_generator: ^2.3.9
 
   # Other
   flutter_launcher_icons:

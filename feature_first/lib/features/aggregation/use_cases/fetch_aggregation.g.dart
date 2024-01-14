@@ -10,8 +10,8 @@ String _$fetchAggregationHash() => r'501f7c5de8450cb7d1d4bf843544ca4b3988fb77';
 
 /// See also [FetchAggregation].
 @ProviderFor(FetchAggregation)
-final fetchAggregationProvider = AutoDisposeAsyncNotifierProvider<
-    FetchAggregation, ({double average, int count, double sum})>.internal(
+final fetchAggregationProvider =
+    AutoDisposeAsyncNotifierProvider<FetchAggregation, Result>.internal(
   FetchAggregation.new,
   name: r'fetchAggregationProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,7 +21,6 @@ final fetchAggregationProvider = AutoDisposeAsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$FetchAggregation
-    = AutoDisposeAsyncNotifier<({double average, int count, double sum})>;
+typedef _$FetchAggregation = AutoDisposeAsyncNotifier<Result>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

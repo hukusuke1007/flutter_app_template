@@ -25,10 +25,12 @@ class FirestoreAggregationPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final items = ref.watch(aggregationControllerProvider).value ?? [];
-    final count = ref.watch(fetchCountProvider).value ?? 0;
-    final sum = ref.watch(fetchSumProvider).value ?? 0;
-    final average = ref.watch(fetchAverageProvider).value ?? 0;
+
+    final items = ref.watch(aggregationControllerProvider).asData?.value ?? [];
+    final count = ref.watch(fetchCountProvider).asData?.value ?? 0;
+    final sum = ref.watch(fetchSumProvider).asData?.value ?? 0;
+    final average = ref.watch(fetchAverageProvider).asData?.value ?? 0;
+
     final statusState = useState(0);
     const statusList = [0, 1, 2];
     return Scaffold(

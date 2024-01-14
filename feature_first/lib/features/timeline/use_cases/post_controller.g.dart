@@ -34,7 +34,7 @@ abstract class _$PostController
   late final String? posterId;
   late final String? postId;
 
-  Future<Post?> build({
+  FutureOr<Post?> build({
     required String? posterId,
     required String? postId,
   });
@@ -124,7 +124,7 @@ class PostControllerProvider
   final String? postId;
 
   @override
-  Future<Post?> runNotifierBuild(
+  FutureOr<Post?> runNotifierBuild(
     covariant PostController notifier,
   ) {
     return notifier.build(
