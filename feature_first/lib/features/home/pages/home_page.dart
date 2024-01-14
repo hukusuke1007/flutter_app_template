@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/features/aggregation/pages/firestore_aggregation_page.dart';
@@ -25,8 +26,13 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
     final enableScreenReader =
-        ref.watch(fetchEnableScreenReaderProvider).value ?? false;
+        ref.watch(fetchEnableScreenReaderProvider).asData?.value ?? false;
     final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
+    ref.listen(fetchEnableScreenReaderProvider, (previous, next) {
+      if (!next.isLoading && next.hasError) {
+        showOkAlertDialog(context: context, title: next.error?.toString());
+      }
+    });
 
     useEffectOnce(() {
       /// 同じタブが選択された場合、上にスクロールする

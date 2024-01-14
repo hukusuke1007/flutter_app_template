@@ -7,7 +7,7 @@ part of 'auth_state_controller.dart';
 // **************************************************************************
 
 String _$authStateControllerHash() =>
-    r'fc1a72c20e51bcb29387fd006a0f38ad7a244dd5';
+    r'dc4d5001f1eacd2fe16f6f174ea0175623b9e5ae';
 
 /// See also [AuthStateController].
 @ProviderFor(AuthStateController)
@@ -18,8 +18,11 @@ final authStateControllerProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$authStateControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[firebaseAuthRepositoryProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    firebaseAuthRepositoryProvider,
+    ...?firebaseAuthRepositoryProvider.allTransitiveDependencies
+  },
 );
 
 typedef _$AuthStateController = Notifier<AuthState>;

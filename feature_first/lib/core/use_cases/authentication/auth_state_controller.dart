@@ -19,7 +19,7 @@ enum AuthState {
   bool get isSignIn => this != noSignIn;
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [firebaseAuthRepository])
 class AuthStateController extends _$AuthStateController {
   @override
   AuthState build() {

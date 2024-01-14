@@ -6,7 +6,7 @@ part of 'firestore_counter.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreCounterHash() => r'7d4c20fea67498d90a0558ddbbd6e749ce82ecde';
+String _$firestoreCounterHash() => r'6df781dbbeb65270be655a4caaf5b15732c0f128';
 
 /// See also [FirestoreCounter].
 @ProviderFor(FirestoreCounter)
@@ -17,8 +17,19 @@ final firestoreCounterProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$firestoreCounterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[
+    authStateControllerProvider,
+    firebaseAuthRepositoryProvider,
+    documentRepositoryProvider
+  ],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    authStateControllerProvider,
+    ...?authStateControllerProvider.allTransitiveDependencies,
+    firebaseAuthRepositoryProvider,
+    ...?firebaseAuthRepositoryProvider.allTransitiveDependencies,
+    documentRepositoryProvider,
+    ...?documentRepositoryProvider.allTransitiveDependencies
+  },
 );
 
 typedef _$FirestoreCounter = AutoDisposeAsyncNotifier<Counter?>;
