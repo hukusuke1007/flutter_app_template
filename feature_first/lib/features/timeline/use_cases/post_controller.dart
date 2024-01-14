@@ -33,7 +33,7 @@ class PostController extends _$PostController {
      */
     final dataOfTimeline = ref.watch(
       fetchTimelineProvider.select(
-        (e) => e.value?.firstWhereOrNull((e) => e.postId == postId),
+        (e) => e.asData?.value.firstWhereOrNull((e) => e.postId == postId),
       ),
     );
     if (dataOfTimeline != null) {

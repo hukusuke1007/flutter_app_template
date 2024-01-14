@@ -32,7 +32,7 @@ class TimelineTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final poster = ref.watch(fetchPosterProvider(data.userId)).value;
+    final poster = ref.watch(fetchPosterProvider(data.userId)).asData?.value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData = myUserId != null && data.userId == myUserId;
     return RippleTapGesture(
