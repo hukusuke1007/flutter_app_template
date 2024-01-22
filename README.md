@@ -1,5 +1,13 @@
 # flutter_app_template
 
+<a href="https://neverjp.com#gh-light-mode-only"><img width="40%" src="./logo_blk.png#gh-light-mode-only" /></a>
+
+<a href="https://neverjp.com#gh-dark-mode-only"><img width="40%" src="./logo_wht.png#gh-dark-mode-only" /></a>
+
+Developed with 💙 by [Never inc](https://neverjp.com/).
+
+---
+
 - [FeatureFirst](./feature_first)
 - [LayerFirst](./layer_first)
 
