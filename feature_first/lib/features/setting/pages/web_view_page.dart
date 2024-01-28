@@ -83,7 +83,9 @@ class WebViewPage extends HookConsumerWidget {
 
     final pullToRefreshController = useState(
       PullToRefreshController(
-        options: PullToRefreshOptions(color: Colors.blue),
+        settings: PullToRefreshSettings(
+          color: Colors.blue,
+        ),
         onRefresh: () async {
           if (Platform.isAndroid) {
             await webViewController.value?.reload();
@@ -175,29 +177,22 @@ class WebViewPage extends HookConsumerWidget {
               children: [
                 Expanded(
                   child: InAppWebView(
-                    initialUrlRequest:
-                        URLRequest(url: Uri.parse(urlState.value)),
-                    initialOptions: InAppWebViewGroupOptions(
-                      crossPlatform: InAppWebViewOptions(
-                        useShouldOverrideUrlLoading: true,
-                      ),
-                      android: AndroidInAppWebViewOptions(
-                        useHybridComposition: true,
-                        displayZoomControls: true,
-                      ),
-                      ios: IOSInAppWebViewOptions(
-                        allowsInlineMediaPlayback: true,
-                      ),
+                    initialUrlRequest: URLRequest(
+                      url: WebUri(urlState.value),
+                    ),
+                    initialSettings: InAppWebViewSettings(
+                      useHybridComposition: false,
+                      displayZoomControls: true,
+                      useShouldOverrideUrlLoading: true,
                     ),
                     pullToRefreshController: pullToRefreshController.value,
                     onWebViewCreated: (controller) {
                       webViewController.value = controller;
                     },
-                    androidOnPermissionRequest:
-                        (controller, origin, resources) async {
-                      return PermissionRequestResponse(
-                        resources: resources,
-                        action: PermissionRequestResponseAction.GRANT,
+                    onPermissionRequest: (controller, request) async {
+                      return PermissionResponse(
+                        resources: request.resources,
+                        action: PermissionResponseAction.GRANT,
                       );
                     },
                     onProgressChanged: (controller, value) {
@@ -205,6 +200,30 @@ class WebViewPage extends HookConsumerWidget {
                     },
                     onConsoleMessage: (controller, consoleMessage) {
                       logger.info(consoleMessage);
+                    },
+                    shouldOverrideUrlLoading:
+                        (controller, navigationAction) async {
+                      // https://github.com/pichillilorenzo/flutter_inappwebview/blob/master/flutter_inappwebview/example/lib/in_app_webiew_example.screen.dart#L141
+                      final uri = navigationAction.request.url;
+                      if (uri != null) {
+                        if (![
+                          'http',
+                          'https',
+                          'file',
+                          'chrome',
+                          'data',
+                          'javascript',
+                          'about',
+                        ].contains(uri.scheme)) {
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri);
+
+                            return NavigationActionPolicy.CANCEL;
+                          }
+                        }
+                      }
+
+                      return NavigationActionPolicy.ALLOW;
                     },
                     onLoadStart: (_, url) {
                       urlState.value = url?.toString() ?? '';

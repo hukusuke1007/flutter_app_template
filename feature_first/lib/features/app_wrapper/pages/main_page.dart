@@ -67,6 +67,15 @@ class MainPage extends HookConsumerWidget {
 
     return PopScope(
       canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) {
+          return;
+        }
+        final keyTab = widgetsState.value[selectedTabIndex].$1;
+        if (keyTab.currentState != null && keyTab.currentState!.canPop()) {
+          await keyTab.currentState!.maybePop();
+        }
+      },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: IndexedStack(

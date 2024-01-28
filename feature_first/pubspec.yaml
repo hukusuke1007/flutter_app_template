@@ -47,7 +47,7 @@ dependencies:
   share_plus:
 
   # WebView
-  flutter_inappwebview: ^5.8.0
+  flutter_inappwebview: ^6.0.0
 
   # Launcher
   url_launcher:
