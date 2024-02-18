@@ -37,6 +37,8 @@
 		0C2E1D8D27B51FED004AE903 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		1912160F2B81997500C8DC71 /* prod.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = prod.xcconfig; path = Flutter/prod.xcconfig; sourceTree = "<group>"; };
+		191216102B81998600C8DC71 /* dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = dev.xcconfig; path = Flutter/dev.xcconfig; sourceTree = "<group>"; };
 		19AB3B5728A89CDA00CAF3A3 /* ScreenReaderPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenReaderPlugin.swift; sourceTree = "<group>"; };
 		19AB3B5928A89FED00CAF3A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 				9740EEB21CF90195004384FC /* Debug.xcconfig */,
 				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
 				9740EEB31CF90195004384FC /* Generated.xcconfig */,
+				191216102B81998600C8DC71 /* dev.xcconfig */,
+				1912160F2B81997500C8DC71 /* prod.xcconfig */,
 			);
 			name = Flutter;
 			sourceTree = "<group>";
@@ -227,7 +231,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\\cp -f ${SRCROOT}/${flavor}/GoogleService-Info.plist ${SRCROOT}/GoogleService-Info.plist\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\\cp -f ${SRCROOT}/${FLAVOR}/GoogleService-Info.plist ${SRCROOT}/GoogleService-Info.plist\n";
 		};
 		0C9F614727AC024B00DFEDA2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -316,7 +320,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -420,7 +424,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(appIdSuffix)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(APP_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -556,7 +560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(appIdSuffix)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(APP_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -586,7 +590,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(appIdSuffix)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app$(APP_ID_SUFFIX)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
