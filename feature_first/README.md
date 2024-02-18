@@ -10,7 +10,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 | ローカル DB    | shared_preferences            |
 | API クライアント | retrofit                      |
 | 画面遷移       | go_router                     |
-| Flavor設定       | --dart-define-from-file  |
+| Flavor設定       | --dart-define  |
 | テスト | flutter_test, integration_test, mockito |
 
 ## 画面構成
@@ -121,16 +121,16 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 - 開発
 
   ```sh
-  flutter run --debug --dart-define-from-file=dart_defines/dev.json
+  flutter run --debug --dart-define=FLAVOR=dev
   ```
 
 - 本番
 
   ```sh
-  flutter run --debug --dart-define-from-file=dart_defines/prod.json
+  flutter run --debug --dart-define=FLAVOR=prod
   ```
 
-Android Studio から実行する場合は、以下のように Run Configurations の Additional run args に `--dart-define-from-file` を設定する。
+Android Studio から実行する場合は、以下のように Run Configurations を設定する。
 
 - dev環境でビルドする場合
 
@@ -161,13 +161,21 @@ mason make feature
 - Android
 
   ```sh
-  flutter build appbundle --release --dart-define-from-file=dart_defines/prod.json
+  # dev
+  flutter build appbundle --release --dart-define=FLAVOR=dev
+
+  # prod
+  flutter build appbundle --release --dart-define=FLAVOR=prod
   ```
 
 - iOS
 
   ```sh
-  flutter build ipa --release --dart-define-from-file=dart_defines/prod.json
+  # dev
+  flutter build ipa --release --dart-define=FLAVOR=dev
+
+  # prod
+  flutter build ipa --release --dart-define=FLAVOR=prod
   ```
 
 ## テスト
@@ -206,10 +214,10 @@ flutter test test/features/github_users/pages/github_users_page_test.dart
 
 ```sh
 # Run all tests
-flutter test --dart-define-from-file=dart_defines/dev.json integration_test
+flutter test --dart-define=FLAVOR=dev integration_test
 
 # Run target test
-flutter test --dart-define-from-file=dart_defines/dev.json integration_test/features/github_users/pages/github_users_page_test.dart
+flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pages/github_users_page_test.dart
 ```
 
 ドキュメント
@@ -245,10 +253,21 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
     ```
 
 3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
-
-    - アプリ名を変更する
-      - [dart-definesディレクトリ](./dart_defines/)内にあるjsonファイルの `appName` を変更する
   
+    - アプリ名を変更する
+      - iOS:
+
+        `$(APP_NAME_PREFIX)`はそのままで、それ以外を変更する
+
+        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
+        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
+
+      - Android:
+
+        `android/app/build.gradle`
+
+        - [resValue](./android/app/build.gradle#L80)
+
     - `com.example.app` のパッケージ名を変更する
       - iOS:
 
@@ -259,7 +278,7 @@ flutter test --dart-define-from-file=dart_defines/dev.json integration_test/feat
       - Android:
 
         - android/app/build.gradle
-          - [applicationId](./android/app/build.gradle#L63)
+          - [applicationId](./android/app/build.gradle#L70)
         - AndroidManifest.xml - package
 
           - [main](./android/app/src/main/AndroidManifest.xml#L2)
