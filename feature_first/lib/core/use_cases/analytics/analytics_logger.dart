@@ -18,11 +18,11 @@ class AnalyticsLogger {
 
   Future<void> onScreen({
     required String screenName,
-    String? screenClassOverride,
+    String? screenClass,
   }) async {
-    await _analytics.setCurrentScreen(
+    await _analytics.logScreenView(
+      screenClass: screenClass ?? screenName,
       screenName: screenName,
-      screenClassOverride: screenClassOverride ?? screenName,
     );
   }
 
