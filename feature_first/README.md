@@ -278,9 +278,9 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
       - Android:
 
         - android/app/build.gradle
+          - [namespace](./android/app/build.gradle#L57)
           - [applicationId](./android/app/build.gradle#L75)
         - AndroidManifest.xml - package
-
           - [main](./android/app/src/main/AndroidManifest.xml#L2)
           - [debug](./android/app/src/debug/AndroidManifest.xml#L2)
           - [profile](./android/app/src/profile/AndroidManifest.xml#L2)

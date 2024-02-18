@@ -86,7 +86,7 @@ dependencies:
 
   # LocalNotification
   flutter_local_notifications:
-  flutter_native_timezone:
+  flutter_timezone: ^1.0.8
   timezone:
 
   # Api
