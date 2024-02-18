@@ -4,7 +4,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -125,18 +125,18 @@ dev_dependencies:
 
   # Static analysis
   pedantic_mono: ^1.25.0
-  custom_lint: ^0.5.8
-  riverpod_lint: ^2.3.7
+  custom_lint:
+  riverpod_lint:
 
   # Serializer
   json_serializable:
 
   # Code generator
-  build_runner:
+  build_runner: ^2.4.8
   freezed:
   flutter_gen_runner:
   retrofit_generator:
-  riverpod_generator: ^2.3.9
+  riverpod_generator:
 
   # Other
   flutter_launcher_icons:
