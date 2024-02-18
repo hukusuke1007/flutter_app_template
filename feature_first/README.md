@@ -266,19 +266,19 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
         `android/app/build.gradle`
 
-        - [resValue](./android/app/build.gradle#L80)
+        - [resValue](./android/app/build.gradle#L84)
 
     - `com.example.app` のパッケージ名を変更する
       - iOS:
 
         `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
-        Debug, Profile, Release の全てを変更する。`$(appIdSuffix)`はそのままにしてください。
+        Debug, Profile, Release の全てを変更する。`$(APP_ID_SUFFIX)`はそのままにしてください。
         ![dev](./doc/images/product_bundle_identifier.png)
 
       - Android:
 
         - android/app/build.gradle
-          - [applicationId](./android/app/build.gradle#L70)
+          - [applicationId](./android/app/build.gradle#L75)
         - AndroidManifest.xml - package
 
           - [main](./android/app/src/main/AndroidManifest.xml#L2)
