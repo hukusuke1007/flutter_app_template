@@ -20,11 +20,11 @@ dependencies:
   shared_preferences:
 
   # Riverpod
-  hooks_riverpod: ^2.4.9
-  riverpod_annotation: ^2.3.3
+  hooks_riverpod:
+  riverpod_annotation:
 
   # Hooks
-  flutter_hooks: ^0.20.4
+  flutter_hooks:
 
   # Entity
   freezed_annotation:
@@ -74,19 +74,19 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^2.25.4
-  firebase_analytics: ^10.8.5
-  cloud_firestore: ^4.15.4
-  firebase_auth: ^4.17.4
-  firebase_storage: ^11.6.5
-  cloud_functions: ^4.6.5
-  firebase_messaging: ^14.7.15
-  firebase_crashlytics: ^3.4.14
-  firebase_remote_config: ^4.3.13
+  firebase_core: ^2.26.0
+  firebase_analytics: ^10.8.8
+  cloud_firestore: ^4.15.7
+  firebase_auth: ^4.17.7
+  firebase_storage: ^11.6.8
+  cloud_functions: ^4.6.7
+  firebase_messaging: ^14.7.18
+  firebase_crashlytics: ^3.4.17
+  firebase_remote_config: ^4.3.16
 
   # LocalNotification
   flutter_local_notifications:
-  flutter_timezone: ^1.0.8
+  flutter_timezone:
   timezone:
 
   # Api
@@ -94,7 +94,7 @@ dependencies:
   dio:
 
   # Navigation
-  go_router: ^12.1.1
+  go_router:
 
   # Info
   package_info_plus:
@@ -124,7 +124,7 @@ dev_dependencies:
   mockito:
 
   # Static analysis
-  pedantic_mono: ^1.25.0
+  pedantic_mono:
   custom_lint:
   riverpod_lint:
 
@@ -132,7 +132,7 @@ dev_dependencies:
   json_serializable:
 
   # Code generator
-  build_runner: ^2.4.8
+  build_runner:
   freezed:
   flutter_gen_runner:
   retrofit_generator:

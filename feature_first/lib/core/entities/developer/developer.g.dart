@@ -7,18 +7,33 @@ part of 'developer.dart';
 // **************************************************************************
 
 _$DeveloperImpl _$$DeveloperImplFromJson(Map<String, dynamic> json) =>
-    _$DeveloperImpl(
-      developerId: json['developerId'] as String?,
-      name: json['name'] as String?,
-      image: json['image'] == null
-          ? null
-          : StorageFile.fromJson(json['image'] as Map<String, dynamic>),
-      birthdate: const DateTimeTimestampConverter()
-          .fromJson(json['birthdate'] as Timestamp?),
-      createdAt: const DateTimeTimestampConverter()
-          .fromJson(json['createdAt'] as Timestamp?),
-      updatedAt: const DateTimeTimestampConverter()
-          .fromJson(json['updatedAt'] as Timestamp?),
+    $checkedCreate(
+      r'_$DeveloperImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$DeveloperImpl(
+          developerId: $checkedConvert('developerId', (v) => v as String?),
+          name: $checkedConvert('name', (v) => v as String?),
+          image: $checkedConvert(
+              'image',
+              (v) => v == null
+                  ? null
+                  : StorageFile.fromJson(v as Map<String, dynamic>)),
+          birthdate: $checkedConvert(
+              'birthdate',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+          createdAt: $checkedConvert(
+              'createdAt',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+          updatedAt: $checkedConvert(
+              'updatedAt',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$DeveloperImplToJson(_$DeveloperImpl instance) =>

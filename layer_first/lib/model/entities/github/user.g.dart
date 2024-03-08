@@ -6,25 +6,51 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      login: json['login'] as String,
-      id: json['id'] as int,
-      nodeId: json['node_id'] as String?,
-      avatarUrl: json['avatar_url'] as String?,
-      gravatarId: json['gravatar_id'] as String?,
-      url: json['url'] as String,
-      htmlUrl: json['html_url'] as String?,
-      followersUrl: json['followers_url'] as String?,
-      followingUrl: json['following_url'] as String?,
-      gistsUrl: json['gists_url'] as String?,
-      starredUrl: json['starred_url'] as String?,
-      subscriptionsUrl: json['subscriptions_url'] as String?,
-      organizationsUrl: json['organizations_url'] as String?,
-      reposUrl: json['repos_url'] as String?,
-      eventsUrl: json['events_url'] as String?,
-      receivedEventsUrl: json['received_events_url'] as String?,
-      type: json['type'] as String?,
-      siteAdmin: json['site_admin'] as bool? ?? false,
+_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
+      r'_$UserImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$UserImpl(
+          login: $checkedConvert('login', (v) => v as String),
+          id: $checkedConvert('id', (v) => v as int),
+          nodeId: $checkedConvert('node_id', (v) => v as String?),
+          avatarUrl: $checkedConvert('avatar_url', (v) => v as String?),
+          gravatarId: $checkedConvert('gravatar_id', (v) => v as String?),
+          url: $checkedConvert('url', (v) => v as String),
+          htmlUrl: $checkedConvert('html_url', (v) => v as String?),
+          followersUrl: $checkedConvert('followers_url', (v) => v as String?),
+          followingUrl: $checkedConvert('following_url', (v) => v as String?),
+          gistsUrl: $checkedConvert('gists_url', (v) => v as String?),
+          starredUrl: $checkedConvert('starred_url', (v) => v as String?),
+          subscriptionsUrl:
+              $checkedConvert('subscriptions_url', (v) => v as String?),
+          organizationsUrl:
+              $checkedConvert('organizations_url', (v) => v as String?),
+          reposUrl: $checkedConvert('repos_url', (v) => v as String?),
+          eventsUrl: $checkedConvert('events_url', (v) => v as String?),
+          receivedEventsUrl:
+              $checkedConvert('received_events_url', (v) => v as String?),
+          type: $checkedConvert('type', (v) => v as String?),
+          siteAdmin: $checkedConvert('site_admin', (v) => v as bool? ?? false),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'nodeId': 'node_id',
+        'avatarUrl': 'avatar_url',
+        'gravatarId': 'gravatar_id',
+        'htmlUrl': 'html_url',
+        'followersUrl': 'followers_url',
+        'followingUrl': 'following_url',
+        'gistsUrl': 'gists_url',
+        'starredUrl': 'starred_url',
+        'subscriptionsUrl': 'subscriptions_url',
+        'organizationsUrl': 'organizations_url',
+        'reposUrl': 'repos_url',
+        'eventsUrl': 'events_url',
+        'receivedEventsUrl': 'received_events_url',
+        'siteAdmin': 'site_admin'
+      },
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>

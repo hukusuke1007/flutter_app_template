@@ -6,15 +6,26 @@ part of 'post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
-      postId: json['postId'] as String,
-      userId: json['userId'] as String,
-      text: json['text'] as String,
-      likeCount: json['likeCount'] as int? ?? 0,
-      createdAt: const DateTimeTimestampConverter()
-          .fromJson(json['createdAt'] as Timestamp?),
-      updatedAt: const DateTimeTimestampConverter()
-          .fromJson(json['updatedAt'] as Timestamp?),
+_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => $checkedCreate(
+      r'_$PostImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$PostImpl(
+          postId: $checkedConvert('postId', (v) => v as String),
+          userId: $checkedConvert('userId', (v) => v as String),
+          text: $checkedConvert('text', (v) => v as String),
+          likeCount: $checkedConvert('likeCount', (v) => v as int? ?? 0),
+          createdAt: $checkedConvert(
+              'createdAt',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+          updatedAt: $checkedConvert(
+              'updatedAt',
+              (v) =>
+                  const DateTimeTimestampConverter().fromJson(v as Timestamp?)),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>

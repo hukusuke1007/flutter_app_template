@@ -3,6 +3,7 @@ targets:
     builders:
       json_serializable:
         options:
+          checked: true # false -> true
           explicit_to_json: true # false -> true
       freezed:
         generate_for:
