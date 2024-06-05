@@ -230,12 +230,15 @@ class SettingPage extends HookConsumerWidget {
                           await ref.read(signOutProvider)();
 
                           /// アナリティクス送信
-                          await ref.read(analyticsLoggerProvider).onEvent(
-                                AnalyticsEvent.signOut,
-                                params: AnalyticsEventParams.signOut(
-                                  userId: userId,
-                                ),
-                              );
+                          if (userId != null) {
+                            await ref.read(analyticsLoggerProvider).onEvent(
+                                  AnalyticsEvent.signOut,
+                                  params: AnalyticsEventParams.signOut(
+                                    userId: userId,
+                                  ),
+                                );
+                          }
+
                           dismissIndicator(context);
                           StartUpPage.pushReplacement(context);
                         } on Exception catch (e) {

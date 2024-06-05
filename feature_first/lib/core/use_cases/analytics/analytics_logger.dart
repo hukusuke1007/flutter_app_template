@@ -28,7 +28,7 @@ class AnalyticsLogger {
 
   Future<void> onEvent(
     AnalyticsEvent event, {
-    Map<String, dynamic>? params,
+    Map<String, Object>? params,
   }) async {
     await _analytics.logEvent(
       name: event.value,

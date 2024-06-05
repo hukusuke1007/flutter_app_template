@@ -7,10 +7,10 @@ enum AnalyticsEvent {
 }
 
 extension AnalyticsEventParams on AnalyticsEvent {
-  static Map<String, dynamic> signOut({
-    required String? userId,
+  static Map<String, Object> signOut({
+    required String userId,
   }) =>
-      <String, dynamic>{
+      <String, Object>{
         'user_id': userId,
       };
 }

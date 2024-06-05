@@ -4,7 +4,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -74,15 +74,15 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^2.27.0
-  firebase_analytics: ^10.8.9
-  cloud_firestore: ^4.15.8
-  firebase_auth: ^4.17.8
-  firebase_storage: ^11.6.9
-  cloud_functions: ^4.6.8
-  firebase_messaging: ^14.7.19
-  firebase_crashlytics: ^3.4.18
-  firebase_remote_config: ^4.3.17
+  firebase_core: ^3.0.0
+  firebase_analytics: ^11.0.0
+  cloud_firestore: ^5.0.0
+  firebase_auth: ^5.0.0
+  firebase_storage: ^12.0.0
+  cloud_functions: ^5.0.0
+  firebase_messaging: ^15.0.0
+  firebase_crashlytics: ^4.0.0
+  firebase_remote_config: ^5.0.0
 
   # LocalNotification
   flutter_local_notifications:
