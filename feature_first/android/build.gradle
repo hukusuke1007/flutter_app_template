@@ -1,14 +1,5 @@
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        // START: FlutterFire Configuration
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
-        // END: FlutterFire Configuration
-    }
+    ext.kotlin_version = '1.9.22'
 }
 
 allprojects {
