@@ -1,9 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-
-import '../extensions/context_extension.dart';
 
 Future<CroppedFile?> cropAvatar(BuildContext context, String path) =>
     _cropImage(
@@ -31,40 +27,35 @@ Future<CroppedFile?> _cropImage(
   required CropStyle cropStyle,
   required String toolbarTitle,
 }) async {
-  List<CropAspectRatioPreset> getPresets() {
-    if (Platform.isAndroid) {
-      return [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9,
-      ];
-    } else {
-      return [
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio5x3,
-        CropAspectRatioPreset.ratio5x4,
-        CropAspectRatioPreset.ratio7x5,
-        CropAspectRatioPreset.ratio16x9,
-      ];
-    }
-  }
-
   final file = await ImageCropper().cropImage(
     sourcePath: path,
-    cropStyle: cropStyle,
-    aspectRatioPresets: getPresets(),
     uiSettings: [
       AndroidUiSettings(
+        cropStyle: cropStyle,
         toolbarTitle: toolbarTitle,
-        toolbarColor: context.primaryColor,
         toolbarWidgetColor: Colors.white,
         initAspectRatio: CropAspectRatioPreset.original,
         lockAspectRatio: false,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9,
+        ],
+      ),
+      IOSUiSettings(
+        cropStyle: cropStyle,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio5x3,
+          CropAspectRatioPreset.ratio5x4,
+          CropAspectRatioPreset.ratio7x5,
+          CropAspectRatioPreset.ratio16x9,
+        ],
       ),
     ],
   );

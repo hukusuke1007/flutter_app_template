@@ -121,19 +121,25 @@ class ResetEmailPasswordPage extends HookConsumerWidget {
               try {
                 showIndicator(context);
                 await ref.read(sendPasswordResetEmailProvider)(email);
-                dismissIndicator(context);
-                await showOkAlertDialog(
-                  context: context,
-                  title: '案内をメールアドレスへ送信しました',
-                );
-                context.pop();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  await showOkAlertDialog(
+                    context: context,
+                    title: '案内をメールアドレスへ送信しました',
+                  );
+                }
+                if (context.mounted) {
+                  context.pop();
+                }
               } on Exception catch (e) {
-                dismissIndicator(context);
-                showOkAlertDialog(
-                  context: context,
-                  title: 'エラー',
-                  message: e.errorMessage,
-                ).ignore();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  showOkAlertDialog(
+                    context: context,
+                    title: 'エラー',
+                    message: e.errorMessage,
+                  ).ignore();
+                }
               }
             },
           ),

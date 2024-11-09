@@ -46,7 +46,7 @@ class SettingPage extends HookConsumerWidget {
     useEffect(
       () {
         Future.microtask(() {
-          if (profileAsyncValue.hasError) {
+          if (context.mounted && profileAsyncValue.hasError) {
             showOkAlertDialog(
               context: context,
               title: profileAsyncValue.error?.toString(),
@@ -219,7 +219,9 @@ class SettingPage extends HookConsumerWidget {
                         message: 'ログアウトしますか？',
                       );
                       if (result == OkCancelResult.ok) {
-                        showIndicator(context);
+                        if (context.mounted) {
+                          showIndicator(context);
+                        }
                         try {
                           /// ログアウトしたユーザーIDを記録したいため、サインアウトする前に取得する
                           final userId = ref
@@ -239,15 +241,19 @@ class SettingPage extends HookConsumerWidget {
                                 );
                           }
 
-                          dismissIndicator(context);
-                          StartUpPage.pushReplacement(context);
+                          if (context.mounted) {
+                            dismissIndicator(context);
+                            StartUpPage.pushReplacement(context);
+                          }
                         } on Exception catch (e) {
-                          dismissIndicator(context);
-                          context.showSnackBar(
-                            e.errorMessage,
-                            backgroundColor: Colors.grey,
-                          );
                           logger.shout(e);
+                          if (context.mounted) {
+                            dismissIndicator(context);
+                            context.showSnackBar(
+                              e.errorMessage,
+                              backgroundColor: Colors.grey,
+                            );
+                          }
                         }
                       }
                     },

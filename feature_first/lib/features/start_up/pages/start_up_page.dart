@@ -48,7 +48,9 @@ class StartUpPage extends HookConsumerWidget {
           // TODO(shohei): 強制バージョンアップのダイアログ出したりする
           return;
         }
-        MainPage.go(context);
+        if (context.mounted) {
+          MainPage.go(context);
+        }
       });
       return null;
     });

@@ -70,10 +70,12 @@ class MemoPage extends HookConsumerWidget {
                 await controller.onFetchMore();
                 refreshController.loadComplete();
               } on Exception catch (e) {
-                context.showSnackBar(
-                  e.errorMessage,
-                  backgroundColor: Colors.grey,
-                );
+                if (context.mounted) {
+                  context.showSnackBar(
+                    e.errorMessage,
+                    backgroundColor: Colors.grey,
+                  );
+                }
               }
             },
             child: ListView.separated(
@@ -98,12 +100,16 @@ class MemoPage extends HookConsumerWidget {
                           }
                           try {
                             await controller.onRemove(docId);
-                            context.showSnackBar('削除しました');
+                            if (context.mounted) {
+                              context.showSnackBar('削除しました');
+                            }
                           } on Exception catch (e) {
-                            context.showSnackBar(
-                              e.errorMessage,
-                              backgroundColor: Colors.grey,
-                            );
+                            if (context.mounted) {
+                              context.showSnackBar(
+                                e.errorMessage,
+                                backgroundColor: Colors.grey,
+                              );
+                            }
                           }
                         },
                         backgroundColor: Colors.redAccent,

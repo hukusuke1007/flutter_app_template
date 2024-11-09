@@ -46,7 +46,7 @@ class _Dialog extends HookConsumerWidget {
     useEffect(
       () {
         Future.microtask(() {
-          if (profileAsyncValue.hasError) {
+          if (context.mounted && profileAsyncValue.hasError) {
             showOkAlertDialog(
               context: context,
               title: profileAsyncValue.error?.toString(),
@@ -96,19 +96,24 @@ class _Dialog extends HookConsumerWidget {
                   }
                   logger.info(compressImage.lengthInBytes);
                   try {
-                    showIndicator(context);
+                    if (context.mounted) {
+                      showIndicator(context);
+                    }
                     await ref
                         .read(saveMyProfileImageProvider)
                         .call(compressImage);
                   } on Exception catch (e) {
                     logger.shout(e);
-                    await showOkAlertDialog(
-                      context: context,
-                      title: '画像を保存できませんでした',
-                    );
+                    if (context.mounted) {
+                      await showOkAlertDialog(
+                        context: context,
+                        title: '画像を保存できませんでした',
+                      );
+                    }
                   } finally {
-                    dismissIndicator(context);
-
+                    if (context.mounted) {
+                      dismissIndicator(context);
+                    }
                     await ref
                         .read(fileRepositoryProvider)
                         .delete(selectedImage.path); // fileがtmpに残ってしまうので削除
@@ -205,13 +210,20 @@ class _Dialog extends HookConsumerWidget {
                       name: name,
                       birthdate: birthdate,
                     );
-                dismissIndicator(context);
-                context.showSnackBar('保存しました');
-                Navigator.of(context).pop();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  context.showSnackBar('保存しました');
+                  Navigator.of(context).pop();
+                }
               } on Exception catch (e) {
                 logger.shout(e);
-                dismissIndicator(context);
-                await showOkAlertDialog(context: context, title: '保存できませんでした');
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  await showOkAlertDialog(
+                    context: context,
+                    title: '保存できませんでした',
+                  );
+                }
               }
             },
             child: const Padding(

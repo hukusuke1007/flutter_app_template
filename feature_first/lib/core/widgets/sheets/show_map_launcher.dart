@@ -65,7 +65,9 @@ Future<void> showLocationMapBottomSheet(
             title: title,
           );
           Future.delayed(const Duration(milliseconds: 1000), () {
-            Navigator.of(context).pop();
+            if (context.mounted) {
+              Navigator.of(context).pop();
+            }
           });
         },
       ),
@@ -87,7 +89,9 @@ Future<void> showLocationMapBottomSheet(
             title: title,
           );
           Future.delayed(const Duration(milliseconds: 1000), () {
-            Navigator.of(context).pop();
+            if (context.mounted) {
+              Navigator.of(context).pop();
+            }
           });
         },
       ),

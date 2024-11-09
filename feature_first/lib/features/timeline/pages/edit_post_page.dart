@@ -109,21 +109,27 @@ class EditPostPage extends HookConsumerWidget {
                     return;
                   }
                   try {
-                    showIndicator(context);
+                    if (context.mounted) {
+                      showIndicator(context);
+                    }
                     await ref.read(provider.notifier).onDelete();
-                    dismissIndicator(context);
-                    context
-                      ..showSnackBar('削除しました')
-                      // TODO(shohei): 暫定対応
-                      ..pop()
-                      ..pop();
+                    if (context.mounted) {
+                      dismissIndicator(context);
+                      context
+                        ..showSnackBar('削除しました')
+                        // TODO(shohei): 暫定対応
+                        ..pop()
+                        ..pop();
+                    }
                   } on Exception catch (e) {
-                    dismissIndicator(context);
-                    showOkAlertDialog(
-                      context: context,
-                      title: 'エラー',
-                      message: e.errorMessage,
-                    ).ignore();
+                    if (context.mounted) {
+                      dismissIndicator(context);
+                      showOkAlertDialog(
+                        context: context,
+                        title: 'エラー',
+                        message: e.errorMessage,
+                      ).ignore();
+                    }
                   }
                 },
                 icon: const Icon(
@@ -209,17 +215,21 @@ class EditPostPage extends HookConsumerWidget {
                                 .read(provider.notifier)
                                 .onCreate(text: text);
                           }
-                          dismissIndicator(context);
-                          context
-                            ..showSnackBar(isUpdatePost ? '更新しました' : '投稿しました')
-                            ..pop();
+                          if (context.mounted) {
+                            dismissIndicator(context);
+                            context
+                              ..showSnackBar(isUpdatePost ? '更新しました' : '投稿しました')
+                              ..pop();
+                          }
                         } on Exception catch (e) {
-                          dismissIndicator(context);
-                          showOkAlertDialog(
-                            context: context,
-                            title: 'エラー',
-                            message: e.errorMessage,
-                          ).ignore();
+                          if (context.mounted) {
+                            dismissIndicator(context);
+                            showOkAlertDialog(
+                              context: context,
+                              title: 'エラー',
+                              message: e.errorMessage,
+                            ).ignore();
+                          }
                         }
                       },
                     ),

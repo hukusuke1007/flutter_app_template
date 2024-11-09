@@ -24,6 +24,7 @@ GithubApiClient githubApiClient(GithubApiClientRef ref) {
 }
 
 @RestApi()
+// ignore:one_member_abstracts
 abstract class GithubApiClient {
   factory GithubApiClient(
     Dio dio, {

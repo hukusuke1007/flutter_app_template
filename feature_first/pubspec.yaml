@@ -47,7 +47,7 @@ dependencies:
   share_plus:
 
   # WebView
-  flutter_inappwebview: ^6.0.0
+  flutter_inappwebview: ^6.1.5
 
   # Launcher
   url_launcher:
@@ -74,15 +74,15 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^3.0.0
-  firebase_analytics: ^11.0.0
-  cloud_firestore: ^5.0.0
-  firebase_auth: ^5.0.0
-  firebase_storage: ^12.0.0
-  cloud_functions: ^5.0.0
-  firebase_messaging: ^15.0.0
-  firebase_crashlytics: ^4.0.0
-  firebase_remote_config: ^5.0.0
+  firebase_core: ^3.7.0
+  firebase_analytics: ^11.3.4
+  cloud_firestore: ^5.4.5
+  firebase_auth: ^5.3.2
+  firebase_storage: ^12.3.5
+  cloud_functions: ^5.1.4
+  firebase_messaging: ^15.1.4
+  firebase_crashlytics: ^4.1.4
+  firebase_remote_config: ^5.1.4
 
   # LocalNotification
   flutter_local_notifications:
