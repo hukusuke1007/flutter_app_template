@@ -140,8 +140,10 @@ class WebViewPage extends HookConsumerWidget {
                     if (value == null) {
                       return;
                     }
-                    await Clipboard.copy(value.toString());
-                    context.showSnackBar('URLをコピーしました');
+                    Clipboard.copy(value.toString()).ignore();
+                    if (context.mounted) {
+                      context.showSnackBar('URLをコピーしました');
+                    }
                   } else if (value == 1) {
                     final box = context.findRenderObject() as RenderBox?;
                     if (box == null) {

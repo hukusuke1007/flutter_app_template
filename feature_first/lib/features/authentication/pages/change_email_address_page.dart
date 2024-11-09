@@ -178,19 +178,25 @@ class ChangeEmailAddressPage extends HookConsumerWidget {
                   newEmail: newEmail,
                   password: password,
                 );
-                dismissIndicator(context);
-                await showOkAlertDialog(
-                  context: context,
-                  title: '変更しました',
-                );
-                context.pop();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  await showOkAlertDialog(
+                    context: context,
+                    title: '変更しました',
+                  );
+                }
+                if (context.mounted) {
+                  context.pop();
+                }
               } on Exception catch (e) {
-                dismissIndicator(context);
-                showOkAlertDialog(
-                  context: context,
-                  title: 'エラー',
-                  message: e.errorMessage,
-                ).ignore();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  showOkAlertDialog(
+                    context: context,
+                    title: 'エラー',
+                    message: e.errorMessage,
+                  ).ignore();
+                }
               }
             },
           ),

@@ -77,12 +77,14 @@ class PostDetailPage extends HookConsumerWidget {
     useEffectOnce(() {
       Future.microtask(() async {
         final value = await ref.read(provider.future);
-        if (value == null) {
+        if (context.mounted && value == null) {
           await showOkAlertDialog(
             context: context,
             title: '投稿が削除されています',
           );
-          context.pop();
+          if (context.mounted) {
+            context.pop();
+          }
         }
       });
       return null;

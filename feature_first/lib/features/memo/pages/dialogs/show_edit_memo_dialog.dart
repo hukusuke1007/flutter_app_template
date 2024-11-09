@@ -85,14 +85,15 @@ class _Dialog extends HookConsumerWidget {
               /// Providerを使った複数のサンプルコードがあるので、保存処理は呼び元へ委ねる
               showIndicator(context);
               final errorMessage = await onSave(text, isUpdate);
-              dismissIndicator(context);
-
-              if (errorMessage == null) {
-                context.showSnackBar(isUpdate ? '更新しました' : '作成しました');
-                Navigator.pop(context);
-              } else {
-                showOkAlertDialog(context: context, title: errorMessage)
-                    .ignore();
+              if (context.mounted) {
+                dismissIndicator(context);
+                if (errorMessage == null) {
+                  context.showSnackBar(isUpdate ? '更新しました' : '作成しました');
+                  Navigator.pop(context);
+                } else {
+                  showOkAlertDialog(context: context, title: errorMessage)
+                      .ignore();
+                }
               }
             },
             child: Padding(

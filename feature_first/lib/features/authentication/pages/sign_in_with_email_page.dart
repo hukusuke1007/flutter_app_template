@@ -145,19 +145,25 @@ class SignInWithEmailPage extends HookConsumerWidget {
                   email: email,
                   password: password,
                 );
-                dismissIndicator(context);
-                await showOkAlertDialog(
-                  context: context,
-                  title: 'ログインしました',
-                );
-                context.pop();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  await showOkAlertDialog(
+                    context: context,
+                    title: 'ログインしました',
+                  );
+                }
+                if (context.mounted) {
+                  context.pop();
+                }
               } on Exception catch (e) {
-                dismissIndicator(context);
-                showOkAlertDialog(
-                  context: context,
-                  title: 'エラー',
-                  message: e.errorMessage,
-                ).ignore();
+                if (context.mounted) {
+                  dismissIndicator(context);
+                  showOkAlertDialog(
+                    context: context,
+                    title: 'エラー',
+                    message: e.errorMessage,
+                  ).ignore();
+                }
               }
             },
           ),
