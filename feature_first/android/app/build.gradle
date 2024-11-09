@@ -48,7 +48,6 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
-
     defaultConfig {
         applicationId = "com.example.app"
         minSdk = 26
