@@ -27,9 +27,7 @@ task selectGoogleServicesJson(type: Copy) {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
-        task.dependsOn selectGoogleServicesJson
-    }
+    task.dependsOn selectGoogleServicesJson
 }
 
 // アイコン切り替えは設定してません

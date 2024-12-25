@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../extensions/context_extension.dart';
@@ -45,7 +45,7 @@ class SaveImageToMediaFolder {
     }
     try {
       showIndicator(gContext);
-      await ImageGallerySaver.saveImage(imageBytes);
+      await ImageGallerySaverPlus.saveImage(imageBytes);
       if (gContext.mounted) {
         gContext.showSnackBar('画像を保存しました');
       }
