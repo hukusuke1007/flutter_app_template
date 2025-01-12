@@ -198,7 +198,9 @@ class WebViewPage extends HookConsumerWidget {
                       );
                     },
                     onProgressChanged: (controller, value) {
-                      progressState.value = value / 100;
+                      if (context.mounted) {
+                        progressState.value = value / 100;
+                      }
                     },
                     onConsoleMessage: (controller, consoleMessage) {
                       logger.info(consoleMessage);

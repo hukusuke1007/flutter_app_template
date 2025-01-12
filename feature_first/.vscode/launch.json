@@ -7,7 +7,7 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--dart-define-from-file=dart_defines/dev.json",
+                "--dart-define=FLAVOR=dev",
             ]
         },
         {
@@ -16,7 +16,7 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--dart-define-from-file=dart_defines/prod.json",
+                "--dart-define=FLAVOR=prod",
             ]
         },
         {
@@ -25,7 +25,16 @@
             "type": "dart",
             "flutterMode": "release",
             "args": [
-                "--dart-define-from-file=dart_defines/dev.json",
+                "--dart-define=FLAVOR=dev",
+            ]
+        },
+        {
+            "name": "Release-Prod",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define=FLAVOR=prod",
             ]
         }
     ]
