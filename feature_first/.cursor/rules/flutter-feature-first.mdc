@@ -1,0 +1,194 @@
+---
+description: Feature First Architecture with Riverpod
+globs: *.dart, *.yaml
+---
+
+## Overview
+
+This document outlines the current project structure and architectural patterns based on the actual project analysis. Follow these guidelines to maintain consistency while applying Flutter best practices.
+
+## Architecture Overview
+
+- Feature-first architecture with Riverpod state management
+- Hooks-based widget composition
+- Clean Architecture inspired layers (entities, repositories, use cases)
+- Firebase for backend services
+- SharedPreferences for local persistence
+- Retrofit for API communication
+- Static analysis with pedantic_mono and custom_lint
+
+## Project Structure
+
+```
+lib/
+  ├── features/           // Feature modules
+  │   ├── account/       // Account related features
+  │   ├── authentication/// Authentication features
+  │   ├── github_users/  // GitHub users feature
+  │   ├── home/         // Home screen features
+  │   ├── memo/         // Memo features
+  │   ├── setting/      // Settings features
+  │   ├── timeline/     // Timeline features
+  │   └── ...          // Other feature modules
+  ├── core/             // Core functionality
+  │   ├── entities/     // Domain entities
+  │   ├── repositories/ // Repository interfaces
+  │   ├── use_cases/    // Business logic
+  │   ├── exceptions/   // Custom exceptions
+  │   ├── extensions/   // Extension methods
+  │   ├── utils/        // Utility functions
+  │   ├── widgets/      // Shared widgets
+  │   ├── router/       // Navigation routing
+  │   ├── res/          // Resources (generated)
+  │   └── custom_hooks/ // Custom Flutter hooks
+  ├── app.dart          // App configuration
+  └── main.dart         // Entry point
+```
+
+## Package Dependencies
+
+### Core Dependencies
+
+- Flutter SDK (>=3.4.0)
+- flutter_localizations
+- cupertino_icons
+
+### State Management & UI
+
+- hooks_riverpod
+- riverpod_annotation
+- flutter_hooks
+- go_router (Navigation)
+
+### Firebase Services
+
+- firebase_core
+- firebase_analytics
+- cloud_firestore
+- firebase_auth
+- firebase_storage
+- cloud_functions
+- firebase_messaging
+- firebase_crashlytics
+- firebase_remote_config
+
+### Data Management
+
+- shared_preferences
+- retrofit
+- dio
+- freezed_annotation
+- json_annotation
+- equatable
+
+### UI Components & Features
+
+- pull_to_refresh_flutter3
+- extended_image
+- flutter_svg
+- flutter_slidable
+- adaptive_dialog
+- page_transition
+- flutter_inappwebview
+- url_launcher
+- map_launcher
+- image_picker
+- image_cropper
+- flutter_local_notifications
+
+### Development Dependencies
+
+- pedantic_mono
+- custom_lint
+- riverpod_lint
+- json_serializable
+- build_runner
+- freezed
+- riverpod_generator
+- retrofit_generator
+- flutter_gen_runner
+
+## State Management Guidelines
+
+1. Use Riverpod with @riverpod annotation
+2. Let riverpod_generator determine the appropriate Notifier class
+3. Use SharedPreferences for local storage
+4. Follow proper state immutability patterns with Freezed
+5. Use proper provider scoping
+
+## Feature Organization
+
+1. Each feature should be self-contained in its directory under features/
+2. Feature structure should include:
+   - pages/ (UI screens)
+   - widgets/ (feature-specific widgets)
+   - providers/ (state management)
+   - repositories/ (data access)
+   - models/ (feature-specific models)
+
+## Core Layer Guidelines
+
+1. Core functionality should be placed in appropriate core/ subdirectories
+2. Shared widgets should be placed in core/widgets/
+3. Business logic should be in core/use_cases/
+4. Domain entities should be in core/entities/
+5. Repository interfaces should be in core/repositories/
+
+## Code Generation
+
+1. Use build_runner for code generation:
+   ```bash
+   flutter pub run build_runner build
+   ```
+2. Generate code for:
+   - Freezed models
+   - Riverpod providers
+   - Retrofit API clients
+   - JSON serialization
+   - FlutterGen resources
+
+## Testing Guidelines
+
+1. Place tests in the test directory
+2. Write unit tests for business logic
+3. Implement widget tests for UI components
+4. Use mockito for mocking dependencies
+
+## Performance Guidelines
+
+1. Implement proper image caching with extended_image
+2. Optimize list views with pull_to_refresh_flutter3
+3. Follow proper state management patterns
+4. Implement proper Firebase caching strategies
+
+## Naming Guidelines
+
+1. Follow consistent casing:
+
+   - Directory names: snake_case
+   - File names: snake_case
+   - Class names: UpperCamelCase
+   - Variable names: camelCase
+   - Constant names: SCREAMING_SNAKE_CASE
+
+2. Feature-specific naming:
+
+   - Pages: NounPage (e.g., HomePage)
+   - Components: NounComponent (e.g., UserCard)
+   - Models: NounModel (e.g., UserModel)
+   - Providers: NounProvider (e.g., UserProvider)
+   - Repositories: NounRepository (e.g., UserRepository)
+
+3. General principles:
+   - Use nouns or adjectives for entities
+   - Use verbs for actions
+   - Consider pluralization in naming
+   - Keep names clear and descriptive
+
+## Static Analysis
+
+1. Follow pedantic_mono lint rules
+2. Use custom_lint for additional checks
+3. Use riverpod_lint for Riverpod-specific rules
+4. Fix all analysis warnings
+5. Use proper null safety patterns

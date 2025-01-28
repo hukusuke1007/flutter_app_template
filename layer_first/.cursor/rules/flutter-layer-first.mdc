@@ -1,0 +1,172 @@
+---
+description: Layer First Architecture with Riverpod
+globs: *.dart, *.yaml
+---
+
+## Overview
+
+This document outlines the current project structure and architectural patterns based on the actual project analysis. Follow these guidelines to maintain consistency while applying Flutter best practices.
+
+## Architecture Overview
+
+- Layer-first architecture with Riverpod state management
+- Hooks-based widget composition
+- SharedPreferences for local persistence
+- Retrofit for API communication
+- Static analysis with pedantic_mono and custom_lint
+
+## Project Structure
+
+```
+lib/
+  extensions/       // Extension methods
+  exceptions/       // Custom exceptions
+  model/           // Data models and entities
+  presentation/    // UI components and screens
+  utils/           // Utility functions
+  app.dart         // App configuration
+  main.dart        // Entry point
+test/             // Test files
+doc/              // Documentation
+```
+
+## Package Dependencies
+
+### Core Dependencies
+
+- Flutter SDK (>=3.4.0)
+- flutter_localizations
+- cupertino_icons
+
+### State Management
+
+- hooks_riverpod
+- riverpod_annotation
+- flutter_hooks
+
+### Data Management
+
+- shared_preferences (Local storage)
+- retrofit (API client)
+- dio (HTTP client)
+- freezed_annotation (Immutable models)
+
+### UI Components
+
+- pull_to_refresh_flutter3
+- extended_image
+- url_launcher
+
+### Development Dependencies
+
+- pedantic_mono (Static analysis)
+- custom_lint
+- riverpod_lint
+- json_serializable
+- build_runner
+- freezed
+- riverpod_generator
+- retrofit_generator
+
+## State Management Guidelines
+
+1. Use Riverpod with @riverpod annotation
+2. Let riverpod_generator determine the appropriate Notifier class
+3. Use SharedPreferences for local storage
+4. Follow proper state immutability patterns with Freezed
+5. Use proper provider scoping
+
+## Widget Guidelines
+
+1. Use HookConsumerWidget for stateful widgets
+2. Implement proper error handling
+3. Use proper widget composition
+4. Follow Material design principles
+5. Implement proper loading states
+
+## Provider Guidelines
+
+1. Place providers in appropriate layer directories
+2. Use proper provider dependencies
+3. Implement proper error handling
+4. Follow proper caching strategies
+5. Use proper provider scoping
+6. Follow single responsibility principle:
+   - One provider should manage one specific state
+   - State mutations should be handled by a single source of truth
+   - Keep business logic focused and cohesive
+
+## Layer Organization
+
+1. Organize by layers (model, presentation, etc.)
+2. Keep layers independent
+3. Share common code through utils and extensions
+4. Follow consistent naming patterns
+5. Implement proper routing
+6. Follow DRY principle:
+   - Extract common widgets to shared components
+   - Share common providers through appropriate layers
+   - Use extensions for repeated code patterns
+   - Create utility functions for common operations
+
+## Code Generation
+
+1. Use build_runner for code generation:
+   ```bash
+   flutter pub run build_runner build
+   ```
+2. Generate code for:
+   - Freezed models
+   - Riverpod providers
+   - Retrofit API clients
+   - JSON serialization
+
+## Testing Guidelines
+
+1. Place tests in the test directory
+2. Write unit tests for business logic
+3. Implement widget tests for UI components
+4. Follow proper test naming conventions
+
+## Performance Guidelines
+
+1. Implement proper image caching with extended_image
+2. Optimize list views:
+   - Use ListView.builder for lazy loading
+   - Implement pagination with pull_to_refresh_flutter3
+   - Handle loading and error states
+   - Use proper scroll performance optimization
+3. Follow proper state management patterns
+4. Implement proper memory management
+
+## Naming Guidelines
+
+1. Follow consistent casing:
+
+   - Directory names: snake_case
+   - File names: snake_case
+   - Class names: UpperCamelCase
+   - Variable names: camelCase
+   - Constant names: SCREAMING_SNAKE_CASE
+
+2. Layer-specific naming:
+
+   - Pages: NounPage (e.g., HomePage)
+   - Components: NounComponent (e.g., UserCard)
+   - Models: NounModel (e.g., UserModel)
+   - Providers: NounProvider (e.g., UserProvider)
+   - Repositories: NounRepository (e.g., UserRepository)
+
+3. General principles:
+   - Use nouns or adjectives for entities
+   - Use verbs for actions
+   - Consider pluralization in naming
+   - Keep names clear and descriptive
+
+## Static Analysis
+
+1. Follow pedantic_mono lint rules
+2. Use custom_lint for additional checks
+3. Use riverpod_lint for Riverpod-specific rules
+4. Fix all analysis warnings
+5. Use proper null safety patterns
