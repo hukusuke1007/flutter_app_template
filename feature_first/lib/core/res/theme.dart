@@ -38,7 +38,7 @@ ThemeData getAppTheme() {
     bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
       backgroundColor: Colors.white,
       selectedItemColor: primaryColor,
-      unselectedItemColor: Colors.black.withOpacity(0.4),
+      unselectedItemColor: Colors.black.withValues(alpha: 0.4),
     ),
     cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
       brightness: Brightness.light,

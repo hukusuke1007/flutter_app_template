@@ -107,8 +107,8 @@ class _State extends State<DraggableScrollablePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.color != null
-          ? widget.color!.withOpacity(_opacity)
-          : context.scaffoldBackgroundColor.withOpacity(_opacity),
+          ? widget.color!.withValues(alpha: _opacity)
+          : context.scaffoldBackgroundColor.withValues(alpha: _opacity),
       body: Stack(
         children: [
           if (widget.enableBlur)

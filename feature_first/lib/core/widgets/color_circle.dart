@@ -53,7 +53,7 @@ class ColorCircleIcon extends StatelessWidget {
       onTap: onTap,
       child: ColorCircle(
         size: size,
-        color: color ?? Colors.black.withOpacity(0.5),
+        color: color ?? Colors.black.withValues(alpha: 0.5),
         child: child,
       ),
     );
