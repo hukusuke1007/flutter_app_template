@@ -73,7 +73,7 @@ class ImageViewer extends HookConsumerWidget {
         slidePageBackgroundHandler: (Offset offset, Size size) {
           final opacity = offset.distance /
               (Offset(size.width, size.height).distance / 2.0);
-          return Colors.black.withOpacity(1 - opacity);
+          return Colors.black.withValues(alpha: 1 - opacity);
         },
         child: ExtendedImageGesturePageView.builder(
           itemBuilder: (BuildContext context, int index) {

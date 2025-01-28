@@ -14,7 +14,7 @@ class ImageViewerHeader extends HookConsumerWidget {
     final statusBarHeight = MediaQuery.of(context).padding.top;
     const topBarHeight = 100.0;
     return Container(
-      color: Colors.black.withOpacity(0.4),
+      color: Colors.black.withValues(alpha: 0.4),
       height: topBarHeight,
       child: Column(
         children: [
@@ -29,7 +29,7 @@ class ImageViewerHeader extends HookConsumerWidget {
                   child: IconButton(
                     icon: Icon(
                       Icons.close,
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                       size: 24,
                     ),
                     onPressed: () {
@@ -43,7 +43,7 @@ class ImageViewerHeader extends HookConsumerWidget {
                     child: PopupMenuButton<int>(
                       icon: Icon(
                         Icons.more_horiz,
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                       ),
                       itemBuilder: (BuildContext context) {
                         final list = ['写真を保存する'];
