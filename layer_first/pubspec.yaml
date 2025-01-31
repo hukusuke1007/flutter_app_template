@@ -42,6 +42,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Testing
+  mockito: ^5.4.4
+
   # Static analysis
   pedantic_mono:
   custom_lint:
@@ -51,7 +54,7 @@ dev_dependencies:
   json_serializable:
 
   # Code generator
-  build_runner:
+  build_runner: ^2.4.8
   freezed:
   riverpod_generator:
   retrofit_generator:
