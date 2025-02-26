@@ -12,7 +12,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
       ($checkedConvert) {
         final val = _$UserImpl(
           login: $checkedConvert('login', (v) => v as String),
-          id: $checkedConvert('id', (v) => v as int),
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
           nodeId: $checkedConvert('node_id', (v) => v as String?),
           avatarUrl: $checkedConvert('avatar_url', (v) => v as String?),
           gravatarId: $checkedConvert('gravatar_id', (v) => v as String?),

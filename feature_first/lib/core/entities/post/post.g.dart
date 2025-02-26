@@ -14,7 +14,8 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => $checkedCreate(
           postId: $checkedConvert('postId', (v) => v as String),
           userId: $checkedConvert('userId', (v) => v as String),
           text: $checkedConvert('text', (v) => v as String),
-          likeCount: $checkedConvert('likeCount', (v) => v as int? ?? 0),
+          likeCount:
+              $checkedConvert('likeCount', (v) => (v as num?)?.toInt() ?? 0),
           createdAt: $checkedConvert(
               'createdAt',
               (v) =>

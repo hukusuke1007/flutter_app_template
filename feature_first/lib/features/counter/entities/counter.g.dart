@@ -12,7 +12,7 @@ _$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$CounterImpl(
-          count: $checkedConvert('count', (v) => v as int?),
+          count: $checkedConvert('count', (v) => (v as num?)?.toInt()),
           createdAt: $checkedConvert(
               'createdAt',
               (v) =>

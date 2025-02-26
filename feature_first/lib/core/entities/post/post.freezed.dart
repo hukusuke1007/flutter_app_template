@@ -12,7 +12,7 @@ part of 'post.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Post _$PostFromJson(Map<String, dynamic> json) {
   return _Post.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$Post {
   @DateTimeTimestampConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Post to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -58,6 +62,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,6 +126,8 @@ class __$$PostImplCopyWithImpl<$Res>
   __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,7 +204,7 @@ class _$PostImpl extends _Post {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostImpl &&
@@ -211,12 +219,14 @@ class _$PostImpl extends _Post {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, postId, userId, text, likeCount, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>
@@ -256,8 +266,11 @@ abstract class _Post extends Post {
   @override
   @DateTimeTimestampConverter()
   DateTime? get updatedAt;
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

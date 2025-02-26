@@ -12,7 +12,7 @@ part of 'memo.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Memo _$MemoFromJson(Map<String, dynamic> json) {
   return _Memo.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Memo {
   @DateTimeTimestampConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Memo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Memo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MemoCopyWith<Memo> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$MemoCopyWithImpl<$Res, $Val extends Memo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Memo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,6 +110,8 @@ class __$$MemoImplCopyWithImpl<$Res>
   __$$MemoImplCopyWithImpl(_$MemoImpl _value, $Res Function(_$MemoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Memo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,7 +171,7 @@ class _$MemoImpl extends _Memo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MemoImpl &&
@@ -175,12 +183,14 @@ class _$MemoImpl extends _Memo {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, memoId, text, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Memo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
@@ -214,8 +224,11 @@ abstract class _Memo extends Memo {
   @override
   @DateTimeTimestampConverter()
   DateTime? get updatedAt;
+
+  /// Create a copy of Memo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
