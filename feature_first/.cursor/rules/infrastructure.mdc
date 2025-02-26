@@ -1,0 +1,148 @@
+---
+description: Flutter Feature First Architecture Infrastructure Rules
+globs: *.dart
+alwaysApply: false
+---
+# Flutter Feature First Architecture Infrastructure Rules
+
+## Directory Structure
+
+```
+lib/
+├── core/
+│   └── repositories/        # Core infrastructure implementations
+│       ├── dio/            # HTTP client configuration
+│       ├── firebase_auth/  # Firebase Authentication
+│       ├── firestore/      # Cloud Firestore
+│       └── ...            # Other infrastructure implementations
+└── features/
+    └── {feature_name}/
+        └── repositories/   # Feature-specific repositories
+```
+
+## Implementation Guidelines
+
+### 1. Repository Pattern
+
+- Each feature has its own repository implementation
+- Repositories abstract data sources from the domain layer
+- Use Riverpod providers for dependency injection
+  ```dart
+  @Riverpod(keepAlive: true)
+  YourRepository yourRepository(YourRepositoryRef ref) {
+    return YourRepository(ref);
+  }
+  ```
+
+### 2. API Client Implementation
+
+- Use Retrofit for REST API clients
+- Implement API clients as abstract classes with factory constructors
+- Generate client code using build_runner
+
+  ```dart
+  @RestApi()
+  abstract class ApiClient {
+    factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
+
+    @GET('/endpoint')
+    Future<Response> getData();
+  }
+  ```
+
+### 3. HTTP Client Configuration (Dio)
+
+- Configure default options for timeout, headers, etc.
+- Implement interceptors for common functionality
+- Use environment-specific configurations
+  ```dart
+  final dioDefaultOptions = BaseOptions(
+    headers: baseHeader,
+    connectTimeout: const Duration(seconds: 30),
+    receiveTimeout: const Duration(seconds: 30),
+  );
+  ```
+
+### 4. Error Handling
+
+- Convert external exceptions to domain-specific exceptions
+- Implement consistent error handling across repositories
+- Log errors appropriately
+  ```dart
+  try {
+    return await apiClient.getData();
+  } on DioException catch (e) {
+    throw AppException.error(e.message);
+  }
+  ```
+
+### 5. Data Source Abstraction
+
+- Separate data source implementations (Remote, Local, etc.)
+- Use interfaces to define data source contracts
+- Implement caching strategies where appropriate
+
+### 6. Firebase Integration
+
+- Implement Firebase services in dedicated repositories
+- Use Firebase SDKs according to best practices
+- Handle authentication state and user sessions
+
+### 7. Local Storage
+
+- Use appropriate storage solutions (SharedPreferences, SQLite, etc.)
+- Implement data persistence strategies
+- Handle data migration and versioning
+
+### 8. Testing
+
+- Mock external dependencies in tests
+- Test error handling and edge cases
+- Implement repository tests with mock clients
+
+  ```dart
+  @GenerateNiceMocks([MockSpec<ApiClient>()])
+  void main() {
+    late MockApiClient mockClient;
+    late YourRepository repository;
+
+    setUp(() {
+      mockClient = MockApiClient();
+      repository = YourRepository(mockClient);
+    });
+  }
+  ```
+
+### 9. Security
+
+- Implement secure storage for sensitive data
+- Use appropriate encryption methods
+- Handle authentication tokens securely
+
+### 10. Best Practices
+
+- Follow consistent naming conventions
+- Document public APIs and important implementation details
+- Use type-safe implementations
+- Handle resource cleanup properly
+
+## Example Repository Implementation
+
+```dart
+@Riverpod(keepAlive: true)
+class YourRepository {
+  YourRepository(this._ref) : _client = _ref.read(apiClientProvider);
+
+  final Ref _ref;
+  final ApiClient _client;
+
+  Future<Data> getData() async {
+    try {
+      final result = await _client.getData();
+      return result.toDomain();
+    } on Exception catch (e) {
+      throw AppException.error(e.toString());
+    }
+  }
+}
+```

@@ -1,0 +1,211 @@
+---
+description: Riverpod Implementation Guidelines
+globs: *.dart
+alwaysApply: false
+---
+# Riverpod Implementation Guidelines
+
+## 1. Types of Providers and Their Usage
+
+### 1.1 Persistent Providers (`@Riverpod(keepAlive: true)`)
+
+Use in the following cases:
+
+- Global states shared across the application
+- Repository classes
+- Authentication states
+- System settings
+- Cached data
+
+```dart
+@Riverpod(keepAlive: true)
+class AuthRepository extends _$AuthRepository {
+  @override
+  Future<User?> build() async {
+    // Implementation
+  }
+}
+```
+
+### 1.2 Temporary Providers (`@riverpod`)
+
+Use in the following cases:
+
+- Screen-specific state management
+- Temporary data retention
+- UI state control
+- Form input management
+
+```dart
+@riverpod
+class ThemeModeController extends _$ThemeModeController {
+  @override
+  ThemeMode build() {
+    // Implementation
+  }
+}
+```
+
+## 2. Naming Conventions
+
+### 2.1 Provider Classes
+
+- Controller: Provider involving state changes
+- Repository: Provider responsible for data access
+- State: Provider holding simple states
+
+### 2.2 Method Names
+
+- build(): Initial state construction
+- setState(): State updates
+- update(): Data updates
+- create(): New creation
+- delete(): Deletion
+
+## 3. State Management Patterns
+
+### 3.1 Asynchronous Data Management
+
+```dart
+@riverpod
+class DataController extends _$DataController {
+  @override
+  Future<Data?> build() async {
+    // Fetch async data
+  }
+
+  Future<void> update() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => // Update process);
+  }
+}
+```
+
+### 3.2 Local Storage Integration
+
+```dart
+@riverpod
+class StorageController extends _$StorageController {
+  @override
+  Data build() {
+    final value = ref.watch(sharedPreferencesProvider).getString(key);
+    return // Conversion process
+  }
+
+  void save(Data data) {
+    state = data;
+    ref.read(sharedPreferencesProvider).setString(key, // Save process);
+  }
+}
+```
+
+## 4. Error Handling
+
+### 4.1 Basic Pattern
+
+```dart
+try {
+  state = const AsyncValue.loading();
+  state = await AsyncValue.guard(() => // Process);
+} on Exception catch (e) {
+  state = AsyncValue.error(e, StackTrace.current);
+}
+```
+
+### 4.2 Custom Exceptions
+
+```dart
+if (condition) {
+  throw AppException('Error message');
+}
+```
+
+## 5. Cache Control
+
+### 5.1 Cache Invalidation
+
+```dart
+// Invalidate related Provider
+ref.invalidate(relatedProvider);
+
+// Batch invalidation of multiple Providers
+ref
+  ..invalidate(providerA)
+  ..invalidate(providerB);
+```
+
+### 5.2 Cache Updates
+
+```dart
+// Update existing cache
+state = state.whenData((data) => data.copyWith(// Update content));
+```
+
+## 6. Best Practices
+
+### 6.1 Dependency Injection
+
+- Explicitly define dependencies between Providers
+- Avoid circular references
+- Set appropriate scopes
+
+### 6.2 Testability
+
+- Mockable design
+- Separation of side effects
+- Clear dependencies
+
+### 6.3 Performance Optimization
+
+- Avoid unnecessary rebuilds
+- Appropriate caching strategy
+- Prevent memory leaks
+
+### 6.4 Using ref.watch vs ref.read
+
+- Always use `ref.watch` in Provider and Widget build methods to properly track dependencies
+- `ref.watch` ensures the widget/provider rebuilds when the watched provider's state changes
+- Use `ref.read` only in event handlers and methods that should not trigger rebuilds
+- Incorrect usage of `ref.read` in build methods can lead to stale data and missed updates
+
+```dart
+// Good: Using ref.watch in build
+@override
+Widget build(BuildContext context, WidgetRef ref) {
+  final user = ref.watch(userProvider);
+  return Text(user.name);
+}
+
+// Good: Using ref.watch in Provider build
+@override
+String build() {
+  final settings = ref.watch(settingsProvider);
+  return settings.theme;
+}
+
+// Good: Using ref.read in event handler
+void onButtonPressed() {
+  ref.read(counterProvider.notifier).increment();
+}
+```
+
+## 7. Code Generation
+
+### 7.1 Setup
+
+```yaml
+dependencies:
+  riverpod_annotation: latest
+
+dev_dependencies:
+  riverpod_generator: latest
+  build_runner: latest
+```
+
+### 7.2 Generation Commands
+
+```bash
+flutter pub run build_runner build
+# or
+flutter pub run build_runner watch
+```

@@ -1,0 +1,80 @@
+---
+description: Flutter Widget Implementation Rules
+globs: *.dart
+alwaysApply: false
+---
+# Flutter Widget Implementation Rules
+
+## List Rendering with Lazy Loading
+
+When displaying lists of data fetched from APIs or databases, it's crucial to implement lazy loading correctly. Failure to do so can result in all list data being held in memory continuously, increasing the risk of Out Of Memory (OOM) errors.
+
+### Recommended Widgets for Lazy Loading
+
+#### List Widgets
+
+- `ListView`
+- `CustomScrollView` + `SliverList`
+
+#### Grid Widgets
+
+- `GridView`
+- `CustomScrollView` + `SliverGrid`
+
+#### External Packages
+
+- `pull_to_refresh_flutter3`
+
+### Implementation Examples
+
+If the number of lists obtained from the API or database is variable length, implement the following.
+
+OK: ListView.builder (Recommended)
+
+```dart
+class SamplePage1 extends StatelessWidget {
+  const SamplePage1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final items = List.generate(1000, (index) => index);
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView.builder(
+        itemBuilder: (context, item) => Tile(item),
+        itemCount: items.length,
+      ),
+    );
+  }
+}
+```
+
+NG: SingleChildScrollView + Column (Not Recommended)
+
+```dart
+class SamplePage3 extends StatelessWidget {
+  const SamplePage3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final items = List.generate(1000, (index) => index);
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: items.map(Tile.new).toList(),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Best Practices
+
+1. Always use widgets that support lazy loading for lists with many items
+2. Prefer `ListView.builder` or `GridView.builder` for optimal performance
+3. Avoid using `SingleChildScrollView` + `Column` for long lists
+4. Implement pagination when fetching data from APIs
+5. Use caching strategies for images and other heavy content
+6. Test your implementation with a large number of items to ensure it performs well

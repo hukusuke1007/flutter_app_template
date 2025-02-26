@@ -1,0 +1,193 @@
+---
+description: Flutter Feature First Architecture Domain Layer Rules
+globs: *.dart
+alwaysApply: false
+---
+# Flutter Feature First Architecture Domain Layer Rules
+
+## Directory Structure
+
+```
+lib/
+├── core/
+│   └── use_cases/        # Core domain logic
+│       ├── authentication/  # Authentication related use cases
+│       ├── analytics/       # Analytics related use cases
+│       ├── permission/      # Permission related use cases
+│       └── images/          # Image handling use cases
+└── features/
+    └── {feature_name}/
+        └── use_cases/    # Feature-specific use cases
+```
+
+## Implementation Guidelines
+
+### 1. Use Case Pattern
+
+- Each use case represents a single business operation
+- Use cases are the primary entry point for business logic
+- Implement use cases as classes with a single public method (often `call()`)
+  ```dart
+  class YourUseCase {
+    YourUseCase(this._ref);
+
+    final Ref _ref;
+
+    Future<ReturnType> call(Parameters params) async {
+      // Implementation
+    }
+  }
+  ```
+
+### 2. State Management with Riverpod
+
+- Use Riverpod for state management and dependency injection
+- Implement controllers using `@riverpod` or `@Riverpod(keepAlive: true)` annotations
+- Generate code using build_runner
+  ```dart
+  @riverpod
+  class YourController extends _$YourController {
+    @override
+    StateType build() {
+      // Initial state
+      return initialState;
+    }
+
+    // Methods to update state
+  }
+  ```
+
+### 3. Dependency Injection
+
+- Inject repositories and other dependencies via Riverpod
+- Use `ref.watch()` for reactive dependencies
+- Use `ref.read()` for non-reactive dependencies
+  ```dart
+  final repository = ref.watch(repositoryProvider);
+  ```
+
+### 4. Error Handling
+
+- Use domain-specific exceptions (`AppException`)
+- Handle and transform infrastructure exceptions
+- Provide meaningful error messages
+  ```dart
+  try {
+    // Implementation
+  } on SpecificException catch (e) {
+    throw AppException(title: 'User-friendly error message');
+  }
+  ```
+
+### 5. Asynchronous Operations
+
+- Use `Future` and `Stream` for asynchronous operations
+- Handle loading and error states with `AsyncValue`
+- Use `AsyncValue.guard()` for error handling
+  ```dart
+  state = await AsyncValue.guard(() async {
+    // Async operation
+    return result;
+  });
+  ```
+
+### 6. State Updates
+
+- Keep state updates atomic and consistent
+- Update state only after successful operations
+- Implement optimistic updates when appropriate
+
+  ```dart
+  // Update state
+  state = newState;
+
+  // Persist changes
+  await repository.save(newState);
+  ```
+
+### 7. Business Logic Separation
+
+- Keep business logic in use cases, not in UI or repositories
+- Implement validation logic in use cases
+- Transform data between domain and infrastructure layers
+
+### 8. Testing
+
+- Design use cases to be easily testable
+- Mock dependencies in tests
+- Test success and failure scenarios
+  ```dart
+  test('use case success', () async {
+    // Arrange
+    when(mockRepository.method()).thenReturn(expectedValue);
+
+    // Act
+    final result = await useCase.call(params);
+
+    // Assert
+    expect(result, expectedValue);
+  });
+  ```
+
+### 9. Pagination and Data Loading
+
+- Implement pagination logic in dedicated controllers
+- Track pagination state (last ID, page number, etc.)
+- Provide methods for loading more data
+  ```dart
+  Future<void> loadMore() async {
+    // Load next page
+  }
+  ```
+
+### 10. Best Practices
+
+- Follow consistent naming conventions
+- Document public APIs and complex logic
+- Keep use cases focused on a single responsibility
+- Use immutable entities for domain models
+
+## Example Use Case Implementation
+
+### Simple Provider
+
+```dart
+final yourUseCaseProvider = Provider(YourUseCase.new);
+
+class YourUseCase {
+  YourUseCase(this._ref);
+
+  final Ref _ref;
+
+  Future<Result> call(Params params) async {
+    try {
+      final repository = _ref.read(repositoryProvider);
+      final result = await repository.operation(params);
+      return result;
+    } on Exception catch (e) {
+      throw AppException(title: 'Error message');
+    }
+  }
+}
+```
+
+### State Controller
+
+```dart
+@riverpod
+class DataController extends _$DataController {
+  @override
+  Future<Data> build() async {
+    // Initial data loading
+    return await ref.watch(repositoryProvider).fetchData();
+  }
+
+  Future<void> update(Data newData) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(repositoryProvider).saveData(newData);
+      return newData;
+    });
+  }
+}
+```

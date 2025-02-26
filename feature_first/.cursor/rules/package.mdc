@@ -1,0 +1,171 @@
+---
+description: Package Usage Guidelines
+globs: *dart, *.yaml
+alwaysApply: false
+---
+# Package Usage Guidelines
+
+This file documents the packages used in the project and their purposes.
+
+## Core Flutter Dependencies
+
+- `flutter` - Flutter SDK
+- `flutter_localizations` - Internationalization support
+- `intl` - Internationalization utilities
+
+## Logging and Debugging
+
+- `simple_logger` - Logging utility
+
+## Image Handling
+
+- `extended_image` - Advanced image handling
+- `flutter_image_compress` - Image compression
+- `image_picker` - Image selection from gallery/camera
+- `image_gallery_saver_plus` - Save images to gallery
+- `photo_view` - Image viewer with zoom
+- `flutter_svg` - SVG rendering
+- `image_cropper` - Image cropping functionality
+
+## Local Storage
+
+- `shared_preferences` - Key-value storage
+- `sembast` - NoSQL database
+- `path_provider` - File system access
+
+## Web Integration
+
+- `flutter_inappwebview` - In-app browser
+
+## UI Components and Styling
+
+- `google_fonts` - Google Fonts integration
+- `cupertino_icons` - iOS-style icons
+- `loading_animation_widget` - Loading animations
+- `adaptive_dialog` - Platform-adaptive dialogs
+- `dropdown_button2` - Enhanced dropdown
+- `step_progress_indicator` - Progress indicators
+- `dismissible_page` - Dismissible pages
+- `carousel_slider` - Image carousel
+- `dots_indicator` - Page indicators
+- `expandable_page_view` - Expandable pages
+- `fl_chart` - Charts and graphs
+- `sleek_circular_slider` - Circular slider
+- `sliding_up_panel2` - Bottom sheet panel
+- `table_calendar` - Calendar widget
+- `calendar_date_picker2` - Date picker
+- `flutter_picker_plus` - General picker
+- `like_button` - Animated like button
+- `flutter_rating_bar` - Rating widget
+- `flutter_datetime_picker_plus` - DateTime picker
+- `lottie` - Lottie animations
+
+## State Management
+
+- `flutter_hooks` - React-style hooks
+- `hooks_riverpod` - State management
+- `riverpod_annotation` - Riverpod code generation
+
+## Data Modeling
+
+- `json_annotation` - JSON serialization
+- `freezed_annotation` - Immutable classes
+- `equatable` - Value equality
+
+## Platform Integration
+
+- `url_launcher` - URL handling
+- `map_launcher` - Map app launching
+- `launch_app_store` - App store launching
+- `in_app_review` - In-app review
+- `share_plus` - Content sharing
+- `package_info_plus` - App package info
+- `device_info_plus` - Device information
+- `app_settings` - App settings access
+- `permission_handler` - Permission management
+
+## Notifications
+
+- `flutter_local_notifications` - Local notifications
+- `flutter_timezone` - Timezone support
+- `in_app_notification` - In-app notifications
+
+## Navigation and Routing
+
+- `page_transition` - Page transitions
+
+## Network and API
+
+- `dio` - HTTP client
+- `supabase_flutter` - Supabase client
+
+## Firebase Services
+
+- `firebase_core` - Firebase core
+- `firebase_analytics` - Analytics
+- `firebase_messaging` - Push notifications
+- `firebase_crashlytics` - Crash reporting
+- `firebase_remote_config` - Remote configuration
+
+## Authentication
+
+- `google_sign_in` - Google authentication
+- `sign_in_with_apple` - Apple authentication
+- `nonce` - Auth nonce generation
+- `crypto` - Cryptography
+
+## UI Utilities
+
+- `pull_to_refresh_flutter3` - Pull to refresh
+- `nested_scroll_view_plus` - Enhanced scroll view
+- `flutter_cache_manager` - Cache management
+- `app_badge_plus` - App badge management
+
+## Audio
+
+- `audio_session` - Audio session management
+- `soundpool` - Sound effects
+
+## Advertising
+
+- `google_mobile_ads` - Google AdMob
+
+## Maps
+
+- `google_maps_flutter` - Google Maps
+
+## Utility Packages
+
+- `uuid` - UUID generation
+- `timezone` - Timezone handling
+- `path` - Path manipulation
+- `collection` - Collection utilities
+- `pub_semver` - Semantic versioning
+- `async` - Async utilities
+- `synchronized` - Synchronization primitives
+- `stop_watch_timer` - Timer functionality
+- `wakelock_plus` - Keep screen awake
+- `rxdart` - Reactive extensions
+
+## Development Dependencies
+
+- `pedantic_mono` - Linting rules
+- `build_runner` - Code generation
+- `json_serializable` - JSON serialization
+- `freezed` - Code generation for immutable classes
+- `riverpod_generator` - Riverpod code generation
+- `riverpod_lint` - Riverpod linting
+- `flutter_launcher_icons` - App icon generation
+- `flutter_native_splash` - Splash screen generation
+- `package_rename` - Package renaming
+- `mockito` - Mocking for tests
+
+## Package Usage Guidelines
+
+1. Keep dependencies up to date
+2. Check for compatibility when updating
+3. Follow version constraints in pubspec.yaml
+4. Use dev_dependencies appropriately
+5. Consider package size and performance impact
+6. Prefer official Flutter packages when available
+7. Document usage of complex packages

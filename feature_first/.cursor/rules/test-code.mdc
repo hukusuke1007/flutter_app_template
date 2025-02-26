@@ -1,0 +1,116 @@
+---
+description: Flutter Feature First Architecture Test Rules
+globs: *.dart
+alwaysApply: false
+---
+# Flutter Feature First Architecture Test Rules
+
+## Directory Structure
+
+```
+test/
+├── features/          # Test code for each feature
+├── core/             # Core functionality tests
+├── other/            # Other test code
+└── utils.dart        # Test utilities
+```
+
+## Test Implementation Guidelines
+
+### 1. Unit Tests
+
+- Test business logic for each feature
+- Use the `flutter_test` package
+- Test file names should follow the `*_test.dart` format
+- Create mock objects using mockito
+  ```dart
+  @GenerateNiceMocks([MockSpec<YourClass>()])
+  ```
+
+### 2. Repository Tests
+
+- Mock external dependencies such as API clients, databases, and file systems
+- Test various scenarios including error cases
+- Use `async/await` for asynchronous testing
+
+### 3. Use Case Tests
+
+- Unit test business logic
+- Test Riverpod providers
+- Use the `createContainer()` utility to create test ProviderContainers
+
+### 4. UI Tests
+
+- Implement widget tests
+- Test screen state changes
+- Simulate user interactions
+
+### 5. Mocking Guidelines
+
+- Use the `mockito` package
+- Auto-generate mock classes
+  ```bash
+  dart run build_runner build
+  ```
+- Mock all external dependencies of the test target
+
+### 6. Test Data
+
+- Define test data within each test file
+- Place common test data in dedicated files
+- Use realistic test data
+
+### 7. Error Handling
+
+- Test both successful and error cases
+- Verify proper exception handling in error cases
+- Use `AppException` for error handling
+
+### 8. Best Practices
+
+- Tests should be independently executable
+- Write clear test descriptions
+- Group test cases appropriately
+- Be mindful of test coverage
+
+### 9. Riverpod Testing
+
+- Use `ProviderContainer`
+- Test provider state changes
+- Utilize overrides for testing
+
+### 10. Utilities
+
+- Place common test utilities in `utils.dart`
+- Create test containers
+- Implement mock listeners
+
+## Example Test Structure
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
+@GenerateNiceMocks([MockSpec<YourClass>()])
+void main() {
+  group('Feature Test Group', () {
+    late MockYourClass mockYourClass;
+
+    setUp(() {
+      mockYourClass = MockYourClass();
+    });
+
+    test('test case description', () async {
+      // Arrange
+      when(mockYourClass.someMethod()).thenReturn(expectedValue);
+
+      // Act
+      final result = await someFunction();
+
+      // Assert
+      expect(result, expectedValue);
+    });
+  });
+}
+```
