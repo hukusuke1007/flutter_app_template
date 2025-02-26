@@ -7,19 +7,22 @@ part of 'github_users_controller.dart';
 // **************************************************************************
 
 String _$githubUsersControllerHash() =>
-    r'8f13375ddcfc06c890e6259067110c5bdac8e427';
+    r'96c0e582d458f40abd9e45e9984225d0b776c788';
 
 /// GithubのユーザーリストをAsyncNotifierで管理する
 ///
 /// Copied from [GithubUsersController].
 @ProviderFor(GithubUsersController)
 final githubUsersControllerProvider = AutoDisposeAsyncNotifierProvider<
-    GithubUsersController, List<User>>.internal(
+  GithubUsersController,
+  List<User>
+>.internal(
   GithubUsersController.new,
   name: r'githubUsersControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$githubUsersControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$githubUsersControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

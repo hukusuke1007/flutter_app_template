@@ -30,21 +30,16 @@ import 'package:mockito/mockito.dart' as _i1;
 class MockGithubApiRepository extends _i1.Mock
     implements _i2.GithubApiRepository {
   @override
-  _i3.Future<List<_i4.User>> fetchUsers({
-    int? since,
-    int? perPage,
-  }) =>
+  _i3.Future<List<_i4.User>> fetchUsers({int? since, int? perPage}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #fetchUsers,
-          [],
-          {
-            #since: since,
-            #perPage: perPage,
-          },
-        ),
-        returnValue: _i3.Future<List<_i4.User>>.value(<_i4.User>[]),
-        returnValueForMissingStub:
-            _i3.Future<List<_i4.User>>.value(<_i4.User>[]),
-      ) as _i3.Future<List<_i4.User>>);
+            Invocation.method(#fetchUsers, [], {
+              #since: since,
+              #perPage: perPage,
+            }),
+            returnValue: _i3.Future<List<_i4.User>>.value(<_i4.User>[]),
+            returnValueForMissingStub: _i3.Future<List<_i4.User>>.value(
+              <_i4.User>[],
+            ),
+          )
+          as _i3.Future<List<_i4.User>>);
 }

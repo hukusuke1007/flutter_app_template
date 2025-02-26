@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 final authHeaderInterceptor = InterceptorsWrapper(
-  onRequest: (request, handler) async {
+  onRequest: (request, handler) {
     /// AccessTokenが必要な場合はここに設定する
     const accessToken = '';
     if (accessToken.isNotEmpty) {

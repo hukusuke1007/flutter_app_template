@@ -14,9 +14,10 @@ String _$githubApiRepositoryHash() =>
 final githubApiRepositoryProvider = Provider<GithubApiRepository>.internal(
   githubApiRepository,
   name: r'githubApiRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$githubApiRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$githubApiRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

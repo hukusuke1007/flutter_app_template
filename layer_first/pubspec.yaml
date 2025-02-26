@@ -3,14 +3,14 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
 
   # LocalDatabase
   shared_preferences:
@@ -43,7 +43,7 @@ dev_dependencies:
     sdk: flutter
 
   # Testing
-  mockito: ^5.4.4
+  mockito:
 
   # Static analysis
   pedantic_mono:
@@ -54,7 +54,7 @@ dev_dependencies:
   json_serializable:
 
   # Code generator
-  build_runner: ^2.4.8
+  build_runner:
   freezed:
   riverpod_generator:
   retrofit_generator:
