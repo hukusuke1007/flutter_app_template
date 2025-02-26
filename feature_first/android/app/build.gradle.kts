@@ -111,6 +111,7 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
+
             // https://stackoverflow.com/questions/78142862/error-execution-failed-for-task-appminifyreleasewithr8
             isMinifyEnabled = false
             isShrinkResources = false
