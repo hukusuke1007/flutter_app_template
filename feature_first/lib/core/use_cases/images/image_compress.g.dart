@@ -6,16 +6,17 @@ part of 'image_compress.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$imageCompressHash() => r'6b95be574d60f16e154545110aa2bdfddb5d02e2';
+String _$imageCompressHash() => r'95a4e18d840d9df1afed45a6216d163bef1f70d7';
 
 /// See also [imageCompress].
 @ProviderFor(imageCompress)
 final imageCompressProvider = Provider<ImageCompress>.internal(
   imageCompress,
   name: r'imageCompressProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$imageCompressHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$imageCompressHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

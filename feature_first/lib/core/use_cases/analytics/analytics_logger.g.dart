@@ -6,16 +6,17 @@ part of 'analytics_logger.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsLoggerHash() => r'c30959718a22c140da9da2c06c806634ab20d1e1';
+String _$analyticsLoggerHash() => r'e280d857df93af81985c4071a7caabb3c3e5e454';
 
 /// See also [analyticsLogger].
 @ProviderFor(analyticsLogger)
 final analyticsLoggerProvider = Provider<AnalyticsLogger>.internal(
   analyticsLogger,
   name: r'analyticsLoggerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyticsLoggerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$analyticsLoggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

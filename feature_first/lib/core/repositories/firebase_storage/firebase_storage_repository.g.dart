@@ -7,20 +7,21 @@ part of 'firebase_storage_repository.dart';
 // **************************************************************************
 
 String _$firebaseStorageRepositoryHash() =>
-    r'44f83e87f7147471c32b1d31e305e78596c64e6b';
+    r'dd24d6edcba9d3e8a572fb08360b131dae472acf';
 
 /// See also [firebaseStorageRepository].
 @ProviderFor(firebaseStorageRepository)
 final firebaseStorageRepositoryProvider =
     Provider<FirebaseStorageRepository>.internal(
-  firebaseStorageRepository,
-  name: r'firebaseStorageRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseStorageRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      firebaseStorageRepository,
+      name: r'firebaseStorageRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$firebaseStorageRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

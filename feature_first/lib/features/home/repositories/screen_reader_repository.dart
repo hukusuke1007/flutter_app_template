@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/utils/logger.dart';
@@ -6,7 +7,7 @@ import '../../../core/utils/logger.dart';
 part 'screen_reader_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-ScreenReaderRepository screenReaderRepository(ScreenReaderRepositoryRef ref) {
+ScreenReaderRepository screenReaderRepository(Ref ref) {
   // TODO(shohei): prefixNameを変更した場合はiOSとAndroidのネイティブ側の変更も必要
   const prefixName = 'com.example.app';
   return ScreenReaderRepository(

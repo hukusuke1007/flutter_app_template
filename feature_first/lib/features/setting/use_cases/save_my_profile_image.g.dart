@@ -7,16 +7,17 @@ part of 'save_my_profile_image.dart';
 // **************************************************************************
 
 String _$saveMyProfileImageHash() =>
-    r'a3a0f842bafde15e9c4ccc8721ed8326c147c854';
+    r'f246d142a570fb32c779a033c685ae69ebabc67f';
 
 /// See also [saveMyProfileImage].
 @ProviderFor(saveMyProfileImage)
 final saveMyProfileImageProvider = Provider<SaveMyProfileImage>.internal(
   saveMyProfileImage,
   name: r'saveMyProfileImageProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$saveMyProfileImageHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$saveMyProfileImageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

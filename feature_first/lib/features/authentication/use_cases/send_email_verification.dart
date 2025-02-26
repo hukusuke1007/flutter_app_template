@@ -6,7 +6,9 @@ import '../../../core/repositories/firebase_auth/auth_error_code.dart';
 import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
-final sendEmailVerificationProvider = Provider(SendEmailVerification.new);
+final sendEmailVerificationProvider = Provider<SendEmailVerification>(
+  SendEmailVerification.new,
+);
 
 class SendEmailVerification {
   SendEmailVerification(this._ref);

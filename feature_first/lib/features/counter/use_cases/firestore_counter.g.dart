@@ -12,14 +12,15 @@ String _$firestoreCounterHash() => r'7d4c20fea67498d90a0558ddbbd6e749ce82ecde';
 @ProviderFor(FirestoreCounter)
 final firestoreCounterProvider =
     AutoDisposeAsyncNotifierProvider<FirestoreCounter, Counter?>.internal(
-  FirestoreCounter.new,
-  name: r'firestoreCounterProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firestoreCounterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FirestoreCounter.new,
+      name: r'firestoreCounterProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$firestoreCounterHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FirestoreCounter = AutoDisposeAsyncNotifier<Counter?>;
 // ignore_for_file: type=lint

@@ -27,17 +27,16 @@ class ImageViewer extends HookConsumerWidget {
     int initialPage = 0,
     String? heroTag,
     bool rootNavigator = true,
-  }) =>
-      context.pushTransparentRoute(
-        ImageViewer(
-          urls: urls ?? [],
-          files: files ?? [],
-          assetNames: assetNames ?? [],
-          initialPage: initialPage,
-          heroTag: heroTag,
-        ),
-        rootNavigator: true,
-      );
+  }) => context.pushTransparentRoute(
+    ImageViewer(
+      urls: urls ?? [],
+      files: files ?? [],
+      assetNames: assetNames ?? [],
+      initialPage: initialPage,
+      heroTag: heroTag,
+    ),
+    rootNavigator: true,
+  );
 
   final List<String> urls;
   final List<File> files;
@@ -51,17 +50,19 @@ class ImageViewer extends HookConsumerWidget {
 
   bool get isAsset => urls.isEmpty && files.isEmpty && assetNames.isNotEmpty;
 
-  int get count => files.isNotEmpty
-      ? files.length
-      : assetNames.isNotEmpty
+  int get count =>
+      files.isNotEmpty
+          ? files.length
+          : assetNames.isNotEmpty
           ? assetNames.length
           : urls.length;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = useState(initialPage);
-    final controller =
-        useState(ExtendedPageController(initialPage: initialPage));
+    final controller = useState(
+      ExtendedPageController(initialPage: initialPage),
+    );
 
     Widget extendedImageSlidePage() {
       return ExtendedImageSlidePage(
@@ -71,7 +72,8 @@ class ImageViewer extends HookConsumerWidget {
         slideType: SlideType.onlyImage,
         onSlidingPage: print,
         slidePageBackgroundHandler: (Offset offset, Size size) {
-          final opacity = offset.distance /
+          final opacity =
+              offset.distance /
               (Offset(size.width, size.height).distance / 2.0);
           return Colors.black.withValues(alpha: 1 - opacity);
         },
@@ -84,9 +86,7 @@ class ImageViewer extends HookConsumerWidget {
                   fit: BoxFit.contain,
                   mode: ExtendedImageMode.gesture,
                   initGestureConfigHandler: (state) {
-                    return GestureConfig(
-                      inPageView: true,
-                    );
+                    return GestureConfig(inPageView: true);
                   },
                 );
               }
@@ -96,9 +96,7 @@ class ImageViewer extends HookConsumerWidget {
                   fit: BoxFit.contain,
                   mode: ExtendedImageMode.gesture,
                   initGestureConfigHandler: (state) {
-                    return GestureConfig(
-                      inPageView: true,
-                    );
+                    return GestureConfig(inPageView: true);
                   },
                 );
               }
@@ -108,9 +106,7 @@ class ImageViewer extends HookConsumerWidget {
                 mode: ExtendedImageMode.gesture,
                 cacheMaxAge: const Duration(days: 90),
                 initGestureConfigHandler: (state) {
-                  return GestureConfig(
-                    inPageView: true,
-                  );
+                  return GestureConfig(inPageView: true);
                 },
               );
             }
@@ -139,10 +135,7 @@ class ImageViewer extends HookConsumerWidget {
         body: Stack(
           children: [
             heroTag != null
-                ? Hero(
-                    tag: heroTag!,
-                    child: extendedImageSlidePage(),
-                  )
+                ? Hero(tag: heroTag!, child: extendedImageSlidePage())
                 : extendedImageSlidePage(),
             ImageViewerHeader(
               onMenuSelected: (value) async {
@@ -150,16 +143,20 @@ class ImageViewer extends HookConsumerWidget {
                   final index = selectedIndex.value;
                   final imageBytes = await Future(() async {
                     if (isUrl) {
-                      return ExtendedNetworkImageProvider(
-                        urls[index],
-                        cache: true,
-                      ).getNetworkImageData();
+                      final data =
+                          await ExtendedNetworkImageProvider(
+                            urls[index],
+                            cache: true,
+                          ).getNetworkImageData();
+                      return data;
                     } else if (isAsset) {
-                      return ExtendedAssetImageProvider(assetNames[index])
-                          .rawImageData;
+                      return ExtendedAssetImageProvider(
+                        assetNames[index],
+                      ).rawImageData;
                     } else if (isFile) {
-                      return ExtendedFileImageProvider(files[index])
-                          .rawImageData;
+                      return ExtendedFileImageProvider(
+                        files[index],
+                      ).rawImageData;
                     }
                     return null;
                   });

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,14 +9,14 @@ import '../../repositories/device_info/device_info_repository.dart';
 part 'request_album_permission.g.dart';
 
 @Riverpod(keepAlive: true)
-RequestAlbumPermission requestAlbumPermission(RequestAlbumPermissionRef ref) {
+RequestAlbumPermission requestAlbumPermission(Ref ref) {
   return RequestAlbumPermission(ref);
 }
 
 class RequestAlbumPermission {
   RequestAlbumPermission(this._ref);
 
-  final RequestAlbumPermissionRef _ref;
+  final Ref _ref;
 
   Future<bool> call() async {
     final status = await Future(() async {

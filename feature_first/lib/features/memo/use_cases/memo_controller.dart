@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/exceptions/app_exception.dart';
@@ -14,7 +15,7 @@ part 'memo_controller.g.dart';
 
 @riverpod
 CollectionPagingRepository<Memo> collectionPagingRepository(
-  CollectionPagingRepositoryRef ref,
+  Ref ref,
   CollectionParam<Memo> query,
 ) {
   return CollectionPagingRepository<Memo>(
@@ -99,10 +100,9 @@ class MemoController extends _$MemoController {
       createdAt: now,
       updatedAt: now,
     );
-    await ref.read(documentRepositoryProvider).save(
-          Memo.docPath(userId, docRef.id),
-          data: data.toCreateDoc,
-        );
+    await ref
+        .read(documentRepositoryProvider)
+        .save(Memo.docPath(userId, docRef.id), data: data.toCreateDoc);
     final previousState = await future;
     state = AsyncData([data, ...previousState]);
   }
@@ -122,16 +122,11 @@ class MemoController extends _$MemoController {
       throw AppException.irregular();
     }
     final data = memo.copyWith(updatedAt: DateTime.now());
-    await ref.read(documentRepositoryProvider).update(
-          Memo.docPath(userId, docId),
-          data: data.toUpdateDoc,
-        );
+    await ref
+        .read(documentRepositoryProvider)
+        .update(Memo.docPath(userId, docId), data: data.toUpdateDoc);
     state = AsyncData(
-      value
-          .map(
-            (e) => e.memoId == memo.memoId ? memo : e,
-          )
-          .toList(),
+      value.map((e) => e.memoId == memo.memoId ? memo : e).toList(),
     );
   }
 
@@ -148,12 +143,6 @@ class MemoController extends _$MemoController {
     await ref
         .read(documentRepositoryProvider)
         .remove(Memo.docPath(userId, docId));
-    state = AsyncData(
-      value
-          .where(
-            (e) => e.memoId != docId,
-          )
-          .toList(),
-    );
+    state = AsyncData(value.where((e) => e.memoId != docId).toList());
   }
 }

@@ -10,7 +10,7 @@ Future<void> showDecimalPickerDialog(
   required int maxValue,
   String doneText = '決定',
   required void Function(double) onChange,
-}) async {
+}) {
   return showModalBottomSheet<void>(
     context: context,
     builder: (BuildContext builder) {

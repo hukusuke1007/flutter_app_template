@@ -12,13 +12,13 @@ String _$fetchSumHash() => r'c7ac0c582dbccba1979d14a4674437e13c5c7fd6';
 @ProviderFor(FetchSum)
 final fetchSumProvider =
     AutoDisposeAsyncNotifierProvider<FetchSum, double>.internal(
-  FetchSum.new,
-  name: r'fetchSumProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchSumHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FetchSum.new,
+      name: r'fetchSumProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product') ? null : _$fetchSumHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FetchSum = AutoDisposeAsyncNotifier<double>;
 // ignore_for_file: type=lint

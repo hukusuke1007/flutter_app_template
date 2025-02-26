@@ -13,21 +13,16 @@ import 'github_api_client.dart';
 part 'github_api_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-GithubApiRepository githubApiRepository(GithubApiRepositoryRef ref) {
+GithubApiRepository githubApiRepository(Ref ref) {
   return GithubApiRepository(ref);
 }
 
 class GithubApiRepository {
-  GithubApiRepository(
-    Ref ref,
-  ) : _client = ref.read(githubApiClientProvider);
+  GithubApiRepository(Ref ref) : _client = ref.read(githubApiClientProvider);
 
   final GithubApiClient _client;
 
-  Future<List<User>> fetchUsers({
-    int? since,
-    int? perPage,
-  }) async {
+  Future<List<User>> fetchUsers({int? since, int? perPage}) async {
     try {
       final result = await _client.fetchUsers(since, perPage);
       return result;

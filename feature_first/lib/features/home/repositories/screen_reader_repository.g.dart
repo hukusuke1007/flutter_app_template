@@ -7,20 +7,21 @@ part of 'screen_reader_repository.dart';
 // **************************************************************************
 
 String _$screenReaderRepositoryHash() =>
-    r'91f3e99a787ad3e97e25a0d044e6fd6cad9a0b0c';
+    r'd72dd3017b3212998db3196ef6d6fac91b09c733';
 
 /// See also [screenReaderRepository].
 @ProviderFor(screenReaderRepository)
 final screenReaderRepositoryProvider =
     Provider<ScreenReaderRepository>.internal(
-  screenReaderRepository,
-  name: r'screenReaderRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$screenReaderRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      screenReaderRepository,
+      name: r'screenReaderRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$screenReaderRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

@@ -15,14 +15,15 @@ String _$fetchFirestoreCounterHash() =>
 @ProviderFor(FetchFirestoreCounter)
 final fetchFirestoreCounterProvider =
     AutoDisposeStreamNotifierProvider<FetchFirestoreCounter, Counter?>.internal(
-  FetchFirestoreCounter.new,
-  name: r'fetchFirestoreCounterProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchFirestoreCounterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FetchFirestoreCounter.new,
+      name: r'fetchFirestoreCounterProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$fetchFirestoreCounterHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FetchFirestoreCounter = AutoDisposeStreamNotifier<Counter?>;
 // ignore_for_file: type=lint

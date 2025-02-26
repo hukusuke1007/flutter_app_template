@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'auth_provider_id.dart';
@@ -10,7 +11,7 @@ import 'login_type.dart';
 part 'firebase_auth_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-FirebaseAuthRepository firebaseAuthRepository(FirebaseAuthRepositoryRef ref) {
+FirebaseAuthRepository firebaseAuthRepository(Ref ref) {
   return FirebaseAuthRepository(FirebaseAuth.instance);
 }
 
@@ -44,20 +45,17 @@ class FirebaseAuthRepository {
 
   Future<UserCredential> signInWithAuthCredential(
     AuthCredential authCredential,
-  ) =>
-      _auth.signInWithCredential(authCredential);
+  ) => _auth.signInWithCredential(authCredential);
 
   Future<UserCredential> createUserWithEmailAndPassword(
     String email,
     String password,
-  ) =>
-      _auth.createUserWithEmailAndPassword(email: email, password: password);
+  ) => _auth.createUserWithEmailAndPassword(email: email, password: password);
 
   Future<UserCredential> signInWithEmailAndPassword(
     String email,
     String password,
-  ) =>
-      _auth.signInWithEmailAndPassword(email: email, password: password);
+  ) => _auth.signInWithEmailAndPassword(email: email, password: password);
 
   Future<void> sendEmailVerification() async {
     await _auth.currentUser?.sendEmailVerification();
@@ -71,8 +69,10 @@ class FirebaseAuthRepository {
     required String oldPassword,
     required String newPassword,
   }) async {
-    final credential =
-        EmailAuthProvider.credential(email: email, password: oldPassword);
+    final credential = EmailAuthProvider.credential(
+      email: email,
+      password: oldPassword,
+    );
     await _auth.currentUser?.reauthenticateWithCredential(credential);
     await _auth.currentUser?.updatePassword(newPassword);
   }
@@ -82,7 +82,8 @@ class FirebaseAuthRepository {
     if (user == null) {
       throw Exception('user is null');
     }
-    return user.linkWithCredential(authCredential);
+    final credential = await user.linkWithCredential(authCredential);
+    return credential;
   }
 
   Future<String?> getIdToken({bool forceRefresh = false}) async {

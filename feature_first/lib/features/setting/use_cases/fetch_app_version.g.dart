@@ -6,16 +6,17 @@ part of 'fetch_app_version.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchAppVersionHash() => r'9c9e8b52dbeb50e5a822d4aeac447833069cd924';
+String _$fetchAppVersionHash() => r'58a6b941f0b03d191a2fa34b764c05e1850941cd';
 
 /// See also [fetchAppVersion].
 @ProviderFor(fetchAppVersion)
 final fetchAppVersionProvider = AutoDisposeProvider<String>.internal(
   fetchAppVersion,
   name: r'fetchAppVersionProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchAppVersionHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fetchAppVersionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

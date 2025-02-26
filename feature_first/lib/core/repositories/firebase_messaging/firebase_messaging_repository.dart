@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -10,9 +11,7 @@ import 'topics.dart';
 part 'firebase_messaging_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-FirebaseMessagingRepository firebaseMessagingRepository(
-  FirebaseMessagingRepositoryRef ref,
-) {
+FirebaseMessagingRepository firebaseMessagingRepository(Ref ref) {
   return FirebaseMessagingRepository(FirebaseMessaging.instance);
 }
 
@@ -23,7 +22,7 @@ class FirebaseMessagingRepository {
   final _message = PublishSubject<RemoteMessage>();
   final _openedApp = PublishSubject<RemoteMessage>();
   final _token = PublishSubject<String>();
-  bool _isFetch = false;
+  var _isFetch = false;
 
   Stream<RemoteMessage> get message => _message;
 

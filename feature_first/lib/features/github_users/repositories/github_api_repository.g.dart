@@ -7,16 +7,17 @@ part of 'github_api_repository.dart';
 // **************************************************************************
 
 String _$githubApiRepositoryHash() =>
-    r'1f1cb4cb9fa46adb7f5fcedbf075e3e0253f0cfb';
+    r'f9ccea515e069766f8bee98d9c9bfa757bd6cb9e';
 
 /// See also [githubApiRepository].
 @ProviderFor(githubApiRepository)
 final githubApiRepositoryProvider = Provider<GithubApiRepository>.internal(
   githubApiRepository,
   name: r'githubApiRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$githubApiRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$githubApiRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

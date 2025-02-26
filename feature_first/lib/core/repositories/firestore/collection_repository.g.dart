@@ -7,16 +7,17 @@ part of 'collection_repository.dart';
 // **************************************************************************
 
 String _$collectionRepositoryHash() =>
-    r'f604dab224c0060cd138dad61718dcd018be2005';
+    r'7e3e7313037b9b040c5cc84ad07cec394de9c1b4';
 
 /// See also [collectionRepository].
 @ProviderFor(collectionRepository)
 final collectionRepositoryProvider = Provider<CollectionRepository>.internal(
   collectionRepository,
   name: r'collectionRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$collectionRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$collectionRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

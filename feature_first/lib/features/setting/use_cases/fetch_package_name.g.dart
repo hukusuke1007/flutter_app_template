@@ -6,16 +6,17 @@ part of 'fetch_package_name.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchPackageNameHash() => r'b653bccfa6c2990c2f31bbf24c086b496d34f796';
+String _$fetchPackageNameHash() => r'e772dd30cbbed54387e4a91801569a0e7052451c';
 
 /// See also [fetchPackageName].
 @ProviderFor(fetchPackageName)
 final fetchPackageNameProvider = AutoDisposeProvider<String>.internal(
   fetchPackageName,
   name: r'fetchPackageNameProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchPackageNameHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fetchPackageNameHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

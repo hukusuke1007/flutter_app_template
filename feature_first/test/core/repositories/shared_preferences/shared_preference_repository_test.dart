@@ -34,103 +34,91 @@ void main() {
       reset(mockSharedPreferences); // セットされたデータを初期化するためにモックをリセットする
     });
 
-    test(
-      'サポートされている型でデータが保存できること',
-      () async {
-        /// Mockにデータをセットする
-        when(
-          mockSharedPreferences.setInt(key.value, any),
-        ).thenAnswer((_) async => true);
-        when(
-          mockSharedPreferences.setDouble(key.value, any),
-        ).thenAnswer((_) async => true);
-        when(
-          mockSharedPreferences.setBool(key.value, any),
-        ).thenAnswer((_) async => true);
-        when(
-          mockSharedPreferences.setString(key.value, any),
-        ).thenAnswer((_) async => true);
-        when(
-          mockSharedPreferences.setStringList(key.value, any),
-        ).thenAnswer((_) async => true);
+    test('サポートされている型でデータが保存できること', () async {
+      /// Mockにデータをセットする
+      when(
+        mockSharedPreferences.setInt(key.value, any),
+      ).thenAnswer((_) async => true);
+      when(
+        mockSharedPreferences.setDouble(key.value, any),
+      ).thenAnswer((_) async => true);
+      when(
+        mockSharedPreferences.setBool(key.value, any),
+      ).thenAnswer((_) async => true);
+      when(
+        mockSharedPreferences.setString(key.value, any),
+      ).thenAnswer((_) async => true);
+      when(
+        mockSharedPreferences.setStringList(key.value, any),
+      ).thenAnswer((_) async => true);
 
-        /// ProviderにMockをセットする
-        final container = createContainer(
-          overrides: [
-            sharedPreferencesRepositoryProvider.overrideWith(
-              (ref) => SharedPreferencesRepository(mockSharedPreferences),
-            ),
-          ],
-        );
+      /// ProviderにMockをセットする
+      final container = createContainer(
+        overrides: [
+          sharedPreferencesRepositoryProvider.overrideWith(
+            (ref) => SharedPreferencesRepository(mockSharedPreferences),
+          ),
+        ],
+      );
 
-        /// テスト実施
-        final repository = container.read(sharedPreferencesRepositoryProvider);
-        final results = await [
-          repository.save<int>(key, 0),
-          repository.save<double>(key, 0.1),
-          repository.save<bool>(key, true),
-          repository.save<String>(key, '0'),
-          repository.save<List<String>>(key, ['0', '1']),
-        ].wait;
+      /// テスト実施
+      final repository = container.read(sharedPreferencesRepositoryProvider);
+      final results =
+          await [
+            repository.save<int>(key, 0),
+            repository.save<double>(key, 0.1),
+            repository.save<bool>(key, true),
+            repository.save<String>(key, '0'),
+            repository.save<List<String>>(key, ['0', '1']),
+          ].wait;
 
-        for (final element in results) {
-          expect(element, isTrue);
-        }
+      for (final element in results) {
+        expect(element, isTrue);
+      }
 
-        /// テスト結果を検証 注入したMockの関数が1回呼ばれていること
-        verify(mockSharedPreferences.setInt(key.value, 0)).called(1);
-        verify(mockSharedPreferences.setDouble(key.value, 0.1)).called(1);
-        verify(mockSharedPreferences.setBool(key.value, true)).called(1);
-        verify(mockSharedPreferences.setString(key.value, '0')).called(1);
-        verify(mockSharedPreferences.setStringList(key.value, ['0', '1']))
-            .called(1);
-      },
-    );
+      /// テスト結果を検証 注入したMockの関数が1回呼ばれていること
+      verify(mockSharedPreferences.setInt(key.value, 0)).called(1);
+      verify(mockSharedPreferences.setDouble(key.value, 0.1)).called(1);
+      verify(mockSharedPreferences.setBool(key.value, true)).called(1);
+      verify(mockSharedPreferences.setString(key.value, '0')).called(1);
+      verify(
+        mockSharedPreferences.setStringList(key.value, ['0', '1']),
+      ).called(1);
+    });
 
-    test(
-      'サポートされている型でデータが取得できること',
-      () async {
-        /// Mockにデータをセットする
-        when(
-          mockSharedPreferences.getInt(key.value),
-        ).thenAnswer((_) => 0);
-        when(
-          mockSharedPreferences.getDouble(key.value),
-        ).thenAnswer((_) => 0.1);
-        when(
-          mockSharedPreferences.getBool(key.value),
-        ).thenAnswer((_) => true);
-        when(
-          mockSharedPreferences.getString(key.value),
-        ).thenAnswer((_) => '0');
-        when(
-          mockSharedPreferences.getStringList(key.value),
-        ).thenAnswer((_) => ['0', '1']);
+    test('サポートされている型でデータが取得できること', () {
+      /// Mockにデータをセットする
+      when(mockSharedPreferences.getInt(key.value)).thenAnswer((_) => 0);
+      when(mockSharedPreferences.getDouble(key.value)).thenAnswer((_) => 0.1);
+      when(mockSharedPreferences.getBool(key.value)).thenAnswer((_) => true);
+      when(mockSharedPreferences.getString(key.value)).thenAnswer((_) => '0');
+      when(
+        mockSharedPreferences.getStringList(key.value),
+      ).thenAnswer((_) => ['0', '1']);
 
-        /// ProviderにMockをセットする
-        final container = createContainer(
-          overrides: [
-            sharedPreferencesRepositoryProvider.overrideWith(
-              (ref) => SharedPreferencesRepository(mockSharedPreferences),
-            ),
-          ],
-        );
+      /// ProviderにMockをセットする
+      final container = createContainer(
+        overrides: [
+          sharedPreferencesRepositoryProvider.overrideWith(
+            (ref) => SharedPreferencesRepository(mockSharedPreferences),
+          ),
+        ],
+      );
 
-        /// テスト実施して結果を検証
-        final repository = container.read(sharedPreferencesRepositoryProvider);
-        expect(repository.fetch<int>(key), 0);
-        expect(repository.fetch<double>(key), 0.1);
-        expect(repository.fetch<bool>(key), true);
-        expect(repository.fetch<String>(key), '0');
-        expect(repository.fetch<List<String>>(key), ['0', '1']);
+      /// テスト実施して結果を検証
+      final repository = container.read(sharedPreferencesRepositoryProvider);
+      expect(repository.fetch<int>(key), 0);
+      expect(repository.fetch<double>(key), 0.1);
+      expect(repository.fetch<bool>(key), true);
+      expect(repository.fetch<String>(key), '0');
+      expect(repository.fetch<List<String>>(key), ['0', '1']);
 
-        /// 注入したMockの関数が1回呼ばれていること
-        verify(mockSharedPreferences.getInt(key.value)).called(1);
-        verify(mockSharedPreferences.getDouble(key.value)).called(1);
-        verify(mockSharedPreferences.getBool(key.value)).called(1);
-        verify(mockSharedPreferences.getString(key.value)).called(1);
-        verify(mockSharedPreferences.getStringList(key.value)).called(1);
-      },
-    );
+      /// 注入したMockの関数が1回呼ばれていること
+      verify(mockSharedPreferences.getInt(key.value)).called(1);
+      verify(mockSharedPreferences.getDouble(key.value)).called(1);
+      verify(mockSharedPreferences.getBool(key.value)).called(1);
+      verify(mockSharedPreferences.getString(key.value)).called(1);
+      verify(mockSharedPreferences.getStringList(key.value)).called(1);
+    });
   });
 }

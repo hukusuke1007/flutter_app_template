@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-FileRepository fileRepository(FileRepositoryRef ref) {
+FileRepository fileRepository(Ref ref) {
   return FileRepository();
 }
 

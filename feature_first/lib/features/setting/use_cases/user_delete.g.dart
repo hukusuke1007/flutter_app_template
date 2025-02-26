@@ -6,7 +6,7 @@ part of 'user_delete.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userDeleteHash() => r'b73affd159e72a7c12c4f4fdd941267c0f6fec29';
+String _$userDeleteHash() => r'2dfe202a78f5e49b46f6b763968e57544684ed5a';
 
 /// See also [userDelete].
 @ProviderFor(userDelete)

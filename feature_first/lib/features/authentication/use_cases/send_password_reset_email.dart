@@ -6,7 +6,9 @@ import '../../../core/repositories/firebase_auth/auth_error_code.dart';
 import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
-final sendPasswordResetEmailProvider = Provider(SendPasswordResetEmail.new);
+final sendPasswordResetEmailProvider = Provider<SendPasswordResetEmail>(
+  SendPasswordResetEmail.new,
+);
 
 class SendPasswordResetEmail {
   SendPasswordResetEmail(this._ref);

@@ -7,16 +7,17 @@ part of 'device_info_repository.dart';
 // **************************************************************************
 
 String _$deviceInfoRepositoryHash() =>
-    r'07e2fc90122b962036c811374f9e7ef466e06919';
+    r'dcaf3408a6f9af373195720fa6acd3fa19a327a3';
 
 /// See also [deviceInfoRepository].
 @ProviderFor(deviceInfoRepository)
 final deviceInfoRepositoryProvider = Provider<DeviceInfoRepository>.internal(
   deviceInfoRepository,
   name: r'deviceInfoRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$deviceInfoRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deviceInfoRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

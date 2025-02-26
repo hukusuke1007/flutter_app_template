@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'document.dart';
@@ -6,7 +7,7 @@ import 'document.dart';
 part 'document_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-DocumentRepository documentRepository(DocumentRepositoryRef ref) {
+DocumentRepository documentRepository(Ref ref) {
   return DocumentRepository(FirebaseFirestore.instance);
 }
 
@@ -22,10 +23,7 @@ class DocumentRepository {
     required Map<String, dynamic> data,
   }) async {
     final doc = _firestore.doc(documentPath);
-    await doc.set(
-      data,
-      SetOptions(merge: true),
-    );
+    await doc.set(data, SetOptions(merge: true));
   }
 
   Future<void> update(
@@ -60,8 +58,9 @@ class DocumentRepository {
       }
     }
 
-    final snap =
-        await _firestore.doc(documentPath).get(GetOptions(source: source));
+    final snap = await _firestore
+        .doc(documentPath)
+        .get(GetOptions(source: source));
     return Document(
       ref: snap.reference,
       exists: snap.exists,
@@ -114,11 +113,7 @@ class DocumentRepository {
     } on Exception catch (_) {
       // ignore exception
     }
-    return Document(
-      ref: doc,
-      entity: null,
-      exists: false,
-    );
+    return Document(ref: doc, entity: null, exists: false);
   }
 
   Future<bool> exists(String documentPath) async {

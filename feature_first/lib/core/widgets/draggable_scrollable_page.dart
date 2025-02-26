@@ -34,15 +34,15 @@ class DraggableScrollablePage extends StatefulWidget {
 }
 
 class _State extends State<DraggableScrollablePage> {
-  final ScrollController _scrollController = ScrollController();
+  final _scrollController = ScrollController();
 
   double _top = 0;
   double _bottom = 0;
   double _right = 0;
   double _left = 0;
 
-  bool _isScaleDown = false;
-  bool _isLock = false;
+  var _isScaleDown = false;
+  var _isLock = false;
   double _opacity = 1;
 
   double get _dismissThresholdRate => widget.dismissThresholdRate;
@@ -106,9 +106,10 @@ class _State extends State<DraggableScrollablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.color != null
-          ? widget.color!.withValues(alpha: _opacity)
-          : context.scaffoldBackgroundColor.withValues(alpha: _opacity),
+      backgroundColor:
+          widget.color != null
+              ? widget.color!.withValues(alpha: _opacity)
+              : context.scaffoldBackgroundColor.withValues(alpha: _opacity),
       body: Stack(
         children: [
           if (widget.enableBlur)

@@ -12,13 +12,15 @@ String _$fetchAverageHash() => r'e790f7612ef71b5f0dc063c19e03025bb7f0cdd3';
 @ProviderFor(FetchAverage)
 final fetchAverageProvider =
     AutoDisposeAsyncNotifierProvider<FetchAverage, double>.internal(
-  FetchAverage.new,
-  name: r'fetchAverageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchAverageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FetchAverage.new,
+      name: r'fetchAverageProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$fetchAverageHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FetchAverage = AutoDisposeAsyncNotifier<double>;
 // ignore_for_file: type=lint

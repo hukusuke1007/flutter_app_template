@@ -7,7 +7,7 @@ part of 'memo_controller.dart';
 // **************************************************************************
 
 String _$collectionPagingRepositoryHash() =>
-    r'a95b0cfedcf5b4d9e15d7f8faee05fed37e0712a';
+    r'5a723ec6cb9ff565e86138fea8ceec5ca902dee4';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,21 +41,15 @@ class CollectionPagingRepositoryFamily
   const CollectionPagingRepositoryFamily();
 
   /// See also [collectionPagingRepository].
-  CollectionPagingRepositoryProvider call(
-    CollectionParam<Memo> query,
-  ) {
-    return CollectionPagingRepositoryProvider(
-      query,
-    );
+  CollectionPagingRepositoryProvider call(CollectionParam<Memo> query) {
+    return CollectionPagingRepositoryProvider(query);
   }
 
   @override
   CollectionPagingRepositoryProvider getProviderOverride(
     covariant CollectionPagingRepositoryProvider provider,
   ) {
-    return call(
-      provider.query,
-    );
+    return call(provider.query);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -77,24 +71,23 @@ class CollectionPagingRepositoryFamily
 class CollectionPagingRepositoryProvider
     extends AutoDisposeProvider<CollectionPagingRepository<Memo>> {
   /// See also [collectionPagingRepository].
-  CollectionPagingRepositoryProvider(
-    CollectionParam<Memo> query,
-  ) : this._internal(
-          (ref) => collectionPagingRepository(
-            ref as CollectionPagingRepositoryRef,
-            query,
-          ),
-          from: collectionPagingRepositoryProvider,
-          name: r'collectionPagingRepositoryProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$collectionPagingRepositoryHash,
-          dependencies: CollectionPagingRepositoryFamily._dependencies,
-          allTransitiveDependencies:
-              CollectionPagingRepositoryFamily._allTransitiveDependencies,
-          query: query,
-        );
+  CollectionPagingRepositoryProvider(CollectionParam<Memo> query)
+    : this._internal(
+        (ref) => collectionPagingRepository(
+          ref as CollectionPagingRepositoryRef,
+          query,
+        ),
+        from: collectionPagingRepositoryProvider,
+        name: r'collectionPagingRepositoryProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$collectionPagingRepositoryHash,
+        dependencies: CollectionPagingRepositoryFamily._dependencies,
+        allTransitiveDependencies:
+            CollectionPagingRepositoryFamily._allTransitiveDependencies,
+        query: query,
+      );
 
   CollectionPagingRepositoryProvider._internal(
     super._createNotifier, {
@@ -111,8 +104,9 @@ class CollectionPagingRepositoryProvider
   @override
   Override overrideWith(
     CollectionPagingRepository<Memo> Function(
-            CollectionPagingRepositoryRef provider)
-        create,
+      CollectionPagingRepositoryRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -171,14 +165,15 @@ String _$memoControllerHash() => r'73fe90b8abd448ef0e3ac42179174e959b493535';
 @ProviderFor(MemoController)
 final memoControllerProvider =
     AutoDisposeAsyncNotifierProvider<MemoController, List<Memo>>.internal(
-  MemoController.new,
-  name: r'memoControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$memoControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      MemoController.new,
+      name: r'memoControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$memoControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$MemoController = AutoDisposeAsyncNotifier<List<Memo>>;
 // ignore_for_file: type=lint

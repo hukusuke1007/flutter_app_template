@@ -7,7 +7,7 @@ part of 'fetch_timeline.dart';
 // **************************************************************************
 
 String _$collectionPagingRepositoryHash() =>
-    r'397ee1da22aa096f649e427562cfc16b69ec8c26';
+    r'140f05754040e904844c858736c19232beac6fe7';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,21 +41,15 @@ class CollectionPagingRepositoryFamily
   const CollectionPagingRepositoryFamily();
 
   /// See also [collectionPagingRepository].
-  CollectionPagingRepositoryProvider call(
-    CollectionParam<Post> query,
-  ) {
-    return CollectionPagingRepositoryProvider(
-      query,
-    );
+  CollectionPagingRepositoryProvider call(CollectionParam<Post> query) {
+    return CollectionPagingRepositoryProvider(query);
   }
 
   @override
   CollectionPagingRepositoryProvider getProviderOverride(
     covariant CollectionPagingRepositoryProvider provider,
   ) {
-    return call(
-      provider.query,
-    );
+    return call(provider.query);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -77,24 +71,23 @@ class CollectionPagingRepositoryFamily
 class CollectionPagingRepositoryProvider
     extends AutoDisposeProvider<CollectionPagingRepository<Post>> {
   /// See also [collectionPagingRepository].
-  CollectionPagingRepositoryProvider(
-    CollectionParam<Post> query,
-  ) : this._internal(
-          (ref) => collectionPagingRepository(
-            ref as CollectionPagingRepositoryRef,
-            query,
-          ),
-          from: collectionPagingRepositoryProvider,
-          name: r'collectionPagingRepositoryProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$collectionPagingRepositoryHash,
-          dependencies: CollectionPagingRepositoryFamily._dependencies,
-          allTransitiveDependencies:
-              CollectionPagingRepositoryFamily._allTransitiveDependencies,
-          query: query,
-        );
+  CollectionPagingRepositoryProvider(CollectionParam<Post> query)
+    : this._internal(
+        (ref) => collectionPagingRepository(
+          ref as CollectionPagingRepositoryRef,
+          query,
+        ),
+        from: collectionPagingRepositoryProvider,
+        name: r'collectionPagingRepositoryProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$collectionPagingRepositoryHash,
+        dependencies: CollectionPagingRepositoryFamily._dependencies,
+        allTransitiveDependencies:
+            CollectionPagingRepositoryFamily._allTransitiveDependencies,
+        query: query,
+      );
 
   CollectionPagingRepositoryProvider._internal(
     super._createNotifier, {
@@ -111,8 +104,9 @@ class CollectionPagingRepositoryProvider
   @override
   Override overrideWith(
     CollectionPagingRepository<Post> Function(
-            CollectionPagingRepositoryRef provider)
-        create,
+      CollectionPagingRepositoryRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -165,7 +159,7 @@ class _CollectionPagingRepositoryProviderElement
       (origin as CollectionPagingRepositoryProvider).query;
 }
 
-String _$fetchTimelineHash() => r'9b2580a7ee30774ae24d24d0453c38dfcd0bb167';
+String _$fetchTimelineHash() => r'3e99741b4dff55efb11af95797cd180ebc46514a';
 
 /// タイムラインを取得
 ///
@@ -173,14 +167,15 @@ String _$fetchTimelineHash() => r'9b2580a7ee30774ae24d24d0453c38dfcd0bb167';
 @ProviderFor(FetchTimeline)
 final fetchTimelineProvider =
     AutoDisposeAsyncNotifierProvider<FetchTimeline, List<Post>>.internal(
-  FetchTimeline.new,
-  name: r'fetchTimelineProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchTimelineHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FetchTimeline.new,
+      name: r'fetchTimelineProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$fetchTimelineHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FetchTimeline = AutoDisposeAsyncNotifier<List<Post>>;
 // ignore_for_file: type=lint

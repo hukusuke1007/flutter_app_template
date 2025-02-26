@@ -4,14 +4,14 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
 
   # Logger
   simple_logger:
@@ -58,7 +58,7 @@ dependencies:
 
   # Image
   image_picker:
-  image_gallery_saver_plus:
+  image_gallery_saver_plus: ^4.0.0-0.alpha
   image_cropper:
   flutter_image_compress:
   extended_image:
@@ -74,15 +74,15 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^3.10.1
-  firebase_analytics: ^11.4.1
-  cloud_firestore: ^5.6.2
-  firebase_auth: ^5.4.1
-  firebase_storage: ^12.4.1
-  cloud_functions: ^5.3.1
-  firebase_messaging: ^15.2.1
-  firebase_crashlytics: ^4.3.1
-  firebase_remote_config: ^5.3.1
+  firebase_core: ^3.12.1
+  firebase_analytics: ^11.4.4
+  cloud_firestore: ^5.6.5
+  firebase_auth: ^5.5.1
+  firebase_storage: ^12.4.4
+  cloud_functions: ^5.3.4
+  firebase_messaging: ^15.2.4
+  firebase_crashlytics: ^4.3.4
+  firebase_remote_config: ^5.4.2
 
   # LocalNotification
   flutter_local_notifications:

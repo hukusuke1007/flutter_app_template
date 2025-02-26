@@ -7,7 +7,7 @@ part of 'fetch_timeline_post_count.dart';
 // **************************************************************************
 
 String _$fetchTimelinePostCountHash() =>
-    r'442e1700ce4ebfb580a4bf95a64c07a36aa2c8db';
+    r'6029f02d750f7369836a8cd69d31ab6a939964c8';
 
 /// タイムラインの投稿数を取得
 ///
@@ -16,9 +16,10 @@ String _$fetchTimelinePostCountHash() =>
 final fetchTimelinePostCountProvider = AutoDisposeFutureProvider<int>.internal(
   fetchTimelinePostCount,
   name: r'fetchTimelinePostCountProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchTimelinePostCountHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fetchTimelinePostCountHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

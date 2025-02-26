@@ -6,16 +6,17 @@ part of 'file_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileRepositoryHash() => r'73144bb30fb2308040c0c679455901ceeda57450';
+String _$fileRepositoryHash() => r'e455678270274497fd0eb91aafc6d3422900b4e4';
 
 /// See also [fileRepository].
 @ProviderFor(fileRepository)
 final fileRepositoryProvider = Provider<FileRepository>.internal(
   fileRepository,
   name: r'fileRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fileRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fileRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

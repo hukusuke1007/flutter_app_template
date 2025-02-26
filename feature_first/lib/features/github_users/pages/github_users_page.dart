@@ -55,7 +55,7 @@ class GithubUsersPage extends HookConsumerWidget {
             enablePullUp: true,
             controller: refreshController,
             physics: const BouncingScrollPhysics(),
-            onRefresh: () async {
+            onRefresh: () {
               ref.invalidate(githubUsersControllerProvider);
               refreshController.refreshCompleted();
             },
@@ -70,22 +70,13 @@ class GithubUsersPage extends HookConsumerWidget {
               itemBuilder: (BuildContext context, int index) {
                 final data = items[index];
                 return ListTile(
-                  leading: CircleThumbnail(
-                    size: 40,
-                    url: data.avatarUrl,
-                  ),
-                  title: Text(
-                    data.login,
-                    style: context.bodyStyle,
-                  ),
+                  leading: CircleThumbnail(size: 40, url: data.avatarUrl),
+                  title: Text(data.login, style: context.bodyStyle),
                   subtitle: Text(
                     data.htmlUrl ?? '-',
                     style: context.smallStyle,
                   ),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 16,
-                  ),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () {
                     final url = data.htmlUrl;
                     if (url != null) {
@@ -101,15 +92,14 @@ class GithubUsersPage extends HookConsumerWidget {
             ),
           );
         },
-        error: (e, _) => ErrorMessage(
-          message: e.toString(),
-          onTapRetry: () async {
-            ref.invalidate(githubUsersControllerProvider);
-          },
-        ),
-        loading: () => const Center(
-          child: CupertinoActivityIndicator(),
-        ),
+        error:
+            (e, _) => ErrorMessage(
+              message: e.toString(),
+              onTapRetry: () {
+                ref.invalidate(githubUsersControllerProvider);
+              },
+            ),
+        loading: () => const Center(child: CupertinoActivityIndicator()),
       ),
     );
   }

@@ -3,12 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../utils/logger.dart';
 
-enum TransitionType {
-  push,
-  pop,
-}
+enum TransitionType { push, pop }
 
-final transitionObserverProvider = Provider(
+final transitionObserverProvider = Provider<TransitionObserver>(
   TransitionObserver.new,
 );
 

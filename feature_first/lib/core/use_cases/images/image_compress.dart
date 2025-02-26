@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'image_compress.g.dart';
 
 @Riverpod(keepAlive: true)
-ImageCompress imageCompress(ImageCompressRef ref) {
+ImageCompress imageCompress(Ref ref) {
   throw UnimplementedError();
 }
 
@@ -21,20 +22,19 @@ class ImageCompress {
     int quality = 95,
     int minWidth = 1024,
     int minHeight = 1024,
-  }) =>
-      FlutterImageCompress.compressWithFile(
-        file.absolute.path,
-        quality: quality,
-        minWidth: minWidth,
-        minHeight: minHeight,
-      );
+  }) => FlutterImageCompress.compressWithFile(
+    file.absolute.path,
+    quality: quality,
+    minWidth: minWidth,
+    minHeight: minHeight,
+  );
 
   Future<XFile?> callWithPath(
     String path, {
     int quality = 95,
     int minWidth = 1024,
     int minHeight = 1024,
-  }) async {
+  }) {
     // .jpgを末尾に付与にしないとエラーを吐くため
     final directory = Directory(
       '${_tempDirectory.path}/${DateTime.now().millisecondsSinceEpoch}.jpg',

@@ -12,12 +12,15 @@ String _$aggregationControllerHash() =>
 /// See also [AggregationController].
 @ProviderFor(AggregationController)
 final aggregationControllerProvider = AutoDisposeAsyncNotifierProvider<
-    AggregationController, List<Result>>.internal(
+  AggregationController,
+  List<Result>
+>.internal(
   AggregationController.new,
   name: r'aggregationControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$aggregationControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$aggregationControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

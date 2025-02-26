@@ -12,14 +12,15 @@ String _$fetchAggregationHash() => r'501f7c5de8450cb7d1d4bf843544ca4b3988fb77';
 @ProviderFor(FetchAggregation)
 final fetchAggregationProvider =
     AutoDisposeAsyncNotifierProvider<FetchAggregation, Result>.internal(
-  FetchAggregation.new,
-  name: r'fetchAggregationProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchAggregationHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      FetchAggregation.new,
+      name: r'fetchAggregationProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$fetchAggregationHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$FetchAggregation = AutoDisposeAsyncNotifier<Result>;
 // ignore_for_file: type=lint

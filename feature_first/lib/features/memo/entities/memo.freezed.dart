@@ -12,7 +12,8 @@ part of 'memo.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Memo _$MemoFromJson(Map<String, dynamic> json) {
   return _Memo.fromJson(json);
@@ -41,11 +42,12 @@ abstract class $MemoCopyWith<$Res> {
   factory $MemoCopyWith(Memo value, $Res Function(Memo) then) =
       _$MemoCopyWithImpl<$Res, Memo>;
   @useResult
-  $Res call(
-      {String? memoId,
-      String? text,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt});
+  $Res call({
+    String? memoId,
+    String? text,
+    @DateTimeTimestampConverter() DateTime? createdAt,
+    @DateTimeTimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -68,39 +70,48 @@ class _$MemoCopyWithImpl<$Res, $Val extends Memo>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      memoId: freezed == memoId
-          ? _value.memoId
-          : memoId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            memoId:
+                freezed == memoId
+                    ? _value.memoId
+                    : memoId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            text:
+                freezed == text
+                    ? _value.text
+                    : text // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$MemoImplCopyWith<$Res> implements $MemoCopyWith<$Res> {
   factory _$$MemoImplCopyWith(
-          _$MemoImpl value, $Res Function(_$MemoImpl) then) =
-      __$$MemoImplCopyWithImpl<$Res>;
+    _$MemoImpl value,
+    $Res Function(_$MemoImpl) then,
+  ) = __$$MemoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? memoId,
-      String? text,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt});
+  $Res call({
+    String? memoId,
+    String? text,
+    @DateTimeTimestampConverter() DateTime? createdAt,
+    @DateTimeTimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -108,7 +119,7 @@ class __$$MemoImplCopyWithImpl<$Res>
     extends _$MemoCopyWithImpl<$Res, _$MemoImpl>
     implements _$$MemoImplCopyWith<$Res> {
   __$$MemoImplCopyWithImpl(_$MemoImpl _value, $Res Function(_$MemoImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of Memo
   /// with the given fields replaced by the non-null parameter values.
@@ -120,36 +131,42 @@ class __$$MemoImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$MemoImpl(
-      memoId: freezed == memoId
-          ? _value.memoId
-          : memoId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$MemoImpl(
+        memoId:
+            freezed == memoId
+                ? _value.memoId
+                : memoId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        text:
+            freezed == text
+                ? _value.text
+                : text // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MemoImpl extends _Memo {
-  const _$MemoImpl(
-      {this.memoId,
-      this.text,
-      @DateTimeTimestampConverter() this.createdAt,
-      @DateTimeTimestampConverter() this.updatedAt})
-      : super._();
+  const _$MemoImpl({
+    this.memoId,
+    this.text,
+    @DateTimeTimestampConverter() this.createdAt,
+    @DateTimeTimestampConverter() this.updatedAt,
+  }) : super._();
 
   factory _$MemoImpl.fromJson(Map<String, dynamic> json) =>
       _$$MemoImplFromJson(json);
@@ -198,18 +215,17 @@ class _$MemoImpl extends _Memo {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MemoImplToJson(
-      this,
-    );
+    return _$$MemoImplToJson(this);
   }
 }
 
 abstract class _Memo extends Memo {
-  const factory _Memo(
-      {final String? memoId,
-      final String? text,
-      @DateTimeTimestampConverter() final DateTime? createdAt,
-      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$MemoImpl;
+  const factory _Memo({
+    final String? memoId,
+    final String? text,
+    @DateTimeTimestampConverter() final DateTime? createdAt,
+    @DateTimeTimestampConverter() final DateTime? updatedAt,
+  }) = _$MemoImpl;
   const _Memo._() : super._();
 
   factory _Memo.fromJson(Map<String, dynamic> json) = _$MemoImpl.fromJson;

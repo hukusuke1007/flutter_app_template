@@ -6,7 +6,7 @@ part of 'fetch_app_name.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchAppNameHash() => r'f1a51269363d8211abf587ec50458c017499da4a';
+String _$fetchAppNameHash() => r'f6bed771aae3e952d2a1ac6d7803179799f43b40';
 
 /// See also [fetchAppName].
 @ProviderFor(fetchAppName)

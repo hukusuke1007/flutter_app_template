@@ -7,16 +7,17 @@ part of 'package_info_repository.dart';
 // **************************************************************************
 
 String _$packageInfoRepositoryHash() =>
-    r'70dc236bf0fd29dede35ff256894165d1346fe70';
+    r'e3f1366adb6c0532bc03932e1f10342f5652d12d';
 
 /// See also [packageInfoRepository].
 @ProviderFor(packageInfoRepository)
 final packageInfoRepositoryProvider = Provider<PackageInfoRepository>.internal(
   packageInfoRepository,
   name: r'packageInfoRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$packageInfoRepositoryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$packageInfoRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

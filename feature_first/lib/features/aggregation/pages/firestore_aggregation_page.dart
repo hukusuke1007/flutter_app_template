@@ -23,7 +23,7 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     context.push(pagePath);
   }
 
-  static final errorProvider = Provider.autoDispose((ref) {
+  static final errorProvider = AutoDisposeProvider<Object?>((ref) {
     final itemsAsyncValue = ref.watch(aggregationControllerProvider);
     final countAsyncValue = ref.watch(fetchCountProvider);
     final sumAsyncValue = ref.watch(fetchSumProvider);
@@ -46,14 +46,11 @@ class FirestoreAggregationPage extends HookConsumerWidget {
     final sum = sumAsyncValue.asData?.value ?? 0;
     final average = averageAsyncValue.asData?.value ?? 0;
 
-    ref.listen(
-      errorProvider,
-      (prev, next) {
-        if (next != null && next is Exception) {
-          showOkAlertDialog(context: context, title: next.toString());
-        }
-      },
-    );
+    ref.listen(errorProvider, (prev, next) {
+      if (next != null && next is Exception) {
+        showOkAlertDialog(context: context, title: next.toString());
+      }
+    });
 
     final scrollController = useScrollController();
     final statusState = useState(0);
@@ -88,20 +85,15 @@ class FirestoreAggregationPage extends HookConsumerWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
                   SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, i) {
-                        final item = items[i];
-                        return Center(
-                          child: Text(
-                            item.toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        );
-                      },
-                      childCount: items.length,
-                    ),
+                    delegate: SliverChildBuilderDelegate((context, i) {
+                      final item = items[i];
+                      return Center(
+                        child: Text(
+                          item.toString(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      );
+                    }, childCount: items.length),
                   ),
                 ],
               ),
@@ -139,14 +131,15 @@ class FirestoreAggregationPage extends HookConsumerWidget {
       persistentFooterButtons: [
         DropdownButton(
           isDense: true,
-          items: statusList
-              .map(
-                (e) => DropdownMenuItem<int>(
-                  value: e,
-                  child: Text('status: $e'),
-                ),
-              )
-              .toList(),
+          items:
+              statusList
+                  .map(
+                    (e) => DropdownMenuItem<int>(
+                      value: e,
+                      child: Text('status: $e'),
+                    ),
+                  )
+                  .toList(),
           onChanged: (int? value) {
             if (value != null) {
               statusState.value = value;
@@ -157,9 +150,9 @@ class FirestoreAggregationPage extends HookConsumerWidget {
         ),
         FilledButton(
           onPressed: () async {
-            await ref.read(aggregationControllerProvider.notifier).add(
-                  statusState.value,
-                );
+            await ref
+                .read(aggregationControllerProvider.notifier)
+                .add(statusState.value);
           },
           child: const Text(
             '追加する',
