@@ -1,7 +1,7 @@
 ---
 description: Flutter Feature First Architecture Infrastructure Rules
 globs: *.dart
-alwaysApply: false
+alwaysApply: true
 ---
 # Flutter Feature First Architecture Infrastructure Rules
 

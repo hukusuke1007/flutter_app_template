@@ -1,7 +1,7 @@
 ---
 description: Flutter Widget Implementation Rules
 globs: *.dart
-alwaysApply: false
+alwaysApply: true
 ---
 # Flutter Widget Implementation Rules
 

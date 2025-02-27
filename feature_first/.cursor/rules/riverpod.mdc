@@ -1,7 +1,7 @@
 ---
 description: Riverpod Implementation Guidelines
 globs: *.dart
-alwaysApply: false
+alwaysApply: true
 ---
 # Riverpod Implementation Guidelines
 

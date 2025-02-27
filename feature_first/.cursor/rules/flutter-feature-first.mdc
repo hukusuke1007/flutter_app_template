@@ -1,6 +1,7 @@
 ---
 description: Feature First Architecture with Riverpod
-globs: *.dart, *.yaml
+globs: *
+alwaysApply: true
 ---
 
 ## Overview
