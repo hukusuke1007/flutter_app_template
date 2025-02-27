@@ -114,7 +114,6 @@ dependencies:
   collection:
   quiver:
   html:
-  flutter_dotenv:
 
 dev_dependencies:
   # Test
@@ -152,7 +151,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - .env
 
   # カスタムフォントを利用する場合はここを設定する
   # fonts:

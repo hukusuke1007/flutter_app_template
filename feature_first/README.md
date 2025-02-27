@@ -330,15 +330,7 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
       flutterfire configure --project=your-prod-project-id --out=lib/core/firebase/prod/firebase_options.dart
       ```
 
-   2. または、`sample.env` ファイルを `.env` にコピーし、Firebase コンソールから取得した値を設定する
-
-      ```sh
-      cp sample.env .env
-      ```
-
-      `.env` ファイルを開き、開発環境と本番環境それぞれの Firebase プロジェクトの値を設定します。
-
-   3. 構築した Firebase の設定ファイルを以下の場所へ設置する
+   2. 構築した Firebase の設定ファイルを以下の場所へ設置する
 
       - Android
 
@@ -368,8 +360,6 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
 6. Flutter のライブラリを取り込む。 pub get を実行する。
    利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
-
-   > **注意**: `.env`ファイルを使用しない場合（flutterfire CLI を使用する場合）は、`flutter_dotenv`パッケージを`pubspec.yaml`から削除し、`main.dart`から`await dotenv.load();`を削除してください。
 
 7. [実行コマンド](#実行コマンド)を用いて動作確認する。
 
