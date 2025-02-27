@@ -12,13 +12,15 @@ String _$localCounterHash() => r'301bfd1fb49b76b63d1ddb46111aeb0eb1719582';
 @ProviderFor(LocalCounter)
 final localCounterProvider =
     AutoDisposeNotifierProvider<LocalCounter, int>.internal(
-  LocalCounter.new,
-  name: r'localCounterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$localCounterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocalCounter.new,
+      name: r'localCounterProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$localCounterHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocalCounter = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint

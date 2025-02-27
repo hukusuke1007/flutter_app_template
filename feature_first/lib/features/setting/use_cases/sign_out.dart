@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/exceptions/app_exception.dart';
@@ -8,14 +9,14 @@ import '../../../core/utils/logger.dart';
 part 'sign_out.g.dart';
 
 @Riverpod(keepAlive: true)
-SignOut signOut(SignOutRef ref) {
+SignOut signOut(Ref ref) {
   return SignOut(ref);
 }
 
 class SignOut {
   SignOut(this._ref);
 
-  final SignOutRef _ref;
+  final Ref _ref;
 
   Future<void> call() async {
     try {

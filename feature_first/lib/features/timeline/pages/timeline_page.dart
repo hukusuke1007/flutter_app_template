@@ -120,7 +120,7 @@ class TimelinePage extends HookConsumerWidget {
               slivers: [
                 /// Pull To Refresh
                 CupertinoSliverRefreshControl(
-                  builder: (_, refreshState, __, ___, ____) {
+                  builder: (_, refreshState, _, _, _) {
                     // TODO(shohei): インジケータのサイズを変更したいためbuilderで実装
                     if (refreshState == RefreshIndicatorMode.done ||
                         refreshState == RefreshIndicatorMode.inactive ||
@@ -160,10 +160,7 @@ class TimelinePage extends HookConsumerWidget {
                           onTapAvatar: (poster) {
                             final url = poster?.image?.url;
                             if (url != null) {
-                              ImageViewer.show(
-                                context,
-                                urls: [url],
-                              );
+                              ImageViewer.show(context, urls: [url]);
                             }
                           },
                         );
@@ -192,8 +189,9 @@ class TimelinePage extends HookConsumerWidget {
                   SliverFillRemaining(
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16)
-                            .copyWith(bottom: 108),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ).copyWith(bottom: 108),
                         child: Text(
                           'タイムラインはありません',
                           style: context.bodyStyle,
@@ -216,9 +214,7 @@ class TimelinePage extends HookConsumerWidget {
             },
           );
         },
-        loading: () => const Center(
-          child: CupertinoActivityIndicator(),
-        ),
+        loading: () => const Center(child: CupertinoActivityIndicator()),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,

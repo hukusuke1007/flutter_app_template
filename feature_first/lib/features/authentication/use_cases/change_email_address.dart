@@ -6,17 +6,18 @@ import '../../../core/repositories/firebase_auth/auth_error_code.dart';
 import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
-final changeEmailAddressProvider = Provider(ChangeEmailAddress.new);
+final changeEmailAddressProvider = Provider<ChangeEmailAddress>(
+  ChangeEmailAddress.new,
+);
 
 class ChangeEmailAddress {
   ChangeEmailAddress(this._ref);
 
   final Ref _ref;
 
-  Future<void> call({
-    required String newEmail,
-    required String password,
-  }) async {
+  Future<void> call({required String newEmail, required String password})
+  // ignore: unnecessary_async
+  async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
       final oldEmail = repository.authUser?.email;

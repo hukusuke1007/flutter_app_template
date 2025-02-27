@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/entities/developer/developer.dart';
@@ -9,18 +10,15 @@ import 'fetch_my_profile.dart';
 part 'save_my_profile.g.dart';
 
 @Riverpod(keepAlive: true)
-SaveMyProfile saveMyProfile(SaveMyProfileRef ref) {
+SaveMyProfile saveMyProfile(Ref ref) {
   return SaveMyProfile(ref);
 }
 
 class SaveMyProfile {
   SaveMyProfile(this._ref);
-  final SaveMyProfileRef _ref;
+  final Ref _ref;
 
-  Future<void> call({
-    String? name,
-    DateTime? birthdate,
-  }) async {
+  Future<void> call({String? name, DateTime? birthdate}) async {
     final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
     if (userId == null) {
       throw AppException(title: 'ログインしてください');
@@ -30,9 +28,8 @@ class SaveMyProfile {
       name: name,
       birthdate: birthdate,
     );
-    await _ref.read(documentRepositoryProvider).save(
-          Developer.docPath(userId),
-          data: newProfile.toDocWithNotImage,
-        );
+    await _ref
+        .read(documentRepositoryProvider)
+        .save(Developer.docPath(userId), data: newProfile.toDocWithNotImage);
   }
 }

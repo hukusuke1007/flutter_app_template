@@ -7,22 +7,21 @@ import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../core/use_cases/authentication/auth_state_controller.dart';
 import '../../../core/utils/logger.dart';
 
-final signUpWithEmailAndPasswordProvider =
-    Provider(SignUpWithEmailAndPassword.new);
+final signUpWithEmailAndPasswordProvider = Provider<SignUpWithEmailAndPassword>(
+  SignUpWithEmailAndPassword.new,
+);
 
 class SignUpWithEmailAndPassword {
   SignUpWithEmailAndPassword(this._ref);
 
   final Ref _ref;
 
-  Future<void> call({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> call({required String email, required String password}) async {
     try {
       final repository = _ref.read(firebaseAuthRepositoryProvider);
-      final authStateController =
-          _ref.read(authStateControllerProvider.notifier);
+      final authStateController = _ref.read(
+        authStateControllerProvider.notifier,
+      );
 
       await repository.createUserWithEmailAndPassword(email, password);
 

@@ -2,16 +2,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 typedef PageName = String;
 
-enum TabTapOperationType {
-  duplication,
-}
+enum TabTapOperationType { duplication }
 
 final tabTapOperationProviders =
-    Provider.family.autoDispose<TabTapOperation, PageName>((ref, _) {
-  final tabTapAction = TabTapOperation();
-  ref.onDispose(tabTapAction.dispose);
-  return tabTapAction;
-});
+    AutoDisposeProviderFamily<TabTapOperation, PageName>((ref, _) {
+      final tabTapAction = TabTapOperation();
+      ref.onDispose(tabTapAction.dispose);
+      return tabTapAction;
+    });
 
 class TabTapOperation {
   void Function(TabTapOperationType)? _listener;

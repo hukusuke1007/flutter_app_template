@@ -33,9 +33,7 @@ abstract class _$FetchPoster
     extends BuildlessAutoDisposeAsyncNotifier<Developer?> {
   late final String userId;
 
-  FutureOr<Developer?> build(
-    String userId,
-  );
+  FutureOr<Developer?> build(String userId);
 }
 
 /// 投稿者を取得
@@ -56,21 +54,15 @@ class FetchPosterFamily extends Family<AsyncValue<Developer?>> {
   /// 投稿者を取得
   ///
   /// Copied from [FetchPoster].
-  FetchPosterProvider call(
-    String userId,
-  ) {
-    return FetchPosterProvider(
-      userId,
-    );
+  FetchPosterProvider call(String userId) {
+    return FetchPosterProvider(userId);
   }
 
   @override
   FetchPosterProvider getProviderOverride(
     covariant FetchPosterProvider provider,
   ) {
-    return call(
-      provider.userId,
-    );
+    return call(provider.userId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -96,21 +88,19 @@ class FetchPosterProvider
   /// 投稿者を取得
   ///
   /// Copied from [FetchPoster].
-  FetchPosterProvider(
-    String userId,
-  ) : this._internal(
-          () => FetchPoster()..userId = userId,
-          from: fetchPosterProvider,
-          name: r'fetchPosterProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchPosterHash,
-          dependencies: FetchPosterFamily._dependencies,
-          allTransitiveDependencies:
-              FetchPosterFamily._allTransitiveDependencies,
-          userId: userId,
-        );
+  FetchPosterProvider(String userId)
+    : this._internal(
+        () => FetchPoster()..userId = userId,
+        from: fetchPosterProvider,
+        name: r'fetchPosterProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$fetchPosterHash,
+        dependencies: FetchPosterFamily._dependencies,
+        allTransitiveDependencies: FetchPosterFamily._allTransitiveDependencies,
+        userId: userId,
+      );
 
   FetchPosterProvider._internal(
     super._createNotifier, {
@@ -125,12 +115,8 @@ class FetchPosterProvider
   final String userId;
 
   @override
-  FutureOr<Developer?> runNotifierBuild(
-    covariant FetchPoster notifier,
-  ) {
-    return notifier.build(
-      userId,
-    );
+  FutureOr<Developer?> runNotifierBuild(covariant FetchPoster notifier) {
+    return notifier.build(userId);
   }
 
   @override
@@ -151,7 +137,7 @@ class FetchPosterProvider
 
   @override
   AutoDisposeAsyncNotifierProviderElement<FetchPoster, Developer?>
-      createElement() {
+  createElement() {
     return _FetchPosterProviderElement(this);
   }
 
@@ -169,6 +155,8 @@ class FetchPosterProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FetchPosterRef on AutoDisposeAsyncNotifierProviderRef<Developer?> {
   /// The parameter `userId` of this provider.
   String get userId;
@@ -189,9 +177,7 @@ abstract class _$FetchPosterStream
     extends BuildlessAutoDisposeStreamNotifier<Developer?> {
   late final String userId;
 
-  Stream<Developer?> build(
-    String userId,
-  );
+  Stream<Developer?> build(String userId);
 }
 
 /// 投稿者を取得（スナップショットリスナー使用）
@@ -212,21 +198,15 @@ class FetchPosterStreamFamily extends Family<AsyncValue<Developer?>> {
   /// 投稿者を取得（スナップショットリスナー使用）
   ///
   /// Copied from [FetchPosterStream].
-  FetchPosterStreamProvider call(
-    String userId,
-  ) {
-    return FetchPosterStreamProvider(
-      userId,
-    );
+  FetchPosterStreamProvider call(String userId) {
+    return FetchPosterStreamProvider(userId);
   }
 
   @override
   FetchPosterStreamProvider getProviderOverride(
     covariant FetchPosterStreamProvider provider,
   ) {
-    return call(
-      provider.userId,
-    );
+    return call(provider.userId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -247,26 +227,26 @@ class FetchPosterStreamFamily extends Family<AsyncValue<Developer?>> {
 /// 投稿者を取得（スナップショットリスナー使用）
 ///
 /// Copied from [FetchPosterStream].
-class FetchPosterStreamProvider extends AutoDisposeStreamNotifierProviderImpl<
-    FetchPosterStream, Developer?> {
+class FetchPosterStreamProvider
+    extends
+        AutoDisposeStreamNotifierProviderImpl<FetchPosterStream, Developer?> {
   /// 投稿者を取得（スナップショットリスナー使用）
   ///
   /// Copied from [FetchPosterStream].
-  FetchPosterStreamProvider(
-    String userId,
-  ) : this._internal(
-          () => FetchPosterStream()..userId = userId,
-          from: fetchPosterStreamProvider,
-          name: r'fetchPosterStreamProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchPosterStreamHash,
-          dependencies: FetchPosterStreamFamily._dependencies,
-          allTransitiveDependencies:
-              FetchPosterStreamFamily._allTransitiveDependencies,
-          userId: userId,
-        );
+  FetchPosterStreamProvider(String userId)
+    : this._internal(
+        () => FetchPosterStream()..userId = userId,
+        from: fetchPosterStreamProvider,
+        name: r'fetchPosterStreamProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$fetchPosterStreamHash,
+        dependencies: FetchPosterStreamFamily._dependencies,
+        allTransitiveDependencies:
+            FetchPosterStreamFamily._allTransitiveDependencies,
+        userId: userId,
+      );
 
   FetchPosterStreamProvider._internal(
     super._createNotifier, {
@@ -281,12 +261,8 @@ class FetchPosterStreamProvider extends AutoDisposeStreamNotifierProviderImpl<
   final String userId;
 
   @override
-  Stream<Developer?> runNotifierBuild(
-    covariant FetchPosterStream notifier,
-  ) {
-    return notifier.build(
-      userId,
-    );
+  Stream<Developer?> runNotifierBuild(covariant FetchPosterStream notifier) {
+    return notifier.build(userId);
   }
 
   @override
@@ -307,7 +283,7 @@ class FetchPosterStreamProvider extends AutoDisposeStreamNotifierProviderImpl<
 
   @override
   AutoDisposeStreamNotifierProviderElement<FetchPosterStream, Developer?>
-      createElement() {
+  createElement() {
     return _FetchPosterStreamProviderElement(this);
   }
 
@@ -325,18 +301,22 @@ class FetchPosterStreamProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FetchPosterStreamRef on AutoDisposeStreamNotifierProviderRef<Developer?> {
   /// The parameter `userId` of this provider.
   String get userId;
 }
 
 class _FetchPosterStreamProviderElement
-    extends AutoDisposeStreamNotifierProviderElement<FetchPosterStream,
-        Developer?> with FetchPosterStreamRef {
+    extends
+        AutoDisposeStreamNotifierProviderElement<FetchPosterStream, Developer?>
+    with FetchPosterStreamRef {
   _FetchPosterStreamProviderElement(super.provider);
 
   @override
   String get userId => (origin as FetchPosterStreamProvider).userId;
 }
+
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

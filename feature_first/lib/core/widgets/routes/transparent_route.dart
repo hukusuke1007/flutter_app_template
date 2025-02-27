@@ -21,7 +21,7 @@ class TransparentRoute<T> extends PageRoute<T>
     Duration transitionDuration = const Duration(milliseconds: 350),
     Duration reverseTransitionDuration = const Duration(milliseconds: 350),
     bool rootNavigator = true,
-  }) async {
+  }) {
     return Navigator.of(context, rootNavigator: rootNavigator).push<T>(
       TransparentRoute(
         builder: (_) => page,
@@ -54,8 +54,7 @@ class TransparentRoute<T> extends PageRoute<T>
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-  ) =>
-      FadeTransition(opacity: animation, child: child);
+  ) => FadeTransition(opacity: animation, child: child);
 
   @override
   Color get barrierColor => backgroundColor;

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/entities/post/post.dart';
@@ -10,7 +11,7 @@ part 'fetch_timeline.g.dart';
 
 @riverpod
 CollectionPagingRepository<Post> collectionPagingRepository(
-  CollectionPagingRepositoryRef ref,
+  Ref ref,
   CollectionParam<Post> query,
 ) {
   return CollectionPagingRepository<Post>(
@@ -40,7 +41,6 @@ class FetchTimeline extends _$FetchTimeline {
       collectionPagingRepositoryProvider(
         CollectionParam<Post>(
           query: query, // インデックス設定する必要がある
-
           /// invalidate後は、FetchTimelineが保持していた状態（state）はキャッシュされている。
           /// そのためinvalidate前に保持されていた個数分取得するようlimitを設定する。
           /// length に対して + 1 にしているのは、新しいデータが作成された際に個数が1つ増えることを考慮したため
@@ -54,13 +54,14 @@ class FetchTimeline extends _$FetchTimeline {
 
     /// 投稿一覧を取得する
     final data = await repository.fetch(
-      fromCache: (cache) async {
+      fromCache: (cache) {
         /// キャッシュから取得して即時反映
         if (cache.isNotEmpty) {
           state = AsyncData(
-            cache.map((e) => e.entity).whereType<Post>().toList(
-                  growable: false,
-                ),
+            cache
+                .map((e) => e.entity)
+                .whereType<Post>()
+                .toList(growable: false),
           );
         }
       },
@@ -77,11 +78,9 @@ class FetchTimeline extends _$FetchTimeline {
     }
     final data = await repository.fetchMore();
     final list = await future;
-    state = AsyncData(
-      [
-        ...list,
-        ...data.map((e) => e.entity).whereType<Post>(),
-      ],
-    );
+    state = AsyncData([
+      ...list,
+      ...data.map((e) => e.entity).whereType<Post>(),
+    ]);
   }
 }

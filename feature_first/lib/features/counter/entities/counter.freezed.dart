@@ -12,7 +12,8 @@ part of 'counter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Counter _$CounterFromJson(Map<String, dynamic> json) {
   return _Counter.fromJson(json);
@@ -26,8 +27,12 @@ mixin _$Counter {
   @DateTimeTimestampConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Counter to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Counter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CounterCopyWith<Counter> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -36,10 +41,11 @@ abstract class $CounterCopyWith<$Res> {
   factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
       _$CounterCopyWithImpl<$Res, Counter>;
   @useResult
-  $Res call(
-      {int? count,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt});
+  $Res call({
+    int? count,
+    @DateTimeTimestampConverter() DateTime? createdAt,
+    @DateTimeTimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -52,6 +58,8 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Counter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -59,34 +67,42 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            count:
+                freezed == count
+                    ? _value.count
+                    : count // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$CounterImplCopyWith<$Res> implements $CounterCopyWith<$Res> {
   factory _$$CounterImplCopyWith(
-          _$CounterImpl value, $Res Function(_$CounterImpl) then) =
-      __$$CounterImplCopyWithImpl<$Res>;
+    _$CounterImpl value,
+    $Res Function(_$CounterImpl) then,
+  ) = __$$CounterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? count,
-      @DateTimeTimestampConverter() DateTime? createdAt,
-      @DateTimeTimestampConverter() DateTime? updatedAt});
+  $Res call({
+    int? count,
+    @DateTimeTimestampConverter() DateTime? createdAt,
+    @DateTimeTimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -94,9 +110,12 @@ class __$$CounterImplCopyWithImpl<$Res>
     extends _$CounterCopyWithImpl<$Res, _$CounterImpl>
     implements _$$CounterImplCopyWith<$Res> {
   __$$CounterImplCopyWithImpl(
-      _$CounterImpl _value, $Res Function(_$CounterImpl) _then)
-      : super(_value, _then);
+    _$CounterImpl _value,
+    $Res Function(_$CounterImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of Counter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,31 +123,36 @@ class __$$CounterImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$CounterImpl(
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$CounterImpl(
+        count:
+            freezed == count
+                ? _value.count
+                : count // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CounterImpl extends _Counter {
-  const _$CounterImpl(
-      {this.count,
-      @DateTimeTimestampConverter() this.createdAt,
-      @DateTimeTimestampConverter() this.updatedAt})
-      : super._();
+  const _$CounterImpl({
+    this.count,
+    @DateTimeTimestampConverter() this.createdAt,
+    @DateTimeTimestampConverter() this.updatedAt,
+  }) : super._();
 
   factory _$CounterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CounterImplFromJson(json);
@@ -148,7 +172,7 @@ class _$CounterImpl extends _Counter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CounterImpl &&
@@ -159,11 +183,13 @@ class _$CounterImpl extends _Counter {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, count, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Counter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CounterImplCopyWith<_$CounterImpl> get copyWith =>
@@ -171,17 +197,16 @@ class _$CounterImpl extends _Counter {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CounterImplToJson(
-      this,
-    );
+    return _$$CounterImplToJson(this);
   }
 }
 
 abstract class _Counter extends Counter {
-  const factory _Counter(
-      {final int? count,
-      @DateTimeTimestampConverter() final DateTime? createdAt,
-      @DateTimeTimestampConverter() final DateTime? updatedAt}) = _$CounterImpl;
+  const factory _Counter({
+    final int? count,
+    @DateTimeTimestampConverter() final DateTime? createdAt,
+    @DateTimeTimestampConverter() final DateTime? updatedAt,
+  }) = _$CounterImpl;
   const _Counter._() : super._();
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$CounterImpl.fromJson;
@@ -194,8 +219,11 @@ abstract class _Counter extends Counter {
   @override
   @DateTimeTimestampConverter()
   DateTime? get updatedAt;
+
+  /// Create a copy of Counter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CounterImplCopyWith<_$CounterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

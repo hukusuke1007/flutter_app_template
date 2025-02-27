@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/entities/developer/developer.dart';
@@ -15,13 +16,13 @@ import 'fetch_my_profile.dart';
 part 'save_my_profile_image.g.dart';
 
 @Riverpod(keepAlive: true)
-SaveMyProfileImage saveMyProfileImage(SaveMyProfileImageRef ref) {
+SaveMyProfileImage saveMyProfileImage(Ref ref) {
   return SaveMyProfileImage(ref);
 }
 
 class SaveMyProfileImage {
   SaveMyProfileImage(this._ref);
-  final SaveMyProfileImageRef _ref;
+  final Ref _ref;
 
   Future<void> call(Uint8List file) async {
     final userId = _ref.read(firebaseAuthRepositoryProvider).loggedInUserId;
@@ -33,11 +34,9 @@ class SaveMyProfileImage {
     final filename = UuidGenerator.create();
     final imagePath = Developer.imagePath(userId, filename);
     const mimeType = MimeType.applicationOctetStream;
-    final imageUrl = await _ref.read(firebaseStorageRepositoryProvider).save(
-          file,
-          path: imagePath,
-          mimeType: mimeType,
-        );
+    final imageUrl = await _ref
+        .read(firebaseStorageRepositoryProvider)
+        .save(file, path: imagePath, mimeType: mimeType);
 
     /// 画像情報をFirestoreへ保存
     final profile = _ref.read(fetchMyProfileProvider).value;
@@ -48,10 +47,9 @@ class SaveMyProfileImage {
         mimeType: mimeType.value,
       ),
     );
-    await _ref.read(documentRepositoryProvider).save(
-          Developer.docPath(userId),
-          data: newProfile.toImageOnly,
-        );
+    await _ref
+        .read(documentRepositoryProvider)
+        .save(Developer.docPath(userId), data: newProfile.toImageOnly);
 
     /// 古い画像をCloudStorageから削除
     final oldImage = profile?.image;

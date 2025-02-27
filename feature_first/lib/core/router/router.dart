@@ -10,7 +10,7 @@ import '../utils/navigator_key_provider.dart';
 import 'transition_observer.dart';
 
 // TODO(shohei): StatefulShellRoute は未対応
-final routerProvider = Provider((ref) {
+final routerProvider = Provider<GoRouter>((ref) {
   final navigatorKey = ref.watch(navigatorKeyProvider);
   final transitionObserver = ref.watch(transitionObserverProvider);
   return GoRouter(
@@ -56,62 +56,62 @@ final routerProvider = Provider((ref) {
           GoRoute(
             path: LocalCounterPage.pageName,
             name: LocalCounterPage.pageName,
-            builder: (_, __) => const LocalCounterPage(),
+            builder: (_, _) => const LocalCounterPage(),
           ),
 
           /// Firestoreカウンター
           GoRoute(
             path: FirestoreCounterPage.pageName,
             name: FirestoreCounterPage.pageName,
-            builder: (_, __) => const FirestoreCounterPage(),
+            builder: (_, _) => const FirestoreCounterPage(),
           ),
 
           /// メールアドレス認証
           GoRoute(
             path: TopEmailFeaturePage.pageName,
             name: TopEmailFeaturePage.pageName,
-            builder: (_, __) => const TopEmailFeaturePage(),
+            builder: (_, _) => const TopEmailFeaturePage(),
             routes: [
               /// サインアップ
               GoRoute(
                 path: SignUpWithEmailPage.pageName,
                 name: SignUpWithEmailPage.pageName,
-                builder: (_, __) => const SignUpWithEmailPage(),
+                builder: (_, _) => const SignUpWithEmailPage(),
               ),
 
               /// サインイン
               GoRoute(
                 path: SignInWithEmailPage.pageName,
                 name: SignInWithEmailPage.pageName,
-                builder: (_, __) => const SignInWithEmailPage(),
+                builder: (_, _) => const SignInWithEmailPage(),
               ),
 
               /// パスワード変更
               GoRoute(
                 path: ChangeEmailPasswordPage.pageName,
                 name: ChangeEmailPasswordPage.pageName,
-                builder: (_, __) => const ChangeEmailPasswordPage(),
+                builder: (_, _) => const ChangeEmailPasswordPage(),
               ),
 
               /// パスワードリセット
               GoRoute(
                 path: ResetEmailPasswordPage.pageName,
                 name: ResetEmailPasswordPage.pageName,
-                builder: (_, __) => const ResetEmailPasswordPage(),
+                builder: (_, _) => const ResetEmailPasswordPage(),
               ),
 
               /// メールアドレスの変更
               GoRoute(
                 path: ChangeEmailAddressPage.pageName,
                 name: ChangeEmailAddressPage.pageName,
-                builder: (_, __) => const ChangeEmailAddressPage(),
+                builder: (_, _) => const ChangeEmailAddressPage(),
               ),
 
               /// メールアドレス本人認証
               GoRoute(
                 path: EmailVerificationPage.pageName,
                 name: EmailVerificationPage.pageName,
-                builder: (_, __) => const EmailVerificationPage(),
+                builder: (_, _) => const EmailVerificationPage(),
               ),
             ],
           ),
@@ -120,14 +120,14 @@ final routerProvider = Provider((ref) {
           GoRoute(
             path: FirestoreAggregationPage.pageName,
             name: FirestoreAggregationPage.pageName,
-            builder: (_, __) => const FirestoreAggregationPage(),
+            builder: (_, _) => const FirestoreAggregationPage(),
           ),
 
           /// タイムライン
           GoRoute(
             path: TimelinePage.pageName,
             name: TimelinePage.pageName,
-            builder: (_, __) => const TimelinePage(),
+            builder: (_, _) => const TimelinePage(),
             routes: [
               /// 投稿の作成・更新・削除
               GoRoute(
@@ -149,10 +149,7 @@ final routerProvider = Provider((ref) {
                 name: PostDetailPage.pageName,
                 builder: (_, state) {
                   final args = state.extra! as (String posterId, String postId);
-                  return PostDetailPage(
-                    posterId: args.$1,
-                    postId: args.$2,
-                  );
+                  return PostDetailPage(posterId: args.$1, postId: args.$2);
                 },
               ),
             ],

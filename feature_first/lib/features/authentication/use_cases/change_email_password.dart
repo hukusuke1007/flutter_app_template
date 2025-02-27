@@ -6,7 +6,9 @@ import '../../../core/repositories/firebase_auth/auth_error_code.dart';
 import '../../../core/repositories/firebase_auth/firebase_auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
-final changeEmailPasswordProvider = Provider(ChangeEmailPassword.new);
+final changeEmailPasswordProvider = Provider<ChangeEmailPassword>(
+  ChangeEmailPassword.new,
+);
 
 class ChangeEmailPassword {
   ChangeEmailPassword(this._ref);

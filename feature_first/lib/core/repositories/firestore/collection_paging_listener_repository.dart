@@ -6,10 +6,7 @@ import 'package:rxdart/rxdart.dart';
 import 'document.dart';
 
 class DocumentChangeData<T extends Object> {
-  DocumentChangeData({
-    required this.entity,
-    required this.docChange,
-  });
+  DocumentChangeData({required this.entity, required this.docChange});
   final T entity;
   final DocumentChange docChange;
 }
@@ -20,9 +17,12 @@ class CollectionPagingListenerRepository<T extends Object> {
     this.initialLimit,
     this.pagingLimit,
     required this.decode,
-  })  : _limit = initialLimit,
-        _pagingListenerController =
-            _PagingListener(query: query, limit: initialLimit, decode: decode);
+  }) : _limit = initialLimit,
+       _pagingListenerController = _PagingListener(
+         query: query,
+         limit: initialLimit,
+         decode: decode,
+       );
 
   final Query<Map<String, dynamic>> query;
   final int? initialLimit;
@@ -36,13 +36,11 @@ class CollectionPagingListenerRepository<T extends Object> {
   bool get hasMore => _hasMore;
 
   final _PagingListener<T> _pagingListenerController;
-  final BehaviorSubject<List<Document<T>>> _dataController =
-      BehaviorSubject<List<Document<T>>>.seeded([]);
-  final PublishSubject<List<DocumentChangeData<T>>> _docChangesController =
-      PublishSubject<List<DocumentChangeData<T>>>();
+  final _dataController = BehaviorSubject<List<Document<T>>>.seeded([]);
+  final _docChangesController = PublishSubject<List<DocumentChangeData<T>>>();
 
-  bool _hasMore = true;
-  bool _initLoaded = false;
+  var _hasMore = true;
+  var _initLoaded = false;
   int? _limit;
 
   StreamSubscription<List<Document<T>>>? _disposer;
@@ -102,11 +100,9 @@ class _PagingListener<T extends Object> {
       _docChangesController.stream;
   Sink<int?> get onFetch => _fetchController.sink;
 
-  final BehaviorSubject<List<Document<T>>> _dataController =
-      BehaviorSubject<List<Document<T>>>.seeded([]);
-  final PublishSubject<List<DocumentChangeData<T>>> _docChangesController =
-      PublishSubject<List<DocumentChangeData<T>>>();
-  final PublishSubject<int> _fetchController = PublishSubject<int>();
+  final _dataController = BehaviorSubject<List<Document<T>>>.seeded([]);
+  final _docChangesController = PublishSubject<List<DocumentChangeData<T>>>();
+  final _fetchController = PublishSubject<int>();
 
   StreamSubscription<QuerySnapshot>? _disposer;
 

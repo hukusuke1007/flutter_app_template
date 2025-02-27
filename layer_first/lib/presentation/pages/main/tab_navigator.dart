@@ -10,12 +10,10 @@ class TabNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget page;
 
-  static const String root = '/';
+  static const root = '/';
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
-    return {
-      root: (context) => page,
-    };
+    return {root: (context) => page};
   }
 
   @override

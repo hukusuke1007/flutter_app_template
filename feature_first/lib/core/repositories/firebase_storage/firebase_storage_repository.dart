@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -11,9 +12,7 @@ import 'mime_type.dart';
 part 'firebase_storage_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-FirebaseStorageRepository firebaseStorageRepository(
-  FirebaseStorageRepositoryRef ref,
-) {
+FirebaseStorageRepository firebaseStorageRepository(Ref ref) {
   return FirebaseStorageRepository(FirebaseStorage.instance);
 }
 

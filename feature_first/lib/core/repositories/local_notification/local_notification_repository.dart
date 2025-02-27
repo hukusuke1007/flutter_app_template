@@ -1,13 +1,12 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 part 'local_notification_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-LocalNotificationRepository localNotificationRepository(
-  LocalNotificationRepositoryRef ref,
-) {
+LocalNotificationRepository localNotificationRepository(Ref ref) {
   return LocalNotificationRepository(FlutterLocalNotificationsPlugin());
 }
 
@@ -22,10 +21,11 @@ class LocalNotificationRepository {
     bool requestBadgePermission = true,
     DidReceiveNotificationResponseCallback? onDidReceiveNotificationResponse,
     DidReceiveBackgroundNotificationResponseCallback?
-        onDidReceiveBackgroundNotificationResponse,
+    onDidReceiveBackgroundNotificationResponse,
   }) async {
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+      'app_icon',
+    );
     final initializationSettingsIOS = DarwinInitializationSettings(
       requestAlertPermission: requestAlertPermission,
       requestBadgePermission: requestSoundPermission,
@@ -47,7 +47,8 @@ class LocalNotificationRepository {
   Future<void> createChannel(AndroidNotificationChannel channel) async {
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
   }
 
@@ -57,8 +58,10 @@ class LocalNotificationRepository {
     bool badge = true,
   }) async {
     final impl =
-        _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()!;
+        _flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin
+            >()!;
     final result = await impl.requestPermissions(
       sound: sound,
       alert: alert,
@@ -178,11 +181,7 @@ class LocalNotificationRepository {
     );
   }
 
-  Future<void> cancel(int id) async {
-    return _flutterLocalNotificationsPlugin.cancel(id);
-  }
+  Future<void> cancel(int id) => _flutterLocalNotificationsPlugin.cancel(id);
 
-  Future<void> cancelAll() async {
-    return _flutterLocalNotificationsPlugin.cancelAll();
-  }
+  Future<void> cancelAll() => _flutterLocalNotificationsPlugin.cancelAll();
 }

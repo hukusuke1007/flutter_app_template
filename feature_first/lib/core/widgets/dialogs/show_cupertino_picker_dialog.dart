@@ -9,7 +9,7 @@ Future<int?> showCupertinoPickerDialog(
   String doneText = '閉じる',
   required FixedExtentScrollController fixedExtentScrollController,
   void Function(int)? onChange,
-}) async {
+}) {
   const height = 240.0;
   return showModalBottomSheet<int?>(
     context: context,
@@ -27,8 +27,9 @@ Future<int?> showCupertinoPickerDialog(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pop<int>(fixedExtentScrollController.selectedItem);
+                      Navigator.of(
+                        context,
+                      ).pop<int>(fixedExtentScrollController.selectedItem);
                     },
                     child: Text(
                       doneText,
@@ -46,12 +47,7 @@ Future<int?> showCupertinoPickerDialog(
                 scrollController: fixedExtentScrollController,
                 itemBuilder: (context, index) {
                   final data = list[index];
-                  return Center(
-                    child: Text(
-                      data,
-                      style: context.bodyStyle,
-                    ),
-                  );
+                  return Center(child: Text(data, style: context.bodyStyle));
                 },
                 childCount: list.length,
                 itemExtent: 40,

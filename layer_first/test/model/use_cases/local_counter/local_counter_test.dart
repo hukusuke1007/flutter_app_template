@@ -24,8 +24,9 @@ void main() {
 
   group('LocalCounter Tests', () {
     test('initial build should fetch counter value', () {
-      when(mockRepository.fetch<int>(LocalCounter.localCounterKey))
-          .thenReturn(5);
+      when(
+        mockRepository.fetch<int>(LocalCounter.localCounterKey),
+      ).thenReturn(5);
 
       final counter = container.read(localCounterProvider);
 
@@ -34,8 +35,9 @@ void main() {
     });
 
     test('initial build should return 0 when no value stored', () {
-      when(mockRepository.fetch<int>(LocalCounter.localCounterKey))
-          .thenReturn(null);
+      when(
+        mockRepository.fetch<int>(LocalCounter.localCounterKey),
+      ).thenReturn(null);
 
       final counter = container.read(localCounterProvider);
 
@@ -44,45 +46,50 @@ void main() {
     });
 
     test('increment should increase counter and save', () async {
-      when(mockRepository.fetch<int>(LocalCounter.localCounterKey))
-          .thenReturn(5);
-      when(mockRepository.save<int>(LocalCounter.localCounterKey, 6))
-          .thenAnswer((_) async => true);
+      when(
+        mockRepository.fetch<int>(LocalCounter.localCounterKey),
+      ).thenReturn(5);
+      when(
+        mockRepository.save<int>(LocalCounter.localCounterKey, 6),
+      ).thenAnswer((_) async => true);
 
       final controller = container.read(localCounterProvider.notifier);
       await controller.increment();
 
       expect(container.read(localCounterProvider), equals(6));
-      verify(mockRepository.save<int>(LocalCounter.localCounterKey, 6))
-          .called(1);
+      verify(
+        mockRepository.save<int>(LocalCounter.localCounterKey, 6),
+      ).called(1);
     });
 
     test('decrement should decrease counter and save', () async {
-      when(mockRepository.fetch<int>(LocalCounter.localCounterKey))
-          .thenReturn(5);
-      when(mockRepository.save<int>(LocalCounter.localCounterKey, 4))
-          .thenAnswer((_) async => true);
+      when(
+        mockRepository.fetch<int>(LocalCounter.localCounterKey),
+      ).thenReturn(5);
+      when(
+        mockRepository.save<int>(LocalCounter.localCounterKey, 4),
+      ).thenAnswer((_) async => true);
 
       final controller = container.read(localCounterProvider.notifier);
       await controller.decrement();
 
       expect(container.read(localCounterProvider), equals(4));
-      verify(mockRepository.save<int>(LocalCounter.localCounterKey, 4))
-          .called(1);
+      verify(
+        mockRepository.save<int>(LocalCounter.localCounterKey, 4),
+      ).called(1);
     });
 
-    test('should handle save error', () async {
-      when(mockRepository.fetch<int>(LocalCounter.localCounterKey))
-          .thenReturn(5);
-      when(mockRepository.save<int>(LocalCounter.localCounterKey, 6))
-          .thenThrow(Exception('Save failed'));
+    test('should handle save error', () {
+      when(
+        mockRepository.fetch<int>(LocalCounter.localCounterKey),
+      ).thenReturn(5);
+      when(
+        mockRepository.save<int>(LocalCounter.localCounterKey, 6),
+      ).thenThrow(Exception('Save failed'));
 
       final controller = container.read(localCounterProvider.notifier);
 
-      expect(
-        controller.increment,
-        throwsA(isA<Exception>()),
-      );
+      expect(controller.increment, throwsA(isA<Exception>()));
     });
   });
 }

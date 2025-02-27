@@ -1,5 +1,6 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'remote_config_key.dart';
@@ -7,9 +8,7 @@ import 'remote_config_key.dart';
 part 'remote_config_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-RemoteConfigRepository remoteConfigRepository(
-  RemoteConfigRepositoryRef ref,
-) {
+RemoteConfigRepository remoteConfigRepository(Ref ref) {
   return RemoteConfigRepository(FirebaseRemoteConfig.instance);
 }
 

@@ -1,20 +1,25 @@
 name: flutter_analyze
 
-on:
-  push:
-    branches:
-      - main
+# Commenting out the triggers to stop the workflow from running
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#  pull_request:
+#    branches:
+#      - main
 
-  pull_request:
-    branches:
-      - main
+# This workflow will only run manually and not automatically trigger on push or pull request
+on:
+  workflow_dispatch:  # This makes the workflow only run when manually triggered
 
 jobs:
   lint:
     strategy:
       matrix:
         os: [macos-14]
-        flutter-version: ['3.27.3']
+        flutter-version: ['3.29.0']
         flutter-channel: [stable]
 
     name: flutter_analyze

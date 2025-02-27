@@ -34,10 +34,7 @@ abstract class _$PostController
   late final String? posterId;
   late final String? postId;
 
-  FutureOr<Post?> build({
-    required String? posterId,
-    required String? postId,
-  });
+  FutureOr<Post?> build({required String? posterId, required String? postId});
 }
 
 /// See also [PostController].
@@ -54,20 +51,14 @@ class PostControllerFamily extends Family<AsyncValue<Post?>> {
     required String? posterId,
     required String? postId,
   }) {
-    return PostControllerProvider(
-      posterId: posterId,
-      postId: postId,
-    );
+    return PostControllerProvider(posterId: posterId, postId: postId);
   }
 
   @override
   PostControllerProvider getProviderOverride(
     covariant PostControllerProvider provider,
   ) {
-    return call(
-      posterId: provider.posterId,
-      postId: provider.postId,
-    );
+    return call(posterId: provider.posterId, postId: provider.postId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,25 +80,24 @@ class PostControllerFamily extends Family<AsyncValue<Post?>> {
 class PostControllerProvider
     extends AutoDisposeAsyncNotifierProviderImpl<PostController, Post?> {
   /// See also [PostController].
-  PostControllerProvider({
-    required String? posterId,
-    required String? postId,
-  }) : this._internal(
-          () => PostController()
-            ..posterId = posterId
-            ..postId = postId,
-          from: postControllerProvider,
-          name: r'postControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$postControllerHash,
-          dependencies: PostControllerFamily._dependencies,
-          allTransitiveDependencies:
-              PostControllerFamily._allTransitiveDependencies,
-          posterId: posterId,
-          postId: postId,
-        );
+  PostControllerProvider({required String? posterId, required String? postId})
+    : this._internal(
+        () =>
+            PostController()
+              ..posterId = posterId
+              ..postId = postId,
+        from: postControllerProvider,
+        name: r'postControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$postControllerHash,
+        dependencies: PostControllerFamily._dependencies,
+        allTransitiveDependencies:
+            PostControllerFamily._allTransitiveDependencies,
+        posterId: posterId,
+        postId: postId,
+      );
 
   PostControllerProvider._internal(
     super._createNotifier, {
@@ -124,13 +114,8 @@ class PostControllerProvider
   final String? postId;
 
   @override
-  FutureOr<Post?> runNotifierBuild(
-    covariant PostController notifier,
-  ) {
-    return notifier.build(
-      posterId: posterId,
-      postId: postId,
-    );
+  FutureOr<Post?> runNotifierBuild(covariant PostController notifier) {
+    return notifier.build(posterId: posterId, postId: postId);
   }
 
   @override
@@ -138,9 +123,10 @@ class PostControllerProvider
     return ProviderOverride(
       origin: this,
       override: PostControllerProvider._internal(
-        () => create()
-          ..posterId = posterId
-          ..postId = postId,
+        () =>
+            create()
+              ..posterId = posterId
+              ..postId = postId,
         from: from,
         name: null,
         dependencies: null,
@@ -154,7 +140,7 @@ class PostControllerProvider
 
   @override
   AutoDisposeAsyncNotifierProviderElement<PostController, Post?>
-      createElement() {
+  createElement() {
     return _PostControllerProviderElement(this);
   }
 
@@ -175,6 +161,8 @@ class PostControllerProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PostControllerRef on AutoDisposeAsyncNotifierProviderRef<Post?> {
   /// The parameter `posterId` of this provider.
   String? get posterId;
@@ -193,5 +181,6 @@ class _PostControllerProviderElement
   @override
   String? get postId => (origin as PostControllerProvider).postId;
 }
+
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

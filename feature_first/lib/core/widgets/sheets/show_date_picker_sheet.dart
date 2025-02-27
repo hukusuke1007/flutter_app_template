@@ -7,7 +7,7 @@ Future<bool?> showDatePickerSheet(
   BuildContext context, {
   required DateTime date,
   required void Function(DateTime) onDateTimeChanged,
-}) async {
+}) {
   return showCupertinoModalPopup<bool?>(
     context: context,
     builder: (BuildContext context) {
@@ -24,21 +24,13 @@ Future<bool?> showDatePickerSheet(
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: Text(
-                      'キャンセル',
-                      style: context.bodyStyle,
-                      maxLines: 1,
-                    ),
+                    child: Text('キャンセル', style: context.bodyStyle, maxLines: 1),
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
-                    child: Text(
-                      '完了',
-                      style: context.bodyStyle,
-                      maxLines: 1,
-                    ),
+                    child: Text('完了', style: context.bodyStyle, maxLines: 1),
                   ),
                 ],
               ),

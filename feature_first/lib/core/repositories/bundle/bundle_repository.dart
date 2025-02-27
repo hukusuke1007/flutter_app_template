@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'bundle_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-BundleRepository bundleRepository(
-  BundleRepositoryRef ref,
-) {
+BundleRepository bundleRepository(Ref ref) {
   return BundleRepository(rootBundle);
 }
 

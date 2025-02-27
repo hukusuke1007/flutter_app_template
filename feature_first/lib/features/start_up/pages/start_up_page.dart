@@ -26,8 +26,10 @@ class StartUpPage extends HookConsumerWidget {
 
   /// 従来の画面遷移
   static Future<void> showNav1(BuildContext context) async {
-    await Navigator.of(context, rootNavigator: true)
-        .pushReplacement<MaterialPageRoute<dynamic>, void>(
+    await Navigator.of(
+      context,
+      rootNavigator: true,
+    ).pushReplacement<MaterialPageRoute<dynamic>, void>(
       PageTransition(
         type: PageTransitionType.fade,
         child: const StartUpPage(),
@@ -84,7 +86,7 @@ class StartUpPage extends HookConsumerWidget {
             }
             return const SizedBox.shrink();
           },
-          error: (e, __) {
+          error: (e, _) {
             logger.shout(e);
             final message = 'エラー\n$e';
             return ErrorText(

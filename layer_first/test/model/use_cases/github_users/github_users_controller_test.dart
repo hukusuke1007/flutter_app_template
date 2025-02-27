@@ -46,8 +46,9 @@ void main() {
     ];
 
     test('initial build should fetch users', () async {
-      when(mockRepository.fetchUsers(since: 0, perPage: 20))
-          .thenAnswer((_) async => List<User>.from(mockUsers));
+      when(
+        mockRepository.fetchUsers(since: 0, perPage: 20),
+      ).thenAnswer((_) async => List<User>.from(mockUsers));
 
       final controller = container.read(githubUsersControllerProvider.notifier);
       final result = await controller.future;
@@ -72,10 +73,12 @@ void main() {
         ),
       ];
 
-      when(mockRepository.fetchUsers(since: 0, perPage: 20))
-          .thenAnswer((_) async => List<User>.from(mockUsers));
-      when(mockRepository.fetchUsers(since: 3, perPage: 20))
-          .thenAnswer((_) async => List<User>.from(moreUsers));
+      when(
+        mockRepository.fetchUsers(since: 0, perPage: 20),
+      ).thenAnswer((_) async => List<User>.from(mockUsers));
+      when(
+        mockRepository.fetchUsers(since: 3, perPage: 20),
+      ).thenAnswer((_) async => List<User>.from(moreUsers));
 
       final controller = container.read(githubUsersControllerProvider.notifier);
       await controller.future;
@@ -89,8 +92,9 @@ void main() {
     });
 
     test('should handle empty response', () async {
-      when(mockRepository.fetchUsers(since: 0, perPage: 20))
-          .thenAnswer((_) async => <User>[]);
+      when(
+        mockRepository.fetchUsers(since: 0, perPage: 20),
+      ).thenAnswer((_) async => <User>[]);
 
       final controller = container.read(githubUsersControllerProvider.notifier);
       final result = await controller.future;
@@ -99,16 +103,14 @@ void main() {
       verify(mockRepository.fetchUsers(since: 0, perPage: 20)).called(1);
     });
 
-    test('should handle error', () async {
-      when(mockRepository.fetchUsers(since: 0, perPage: 20))
-          .thenThrow(Exception('Network error'));
+    test('should handle error', () {
+      when(
+        mockRepository.fetchUsers(since: 0, perPage: 20),
+      ).thenThrow(Exception('Network error'));
 
       final controller = container.read(githubUsersControllerProvider.notifier);
 
-      expect(
-        controller.future,
-        throwsA(isA<Exception>()),
-      );
+      expect(controller.future, throwsA(isA<Exception>()));
       verify(mockRepository.fetchUsers(since: 0, perPage: 20)).called(1);
     });
   });

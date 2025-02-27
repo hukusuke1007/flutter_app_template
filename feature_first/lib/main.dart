@@ -14,6 +14,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import 'app.dart';
+import 'core/firebase/firebase_options.dart';
 import 'core/repositories/package_info/package_info_repository.dart';
 import 'core/repositories/shared_preferences/shared_preference_repository.dart';
 import 'core/use_cases/images/image_compress.dart';
@@ -26,10 +27,11 @@ Future<void> main() async {
   late final SharedPreferences sharedPreferences;
   late final Directory tempDirectory;
   Logger.configure();
+  logger.info(Flavor.environment);
 
   await (
     /// Firebase
-    Firebase.initializeApp(),
+    Firebase.initializeApp(options: getCurrentPlatform()),
 
     /// 縦固定
     SystemChrome.setPreferredOrientations([
@@ -53,8 +55,6 @@ Future<void> main() async {
     }),
   ).wait;
 
-  logger.info(Flavor.environment);
-
   /// Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   PlatformDispatcher.instance.onError = (error, stack) {
@@ -65,10 +65,12 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: [
-        sharedPreferencesRepositoryProvider
-            .overrideWithValue(SharedPreferencesRepository(sharedPreferences)),
-        packageInfoRepositoryProvider
-            .overrideWithValue(PackageInfoRepository(packageInfo)),
+        sharedPreferencesRepositoryProvider.overrideWithValue(
+          SharedPreferencesRepository(sharedPreferences),
+        ),
+        packageInfoRepositoryProvider.overrideWithValue(
+          PackageInfoRepository(packageInfo),
+        ),
         imageCompressProvider.overrideWithValue(ImageCompress(tempDirectory)),
       ],
       child: const App(),

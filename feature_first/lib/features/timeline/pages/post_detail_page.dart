@@ -51,10 +51,7 @@ class PostDetailPage extends HookConsumerWidget {
     return Navigator.of(context, rootNavigator: true).push<void>(
       CupertinoPageRoute(
         settings: RouteSettings(name: pageName),
-        builder: (_) => PostDetailPage(
-          posterId: posterId,
-          postId: postId,
-        ),
+        builder: (_) => PostDetailPage(posterId: posterId, postId: postId),
       ),
     );
   }
@@ -78,10 +75,7 @@ class PostDetailPage extends HookConsumerWidget {
       Future.microtask(() async {
         final value = await ref.read(provider.future);
         if (context.mounted && value == null) {
-          await showOkAlertDialog(
-            context: context,
-            title: '投稿が削除されています',
-          );
+          await showOkAlertDialog(context: context, title: '投稿が削除されています');
           if (context.mounted) {
             context.pop();
           }
@@ -104,32 +98,26 @@ class PostDetailPage extends HookConsumerWidget {
           Builder(
             builder: (context) {
               return PopupMenuButton<MenuResultType>(
-                icon: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.white,
-                ),
+                icon: const Icon(Icons.more_horiz, color: Colors.white),
                 itemBuilder: (BuildContext context) {
                   return [
-                    MenuResultType.share,
-                    MenuResultType.copy,
-                    if (!isMyData) ...[
-                      MenuResultType.issueReport,
-                      MenuResultType.mute,
-                      MenuResultType.block,
-                    ],
-                  ]
+                        MenuResultType.share,
+                        MenuResultType.copy,
+                        if (!isMyData) ...[
+                          MenuResultType.issueReport,
+                          MenuResultType.mute,
+                          MenuResultType.block,
+                        ],
+                      ]
                       .map(
                         (data) => PopupMenuItem<MenuResultType>(
                           value: data,
-                          child: Text(
-                            data.label,
-                            style: context.bodyStyle,
-                          ),
+                          child: Text(data.label, style: context.bodyStyle),
                         ),
                       )
                       .toList();
                 },
-                onSelected: (result) async {
+                onSelected: (result) {
                   final text = data?.text;
                   if (text == null) {
                     return;
@@ -137,18 +125,17 @@ class PostDetailPage extends HookConsumerWidget {
 
                   switch (result) {
                     case MenuResultType.share:
-                      ShareExtension.shareText(
-                        context,
-                        text,
-                      ).ignore();
+                      ShareExtension.shareText(context, text).ignore();
                     case MenuResultType.copy:
                       Clipboard.copy(text).ignore();
                       context.showSnackBar('コピーしました');
                     case MenuResultType.issueReport ||
-                          MenuResultType.mute ||
-                          MenuResultType.block:
-                      showOkAlertDialog(context: context, title: '実装してください')
-                          .ignore();
+                        MenuResultType.mute ||
+                        MenuResultType.block:
+                      showOkAlertDialog(
+                        context: context,
+                        title: '実装してください',
+                      ).ignore();
                   }
                 },
               );
@@ -179,10 +166,7 @@ class PostDetailPage extends HookConsumerWidget {
                             onTap: () {
                               final url = poster?.image?.url;
                               if (url != null) {
-                                ImageViewer.show(
-                                  context,
-                                  urls: [url],
-                                );
+                                ImageViewer.show(context, urls: [url]);
                               }
                             },
                           ),
@@ -267,20 +251,18 @@ class PostDetailPage extends HookConsumerWidget {
           ],
         ),
       ),
-      floatingActionButton: isMyData
-          ? FloatingActionButton(
-              onPressed: () {
-                EditPostPage.push(
-                  context,
-                  args: EditPostPageArgs(
-                    posterId: posterId,
-                    postId: postId,
-                  ),
-                );
-              },
-              child: const Icon(Icons.edit),
-            )
-          : null,
+      floatingActionButton:
+          isMyData
+              ? FloatingActionButton(
+                onPressed: () {
+                  EditPostPage.push(
+                    context,
+                    args: EditPostPageArgs(posterId: posterId, postId: postId),
+                  );
+                },
+                child: const Icon(Icons.edit),
+              )
+              : null,
     );
   }
 }

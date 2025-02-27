@@ -12,7 +12,8 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
@@ -53,8 +54,12 @@ mixin _$User {
   @JsonKey(name: 'site_admin')
   bool get siteAdmin => throw _privateConstructorUsedError;
 
+  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -63,25 +68,26 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {String login,
-      int id,
-      @JsonKey(name: 'node_id') String? nodeId,
-      @JsonKey(name: 'avatar_url') String? avatarUrl,
-      @JsonKey(name: 'gravatar_id') String? gravatarId,
-      String url,
-      @JsonKey(name: 'html_url') String? htmlUrl,
-      @JsonKey(name: 'followers_url') String? followersUrl,
-      @JsonKey(name: 'following_url') String? followingUrl,
-      @JsonKey(name: 'gists_url') String? gistsUrl,
-      @JsonKey(name: 'starred_url') String? starredUrl,
-      @JsonKey(name: 'subscriptions_url') String? subscriptionsUrl,
-      @JsonKey(name: 'organizations_url') String? organizationsUrl,
-      @JsonKey(name: 'repos_url') String? reposUrl,
-      @JsonKey(name: 'events_url') String? eventsUrl,
-      @JsonKey(name: 'received_events_url') String? receivedEventsUrl,
-      String? type,
-      @JsonKey(name: 'site_admin') bool siteAdmin});
+  $Res call({
+    String login,
+    int id,
+    @JsonKey(name: 'node_id') String? nodeId,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'gravatar_id') String? gravatarId,
+    String url,
+    @JsonKey(name: 'html_url') String? htmlUrl,
+    @JsonKey(name: 'followers_url') String? followersUrl,
+    @JsonKey(name: 'following_url') String? followingUrl,
+    @JsonKey(name: 'gists_url') String? gistsUrl,
+    @JsonKey(name: 'starred_url') String? starredUrl,
+    @JsonKey(name: 'subscriptions_url') String? subscriptionsUrl,
+    @JsonKey(name: 'organizations_url') String? organizationsUrl,
+    @JsonKey(name: 'repos_url') String? reposUrl,
+    @JsonKey(name: 'events_url') String? eventsUrl,
+    @JsonKey(name: 'received_events_url') String? receivedEventsUrl,
+    String? type,
+    @JsonKey(name: 'site_admin') bool siteAdmin,
+  });
 }
 
 /// @nodoc
@@ -94,6 +100,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,109 +124,132 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? type = freezed,
     Object? siteAdmin = null,
   }) {
-    return _then(_value.copyWith(
-      login: null == login
-          ? _value.login
-          : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: freezed == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gravatarId: freezed == gravatarId
-          ? _value.gravatarId
-          : gravatarId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: freezed == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followersUrl: freezed == followersUrl
-          ? _value.followersUrl
-          : followersUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followingUrl: freezed == followingUrl
-          ? _value.followingUrl
-          : followingUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gistsUrl: freezed == gistsUrl
-          ? _value.gistsUrl
-          : gistsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      starredUrl: freezed == starredUrl
-          ? _value.starredUrl
-          : starredUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subscriptionsUrl: freezed == subscriptionsUrl
-          ? _value.subscriptionsUrl
-          : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      organizationsUrl: freezed == organizationsUrl
-          ? _value.organizationsUrl
-          : organizationsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reposUrl: freezed == reposUrl
-          ? _value.reposUrl
-          : reposUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eventsUrl: freezed == eventsUrl
-          ? _value.eventsUrl
-          : eventsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      receivedEventsUrl: freezed == receivedEventsUrl
-          ? _value.receivedEventsUrl
-          : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String?,
-      siteAdmin: null == siteAdmin
-          ? _value.siteAdmin
-          : siteAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            login:
+                null == login
+                    ? _value.login
+                    : login // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            nodeId:
+                freezed == nodeId
+                    ? _value.nodeId
+                    : nodeId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            avatarUrl:
+                freezed == avatarUrl
+                    ? _value.avatarUrl
+                    : avatarUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            gravatarId:
+                freezed == gravatarId
+                    ? _value.gravatarId
+                    : gravatarId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            url:
+                null == url
+                    ? _value.url
+                    : url // ignore: cast_nullable_to_non_nullable
+                        as String,
+            htmlUrl:
+                freezed == htmlUrl
+                    ? _value.htmlUrl
+                    : htmlUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            followersUrl:
+                freezed == followersUrl
+                    ? _value.followersUrl
+                    : followersUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            followingUrl:
+                freezed == followingUrl
+                    ? _value.followingUrl
+                    : followingUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            gistsUrl:
+                freezed == gistsUrl
+                    ? _value.gistsUrl
+                    : gistsUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            starredUrl:
+                freezed == starredUrl
+                    ? _value.starredUrl
+                    : starredUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            subscriptionsUrl:
+                freezed == subscriptionsUrl
+                    ? _value.subscriptionsUrl
+                    : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            organizationsUrl:
+                freezed == organizationsUrl
+                    ? _value.organizationsUrl
+                    : organizationsUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            reposUrl:
+                freezed == reposUrl
+                    ? _value.reposUrl
+                    : reposUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            eventsUrl:
+                freezed == eventsUrl
+                    ? _value.eventsUrl
+                    : eventsUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            receivedEventsUrl:
+                freezed == receivedEventsUrl
+                    ? _value.receivedEventsUrl
+                    : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            type:
+                freezed == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            siteAdmin:
+                null == siteAdmin
+                    ? _value.siteAdmin
+                    : siteAdmin // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
+    _$UserImpl value,
+    $Res Function(_$UserImpl) then,
+  ) = __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String login,
-      int id,
-      @JsonKey(name: 'node_id') String? nodeId,
-      @JsonKey(name: 'avatar_url') String? avatarUrl,
-      @JsonKey(name: 'gravatar_id') String? gravatarId,
-      String url,
-      @JsonKey(name: 'html_url') String? htmlUrl,
-      @JsonKey(name: 'followers_url') String? followersUrl,
-      @JsonKey(name: 'following_url') String? followingUrl,
-      @JsonKey(name: 'gists_url') String? gistsUrl,
-      @JsonKey(name: 'starred_url') String? starredUrl,
-      @JsonKey(name: 'subscriptions_url') String? subscriptionsUrl,
-      @JsonKey(name: 'organizations_url') String? organizationsUrl,
-      @JsonKey(name: 'repos_url') String? reposUrl,
-      @JsonKey(name: 'events_url') String? eventsUrl,
-      @JsonKey(name: 'received_events_url') String? receivedEventsUrl,
-      String? type,
-      @JsonKey(name: 'site_admin') bool siteAdmin});
+  $Res call({
+    String login,
+    int id,
+    @JsonKey(name: 'node_id') String? nodeId,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'gravatar_id') String? gravatarId,
+    String url,
+    @JsonKey(name: 'html_url') String? htmlUrl,
+    @JsonKey(name: 'followers_url') String? followersUrl,
+    @JsonKey(name: 'following_url') String? followingUrl,
+    @JsonKey(name: 'gists_url') String? gistsUrl,
+    @JsonKey(name: 'starred_url') String? starredUrl,
+    @JsonKey(name: 'subscriptions_url') String? subscriptionsUrl,
+    @JsonKey(name: 'organizations_url') String? organizationsUrl,
+    @JsonKey(name: 'repos_url') String? reposUrl,
+    @JsonKey(name: 'events_url') String? eventsUrl,
+    @JsonKey(name: 'received_events_url') String? receivedEventsUrl,
+    String? type,
+    @JsonKey(name: 'site_admin') bool siteAdmin,
+  });
 }
 
 /// @nodoc
@@ -226,8 +257,10 @@ class __$$UserImplCopyWithImpl<$Res>
     extends _$UserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,106 +283,126 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? siteAdmin = null,
   }) {
-    return _then(_$UserImpl(
-      login: null == login
-          ? _value.login
-          : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: freezed == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gravatarId: freezed == gravatarId
-          ? _value.gravatarId
-          : gravatarId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: freezed == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followersUrl: freezed == followersUrl
-          ? _value.followersUrl
-          : followersUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followingUrl: freezed == followingUrl
-          ? _value.followingUrl
-          : followingUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gistsUrl: freezed == gistsUrl
-          ? _value.gistsUrl
-          : gistsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      starredUrl: freezed == starredUrl
-          ? _value.starredUrl
-          : starredUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subscriptionsUrl: freezed == subscriptionsUrl
-          ? _value.subscriptionsUrl
-          : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      organizationsUrl: freezed == organizationsUrl
-          ? _value.organizationsUrl
-          : organizationsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reposUrl: freezed == reposUrl
-          ? _value.reposUrl
-          : reposUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eventsUrl: freezed == eventsUrl
-          ? _value.eventsUrl
-          : eventsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      receivedEventsUrl: freezed == receivedEventsUrl
-          ? _value.receivedEventsUrl
-          : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String?,
-      siteAdmin: null == siteAdmin
-          ? _value.siteAdmin
-          : siteAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$UserImpl(
+        login:
+            null == login
+                ? _value.login
+                : login // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        nodeId:
+            freezed == nodeId
+                ? _value.nodeId
+                : nodeId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        avatarUrl:
+            freezed == avatarUrl
+                ? _value.avatarUrl
+                : avatarUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        gravatarId:
+            freezed == gravatarId
+                ? _value.gravatarId
+                : gravatarId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        url:
+            null == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                    as String,
+        htmlUrl:
+            freezed == htmlUrl
+                ? _value.htmlUrl
+                : htmlUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        followersUrl:
+            freezed == followersUrl
+                ? _value.followersUrl
+                : followersUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        followingUrl:
+            freezed == followingUrl
+                ? _value.followingUrl
+                : followingUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        gistsUrl:
+            freezed == gistsUrl
+                ? _value.gistsUrl
+                : gistsUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        starredUrl:
+            freezed == starredUrl
+                ? _value.starredUrl
+                : starredUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        subscriptionsUrl:
+            freezed == subscriptionsUrl
+                ? _value.subscriptionsUrl
+                : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        organizationsUrl:
+            freezed == organizationsUrl
+                ? _value.organizationsUrl
+                : organizationsUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        reposUrl:
+            freezed == reposUrl
+                ? _value.reposUrl
+                : reposUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        eventsUrl:
+            freezed == eventsUrl
+                ? _value.eventsUrl
+                : eventsUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        receivedEventsUrl:
+            freezed == receivedEventsUrl
+                ? _value.receivedEventsUrl
+                : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        type:
+            freezed == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        siteAdmin:
+            null == siteAdmin
+                ? _value.siteAdmin
+                : siteAdmin // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl extends _User {
-  const _$UserImpl(
-      {required this.login,
-      required this.id,
-      @JsonKey(name: 'node_id') this.nodeId,
-      @JsonKey(name: 'avatar_url') this.avatarUrl,
-      @JsonKey(name: 'gravatar_id') this.gravatarId,
-      required this.url,
-      @JsonKey(name: 'html_url') this.htmlUrl,
-      @JsonKey(name: 'followers_url') this.followersUrl,
-      @JsonKey(name: 'following_url') this.followingUrl,
-      @JsonKey(name: 'gists_url') this.gistsUrl,
-      @JsonKey(name: 'starred_url') this.starredUrl,
-      @JsonKey(name: 'subscriptions_url') this.subscriptionsUrl,
-      @JsonKey(name: 'organizations_url') this.organizationsUrl,
-      @JsonKey(name: 'repos_url') this.reposUrl,
-      @JsonKey(name: 'events_url') this.eventsUrl,
-      @JsonKey(name: 'received_events_url') this.receivedEventsUrl,
-      this.type,
-      @JsonKey(name: 'site_admin') this.siteAdmin = false})
-      : super._();
+  const _$UserImpl({
+    required this.login,
+    required this.id,
+    @JsonKey(name: 'node_id') this.nodeId,
+    @JsonKey(name: 'avatar_url') this.avatarUrl,
+    @JsonKey(name: 'gravatar_id') this.gravatarId,
+    required this.url,
+    @JsonKey(name: 'html_url') this.htmlUrl,
+    @JsonKey(name: 'followers_url') this.followersUrl,
+    @JsonKey(name: 'following_url') this.followingUrl,
+    @JsonKey(name: 'gists_url') this.gistsUrl,
+    @JsonKey(name: 'starred_url') this.starredUrl,
+    @JsonKey(name: 'subscriptions_url') this.subscriptionsUrl,
+    @JsonKey(name: 'organizations_url') this.organizationsUrl,
+    @JsonKey(name: 'repos_url') this.reposUrl,
+    @JsonKey(name: 'events_url') this.eventsUrl,
+    @JsonKey(name: 'received_events_url') this.receivedEventsUrl,
+    this.type,
+    @JsonKey(name: 'site_admin') this.siteAdmin = false,
+  }) : super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -411,7 +464,7 @@ class _$UserImpl extends _User {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
@@ -447,30 +500,33 @@ class _$UserImpl extends _User {
                 other.siteAdmin == siteAdmin));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      login,
-      id,
-      nodeId,
-      avatarUrl,
-      gravatarId,
-      url,
-      htmlUrl,
-      followersUrl,
-      followingUrl,
-      gistsUrl,
-      starredUrl,
-      subscriptionsUrl,
-      organizationsUrl,
-      reposUrl,
-      eventsUrl,
-      receivedEventsUrl,
-      type,
-      siteAdmin);
+    runtimeType,
+    login,
+    id,
+    nodeId,
+    avatarUrl,
+    gravatarId,
+    url,
+    htmlUrl,
+    followersUrl,
+    followingUrl,
+    gistsUrl,
+    starredUrl,
+    subscriptionsUrl,
+    organizationsUrl,
+    reposUrl,
+    eventsUrl,
+    receivedEventsUrl,
+    type,
+    siteAdmin,
+  );
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -478,32 +534,31 @@ class _$UserImpl extends _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
+    return _$$UserImplToJson(this);
   }
 }
 
 abstract class _User extends User {
-  const factory _User(
-      {required final String login,
-      required final int id,
-      @JsonKey(name: 'node_id') final String? nodeId,
-      @JsonKey(name: 'avatar_url') final String? avatarUrl,
-      @JsonKey(name: 'gravatar_id') final String? gravatarId,
-      required final String url,
-      @JsonKey(name: 'html_url') final String? htmlUrl,
-      @JsonKey(name: 'followers_url') final String? followersUrl,
-      @JsonKey(name: 'following_url') final String? followingUrl,
-      @JsonKey(name: 'gists_url') final String? gistsUrl,
-      @JsonKey(name: 'starred_url') final String? starredUrl,
-      @JsonKey(name: 'subscriptions_url') final String? subscriptionsUrl,
-      @JsonKey(name: 'organizations_url') final String? organizationsUrl,
-      @JsonKey(name: 'repos_url') final String? reposUrl,
-      @JsonKey(name: 'events_url') final String? eventsUrl,
-      @JsonKey(name: 'received_events_url') final String? receivedEventsUrl,
-      final String? type,
-      @JsonKey(name: 'site_admin') final bool siteAdmin}) = _$UserImpl;
+  const factory _User({
+    required final String login,
+    required final int id,
+    @JsonKey(name: 'node_id') final String? nodeId,
+    @JsonKey(name: 'avatar_url') final String? avatarUrl,
+    @JsonKey(name: 'gravatar_id') final String? gravatarId,
+    required final String url,
+    @JsonKey(name: 'html_url') final String? htmlUrl,
+    @JsonKey(name: 'followers_url') final String? followersUrl,
+    @JsonKey(name: 'following_url') final String? followingUrl,
+    @JsonKey(name: 'gists_url') final String? gistsUrl,
+    @JsonKey(name: 'starred_url') final String? starredUrl,
+    @JsonKey(name: 'subscriptions_url') final String? subscriptionsUrl,
+    @JsonKey(name: 'organizations_url') final String? organizationsUrl,
+    @JsonKey(name: 'repos_url') final String? reposUrl,
+    @JsonKey(name: 'events_url') final String? eventsUrl,
+    @JsonKey(name: 'received_events_url') final String? receivedEventsUrl,
+    final String? type,
+    @JsonKey(name: 'site_admin') final bool siteAdmin,
+  }) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -558,8 +613,11 @@ abstract class _User extends User {
   @override
   @JsonKey(name: 'site_admin')
   bool get siteAdmin;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

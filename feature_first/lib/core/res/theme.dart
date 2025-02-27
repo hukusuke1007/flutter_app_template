@@ -8,14 +8,13 @@ import './gen/colors.gen.dart';
 
 ThemeData getAppTheme() {
   const primaryColor = ColorName.primary;
-
+  const lightGrey1 = ColorName.lightGrey1;
   final base = ThemeData(
     useMaterial3: true,
     primaryColor: primaryColor,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryColor,
+    scaffoldBackgroundColor: lightGrey1,
+    colorScheme: const ColorScheme.light(
       primary: primaryColor,
-      surfaceTint: Colors.white,
     ),
   );
 
@@ -30,6 +29,9 @@ ThemeData getAppTheme() {
       iconTheme: base.iconTheme.copyWith(color: Colors.white),
       backgroundColor: primaryColor,
       foregroundColor: Colors.white,
+    ),
+    dividerTheme: base.dividerTheme.copyWith(
+      thickness: 0.1,
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
       backgroundColor: primaryColor,

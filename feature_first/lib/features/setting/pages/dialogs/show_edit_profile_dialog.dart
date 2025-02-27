@@ -25,13 +25,8 @@ import '../../use_cases/fetch_my_profile.dart';
 import '../../use_cases/save_my_profile.dart';
 import '../../use_cases/save_my_profile_image.dart';
 
-Future<void> showEditProfileDialog({
-  required BuildContext context,
-}) async {
-  return showContentDialog(
-    context: context,
-    contentWidget: const _Dialog(),
-  );
+Future<void> showEditProfileDialog({required BuildContext context}) {
+  return showContentDialog(context: context, contentWidget: const _Dialog());
 }
 
 class _Dialog extends HookConsumerWidget {
@@ -43,20 +38,17 @@ class _Dialog extends HookConsumerWidget {
     final profile = profileAsyncValue.asData?.value;
     final birthdateState = useState<DateTime?>(profile?.birthdate);
 
-    useEffect(
-      () {
-        Future.microtask(() {
-          if (context.mounted && profileAsyncValue.hasError) {
-            showOkAlertDialog(
-              context: context,
-              title: profileAsyncValue.error?.toString(),
-            );
-          }
-        });
-        return null;
-      },
-      [profileAsyncValue.error],
-    );
+    useEffect(() {
+      Future.microtask(() {
+        if (context.mounted && profileAsyncValue.hasError) {
+          showOkAlertDialog(
+            context: context,
+            title: profileAsyncValue.error?.toString(),
+          );
+        }
+      });
+      return null;
+    }, [profileAsyncValue.error]);
 
     final nameFormKey = useFormFieldStateKey();
     final birthdateFormKey = useFormFieldStateKey();
@@ -89,8 +81,9 @@ class _Dialog extends HookConsumerWidget {
                   }
 
                   /// 圧縮して設定
-                  final compressImage =
-                      await ref.read(imageCompressProvider)(selectedImage);
+                  final compressImage = await ref.read(imageCompressProvider)(
+                    selectedImage,
+                  );
                   if (compressImage == null) {
                     return;
                   }
@@ -142,17 +135,21 @@ class _Dialog extends HookConsumerWidget {
               style: context.bodyStyle,
               decoration: const InputDecoration(
                 hintText: '名前を入力してください',
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
                 border: OutlineInputBorder(),
                 isDense: true,
                 counterText: '',
               ),
               key: nameFormKey,
               initialValue: profile?.name,
-              validator: (value) => (value == null || value.trim().isEmpty)
-                  ? '名前を入力してください'
-                  : null,
+              validator:
+                  (value) =>
+                      (value == null || value.trim().isEmpty)
+                          ? '名前を入力してください'
+                          : null,
               maxLength: 32,
             ),
             const SizedBox(height: 24),
@@ -170,8 +167,9 @@ class _Dialog extends HookConsumerWidget {
                   date: birthdate,
                   onDateTimeChanged: (DateTime value) {
                     birthdateState.value = value;
-                    birthdateFormKey.currentState
-                        ?.didChange(value.format(pattern: 'yyyy/M/d'));
+                    birthdateFormKey.currentState?.didChange(
+                      value.format(pattern: 'yyyy/M/d'),
+                    );
                   },
                 );
               },
@@ -180,8 +178,10 @@ class _Dialog extends HookConsumerWidget {
                   style: context.bodyStyle,
                   decoration: const InputDecoration(
                     hintText: '誕生日を設定してください',
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 10,
+                    ),
                     border: OutlineInputBorder(),
                     isDense: true,
                   ),
@@ -206,10 +206,9 @@ class _Dialog extends HookConsumerWidget {
               final birthdate = birthdateState.value;
               try {
                 showIndicator(context);
-                await ref.read(saveMyProfileProvider).call(
-                      name: name,
-                      birthdate: birthdate,
-                    );
+                await ref
+                    .read(saveMyProfileProvider)
+                    .call(name: name, birthdate: birthdate);
                 if (context.mounted) {
                   dismissIndicator(context);
                   context.showSnackBar('保存しました');

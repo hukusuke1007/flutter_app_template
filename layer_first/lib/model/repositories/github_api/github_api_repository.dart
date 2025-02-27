@@ -12,7 +12,7 @@ import 'github_api_client.dart';
 part 'github_api_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-GithubApiRepository githubApiRepository(GithubApiRepositoryRef ref) {
+GithubApiRepository githubApiRepository(Ref ref) {
   return GithubApiRepository(ref);
 }
 

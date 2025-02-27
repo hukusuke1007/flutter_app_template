@@ -2,16 +2,16 @@
 
 Flutter + Firebase アプリのスターターキット、新規アプリ開発はこのテンプレートをベースに始める。
 
-| カテゴリ       | 説明                            |
-|------------|-------------------------------|
-| 状態管理と DI   | flutter_hooks, hooks_riverpod |
-| データモデル     | freezed, equatable          |
-| クラウド DB    | cloud_firestore               |
-| ローカル DB    | shared_preferences            |
-| API クライアント | retrofit                      |
-| 画面遷移       | go_router                     |
-| Flavor設定       | --dart-define  |
-| テスト | flutter_test, integration_test, mockito |
+| カテゴリ         | 説明                                    |
+| ---------------- | --------------------------------------- |
+| 状態管理と DI    | flutter_hooks, hooks_riverpod           |
+| データモデル     | freezed, equatable                      |
+| クラウド DB      | cloud_firestore                         |
+| ローカル DB      | shared_preferences                      |
+| API クライアント | retrofit                                |
+| 画面遷移         | go_router                               |
+| Flavor 設定      | --dart-define                           |
+| テスト           | flutter_test, integration_test, mockito |
 
 ## 画面構成
 
@@ -48,10 +48,10 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 ## 実装済み
 
 - iOS14、Android7 以上で動作
-- DDDライクなFeatureFirst構成で設計
+- DDD ライクな FeatureFirst 構成で設計
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - retrofit を用いた サンプルコード
-- 画面遷移は go_router（ShellRouteは未対応）
+- 画面遷移は go_router（ShellRoute は未対応）
 - ボトムナビゲーション構成のサンプル画面
 - 画像選択・保存
 - カメラ、画像のパーミッション設定
@@ -61,13 +61,13 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 - 静的解析導入
 - Android/iOS の Flavor 設定
 - iOS 日本語デフォルト
-- MethodChannelとEventChannelのサンプルコード
-  - AndroidはTalkback、iOSはVoiceOverの設定状態の表示
+- MethodChannel と EventChannel のサンプルコード
+  - Android は Talkback、iOS は VoiceOver の設定状態の表示
 - その他アプリに必要なライブラリを設定済み
 - fvm, asdf
 - Unit tests（オフラインテスト）
 - Widget tests（オフラインテスト）
-- Integration tests（E2Eテスト）
+- Integration tests（E2E テスト）
 
 ## やっていないこと
 
@@ -132,23 +132,23 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 
 Android Studio から実行する場合は、以下のように Run Configurations を設定する。
 
-- dev環境でビルドする場合
+- dev 環境でビルドする場合
 
 ![dev](./doc/images/run_configuration_debug_dev.png)
 
-- prod環境でビルドする場合
+- prod 環境でビルドする場合
 
 ![prod](./doc/images/run_configuration_debug_prod.png)
 
-### Masonを使ってFeatureディレクトリを作成する
+### Mason を使って Feature ディレクトリを作成する
 
-masonに登録されているbrickを取り込む
+mason に登録されている brick を取り込む
 
 ```sh
 mason get
 ```
 
-featureを実行してディレクトリを作成する
+feature を実行してディレクトリを作成する
 
 ```sh
 mason make feature
@@ -210,7 +210,7 @@ flutter test test/features/github_users/pages/github_users_page_test.dart
 
 ### Integration tests
 
-実機・シミュレータを起動させるので、実行コマンドにflavor設定のjsonを指定してください。
+実機・シミュレータを起動させるので、実行コマンドに flavor 設定の json を指定してください。
 
 ```sh
 # Run all tests
@@ -226,7 +226,7 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
 ### モック
 
-[mockito](https://pub.dev/packages/mockito)を利用しています。モックのDIは[Riverpod](https://riverpod.dev/)の overrides を利用しています。
+[mockito](https://pub.dev/packages/mockito)を利用しています。モックの DI は[Riverpod](https://riverpod.dev/)の overrides を利用しています。
 
 ドキュメント
 
@@ -240,100 +240,126 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
 1. git clone で取り込み、作業用ディレクトリへコピーする
 
-    ```sh
-    git clone https://github.com/hukusuke1007/flutter_app_template.git
-    cp -rf feature_first/ [作業用ディレクトリのパス]
-    cd [作業用ディレクトリのパス]
-    ```
+   ```sh
+   git clone https://github.com/hukusuke1007/flutter_app_template.git
+   cp -rf feature_first/ [作業用ディレクトリのパス]
+   cd [作業用ディレクトリのパス]
+   ```
 
 2. 取り込み後、作業用ディレクトリ内の`.git`を削除する
 
-    ```sh
-    rm -rf .git
-    ```
+   ```sh
+   rm -rf .git
+   ```
 
 3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
-  
-    - アプリ名を変更する
-      - iOS:
 
-        `$(APP_NAME_PREFIX)`はそのままで、それ以外を変更する
+   - アプリ名を変更する
 
-        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
-        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
+     - iOS:
 
-      - Android:
+       `$(APP_NAME_PREFIX)`はそのままで、それ以外を変更する
 
-        `android/app/build.gradle`
+       - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
+       - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
 
-        - [resValue](./android/app/build.gradle#L84)
+     - Android:
 
-    - `com.example.app` のパッケージ名を変更する
-      - iOS:
+       `android/app/build.gradle`
 
-        `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
-        Debug, Profile, Release の全てを変更する。`$(APP_ID_SUFFIX)`はそのままにしてください。
-        ![dev](./doc/images/product_bundle_identifier.png)
+       - [resValue](./android/app/build.gradle#L84)
 
-      - Android:
+   - `com.example.app` のパッケージ名を変更する
 
-        - android/app/build.gradle
-          - [namespace](./android/app/build.gradle#L57)
-          - [applicationId](./android/app/build.gradle#L75)
-        - AndroidManifest.xml - package
-          - [main](./android/app/src/main/AndroidManifest.xml#L2)
-          - [debug](./android/app/src/debug/AndroidManifest.xml#L2)
-          - [profile](./android/app/src/profile/AndroidManifest.xml#L2)
+     - iOS:
 
-        - MainActivity.kt
-          - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
+       `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
+       Debug, Profile, Release の全てを変更する。`$(APP_ID_SUFFIX)`はそのままにしてください。
+       ![dev](./doc/images/product_bundle_identifier.png)
 
-        - ScreenReaderPlugin.kt
-          - [package1](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L1)
-          - [package2](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L15)
-          - [package3](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L25)
+     - Android:
 
-        - kotlin 配下のディレクトリ名を変更する
+       - android/app/build.gradle
+         - [namespace](./android/app/build.gradle#L57)
+         - [applicationId](./android/app/build.gradle#L75)
+       - AndroidManifest.xml - package
 
-          （例）`com.example.app` から `com.never.jp` へ変更した場合
+         - [main](./android/app/src/main/AndroidManifest.xml#L2)
+         - [debug](./android/app/src/debug/AndroidManifest.xml#L2)
+         - [profile](./android/app/src/profile/AndroidManifest.xml#L2)
 
-          ```md
-            変更前: android/app/src/main/kotlin/com/example/app
-            変更後: android/app/src/main/kotlin/com/never/jp
-          ```
+       - MainActivity.kt
 
-    - プロジェクト名を変更する
-      - [pubspec.yaml の name](./pubspec.yaml#L1)
+         - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
+
+       - ScreenReaderPlugin.kt
+
+         - [package1](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L1)
+         - [package2](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L15)
+         - [package3](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L25)
+
+       - kotlin 配下のディレクトリ名を変更する
+
+         （例）`com.example.app` から `com.never.jp` へ変更した場合
+
+         ```md
+         変更前: android/app/src/main/kotlin/com/example/app
+         変更後: android/app/src/main/kotlin/com/never/jp
+         ```
+
+   - プロジェクト名を変更する
+     - [pubspec.yaml の name](./pubspec.yaml#L1)
 
 4. 新しい Firebase プロジェクトを構築する。
-    開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
+   開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
 
-    - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
+   - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
 
-    構築した Firebase の設定ファイルを以下の場所へ設置する
+   以下の手順で Firebase の設定を行います：
 
-    - Android
+   1. flutterfire CLI をインストールして環境ごとに `firebase_options.dart` を生成する
 
-      ```md
-      # 開発環境
-      android/app/src/dev/google-services.json
-      # 本番環境
-      android/app/src/prod/google-services.json
+      ```sh
+      # flutterfire CLI をインストール
+      dart pub global activate flutterfire_cli
+
+      # 開発環境用の firebase_options.dart を生成
+      flutterfire configure --project=your-dev-project-id --out=lib/core/firebase/dev/firebase_options.dart
+
+      # 本番環境用の firebase_options.dart を生成
+      flutterfire configure --project=your-prod-project-id --out=lib/core/firebase/prod/firebase_options.dart
       ```
 
-    - iOS
+   2. 構築した Firebase の設定ファイルを以下の場所へ設置する
 
-      ```md
-      # 開発環境
-      ios/dev/GoogleService-Info.plist
-      # 本番環境
-      ios/prod/GoogleService-Info.plist
-      ```
+      - Android
+
+        ```md
+        # 開発環境
+
+        android/app/src/dev/google-services.json
+
+        # 本番環境
+
+        android/app/src/prod/google-services.json
+        ```
+
+      - iOS
+
+        ```md
+        # 開発環境
+
+        ios/dev/GoogleService-Info.plist
+
+        # 本番環境
+
+        ios/prod/GoogleService-Info.plist
+        ```
 
 5. Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
 6. Flutter のライブラリを取り込む。 pub get を実行する。
-    利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
+   利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
 7. [実行コマンド](#実行コマンド)を用いて動作確認する。
 
@@ -343,6 +369,6 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
 ### 注意
 
-タイムライン機能を確認するためには、Firestoreの`posts`コレクションのindexを設定してください。
+タイムライン機能を確認するためには、Firestore の`posts`コレクションの index を設定してください。
 
 ![firestore_posts_index](./doc/images/firestore_posts_index.png)

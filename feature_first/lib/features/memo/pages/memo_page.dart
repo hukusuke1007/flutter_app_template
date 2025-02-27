@@ -120,22 +120,17 @@ class MemoPage extends HookConsumerWidget {
                     ],
                   ),
                   child: ListTile(
-                    title: Text(
-                      data.text ?? '',
-                      style: context.bodyStyle,
-                    ),
-                    trailing: Text(
-                      data.dateLabel,
-                      style: context.smallStyle,
-                    ),
+                    title: Text(data.text ?? '', style: context.bodyStyle),
+                    trailing: Text(data.dateLabel, style: context.smallStyle),
                     onTap: () {
                       showEditMemoDialog(
                         context,
                         data: data,
                         onSave: (text, _) async {
                           try {
-                            await controller
-                                .onUpdate(data.copyWith(text: text));
+                            await controller.onUpdate(
+                              data.copyWith(text: text),
+                            );
                             return null;
                           } on Exception catch (e) {
                             return e.errorMessage;
@@ -153,16 +148,13 @@ class MemoPage extends HookConsumerWidget {
             ),
           );
         },
-        error: (e, __) {
+        error: (e, _) {
           return Center(
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 32),
-                  child: Text(
-                    'エラー: $e',
-                    style: context.bodyStyle,
-                  ),
+                  child: Text('エラー: $e', style: context.bodyStyle),
                 ),
                 TextButton(
                   child: Text(
@@ -180,9 +172,7 @@ class MemoPage extends HookConsumerWidget {
             ),
           );
         },
-        loading: () => const Center(
-          child: CupertinoActivityIndicator(),
-        ),
+        loading: () => const Center(child: CupertinoActivityIndicator()),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

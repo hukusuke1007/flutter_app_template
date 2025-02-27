@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/use_cases/authentication/fetch_logged_in_type.dart';
@@ -6,13 +7,10 @@ import 'sign_in_with_anonymously.dart';
 
 part 'start_up.g.dart';
 
-enum StartUpResultType {
-  success,
-  forcedVersionUpgrade,
-}
+enum StartUpResultType { success, forcedVersionUpgrade }
 
 @riverpod
-Future<StartUpResultType> startUp(StartUpRef ref) async {
+Future<StartUpResultType> startUp(Ref ref) async {
   /// ログイン状態を確認
   final loginType = ref.watch(fetchLoggedInTypeProvider)();
   logger.info(loginType);

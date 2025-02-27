@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,15 +11,13 @@ import '../entities/user.dart';
 part 'github_api_client.g.dart';
 
 @Riverpod(keepAlive: true)
-GithubApiClient githubApiClient(GithubApiClientRef ref) {
+GithubApiClient githubApiClient(Ref ref) {
   return GithubApiClient(
     Dio(dioDefaultOptions)
-      ..interceptors.addAll(
-        [
-          if (kDebugMode) LogInterceptor(requestBody: true, responseBody: true),
-          authHeaderInterceptor,
-        ],
-      ),
+      ..interceptors.addAll([
+        if (kDebugMode) LogInterceptor(requestBody: true, responseBody: true),
+        authHeaderInterceptor,
+      ]),
     baseUrl: 'https://api.github.com',
   );
 }
@@ -26,10 +25,7 @@ GithubApiClient githubApiClient(GithubApiClientRef ref) {
 @RestApi()
 // ignore:one_member_abstracts
 abstract class GithubApiClient {
-  factory GithubApiClient(
-    Dio dio, {
-    String baseUrl,
-  }) = _GithubApiClient;
+  factory GithubApiClient(Dio dio, {String baseUrl}) = _GithubApiClient;
 
   /// https://docs.github.com/ja/rest/users/users#list-users
   @GET('/users')

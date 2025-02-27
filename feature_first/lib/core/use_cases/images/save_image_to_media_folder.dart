@@ -12,16 +12,16 @@ import '../../utils/navigator_key_provider.dart';
 import '../../widgets/show_indicator.dart';
 import '../permission/request_album_permission.dart';
 
-final saveImageToMediaFolderProvider = Provider(SaveImageToMediaFolder.new);
+final saveImageToMediaFolderProvider = Provider<SaveImageToMediaFolder>(
+  SaveImageToMediaFolder.new,
+);
 
 class SaveImageToMediaFolder {
   SaveImageToMediaFolder(this._ref);
 
   final Ref _ref;
 
-  Future<void> call(
-    Uint8List imageBytes,
-  ) async {
+  Future<void> call(Uint8List imageBytes) async {
     final status = await _ref.read(requestAlbumPermissionProvider).call();
     final gContext = _ref.read(navigatorKeyProvider).currentContext!;
     if (!status) {

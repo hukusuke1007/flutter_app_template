@@ -50,6 +50,7 @@ ios/Flutter/DartDefines.xcconfig
 # Firebase
 android/**/google-services.json
 ios/**/GoogleService-Info.plist
+lib/core/firebase/*/firebase_options.dart
 
 # Mason
 mason-lock.json
@@ -58,3 +59,4 @@ mason-lock.json
 
 # Test
 coverage/
+

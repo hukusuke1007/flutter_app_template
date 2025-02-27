@@ -7,20 +7,23 @@ part of 'save_my_profile_image.dart';
 // **************************************************************************
 
 String _$saveMyProfileImageHash() =>
-    r'a3a0f842bafde15e9c4ccc8721ed8326c147c854';
+    r'f246d142a570fb32c779a033c685ae69ebabc67f';
 
 /// See also [saveMyProfileImage].
 @ProviderFor(saveMyProfileImage)
 final saveMyProfileImageProvider = Provider<SaveMyProfileImage>.internal(
   saveMyProfileImage,
   name: r'saveMyProfileImageProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$saveMyProfileImageHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$saveMyProfileImageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SaveMyProfileImageRef = ProviderRef<SaveMyProfileImage>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

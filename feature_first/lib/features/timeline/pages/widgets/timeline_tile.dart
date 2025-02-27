@@ -54,11 +54,12 @@ class TimelineTile extends HookConsumerWidget {
                         child: CircleThumbnail(
                           size: 48,
                           url: poster?.image?.url,
-                          onTap: onTapAvatar != null
-                              ? () {
-                                  onTapAvatar!(poster);
-                                }
-                              : null,
+                          onTap:
+                              onTapAvatar != null
+                                  ? () {
+                                    onTapAvatar!(poster);
+                                  }
+                                  : null,
                         ),
                       ),
                       Expanded(
@@ -119,7 +120,7 @@ class TimelineTile extends HookConsumerWidget {
                                   return TileMenu(
                                     data: data,
                                     isMyData: isMyData,
-                                    onTapMenu: (result) async {
+                                    onTapMenu: (result) {
                                       switch (result) {
                                         case MenuResultType.share:
                                           ShareExtension.shareText(
@@ -130,8 +131,8 @@ class TimelineTile extends HookConsumerWidget {
                                           Clipboard.copy(data.text).ignore();
                                           context.showSnackBar('コピーしました');
                                         case MenuResultType.issueReport ||
-                                              MenuResultType.mute ||
-                                              MenuResultType.block:
+                                            MenuResultType.mute ||
+                                            MenuResultType.block:
                                           showOkAlertDialog(
                                             context: context,
                                             title: '実装してください',
