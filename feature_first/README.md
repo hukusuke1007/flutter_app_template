@@ -369,7 +369,7 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 6. Flutter のライブラリを取り込む。 pub get を実行する。
    利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
 
-   > **注意**: `.env`ファイルを使用しない場合（flutterfire CLI を使用する場合）は、`flutter_dotenv`パッケージを`pubspec.yaml`から削除してください。
+   > **注意**: `.env`ファイルを使用しない場合（flutterfire CLI を使用する場合）は、`flutter_dotenv`パッケージを`pubspec.yaml`から削除し、`main.dart`から`await dotenv.load();`を削除してください。
 
 7. [実行コマンド](#実行コマンド)を用いて動作確認する。
 
