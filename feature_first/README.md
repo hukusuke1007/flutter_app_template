@@ -319,55 +319,57 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
    1. flutterfire CLI をインストールして環境ごとに `firebase_options.dart` を生成する
 
-   ```sh
-   # flutterfire CLI をインストール
-   dart pub global activate flutterfire_cli
+      ```sh
+      # flutterfire CLI をインストール
+      dart pub global activate flutterfire_cli
 
-   # 開発環境用の firebase_options.dart を生成
-   flutterfire configure --project=your-dev-project-id --out=lib/core/firebase/dev/firebase_options.dart
+      # 開発環境用の firebase_options.dart を生成
+      flutterfire configure --project=your-dev-project-id --out=lib/core/firebase/dev/firebase_options.dart
 
-   # 本番環境用の firebase_options.dart を生成
-   flutterfire configure --project=your-prod-project-id --out=lib/core/firebase/prod/firebase_options.dart
-   ```
+      # 本番環境用の firebase_options.dart を生成
+      flutterfire configure --project=your-prod-project-id --out=lib/core/firebase/prod/firebase_options.dart
+      ```
 
    2. または、`sample.env` ファイルを `.env` にコピーし、Firebase コンソールから取得した値を設定する
 
-   ```sh
-   cp sample.env .env
-   ```
+      ```sh
+      cp sample.env .env
+      ```
 
-   `.env` ファイルを開き、開発環境と本番環境それぞれの Firebase プロジェクトの値を設定します。
+      `.env` ファイルを開き、開発環境と本番環境それぞれの Firebase プロジェクトの値を設定します。
 
    3. 構築した Firebase の設定ファイルを以下の場所へ設置する
 
-   - Android
+      - Android
 
-     ```md
-     # 開発環境
+        ```md
+        # 開発環境
 
-     android/app/src/dev/google-services.json
+        android/app/src/dev/google-services.json
 
-     # 本番環境
+        # 本番環境
 
-     android/app/src/prod/google-services.json
-     ```
+        android/app/src/prod/google-services.json
+        ```
 
-   - iOS
+      - iOS
 
-     ```md
-     # 開発環境
+        ```md
+        # 開発環境
 
-     ios/dev/GoogleService-Info.plist
+        ios/dev/GoogleService-Info.plist
 
-     # 本番環境
+        # 本番環境
 
-     ios/prod/GoogleService-Info.plist
-     ```
+        ios/prod/GoogleService-Info.plist
+        ```
 
 5. Firebase コンソールから匿名認証を 開発環境、本番環境共に ON にする
 
 6. Flutter のライブラリを取り込む。 pub get を実行する。
    利用するバージョンを固定にするため、[pubspec.lock](./pubspec.lock) 内のプラグインのバージョンを見て [pubspec.yaml](./pubspec.yaml) のプラグインのバージョンを指定する。
+
+   > **注意**: `.env`ファイルを使用しない場合（flutterfire CLI を使用する場合）は、`flutter_dotenv`パッケージを`pubspec.yaml`から削除してください。
 
 7. [実行コマンド](#実行コマンド)を用いて動作確認する。
 
