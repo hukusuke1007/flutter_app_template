@@ -13,13 +13,12 @@ Future<CroppedFile?> cropThumbnail(
   BuildContext context,
   String path, {
   String title = 'サムネイル',
-}) =>
-    _cropImage(
-      context,
-      path,
-      cropStyle: CropStyle.rectangle,
-      toolbarTitle: title,
-    );
+}) => _cropImage(
+  context,
+  path,
+  cropStyle: CropStyle.rectangle,
+  toolbarTitle: title,
+);
 
 Future<CroppedFile?> _cropImage(
   BuildContext context,
@@ -33,6 +32,7 @@ Future<CroppedFile?> _cropImage(
       AndroidUiSettings(
         cropStyle: cropStyle,
         toolbarTitle: toolbarTitle,
+        toolbarColor: Colors.deepOrange,
         toolbarWidgetColor: Colors.white,
         initAspectRatio: CropAspectRatioPreset.original,
         lockAspectRatio: false,
