@@ -58,4 +58,6 @@ mason-lock.json
 
 # Test
 coverage/
-lib/core/firebase/*/firebase_options.dart
+
+# Environment variables
+.env

@@ -662,6 +662,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_driver:
     dependency: transitive
     description: flutter
@@ -875,11 +883,10 @@ packages:
   flutter_slidable:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a510f1e94d766bc240ea264a350d18a5e60cf0d0
-      url: "https://github.com/letsar/flutter_slidable"
-    source: git
+      name: flutter_slidable
+      sha256: ab7dbb16f783307c9d7762ede2593ce32c220ba2ba0fd540a3db8e9a3acba71a
+      url: "https://pub.dev"
+    source: hosted
     version: "4.0.0"
   flutter_svg:
     dependency: "direct main"

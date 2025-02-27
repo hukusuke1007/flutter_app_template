@@ -5,6 +5,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
   late final SharedPreferences sharedPreferences;
   late final Directory tempDirectory;
   Logger.configure();
+  await dotenv.load();
   logger.info(Flavor.environment);
 
   await (
