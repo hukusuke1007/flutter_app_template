@@ -1,6 +1,6 @@
 ---
 description: Riverpod Implementation Guidelines
-globs: *.dart
+globs: *.dart, *.yaml
 alwaysApply: true
 ---
 # Riverpod Implementation Guidelines

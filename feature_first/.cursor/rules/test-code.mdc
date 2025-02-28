@@ -1,6 +1,6 @@
 ---
 description: Flutter Feature First Architecture Test Rules
-globs: *.dart
+globs: *.dart, *.yaml
 alwaysApply: false
 ---
 # Flutter Feature First Architecture Test Rules

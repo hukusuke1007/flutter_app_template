@@ -1,0 +1,292 @@
+---
+description: Flutter Feature First Architecture Presentation Layer Implementation Rules
+globs: *.dart, *.yaml
+alwaysApply: true
+---
+# Flutter Feature First Architecture Presentation Layer Implementation Rules
+
+## Directory Structure
+
+```
+lib/
+├── features/
+│   └── {feature_name}/
+│       └── pages/           # Screens
+│           ├── {page_name}_page.dart  # Screen implementation
+│           └── widgets/     # Screen-specific widgets
+│               └── {widget_name}.dart
+├── core/
+│   ├── widgets/            # Common widgets
+│   │   ├── buttons/        # Button-related
+│   │   ├── texts/          # Text-related
+│   │   ├── images/         # Image-related
+│   │   ├── dialogs/        # Dialog-related
+│   │   └── sheets/         # Bottom sheet-related
+│   ├── custom_hooks/       # Custom hooks
+│   ├── extensions/         # Extension methods
+│   └── res/               # Resources (styles, etc.)
+```
+
+## Screen Implementation Guidelines
+
+### 1. Basic Page Structure
+
+- Implement each screen by extending `HookConsumerWidget`
+- Provide static methods for screen navigation (`push`, `showNav1`, etc.)
+- Define screen names as static properties (`pageName`, `pagePath`)
+
+```dart
+class YourPage extends HookConsumerWidget {
+  const YourPage({super.key});
+
+  static String get pageName => 'your_page';
+  static String get pagePath => '/${pageName}';
+
+  /// go_router navigation
+  static void push(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// Traditional navigation
+  static Future<void> showNav1(BuildContext context) {
+    return Navigator.of(context, rootNavigator: true).push<void>(
+      CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
+        builder: (_) => const YourPage(),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Implementation
+  }
+}
+```
+
+### 2. Utilizing Hooks
+
+- Use `flutter_hooks` for concise state management
+- Create custom hooks to enhance reusability
+- Commonly used hooks:
+  - `useScrollController`: Scroll controller
+  - `useFocusNode`: Focus node
+  - `useFormFieldStateKey`: Form field state management
+  - `useEffectOnce`: Side effects that run only once
+
+```dart
+// Custom hook example
+void useEffectOnce(Dispose? Function() effect) {
+  return useEffect(effect, const []);
+}
+
+// Usage example
+useEffectOnce(() {
+  // Process to run only once
+  return null;
+});
+```
+
+### 3. State Management
+
+- Use Riverpod for state management
+- Monitor state with `ref.watch()`
+- Execute actions with `ref.read()`
+- Use `.when()` for displaying asynchronous data
+
+```dart
+// State monitoring
+final data = ref.watch(dataProvider);
+
+// Displaying asynchronous data
+data.when(
+  data: (items) => ListView.builder(/* ... */),
+  error: (e, _) => ErrorMessage(message: e.toString()),
+  loading: () => const Center(child: CircularProgressIndicator()),
+);
+```
+
+### 4. Error Handling
+
+- Use common components for error display
+- Provide retry functionality
+- Display user-friendly error messages
+
+```dart
+ErrorMessage(
+  message: e.toString(),
+  onTapRetry: () {
+    ref.invalidate(dataProvider);
+  },
+);
+```
+
+### 5. Loading Display
+
+- Use common components for displaying loading states
+- Use `showIndicator` / `dismissIndicator` for full-screen loading
+
+```dart
+try {
+  showIndicator(context);
+  await ref.read(someProvider)(params);
+  if (context.mounted) {
+    dismissIndicator(context);
+    // Success handling
+  }
+} on Exception catch (e) {
+  if (context.mounted) {
+    dismissIndicator(context);
+    // Error handling
+  }
+}
+```
+
+### 6. Form Implementation
+
+- Use dedicated components for form fields
+- Implement validation within form fields
+- Use `useFormFieldStateKey` for form state management
+
+```dart
+final emailFormFieldKey = useFormFieldStateKey();
+
+EmailTextField(
+  textFormFieldKey: emailFormFieldKey,
+  // Other properties
+);
+
+// Validation
+final isValid = emailFormFieldKey.currentState?.validate() ?? false;
+final value = emailFormFieldKey.currentState?.value;
+```
+
+### 7. Button Implementation
+
+- Use Material Design button components
+- Get button styles from the `ButtonStyles` class
+- Don't create button components for specific purposes only
+
+```dart
+FilledButton(
+  style: ButtonStyles.normal(),
+  onPressed: () {
+    // Action
+  },
+  child: Text('Button Text'),
+);
+
+// Full-width button
+FilledButton(
+  style: ButtonStyles.fullWidth(),
+  onPressed: () {
+    // Action
+  },
+  child: Text('Button Text'),
+);
+```
+
+### 8. List Display
+
+- Use `ListView.builder` or `ListView.separated`
+- Use `SmartRefresher` for infinite scrolling
+- Properly manage scroll controllers
+
+```dart
+SmartRefresher(
+  header: const SmartRefreshHeader(),
+  footer: const SmartRefreshFooter(),
+  enablePullUp: true,
+  controller: refreshController,
+  onRefresh: () {
+    ref.invalidate(dataProvider);
+    refreshController.refreshCompleted();
+  },
+  onLoading: () async {
+    await ref.read(dataProvider.notifier).onFetchMore();
+    refreshController.loadComplete();
+  },
+  child: ListView.builder(
+    controller: scrollController,
+    itemBuilder: (context, index) {
+      // Build items
+    },
+    itemCount: items.length,
+  ),
+);
+```
+
+### 9. Utilizing Context Extensions
+
+- Leverage extension methods from `context_extension.dart`
+- Simplify access to themes and styles
+- Provide device information and utility functions
+
+```dart
+// Text styles
+Text('Title', style: context.titleStyle);
+Text('Body', style: context.bodyStyle);
+
+// Device information
+final width = context.deviceWidth;
+final isTablet = context.isTablet;
+
+// Utilities
+context.hideKeyboard();
+context.showSnackBar('Message');
+```
+
+### 10. Widget Decomposition
+
+- Break complex widgets into smaller components
+- Place screen-specific widgets in the `widgets/` directory
+- Place reusable widgets in `core/widgets/`
+
+```dart
+// Screen-specific widget
+class CustomListTile extends StatelessWidget {
+  // Implementation
+}
+
+// Reusable widget
+class ErrorMessage extends StatelessWidget {
+  // Implementation
+}
+```
+
+## Best Practices
+
+1. **Consistent Naming Conventions**:
+
+   - Page classes: `NounPage` (e.g., `HomePage`)
+   - Widget classes: Names that represent functionality (e.g., `ErrorMessage`)
+   - Providers: Functionality name + Provider (e.g., `userProvider`)
+
+2. **Code Organization**:
+
+   - Organize imports (Dart/Flutter, third-party, project internal)
+   - Arrange methods logically within classes
+   - Break long methods into smaller functions
+
+3. **Performance Considerations**:
+
+   - Avoid unnecessary rebuilds
+   - Use `ListView.builder` for large lists
+   - Properly manage image caching
+
+4. **Accessibility**:
+
+   - Appropriate text sizes and contrast
+   - Sufficiently large tappable areas
+   - Provide semantic labels
+
+5. **Error Handling**:
+
+   - Handle errors in all asynchronous operations
+   - User-friendly error messages
+   - Provide recovery options
+
+6. **Testability**:
+   - Design for easy widget testing
+   - Explicit dependency injection
+   - Testable component decomposition

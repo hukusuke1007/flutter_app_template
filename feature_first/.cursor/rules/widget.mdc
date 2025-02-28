@@ -1,6 +1,6 @@
 ---
 description: Flutter Widget Implementation Rules
-globs: *.dart
+globs: *.dart, *.yaml
 alwaysApply: true
 ---
 # Flutter Widget Implementation Rules

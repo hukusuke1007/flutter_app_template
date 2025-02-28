@@ -1,6 +1,6 @@
 ---
 description: Package Usage Guidelines
-globs: *dart, *.yaml
+globs: *.dart, *.yaml
 alwaysApply: false
 ---
 # Package Usage Guidelines
