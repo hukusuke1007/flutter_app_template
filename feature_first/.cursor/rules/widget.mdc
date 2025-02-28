@@ -78,3 +78,91 @@ class SamplePage3 extends StatelessWidget {
 4. Implement pagination when fetching data from APIs
 5. Use caching strategies for images and other heavy content
 6. Test your implementation with a large number of items to ensure it performs well
+
+## Button Implementation Guidelines
+
+When implementing buttons in Flutter applications, it's important to use the built-in Material Design buttons appropriately and create custom buttons only when necessary. Understanding the `ButtonStyleButton` framework is essential for maintaining consistency and flexibility.
+
+### Common Implementation Pitfalls
+
+#### NG: Creating Overly Specific Button Components
+
+Avoid creating button components that serve very specific purposes and are hard to extend or modify:
+
+```dart
+// NOT RECOMMENDED
+class FullWidthButton extends StatelessWidget {
+  const FullWidthButton({
+    super.key,
+    required this.onPressed,
+    required this.child,
+  });
+
+  final VoidCallback? onPressed;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: onPressed,
+        child: child,
+      ),
+    );
+  }
+}
+```
+
+Problems with this approach:
+
+1. Limited to only `FilledButton`, requires creating new widgets for other button types
+2. No way to customize the style (colors, shapes, etc.) without adding more parameters
+3. Creates unnecessary abstraction over simple button configuration
+
+### Better Approaches
+
+#### OK: Using ButtonStyle Configurations
+
+```dart
+// RECOMMENDED
+// constants.dart
+const double kButtonMinimumHeight = 40.0;
+
+// button_styles.dart
+class ButtonStyles {
+  // Style for full-width buttons
+  static ButtonStyle fullWidthStyle = ButtonStyle(
+    minimumSize: MaterialStatePropertyAll(
+      Size(double.infinity, kButtonMinimumHeight),
+    ),
+  );
+
+  // Style for rounded buttons
+  static ButtonStyle roundedStyle = ButtonStyle(
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  );
+}
+
+// Usage
+FilledButton(
+  style: ButtonStyles.fullWidthStyle,
+  onPressed: () {},
+  child: const Text('Submit'),
+)
+```
+
+### Best Practices for Button Implementation
+
+1. Use the appropriate built-in button type based on your UI requirements and action importance
+2. Leverage `Theme.of(context)` for consistent styling rather than hardcoding colors and styles
+3. Define reusable `ButtonStyle` objects for common button configurations rather than creating wrapper widgets
+4. Use `MaterialStateProperty` to handle different button states properly
+5. Keep custom button implementations focused on adding meaningful functionality, not just superficial styling
+6. When creating a custom button, ensure it works with all relevant button types from the Material library
+7. Set a consistent button height across your application (typically 40dp for Material 3)
+8. For platform-specific designs, consider using the Visual Density property that Flutter provides

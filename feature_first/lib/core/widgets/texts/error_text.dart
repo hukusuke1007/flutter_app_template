@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../extensions/context_extension.dart';
+import '../../res/button_style.dart';
 
 class ErrorText extends StatelessWidget {
   const ErrorText({
@@ -21,19 +22,13 @@ class ErrorText extends StatelessWidget {
       children: [
         Text(
           message,
-          style: context.bodyStyle.copyWith(
-            color: Colors.redAccent,
-          ),
+          style: context.bodyStyle.copyWith(color: Colors.redAccent),
           textAlign: TextAlign.center,
         ),
         TextButton(
           onPressed: onRetry,
-          child: Text(
-            retryTitle,
-            style: context.bodyStyle.copyWith(
-              color: Colors.blueAccent,
-            ),
-          ),
+          style: ButtonStyles.textButton(),
+          child: Text(retryTitle, style: context.bodyStyle),
         ),
       ],
     );

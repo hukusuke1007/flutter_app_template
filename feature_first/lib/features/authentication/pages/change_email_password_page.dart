@@ -17,7 +17,6 @@ import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/change_email_password.dart';
 import 'reset_email_password_page.dart';
 import 'top_email_feature_page.dart';
-import 'widgets/forget_password_button.dart';
 import 'widgets/passward_text_field.dart';
 
 class ChangeEmailPasswordPage extends HookConsumerWidget {
@@ -80,8 +79,10 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                 PasswordTextField(
                   textFormFieldKey: oldPasswordFormFieldKey,
                   focusNode: focusNode,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 32,
+                  ),
                   hintText: '大文字小文字含む英数字8桁以上',
                   title: '現在のパスワードを入力',
                   textInputAction: TextInputAction.next,
@@ -91,18 +92,27 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                 /// 変更後パスワード
                 PasswordTextField(
                   textFormFieldKey: newPasswordFormFieldKey,
-                  padding: const EdgeInsets.symmetric(horizontal: 32).copyWith(
-                    bottom: 16,
-                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                  ).copyWith(bottom: 16),
                   hintText: '大文字小文字含む英数字8桁以上',
                   title: '変更後のパスワードを入力',
                 ),
 
                 /// パスワードを忘れた
-                ForgetPasswordButton(
-                  onTap: () {
+                TextButton(
+                  onPressed: () {
                     ResetEmailPasswordPage.push(context);
                   },
+                  child: Text(
+                    'パスワードを忘れた',
+                    style: context.bodyStyle.copyWith(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
@@ -146,10 +156,7 @@ class ChangeEmailPasswordPage extends HookConsumerWidget {
                 );
                 if (context.mounted) {
                   dismissIndicator(context);
-                  await showOkAlertDialog(
-                    context: context,
-                    title: '変更しました',
-                  );
+                  await showOkAlertDialog(context: context, title: '変更しました');
                 }
                 if (context.mounted) {
                   context.pop();

@@ -18,7 +18,6 @@ import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/sign_in_with_email_and_password.dart';
 import 'top_email_feature_page.dart';
 import 'widgets/email_text_field.dart';
-import 'widgets/forget_password_button.dart';
 import 'widgets/passward_text_field.dart';
 
 class SignInWithEmailPage extends HookConsumerWidget {
@@ -82,8 +81,10 @@ class SignInWithEmailPage extends HookConsumerWidget {
                   key: const Key('emailTextField'),
                   textFormFieldKey: emailFormFieldKey,
                   focusNode: focusNode,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 32,
+                  ),
                   hintText: 'メールアドレスを入力',
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) => focusNode.nextFocus(),
@@ -93,17 +94,26 @@ class SignInWithEmailPage extends HookConsumerWidget {
                 PasswordTextField(
                   key: const Key('passwordTextField'),
                   textFormFieldKey: passwordFormFieldKey,
-                  padding: const EdgeInsets.symmetric(horizontal: 32).copyWith(
-                    bottom: 16,
-                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                  ).copyWith(bottom: 16),
                   hintText: '大文字小文字含む英数字8桁以上',
                 ),
 
                 /// パスワードを忘れた
-                ForgetPasswordButton(
-                  onTap: () {
+                TextButton(
+                  onPressed: () {
                     ResetEmailPasswordPage.push(context);
                   },
+                  child: Text(
+                    'パスワードを忘れた',
+                    style: context.bodyStyle.copyWith(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
@@ -147,10 +157,7 @@ class SignInWithEmailPage extends HookConsumerWidget {
                 );
                 if (context.mounted) {
                   dismissIndicator(context);
-                  await showOkAlertDialog(
-                    context: context,
-                    title: 'ログインしました',
-                  );
+                  await showOkAlertDialog(context: context, title: 'ログインしました');
                 }
                 if (context.mounted) {
                   context.pop();
