@@ -25,6 +25,7 @@ It was created as a reference for developing new Flutter projects.
 3. Use consistent naming conventions
 4. Prioritize beautiful design and user experience
 5. Clearly separate business logic for each feature
+6. Implement responsive UIs that adapt to different screen sizes to prevent overflow issues
 
 ## Design and Implementation Rules
 
