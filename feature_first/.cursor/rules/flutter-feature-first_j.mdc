@@ -125,7 +125,7 @@ lib/
    - widgets/（機能固有のウィジェット）
    - providers/（状態管理）
    - repositories/（データアクセス）
-   - models/（機能固有のモデル）
+   - entities/（機能固有のエンティティ）
 
 ## コア層のガイドライン
 

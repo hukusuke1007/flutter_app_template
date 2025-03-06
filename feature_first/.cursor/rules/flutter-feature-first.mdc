@@ -125,7 +125,7 @@ lib/
    - widgets/ (feature-specific widgets)
    - providers/ (state management)
    - repositories/ (data access)
-   - models/ (feature-specific models)
+   - entities/ (feature-specific entities)
 
 ## Core Layer Guidelines
 
