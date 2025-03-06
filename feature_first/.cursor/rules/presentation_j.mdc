@@ -1,0 +1,292 @@
+---
+description: Flutter Feature Firstアーキテクチャ プレゼンテーション層実装ルール
+globs: *.dart, *.yaml
+alwaysApply: true
+---
+# Flutter Feature Firstアーキテクチャ プレゼンテーション層実装ルール
+
+## ディレクトリ構造
+
+```
+lib/
+├── features/
+│   └── {feature_name}/
+│       └── pages/           # 画面
+│           ├── {page_name}_page.dart  # 画面実装
+│           └── widgets/     # 画面固有のウィジェット
+│               └── {widget_name}.dart
+├── core/
+│   ├── widgets/            # 共通ウィジェット
+│   │   ├── buttons/        # ボタン関連
+│   │   ├── texts/          # テキスト関連
+│   │   ├── images/         # 画像関連
+│   │   ├── dialogs/        # ダイアログ関連
+│   │   └── sheets/         # ボトムシート関連
+│   ├── custom_hooks/       # カスタムフック
+│   ├── extensions/         # 拡張メソッド
+│   └── res/               # リソース（スタイルなど）
+```
+
+## 画面実装ガイドライン
+
+### 1. 基本的なページ構造
+
+- 各画面は`HookConsumerWidget`を拡張して実装する
+- 画面ナビゲーション用の静的メソッド（`push`、`showNav1`など）を提供する
+- 画面名を静的プロパティとして定義する（`pageName`、`pagePath`）
+
+```dart
+class YourPage extends HookConsumerWidget {
+  const YourPage({super.key});
+
+  static String get pageName => 'your_page';
+  static String get pagePath => '/${pageName}';
+
+  /// go_routerナビゲーション
+  static void push(BuildContext context) {
+    context.push(pagePath);
+  }
+
+  /// 従来のナビゲーション
+  static Future<void> showNav1(BuildContext context) {
+    return Navigator.of(context, rootNavigator: true).push<void>(
+      CupertinoPageRoute(
+        settings: RouteSettings(name: pageName),
+        builder: (_) => const YourPage(),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 実装
+  }
+}
+```
+
+### 2. フックの活用
+
+- 簡潔な状態管理のために`flutter_hooks`を使用する
+- 再利用性を高めるためにカスタムフックを作成する
+- よく使用されるフック：
+  - `useScrollController`：スクロールコントローラー
+  - `useFocusNode`：フォーカスノード
+  - `useFormFieldStateKey`：フォームフィールド状態管理
+  - `useEffectOnce`：一度だけ実行される副作用
+
+```dart
+// カスタムフックの例
+void useEffectOnce(Dispose? Function() effect) {
+  return useEffect(effect, const []);
+}
+
+// 使用例
+useEffectOnce(() {
+  // 一度だけ実行されるプロセス
+  return null;
+});
+```
+
+### 3. 状態管理
+
+- 状態管理にはRiverpodを使用する
+- `ref.watch()`で状態を監視する
+- `ref.read()`でアクションを実行する
+- 非同期データの表示には`.when()`を使用する
+
+```dart
+// 状態監視
+final data = ref.watch(dataProvider);
+
+// 非同期データの表示
+data.when(
+  data: (items) => ListView.builder(/* ... */),
+  error: (e, _) => ErrorMessage(message: e.toString()),
+  loading: () => const Center(child: CircularProgressIndicator()),
+);
+```
+
+### 4. エラー処理
+
+- エラー表示には共通コンポーネントを使用する
+- リトライ機能を提供する
+- ユーザーフレンドリーなエラーメッセージを表示する
+
+```dart
+ErrorMessage(
+  message: e.toString(),
+  onTapRetry: () {
+    ref.invalidate(dataProvider);
+  },
+);
+```
+
+### 5. ローディング表示
+
+- ローディング状態の表示には共通コンポーネントを使用する
+- 全画面ローディングには`showIndicator` / `dismissIndicator`を使用する
+
+```dart
+try {
+  showIndicator(context);
+  await ref.read(someProvider)(params);
+  if (context.mounted) {
+    dismissIndicator(context);
+    // 成功処理
+  }
+} on Exception catch (e) {
+  if (context.mounted) {
+    dismissIndicator(context);
+    // エラー処理
+  }
+}
+```
+
+### 6. フォーム実装
+
+- フォームフィールドには専用コンポーネントを使用する
+- フォームフィールド内にバリデーションを実装する
+- フォーム状態管理には`useFormFieldStateKey`を使用する
+
+```dart
+final emailFormFieldKey = useFormFieldStateKey();
+
+EmailTextField(
+  textFormFieldKey: emailFormFieldKey,
+  // その他のプロパティ
+);
+
+// バリデーション
+final isValid = emailFormFieldKey.currentState?.validate() ?? false;
+final value = emailFormFieldKey.currentState?.value;
+```
+
+### 7. ボタン実装
+
+- マテリアルデザインのボタンコンポーネントを使用する
+- ボタンスタイルは`ButtonStyles`クラスから取得する
+- 特定の目的だけのためのボタンコンポーネントを作成しない
+
+```dart
+FilledButton(
+  style: ButtonStyles.normal(),
+  onPressed: () {
+    // アクション
+  },
+  child: Text('ボタンテキスト'),
+);
+
+// 全幅ボタン
+FilledButton(
+  style: ButtonStyles.fullWidth(),
+  onPressed: () {
+    // アクション
+  },
+  child: Text('ボタンテキスト'),
+);
+```
+
+### 8. リスト表示
+
+- `ListView.builder`または`ListView.separated`を使用する
+- 無限スクロールには`SmartRefresher`を使用する
+- スクロールコントローラーを適切に管理する
+
+```dart
+SmartRefresher(
+  header: const SmartRefreshHeader(),
+  footer: const SmartRefreshFooter(),
+  enablePullUp: true,
+  controller: refreshController,
+  onRefresh: () {
+    ref.invalidate(dataProvider);
+    refreshController.refreshCompleted();
+  },
+  onLoading: () async {
+    await ref.read(dataProvider.notifier).onFetchMore();
+    refreshController.loadComplete();
+  },
+  child: ListView.builder(
+    controller: scrollController,
+    itemBuilder: (context, index) {
+      // アイテムを構築
+    },
+    itemCount: items.length,
+  ),
+);
+```
+
+### 9. コンテキスト拡張の活用
+
+- `context_extension.dart`からの拡張メソッドを活用する
+- テーマとスタイルへのアクセスを簡素化する
+- デバイス情報とユーティリティ関数を提供する
+
+```dart
+// テキストスタイル
+Text('タイトル', style: context.titleStyle);
+Text('本文', style: context.bodyStyle);
+
+// デバイス情報
+final width = context.deviceWidth;
+final isTablet = context.isTablet;
+
+// ユーティリティ
+context.hideKeyboard();
+context.showSnackBar('メッセージ');
+```
+
+### 10. ウィジェットの分解
+
+- 複雑なウィジェットを小さなコンポーネントに分割する
+- 画面固有のウィジェットは`widgets/`ディレクトリに配置する
+- 再利用可能なウィジェットは`core/widgets/`に配置する
+
+```dart
+// 画面固有のウィジェット
+class CustomListTile extends StatelessWidget {
+  // 実装
+}
+
+// 再利用可能なウィジェット
+class ErrorMessage extends StatelessWidget {
+  // 実装
+}
+```
+
+## ベストプラクティス
+
+1. **一貫した命名規則**:
+
+   - ページクラス：`NounPage`（例：`HomePage`）
+   - ウィジェットクラス：機能を表す名前（例：`ErrorMessage`）
+   - プロバイダー：機能名 + Provider（例：`userProvider`）
+
+2. **コード構成**:
+
+   - インポートを整理する（Dart/Flutter、サードパーティ、プロジェクト内部）
+   - クラス内のメソッドを論理的に配置する
+   - 長いメソッドを小さな関数に分割する
+
+3. **パフォーマンスの考慮事項**:
+
+   - 不要な再構築を避ける
+   - 大きなリストには`ListView.builder`を使用する
+   - 画像キャッシュを適切に管理する
+
+4. **アクセシビリティ**:
+
+   - 適切なテキストサイズとコントラスト
+   - 十分に大きなタップ可能領域
+   - セマンティックラベルを提供する
+
+5. **エラー処理**:
+
+   - すべての非同期操作でエラーを処理する
+   - ユーザーフレンドリーなエラーメッセージ
+   - 回復オプションを提供する
+
+6. **テスト可能性**:
+   - 簡単なウィジェットテストのための設計
+   - 明示的な依存性注入
+   - テスト可能なコンポーネント分解

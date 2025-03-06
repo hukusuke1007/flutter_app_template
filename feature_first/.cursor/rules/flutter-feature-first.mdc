@@ -170,7 +170,6 @@ lib/
    - File names: snake_case
    - Class names: UpperCamelCase
    - Variable names: camelCase
-   - Constant names: SCREAMING_SNAKE_CASE
 
 2. Feature-specific naming:
 

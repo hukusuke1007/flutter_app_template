@@ -1,0 +1,193 @@
+---
+description: Flutter Feature Firstアーキテクチャ ドメイン層のルール
+globs: *.dart, *.yaml
+alwaysApply: true
+---
+# Flutter Feature Firstアーキテクチャ ドメイン層のルール
+
+## ディレクトリ構造
+
+```
+lib/
+├── core/
+│   └── use_cases/        # コアドメインロジック
+│       ├── authentication/  # 認証関連のユースケース
+│       ├── analytics/       # 分析関連のユースケース
+│       ├── permission/      # 権限関連のユースケース
+│       └── images/          # 画像処理のユースケース
+└── features/
+    └── {feature_name}/
+        └── use_cases/    # 機能固有のユースケース
+```
+
+## 実装ガイドライン
+
+### 1. ユースケースパターン
+
+- 各ユースケースは単一のビジネスオペレーションを表す
+- ユースケースはビジネスロジックの主要なエントリーポイント
+- ユースケースは単一の公開メソッド（多くの場合は`call()`）を持つクラスとして実装する
+  ```dart
+  class YourUseCase {
+    YourUseCase(this._ref);
+
+    final Ref _ref;
+
+    Future<ReturnType> call(Parameters params) async {
+      // 実装
+    }
+  }
+  ```
+
+### 2. Riverpodを用いた状態管理
+
+- 状態管理と依存性注入にRiverpodを使用する
+- `@riverpod`または`@Riverpod(keepAlive: true)`アノテーションを使用してコントローラーを実装する
+- build_runnerを使用してコードを生成する
+  ```dart
+  @riverpod
+  class YourController extends _$YourController {
+    @override
+    StateType build() {
+      // 初期状態
+      return initialState;
+    }
+
+    // 状態を更新するメソッド
+  }
+  ```
+
+### 3. 依存性注入
+
+- Riverpodを介してリポジトリやその他の依存関係を注入する
+- リアクティブな依存関係には`ref.watch()`を使用する
+- 非リアクティブな依存関係には`ref.read()`を使用する
+  ```dart
+  final repository = ref.watch(repositoryProvider);
+  ```
+
+### 4. エラー処理
+
+- ドメイン固有の例外（`AppException`）を使用する
+- インフラストラクチャの例外を処理および変換する
+- 意味のあるエラーメッセージを提供する
+  ```dart
+  try {
+    // 実装
+  } on SpecificException catch (e) {
+    throw AppException(title: 'ユーザーフレンドリーなエラーメッセージ');
+  }
+  ```
+
+### 5. 非同期操作
+
+- 非同期操作には`Future`と`Stream`を使用する
+- 読み込み状態とエラー状態を`AsyncValue`で処理する
+- エラー処理には`AsyncValue.guard()`を使用する
+  ```dart
+  state = await AsyncValue.guard(() async {
+    // 非同期操作
+    return result;
+  });
+  ```
+
+### 6. 状態更新
+
+- 状態更新をアトミックで一貫性のあるものにする
+- 成功した操作の後にのみ状態を更新する
+- 適切な場合は楽観的な更新を実装する
+
+  ```dart
+  // 状態を更新
+  state = newState;
+
+  // 変更を永続化
+  await repository.save(newState);
+  ```
+
+### 7. ビジネスロジックの分離
+
+- ビジネスロジックはUIやリポジトリではなく、ユースケースに保持する
+- バリデーションロジックをユースケースに実装する
+- ドメイン層とインフラストラクチャ層の間でデータを変換する
+
+### 8. テスト
+
+- ユースケースはテストが容易になるように設計する
+- テストでは依存関係をモック化する
+- 成功シナリオと失敗シナリオをテストする
+  ```dart
+  test('ユースケース成功', () async {
+    // 準備
+    when(mockRepository.method()).thenReturn(expectedValue);
+
+    // 実行
+    final result = await useCase.call(params);
+
+    // 検証
+    expect(result, expectedValue);
+  });
+  ```
+
+### 9. ページネーションとデータロード
+
+- ページネーションロジックを専用のコントローラーに実装する
+- ページネーション状態（最後のID、ページ番号など）を追跡する
+- より多くのデータを読み込むためのメソッドを提供する
+  ```dart
+  Future<void> loadMore() async {
+    // 次のページを読み込む
+  }
+  ```
+
+### 10. ベストプラクティス
+
+- 一貫した命名規則に従う
+- 公開APIと複雑なロジックを文書化する
+- ユースケースは単一の責任に焦点を当てる
+- ドメインモデルには不変のエンティティを使用する
+
+## ユースケース実装の例
+
+### シンプルなプロバイダー
+
+```dart
+final yourUseCaseProvider = Provider(YourUseCase.new);
+
+class YourUseCase {
+  YourUseCase(this._ref);
+
+  final Ref _ref;
+
+  Future<r> call(Params params) async {
+    try {
+      final repository = _ref.read(repositoryProvider);
+      final result = await repository.operation(params);
+      return result;
+    } on Exception catch (e) {
+      throw AppException(title: 'エラーメッセージ');
+    }
+  }
+}
+```
+
+### 状態コントローラー
+
+```dart
+@riverpod
+class DataController extends _$DataController {
+  @override
+  Future<Data> build() async {
+    // 初期データの読み込み
+    return await ref.watch(repositoryProvider).fetchData();
+  }
+
+  Future<void> update(Data newData) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(repositoryProvider).saveData(newData);
+      return newData;
+    });
+  }
+}
+```

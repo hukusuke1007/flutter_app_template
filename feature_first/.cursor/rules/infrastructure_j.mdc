@@ -1,0 +1,148 @@
+---
+description: Flutter Feature Firstアーキテクチャ インフラストラクチャ層のルール
+globs: *.dart, *.yaml
+alwaysApply: true
+---
+# Flutter Feature Firstアーキテクチャ インフラストラクチャ層のルール
+
+## ディレクトリ構造
+
+```
+lib/
+├── core/
+│   └── repositories/        # コアインフラストラクチャの実装
+│       ├── dio/            # HTTPクライアント設定
+│       ├── firebase_auth/  # Firebase認証
+│       ├── firestore/      # Cloud Firestore
+│       └── ...            # その他のインフラストラクチャ実装
+└── features/
+    └── {feature_name}/
+        └── repositories/   # 機能固有のリポジトリ
+```
+
+## 実装ガイドライン
+
+### 1. リポジトリパターン
+
+- 各機能は独自のリポジトリ実装を持つ
+- リポジトリはドメイン層からデータソースを抽象化する
+- 依存性注入にはRiverpodプロバイダーを使用する
+  ```dart
+  @Riverpod(keepAlive: true)
+  YourRepository yourRepository(YourRepositoryRef ref) {
+    return YourRepository(ref);
+  }
+  ```
+
+### 2. APIクライアント実装
+
+- REST APIクライアントにはRetrofitを使用する
+- APIクライアントはファクトリコンストラクタを持つ抽象クラスとして実装する
+- build_runnerを使用してクライアントコードを生成する
+
+  ```dart
+  @RestApi()
+  abstract class ApiClient {
+    factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
+
+    @GET('/endpoint')
+    Future<Response> getData();
+  }
+  ```
+
+### 3. HTTPクライアント設定（Dio）
+
+- タイムアウト、ヘッダーなどのデフォルトオプションを設定する
+- 共通機能用のインターセプターを実装する
+- 環境固有の設定を使用する
+  ```dart
+  final dioDefaultOptions = BaseOptions(
+    headers: baseHeader,
+    connectTimeout: const Duration(seconds: 30),
+    receiveTimeout: const Duration(seconds: 30),
+  );
+  ```
+
+### 4. エラー処理
+
+- 外部例外をドメイン固有の例外に変換する
+- リポジトリ全体で一貫したエラー処理を実装する
+- エラーを適切にログに記録する
+  ```dart
+  try {
+    return await apiClient.getData();
+  } on DioException catch (e) {
+    throw AppException.error(e.message);
+  }
+  ```
+
+### 5. データソース抽象化
+
+- データソース実装を分離する（リモート、ローカルなど）
+- データソース契約を定義するためのインターフェースを使用する
+- 適切な場合はキャッシュ戦略を実装する
+
+### 6. Firebase統合
+
+- 専用のリポジトリにFirebaseサービスを実装する
+- ベストプラクティスに従ってFirebase SDKを使用する
+- 認証状態とユーザーセッションを処理する
+
+### 7. ローカルストレージ
+
+- 適切なストレージソリューションを使用する（SharedPreferences、SQLiteなど）
+- データ永続化戦略を実装する
+- データの移行とバージョン管理を処理する
+
+### 8. テスト
+
+- テストで外部依存関係をモック化する
+- エラー処理とエッジケースをテストする
+- モッククライアントを使用してリポジトリテストを実装する
+
+  ```dart
+  @GenerateNiceMocks([MockSpec<ApiClient>()])
+  void main() {
+    late MockApiClient mockClient;
+    late YourRepository repository;
+
+    setUp(() {
+      mockClient = MockApiClient();
+      repository = YourRepository(mockClient);
+    });
+  }
+  ```
+
+### 9. セキュリティ
+
+- 機密データのための安全なストレージを実装する
+- 適切な暗号化方法を使用する
+- 認証トークンを安全に処理する
+
+### 10. ベストプラクティス
+
+- 一貫した命名規則に従う
+- 公開APIと重要な実装の詳細を文書化する
+- 型安全な実装を使用する
+- リソースのクリーンアップを適切に処理する
+
+## リポジトリ実装の例
+
+```dart
+@Riverpod(keepAlive: true)
+class YourRepository {
+  YourRepository(this._ref) : _client = _ref.read(apiClientProvider);
+
+  final Ref _ref;
+  final ApiClient _client;
+
+  Future<Data> getData() async {
+    try {
+      final result = await _client.getData();
+      return result.toDomain();
+    } on Exception catch (e) {
+      throw AppException.error(e.toString());
+    }
+  }
+}
+```

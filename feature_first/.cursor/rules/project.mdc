@@ -1,0 +1,42 @@
+---
+description: Flutter Feature First Architecture Template Project Overview
+globs: *
+alwaysApply: true
+---
+
+# Flutter Feature First Architecture Template
+
+## Project Overview
+
+This project is a template code collection for adopting the Flutter Feature-First architecture.
+It was created as a reference for developing new Flutter projects.
+
+## Purpose
+
+- Provide design guidelines for new project development
+- Demonstrate implementation examples of Feature-First architecture
+- Share consistent coding conventions and best practices
+- Offer reusable patterns and components
+
+## Implementation Notes
+
+1. Follow the design principles of this template
+2. Maintain appropriate directory structure
+3. Use consistent naming conventions
+4. Prioritize beautiful design and user experience
+5. Clearly separate business logic for each feature
+
+## Design and Implementation Rules
+
+For detailed design principles and implementation rules, please refer to the following documents:
+
+- [flutter-feature-first.mdc](mdc:.cursor/rules/flutter-feature-first.mdc) Architecture overview
+- [domain.mdc](mdc:.cursor/rules/domain.mdc) Domain layer implementation rules
+- [infrastructure.mdc](mdc:.cursor/rules/infrastructure.mdc) Infrastructure layer implementation rules
+- [presentation.mdc](mdc:.cursor/rules/presentation.mdc) Presentation layer implementation rules
+- [riverpod.mdc](mdc:.cursor/rules/riverpod.mdc) Riverpod implementation guidelines
+- [widget.mdc](mdc:.cursor/rules/widget.mdc) Widget implementation rules
+- [test-code.mdc](mdc:.cursor/rules/test-code.mdc) Test code implementation rules
+- [package.mdc](mdc:.cursor/rules/package.mdc) Package usage guidelines
+
+Utilize these rules to aim for high-quality Flutter application development with excellent maintainability and scalability.

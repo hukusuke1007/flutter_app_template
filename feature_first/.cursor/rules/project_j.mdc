@@ -1,0 +1,42 @@
+---
+description: Flutter Feature Firstアーキテクチャテンプレート プロジェクト概要
+globs: *
+alwaysApply: true
+---
+
+# Flutter Feature Firstアーキテクチャテンプレート
+
+## プロジェクト概要
+
+このプロジェクトは、Flutter Feature-Firstアーキテクチャを採用する際のテンプレートコード集です。
+新しいFlutterプロジェクトを開発する際の参考資料として作成されました。
+
+## 目的
+
+- 新規プロジェクト開発時の設計指針を提供する
+- Feature-Firstアーキテクチャの実装例を示す
+- 一貫性のあるコーディング規約とベストプラクティスを共有する
+- 再利用可能なパターンとコンポーネントを提供する
+
+## 実装上の注意点
+
+1. このテンプレートの設計原則に従う
+2. 適切なディレクトリ構造を維持する
+3. 一貫性のある命名規則を使用する
+4. 美しいデザインとユーザー体験を優先する
+5. 各機能のビジネスロジックを明確に分離する
+
+## 設計・実装ルール
+
+詳細な設計方針や実装ルールは、以下のドキュメントを参照してください：
+
+- [flutter-feature-first_j.mdc](mdc:.cursor/rules/flutter-feature-first_j.mdc) アーキテクチャ概要
+- [domain_j.mdc](mdc:.cursor/rules/domain_j.mdc) ドメイン層の実装ルール 
+- [infrastructure_j.mdc](mdc:.cursor/rules/infrastructure_j.mdc) インフラストラクチャ層の実装ルール
+- [presentation_j.mdc](mdc:.cursor/rules/presentation_j.mdc) プレゼンテーション層の実装ルール
+- [riverpod_j.mdc](mdc:.cursor/rules/riverpod_j.mdc) Riverpodの実装ガイドライン
+- [widget_j.mdc](mdc:.cursor/rules/widget_j.mdc) Widgetの実装ルール
+- [test-code_j.mdc](mdc:.cursor/rules/test-code_j.mdc) テストコードの実装ルール
+- [package_j.mdc](mdc:.cursor/rules/package_j.mdc) パッケージ使用ガイドライン
+
+このルールを活用し、保守性と拡張性に優れた高品質なFlutterアプリケーション開発を目指してください。

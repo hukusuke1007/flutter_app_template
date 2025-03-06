@@ -1,0 +1,171 @@
+---
+description: パッケージ使用ガイドライン
+globs: *.dart, *.yaml
+alwaysApply: false
+---
+# パッケージ使用ガイドライン
+
+このファイルはプロジェクトで使用されているパッケージとその目的を文書化しています。
+
+## コアFlutter依存関係
+
+- `flutter` - Flutter SDK
+- `flutter_localizations` - 国際化サポート
+- `intl` - 国際化ユーティリティ
+
+## ロギングとデバッグ
+
+- `simple_logger` - ロギングユーティリティ
+
+## 画像処理
+
+- `extended_image` - 高度な画像処理
+- `flutter_image_compress` - 画像圧縮
+- `image_picker` - ギャラリー/カメラからの画像選択
+- `image_gallery_saver_plus` - 画像をギャラリーに保存
+- `photo_view` - ズーム機能付き画像ビューア
+- `flutter_svg` - SVGレンダリング
+- `image_cropper` - 画像トリミング機能
+
+## ローカルストレージ
+
+- `shared_preferences` - キーバリューストレージ
+- `sembast` - NoSQLデータベース
+- `path_provider` - ファイルシステムアクセス
+
+## Web統合
+
+- `flutter_inappwebview` - アプリ内ブラウザ
+
+## UIコンポーネントとスタイリング
+
+- `google_fonts` - Googleフォント統合
+- `cupertino_icons` - iOSスタイルのアイコン
+- `loading_animation_widget` - ローディングアニメーション
+- `adaptive_dialog` - プラットフォーム適応型ダイアログ
+- `dropdown_button2` - 拡張ドロップダウン
+- `step_progress_indicator` - 進捗インジケーター
+- `dismissible_page` - 閉じることができるページ
+- `carousel_slider` - 画像カルーセル
+- `dots_indicator` - ページインジケーター
+- `expandable_page_view` - 拡張可能なページ
+- `fl_chart` - チャートとグラフ
+- `sleek_circular_slider` - 円形スライダー
+- `sliding_up_panel2` - ボトムシートパネル
+- `table_calendar` - カレンダーウィジェット
+- `calendar_date_picker2` - 日付ピッカー
+- `flutter_picker_plus` - 汎用ピッカー
+- `like_button` - アニメーション付きいいねボタン
+- `flutter_rating_bar` - 評価ウィジェット
+- `flutter_datetime_picker_plus` - 日時ピッカー
+- `lottie` - Lottieアニメーション
+
+## 状態管理
+
+- `flutter_hooks` - Reactスタイルのフック
+- `hooks_riverpod` - 状態管理
+- `riverpod_annotation` - Riverpodコード生成
+
+## データモデリング
+
+- `json_annotation` - JSONシリアライゼーション
+- `freezed_annotation` - イミュータブルクラス
+- `equatable` - 値の等価性
+
+## プラットフォーム統合
+
+- `url_launcher` - URL処理
+- `map_launcher` - マップアプリ起動
+- `launch_app_store` - アプリストア起動
+- `in_app_review` - アプリ内レビュー
+- `share_plus` - コンテンツ共有
+- `package_info_plus` - アプリパッケージ情報
+- `device_info_plus` - デバイス情報
+- `app_settings` - アプリ設定アクセス
+- `permission_handler` - 権限管理
+
+## 通知
+
+- `flutter_local_notifications` - ローカル通知
+- `flutter_timezone` - タイムゾーンサポート
+- `in_app_notification` - アプリ内通知
+
+## ナビゲーションとルーティング
+
+- `page_transition` - ページトランジション
+
+## ネットワークとAPI
+
+- `dio` - HTTPクライアント
+- `supabase_flutter` - Supabaseクライアント
+
+## Firebaseサービス
+
+- `firebase_core` - Firebaseコア
+- `firebase_analytics` - アナリティクス
+- `firebase_messaging` - プッシュ通知
+- `firebase_crashlytics` - クラッシュレポート
+- `firebase_remote_config` - リモート構成
+
+## 認証
+
+- `google_sign_in` - Google認証
+- `sign_in_with_apple` - Apple認証
+- `nonce` - 認証ノンス生成
+- `crypto` - 暗号化
+
+## UIユーティリティ
+
+- `pull_to_refresh_flutter3` - プルトゥリフレッシュ
+- `nested_scroll_view_plus` - 拡張スクロールビュー
+- `flutter_cache_manager` - キャッシュ管理
+- `app_badge_plus` - アプリバッジ管理
+
+## オーディオ
+
+- `audio_session` - オーディオセッション管理
+- `soundpool` - 効果音
+
+## 広告
+
+- `google_mobile_ads` - Google AdMob
+
+## マップ
+
+- `google_maps_flutter` - Googleマップ
+
+## ユーティリティパッケージ
+
+- `uuid` - UUID生成
+- `timezone` - タイムゾーン処理
+- `path` - パス操作
+- `collection` - コレクションユーティリティ
+- `pub_semver` - セマンティックバージョニング
+- `async` - 非同期ユーティリティ
+- `synchronized` - 同期プリミティブ
+- `stop_watch_timer` - タイマー機能
+- `wakelock_plus` - 画面をスリープさせない
+- `rxdart` - リアクティブ拡張
+
+## 開発依存関係
+
+- `pedantic_mono` - リントルール
+- `build_runner` - コード生成
+- `json_serializable` - JSONシリアライゼーション
+- `freezed` - イミュータブルクラスのコード生成
+- `riverpod_generator` - Riverpodコード生成
+- `riverpod_lint` - Riverpodリント
+- `flutter_launcher_icons` - アプリアイコン生成
+- `flutter_native_splash` - スプラッシュ画面生成
+- `package_rename` - パッケージ名変更
+- `mockito` - テスト用モック
+
+## パッケージ使用ガイドライン
+
+1. 依存関係を最新の状態に保つ
+2. 更新時に互換性をチェックする
+3. pubspec.yamlのバージョン制約に従う
+4. dev_dependenciesを適切に使用する
+5. パッケージのサイズとパフォーマンスへの影響を考慮する
+6. 可能な場合は公式Flutterパッケージを優先する
+7. 複雑なパッケージの使用方法を文書化する
