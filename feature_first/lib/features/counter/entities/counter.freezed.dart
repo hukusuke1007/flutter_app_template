@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,221 +10,145 @@ part of 'counter.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-Counter _$CounterFromJson(Map<String, dynamic> json) {
-  return _Counter.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Counter {
-  int? get count => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+
+ int? get count;@DateTimeTimestampConverter() DateTime? get createdAt;@DateTimeTimestampConverter() DateTime? get updatedAt;
+/// Create a copy of Counter
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CounterCopyWith<Counter> get copyWith => _$CounterCopyWithImpl<Counter>(this as Counter, _$identity);
 
   /// Serializes this Counter to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of Counter
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CounterCopyWith<Counter> get copyWith => throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Counter&&(identical(other.count, count) || other.count == count)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,count,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Counter(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $CounterCopyWith<$Res> {
-  factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
-      _$CounterCopyWithImpl<$Res, Counter>;
-  @useResult
-  $Res call({
-    int? count,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
-}
+abstract mixin class $CounterCopyWith<$Res>  {
+  factory $CounterCopyWith(Counter value, $Res Function(Counter) _then) = _$CounterCopyWithImpl;
+@useResult
+$Res call({
+ int? count,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$CounterCopyWithImpl<$Res, $Val extends Counter>
+class _$CounterCopyWithImpl<$Res>
     implements $CounterCopyWith<$Res> {
-  _$CounterCopyWithImpl(this._value, this._then);
+  _$CounterCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Counter _self;
+  final $Res Function(Counter) _then;
 
-  /// Create a copy of Counter
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? count = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            count:
-                freezed == count
-                    ? _value.count
-                    : count // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of Counter
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? count = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_self.copyWith(
+count: freezed == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$CounterImplCopyWith<$Res> implements $CounterCopyWith<$Res> {
-  factory _$$CounterImplCopyWith(
-    _$CounterImpl value,
-    $Res Function(_$CounterImpl) then,
-  ) = __$$CounterImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    int? count,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$CounterImplCopyWithImpl<$Res>
-    extends _$CounterCopyWithImpl<$Res, _$CounterImpl>
-    implements _$$CounterImplCopyWith<$Res> {
-  __$$CounterImplCopyWithImpl(
-    _$CounterImpl _value,
-    $Res Function(_$CounterImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of Counter
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? count = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _$CounterImpl(
-        count:
-            freezed == count
-                ? _value.count
-                : count // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$CounterImpl extends _Counter {
-  const _$CounterImpl({
-    this.count,
-    @DateTimeTimestampConverter() this.createdAt,
-    @DateTimeTimestampConverter() this.updatedAt,
-  }) : super._();
 
-  factory _$CounterImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CounterImplFromJson(json);
+class _Counter extends Counter {
+  const _Counter({this.count, @DateTimeTimestampConverter() this.createdAt, @DateTimeTimestampConverter() this.updatedAt}): super._();
+  factory _Counter.fromJson(Map<String, dynamic> json) => _$CounterFromJson(json);
 
-  @override
-  final int? count;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? updatedAt;
+@override final  int? count;
+@override@DateTimeTimestampConverter() final  DateTime? createdAt;
+@override@DateTimeTimestampConverter() final  DateTime? updatedAt;
 
-  @override
-  String toString() {
-    return 'Counter(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
+/// Create a copy of Counter
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CounterCopyWith<_Counter> get copyWith => __$CounterCopyWithImpl<_Counter>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CounterImpl &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, count, createdAt, updatedAt);
-
-  /// Create a copy of Counter
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CounterImplCopyWith<_$CounterImpl> get copyWith =>
-      __$$CounterImplCopyWithImpl<_$CounterImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CounterImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$CounterToJson(this, );
 }
 
-abstract class _Counter extends Counter {
-  const factory _Counter({
-    final int? count,
-    @DateTimeTimestampConverter() final DateTime? createdAt,
-    @DateTimeTimestampConverter() final DateTime? updatedAt,
-  }) = _$CounterImpl;
-  const _Counter._() : super._();
-
-  factory _Counter.fromJson(Map<String, dynamic> json) = _$CounterImpl.fromJson;
-
-  @override
-  int? get count;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
-
-  /// Create a copy of Counter
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CounterImplCopyWith<_$CounterImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Counter&&(identical(other.count, count) || other.count == count)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,count,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Counter(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
+  factory _$CounterCopyWith(_Counter value, $Res Function(_Counter) _then) = __$CounterCopyWithImpl;
+@override @useResult
+$Res call({
+ int? count,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$CounterCopyWithImpl<$Res>
+    implements _$CounterCopyWith<$Res> {
+  __$CounterCopyWithImpl(this._self, this._then);
+
+  final _Counter _self;
+  final $Res Function(_Counter) _then;
+
+/// Create a copy of Counter
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? count = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_Counter(
+count: freezed == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+// dart format on

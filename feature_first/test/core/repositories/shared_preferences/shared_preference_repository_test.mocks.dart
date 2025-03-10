@@ -6,7 +6,7 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i2;
+import 'package:shared_preferences/src/shared_preferences_async.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,18 +22,38 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [SharedPreferences].
+/// A class which mocks [SharedPreferencesWithCache].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
+// ignore: must_be_immutable
+class MockSharedPreferencesWithCache extends _i1.Mock
+    implements _i2.SharedPreferencesWithCache {
   @override
-  Set<String> getKeys() =>
+  Set<String> get keys =>
       (super.noSuchMethod(
-            Invocation.method(#getKeys, []),
+            Invocation.getter(#keys),
             returnValue: <String>{},
             returnValueForMissingStub: <String>{},
           )
           as Set<String>);
+
+  @override
+  _i3.Future<void> reloadCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#reloadCache, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  bool containsKey(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#containsKey, [key]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   Object? get(String? key) =>
@@ -76,15 +96,6 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
           as String?);
 
   @override
-  bool containsKey(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#containsKey, [key]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   List<String>? getStringList(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#getStringList, [key]),
@@ -93,81 +104,63 @@ class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
           as List<String>?);
 
   @override
-  _i3.Future<bool> setBool(String? key, bool? value) =>
+  _i3.Future<void> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> setInt(String? key, int? value) =>
+  _i3.Future<void> setInt(String? key, int? value) =>
       (super.noSuchMethod(
             Invocation.method(#setInt, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> setDouble(String? key, double? value) =>
+  _i3.Future<void> setDouble(String? key, double? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDouble, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> setString(String? key, String? value) =>
+  _i3.Future<void> setString(String? key, String? value) =>
       (super.noSuchMethod(
             Invocation.method(#setString, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> setStringList(String? key, List<String>? value) =>
+  _i3.Future<void> setStringList(String? key, List<String>? value) =>
       (super.noSuchMethod(
             Invocation.method(#setStringList, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> remove(String? key) =>
+  _i3.Future<void> remove(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#remove, [key]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> commit() =>
-      (super.noSuchMethod(
-            Invocation.method(#commit, []),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
-
-  @override
-  _i3.Future<bool> clear() =>
+  _i3.Future<void> clear() =>
       (super.noSuchMethod(
             Invocation.method(#clear, []),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
-
-  @override
-  _i3.Future<void> reload() =>
-      (super.noSuchMethod(
-            Invocation.method(#reload, []),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )

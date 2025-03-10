@@ -24,7 +24,7 @@ import 'core/utils/logger.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   late final PackageInfo packageInfo;
-  late final SharedPreferences sharedPreferences;
+  late final SharedPreferencesWithCache sharedPreferences;
   late final Directory tempDirectory;
   Logger.configure();
   logger.info(Flavor.environment);
@@ -43,7 +43,9 @@ Future<void> main() async {
       packageInfo = await PackageInfo.fromPlatform();
     }),
     Future(() async {
-      sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences = await SharedPreferencesWithCache.create(
+        cacheOptions: const SharedPreferencesWithCacheOptions(),
+      );
     }),
     Future(() async {
       tz.initializeTimeZones();

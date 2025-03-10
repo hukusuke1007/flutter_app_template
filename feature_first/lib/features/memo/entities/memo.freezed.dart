@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,242 +10,148 @@ part of 'memo.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-Memo _$MemoFromJson(Map<String, dynamic> json) {
-  return _Memo.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Memo {
-  String? get memoId => throw _privateConstructorUsedError;
-  String? get text => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+
+ String? get memoId; String? get text;@DateTimeTimestampConverter() DateTime? get createdAt;@DateTimeTimestampConverter() DateTime? get updatedAt;
+/// Create a copy of Memo
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MemoCopyWith<Memo> get copyWith => _$MemoCopyWithImpl<Memo>(this as Memo, _$identity);
 
   /// Serializes this Memo to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of Memo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $MemoCopyWith<Memo> get copyWith => throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Memo&&(identical(other.memoId, memoId) || other.memoId == memoId)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,memoId,text,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Memo(memoId: $memoId, text: $text, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $MemoCopyWith<$Res> {
-  factory $MemoCopyWith(Memo value, $Res Function(Memo) then) =
-      _$MemoCopyWithImpl<$Res, Memo>;
-  @useResult
-  $Res call({
-    String? memoId,
-    String? text,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
-}
+abstract mixin class $MemoCopyWith<$Res>  {
+  factory $MemoCopyWith(Memo value, $Res Function(Memo) _then) = _$MemoCopyWithImpl;
+@useResult
+$Res call({
+ String? memoId, String? text,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$MemoCopyWithImpl<$Res, $Val extends Memo>
+class _$MemoCopyWithImpl<$Res>
     implements $MemoCopyWith<$Res> {
-  _$MemoCopyWithImpl(this._value, this._then);
+  _$MemoCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Memo _self;
+  final $Res Function(Memo) _then;
 
-  /// Create a copy of Memo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? memoId = freezed,
-    Object? text = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            memoId:
-                freezed == memoId
-                    ? _value.memoId
-                    : memoId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            text:
-                freezed == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of Memo
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? memoId = freezed,Object? text = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_self.copyWith(
+memoId: freezed == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
+as String?,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$MemoImplCopyWith<$Res> implements $MemoCopyWith<$Res> {
-  factory _$$MemoImplCopyWith(
-    _$MemoImpl value,
-    $Res Function(_$MemoImpl) then,
-  ) = __$$MemoImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String? memoId,
-    String? text,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$MemoImplCopyWithImpl<$Res>
-    extends _$MemoCopyWithImpl<$Res, _$MemoImpl>
-    implements _$$MemoImplCopyWith<$Res> {
-  __$$MemoImplCopyWithImpl(_$MemoImpl _value, $Res Function(_$MemoImpl) _then)
-    : super(_value, _then);
-
-  /// Create a copy of Memo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? memoId = freezed,
-    Object? text = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _$MemoImpl(
-        memoId:
-            freezed == memoId
-                ? _value.memoId
-                : memoId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        text:
-            freezed == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$MemoImpl extends _Memo {
-  const _$MemoImpl({
-    this.memoId,
-    this.text,
-    @DateTimeTimestampConverter() this.createdAt,
-    @DateTimeTimestampConverter() this.updatedAt,
-  }) : super._();
 
-  factory _$MemoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MemoImplFromJson(json);
+class _Memo extends Memo {
+  const _Memo({this.memoId, this.text, @DateTimeTimestampConverter() this.createdAt, @DateTimeTimestampConverter() this.updatedAt}): super._();
+  factory _Memo.fromJson(Map<String, dynamic> json) => _$MemoFromJson(json);
 
-  @override
-  final String? memoId;
-  @override
-  final String? text;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? updatedAt;
+@override final  String? memoId;
+@override final  String? text;
+@override@DateTimeTimestampConverter() final  DateTime? createdAt;
+@override@DateTimeTimestampConverter() final  DateTime? updatedAt;
 
-  @override
-  String toString() {
-    return 'Memo(memoId: $memoId, text: $text, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
+/// Create a copy of Memo
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MemoCopyWith<_Memo> get copyWith => __$MemoCopyWithImpl<_Memo>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MemoImpl &&
-            (identical(other.memoId, memoId) || other.memoId == memoId) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, memoId, text, createdAt, updatedAt);
-
-  /// Create a copy of Memo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
-      __$$MemoImplCopyWithImpl<_$MemoImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MemoImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$MemoToJson(this, );
 }
 
-abstract class _Memo extends Memo {
-  const factory _Memo({
-    final String? memoId,
-    final String? text,
-    @DateTimeTimestampConverter() final DateTime? createdAt,
-    @DateTimeTimestampConverter() final DateTime? updatedAt,
-  }) = _$MemoImpl;
-  const _Memo._() : super._();
-
-  factory _Memo.fromJson(Map<String, dynamic> json) = _$MemoImpl.fromJson;
-
-  @override
-  String? get memoId;
-  @override
-  String? get text;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
-
-  /// Create a copy of Memo
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Memo&&(identical(other.memoId, memoId) || other.memoId == memoId)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,memoId,text,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Memo(memoId: $memoId, text: $text, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
+  factory _$MemoCopyWith(_Memo value, $Res Function(_Memo) _then) = __$MemoCopyWithImpl;
+@override @useResult
+$Res call({
+ String? memoId, String? text,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$MemoCopyWithImpl<$Res>
+    implements _$MemoCopyWith<$Res> {
+  __$MemoCopyWithImpl(this._self, this._then);
+
+  final _Memo _self;
+  final $Res Function(_Memo) _then;
+
+/// Create a copy of Memo
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? memoId = freezed,Object? text = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_Memo(
+memoId: freezed == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
+as String?,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+// dart format on

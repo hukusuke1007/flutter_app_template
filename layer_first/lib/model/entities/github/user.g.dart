@@ -6,11 +6,11 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
-  r'_$UserImpl',
+_User _$UserFromJson(Map<String, dynamic> json) => $checkedCreate(
+  '_User',
   json,
   ($checkedConvert) {
-    final val = _$UserImpl(
+    final val = _User(
       login: $checkedConvert('login', (v) => v as String),
       id: $checkedConvert('id', (v) => (v as num).toInt()),
       nodeId: $checkedConvert('node_id', (v) => v as String?),
@@ -59,24 +59,23 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
   },
 );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
-      'login': instance.login,
-      'id': instance.id,
-      'node_id': instance.nodeId,
-      'avatar_url': instance.avatarUrl,
-      'gravatar_id': instance.gravatarId,
-      'url': instance.url,
-      'html_url': instance.htmlUrl,
-      'followers_url': instance.followersUrl,
-      'following_url': instance.followingUrl,
-      'gists_url': instance.gistsUrl,
-      'starred_url': instance.starredUrl,
-      'subscriptions_url': instance.subscriptionsUrl,
-      'organizations_url': instance.organizationsUrl,
-      'repos_url': instance.reposUrl,
-      'events_url': instance.eventsUrl,
-      'received_events_url': instance.receivedEventsUrl,
-      'type': instance.type,
-      'site_admin': instance.siteAdmin,
-    };
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+  'login': instance.login,
+  'id': instance.id,
+  'node_id': instance.nodeId,
+  'avatar_url': instance.avatarUrl,
+  'gravatar_id': instance.gravatarId,
+  'url': instance.url,
+  'html_url': instance.htmlUrl,
+  'followers_url': instance.followersUrl,
+  'following_url': instance.followingUrl,
+  'gists_url': instance.gistsUrl,
+  'starred_url': instance.starredUrl,
+  'subscriptions_url': instance.subscriptionsUrl,
+  'organizations_url': instance.organizationsUrl,
+  'repos_url': instance.reposUrl,
+  'events_url': instance.eventsUrl,
+  'received_events_url': instance.receivedEventsUrl,
+  'type': instance.type,
+  'site_admin': instance.siteAdmin,
+};

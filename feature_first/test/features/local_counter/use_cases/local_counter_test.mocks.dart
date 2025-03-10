@@ -31,13 +31,13 @@ import 'package:mockito/mockito.dart' as _i1;
 class MockSharedPreferencesRepository extends _i1.Mock
     implements _i2.SharedPreferencesRepository {
   @override
-  _i3.Future<bool> save<T>(_i4.SharedPreferencesKey? key, T? value) =>
+  _i3.Future<void> save<T>(_i4.SharedPreferencesKey? key, T? value) =>
       (super.noSuchMethod(
             Invocation.method(#save, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
   T? fetch<T>(_i4.SharedPreferencesKey? key) =>
@@ -48,11 +48,11 @@ class MockSharedPreferencesRepository extends _i1.Mock
           as T?);
 
   @override
-  _i3.Future<bool> remove(_i4.SharedPreferencesKey? key) =>
+  _i3.Future<void> remove(_i4.SharedPreferencesKey? key) =>
       (super.noSuchMethod(
             Invocation.method(#remove, [key]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 }

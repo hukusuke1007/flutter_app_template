@@ -11,7 +11,7 @@ part 'developer.freezed.dart';
 part 'developer.g.dart';
 
 @freezed
-class Developer with _$Developer {
+sealed class Developer with _$Developer {
   const factory Developer({
     String? developerId,
     String? name,
@@ -34,17 +34,11 @@ class Developer with _$Developer {
       Document.docRefWithDocPath(docPath(id));
 
   /// 投稿のドキュメントパス
-  static String postDocPath({
-    required String userId,
-    required String docId,
-  }) =>
+  static String postDocPath({required String userId, required String docId}) =>
       '$collectionPath/$userId/${Post.collectionName}/$docId';
 
   /// 画像パス
-  static String imagePath(
-    String id,
-    String filename,
-  ) =>
+  static String imagePath(String id, String filename) =>
       '${docPath(id)}/image/$filename';
 
   /// 誕生日のラベル
@@ -64,9 +58,9 @@ class Developer with _$Developer {
 
   /// 画像情報をサーバーへ保存するMap
   Map<String, dynamic> get toImageOnly => <String, dynamic>{
-        'developerId': developerId,
-        'image': image?.toJson(),
-        'createdAt': createdAt ?? FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+    'developerId': developerId,
+    'image': image?.toJson(),
+    'createdAt': createdAt ?? FieldValue.serverTimestamp(),
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
 }

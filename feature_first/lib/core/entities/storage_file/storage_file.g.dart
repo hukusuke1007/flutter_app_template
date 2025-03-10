@@ -6,9 +6,9 @@ part of 'storage_file.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StorageFileImpl _$$StorageFileImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(r'_$StorageFileImpl', json, ($checkedConvert) {
-      final val = _$StorageFileImpl(
+_StorageFile _$StorageFileFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_StorageFile', json, ($checkedConvert) {
+      final val = _StorageFile(
         url: $checkedConvert('url', (v) => v as String),
         path: $checkedConvert('path', (v) => v as String),
         mimeType: $checkedConvert('mimeType', (v) => v as String?),
@@ -22,7 +22,7 @@ _$StorageFileImpl _$$StorageFileImplFromJson(Map<String, dynamic> json) =>
       return val;
     });
 
-Map<String, dynamic> _$$StorageFileImplToJson(_$StorageFileImpl instance) =>
+Map<String, dynamic> _$StorageFileToJson(_StorageFile instance) =>
     <String, dynamic>{
       'url': instance.url,
       'path': instance.path,

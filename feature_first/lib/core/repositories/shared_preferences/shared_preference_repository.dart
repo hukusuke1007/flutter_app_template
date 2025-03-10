@@ -14,9 +14,9 @@ SharedPreferencesRepository sharedPreferencesRepository(Ref ref) {
 class SharedPreferencesRepository {
   SharedPreferencesRepository(this._prefs);
 
-  final SharedPreferences _prefs;
+  final SharedPreferencesWithCache _prefs;
 
-  Future<bool> save<T>(SharedPreferencesKey key, T value) {
+  Future<void> save<T>(SharedPreferencesKey key, T value) {
     if (value is int) {
       return _prefs.setInt(key.value, value);
     }
@@ -54,5 +54,5 @@ class SharedPreferencesRepository {
     throw UnsupportedError('Not support \'$T\'');
   }
 
-  Future<bool> remove(SharedPreferencesKey key) => _prefs.remove(key.value);
+  Future<void> remove(SharedPreferencesKey key) => _prefs.remove(key.value);
 }

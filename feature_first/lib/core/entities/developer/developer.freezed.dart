@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,322 +10,178 @@ part of 'developer.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-Developer _$DeveloperFromJson(Map<String, dynamic> json) {
-  return _Developer.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Developer {
-  String? get developerId => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  StorageFile? get image => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get birthdate => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+
+ String? get developerId; String? get name; StorageFile? get image;@DateTimeTimestampConverter() DateTime? get birthdate;@DateTimeTimestampConverter() DateTime? get createdAt;@DateTimeTimestampConverter() DateTime? get updatedAt;
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeveloperCopyWith<Developer> get copyWith => _$DeveloperCopyWithImpl<Developer>(this as Developer, _$identity);
 
   /// Serializes this Developer to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DeveloperCopyWith<Developer> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Developer&&(identical(other.developerId, developerId) || other.developerId == developerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,developerId,name,image,birthdate,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Developer(developerId: $developerId, name: $name, image: $image, birthdate: $birthdate, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $DeveloperCopyWith<$Res> {
-  factory $DeveloperCopyWith(Developer value, $Res Function(Developer) then) =
-      _$DeveloperCopyWithImpl<$Res, Developer>;
-  @useResult
-  $Res call({
-    String? developerId,
-    String? name,
-    StorageFile? image,
-    @DateTimeTimestampConverter() DateTime? birthdate,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
+abstract mixin class $DeveloperCopyWith<$Res>  {
+  factory $DeveloperCopyWith(Developer value, $Res Function(Developer) _then) = _$DeveloperCopyWithImpl;
+@useResult
+$Res call({
+ String? developerId, String? name, StorageFile? image,@DateTimeTimestampConverter() DateTime? birthdate,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
 
-  $StorageFileCopyWith<$Res>? get image;
+
+$StorageFileCopyWith<$Res>? get image;
+
 }
-
 /// @nodoc
-class _$DeveloperCopyWithImpl<$Res, $Val extends Developer>
+class _$DeveloperCopyWithImpl<$Res>
     implements $DeveloperCopyWith<$Res> {
-  _$DeveloperCopyWithImpl(this._value, this._then);
+  _$DeveloperCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Developer _self;
+  final $Res Function(Developer) _then;
 
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? developerId = freezed,
-    Object? name = freezed,
-    Object? image = freezed,
-    Object? birthdate = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            developerId:
-                freezed == developerId
-                    ? _value.developerId
-                    : developerId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            name:
-                freezed == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            image:
-                freezed == image
-                    ? _value.image
-                    : image // ignore: cast_nullable_to_non_nullable
-                        as StorageFile?,
-            birthdate:
-                freezed == birthdate
-                    ? _value.birthdate
-                    : birthdate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
-  }
-
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $StorageFileCopyWith<$Res>? get image {
-    if (_value.image == null) {
-      return null;
-    }
-
-    return $StorageFileCopyWith<$Res>(_value.image!, (value) {
-      return _then(_value.copyWith(image: value) as $Val);
-    });
-  }
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? developerId = freezed,Object? name = freezed,Object? image = freezed,Object? birthdate = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_self.copyWith(
+developerId: freezed == developerId ? _self.developerId : developerId // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as StorageFile?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
 }
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StorageFileCopyWith<$Res>? get image {
+    if (_self.image == null) {
+    return null;
+  }
 
-/// @nodoc
-abstract class _$$DeveloperImplCopyWith<$Res>
-    implements $DeveloperCopyWith<$Res> {
-  factory _$$DeveloperImplCopyWith(
-    _$DeveloperImpl value,
-    $Res Function(_$DeveloperImpl) then,
-  ) = __$$DeveloperImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String? developerId,
-    String? name,
-    StorageFile? image,
-    @DateTimeTimestampConverter() DateTime? birthdate,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
+  return $StorageFileCopyWith<$Res>(_self.image!, (value) {
+    return _then(_self.copyWith(image: value));
   });
-
-  @override
-  $StorageFileCopyWith<$Res>? get image;
+}
 }
 
-/// @nodoc
-class __$$DeveloperImplCopyWithImpl<$Res>
-    extends _$DeveloperCopyWithImpl<$Res, _$DeveloperImpl>
-    implements _$$DeveloperImplCopyWith<$Res> {
-  __$$DeveloperImplCopyWithImpl(
-    _$DeveloperImpl _value,
-    $Res Function(_$DeveloperImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? developerId = freezed,
-    Object? name = freezed,
-    Object? image = freezed,
-    Object? birthdate = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _$DeveloperImpl(
-        developerId:
-            freezed == developerId
-                ? _value.developerId
-                : developerId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        name:
-            freezed == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        image:
-            freezed == image
-                ? _value.image
-                : image // ignore: cast_nullable_to_non_nullable
-                    as StorageFile?,
-        birthdate:
-            freezed == birthdate
-                ? _value.birthdate
-                : birthdate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$DeveloperImpl extends _Developer {
-  const _$DeveloperImpl({
-    this.developerId,
-    this.name,
-    this.image,
-    @DateTimeTimestampConverter() this.birthdate,
-    @DateTimeTimestampConverter() this.createdAt,
-    @DateTimeTimestampConverter() this.updatedAt,
-  }) : super._();
 
-  factory _$DeveloperImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DeveloperImplFromJson(json);
+class _Developer extends Developer {
+  const _Developer({this.developerId, this.name, this.image, @DateTimeTimestampConverter() this.birthdate, @DateTimeTimestampConverter() this.createdAt, @DateTimeTimestampConverter() this.updatedAt}): super._();
+  factory _Developer.fromJson(Map<String, dynamic> json) => _$DeveloperFromJson(json);
 
-  @override
-  final String? developerId;
-  @override
-  final String? name;
-  @override
-  final StorageFile? image;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? birthdate;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? updatedAt;
+@override final  String? developerId;
+@override final  String? name;
+@override final  StorageFile? image;
+@override@DateTimeTimestampConverter() final  DateTime? birthdate;
+@override@DateTimeTimestampConverter() final  DateTime? createdAt;
+@override@DateTimeTimestampConverter() final  DateTime? updatedAt;
 
-  @override
-  String toString() {
-    return 'Developer(developerId: $developerId, name: $name, image: $image, birthdate: $birthdate, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DeveloperCopyWith<_Developer> get copyWith => __$DeveloperCopyWithImpl<_Developer>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeveloperImpl &&
-            (identical(other.developerId, developerId) ||
-                other.developerId == developerId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.birthdate, birthdate) ||
-                other.birthdate == birthdate) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    developerId,
-    name,
-    image,
-    birthdate,
-    createdAt,
-    updatedAt,
-  );
-
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
-      __$$DeveloperImplCopyWithImpl<_$DeveloperImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DeveloperImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$DeveloperToJson(this, );
 }
 
-abstract class _Developer extends Developer {
-  const factory _Developer({
-    final String? developerId,
-    final String? name,
-    final StorageFile? image,
-    @DateTimeTimestampConverter() final DateTime? birthdate,
-    @DateTimeTimestampConverter() final DateTime? createdAt,
-    @DateTimeTimestampConverter() final DateTime? updatedAt,
-  }) = _$DeveloperImpl;
-  const _Developer._() : super._();
-
-  factory _Developer.fromJson(Map<String, dynamic> json) =
-      _$DeveloperImpl.fromJson;
-
-  @override
-  String? get developerId;
-  @override
-  String? get name;
-  @override
-  StorageFile? get image;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get birthdate;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
-
-  /// Create a copy of Developer
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Developer&&(identical(other.developerId, developerId) || other.developerId == developerId)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,developerId,name,image,birthdate,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Developer(developerId: $developerId, name: $name, image: $image, birthdate: $birthdate, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DeveloperCopyWith<$Res> implements $DeveloperCopyWith<$Res> {
+  factory _$DeveloperCopyWith(_Developer value, $Res Function(_Developer) _then) = __$DeveloperCopyWithImpl;
+@override @useResult
+$Res call({
+ String? developerId, String? name, StorageFile? image,@DateTimeTimestampConverter() DateTime? birthdate,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
+
+
+@override $StorageFileCopyWith<$Res>? get image;
+
+}
+/// @nodoc
+class __$DeveloperCopyWithImpl<$Res>
+    implements _$DeveloperCopyWith<$Res> {
+  __$DeveloperCopyWithImpl(this._self, this._then);
+
+  final _Developer _self;
+  final $Res Function(_Developer) _then;
+
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? developerId = freezed,Object? name = freezed,Object? image = freezed,Object? birthdate = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_Developer(
+developerId: freezed == developerId ? _self.developerId : developerId // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as StorageFile?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+/// Create a copy of Developer
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StorageFileCopyWith<$Res>? get image {
+    if (_self.image == null) {
+    return null;
+  }
+
+  return $StorageFileCopyWith<$Res>(_self.image!, (value) {
+    return _then(_self.copyWith(image: value));
+  });
+}
+}
+
+// dart format on

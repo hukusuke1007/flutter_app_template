@@ -8,7 +8,7 @@ part 'counter.freezed.dart';
 part 'counter.g.dart';
 
 @freezed
-class Counter with _$Counter {
+sealed class Counter with _$Counter {
   const factory Counter({
     int? count,
     @DateTimeTimestampConverter() DateTime? createdAt,
@@ -28,8 +28,8 @@ class Counter with _$Counter {
       Document.docRefWithDocPath(docPath(id));
 
   Map<String, dynamic> get toDoc => <String, dynamic>{
-        ...toJson(),
-        'createdAt': createdAt ?? FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+    ...toJson(),
+    'createdAt': createdAt ?? FieldValue.serverTimestamp(),
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
 }

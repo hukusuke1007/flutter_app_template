@@ -6,10 +6,10 @@ part of 'developer.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeveloperImpl _$$DeveloperImplFromJson(
+_Developer _$DeveloperFromJson(
   Map<String, dynamic> json,
-) => $checkedCreate(r'_$DeveloperImpl', json, ($checkedConvert) {
-  final val = _$DeveloperImpl(
+) => $checkedCreate('_Developer', json, ($checkedConvert) {
+  final val = _Developer(
     developerId: $checkedConvert('developerId', (v) => v as String?),
     name: $checkedConvert('name', (v) => v as String?),
     image: $checkedConvert(
@@ -32,8 +32,8 @@ _$DeveloperImpl _$$DeveloperImplFromJson(
   return val;
 });
 
-Map<String, dynamic> _$$DeveloperImplToJson(
-  _$DeveloperImpl instance,
+Map<String, dynamic> _$DeveloperToJson(
+  _Developer instance,
 ) => <String, dynamic>{
   'developerId': instance.developerId,
   'name': instance.name,

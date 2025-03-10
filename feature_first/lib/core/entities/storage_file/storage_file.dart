@@ -4,7 +4,7 @@ part 'storage_file.freezed.dart';
 part 'storage_file.g.dart';
 
 @freezed
-class StorageFile with _$StorageFile {
+sealed class StorageFile with _$StorageFile {
   factory StorageFile({
     required String url,
     required String path,

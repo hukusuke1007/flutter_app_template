@@ -12,7 +12,7 @@ import 'shared_preference_repository_test.mocks.dart';
 /// Unit tests
 /// https://docs.flutter.dev/testing#unit-tests
 /// https://docs.flutter.dev/cookbook/testing/unit/mocking
-@GenerateNiceMocks([MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([MockSpec<SharedPreferencesWithCache>()])
 void main() {
   /// テストで利用する定数を定義
   const key = SharedPreferencesKey.localCounter;
@@ -22,11 +22,11 @@ void main() {
 
   /// 正常系テストケース
   group('[正常系] SharedPreferencesRepository オフラインテスト', () {
-    late final MockSharedPreferences mockSharedPreferences;
+    late final MockSharedPreferencesWithCache mockSharedPreferences;
 
     /// 前処理（テスト前に1回呼ばれる）
     setUpAll(() {
-      mockSharedPreferences = MockSharedPreferences();
+      mockSharedPreferences = MockSharedPreferencesWithCache();
     });
 
     /// 後処理（テスト後に毎回呼ばれる）
@@ -63,18 +63,14 @@ void main() {
 
       /// テスト実施
       final repository = container.read(sharedPreferencesRepositoryProvider);
-      final results =
-          await [
-            repository.save<int>(key, 0),
-            repository.save<double>(key, 0.1),
-            repository.save<bool>(key, true),
-            repository.save<String>(key, '0'),
-            repository.save<List<String>>(key, ['0', '1']),
-          ].wait;
 
-      for (final element in results) {
-        expect(element, isTrue);
-      }
+      await [
+        repository.save<int>(key, 0),
+        repository.save<double>(key, 0.1),
+        repository.save<bool>(key, true),
+        repository.save<String>(key, '0'),
+        repository.save<List<String>>(key, ['0', '1']),
+      ].wait;
 
       /// テスト結果を検証 注入したMockの関数が1回呼ばれていること
       verify(mockSharedPreferences.setInt(key.value, 0)).called(1);

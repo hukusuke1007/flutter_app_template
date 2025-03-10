@@ -9,7 +9,7 @@ part 'memo.freezed.dart';
 part 'memo.g.dart';
 
 @freezed
-class Memo with _$Memo {
+sealed class Memo with _$Memo {
   const factory Memo({
     String? memoId,
     String? text,
@@ -31,16 +31,16 @@ class Memo with _$Memo {
       Document.docRefWithDocPath(docPath(userId, id));
 
   Map<String, dynamic> get toCreateDoc => <String, dynamic>{
-        'memoId': memoId,
-        'text': text,
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+    'memoId': memoId,
+    'text': text,
+    'createdAt': FieldValue.serverTimestamp(),
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
 
   Map<String, dynamic> get toUpdateDoc => <String, dynamic>{
-        'text': text,
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+    'text': text,
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
 
   String get dateLabel {
     final date = createdAt;

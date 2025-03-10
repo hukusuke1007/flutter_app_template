@@ -17,18 +17,18 @@ dependencies:
   simple_logger:
 
   # LocalDatabase
-  shared_preferences:
+  shared_preferences: ^2.5.2
 
   # Riverpod
   hooks_riverpod:
-  riverpod_annotation:
+  riverpod_annotation: ^2.6.1
 
   # Hooks
   flutter_hooks:
 
   # Entity
-  freezed_annotation:
-  json_annotation:
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
   equatable:
 
   # Dialog
@@ -58,7 +58,7 @@ dependencies:
 
   # Image
   image_picker:
-  image_gallery_saver_plus: ^4.0.0-0.alpha
+  image_gallery_saver_plus: ^4.0.1
   image_cropper:
   flutter_image_compress:
   extended_image:
@@ -113,7 +113,6 @@ dependencies:
   hashids2:
   collection:
   quiver:
-  html:
 
 dev_dependencies:
   # Test
@@ -121,22 +120,22 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  mockito:
+  mockito: ^5.4.5
 
   # Static analysis
-  pedantic_mono:
-  custom_lint:
-  riverpod_lint:
+  pedantic_mono: ^1.30.3
+  custom_lint: ^0.7.5
+  riverpod_lint: ^2.6.5
 
   # Serializer
-  json_serializable:
+  json_serializable: ^6.9.4
 
   # Code generator
-  build_runner:
-  freezed:
-  flutter_gen_runner:
-  retrofit_generator:
-  riverpod_generator:
+  build_runner: ^2.4.15
+  freezed: ^3.0.3
+  flutter_gen_runner: ^5.10.0
+  retrofit_generator: ^9.1.9
+  riverpod_generator: ^2.6.5
 
   # Other
   flutter_launcher_icons:

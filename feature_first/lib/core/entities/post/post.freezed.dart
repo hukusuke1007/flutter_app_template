@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,295 +10,154 @@ part of 'post.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-Post _$PostFromJson(Map<String, dynamic> json) {
-  return _Post.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Post {
-  String get postId => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  int get likeCount => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+
+ String get postId; String get userId; String get text; int get likeCount;@DateTimeTimestampConverter() DateTime? get createdAt;@DateTimeTimestampConverter() DateTime? get updatedAt;
+/// Create a copy of Post
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PostCopyWith<Post> get copyWith => _$PostCopyWithImpl<Post>(this as Post, _$identity);
 
   /// Serializes this Post to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Post&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.text, text) || other.text == text)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,postId,userId,text,likeCount,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Post(postId: $postId, userId: $userId, text: $text, likeCount: $likeCount, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PostCopyWith<$Res> {
-  factory $PostCopyWith(Post value, $Res Function(Post) then) =
-      _$PostCopyWithImpl<$Res, Post>;
-  @useResult
-  $Res call({
-    String postId,
-    String userId,
-    String text,
-    int likeCount,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
-}
+abstract mixin class $PostCopyWith<$Res>  {
+  factory $PostCopyWith(Post value, $Res Function(Post) _then) = _$PostCopyWithImpl;
+@useResult
+$Res call({
+ String postId, String userId, String text, int likeCount,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$PostCopyWithImpl<$Res, $Val extends Post>
+class _$PostCopyWithImpl<$Res>
     implements $PostCopyWith<$Res> {
-  _$PostCopyWithImpl(this._value, this._then);
+  _$PostCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Post _self;
+  final $Res Function(Post) _then;
 
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? postId = null,
-    Object? userId = null,
-    Object? text = null,
-    Object? likeCount = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            postId:
-                null == postId
-                    ? _value.postId
-                    : postId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String,
-            likeCount:
-                null == likeCount
-                    ? _value.likeCount
-                    : likeCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of Post
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? postId = null,Object? userId = null,Object? text = null,Object? likeCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_self.copyWith(
+postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$$PostImplCopyWith(
-    _$PostImpl value,
-    $Res Function(_$PostImpl) then,
-  ) = __$$PostImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String postId,
-    String userId,
-    String text,
-    int likeCount,
-    @DateTimeTimestampConverter() DateTime? createdAt,
-    @DateTimeTimestampConverter() DateTime? updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$PostImplCopyWithImpl<$Res>
-    extends _$PostCopyWithImpl<$Res, _$PostImpl>
-    implements _$$PostImplCopyWith<$Res> {
-  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
-    : super(_value, _then);
-
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? postId = null,
-    Object? userId = null,
-    Object? text = null,
-    Object? likeCount = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _$PostImpl(
-        postId:
-            null == postId
-                ? _value.postId
-                : postId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String,
-        likeCount:
-            null == likeCount
-                ? _value.likeCount
-                : likeCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$PostImpl extends _Post {
-  const _$PostImpl({
-    required this.postId,
-    required this.userId,
-    required this.text,
-    this.likeCount = 0,
-    @DateTimeTimestampConverter() this.createdAt,
-    @DateTimeTimestampConverter() this.updatedAt,
-  }) : super._();
 
-  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostImplFromJson(json);
+class _Post extends Post {
+  const _Post({required this.postId, required this.userId, required this.text, this.likeCount = 0, @DateTimeTimestampConverter() this.createdAt, @DateTimeTimestampConverter() this.updatedAt}): super._();
+  factory _Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  @override
-  final String postId;
-  @override
-  final String userId;
-  @override
-  final String text;
-  @override
-  @JsonKey()
-  final int likeCount;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  final DateTime? updatedAt;
+@override final  String postId;
+@override final  String userId;
+@override final  String text;
+@override@JsonKey() final  int likeCount;
+@override@DateTimeTimestampConverter() final  DateTime? createdAt;
+@override@DateTimeTimestampConverter() final  DateTime? updatedAt;
 
-  @override
-  String toString() {
-    return 'Post(postId: $postId, userId: $userId, text: $text, likeCount: $likeCount, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
+/// Create a copy of Post
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PostCopyWith<_Post> get copyWith => __$PostCopyWithImpl<_Post>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PostImpl &&
-            (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.likeCount, likeCount) ||
-                other.likeCount == likeCount) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    postId,
-    userId,
-    text,
-    likeCount,
-    createdAt,
-    updatedAt,
-  );
-
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
-      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PostImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$PostToJson(this, );
 }
 
-abstract class _Post extends Post {
-  const factory _Post({
-    required final String postId,
-    required final String userId,
-    required final String text,
-    final int likeCount,
-    @DateTimeTimestampConverter() final DateTime? createdAt,
-    @DateTimeTimestampConverter() final DateTime? updatedAt,
-  }) = _$PostImpl;
-  const _Post._() : super._();
-
-  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
-
-  @override
-  String get postId;
-  @override
-  String get userId;
-  @override
-  String get text;
-  @override
-  int get likeCount;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get createdAt;
-  @override
-  @DateTimeTimestampConverter()
-  DateTime? get updatedAt;
-
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Post&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.text, text) || other.text == text)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,postId,userId,text,likeCount,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Post(postId: $postId, userId: $userId, text: $text, likeCount: $likeCount, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$PostCopyWith(_Post value, $Res Function(_Post) _then) = __$PostCopyWithImpl;
+@override @useResult
+$Res call({
+ String postId, String userId, String text, int likeCount,@DateTimeTimestampConverter() DateTime? createdAt,@DateTimeTimestampConverter() DateTime? updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$PostCopyWithImpl<$Res>
+    implements _$PostCopyWith<$Res> {
+  __$PostCopyWithImpl(this._self, this._then);
+
+  final _Post _self;
+  final $Res Function(_Post) _then;
+
+/// Create a copy of Post
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? postId = null,Object? userId = null,Object? text = null,Object? likeCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+  return _then(_Post(
+postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+// dart format on

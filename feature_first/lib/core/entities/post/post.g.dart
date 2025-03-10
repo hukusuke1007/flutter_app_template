@@ -6,11 +6,11 @@ part of 'post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => $checkedCreate(
-  r'_$PostImpl',
+_Post _$PostFromJson(Map<String, dynamic> json) => $checkedCreate(
+  '_Post',
   json,
   ($checkedConvert) {
-    final val = _$PostImpl(
+    final val = _Post(
       postId: $checkedConvert('postId', (v) => v as String),
       userId: $checkedConvert('userId', (v) => v as String),
       text: $checkedConvert('text', (v) => v as String),
@@ -28,9 +28,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => $checkedCreate(
   },
 );
 
-Map<String, dynamic> _$$PostImplToJson(
-  _$PostImpl instance,
-) => <String, dynamic>{
+Map<String, dynamic> _$PostToJson(_Post instance) => <String, dynamic>{
   'postId': instance.postId,
   'userId': instance.userId,
   'text': instance.text,

@@ -6,9 +6,9 @@ part of 'counter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(r'_$CounterImpl', json, ($checkedConvert) {
-      final val = _$CounterImpl(
+_Counter _$CounterFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_Counter', json, ($checkedConvert) {
+      final val = _Counter(
         count: $checkedConvert('count', (v) => (v as num?)?.toInt()),
         createdAt: $checkedConvert(
           'createdAt',
@@ -22,9 +22,7 @@ _$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
       return val;
     });
 
-Map<String, dynamic> _$$CounterImplToJson(
-  _$CounterImpl instance,
-) => <String, dynamic>{
+Map<String, dynamic> _$CounterToJson(_Counter instance) => <String, dynamic>{
   'count': instance.count,
   'createdAt': const DateTimeTimestampConverter().toJson(instance.createdAt),
   'updatedAt': const DateTimeTimestampConverter().toJson(instance.updatedAt),
