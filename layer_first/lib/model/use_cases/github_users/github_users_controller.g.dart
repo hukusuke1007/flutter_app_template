@@ -13,19 +13,19 @@ String _$githubUsersControllerHash() =>
 ///
 /// Copied from [GithubUsersController].
 @ProviderFor(GithubUsersController)
-final githubUsersControllerProvider = AutoDisposeAsyncNotifierProvider<
-  GithubUsersController,
-  List<User>
->.internal(
-  GithubUsersController.new,
-  name: r'githubUsersControllerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final githubUsersControllerProvider =
+    AutoDisposeAsyncNotifierProvider<
+      GithubUsersController,
+      List<User>
+    >.internal(
+      GithubUsersController.new,
+      name: r'githubUsersControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$githubUsersControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$GithubUsersController = AutoDisposeAsyncNotifier<List<User>>;
 // ignore_for_file: type=lint

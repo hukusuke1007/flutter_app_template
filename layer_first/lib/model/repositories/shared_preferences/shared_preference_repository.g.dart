@@ -15,10 +15,9 @@ final sharedPreferencesRepositoryProvider =
     Provider<SharedPreferencesRepository>.internal(
       sharedPreferencesRepository,
       name: r'sharedPreferencesRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$sharedPreferencesRepositoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sharedPreferencesRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

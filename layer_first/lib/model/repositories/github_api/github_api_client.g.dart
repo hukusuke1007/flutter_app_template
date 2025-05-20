@@ -40,10 +40,9 @@ class _GithubApiClient implements GithubApiClient {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<User> _value;
     try {
-      _value =
-          _result.data!
-              .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -90,10 +89,9 @@ String _$githubApiClientHash() => r'2f5294a93474bd49c96fdf3d21c009d965cc1ddd';
 final githubApiClientProvider = Provider<GithubApiClient>.internal(
   githubApiClient,
   name: r'githubApiClientProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$githubApiClientHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$githubApiClientHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

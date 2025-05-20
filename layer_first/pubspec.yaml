@@ -3,7 +3,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
@@ -55,9 +55,9 @@ dev_dependencies:
 
   # Code generator
   build_runner: ^2.4.15
-  freezed: ^3.0.3
+  freezed: ^3.0.6
   riverpod_generator: ^2.6.5
-  retrofit_generator: ^9.1.9
+  retrofit_generator: ^9.2.0
 
 flutter:
   uses-material-design: true

@@ -14,10 +14,9 @@ final localCounterProvider =
     AutoDisposeNotifierProvider<LocalCounter, int>.internal(
       LocalCounter.new,
       name: r'localCounterProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$localCounterHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$localCounterHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
