@@ -3,7 +3,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.9.2
 
 dependencies:
   flutter:
@@ -13,30 +13,27 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # LocalDatabase
-  shared_preferences:
+  shared_preferences: ^2.5.3
 
   # Riverpod
   hooks_riverpod:
   riverpod_annotation: ^2.6.1
 
   # Hooks
-  flutter_hooks:
-
-  # PullToRefresh
-  pull_to_refresh_flutter3:
+  flutter_hooks: ^0.21.3
 
   # Api
-  retrofit:
-  dio:
+  retrofit: ^4.7.2
+  dio: ^5.9.0
 
   # Entity
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^3.1.0
 
   # Launcher
-  url_launcher:
+  url_launcher: ^6.3.2
 
   # Image
-  extended_image:
+  extended_image: ^10.0.1
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +43,7 @@ dev_dependencies:
   mockito: ^5.4.5
 
   # Static analysis
-  pedantic_mono: ^1.30.3
+  pedantic_mono: ^1.33.0
   custom_lint: ^0.7.5
   riverpod_lint: ^2.6.5
 

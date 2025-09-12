@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../extensions/context_extension.dart';
@@ -10,9 +9,8 @@ import '../../../extensions/scroll_controller_extension.dart';
 import '../../../model/use_cases/github_users/github_users_controller.dart';
 import '../../../utils/tab_tap_operation_provider.dart';
 import '../../custom_hooks/use_effect_once.dart';
-import '../../custom_hooks/use_refresh_controller.dart';
 import '../../widgets/images/thumbnail.dart';
-import '../../widgets/smart_refresher/smart_refresher_custom.dart';
+import '../../widgets/pull_to_refresh/pull_to_refresh.dart';
 import 'widgets/error_message.dart';
 
 class GithubUsersPage extends HookConsumerWidget {
@@ -24,7 +22,6 @@ class GithubUsersPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final githubUsers = ref.watch(githubUsersControllerProvider);
     final scrollController = useScrollController();
-    final refreshController = useRefreshController();
     final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
 
     useEffectOnce(() {
@@ -47,56 +44,65 @@ class GithubUsersPage extends HookConsumerWidget {
       ),
       body: githubUsers.when(
         data: (items) {
-          return SmartRefresher(
-            header: const SmartRefreshHeader(),
-            footer: const SmartRefreshFooter(),
-            enablePullUp: true,
-            controller: refreshController,
-            physics: const BouncingScrollPhysics(),
-            onRefresh: () {
+          // Github API は per_page=20 で取得しているため、総件数を持たないが
+          // 長さが 20 の倍数であれば更に続きを期待できる可能性が高い。
+          const pageSize = 20;
+          final hasMore = items.isNotEmpty && items.length % pageSize == 0;
+
+          return PullToRefresh(
+            controller: scrollController,
+            onRefresh: () async {
               ref.invalidate(githubUsersControllerProvider);
-              refreshController.refreshCompleted();
+              // 再取得完了まで待機してインジケータを閉じる
+              await ref.read(githubUsersControllerProvider.future);
             },
-            onLoading: () async {
+            onLoadMore: () async {
               await ref
                   .read(githubUsersControllerProvider.notifier)
                   .onFetchMore();
-              refreshController.loadComplete();
             },
-            child: ListView.separated(
-              controller: scrollController,
-              itemBuilder: (BuildContext context, int index) {
-                final data = items[index];
-                return ListTile(
-                  leading: CircleThumbnail(size: 40, url: data.avatarUrl),
-                  title: Text(data.login, style: context.bodyStyle),
-                  subtitle: Text(
-                    data.htmlUrl ?? '-',
-                    style: context.smallStyle,
+            hasMore: hasMore,
+            slivers: [
+              SliverList.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  final data = items[index];
+                  return ListTile(
+                    leading: CircleThumbnail(size: 40, url: data.avatarUrl),
+                    title: Text(data.login, style: context.bodyStyle),
+                    subtitle: Text(
+                      data.htmlUrl ?? '-',
+                      style: context.smallStyle,
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      final url = data.htmlUrl;
+                      if (url != null) {
+                        launchUrl(Uri.parse(url));
+                      }
+                    },
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider(height: 1);
+                },
+                itemCount: items.length,
+              ),
+
+              if (items.isEmpty)
+                const SliverFillRemaining(
+                  child: Center(
+                    child: Text('ユーザーが見つかりません'),
                   ),
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                  onTap: () {
-                    final url = data.htmlUrl;
-                    if (url != null) {
-                      launchUrl(Uri.parse(url));
-                    }
-                  },
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider(height: 1);
-              },
-              itemCount: items.length,
-            ),
+                ),
+            ],
           );
         },
-        error:
-            (e, _) => ErrorMessage(
-              message: e.toString(),
-              onTapRetry: () {
-                ref.invalidate(githubUsersControllerProvider);
-              },
-            ),
+        error: (e, _) => ErrorMessage(
+          message: e.toString(),
+          onTapRetry: () {
+            ref.invalidate(githubUsersControllerProvider);
+          },
+        ),
         loading: () => const Center(child: CupertinoActivityIndicator()),
       ),
     );
