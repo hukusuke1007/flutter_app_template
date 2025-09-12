@@ -83,8 +83,9 @@ class SettingPage extends HookConsumerWidget {
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ).copyWith(bottom: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -233,7 +234,9 @@ class SettingPage extends HookConsumerWidget {
 
                           /// アナリティクス送信
                           if (userId != null) {
-                            await ref.read(analyticsLoggerProvider).onEvent(
+                            await ref
+                                .read(analyticsLoggerProvider)
+                                .onEvent(
                                   AnalyticsEvent.signOut,
                                   params: AnalyticsEventParams.signOut(
                                     userId: userId,
@@ -306,8 +309,9 @@ class ProfileTile extends StatelessWidget {
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16)
-                      .copyWith(right: 0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ).copyWith(right: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -317,7 +321,6 @@ class ProfileTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        // ignore: lines_longer_than_80_chars
                         '誕生日: ${developer?.birthdate?.format(pattern: 'yyyy/M/d') ?? '-'}',
                         style: context.bodyStyle,
                       ),

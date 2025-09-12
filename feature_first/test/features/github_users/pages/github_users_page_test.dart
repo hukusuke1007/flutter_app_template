@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+ 
 
 import 'github_users_page_test.mocks.dart';
 
@@ -88,17 +88,13 @@ void main() {
       expect(item1Finder, findsOneWidget); // 期待する状態のWidgetが1つ見つかること
 
       /// テスト実施（ページング後）
-      await tester.drag(
-        find.byType(SmartRefresher),
-        const Offset(100, 0),
-      ); // 上にスワイプ
-      await tester.pumpAndSettle(); // ページング処理のアニメーションが終わるまで待ち、処理後の状態を反映する
       final item2Finder = find.text('User 39'); // ページング処理後、リストの最後の情報を見つける
       await tester.scrollUntilVisible(
         item2Finder,
         500,
         scrollable: listFinder,
       );
+      await tester.pumpAndSettle();
       expect(item2Finder, findsOneWidget); // 期待する状態のWidgetが1つ見つかること
     });
   });

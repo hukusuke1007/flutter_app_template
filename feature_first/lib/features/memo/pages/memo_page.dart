@@ -4,15 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../../core/custom_hooks/use_effect_once.dart';
-import '../../../core/custom_hooks/use_refresh_controller.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/extensions/exception_extension.dart';
 import '../../../core/extensions/scroll_controller_extension.dart';
 import '../../../core/utils/tab_tap_operation_provider.dart';
-import '../../../core/widgets/smart_refresher/smart_refresher_custom.dart';
+import '../../../core/widgets/pull_to_refresh/pull_to_refresh.dart';
 import '../use_cases/memo_controller.dart';
 import 'dialogs/show_edit_memo_dialog.dart';
 
@@ -24,7 +22,7 @@ class MemoPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final refreshController = useRefreshController();
+
     final tabTapOperation = ref.watch(tabTapOperationProviders(pageName));
 
     final asyncValue = ref.watch(memoControllerProvider);
@@ -54,21 +52,16 @@ class MemoPage extends HookConsumerWidget {
       ),
       body: asyncValue.when(
         data: (items) {
-          return SmartRefresher(
-            header: const SmartRefreshHeader(),
-            footer: const SmartRefreshFooter(),
-            enablePullUp: true,
-            scrollController: scrollController,
-            controller: refreshController,
-            physics: const BouncingScrollPhysics(),
-            onRefresh: () {
+          return PullToRefresh(
+            controller: scrollController,
+            pageSize: MemoController.defaultLimit,
+            itemCount: items.length,
+            onRefresh: () async {
               ref.invalidate(memoControllerProvider);
-              refreshController.refreshCompleted();
             },
-            onLoading: () async {
+            onLoadMore: () async {
               try {
                 await controller.onFetchMore();
-                refreshController.loadComplete();
               } on Exception catch (e) {
                 if (context.mounted) {
                   context.showSnackBar(
@@ -78,74 +71,88 @@ class MemoPage extends HookConsumerWidget {
                 }
               }
             },
-            child: ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                final data = items[index];
-                return Slidable(
-                  endActionPane: ActionPane(
-                    motion: const ScrollMotion(),
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate((
+                  BuildContext context,
+                  int index,
+                ) {
+                  final data = items[index];
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      SlidableAction(
-                        onPressed: (_) async {
-                          final docId = data.memoId;
-                          if (docId == null) {
-                            return;
-                          }
-                          final alertResult = await showOkCancelAlertDialog(
-                            context: context,
-                            title: '削除しますか？',
-                          );
-                          if (alertResult == OkCancelResult.cancel) {
-                            return;
-                          }
-                          try {
-                            await controller.onRemove(docId);
-                            if (context.mounted) {
-                              context.showSnackBar('削除しました');
-                            }
-                          } on Exception catch (e) {
-                            if (context.mounted) {
-                              context.showSnackBar(
-                                e.errorMessage,
-                                backgroundColor: Colors.grey,
-                              );
-                            }
-                          }
-                        },
-                        backgroundColor: Colors.redAccent,
-                        foregroundColor: Colors.white,
-                        icon: Icons.delete,
-                        label: '削除',
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text(data.text ?? '', style: context.bodyStyle),
-                    trailing: Text(data.dateLabel, style: context.smallStyle),
-                    onTap: () {
-                      showEditMemoDialog(
-                        context,
-                        data: data,
-                        onSave: (text, _) async {
-                          try {
-                            await controller.onUpdate(
-                              data.copyWith(text: text),
+                      Slidable(
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (_) async {
+                                final docId = data.memoId;
+                                if (docId == null) {
+                                  return;
+                                }
+                                final alertResult =
+                                    await showOkCancelAlertDialog(
+                                      context: context,
+                                      title: '削除しますか？',
+                                    );
+                                if (alertResult == OkCancelResult.cancel) {
+                                  return;
+                                }
+                                try {
+                                  await controller.onRemove(docId);
+                                  if (context.mounted) {
+                                    context.showSnackBar('削除しました');
+                                  }
+                                } on Exception catch (e) {
+                                  if (context.mounted) {
+                                    context.showSnackBar(
+                                      e.errorMessage,
+                                      backgroundColor: Colors.grey,
+                                    );
+                                  }
+                                }
+                              },
+                              backgroundColor: Colors.redAccent,
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
+                              label: '削除',
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            data.text ?? '',
+                            style: context.bodyStyle,
+                          ),
+                          trailing: Text(
+                            data.dateLabel,
+                            style: context.smallStyle,
+                          ),
+                          onTap: () {
+                            showEditMemoDialog(
+                              context,
+                              data: data,
+                              onSave: (text, _) async {
+                                try {
+                                  await controller.onUpdate(
+                                    data.copyWith(text: text),
+                                  );
+                                  return null;
+                                } on Exception catch (e) {
+                                  return e.errorMessage;
+                                }
+                              },
                             );
-                            return null;
-                          } on Exception catch (e) {
-                            return e.errorMessage;
-                          }
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider(height: 1);
-              },
-              itemCount: items.length,
-            ),
+                          },
+                        ),
+                      ),
+                      const Divider(height: 1),
+                    ],
+                  );
+                }, childCount: items.length),
+              ),
+            ],
           );
         },
         error: (e, _) {

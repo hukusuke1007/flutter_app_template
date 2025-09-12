@@ -47,7 +47,7 @@ Flutter + Firebase アプリのスターターキット、新規アプリ開発�
 
 ## 実装済み
 
-- iOS14、Android7 以上で動作
+- iOS15、Android7 以上で動作
 - DDD ライクな FeatureFirst 構成で設計
 - Firebase を利用 (FirebaseAuth, Firestore, Functions, FirebaseAnalytics, FirebaseCrashlytics)
 - retrofit を用いた サンプルコード

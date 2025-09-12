@@ -9,6 +9,7 @@ import '../../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/widgets/images/image_viewer.dart';
+import '../../../../core/widgets/pull_to_refresh/pull_to_refresh.dart';
 import '../../../../core/widgets/texts/error_text.dart';
 import '../use_cases/fetch_timeline.dart';
 import '../use_cases/fetch_timeline_post_count.dart';
@@ -45,7 +46,6 @@ class TimelinePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final loadingState = useState(false);
 
     final asyncValue = ref.watch(fetchTimelineProvider);
     final count = ref.watch(fetchTimelinePostCountProvider).asData?.value ?? 0;
@@ -82,126 +82,66 @@ class TimelinePage extends HookConsumerWidget {
       ),
       body: asyncValue.when(
         data: (items) {
-          return NotificationListener<ScrollUpdateNotification>(
-            onNotification: (notification) {
-              if (items.length >= FetchTimeline.defaultLimit &&
-                  notification.metrics.extentAfter == 0) {
-                Future(() async {
-                  if (loadingState.value) {
-                    return;
-                  }
-                  loadingState.value = true;
-                  try {
-                    await Future<void>.delayed(
-                      const Duration(milliseconds: 1000),
-                    );
-                    await ref
-                        .read(fetchTimelineProvider.notifier)
-                        .onFetchMore();
-                  } on Exception catch (e) {
-                    logger.shout(e);
-                    // TODO(shohei): エラーハンドリング
-                  } finally {
-                    if (context.mounted) {
-                      loadingState.value = false;
-                    }
-                  }
-                });
-              }
-              return true;
+          return PullToRefresh(
+            controller: scrollController,
+            pageSize: FetchTimeline.defaultLimit,
+            itemCount: items.length,
+            onRefresh: () async {
+              ref
+                ..invalidate(fetchTimelineProvider)
+                ..invalidate(fetchTimelinePostCountProvider);
             },
-            child: CustomScrollView(
-              controller: scrollController,
-
-              /// スクロールできる領域がなくても、Pull To Refreshできるようにスクロール可能にする
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
+            onLoadMore: () async {
+              try {
+                await ref.read(fetchTimelineProvider.notifier).onFetchMore();
+              } on Exception catch (e) {
+                logger.shout(e);
+              }
+            },
+            slivers: [
+              SliverList.separated(
+                itemBuilder: (context, index) {
+                  final data = items[index];
+                  return TimelineTile(
+                    data: data,
+                    onTap: () {
+                      PostDetailPage.push(
+                        context,
+                        posterId: data.userId,
+                        postId: data.postId,
+                      );
+                    },
+                    onTapAvatar: (poster) {
+                      final url = poster?.image?.url;
+                      if (url != null) {
+                        ImageViewer.show(context, urls: [url]);
+                      }
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(height: 1);
+                },
+                itemCount: items.length,
               ),
-              slivers: [
-                /// Pull To Refresh
-                CupertinoSliverRefreshControl(
-                  builder: (_, refreshState, _, _, _) {
-                    // TODO(shohei): インジケータのサイズを変更したいためbuilderで実装
-                    if (refreshState == RefreshIndicatorMode.done ||
-                        refreshState == RefreshIndicatorMode.inactive ||
-                        refreshState == RefreshIndicatorMode.drag) {
-                      return const SizedBox.shrink();
-                    }
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 16),
-                      child: CupertinoActivityIndicator(),
-                    );
-                  },
-                  onRefresh: () async {
-                    ref
-                      ..invalidate(fetchTimelineProvider)
-                      ..invalidate(fetchTimelinePostCountProvider);
-                    await Future<void>.delayed(
-                      const Duration(milliseconds: 1000),
-                    );
-                  },
-                ),
 
-                /// リスト + Paginationのインジケータ
-                SliverMainAxisGroup(
-                  slivers: [
-                    SliverList.separated(
-                      itemBuilder: (context, index) {
-                        final data = items[index];
-                        return TimelineTile(
-                          data: data,
-                          onTap: () {
-                            PostDetailPage.push(
-                              context,
-                              posterId: data.userId,
-                              postId: data.postId,
-                            );
-                          },
-                          onTapAvatar: (poster) {
-                            final url = poster?.image?.url;
-                            if (url != null) {
-                              ImageViewer.show(context, urls: [url]);
-                            }
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(height: 1);
-                      },
-                      itemCount: items.length,
-                    ),
-
-                    /// Pagination処理中のインジケータ
-                    SliverPadding(
-                      padding: const EdgeInsets.only(top: 16, bottom: 56),
-                      sliver: SliverToBoxAdapter(
-                        child: Visibility(
-                          visible: loadingState.value,
-                          child: const CupertinoActivityIndicator(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                /// リストがない時の表示
-                if (items.isEmpty)
-                  SliverFillRemaining(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ).copyWith(bottom: 108),
-                        child: Text(
-                          'タイムラインはありません',
-                          style: context.bodyStyle,
-                          textAlign: TextAlign.center,
-                        ),
+              /// リストがない時の表示
+              if (items.isEmpty)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ).copyWith(bottom: 108),
+                      child: Text(
+                        'タイムラインはありません',
+                        style: context.bodyStyle,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
-              ],
-            ),
+                ),
+            ],
           );
         },
         error: (e, stackTrace) {

@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # LocalDatabase
-  shared_preferences: ^2.5.3
+  shared_preferences:
 
   # Riverpod
   hooks_riverpod:
@@ -23,17 +23,17 @@ dependencies:
   flutter_hooks: ^0.21.3
 
   # Api
-  retrofit: ^4.7.2
-  dio: ^5.9.0
+  retrofit:
+  dio:
 
   # Entity
   freezed_annotation: ^3.1.0
 
   # Launcher
-  url_launcher: ^6.3.2
+  url_launcher:
 
   # Image
-  extended_image: ^10.0.1
+  extended_image:
 
 dev_dependencies:
   flutter_test:
