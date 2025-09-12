@@ -59,7 +59,7 @@ dependencies:
   # Image
   image_picker:
   image_gallery_saver_plus: ^4.0.1
-  image_cropper:
+  image_cropper: ^9.1.0
   flutter_image_compress:
   extended_image:
   flutter_svg:

@@ -57,11 +57,10 @@ class LocalNotificationRepository {
     bool alert = true,
     bool badge = true,
   }) async {
-    final impl =
-        _flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin
-            >()!;
+    final impl = _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >()!;
     final result = await impl.requestPermissions(
       sound: sound,
       alert: alert,
@@ -138,8 +137,6 @@ class LocalNotificationRepository {
       body,
       tzDateTime,
       NotificationDetails(android: androidPlatformChannelSpecifics),
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
       androidScheduleMode: androidScheduleMode,
       payload: payload,
       matchDateTimeComponents: dateTimeComponents,

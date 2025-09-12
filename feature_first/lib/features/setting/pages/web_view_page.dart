@@ -9,10 +9,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/extensions/context_extension.dart';
+import '../../../core/extensions/share_extension.dart';
 import '../../../core/utils/clipboard.dart';
 import '../../../core/utils/logger.dart';
 
@@ -91,8 +91,9 @@ class WebViewPage extends HookConsumerWidget {
             await webViewController.value?.reload();
           } else if (Platform.isIOS) {
             await webViewController.value?.loadUrl(
-              urlRequest:
-                  URLRequest(url: await webViewController.value?.getUrl()),
+              urlRequest: URLRequest(
+                url: await webViewController.value?.getUrl(),
+              ),
             );
           }
         },
@@ -119,10 +120,10 @@ class WebViewPage extends HookConsumerWidget {
                 ),
                 itemBuilder: (BuildContext context) {
                   return [
-                    'リンクをコピー',
-                    'リンクを共有',
-                    'ブラウザで開く',
-                  ]
+                        'リンクをコピー',
+                        'リンクを共有',
+                        'ブラウザで開く',
+                      ]
                       .mapIndexed(
                         (index, data) => PopupMenuItem<int>(
                           value: index,
@@ -150,10 +151,9 @@ class WebViewPage extends HookConsumerWidget {
                       return;
                     }
 
-                    Share.share(
+                    ShareExtension.shareText(
+                      context,
                       urlState.value,
-                      sharePositionOrigin:
-                          box.localToGlobal(Offset.zero) & box.size,
                     ).ignore();
                   } else if (value == 2) {
                     final uri = Uri.parse(urlState.value);
@@ -205,8 +205,7 @@ class WebViewPage extends HookConsumerWidget {
                     onConsoleMessage: (controller, consoleMessage) {
                       logger.info(consoleMessage);
                     },
-                    shouldOverrideUrlLoading:
-                        (controller, navigationAction) async {
+                    shouldOverrideUrlLoading: (controller, navigationAction) async {
                       // https://github.com/pichillilorenzo/flutter_inappwebview/blob/master/flutter_inappwebview/example/lib/in_app_webiew_example.screen.dart#L141
                       final uri = navigationAction.request.url;
                       if (uri != null) {
