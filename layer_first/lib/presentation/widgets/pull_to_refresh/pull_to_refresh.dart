@@ -1,48 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-/// Pull-To-Refresh と Pagination(無限スクロール) をカプセル化した汎用ウィジェット。
-///
-/// - Refresh: `CupertinoSliverRefreshControl` を内部で使用
-/// - Pagination: スクロール末尾到達時 (`extentAfter == 0`) に `onLoadMore` を発火
-///
-/// 使い方:
-/// ```dart
-/// return PullToRefresh(
-///   slivers: [
-///     SliverList.separated(
-///       itemBuilder: (context, index) => YourItem(...),
-///       separatorBuilder: (_, __) => const Divider(height: 1),
-///       itemCount: items.length,
-///     ),
-///     if (items.isEmpty)
-///       SliverFillRemaining(
-///         child: Center(child: Text('データがありません')),
-///       ),
-///   ],
-///   onRefresh: () async {
-///     // データ再取得
-///   },
-///   onLoadMore: () async {
-///     // 次ページ取得
-///   },
-///   hasMore: hasMore, // 追加データがあるかどうか
-/// );
-/// ```
 class PullToRefresh extends HookWidget {
   const PullToRefresh({
     super.key,
     required this.slivers,
     this.onRefresh,
     this.onLoadMore,
-    this.hasMore = false,
+    this.pageSize,
+    this.itemCount,
     this.enableRefresh = true,
     this.enablePagination = true,
     this.controller,
     this.physics,
     this.refreshIndicatorBuilder,
     this.paginationIndicator,
-    this.paginationPadding = const EdgeInsets.only(top: 16, bottom: 56),
+    this.paginationPadding = const EdgeInsets.only(top: 16, bottom: 24),
   });
 
   /// スクロール内容（リスト等）を表す Sliver 群
@@ -54,8 +27,13 @@ class PullToRefresh extends HookWidget {
   /// 末尾到達時に呼び出す処理
   final Future<void> Function()? onLoadMore;
 
-  /// 追加のデータがあるかどうか。`false` の場合は Pagination を発火しない
-  final bool hasMore;
+  /// ページサイズ（hasMore 判定に使用）。
+  /// `enablePagination` が true の場合は、`itemCount` とセットでの指定を推奨。
+  final int? pageSize;
+
+  /// 現在のアイテム総数（hasMore 判定に使用）。
+  /// `enablePagination` が true の場合は、`pageSize` とセットでの指定を推奨。
+  final int? itemCount;
 
   /// Pull-To-Refresh を有効にするか
   final bool enableRefresh;
@@ -115,6 +93,10 @@ class PullToRefresh extends HookWidget {
       if (onLoadMore == null) {
         return;
       }
+      if (pageSize == null || itemCount == null) {
+        return;
+      }
+      final hasMore = itemCount! > 0 && (itemCount! % pageSize! == 0);
       if (!hasMore) {
         return;
       }
