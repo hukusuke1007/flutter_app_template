@@ -6,25 +6,54 @@ part of 'shared_preference_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(sharedPreferencesRepository)
+const sharedPreferencesRepositoryProvider =
+    SharedPreferencesRepositoryProvider._();
+
+final class SharedPreferencesRepositoryProvider
+    extends
+        $FunctionalProvider<
+          SharedPreferencesRepository,
+          SharedPreferencesRepository,
+          SharedPreferencesRepository
+        >
+    with $Provider<SharedPreferencesRepository> {
+  const SharedPreferencesRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'sharedPreferencesRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$sharedPreferencesRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<SharedPreferencesRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SharedPreferencesRepository create(Ref ref) {
+    return sharedPreferencesRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SharedPreferencesRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SharedPreferencesRepository>(value),
+    );
+  }
+}
+
 String _$sharedPreferencesRepositoryHash() =>
     r'08a1b756abe0325908f56bffdc13219c6b786102';
-
-/// See also [sharedPreferencesRepository].
-@ProviderFor(sharedPreferencesRepository)
-final sharedPreferencesRepositoryProvider =
-    Provider<SharedPreferencesRepository>.internal(
-      sharedPreferencesRepository,
-      name: r'sharedPreferencesRepositoryProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$sharedPreferencesRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SharedPreferencesRepositoryRef =
-    ProviderRef<SharedPreferencesRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

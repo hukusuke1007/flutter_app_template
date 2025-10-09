@@ -4,12 +4,14 @@ typedef PageName = String;
 
 enum TabTapOperationType { duplication }
 
-final tabTapOperationProviders =
-    AutoDisposeProviderFamily<TabTapOperation, PageName>((ref, _) {
-      final tabTapAction = TabTapOperation();
-      ref.onDispose(tabTapAction.dispose);
-      return tabTapAction;
-    });
+final tabTapOperationProviders = Provider.family<TabTapOperation, PageName>((
+  ref,
+  _,
+) {
+  final tabTapAction = TabTapOperation();
+  ref.onDispose(tabTapAction.dispose);
+  return tabTapAction;
+});
 
 class TabTapOperation {
   void Function(TabTapOperationType)? _listener;

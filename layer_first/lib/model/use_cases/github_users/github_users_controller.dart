@@ -16,7 +16,7 @@ class GithubUsersController extends _$GithubUsersController {
 
   /// インスタンス生成時に取得
   @override
-  FutureOr<List<User>> build() async {
+  Future<List<User>> build() async {
     final length = state.asData?.value.length ?? 0;
     final data = await ref
         .watch(githubApiRepositoryProvider)
