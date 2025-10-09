@@ -6,21 +6,46 @@ part of 'user_delete.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userDeleteHash() => r'2dfe202a78f5e49b46f6b763968e57544684ed5a';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [userDelete].
 @ProviderFor(userDelete)
-final userDeleteProvider = Provider<UserDelete>.internal(
-  userDelete,
-  name: r'userDeleteProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userDeleteHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const userDeleteProvider = UserDeleteProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef UserDeleteRef = ProviderRef<UserDelete>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class UserDeleteProvider
+    extends $FunctionalProvider<UserDelete, UserDelete, UserDelete>
+    with $Provider<UserDelete> {
+  const UserDeleteProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'userDeleteProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$userDeleteHash();
+
+  @$internal
+  @override
+  $ProviderElement<UserDelete> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  UserDelete create(Ref ref) {
+    return userDelete(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UserDelete value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UserDelete>(value),
+    );
+  }
+}
+
+String _$userDeleteHash() => r'2dfe202a78f5e49b46f6b763968e57544684ed5a';

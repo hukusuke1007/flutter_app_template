@@ -6,23 +6,46 @@ part of 'save_my_profile.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$saveMyProfileHash() => r'01b72965ecb9a1ed7a3d0f55ab0f6d3bb4c47bad';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [saveMyProfile].
 @ProviderFor(saveMyProfile)
-final saveMyProfileProvider = Provider<SaveMyProfile>.internal(
-  saveMyProfile,
-  name: r'saveMyProfileProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$saveMyProfileHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const saveMyProfileProvider = SaveMyProfileProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SaveMyProfileRef = ProviderRef<SaveMyProfile>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class SaveMyProfileProvider
+    extends $FunctionalProvider<SaveMyProfile, SaveMyProfile, SaveMyProfile>
+    with $Provider<SaveMyProfile> {
+  const SaveMyProfileProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'saveMyProfileProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$saveMyProfileHash();
+
+  @$internal
+  @override
+  $ProviderElement<SaveMyProfile> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  SaveMyProfile create(Ref ref) {
+    return saveMyProfile(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SaveMyProfile value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SaveMyProfile>(value),
+    );
+  }
+}
+
+String _$saveMyProfileHash() => r'01b72965ecb9a1ed7a3d0f55ab0f6d3bb4c47bad';

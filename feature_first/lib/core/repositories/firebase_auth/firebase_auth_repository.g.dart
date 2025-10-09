@@ -6,25 +6,53 @@ part of 'firebase_auth_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(firebaseAuthRepository)
+const firebaseAuthRepositoryProvider = FirebaseAuthRepositoryProvider._();
+
+final class FirebaseAuthRepositoryProvider
+    extends
+        $FunctionalProvider<
+          FirebaseAuthRepository,
+          FirebaseAuthRepository,
+          FirebaseAuthRepository
+        >
+    with $Provider<FirebaseAuthRepository> {
+  const FirebaseAuthRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'firebaseAuthRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$firebaseAuthRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<FirebaseAuthRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  FirebaseAuthRepository create(Ref ref) {
+    return firebaseAuthRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseAuthRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FirebaseAuthRepository>(value),
+    );
+  }
+}
+
 String _$firebaseAuthRepositoryHash() =>
     r'01361695684fa1525cd4aa1cdeac359ade4746fc';
-
-/// See also [firebaseAuthRepository].
-@ProviderFor(firebaseAuthRepository)
-final firebaseAuthRepositoryProvider =
-    Provider<FirebaseAuthRepository>.internal(
-      firebaseAuthRepository,
-      name: r'firebaseAuthRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firebaseAuthRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirebaseAuthRepositoryRef = ProviderRef<FirebaseAuthRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

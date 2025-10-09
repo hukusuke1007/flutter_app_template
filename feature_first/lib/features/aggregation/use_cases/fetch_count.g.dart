@@ -6,22 +6,49 @@ part of 'fetch_count.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(FetchCount)
+const fetchCountProvider = FetchCountProvider._();
+
+final class FetchCountProvider extends $AsyncNotifierProvider<FetchCount, int> {
+  const FetchCountProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchCountProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchCountHash();
+
+  @$internal
+  @override
+  FetchCount create() => FetchCount();
+}
+
 String _$fetchCountHash() => r'914ae2fb28417fe8ab1c1c7bc87d800657f7b58d';
 
-/// See also [FetchCount].
-@ProviderFor(FetchCount)
-final fetchCountProvider =
-    AutoDisposeAsyncNotifierProvider<FetchCount, int>.internal(
-      FetchCount.new,
-      name: r'fetchCountProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$fetchCountHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$FetchCount = AutoDisposeAsyncNotifier<int>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$FetchCount extends $AsyncNotifier<int> {
+  FutureOr<int> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<int>, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<int>, int>,
+              AsyncValue<int>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

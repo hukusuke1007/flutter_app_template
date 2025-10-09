@@ -6,21 +6,46 @@ part of 'fetch_app_name.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchAppNameHash() => r'f6bed771aae3e952d2a1ac6d7803179799f43b40';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fetchAppName].
 @ProviderFor(fetchAppName)
-final fetchAppNameProvider = AutoDisposeProvider<String>.internal(
-  fetchAppName,
-  name: r'fetchAppNameProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchAppNameHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fetchAppNameProvider = FetchAppNameProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchAppNameRef = AutoDisposeProviderRef<String>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FetchAppNameProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
+  const FetchAppNameProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchAppNameProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchAppNameHash();
+
+  @$internal
+  @override
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String create(Ref ref) {
+    return fetchAppName(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$fetchAppNameHash() => r'f6bed771aae3e952d2a1ac6d7803179799f43b40';

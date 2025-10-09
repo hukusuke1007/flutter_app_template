@@ -6,26 +6,54 @@ part of 'firebase_messaging_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(firebaseMessagingRepository)
+const firebaseMessagingRepositoryProvider =
+    FirebaseMessagingRepositoryProvider._();
+
+final class FirebaseMessagingRepositoryProvider
+    extends
+        $FunctionalProvider<
+          FirebaseMessagingRepository,
+          FirebaseMessagingRepository,
+          FirebaseMessagingRepository
+        >
+    with $Provider<FirebaseMessagingRepository> {
+  const FirebaseMessagingRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'firebaseMessagingRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$firebaseMessagingRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<FirebaseMessagingRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  FirebaseMessagingRepository create(Ref ref) {
+    return firebaseMessagingRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseMessagingRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FirebaseMessagingRepository>(value),
+    );
+  }
+}
+
 String _$firebaseMessagingRepositoryHash() =>
     r'babb354828b68487e527debd2ec370e36ee1c4d4';
-
-/// See also [firebaseMessagingRepository].
-@ProviderFor(firebaseMessagingRepository)
-final firebaseMessagingRepositoryProvider =
-    Provider<FirebaseMessagingRepository>.internal(
-      firebaseMessagingRepository,
-      name: r'firebaseMessagingRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firebaseMessagingRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirebaseMessagingRepositoryRef =
-    ProviderRef<FirebaseMessagingRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

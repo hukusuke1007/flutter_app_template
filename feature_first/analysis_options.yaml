@@ -10,7 +10,9 @@ analyzer:
     - lib/gen/*.dart
     - lib/**/gen/*.dart
   errors:
+    duplicate_ignore: ignore
     invalid_annotation_target: ignore
+    specify_nonobvious_property_types: ignore
 linter:
   rules:
     sort_pub_dependencies: false

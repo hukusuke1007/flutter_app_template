@@ -6,26 +6,43 @@ part of 'fetch_timeline_post_count.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchTimelinePostCountHash() =>
-    r'6029f02d750f7369836a8cd69d31ab6a939964c8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// タイムラインの投稿数を取得
+
+@ProviderFor(fetchTimelinePostCount)
+const fetchTimelinePostCountProvider = FetchTimelinePostCountProvider._();
 
 /// タイムラインの投稿数を取得
-///
-/// Copied from [fetchTimelinePostCount].
-@ProviderFor(fetchTimelinePostCount)
-final fetchTimelinePostCountProvider = AutoDisposeFutureProvider<int>.internal(
-  fetchTimelinePostCount,
-  name: r'fetchTimelinePostCountProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$fetchTimelinePostCountHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchTimelinePostCountRef = AutoDisposeFutureProviderRef<int>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FetchTimelinePostCountProvider
+    extends $FunctionalProvider<AsyncValue<int>, int, FutureOr<int>>
+    with $FutureModifier<int>, $FutureProvider<int> {
+  /// タイムラインの投稿数を取得
+  const FetchTimelinePostCountProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchTimelinePostCountProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchTimelinePostCountHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<int> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<int> create(Ref ref) {
+    return fetchTimelinePostCount(ref);
+  }
+}
+
+String _$fetchTimelinePostCountHash() =>
+    r'6029f02d750f7369836a8cd69d31ab6a939964c8';

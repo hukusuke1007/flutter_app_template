@@ -6,23 +6,46 @@ part of 'fetch_my_user_id.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchMyUserIdHash() => r'daa83e5b4fcdf88645fd51c89b38da01b3562e36';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fetchMyUserId].
 @ProviderFor(fetchMyUserId)
-final fetchMyUserIdProvider = AutoDisposeProvider<String?>.internal(
-  fetchMyUserId,
-  name: r'fetchMyUserIdProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$fetchMyUserIdHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fetchMyUserIdProvider = FetchMyUserIdProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchMyUserIdRef = AutoDisposeProviderRef<String?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FetchMyUserIdProvider
+    extends $FunctionalProvider<String?, String?, String?>
+    with $Provider<String?> {
+  const FetchMyUserIdProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchMyUserIdProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchMyUserIdHash();
+
+  @$internal
+  @override
+  $ProviderElement<String?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String? create(Ref ref) {
+    return fetchMyUserId(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String?>(value),
+    );
+  }
+}
+
+String _$fetchMyUserIdHash() => r'daa83e5b4fcdf88645fd51c89b38da01b3562e36';

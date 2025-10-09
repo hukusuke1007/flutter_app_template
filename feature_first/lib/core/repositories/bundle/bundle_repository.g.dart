@@ -6,23 +6,51 @@ part of 'bundle_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bundleRepositoryHash() => r'd844c5b9abec7e1a1b13042599cca668da4df9df';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [bundleRepository].
 @ProviderFor(bundleRepository)
-final bundleRepositoryProvider = Provider<BundleRepository>.internal(
-  bundleRepository,
-  name: r'bundleRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$bundleRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const bundleRepositoryProvider = BundleRepositoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BundleRepositoryRef = ProviderRef<BundleRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class BundleRepositoryProvider
+    extends
+        $FunctionalProvider<
+          BundleRepository,
+          BundleRepository,
+          BundleRepository
+        >
+    with $Provider<BundleRepository> {
+  const BundleRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'bundleRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$bundleRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<BundleRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  BundleRepository create(Ref ref) {
+    return bundleRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BundleRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BundleRepository>(value),
+    );
+  }
+}
+
+String _$bundleRepositoryHash() => r'd844c5b9abec7e1a1b13042599cca668da4df9df';

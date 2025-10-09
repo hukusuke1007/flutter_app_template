@@ -32,7 +32,7 @@ class TimelineTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final poster = ref.watch(fetchPosterProvider(data.userId)).asData?.value;
+    final poster = ref.watch(fetchPosterProvider(data.userId)).value;
     final myUserId = ref.watch(fetchMyUserIdProvider);
     final isMyData = myUserId != null && data.userId == myUserId;
     return RippleTapGesture(
@@ -54,12 +54,11 @@ class TimelineTile extends HookConsumerWidget {
                         child: CircleThumbnail(
                           size: 48,
                           url: poster?.image?.url,
-                          onTap:
-                              onTapAvatar != null
-                                  ? () {
-                                    onTapAvatar!(poster);
-                                  }
-                                  : null,
+                          onTap: onTapAvatar != null
+                              ? () {
+                                  onTapAvatar!(poster);
+                                }
+                              : null,
                         ),
                       ),
                       Expanded(

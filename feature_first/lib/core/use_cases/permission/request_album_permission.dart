@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,8 +20,9 @@ class RequestAlbumPermission {
   Future<bool> call() async {
     final status = await Future(() async {
       if (Platform.isAndroid) {
-        final androidInfo =
-            await _ref.read(deviceInfoRepositoryProvider).androidInfo;
+        final androidInfo = await _ref
+            .read(deviceInfoRepositoryProvider)
+            .androidInfo;
         if (androidInfo.version.sdkInt >= 33) {
           return Permission.photos.request();
         } else {

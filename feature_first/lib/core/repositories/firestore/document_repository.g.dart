@@ -6,24 +6,53 @@ part of 'document_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(documentRepository)
+const documentRepositoryProvider = DocumentRepositoryProvider._();
+
+final class DocumentRepositoryProvider
+    extends
+        $FunctionalProvider<
+          DocumentRepository,
+          DocumentRepository,
+          DocumentRepository
+        >
+    with $Provider<DocumentRepository> {
+  const DocumentRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'documentRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$documentRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<DocumentRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  DocumentRepository create(Ref ref) {
+    return documentRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DocumentRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DocumentRepository>(value),
+    );
+  }
+}
+
 String _$documentRepositoryHash() =>
     r'16b5384e0647f223047debb442fa1cfd2792cc18';
-
-/// See also [documentRepository].
-@ProviderFor(documentRepository)
-final documentRepositoryProvider = Provider<DocumentRepository>.internal(
-  documentRepository,
-  name: r'documentRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$documentRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef DocumentRepositoryRef = ProviderRef<DocumentRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

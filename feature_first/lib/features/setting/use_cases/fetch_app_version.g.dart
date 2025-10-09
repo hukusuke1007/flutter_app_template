@@ -6,23 +6,46 @@ part of 'fetch_app_version.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchAppVersionHash() => r'58a6b941f0b03d191a2fa34b764c05e1850941cd';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fetchAppVersion].
 @ProviderFor(fetchAppVersion)
-final fetchAppVersionProvider = AutoDisposeProvider<String>.internal(
-  fetchAppVersion,
-  name: r'fetchAppVersionProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$fetchAppVersionHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fetchAppVersionProvider = FetchAppVersionProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchAppVersionRef = AutoDisposeProviderRef<String>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FetchAppVersionProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
+  const FetchAppVersionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchAppVersionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchAppVersionHash();
+
+  @$internal
+  @override
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String create(Ref ref) {
+    return fetchAppVersion(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$fetchAppVersionHash() => r'58a6b941f0b03d191a2fa34b764c05e1850941cd';

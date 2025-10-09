@@ -14,17 +14,17 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # Logger
-  simple_logger:
+  simple_logger: ^1.10.0
 
   # LocalDatabase
-  shared_preferences: ^2.5.2
+  shared_preferences: ^2.5.3
 
   # Riverpod
-  hooks_riverpod:
-  riverpod_annotation: ^2.6.1
+  hooks_riverpod: ^3.0.3
+  riverpod_annotation: ^3.0.3
 
   # Hooks
-  flutter_hooks:
+  flutter_hooks: ^0.21.3
 
   # Entity
   freezed_annotation: ^3.0.0
@@ -71,15 +71,15 @@ dependencies:
   permission_handler:
 
   # Firebase
-  firebase_core: ^4.1.0
+  firebase_core: ^4.1.1
   firebase_analytics: ^12.0.1
-  cloud_firestore: ^6.0.1
-  firebase_auth: ^6.0.2
-  firebase_storage: ^13.0.1
-  cloud_functions: ^6.0.1
-  firebase_messaging: ^16.0.1
-  firebase_crashlytics: ^5.0.1
-  firebase_remote_config: ^6.0.1
+  cloud_firestore: ^6.0.2
+  firebase_auth: ^6.1.0
+  firebase_storage: ^13.0.2
+  cloud_functions: ^6.0.2
+  firebase_messaging: ^16.0.2
+  firebase_crashlytics: ^5.0.2
+  firebase_remote_config: ^6.0.2
 
   # LocalNotification
   flutter_local_notifications:
@@ -117,25 +117,29 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.5
+  mockito: ^5.5.1
 
   # Static analysis
-  pedantic_mono: ^1.33.0
-  custom_lint: ^0.7.5
-  riverpod_lint: ^2.6.5
+  pedantic_mono: ^1.34.0
+  custom_lint: ^0.8.1
+  riverpod_lint: ^3.0.3
 
   # Serializer
-  json_serializable: ^6.9.4
+  json_serializable: ^6.11.1
 
   # Code generator
-  build_runner: ^2.4.15
-  freezed: ^3.0.3
-  flutter_gen_runner: ^5.10.0
-  retrofit_generator: ^9.1.9
-  riverpod_generator: ^2.6.5
+  build_runner: ^2.9.0
+  freezed: ^3.2.3
+  flutter_gen_runner: ^5.12.0
+  retrofit_generator: ^10.0.6
+  riverpod_generator: ^3.0.3
 
   # Other
   flutter_launcher_icons:
+
+dependency_overrides:
+  test: ^1.26.3
+  test_api: ^0.7.7
 
 flutter_gen:
   output: lib/core/res/gen/

@@ -6,25 +6,56 @@ part of 'fetch_firestore_counter_stream.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 取得（スナップショットリスナー使用）
+
+@ProviderFor(FetchFirestoreCounter)
+const fetchFirestoreCounterProvider = FetchFirestoreCounterProvider._();
+
+/// 取得（スナップショットリスナー使用）
+final class FetchFirestoreCounterProvider
+    extends $StreamNotifierProvider<FetchFirestoreCounter, Counter?> {
+  /// 取得（スナップショットリスナー使用）
+  const FetchFirestoreCounterProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchFirestoreCounterProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchFirestoreCounterHash();
+
+  @$internal
+  @override
+  FetchFirestoreCounter create() => FetchFirestoreCounter();
+}
+
 String _$fetchFirestoreCounterHash() =>
     r'9554f5ddc96253a464078be15f81ec371dc0fb7d';
 
 /// 取得（スナップショットリスナー使用）
-///
-/// Copied from [FetchFirestoreCounter].
-@ProviderFor(FetchFirestoreCounter)
-final fetchFirestoreCounterProvider =
-    AutoDisposeStreamNotifierProvider<FetchFirestoreCounter, Counter?>.internal(
-      FetchFirestoreCounter.new,
-      name: r'fetchFirestoreCounterProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$fetchFirestoreCounterHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-typedef _$FetchFirestoreCounter = AutoDisposeStreamNotifier<Counter?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$FetchFirestoreCounter extends $StreamNotifier<Counter?> {
+  Stream<Counter?> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<Counter?>, Counter?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<Counter?>, Counter?>,
+              AsyncValue<Counter?>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

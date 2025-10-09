@@ -2,11 +2,13 @@
 
 part of 'github_api_client.dart';
 
+// dart format off
+
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _GithubApiClient implements GithubApiClient {
   _GithubApiClient(this._dio, {this.baseUrl, this.errorLogger});
@@ -40,10 +42,9 @@ class _GithubApiClient implements GithubApiClient {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<User> _value;
     try {
-      _value =
-          _result.data!
-              .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -79,27 +80,53 @@ class _GithubApiClient implements GithubApiClient {
   }
 }
 
+// dart format on
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$githubApiClientHash() => r'2f5294a93474bd49c96fdf3d21c009d965cc1ddd';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [githubApiClient].
 @ProviderFor(githubApiClient)
-final githubApiClientProvider = Provider<GithubApiClient>.internal(
-  githubApiClient,
-  name: r'githubApiClientProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$githubApiClientHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const githubApiClientProvider = GithubApiClientProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GithubApiClientRef = ProviderRef<GithubApiClient>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class GithubApiClientProvider
+    extends
+        $FunctionalProvider<GithubApiClient, GithubApiClient, GithubApiClient>
+    with $Provider<GithubApiClient> {
+  const GithubApiClientProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'githubApiClientProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$githubApiClientHash();
+
+  @$internal
+  @override
+  $ProviderElement<GithubApiClient> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GithubApiClient create(Ref ref) {
+    return githubApiClient(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GithubApiClient value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GithubApiClient>(value),
+    );
+  }
+}
+
+String _$githubApiClientHash() => r'2f5294a93474bd49c96fdf3d21c009d965cc1ddd';

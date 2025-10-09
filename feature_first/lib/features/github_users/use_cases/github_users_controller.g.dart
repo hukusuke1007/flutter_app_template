@@ -6,27 +6,56 @@ part of 'github_users_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// GithubのユーザーリストをAsyncNotifierで管理する
+
+@ProviderFor(GithubUsersController)
+const githubUsersControllerProvider = GithubUsersControllerProvider._();
+
+/// GithubのユーザーリストをAsyncNotifierで管理する
+final class GithubUsersControllerProvider
+    extends $AsyncNotifierProvider<GithubUsersController, List<User>> {
+  /// GithubのユーザーリストをAsyncNotifierで管理する
+  const GithubUsersControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'githubUsersControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$githubUsersControllerHash();
+
+  @$internal
+  @override
+  GithubUsersController create() => GithubUsersController();
+}
+
 String _$githubUsersControllerHash() =>
     r'd7834fef3e8b2660af6c3e31940707fa4e1804b1';
 
 /// GithubのユーザーリストをAsyncNotifierで管理する
-///
-/// Copied from [GithubUsersController].
-@ProviderFor(GithubUsersController)
-final githubUsersControllerProvider = AutoDisposeAsyncNotifierProvider<
-  GithubUsersController,
-  List<User>
->.internal(
-  GithubUsersController.new,
-  name: r'githubUsersControllerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$githubUsersControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-typedef _$GithubUsersController = AutoDisposeAsyncNotifier<List<User>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$GithubUsersController extends $AsyncNotifier<List<User>> {
+  FutureOr<List<User>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<List<User>>, List<User>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<User>>, List<User>>,
+              AsyncValue<List<User>>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

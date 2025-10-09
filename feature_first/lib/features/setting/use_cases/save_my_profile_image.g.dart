@@ -6,24 +6,53 @@ part of 'save_my_profile_image.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(saveMyProfileImage)
+const saveMyProfileImageProvider = SaveMyProfileImageProvider._();
+
+final class SaveMyProfileImageProvider
+    extends
+        $FunctionalProvider<
+          SaveMyProfileImage,
+          SaveMyProfileImage,
+          SaveMyProfileImage
+        >
+    with $Provider<SaveMyProfileImage> {
+  const SaveMyProfileImageProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'saveMyProfileImageProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$saveMyProfileImageHash();
+
+  @$internal
+  @override
+  $ProviderElement<SaveMyProfileImage> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SaveMyProfileImage create(Ref ref) {
+    return saveMyProfileImage(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SaveMyProfileImage value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SaveMyProfileImage>(value),
+    );
+  }
+}
+
 String _$saveMyProfileImageHash() =>
     r'f246d142a570fb32c779a033c685ae69ebabc67f';
-
-/// See also [saveMyProfileImage].
-@ProviderFor(saveMyProfileImage)
-final saveMyProfileImageProvider = Provider<SaveMyProfileImage>.internal(
-  saveMyProfileImage,
-  name: r'saveMyProfileImageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$saveMyProfileImageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SaveMyProfileImageRef = ProviderRef<SaveMyProfileImage>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

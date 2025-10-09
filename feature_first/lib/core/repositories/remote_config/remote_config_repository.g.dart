@@ -6,25 +6,53 @@ part of 'remote_config_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(remoteConfigRepository)
+const remoteConfigRepositoryProvider = RemoteConfigRepositoryProvider._();
+
+final class RemoteConfigRepositoryProvider
+    extends
+        $FunctionalProvider<
+          RemoteConfigRepository,
+          RemoteConfigRepository,
+          RemoteConfigRepository
+        >
+    with $Provider<RemoteConfigRepository> {
+  const RemoteConfigRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'remoteConfigRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$remoteConfigRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<RemoteConfigRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  RemoteConfigRepository create(Ref ref) {
+    return remoteConfigRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RemoteConfigRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RemoteConfigRepository>(value),
+    );
+  }
+}
+
 String _$remoteConfigRepositoryHash() =>
     r'755f1f09acbe68b216909edd60ba3dd648c2dc8d';
-
-/// See also [remoteConfigRepository].
-@ProviderFor(remoteConfigRepository)
-final remoteConfigRepositoryProvider =
-    Provider<RemoteConfigRepository>.internal(
-      remoteConfigRepository,
-      name: r'remoteConfigRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$remoteConfigRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RemoteConfigRepositoryRef = ProviderRef<RemoteConfigRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

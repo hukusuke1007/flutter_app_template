@@ -6,23 +6,46 @@ part of 'file_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileRepositoryHash() => r'e455678270274497fd0eb91aafc6d3422900b4e4';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fileRepository].
 @ProviderFor(fileRepository)
-final fileRepositoryProvider = Provider<FileRepository>.internal(
-  fileRepository,
-  name: r'fileRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$fileRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fileRepositoryProvider = FileRepositoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FileRepositoryRef = ProviderRef<FileRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FileRepositoryProvider
+    extends $FunctionalProvider<FileRepository, FileRepository, FileRepository>
+    with $Provider<FileRepository> {
+  const FileRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fileRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fileRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<FileRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  FileRepository create(Ref ref) {
+    return fileRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FileRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FileRepository>(value),
+    );
+  }
+}
+
+String _$fileRepositoryHash() => r'e455678270274497fd0eb91aafc6d3422900b4e4';

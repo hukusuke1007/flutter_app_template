@@ -6,23 +6,47 @@ part of 'analytics_logger.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsLoggerHash() => r'e280d857df93af81985c4071a7caabb3c3e5e454';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [analyticsLogger].
 @ProviderFor(analyticsLogger)
-final analyticsLoggerProvider = Provider<AnalyticsLogger>.internal(
-  analyticsLogger,
-  name: r'analyticsLoggerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$analyticsLoggerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const analyticsLoggerProvider = AnalyticsLoggerProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AnalyticsLoggerRef = ProviderRef<AnalyticsLogger>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AnalyticsLoggerProvider
+    extends
+        $FunctionalProvider<AnalyticsLogger, AnalyticsLogger, AnalyticsLogger>
+    with $Provider<AnalyticsLogger> {
+  const AnalyticsLoggerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'analyticsLoggerProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$analyticsLoggerHash();
+
+  @$internal
+  @override
+  $ProviderElement<AnalyticsLogger> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AnalyticsLogger create(Ref ref) {
+    return analyticsLogger(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AnalyticsLogger value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AnalyticsLogger>(value),
+    );
+  }
+}
+
+String _$analyticsLoggerHash() => r'e280d857df93af81985c4071a7caabb3c3e5e454';

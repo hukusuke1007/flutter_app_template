@@ -6,21 +6,46 @@ part of 'sign_out.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$signOutHash() => r'305fcb6385ea3c19de43c59733cabaf3cf310b71';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [signOut].
 @ProviderFor(signOut)
-final signOutProvider = Provider<SignOut>.internal(
-  signOut,
-  name: r'signOutProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$signOutHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const signOutProvider = SignOutProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SignOutRef = ProviderRef<SignOut>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class SignOutProvider
+    extends $FunctionalProvider<SignOut, SignOut, SignOut>
+    with $Provider<SignOut> {
+  const SignOutProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'signOutProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$signOutHash();
+
+  @$internal
+  @override
+  $ProviderElement<SignOut> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  SignOut create(Ref ref) {
+    return signOut(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SignOut value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SignOut>(value),
+    );
+  }
+}
+
+String _$signOutHash() => r'305fcb6385ea3c19de43c59733cabaf3cf310b71';

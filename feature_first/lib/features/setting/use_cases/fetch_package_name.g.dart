@@ -6,23 +6,46 @@ part of 'fetch_package_name.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchPackageNameHash() => r'e772dd30cbbed54387e4a91801569a0e7052451c';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fetchPackageName].
 @ProviderFor(fetchPackageName)
-final fetchPackageNameProvider = AutoDisposeProvider<String>.internal(
-  fetchPackageName,
-  name: r'fetchPackageNameProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$fetchPackageNameHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fetchPackageNameProvider = FetchPackageNameProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchPackageNameRef = AutoDisposeProviderRef<String>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FetchPackageNameProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
+  const FetchPackageNameProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchPackageNameProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchPackageNameHash();
+
+  @$internal
+  @override
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String create(Ref ref) {
+    return fetchPackageName(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$fetchPackageNameHash() => r'e772dd30cbbed54387e4a91801569a0e7052451c';

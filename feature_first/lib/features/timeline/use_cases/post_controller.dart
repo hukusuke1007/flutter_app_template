@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/entities/developer/developer.dart';
@@ -31,9 +32,10 @@ class PostController extends _$PostController {
     /**
      * タイムラインから取得する
      */
+
     final dataOfTimeline = ref.watch(
       fetchTimelineProvider.select(
-        (e) => e.asData?.value.firstWhereOrNull((e) => e.postId == postId),
+        (e) => e.value?.firstWhereOrNull((e) => e.postId == postId),
       ),
     );
     if (dataOfTimeline != null) {
@@ -44,7 +46,9 @@ class PostController extends _$PostController {
      * タイムラインになければドキュメントから取得する
      */
     /// ローカルキャッシュから取得して即時反映
-    final cache = await ref.watch(documentRepositoryProvider).fetchCacheOnly(
+    final cache = await ref
+        .watch(documentRepositoryProvider)
+        .fetchCacheOnly(
           Developer.postDocPath(userId: posterId, docId: postId),
           decode: Post.fromJson,
         );
@@ -53,7 +57,9 @@ class PostController extends _$PostController {
     }
 
     /// サーバーから取得して最新情報を反映
-    final data = await ref.watch(documentRepositoryProvider).fetch(
+    final data = await ref
+        .watch(documentRepositoryProvider)
+        .fetch(
           Developer.postDocPath(userId: posterId, docId: postId),
           decode: Post.fromJson,
         );
