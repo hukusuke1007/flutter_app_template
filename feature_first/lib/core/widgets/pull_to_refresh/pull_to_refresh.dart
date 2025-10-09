@@ -5,6 +5,7 @@ class PullToRefresh extends HookWidget {
   const PullToRefresh({
     super.key,
     required this.slivers,
+    this.scrollDirection = Axis.vertical,
     this.onRefresh,
     this.onLoadMore,
     this.enableRefresh = true,
@@ -15,6 +16,8 @@ class PullToRefresh extends HookWidget {
     this.paginationIndicator,
     this.paginationPadding = const EdgeInsets.only(top: 16, bottom: 24),
   });
+
+  final Axis scrollDirection;
 
   /// スクロール内容（リスト等）を表す Sliver 群
   final List<Widget> slivers;
@@ -110,6 +113,7 @@ class PullToRefresh extends HookWidget {
         return false;
       },
       child: CustomScrollView(
+        scrollDirection: scrollDirection,
         controller: controller,
         physics:
             physics ??
