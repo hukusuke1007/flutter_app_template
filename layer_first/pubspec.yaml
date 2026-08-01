@@ -3,28 +3,28 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.12.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
 
   # LocalDatabase
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.5
 
   # Riverpod
-  hooks_riverpod: ^3.0.3
-  riverpod_annotation: ^3.0.3
+  hooks_riverpod: ^3.4.2
+  riverpod_annotation: ^4.0.6
 
   # Hooks
   flutter_hooks: ^0.21.3
 
   # Api
-  retrofit:
-  dio:
+  retrofit: 4.9.2
+  dio: 5.11.0
 
   # Entity
   freezed_annotation: ^3.1.0
@@ -33,32 +33,28 @@ dependencies:
   url_launcher: ^6.3.2
 
   # Image
-  extended_image: ^10.0.1
+  extended_image: ^10.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # Testing
-  mockito: ^5.5.1
+  mockito: ^5.8.0
 
   # Static analysis
-  pedantic_mono: ^1.34.0
+  pedantic_mono: ^1.37.0
   custom_lint: ^0.8.1
-  riverpod_lint: ^3.0.3
+  riverpod_lint: ^3.1.8
 
   # Serializer
-  json_serializable: ^6.11.1
+  json_serializable: ^6.14.1
 
   # Code generator
-  build_runner: ^2.9.0
-  freezed: ^3.2.3
-  riverpod_generator: ^3.0.3
-  retrofit_generator: ^10.0.6
-
-dependency_overrides:
-  test: ^1.26.3
-  test_api: ^0.7.7
+  build_runner: ^2.16.0
+  freezed: ^3.2.5
+  riverpod_generator: ^4.0.8
+  retrofit_generator: ^10.2.8
 
 flutter:
   uses-material-design: true

@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-14]
-        flutter-version: ['3.29.0']
+        flutter-version: ['3.44.7']
         flutter-channel: [stable]
 
     name: flutter_analyze
