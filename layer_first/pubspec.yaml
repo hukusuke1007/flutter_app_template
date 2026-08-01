@@ -3,7 +3,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.12.0
+  sdk: ^3.12.2
 
 dependencies:
   flutter:
@@ -38,23 +38,18 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # Testing
   mockito: ^5.8.0
-
-  # Static analysis
   pedantic_mono: ^1.37.0
-  custom_lint: ^0.8.1
-  riverpod_lint: ^3.1.8
-
-  # Serializer
   json_serializable: ^6.14.1
-
-  # Code generator
   build_runner: ^2.16.0
-  freezed: ^3.2.5
+  freezed: ^4.0.0-dev.3
   riverpod_generator: ^4.0.8
   retrofit_generator: ^10.2.8
+
+dependency_overrides:
+  meta: ^1.19.0
+  test: ^1.31.2
+  test_api: ^0.7.13
 
 flutter:
   uses-material-design: true
