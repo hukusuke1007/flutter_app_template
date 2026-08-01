@@ -10,7 +10,7 @@ part of 'shared_preference_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(sharedPreferencesRepository)
-const sharedPreferencesRepositoryProvider =
+final sharedPreferencesRepositoryProvider =
     SharedPreferencesRepositoryProvider._();
 
 final class SharedPreferencesRepositoryProvider
@@ -21,7 +21,7 @@ final class SharedPreferencesRepositoryProvider
           SharedPreferencesRepository
         >
     with $Provider<SharedPreferencesRepository> {
-  const SharedPreferencesRepositoryProvider._()
+  SharedPreferencesRepositoryProvider._()
     : super(
         from: null,
         argument: null,

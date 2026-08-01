@@ -10,10 +10,10 @@ part of 'local_counter.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(LocalCounter)
-const localCounterProvider = LocalCounterProvider._();
+final localCounterProvider = LocalCounterProvider._();
 
 final class LocalCounterProvider extends $NotifierProvider<LocalCounter, int> {
-  const LocalCounterProvider._()
+  LocalCounterProvider._()
     : super(
         from: null,
         argument: null,
@@ -46,8 +46,7 @@ abstract class _$LocalCounter extends $Notifier<int> {
   int build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<int, int>;
     final element =
         ref.element
@@ -57,6 +56,6 @@ abstract class _$LocalCounter extends $Notifier<int> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }
