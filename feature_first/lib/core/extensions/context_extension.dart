@@ -48,6 +48,7 @@ extension ContextExtension on BuildContext {
         backgroundColor: backgroundColor ?? primaryColor,
         content: Text(text),
         duration: duration,
+        persist: false,
         action: SnackBarAction(
           label: closeLabel,
           onPressed: () {

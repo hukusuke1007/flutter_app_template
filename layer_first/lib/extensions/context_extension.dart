@@ -49,6 +49,7 @@ extension ContextExtension on BuildContext {
           style: bodyStyle.copyWith(color: Colors.white),
         ),
         duration: duration,
+        persist: false,
         action: SnackBarAction(
           label: closeLabel,
           textColor: Colors.white,
