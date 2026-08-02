@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 import 'dart:math';
 import 'dart:ui';
 
@@ -36,14 +34,13 @@ class DraggableScrollablePage extends StatefulWidget {
 class _State extends State<DraggableScrollablePage> {
   final _scrollController = ScrollController();
 
-  double _top = 0;
-  double _bottom = 0;
-  double _right = 0;
-  double _left = 0;
+  /// 縮小率。1.0で等倍、小さくなるほど縮む。
+  ///
+  /// setStateではなくValueNotifierで通知することで、スクロール中に
+  /// BackdropFilterやスクロール本体まで作り直さないようにしている。
+  final _scale = ValueNotifier<double>(1);
 
-  var _isScaleDown = false;
   var _isLock = false;
-  double _opacity = 1;
 
   double get _dismissThresholdRate => widget.dismissThresholdRate;
   double get _scaleDownOffset => widget.scaleDownOffset;
@@ -51,67 +48,62 @@ class _State extends State<DraggableScrollablePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!_scrollController.hasClients) {
-        return;
-      }
-      _scrollController.addListener(() {
-        final pixels = _scrollController.position.pixels;
-        // ignore: invalid_use_of_protected_member
-        final velocity = _scrollController.position.activity?.velocity ?? 0;
-        // print(pixels);
-        final margin = () {
-          if (velocity != 0.0) {
-            return 0.0;
-          }
-          if (pixels >= 0 || (0.0 > pixels && pixels > -_scaleDownOffset)) {
-            return 0.0;
-          }
-          return -pixels - _scaleDownOffset;
-        }();
-
-        setState(() {
-          _isScaleDown = margin != 0;
-          _top = margin;
-
-          /// BouncingScrollPhysicsの影響でひっぱった時にtopが大きくなるためbottomを余分に加算する
-          _bottom = margin * 4;
-
-          _right = margin;
-          _left = margin;
-        });
-
-        if (widget.onDragVertical != null) {
-          widget.onDragVertical!(margin, _isScaleDown);
-        }
-
-        final deviceWidth = context.deviceWidth;
-        final bodyWidth = deviceWidth - margin * 2;
-        final widthRate = bodyWidth / deviceWidth;
-        // print('deviceWidth $deviceWidth, margin: $margin, rate: $widthRate');
-
-        if (!_isLock) {
-          setState(() {
-            _opacity = widthRate == 1.0 ? widthRate : max(widthRate - 0.5, 0.2);
-          });
-          if (widthRate <= _dismissThresholdRate) {
-            _isLock = true;
-            Navigator.pop(context);
-          }
-        }
-      });
-    });
+    _scrollController.addListener(_onScroll);
   }
 
   @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    _scale.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isLock || !mounted || !_scrollController.hasClients) {
+      return;
+    }
+    final position = _scrollController.position;
+    final pixels = position.pixels;
+
+    /// scaleDownOffset分は遊びとして縮小させず、それを超えた分だけ縮小に使う
+    final margin = pixels >= -_scaleDownOffset ? 0.0 : -pixels - _scaleDownOffset;
+
+    final deviceWidth = context.deviceWidth;
+    final scale = (deviceWidth - margin * 2) / deviceWidth;
+    _scale.value = scale;
+
+    widget.onDragVertical?.call(margin, margin != 0);
+
+    /// 指を離した後の慣性スクロールで閉じてしまわないよう、ドラッグ中のみ判定する
+    /// (DragScrollActivityのvelocityは0、慣性中のBallisticScrollActivityは非0)
+    // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+    final velocity = position.activity?.velocity ?? 0;
+    if (velocity == 0.0 && scale <= _dismissThresholdRate) {
+      _isLock = true;
+      Navigator.pop(context);
+    }
+  }
+
+  double _opacityOf(double scale) =>
+      scale == 1.0 ? scale : max(scale - 0.5, 0.2);
+
+  @override
   Widget build(BuildContext context) {
+    final baseColor = widget.color ?? context.scaffoldBackgroundColor;
     return Scaffold(
-      backgroundColor:
-          widget.color != null
-              ? widget.color!.withValues(alpha: _opacity)
-              : context.scaffoldBackgroundColor.withValues(alpha: _opacity),
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
+          Positioned.fill(
+            child: ValueListenableBuilder<double>(
+              valueListenable: _scale,
+              builder:
+                  (context, scale, _) =>
+                      ColoredBox(color: baseColor.withValues(alpha: _opacityOf(scale))),
+            ),
+          ),
           if (widget.enableBlur)
             Positioned.fill(
               child: BackdropFilter(
@@ -122,28 +114,36 @@ class _State extends State<DraggableScrollablePage> {
                 child: const SizedBox.shrink(),
               ),
             ),
-          Positioned(
-            top: _top,
-            bottom: _bottom,
-            right: _right,
-            left: _left,
-            child: Hero(
-              tag: widget.heroTag,
-              child: Material(
-                color: Colors.transparent,
-                child: Scrollbar(
-                  thickness: _isScaleDown ? 0 : 3,
-                  controller: _scrollController,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    physics:
-                        Theme.of(context).platform == TargetPlatform.android
-                            ? const BouncingScrollPhysics()
-                            : const AlwaysScrollableScrollPhysics(),
-                    child: widget.pageBuilder(_scrollController),
-                  ),
-                ),
+
+          /// Positionedのinsetで縮めるとスクロールビューポート自体が縮み、
+          /// BouncingScrollPhysicsの摩擦計算(viewportDimension依存)が毎フレーム変わって
+          /// カクつき・閾値まで引っ張れない原因になるため、Transformで見た目だけ縮める
+          Positioned.fill(
+            child: ValueListenableBuilder<double>(
+              valueListenable: _scale,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                physics:
+                    Theme.of(context).platform == TargetPlatform.android
+                        ? const BouncingScrollPhysics()
+                        : const AlwaysScrollableScrollPhysics(),
+                child: widget.pageBuilder(_scrollController),
               ),
+              builder:
+                  (context, scale, child) => Transform.scale(
+                    scale: scale,
+                    child: Hero(
+                      tag: widget.heroTag,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Scrollbar(
+                          thickness: scale < 1.0 ? 0 : 3,
+                          controller: _scrollController,
+                          child: child!,
+                        ),
+                      ),
+                    ),
+                  ),
             ),
           ),
         ],
