@@ -253,24 +253,19 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
    ```
 
 3. 変更したいアプリ名、パッケージ名、プロジェクト名 にする。以下の通り手動で修正するか、[change_app_package_name](https://pub.dev/packages/change_app_package_name)を使って自動で修正する。
-
    - アプリ名を変更する
-
      - iOS:
 
        `$(APP_NAME_PREFIX)`はそのままで、それ以外を変更する
-
        - [info.plist - CFBundleDisplayName](./ios/Runner/Info.plist#L16)
        - [info.plist - CFBundleName](./ios/Runner/Info.plist#L24)
 
      - Android:
 
        `android/app/build.gradle`
-
        - [resValue](./android/app/build.gradle#L84)
 
    - `com.example.app` のパッケージ名を変更する
-
      - iOS:
 
        `Xcode > Runner > TARGETS Runner > Build Settings` の `Product Bundle Identifier` を変更。
@@ -278,22 +273,18 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
        ![dev](./doc/images/product_bundle_identifier.png)
 
      - Android:
-
        - android/app/build.gradle
          - [namespace](./android/app/build.gradle#L57)
          - [applicationId](./android/app/build.gradle#L75)
        - AndroidManifest.xml - package
-
          - [main](./android/app/src/main/AndroidManifest.xml#L2)
          - [debug](./android/app/src/debug/AndroidManifest.xml#L2)
          - [profile](./android/app/src/profile/AndroidManifest.xml#L2)
 
        - MainActivity.kt
-
          - [package](./android/app/src/main/kotlin/com/example/app/MainActivity.kt#L1)
 
        - ScreenReaderPlugin.kt
-
          - [package1](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L1)
          - [package2](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L15)
          - [package3](./android/app/src/main/kotlin/com/example/app/ScreenReaderPlugin.kt#L25)
@@ -312,11 +303,9 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
 
 4. 新しい Firebase プロジェクトを構築する。
    開発環境、本番環境の 2 種類用意する。なお、開発環境のパッケージ名の末尾は必ず `.dev` を付与する。
-
    - [Firebase の構築方法](https://firebase.flutter.dev/docs/overview)
 
    以下の手順で Firebase の設定を行います：
-
    1. flutterfire CLI をインストールして環境ごとに `firebase_options.dart` を生成する
 
       ```sh
@@ -330,8 +319,12 @@ flutter test --dart-define=FLAVOR=dev integration_test/features/github_users/pag
       flutterfire configure --project=your-prod-project-id --out=lib/core/firebase/prod/firebase_options.dart
       ```
 
-   2. 構築した Firebase の設定ファイルを以下の場所へ設置する
+      生成される `firebase_options.dart` は `.gitignore` 済みでコミットされません。
+      同じ場所にある `firebase_options.sample.dart` はダミー値のプレースホルダーで、
+      CI（analyze / test）はこれをコピーして実行しています。
+      `FirebaseOptions` の項目が増減した場合はサンプル側も追従してください。
 
+   2. 構築した Firebase の設定ファイルを以下の場所へ設置する
       - Android
 
         ```md

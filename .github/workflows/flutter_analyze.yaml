@@ -32,6 +32,15 @@ jobs:
       - name: flutter doctor
         working-directory: ${{ matrix.package }}
         run: flutter doctor -v
+      - name: place firebase options placeholder
+        working-directory: ${{ matrix.package }}
+        # 実キーを含む firebase_options.dart は .gitignore されているため、
+        # CI ではダミー値のサンプルをコピーして analyze / test を通す
+        run: |
+          for sample in lib/core/firebase/*/firebase_options.sample.dart; do
+            [ -e "$sample" ] || continue
+            cp "$sample" "$(dirname "$sample")/firebase_options.dart"
+          done
       - name: flutter pub get
         working-directory: ${{ matrix.package }}
         run: flutter pub get
