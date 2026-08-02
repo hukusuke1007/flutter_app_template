@@ -10,7 +10,7 @@ part of 'save_my_profile_image.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(saveMyProfileImage)
-const saveMyProfileImageProvider = SaveMyProfileImageProvider._();
+final saveMyProfileImageProvider = SaveMyProfileImageProvider._();
 
 final class SaveMyProfileImageProvider
     extends
@@ -20,7 +20,7 @@ final class SaveMyProfileImageProvider
           SaveMyProfileImage
         >
     with $Provider<SaveMyProfileImage> {
-  const SaveMyProfileImageProvider._()
+  SaveMyProfileImageProvider._()
     : super(
         from: null,
         argument: null,

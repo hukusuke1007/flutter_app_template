@@ -6,11 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/texts/error_text.dart';
+import '../../app_wrapper/pages/main_page.dart';
 import '../use_cases/start_up.dart';
 
 class StartUpPage extends HookConsumerWidget {

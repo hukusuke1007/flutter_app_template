@@ -10,11 +10,11 @@ part of 'fetch_enable_screen_reader.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FetchEnableScreenReader)
-const fetchEnableScreenReaderProvider = FetchEnableScreenReaderProvider._();
+final fetchEnableScreenReaderProvider = FetchEnableScreenReaderProvider._();
 
 final class FetchEnableScreenReaderProvider
     extends $StreamNotifierProvider<FetchEnableScreenReader, bool> {
-  const FetchEnableScreenReaderProvider._()
+  FetchEnableScreenReaderProvider._()
     : super(
         from: null,
         argument: null,
@@ -40,8 +40,7 @@ abstract class _$FetchEnableScreenReader extends $StreamNotifier<bool> {
   Stream<bool> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<bool>, bool>;
     final element =
         ref.element
@@ -51,6 +50,6 @@ abstract class _$FetchEnableScreenReader extends $StreamNotifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import './gen/colors.gen.dart';
+import 'gen/colors.gen.dart';
 
 /// Migrating a Flutter app to Material 3
 /// https://blog.codemagic.io/migrating-a-flutter-app-to-material-3/

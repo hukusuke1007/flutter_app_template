@@ -10,7 +10,7 @@ part of 'request_album_permission.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(requestAlbumPermission)
-const requestAlbumPermissionProvider = RequestAlbumPermissionProvider._();
+final requestAlbumPermissionProvider = RequestAlbumPermissionProvider._();
 
 final class RequestAlbumPermissionProvider
     extends
@@ -20,7 +20,7 @@ final class RequestAlbumPermissionProvider
           RequestAlbumPermission
         >
     with $Provider<RequestAlbumPermission> {
-  const RequestAlbumPermissionProvider._()
+  RequestAlbumPermissionProvider._()
     : super(
         from: null,
         argument: null,

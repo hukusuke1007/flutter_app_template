@@ -11,13 +11,13 @@ part of 'fetch_poster.dart';
 /// 投稿者を取得
 
 @ProviderFor(FetchPoster)
-const fetchPosterProvider = FetchPosterFamily._();
+final fetchPosterProvider = FetchPosterFamily._();
 
 /// 投稿者を取得
 final class FetchPosterProvider
     extends $AsyncNotifierProvider<FetchPoster, Developer?> {
   /// 投稿者を取得
-  const FetchPosterProvider._({
+  FetchPosterProvider._({
     required FetchPosterFamily super.from,
     required String super.argument,
   }) : super(
@@ -66,7 +66,7 @@ final class FetchPosterFamily extends $Family
           FutureOr<Developer?>,
           String
         > {
-  const FetchPosterFamily._()
+  FetchPosterFamily._()
     : super(
         retry: null,
         name: r'fetchPosterProvider',
@@ -93,8 +93,7 @@ abstract class _$FetchPoster extends $AsyncNotifier<Developer?> {
   FutureOr<Developer?> build(String userId);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Developer?>, Developer?>;
     final element =
         ref.element
@@ -104,20 +103,20 @@ abstract class _$FetchPoster extends $AsyncNotifier<Developer?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }
 
 /// 投稿者を取得（スナップショットリスナー使用）
 
 @ProviderFor(FetchPosterStream)
-const fetchPosterStreamProvider = FetchPosterStreamFamily._();
+final fetchPosterStreamProvider = FetchPosterStreamFamily._();
 
 /// 投稿者を取得（スナップショットリスナー使用）
 final class FetchPosterStreamProvider
     extends $StreamNotifierProvider<FetchPosterStream, Developer?> {
   /// 投稿者を取得（スナップショットリスナー使用）
-  const FetchPosterStreamProvider._({
+  FetchPosterStreamProvider._({
     required FetchPosterStreamFamily super.from,
     required String super.argument,
   }) : super(
@@ -166,7 +165,7 @@ final class FetchPosterStreamFamily extends $Family
           Stream<Developer?>,
           String
         > {
-  const FetchPosterStreamFamily._()
+  FetchPosterStreamFamily._()
     : super(
         retry: null,
         name: r'fetchPosterStreamProvider',
@@ -193,8 +192,7 @@ abstract class _$FetchPosterStream extends $StreamNotifier<Developer?> {
   Stream<Developer?> build(String userId);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Developer?>, Developer?>;
     final element =
         ref.element
@@ -204,6 +202,6 @@ abstract class _$FetchPosterStream extends $StreamNotifier<Developer?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }

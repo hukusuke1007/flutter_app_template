@@ -10,7 +10,7 @@ part of 'firebase_messaging_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(firebaseMessagingRepository)
-const firebaseMessagingRepositoryProvider =
+final firebaseMessagingRepositoryProvider =
     FirebaseMessagingRepositoryProvider._();
 
 final class FirebaseMessagingRepositoryProvider
@@ -21,7 +21,7 @@ final class FirebaseMessagingRepositoryProvider
           FirebaseMessagingRepository
         >
     with $Provider<FirebaseMessagingRepository> {
-  const FirebaseMessagingRepositoryProvider._()
+  FirebaseMessagingRepositoryProvider._()
     : super(
         from: null,
         argument: null,

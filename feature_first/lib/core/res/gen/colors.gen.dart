@@ -11,9 +11,7 @@
 import 'package:flutter/painting.dart';
 import 'package:flutter/material.dart';
 
-class ColorName {
-  ColorName._();
-
+abstract final class ColorName {
   /// Color: #fff7f7f7
   static const Color lightGrey1 = Color(0xFFF7F7F7);
 

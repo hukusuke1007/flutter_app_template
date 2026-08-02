@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../extensions/context_extension.dart';
@@ -17,44 +16,40 @@ Future<void> showMapLauncher(
   double longitude,
 ) async {
   Vibration.select().ignore();
-  final maps = (await MapLauncher.installedMaps).where(
-    (element) =>
-        element.mapType == MapType.google || element.mapType == MapType.apple,
-  );
+  final maps =
+      (await MapLauncher.marker(
+        LocationCoords(latitude, longitude, title: title),
+      ).getSupportedMaps([MapApp.google, MapApp.apple])).where(
+        (element) => element.isInstalled,
+      );
   if (!context.mounted) {
     return;
   }
   await showLocationMapBottomSheet(
     context,
     title,
-    latitude,
-    longitude,
     google: maps.firstWhereOrNull(
-      (element) => element.mapType == MapType.google,
+      (element) => element.map.id == MapApp.google.id,
     ),
-    apple: maps.firstWhereOrNull((element) => element.mapType == MapType.apple),
+    apple: maps.firstWhereOrNull(
+      (element) => element.map.id == MapApp.apple.id,
+    ),
   );
 }
 
 Future<void> showLocationMapBottomSheet(
   BuildContext context,
-  String title,
-  double latitude,
-  double longitude, {
-  AvailableMap? google,
-  AvailableMap? apple,
+  String title, {
+  SupportedMap? google,
+  SupportedMap? apple,
 }) {
   final mapList = <Widget>[
     if (google != null)
       ListTile(
-        leading: SvgPicture.asset(google.icon, width: 40, height: 40),
+        leading: Image.memory(google.iconBytes, width: 40, height: 40),
         title: const Text('GoogleMapで開く'),
         onTap: () {
-          MapLauncher.showMarker(
-            mapType: MapType.google,
-            coords: Coords(latitude, longitude),
-            title: title,
-          );
+          google.show().ignore();
           Future.delayed(const Duration(milliseconds: 1000), () {
             if (context.mounted) {
               Navigator.of(context).pop();
@@ -64,14 +59,10 @@ Future<void> showLocationMapBottomSheet(
       ),
     if (apple != null)
       ListTile(
-        leading: SvgPicture.asset(apple.icon, width: 32, height: 32),
+        leading: Image.memory(apple.iconBytes, width: 32, height: 32),
         title: const Text('Appleマップで開く'),
         onTap: () {
-          MapLauncher.showMarker(
-            mapType: MapType.apple,
-            coords: Coords(latitude, longitude),
-            title: title,
-          );
+          apple.show().ignore();
           Future.delayed(const Duration(milliseconds: 1000), () {
             if (context.mounted) {
               Navigator.of(context).pop();

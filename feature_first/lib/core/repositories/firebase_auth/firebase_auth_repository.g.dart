@@ -10,7 +10,7 @@ part of 'firebase_auth_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(firebaseAuthRepository)
-const firebaseAuthRepositoryProvider = FirebaseAuthRepositoryProvider._();
+final firebaseAuthRepositoryProvider = FirebaseAuthRepositoryProvider._();
 
 final class FirebaseAuthRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class FirebaseAuthRepositoryProvider
           FirebaseAuthRepository
         >
     with $Provider<FirebaseAuthRepository> {
-  const FirebaseAuthRepositoryProvider._()
+  FirebaseAuthRepositoryProvider._()
     : super(
         from: null,
         argument: null,

@@ -10,11 +10,11 @@ part of 'aggregation_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(AggregationController)
-const aggregationControllerProvider = AggregationControllerProvider._();
+final aggregationControllerProvider = AggregationControllerProvider._();
 
 final class AggregationControllerProvider
     extends $AsyncNotifierProvider<AggregationController, List<Result>> {
-  const AggregationControllerProvider._()
+  AggregationControllerProvider._()
     : super(
         from: null,
         argument: null,
@@ -40,8 +40,7 @@ abstract class _$AggregationController extends $AsyncNotifier<List<Result>> {
   FutureOr<List<Result>> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<List<Result>>, List<Result>>;
     final element =
         ref.element
@@ -51,6 +50,6 @@ abstract class _$AggregationController extends $AsyncNotifier<List<Result>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

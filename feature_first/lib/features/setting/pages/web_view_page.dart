@@ -191,12 +191,12 @@ class WebViewPage extends HookConsumerWidget {
                     onWebViewCreated: (controller) {
                       webViewController.value = controller;
                     },
-                    onPermissionRequest: (controller, request) async {
-                      return PermissionResponse(
+                    onPermissionRequest: (controller, request) => Future.value(
+                      PermissionResponse(
                         resources: request.resources,
                         action: PermissionResponseAction.GRANT,
-                      );
-                    },
+                      ),
+                    ),
                     onProgressChanged: (controller, value) {
                       if (context.mounted) {
                         progressState.value = value / 100;

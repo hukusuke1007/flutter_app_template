@@ -10,7 +10,7 @@ part of 'sign_in_with_anonymously.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(signInWithAnonymously)
-const signInWithAnonymouslyProvider = SignInWithAnonymouslyProvider._();
+final signInWithAnonymouslyProvider = SignInWithAnonymouslyProvider._();
 
 final class SignInWithAnonymouslyProvider
     extends
@@ -20,7 +20,7 @@ final class SignInWithAnonymouslyProvider
           SignInWithAnonymously
         >
     with $Provider<SignInWithAnonymously> {
-  const SignInWithAnonymouslyProvider._()
+  SignInWithAnonymouslyProvider._()
     : super(
         from: null,
         argument: null,

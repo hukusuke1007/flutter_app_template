@@ -10,7 +10,7 @@ part of 'remote_config_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(remoteConfigRepository)
-const remoteConfigRepositoryProvider = RemoteConfigRepositoryProvider._();
+final remoteConfigRepositoryProvider = RemoteConfigRepositoryProvider._();
 
 final class RemoteConfigRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class RemoteConfigRepositoryProvider
           RemoteConfigRepository
         >
     with $Provider<RemoteConfigRepository> {
-  const RemoteConfigRepositoryProvider._()
+  RemoteConfigRepositoryProvider._()
     : super(
         from: null,
         argument: null,

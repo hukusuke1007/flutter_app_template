@@ -10,10 +10,10 @@ part of 'fetch_sum.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FetchSum)
-const fetchSumProvider = FetchSumProvider._();
+final fetchSumProvider = FetchSumProvider._();
 
 final class FetchSumProvider extends $AsyncNotifierProvider<FetchSum, double> {
-  const FetchSumProvider._()
+  FetchSumProvider._()
     : super(
         from: null,
         argument: null,
@@ -38,8 +38,7 @@ abstract class _$FetchSum extends $AsyncNotifier<double> {
   FutureOr<double> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<double>, double>;
     final element =
         ref.element
@@ -49,6 +48,6 @@ abstract class _$FetchSum extends $AsyncNotifier<double> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

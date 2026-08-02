@@ -50,7 +50,7 @@ Future<void> main() async {
     Future(() async {
       tz.initializeTimeZones();
       final currentTimeZone = await FlutterTimezone.getLocalTimezone();
-      tz.setLocalLocation(tz.getLocation(currentTimeZone));
+      tz.setLocalLocation(tz.getLocation(currentTimeZone.identifier));
     }),
     Future(() async {
       tempDirectory = await getTemporaryDirectory();

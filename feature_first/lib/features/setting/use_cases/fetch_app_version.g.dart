@@ -10,12 +10,12 @@ part of 'fetch_app_version.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchAppVersion)
-const fetchAppVersionProvider = FetchAppVersionProvider._();
+final fetchAppVersionProvider = FetchAppVersionProvider._();
 
 final class FetchAppVersionProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const FetchAppVersionProvider._()
+  FetchAppVersionProvider._()
     : super(
         from: null,
         argument: null,

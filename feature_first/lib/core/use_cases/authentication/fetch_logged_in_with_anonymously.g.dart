@@ -10,7 +10,7 @@ part of 'fetch_logged_in_with_anonymously.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchLoggedInWithAnonymously)
-const fetchLoggedInWithAnonymouslyProvider =
+final fetchLoggedInWithAnonymouslyProvider =
     FetchLoggedInWithAnonymouslyProvider._();
 
 final class FetchLoggedInWithAnonymouslyProvider
@@ -21,7 +21,7 @@ final class FetchLoggedInWithAnonymouslyProvider
           FetchLoggedInWithAnonymously
         >
     with $Provider<FetchLoggedInWithAnonymously> {
-  const FetchLoggedInWithAnonymouslyProvider._()
+  FetchLoggedInWithAnonymouslyProvider._()
     : super(
         from: null,
         argument: null,

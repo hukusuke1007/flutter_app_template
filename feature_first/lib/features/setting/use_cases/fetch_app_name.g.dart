@@ -10,12 +10,12 @@ part of 'fetch_app_name.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchAppName)
-const fetchAppNameProvider = FetchAppNameProvider._();
+final fetchAppNameProvider = FetchAppNameProvider._();
 
 final class FetchAppNameProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const FetchAppNameProvider._()
+  FetchAppNameProvider._()
     : super(
         from: null,
         argument: null,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user.dart';
@@ -9,6 +9,7 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$UserCopyWithImpl<$Res>
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? login = null,Object? id = null,Object? nodeId = freezed,Object? avatarUrl = freezed,Object? gravatarId = freezed,Object? url = null,Object? htmlUrl = freezed,Object? followersUrl = freezed,Object? followingUrl = freezed,Object? gistsUrl = freezed,Object? starredUrl = freezed,Object? subscriptionsUrl = freezed,Object? organizationsUrl = freezed,Object? reposUrl = freezed,Object? eventsUrl = freezed,Object? receivedEventsUrl = freezed,Object? type = freezed,Object? siteAdmin = null,}) {
-  return _then(_self.copyWith(
+  return _then(User(
 login: null == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,nodeId: freezed == nodeId ? _self.nodeId : nodeId // ignore: cast_nullable_to_non_nullable

@@ -10,11 +10,11 @@ part of 'post_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(PostController)
-const postControllerProvider = PostControllerFamily._();
+final postControllerProvider = PostControllerFamily._();
 
 final class PostControllerProvider
     extends $AsyncNotifierProvider<PostController, Post?> {
-  const PostControllerProvider._({
+  PostControllerProvider._({
     required PostControllerFamily super.from,
     required ({String? posterId, String? postId}) super.argument,
   }) : super(
@@ -50,7 +50,7 @@ final class PostControllerProvider
   }
 }
 
-String _$postControllerHash() => r'e66146e9dff0784eb9bfc1f6e75bb466e8924060';
+String _$postControllerHash() => r'c8d46da276c16238cd220922bde87ba1a8845dd2';
 
 final class PostControllerFamily extends $Family
     with
@@ -61,7 +61,7 @@ final class PostControllerFamily extends $Family
           FutureOr<Post?>,
           ({String? posterId, String? postId})
         > {
-  const PostControllerFamily._()
+  PostControllerFamily._()
     : super(
         retry: null,
         name: r'postControllerProvider',
@@ -90,8 +90,7 @@ abstract class _$PostController extends $AsyncNotifier<Post?> {
   FutureOr<Post?> build({required String? posterId, required String? postId});
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(posterId: _$args.posterId, postId: _$args.postId);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Post?>, Post?>;
     final element =
         ref.element
@@ -101,6 +100,9 @@ abstract class _$PostController extends $AsyncNotifier<Post?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(
+      ref,
+      () => build(posterId: _$args.posterId, postId: _$args.postId),
+    );
   }
 }

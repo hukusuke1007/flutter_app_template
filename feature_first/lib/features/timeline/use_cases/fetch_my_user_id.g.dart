@@ -10,12 +10,12 @@ part of 'fetch_my_user_id.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchMyUserId)
-const fetchMyUserIdProvider = FetchMyUserIdProvider._();
+final fetchMyUserIdProvider = FetchMyUserIdProvider._();
 
 final class FetchMyUserIdProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const FetchMyUserIdProvider._()
+  FetchMyUserIdProvider._()
     : super(
         from: null,
         argument: null,

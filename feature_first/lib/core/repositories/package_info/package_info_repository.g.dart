@@ -10,7 +10,7 @@ part of 'package_info_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(packageInfoRepository)
-const packageInfoRepositoryProvider = PackageInfoRepositoryProvider._();
+final packageInfoRepositoryProvider = PackageInfoRepositoryProvider._();
 
 final class PackageInfoRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class PackageInfoRepositoryProvider
           PackageInfoRepository
         >
     with $Provider<PackageInfoRepository> {
-  const PackageInfoRepositoryProvider._()
+  PackageInfoRepositoryProvider._()
     : super(
         from: null,
         argument: null,

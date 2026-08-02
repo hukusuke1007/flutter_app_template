@@ -10,7 +10,7 @@ part of 'memo_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(collectionPagingRepository)
-const collectionPagingRepositoryProvider = CollectionPagingRepositoryFamily._();
+final collectionPagingRepositoryProvider = CollectionPagingRepositoryFamily._();
 
 final class CollectionPagingRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class CollectionPagingRepositoryProvider
           CollectionPagingRepository<Memo>
         >
     with $Provider<CollectionPagingRepository<Memo>> {
-  const CollectionPagingRepositoryProvider._({
+  CollectionPagingRepositoryProvider._({
     required CollectionPagingRepositoryFamily super.from,
     required CollectionParam<Memo> super.argument,
   }) : super(
@@ -84,7 +84,7 @@ final class CollectionPagingRepositoryFamily extends $Family
           CollectionPagingRepository<Memo>,
           CollectionParam<Memo>
         > {
-  const CollectionPagingRepositoryFamily._()
+  CollectionPagingRepositoryFamily._()
     : super(
         retry: null,
         name: r'collectionPagingRepositoryProvider',
@@ -101,11 +101,11 @@ final class CollectionPagingRepositoryFamily extends $Family
 }
 
 @ProviderFor(MemoController)
-const memoControllerProvider = MemoControllerProvider._();
+final memoControllerProvider = MemoControllerProvider._();
 
 final class MemoControllerProvider
     extends $AsyncNotifierProvider<MemoController, List<Memo>> {
-  const MemoControllerProvider._()
+  MemoControllerProvider._()
     : super(
         from: null,
         argument: null,
@@ -130,8 +130,7 @@ abstract class _$MemoController extends $AsyncNotifier<List<Memo>> {
   FutureOr<List<Memo>> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<List<Memo>>, List<Memo>>;
     final element =
         ref.element
@@ -141,6 +140,6 @@ abstract class _$MemoController extends $AsyncNotifier<List<Memo>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

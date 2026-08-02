@@ -10,7 +10,7 @@ part of 'document_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(documentRepository)
-const documentRepositoryProvider = DocumentRepositoryProvider._();
+final documentRepositoryProvider = DocumentRepositoryProvider._();
 
 final class DocumentRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class DocumentRepositoryProvider
           DocumentRepository
         >
     with $Provider<DocumentRepository> {
-  const DocumentRepositoryProvider._()
+  DocumentRepositoryProvider._()
     : super(
         from: null,
         argument: null,

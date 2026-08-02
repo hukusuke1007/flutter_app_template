@@ -7,7 +7,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/authentication/pages/reset_email_password_page.dart';
 import '../../../core/custom_hooks/use_effect_once.dart';
 import '../../../core/custom_hooks/use_form_field_state_key.dart';
 import '../../../core/extensions/context_extension.dart';
@@ -16,6 +15,7 @@ import '../../../core/res/button_style.dart';
 import '../../../core/utils/logger.dart';
 import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/sign_in_with_email_and_password.dart';
+import 'reset_email_password_page.dart';
 import 'top_email_feature_page.dart';
 import 'widgets/email_text_field.dart';
 import 'widgets/passward_text_field.dart';

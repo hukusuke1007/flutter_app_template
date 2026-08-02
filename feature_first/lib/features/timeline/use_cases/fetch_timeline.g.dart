@@ -10,7 +10,7 @@ part of 'fetch_timeline.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(collectionPagingRepository)
-const collectionPagingRepositoryProvider = CollectionPagingRepositoryFamily._();
+final collectionPagingRepositoryProvider = CollectionPagingRepositoryFamily._();
 
 final class CollectionPagingRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class CollectionPagingRepositoryProvider
           CollectionPagingRepository<Post>
         >
     with $Provider<CollectionPagingRepository<Post>> {
-  const CollectionPagingRepositoryProvider._({
+  CollectionPagingRepositoryProvider._({
     required CollectionPagingRepositoryFamily super.from,
     required CollectionParam<Post> super.argument,
   }) : super(
@@ -84,7 +84,7 @@ final class CollectionPagingRepositoryFamily extends $Family
           CollectionPagingRepository<Post>,
           CollectionParam<Post>
         > {
-  const CollectionPagingRepositoryFamily._()
+  CollectionPagingRepositoryFamily._()
     : super(
         retry: null,
         name: r'collectionPagingRepositoryProvider',
@@ -103,13 +103,13 @@ final class CollectionPagingRepositoryFamily extends $Family
 /// タイムラインを取得
 
 @ProviderFor(FetchTimeline)
-const fetchTimelineProvider = FetchTimelineProvider._();
+final fetchTimelineProvider = FetchTimelineProvider._();
 
 /// タイムラインを取得
 final class FetchTimelineProvider
     extends $AsyncNotifierProvider<FetchTimeline, List<Post>> {
   /// タイムラインを取得
-  const FetchTimelineProvider._()
+  FetchTimelineProvider._()
     : super(
         from: null,
         argument: null,
@@ -136,8 +136,7 @@ abstract class _$FetchTimeline extends $AsyncNotifier<List<Post>> {
   FutureOr<List<Post>> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<List<Post>>, List<Post>>;
     final element =
         ref.element
@@ -147,6 +146,6 @@ abstract class _$FetchTimeline extends $AsyncNotifier<List<Post>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

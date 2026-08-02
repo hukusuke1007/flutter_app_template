@@ -11,13 +11,13 @@ part of 'fetch_firestore_counter_stream.dart';
 /// 取得（スナップショットリスナー使用）
 
 @ProviderFor(FetchFirestoreCounter)
-const fetchFirestoreCounterProvider = FetchFirestoreCounterProvider._();
+final fetchFirestoreCounterProvider = FetchFirestoreCounterProvider._();
 
 /// 取得（スナップショットリスナー使用）
 final class FetchFirestoreCounterProvider
     extends $StreamNotifierProvider<FetchFirestoreCounter, Counter?> {
   /// 取得（スナップショットリスナー使用）
-  const FetchFirestoreCounterProvider._()
+  FetchFirestoreCounterProvider._()
     : super(
         from: null,
         argument: null,
@@ -45,8 +45,7 @@ abstract class _$FetchFirestoreCounter extends $StreamNotifier<Counter?> {
   Stream<Counter?> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Counter?>, Counter?>;
     final element =
         ref.element
@@ -56,6 +55,6 @@ abstract class _$FetchFirestoreCounter extends $StreamNotifier<Counter?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

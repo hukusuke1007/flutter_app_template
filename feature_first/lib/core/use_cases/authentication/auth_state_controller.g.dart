@@ -10,11 +10,11 @@ part of 'auth_state_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(AuthStateController)
-const authStateControllerProvider = AuthStateControllerProvider._();
+final authStateControllerProvider = AuthStateControllerProvider._();
 
 final class AuthStateControllerProvider
     extends $NotifierProvider<AuthStateController, AuthState> {
-  const AuthStateControllerProvider._()
+  AuthStateControllerProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,8 +48,7 @@ abstract class _$AuthStateController extends $Notifier<AuthState> {
   AuthState build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AuthState, AuthState>;
     final element =
         ref.element
@@ -59,6 +58,6 @@ abstract class _$AuthStateController extends $Notifier<AuthState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'storage_file.dart';
@@ -9,6 +9,7 @@ part of 'storage_file.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$StorageFileCopyWithImpl<$Res>
 /// Create a copy of StorageFile
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? path = null,Object? mimeType = freezed,Object? metadata = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(StorageFile(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
@@ -206,7 +207,7 @@ return $default(_that.url,_that.path,_that.mimeType,_that.metadata);case _:
 @JsonSerializable()
 
 class _StorageFile extends StorageFile {
-   _StorageFile({required this.url, required this.path, this.mimeType, final  Map<String, String>? metadata}): _metadata = metadata,super._();
+   _StorageFile({required this.url, required this.path, this.mimeType,  Map<String, String>? metadata}): _metadata = metadata,super._();
   factory _StorageFile.fromJson(Map<String, dynamic> json) => _$StorageFileFromJson(json);
 
 @override final  String url;

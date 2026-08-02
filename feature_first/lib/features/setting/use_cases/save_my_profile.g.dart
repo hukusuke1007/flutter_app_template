@@ -10,12 +10,12 @@ part of 'save_my_profile.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(saveMyProfile)
-const saveMyProfileProvider = SaveMyProfileProvider._();
+final saveMyProfileProvider = SaveMyProfileProvider._();
 
 final class SaveMyProfileProvider
     extends $FunctionalProvider<SaveMyProfile, SaveMyProfile, SaveMyProfile>
     with $Provider<SaveMyProfile> {
-  const SaveMyProfileProvider._()
+  SaveMyProfileProvider._()
     : super(
         from: null,
         argument: null,

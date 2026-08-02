@@ -10,7 +10,7 @@ part of 'screen_reader_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(screenReaderRepository)
-const screenReaderRepositoryProvider = ScreenReaderRepositoryProvider._();
+final screenReaderRepositoryProvider = ScreenReaderRepositoryProvider._();
 
 final class ScreenReaderRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class ScreenReaderRepositoryProvider
           ScreenReaderRepository
         >
     with $Provider<ScreenReaderRepository> {
-  const ScreenReaderRepositoryProvider._()
+  ScreenReaderRepositoryProvider._()
     : super(
         from: null,
         argument: null,

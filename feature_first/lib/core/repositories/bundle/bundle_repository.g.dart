@@ -10,7 +10,7 @@ part of 'bundle_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(bundleRepository)
-const bundleRepositoryProvider = BundleRepositoryProvider._();
+final bundleRepositoryProvider = BundleRepositoryProvider._();
 
 final class BundleRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class BundleRepositoryProvider
           BundleRepository
         >
     with $Provider<BundleRepository> {
-  const BundleRepositoryProvider._()
+  BundleRepositoryProvider._()
     : super(
         from: null,
         argument: null,

@@ -11,13 +11,13 @@ part of 'github_users_controller.dart';
 /// GithubのユーザーリストをAsyncNotifierで管理する
 
 @ProviderFor(GithubUsersController)
-const githubUsersControllerProvider = GithubUsersControllerProvider._();
+final githubUsersControllerProvider = GithubUsersControllerProvider._();
 
 /// GithubのユーザーリストをAsyncNotifierで管理する
 final class GithubUsersControllerProvider
     extends $AsyncNotifierProvider<GithubUsersController, List<User>> {
   /// GithubのユーザーリストをAsyncNotifierで管理する
-  const GithubUsersControllerProvider._()
+  GithubUsersControllerProvider._()
     : super(
         from: null,
         argument: null,
@@ -45,8 +45,7 @@ abstract class _$GithubUsersController extends $AsyncNotifier<List<User>> {
   FutureOr<List<User>> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<List<User>>, List<User>>;
     final element =
         ref.element
@@ -56,6 +55,6 @@ abstract class _$GithubUsersController extends $AsyncNotifier<List<User>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

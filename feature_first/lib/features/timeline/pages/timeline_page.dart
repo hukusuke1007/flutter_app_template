@@ -5,12 +5,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/app_wrapper/pages/main_page.dart';
-import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/utils/logger.dart';
-import '../../../../core/widgets/images/image_viewer.dart';
-import '../../../../core/widgets/pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/widgets/texts/error_text.dart';
+import '../../../core/extensions/context_extension.dart';
+import '../../../core/utils/logger.dart';
+import '../../../core/widgets/images/image_viewer.dart';
+import '../../../core/widgets/pull_to_refresh/pull_to_refresh.dart';
+import '../../../core/widgets/texts/error_text.dart';
+import '../../app_wrapper/pages/main_page.dart';
 import '../use_cases/fetch_timeline.dart';
 import '../use_cases/fetch_timeline_post_count.dart';
 import 'edit_post_page.dart';

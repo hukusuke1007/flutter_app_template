@@ -10,11 +10,11 @@ part of 'fetch_my_profile.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FetchMyProfile)
-const fetchMyProfileProvider = FetchMyProfileProvider._();
+final fetchMyProfileProvider = FetchMyProfileProvider._();
 
 final class FetchMyProfileProvider
     extends $StreamNotifierProvider<FetchMyProfile, Developer?> {
-  const FetchMyProfileProvider._()
+  FetchMyProfileProvider._()
     : super(
         from: null,
         argument: null,
@@ -39,8 +39,7 @@ abstract class _$FetchMyProfile extends $StreamNotifier<Developer?> {
   Stream<Developer?> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Developer?>, Developer?>;
     final element =
         ref.element
@@ -50,6 +49,6 @@ abstract class _$FetchMyProfile extends $StreamNotifier<Developer?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

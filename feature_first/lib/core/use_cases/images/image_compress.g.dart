@@ -10,12 +10,12 @@ part of 'image_compress.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(imageCompress)
-const imageCompressProvider = ImageCompressProvider._();
+final imageCompressProvider = ImageCompressProvider._();
 
 final class ImageCompressProvider
     extends $FunctionalProvider<ImageCompress, ImageCompress, ImageCompress>
     with $Provider<ImageCompress> {
-  const ImageCompressProvider._()
+  ImageCompressProvider._()
     : super(
         from: null,
         argument: null,

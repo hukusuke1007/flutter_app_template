@@ -10,12 +10,12 @@ part of 'user_delete.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(userDelete)
-const userDeleteProvider = UserDeleteProvider._();
+final userDeleteProvider = UserDeleteProvider._();
 
 final class UserDeleteProvider
     extends $FunctionalProvider<UserDelete, UserDelete, UserDelete>
     with $Provider<UserDelete> {
-  const UserDeleteProvider._()
+  UserDeleteProvider._()
     : super(
         from: null,
         argument: null,

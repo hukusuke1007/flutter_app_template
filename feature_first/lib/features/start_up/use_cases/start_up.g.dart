@@ -10,7 +10,7 @@ part of 'start_up.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(startUp)
-const startUpProvider = StartUpProvider._();
+final startUpProvider = StartUpProvider._();
 
 final class StartUpProvider
     extends
@@ -22,7 +22,7 @@ final class StartUpProvider
     with
         $FutureModifier<StartUpResultType>,
         $FutureProvider<StartUpResultType> {
-  const StartUpProvider._()
+  StartUpProvider._()
     : super(
         from: null,
         argument: null,

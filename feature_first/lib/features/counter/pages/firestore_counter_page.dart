@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/app_wrapper/pages/main_page.dart';
 import '../../../core/extensions/context_extension.dart';
 import '../../../core/res/button_style.dart';
+import '../../app_wrapper/pages/main_page.dart';
 import '../use_cases/fetch_firestore_counter_stream.dart';
 import '../use_cases/firestore_counter.dart';
 

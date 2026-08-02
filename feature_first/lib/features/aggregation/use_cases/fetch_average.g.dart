@@ -10,11 +10,11 @@ part of 'fetch_average.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FetchAverage)
-const fetchAverageProvider = FetchAverageProvider._();
+final fetchAverageProvider = FetchAverageProvider._();
 
 final class FetchAverageProvider
     extends $AsyncNotifierProvider<FetchAverage, double> {
-  const FetchAverageProvider._()
+  FetchAverageProvider._()
     : super(
         from: null,
         argument: null,
@@ -39,8 +39,7 @@ abstract class _$FetchAverage extends $AsyncNotifier<double> {
   FutureOr<double> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<double>, double>;
     final element =
         ref.element
@@ -50,6 +49,6 @@ abstract class _$FetchAverage extends $AsyncNotifier<double> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

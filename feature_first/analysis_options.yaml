@@ -3,6 +3,8 @@ plugins:
   riverpod_lint: ^3.1.8
 analyzer:
   exclude:
+    # SPMが有効だとbuild/ios/SourcePackagesに依存パッケージのソースが展開されるため除外する
+    - build/**
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
     - lib/l10n/*.dart

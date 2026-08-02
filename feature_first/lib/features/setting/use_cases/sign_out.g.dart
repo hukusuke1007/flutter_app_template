@@ -10,12 +10,12 @@ part of 'sign_out.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(signOut)
-const signOutProvider = SignOutProvider._();
+final signOutProvider = SignOutProvider._();
 
 final class SignOutProvider
     extends $FunctionalProvider<SignOut, SignOut, SignOut>
     with $Provider<SignOut> {
-  const SignOutProvider._()
+  SignOutProvider._()
     : super(
         from: null,
         argument: null,

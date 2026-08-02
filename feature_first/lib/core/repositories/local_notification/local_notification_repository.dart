@@ -36,7 +36,7 @@ class LocalNotificationRepository {
     );
 
     await _flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
       onDidReceiveBackgroundNotificationResponse:
           onDidReceiveBackgroundNotificationResponse,
@@ -96,10 +96,10 @@ class LocalNotificationRepository {
     );
 
     await _flutterLocalNotificationsPlugin.show(
-      id,
-      title,
-      body,
-      platformChannelSpecifics,
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: platformChannelSpecifics,
       payload: payload,
     );
   }
@@ -131,11 +131,13 @@ class LocalNotificationRepository {
     );
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tzDateTime,
-      NotificationDetails(android: androidPlatformChannelSpecifics),
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: tzDateTime,
+      notificationDetails: NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+      ),
       androidScheduleMode: androidScheduleMode,
       payload: payload,
       matchDateTimeComponents: dateTimeComponents,
@@ -167,17 +169,20 @@ class LocalNotificationRepository {
     );
 
     await _flutterLocalNotificationsPlugin.periodicallyShow(
-      id,
-      title,
-      body,
-      interval,
-      NotificationDetails(android: androidPlatformChannelSpecifics),
+      id: id,
+      title: title,
+      body: body,
+      repeatInterval: interval,
+      notificationDetails: NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+      ),
       payload: payload,
       androidScheduleMode: androidScheduleMode,
     );
   }
 
-  Future<void> cancel(int id) => _flutterLocalNotificationsPlugin.cancel(id);
+  Future<void> cancel(int id) =>
+      _flutterLocalNotificationsPlugin.cancel(id: id);
 
   Future<void> cancelAll() => _flutterLocalNotificationsPlugin.cancelAll();
 }

@@ -10,10 +10,10 @@ part of 'fetch_count.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FetchCount)
-const fetchCountProvider = FetchCountProvider._();
+final fetchCountProvider = FetchCountProvider._();
 
 final class FetchCountProvider extends $AsyncNotifierProvider<FetchCount, int> {
-  const FetchCountProvider._()
+  FetchCountProvider._()
     : super(
         from: null,
         argument: null,
@@ -38,8 +38,7 @@ abstract class _$FetchCount extends $AsyncNotifier<int> {
   FutureOr<int> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<int>, int>;
     final element =
         ref.element
@@ -49,6 +48,6 @@ abstract class _$FetchCount extends $AsyncNotifier<int> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

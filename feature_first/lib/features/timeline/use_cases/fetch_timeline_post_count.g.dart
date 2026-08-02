@@ -11,7 +11,7 @@ part of 'fetch_timeline_post_count.dart';
 /// タイムラインの投稿数を取得
 
 @ProviderFor(fetchTimelinePostCount)
-const fetchTimelinePostCountProvider = FetchTimelinePostCountProvider._();
+final fetchTimelinePostCountProvider = FetchTimelinePostCountProvider._();
 
 /// タイムラインの投稿数を取得
 
@@ -19,7 +19,7 @@ final class FetchTimelinePostCountProvider
     extends $FunctionalProvider<AsyncValue<int>, int, FutureOr<int>>
     with $FutureModifier<int>, $FutureProvider<int> {
   /// タイムラインの投稿数を取得
-  const FetchTimelinePostCountProvider._()
+  FetchTimelinePostCountProvider._()
     : super(
         from: null,
         argument: null,

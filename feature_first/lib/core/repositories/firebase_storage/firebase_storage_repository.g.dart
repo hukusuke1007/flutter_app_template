@@ -10,7 +10,7 @@ part of 'firebase_storage_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(firebaseStorageRepository)
-const firebaseStorageRepositoryProvider = FirebaseStorageRepositoryProvider._();
+final firebaseStorageRepositoryProvider = FirebaseStorageRepositoryProvider._();
 
 final class FirebaseStorageRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class FirebaseStorageRepositoryProvider
           FirebaseStorageRepository
         >
     with $Provider<FirebaseStorageRepository> {
-  const FirebaseStorageRepositoryProvider._()
+  FirebaseStorageRepositoryProvider._()
     : super(
         from: null,
         argument: null,

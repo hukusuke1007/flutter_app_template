@@ -8,12 +8,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/custom_hooks/use_form_field_state_key.dart';
-import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/extensions/exception_extension.dart';
-import '../../../../core/utils/logger.dart';
-import '../../../../core/widgets/show_indicator.dart';
+import '../../../core/custom_hooks/use_form_field_state_key.dart';
+import '../../../core/extensions/context_extension.dart';
+import '../../../core/extensions/exception_extension.dart';
 import '../../../core/res/button_style.dart';
+import '../../../core/utils/logger.dart';
+import '../../../core/widgets/show_indicator.dart';
 import '../use_cases/post_controller.dart';
 import 'timeline_page.dart';
 

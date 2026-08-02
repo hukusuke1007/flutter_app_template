@@ -10,7 +10,7 @@ part of 'github_api_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(githubApiRepository)
-const githubApiRepositoryProvider = GithubApiRepositoryProvider._();
+final githubApiRepositoryProvider = GithubApiRepositoryProvider._();
 
 final class GithubApiRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class GithubApiRepositoryProvider
           GithubApiRepository
         >
     with $Provider<GithubApiRepository> {
-  const GithubApiRepositoryProvider._()
+  GithubApiRepositoryProvider._()
     : super(
         from: null,
         argument: null,

@@ -10,7 +10,7 @@ part of 'fetch_logged_in_type.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchLoggedInType)
-const fetchLoggedInTypeProvider = FetchLoggedInTypeProvider._();
+final fetchLoggedInTypeProvider = FetchLoggedInTypeProvider._();
 
 final class FetchLoggedInTypeProvider
     extends
@@ -20,7 +20,7 @@ final class FetchLoggedInTypeProvider
           FetchLoggedInType
         >
     with $Provider<FetchLoggedInType> {
-  const FetchLoggedInTypeProvider._()
+  FetchLoggedInTypeProvider._()
     : super(
         from: null,
         argument: null,

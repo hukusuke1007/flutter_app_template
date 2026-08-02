@@ -10,7 +10,7 @@ part of 'local_notification_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(localNotificationRepository)
-const localNotificationRepositoryProvider =
+final localNotificationRepositoryProvider =
     LocalNotificationRepositoryProvider._();
 
 final class LocalNotificationRepositoryProvider
@@ -21,7 +21,7 @@ final class LocalNotificationRepositoryProvider
           LocalNotificationRepository
         >
     with $Provider<LocalNotificationRepository> {
-  const LocalNotificationRepositoryProvider._()
+  LocalNotificationRepositoryProvider._()
     : super(
         from: null,
         argument: null,
