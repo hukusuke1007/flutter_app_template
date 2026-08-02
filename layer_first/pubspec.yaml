@@ -39,7 +39,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.8.0
-  pedantic_mono: ^1.37.0
+  pedantic_mono: ^1.36.0
   json_serializable: ^6.14.1
   build_runner: ^2.16.0
   freezed: ^4.0.0-dev.3

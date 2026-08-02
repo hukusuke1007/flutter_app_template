@@ -4,112 +4,112 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.12.2
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
 
   # Logger
   simple_logger: ^1.10.0
 
   # LocalDatabase
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.5
 
   # Riverpod
-  hooks_riverpod: ^3.0.3
-  riverpod_annotation: ^3.0.3
+  hooks_riverpod: ^3.4.2
+  riverpod_annotation: ^4.0.6
 
   # Hooks
   flutter_hooks: ^0.21.3
 
   # Entity
-  freezed_annotation: ^3.0.0
-  json_annotation: ^4.9.0
-  equatable:
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.12.0
+  equatable: 2.1.0
 
   # Dialog
-  adaptive_dialog:
+  adaptive_dialog: 2.8.0
 
   # Access local storage
-  path_provider:
+  path_provider: 2.1.6
 
   # Date
-  intl:
+  intl: 0.20.2
 
   # Reactive
-  rxdart:
+  rxdart: 0.28.0
 
   # Data share
-  share_plus:
+  share_plus: 13.3.0
 
   # WebView
-  flutter_inappwebview: ^6.1.5
+  flutter_inappwebview: ^6.2.0-beta.3
 
   # Launcher
-  url_launcher:
-  map_launcher:
+  url_launcher: 6.3.2
+  map_launcher: 6.0.0
 
   # Transition
-  page_transition:
+  page_transition: 2.2.2
 
   # Image
-  image_picker:
-  image_gallery_saver_plus: ^4.0.1
-  image_cropper: ^11.0.0
-  flutter_image_compress:
-  extended_image:
-  flutter_svg:
+  image_picker: 1.2.3
+  image_gallery_saver_plus: ^5.1.1
+  image_cropper: ^12.2.1
+  flutter_image_compress: 2.5.1
+  extended_image: 10.1.0
+  flutter_svg: 2.3.0
 
   # Picker
-  numberpicker:
+  numberpicker: 2.1.2
 
   # Permission
-  permission_handler:
+  permission_handler: 13.0.0
 
   # Firebase
-  firebase_core: ^4.1.1
-  firebase_analytics: ^12.0.1
-  cloud_firestore: ^6.0.2
-  firebase_auth: ^6.1.0
-  firebase_storage: ^13.0.2
-  cloud_functions: ^6.0.2
-  firebase_messaging: ^16.0.2
-  firebase_crashlytics: ^5.0.2
-  firebase_remote_config: ^6.0.2
+  firebase_core: ^4.12.1
+  firebase_analytics: ^12.4.5
+  cloud_firestore: ^6.7.1
+  firebase_auth: ^6.5.6
+  firebase_storage: ^13.4.5
+  cloud_functions: ^6.3.5
+  firebase_messaging: ^16.4.3
+  firebase_crashlytics: ^5.2.6
+  firebase_remote_config: ^6.5.5
 
   # LocalNotification
-  flutter_local_notifications:
-  flutter_timezone:
-  timezone:
+  flutter_local_notifications: 22.2.0
+  flutter_timezone: 5.1.0
+  timezone: 0.11.1
 
   # Api
-  retrofit:
-  dio:
+  retrofit: 4.9.2
+  dio: 5.11.0
 
   # Navigation
-  go_router:
+  go_router: 17.3.0
 
   # Info
-  package_info_plus:
-  device_info_plus:
+  package_info_plus: 10.2.1
+  device_info_plus: 13.2.0
 
   # Text
-  flutter_linkify:
+  flutter_linkify: 6.0.0
 
   # Widget
-  flutter_slidable:
-  dismissible_page:
+  flutter_slidable: 4.0.3
+  dismissible_page: 1.0.2
 
   # Other
-  uuid:
-  synchronized:
-  hashids2:
-  collection:
-  quiver:
+  uuid: 4.6.0
+  synchronized: 3.4.1
+  hashids2: 2.0.0
+  collection: 1.19.1
+  quiver: 3.2.2
 
 dev_dependencies:
   # Test
@@ -117,29 +117,30 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  mockito: ^5.5.1
+  mockito: ^5.8.0
 
   # Static analysis
-  pedantic_mono: ^1.34.0
-  custom_lint: ^0.8.1
-  riverpod_lint: ^3.0.3
+  pedantic_mono: ^1.36.0
+
+  riverpod_lint: ^3.1.8
 
   # Serializer
-  json_serializable: ^6.11.1
+  json_serializable: ^6.14.1
 
   # Code generator
-  build_runner: ^2.9.0
-  freezed: ^3.2.3
-  flutter_gen_runner: ^5.12.0
-  retrofit_generator: ^10.0.6
-  riverpod_generator: ^3.0.3
+  build_runner: ^2.16.0
+  freezed: ^4.0.0-dev.3
+  flutter_gen_runner: ^5.15.0
+  retrofit_generator: ^10.2.8
+  riverpod_generator: ^4.0.8
 
   # Other
-  flutter_launcher_icons:
+  flutter_launcher_icons: 0.14.4
 
 dependency_overrides:
-  test: ^1.26.3
-  test_api: ^0.7.7
+  meta: ^1.19.0
+  test: ^1.31.2
+  test_api: ^0.7.13
 
 flutter_gen:
   output: lib/core/res/gen/
