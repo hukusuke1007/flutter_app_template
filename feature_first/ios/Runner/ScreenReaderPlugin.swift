@@ -24,12 +24,12 @@ final class ScreenReaderPlugin {
         var value: String { return self.rawValue }
     }
     
-    static func configure(_ controller: FlutterViewController) {
+    static func configure(_ messenger: FlutterBinaryMessenger) {
         /// MethodChannel
         /// https://docs.flutter.dev/development/platform-integration/platform-channels#step-4-add-an-ios-platform-specific-implementation
         let channel = FlutterMethodChannel(
             name: MethodChannelType.screenReader.value,
-            binaryMessenger: controller.binaryMessenger
+            binaryMessenger: messenger
         )
         channel.setMethodCallHandler { (call, result) in
             if (call.method == MethodChannelType.MethodNameType.fetchEnable.value) {
@@ -45,7 +45,7 @@ final class ScreenReaderPlugin {
         /// EventChannel
         let fetchEnableEventChannel = FlutterEventChannel(
             name: EventChannelType.screenReader.value,
-            binaryMessenger: controller.binaryMessenger
+            binaryMessenger: messenger
         )
         fetchEnableEventChannel.setStreamHandler(FetchEnableStreamHandler())
     }
